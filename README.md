@@ -2,7 +2,7 @@
 
 [![[CI] Lint](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/lint.yml)
 [![[CI] Test](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/test.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7d9a138a045b30851a33/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-reporting_proposals/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1b469dba958dedd29046/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-reporting-proposals/maintainability)
 [![codecov](https://codecov.io/gh/openpoke/decidim-module-reporting_proposals/branch/main/graph/badge.svg?token=V3KR51DGFN)](https://codecov.io/gh/openpoke/decidim-module-reporting_proposals)
 [![Gem Version](https://badge.fury.io/rb/decidim-reporting_proposals.svg)](https://badge.fury.io/rb/decidim-reporting_proposals)
 
