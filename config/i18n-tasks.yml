@@ -1,0 +1,12 @@
+---
+
+base_locale: en
+locales: [en]
+
+data:
+  external:
+    - "<%= %x[bundle info decidim-core --path].chomp %>/config/locales/%{locale}.yml"
+
+ignore_unused:
+
+ignore_missing:
