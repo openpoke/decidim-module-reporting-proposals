@@ -1,9 +1,9 @@
 # OmniAuth::Decidim
 
-[![[CI] Lint](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/lint.yml)
-[![[CI] Test](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting_proposals/actions/workflows/test.yml)
+[![[CI] Lint](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml)
+[![[CI] Test](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1b469dba958dedd29046/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-reporting-proposals/maintainability)
-[![codecov](https://codecov.io/gh/openpoke/decidim-module-reporting_proposals/branch/main/graph/badge.svg?token=V3KR51DGFN)](https://codecov.io/gh/openpoke/decidim-module-reporting_proposals)
+[![codecov](https://codecov.io/gh/openpoke/decidim-module-reporting-proposals/branch/main/graph/badge.svg?token=X11YWWSMO4)](https://codecov.io/gh/openpoke/decidim-module-reporting-proposals)
 [![Gem Version](https://badge.fury.io/rb/decidim-reporting_proposals.svg)](https://badge.fury.io/rb/decidim-reporting_proposals)
 
 This module creates a new component to be used in participatory spaces that allows to create proposals orientated to manage geolocated issues in a city. For instance Damages or new ideas of improving a particular street or public good.
