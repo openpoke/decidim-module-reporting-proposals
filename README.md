@@ -1,4 +1,4 @@
-# OmniAuth::Decidim
+# Reporting proposals component for Decidim
 
 [![[CI] Lint](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml)
 [![[CI] Test](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml)
