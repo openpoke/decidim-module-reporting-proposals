@@ -7,6 +7,12 @@ require "spec_helper"
 # file should be updated to match any change/bug fix introduced in the core
 checksums = [
   {
+    package: "decidim-core",
+    files: {
+      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9"
+    }
+  },
+  {
     package: "decidim-proposals",
     files: {
       "/app/controllers/decidim/proposals/proposals_controller.rb" => "6f73c3cad3c713358535c92e2ed84f60",

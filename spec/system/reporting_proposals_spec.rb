@@ -7,6 +7,8 @@ describe "Reporting proposals overrides", type: :system do
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
   let!(:user) { create(:user, :confirmed, organization: organization) }
+  let(:proposal_title) { "More sidewalks and less roads" }
+  let(:proposal_body) { "Cities need more people, not more cars" }
 
   before do
     switch_to_host(organization.host)
@@ -22,6 +24,24 @@ describe "Reporting proposals overrides", type: :system do
         expect(page).not_to have_content("Complete")
       end
     end
+
+    it "redirects to the plublish action" do
+      click_link "New proposal"
+
+      within ".card__content form" do
+        fill_in :proposal_title, with: proposal_title
+        fill_in :proposal_body, with: proposal_body
+        find("*[type=submit]").click
+      end
+
+      expect(page).to have_content(proposal_title)
+      expect(page).to have_content(user.name)
+      expect(page).to have_content(proposal_body)
+
+      expect(page).to have_selector("button", text: "Publish")
+
+      expect(page).to have_selector("a", text: "Modify the proposal")
+    end
   end
 
   shared_examples "4 steps" do
@@ -32,6 +52,22 @@ describe "Reporting proposals overrides", type: :system do
       within ".wizard__steps" do
         expect(page).to have_content("Complete")
       end
+    end
+
+    it "redirects to the complete action" do
+      click_link "New proposal"
+
+      within ".card__content form" do
+        fill_in :proposal_title, with: proposal_title
+        fill_in :proposal_body, with: proposal_body
+        find("*[type=submit]").click
+      end
+
+      within ".section-heading" do
+        expect(page).to have_content("COMPLETE YOUR PROPOSAL")
+      end
+
+      expect(page).to have_css(".edit_proposal")
     end
   end
 

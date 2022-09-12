@@ -10,6 +10,7 @@ module Decidim
       config.to_prepare do
         Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
         Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
+        ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
       end
 
       initializer "decidim_reporting_proposals.webpacker.assets_path" do
