@@ -23,7 +23,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
-  POSSIBLE_SORT_ORDERS = %w(default random recent most_endorsed most_voted most_commented most_followed with_more_authors).freeze
+  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_endorsed most_voted most_commented most_followed with_more_authors).freeze
 
   component.settings(:global) do |settings|
     settings.attribute :scopes_enabled, type: :boolean, default: false
@@ -37,7 +37,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
     settings.attribute :can_accumulate_supports_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
-    settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { REP_POSSIBLE_SORT_ORDERS }
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
     settings.attribute :comments_enabled, type: :boolean, default: true
     settings.attribute :comments_max_length, type: :integer, required: false
@@ -70,7 +70,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :publish_answers_immediately, type: :boolean, default: true
     settings.attribute :answers_with_costs, type: :boolean, default: false
-    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { REP_POSSIBLE_SORT_ORDERS }
     settings.attribute :amendment_creation_enabled, type: :boolean, default: true
     settings.attribute :amendment_reaction_enabled, type: :boolean, default: true
     settings.attribute :amendment_promotion_enabled, type: :boolean, default: true

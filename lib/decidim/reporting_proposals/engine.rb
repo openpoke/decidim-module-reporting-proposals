@@ -7,7 +7,8 @@ module Decidim
       isolate_namespace Decidim::ReportingProposals
 
       # overrides for proposals
-      config.to_prepare do
+      config.after_initialize do
+        Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
         Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
         Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
