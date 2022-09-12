@@ -3,6 +3,7 @@ PATH
   specs:
     decidim-reporting_proposals (0.1.0)
       decidim-core (>= 0.25.0, < 0.27)
+      decidim-proposals (>= 0.25.0, < 0.27)
 
 GEM
   remote: https://rubygems.org/
