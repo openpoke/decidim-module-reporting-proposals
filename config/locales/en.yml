@@ -2,6 +2,17 @@
 en:
   decidim:
     components:
+      proposals:
+        settings:
+          global:
+            evaluating_proposals_overdue: After how many days a proposal in its evaluating
+              state is considered overdue
+            evaluating_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
+            unanswered_proposals_overdue: After how many days a not-answered proposal
+              is considered overdue
+            unanswered_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
       reporting_proposals:
         name: Reporting proposals
         settings:
@@ -30,6 +41,10 @@ en:
               random: Random
               recent: Recent
               with_more_authors: With more authors
+            evaluating_proposals_overdue: After how many days a proposal in its evaluating
+              state is considered overdue
+            evaluating_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
             geocoding_enabled: Geocoding enabled
             minimum_votes_per_user: Minimum supports per user
             new_proposal_body_template: New proposal body template
@@ -63,6 +78,10 @@ en:
             scope_id: Scope
             scopes_enabled: Scopes enabled
             threshold_per_proposal: Threshold per proposal
+            unanswered_proposals_overdue: After how many days a not-answered proposal
+              is considered overdue
+            unanswered_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
             vote_limit: Support limit per participant
           step:
             amendment_creation_enabled: Amendment creation enabled

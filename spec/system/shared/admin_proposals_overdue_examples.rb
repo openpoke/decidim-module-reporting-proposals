@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+shared_examples "has overdue settings" do
+  it "input fields have the default value" do
+    expect(page).to have_field("After how many days a not-answered proposal is considered overdue", with: "7")
+    expect(page).to have_field("After how many days a proposal in its evaluating state is considered overdue", with: "3")
+  end
+end
+
 shared_examples "proposals list has no due dates" do
   context "when overdue days is zero" do
     let(:unanswered_days_overdue) { 0 }

@@ -29,29 +29,51 @@ describe "Highlighted proposal", type: :system do
         reporting_proposals_component)
     ]
   end
+  let(:unanswered_days_overdue) { 7 }
+  let(:evaluating_days_overdue) { 3 }
+  let(:component) { proposal_component }
+
+  def edit_component_path(component)
+    Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id)
+  end
 
   before do
-    allow(Decidim::ReportingProposals).to receive(:unanswered_proposals_overdue).and_return unanswered_days_overdue.to_i
-    allow(Decidim::ReportingProposals).to receive(:evaluating_proposals_overdue).and_return evaluating_days_overdue.to_i
     switch_to_host(organization.host)
     login_as admin, scope: :user
   end
 
-  context "when managing standard proposals" do
+  context "when configuring the module" do
     before do
-      visit manage_component_path(proposal_component)
+      visit edit_component_path(component)
     end
 
-    it_behaves_like "proposals list has no due dates"
-    it_behaves_like "proposals list has overdue dates"
+    context "when managing standard proposals" do
+      it_behaves_like "has overdue settings"
+    end
+
+    context "when managing reporting proposals" do
+      let(:component) { reporting_proposals_component }
+
+      it_behaves_like "has overdue settings"
+    end
   end
 
-  context "when managing reporting proposals" do
+  context "when managing the module" do
     before do
-      visit manage_component_path(reporting_proposals_component)
+      component.update!(settings: { unanswered_proposals_overdue: unanswered_days_overdue, evaluating_proposals_overdue: evaluating_days_overdue })
+      visit manage_component_path(component)
     end
 
-    it_behaves_like "proposals list has no due dates"
-    it_behaves_like "proposals list has overdue dates"
+    context "when managing standard proposals" do
+      it_behaves_like "proposals list has no due dates"
+      it_behaves_like "proposals list has overdue dates"
+    end
+
+    context "when managing reporting proposals" do
+      let(:component) { reporting_proposals_component }
+
+      it_behaves_like "proposals list has no due dates"
+      it_behaves_like "proposals list has overdue dates"
+    end
   end
 end

@@ -11,13 +11,13 @@ module Decidim
           # Helpers for overdue proposals
 
           def unanswered_proposals_overdue?(proposal)
-            grace_period = Decidim::ReportingProposals.unanswered_proposals_overdue.to_i
+            grace_period = days_unanswered(proposal)
             !grace_period.zero? &&
               proposal.state.blank? && (Time.current - grace_period.days).to_date > proposal.published_at
           end
 
           def evaluating_proposals_overdue?(proposal)
-            grace_period = Decidim::ReportingProposals.evaluating_proposals_overdue.to_i
+            grace_period = days_evaluating(proposal)
             !grace_period.zero? &&
               proposal.evaluating? && proposal.answered? &&
               (Time.current - grace_period.days).to_date > proposal.answered_at
@@ -27,18 +27,28 @@ module Decidim
             !proposal.answered? && Time.current < last_day_to_answer(proposal)
           end
 
+          def days_unanswered(proposal)
+            return proposal.component.settings.unanswered_proposals_overdue.to_i if proposal.component&.settings
+
+            Decidim::ReportingProposals.unanswered_proposals_overdue.to_i
+          end
+
+          def days_evaluating(proposal)
+            return proposal.component.settings.evaluating_proposals_overdue.to_i if proposal.component&.settings
+
+            Decidim::ReportingProposals.evaluating_proposals_overdue.to_i
+          end
+
           def grace_period_evaluating?(proposal)
             proposal.evaluating? && Time.current < last_day_to_evaluate(proposal)
           end
 
           def last_day_to_answer(proposal)
-            grace_period = Decidim::ReportingProposals.unanswered_proposals_overdue.to_i
-            (proposal.published_at + grace_period.days).to_date
+            (proposal.published_at + days_unanswered(proposal).days).to_date
           end
 
           def last_day_to_evaluate(proposal)
-            grace_period = Decidim::ReportingProposals.evaluating_proposals_overdue.to_i
-            (proposal.answered_at + grace_period.days).to_date if proposal.answered?
+            (proposal.answered_at + days_evaluating(proposal).days).to_date if proposal.answered?
           end
         end
       end
