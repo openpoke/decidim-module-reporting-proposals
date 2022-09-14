@@ -9,9 +9,20 @@ module Decidim
       # overrides for proposals
       config.after_initialize do
         Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+        Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+        Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
         Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
         Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
+      end
+
+      initializer "decidim_reporting_proposals.component_overdue_options" do
+        Decidim.component_registry.find(:proposals).tap do |component|
+          component.settings(:global) do |settings|
+            settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
+            settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
+          end
+        end
       end
 
       initializer "decidim_reporting_proposals.webpacker.assets_path" do

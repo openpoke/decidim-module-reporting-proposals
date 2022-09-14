@@ -1,1 +1,0 @@
-import "stylesheets/decidim/reporting_proposals/component_admin.scss";

@@ -2,6 +2,17 @@
 en:
   decidim:
     components:
+      proposals:
+        settings:
+          global:
+            evaluating_proposals_overdue: After how many days a proposal in its evaluating
+              state is considered overdue
+            evaluating_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
+            unanswered_proposals_overdue: After how many days a not-answered proposal
+              is considered overdue
+            unanswered_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
       reporting_proposals:
         name: Reporting proposals
         settings:
@@ -30,6 +41,10 @@ en:
               random: Random
               recent: Recent
               with_more_authors: With more authors
+            evaluating_proposals_overdue: After how many days a proposal in its evaluating
+              state is considered overdue
+            evaluating_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
             geocoding_enabled: Geocoding enabled
             minimum_votes_per_user: Minimum supports per user
             new_proposal_body_template: New proposal body template
@@ -63,6 +78,10 @@ en:
             scope_id: Scope
             scopes_enabled: Scopes enabled
             threshold_per_proposal: Threshold per proposal
+            unanswered_proposals_overdue: After how many days a not-answered proposal
+              is considered overdue
+            unanswered_proposals_overdue_help: This adds a visual alert to the list
+              of proposals. Leave it to zero to disable this feature.
             vote_limit: Support limit per participant
           step:
             amendment_creation_enabled: Amendment creation enabled
@@ -115,6 +134,95 @@ en:
             votes_enabled: Supports enabled
             votes_hidden: Supports hidden (if supports are enabled, checking this
               will hide the number of supports)
+    proposals:
+      admin:
+        answer_overdue:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour overdue
+                other: about %{count} hours overdue
+              about_x_months:
+                one: about 1 month overdue
+                other: about %{count} months overdue
+              half_a_minute: half a minute overdue
+              less_than_x_minutes:
+                one: less than a min. overdue
+                other: less than %{count} min. overdue
+              less_than_x_seconds:
+                one: right now overdue
+                other: less than %{count} sec. overdue
+              x_days:
+                one: 1 day ago overdue
+                other: "%{count} days ago overdue"
+              x_hours:
+                one: 1 hour ago overdue
+                other: "%{count} hours ago overdue"
+              x_minutes:
+                one: 1 min. ago overdue
+                other: "%{count} min. ago overdue"
+              x_seconds:
+                one: 1 sec. ago overdue
+                other: "%{count} sec. ago overdue"
+                zero: right now overdue
+        answer_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour to answer
+                other: about %{count} hours to answer
+              about_x_months:
+                one: about 1 month to answer
+                other: about %{count} months to answer
+              half_a_minute: half a minute to answer
+              less_than_x_minutes:
+                one: less than a min. to answer
+                other: less than %{count} min. to answer
+              less_than_x_seconds:
+                one: right now to answer
+                other: less than %{count} sec. to answer
+              x_days:
+                one: 1 day ago to answer
+                other: "%{count} days ago to answer"
+              x_hours:
+                one: 1 hour ago to answer
+                other: "%{count} hours ago to answer"
+              x_minutes:
+                one: 1 min. ago to answer
+                other: "%{count} min. ago to answer"
+              x_seconds:
+                one: 1 sec. ago to answer
+                other: "%{count} sec. ago to answer"
+                zero: right now to answer
+        evaluate_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour to evaluate
+                other: about %{count} hours to evaluate
+              about_x_months:
+                one: about 1 month to evaluate
+                other: about %{count} months to evaluate
+              half_a_minute: half a minute to evaluate
+              less_than_x_minutes:
+                one: less than a min. to evaluate
+                other: less than %{count} min. to evaluate
+              less_than_x_seconds:
+                one: right now to evaluate
+                other: less than %{count} sec. to evaluate
+              x_days:
+                one: 1 day ago to evaluate
+                other: "%{count} days ago to evaluate"
+              x_hours:
+                one: 1 hour ago to evaluate
+                other: "%{count} hours ago to evaluate"
+              x_minutes:
+                one: 1 min. ago to evaluate
+                other: "%{count} min. ago to evaluate"
+              x_seconds:
+                one: 1 sec. ago to evaluate
+                other: "%{count} sec. ago to evaluate"
+                zero: right now to evaluate
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
@@ -127,6 +235,93 @@ en:
       admin:
         actions:
           preview: Preview
+        answer_overdue:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour overdue
+                other: about %{count} hours overdue
+              about_x_months:
+                one: about 1 month overdue
+                other: about %{count} months overdue
+              half_a_minute: half a minute overdue
+              less_than_x_minutes:
+                one: less than a min. overdue
+                other: less than %{count} min. overdue
+              less_than_x_seconds:
+                one: right now overdue
+                other: less than %{count} sec. overdue
+              x_days:
+                one: 1 day ago overdue
+                other: "%{count} days ago overdue"
+              x_hours:
+                one: 1 hour ago overdue
+                other: "%{count} hours ago overdue"
+              x_minutes:
+                one: 1 min. ago overdue
+                other: "%{count} min. ago overdue"
+              x_seconds:
+                one: 1 sec. ago overdue
+                other: "%{count} sec. ago overdue"
+                zero: right now overdue
+        answer_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour to answer
+                other: about %{count} hours to answer
+              about_x_months:
+                one: about 1 month to answer
+                other: about %{count} months to answer
+              half_a_minute: half a minute to answer
+              less_than_x_minutes:
+                one: less than a min. to answer
+                other: less than %{count} min. to answer
+              less_than_x_seconds:
+                one: right now to answer
+                other: less than %{count} sec. to answer
+              x_days:
+                one: 1 day ago to answer
+                other: "%{count} days ago to answer"
+              x_hours:
+                one: 1 hour ago to answer
+                other: "%{count} hours ago to answer"
+              x_minutes:
+                one: 1 min. ago to answer
+                other: "%{count} min. ago to answer"
+              x_seconds:
+                one: 1 sec. ago to answer
+                other: "%{count} sec. ago to answer"
+                zero: right now to answer
+        evaluate_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour to evaluate
+                other: about %{count} hours to evaluate
+              about_x_months:
+                one: about 1 month to evaluate
+                other: about %{count} months to evaluate
+              half_a_minute: half a minute to evaluate
+              less_than_x_minutes:
+                one: less than a min. to evaluate
+                other: less than %{count} min. to evaluate
+              less_than_x_seconds:
+                one: right now to evaluate
+                other: less than %{count} sec. to evaluate
+              x_days:
+                one: 1 day ago to evaluate
+                other: "%{count} days ago to evaluate"
+              x_hours:
+                one: 1 hour ago to evaluate
+                other: "%{count} hours ago to evaluate"
+              x_minutes:
+                one: 1 min. ago to evaluate
+                other: "%{count} min. ago to evaluate"
+              x_seconds:
+                one: 1 sec. ago to evaluate
+                other: "%{count} sec. ago to evaluate"
+                zero: right now to evaluate
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals

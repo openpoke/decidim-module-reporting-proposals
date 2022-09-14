@@ -14,9 +14,14 @@ module Decidim
         def snippets
           @snippets ||= Decidim::Snippets.new
 
-          unless @snippets.any?(:reporting_proposals_snippets) && reporting_proposals_component?
-            @snippets.add(:reporting_proposals_snippets, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_component_admin"))
-            @snippets.add(:head, @snippets.for(:reporting_proposals_snippets))
+          unless @snippets.any?(:reporting_proposals_manage_component) && reporting_proposals_component?
+            @snippets.add(:reporting_proposals_manage_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_manage_component_admin"))
+            @snippets.add(:head, @snippets.for(:reporting_proposals_manage_component))
+          end
+
+          unless @snippets.any?(:reporting_proposals_list_component) && any_proposals_component?
+            @snippets.add(:reporting_proposals_list_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_list_component_admin"))
+            @snippets.add(:head, @snippets.for(:reporting_proposals_list_component))
           end
 
           @snippets
@@ -26,10 +31,18 @@ module Decidim
           current_component&.manifest_name == "reporting_proposals"
         end
 
-        def current_component
-          return unless query_scope && query_scope.respond_to?(:find)
+        def any_proposals_component?
+          current_component&.manifest_name.in? %w(proposals reporting_proposals)
+        end
 
-          @current_component ||= query_scope.find(params[:id])
+        def current_component
+          @current_component ||= begin
+            if defined?(query_scope) && query_scope.respond_to?(:find)
+              query_scope.find_by(id: params[:id])
+            elsif params.has_key?(:component_id)
+              Decidim::Component.find_by(id: params[:component_id])
+            end
+          end
         end
       end
     end
