@@ -17,6 +17,8 @@ module Decidim
       3
     end
 
+    # Public Setting that defines whether the administrator is allowed to hide the proposals.
+    # Set to false if you do not want to use this feature
     config_accessor :allow_admins_to_hide_proposals do
       true
     end
