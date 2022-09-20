@@ -105,6 +105,17 @@
 
     <%= resource_permissions_link(proposal) %>
 
-   <%= icon_link_to "eye", resource_locator(proposal).path, t("actions.preview", scope: "decidim.proposals.admin"), class: "action-icon--preview", target: :blank %>
+    <%= icon_link_to "eye", resource_locator(proposal).path, t("actions.preview", scope: "decidim.proposals.admin"), class: "action-icon--preview", target: :blank %>
+
+    <% if Decidim::ReportingProposals.allow_admins_to_hide_proposals %>
+      <button type="button" class="link-alt"
+              data-open="<%= "flagModal" %>"
+              title="<%= t("report", scope: "decidim.proposals.proposals.show") %>"
+              aria-controls="<%= "flagModal" %>"
+              aria-haspopup="true"
+              tabindex="0">
+        <%= icon "flag", aria_hidden: true, class: "action-icon--preview", role: "img", "aria-hidden": true %>
+      </button>
+    <% end %>
   </td>
 </tr>

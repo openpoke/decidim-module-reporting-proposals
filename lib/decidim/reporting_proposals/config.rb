@@ -16,5 +16,9 @@ module Decidim
     config_accessor :evaluating_proposals_overdue do
       3
     end
+
+    config_accessor :allow_admins_to_hide_proposals do
+      true
+    end
   end
 end
