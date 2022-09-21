@@ -22,7 +22,7 @@
       </fieldset>
       <%= f.text_area :details, rows: 4, id: "#{modal_id}_details", label_options: { for: "#{modal_id}_details" } %>
       <%= f.submit t("decidim.shared.flag_modal.report") %>
-      <%= f.submit t("decidim.shared.flag_modal.report"), class: "button warning"%>
+      <%= f.submit t("decidim.shared.flag_modal.hide"), class: "button warning"%>
     <% end %>
   <% end %>
 </div>

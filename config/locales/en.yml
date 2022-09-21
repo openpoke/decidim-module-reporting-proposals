@@ -325,3 +325,6 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+    shared:
+      flag_modal:
+        hide: Hide proposal
