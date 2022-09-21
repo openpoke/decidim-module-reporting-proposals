@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "decidim/core"
 
 module Decidim
   module ReportingProposals
@@ -22,12 +23,17 @@ module Decidim
           component.settings(:global) do |settings|
             settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
             settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
+            settings.attribute(:allow_admins_to_hide_proposals, type: :boolean, default: Decidim::ReportingProposals.allow_admins_to_hide_proposals)
           end
         end
       end
 
       initializer "decidim_reporting_proposals.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
+      end
+
+      initializer "decidim_reporting_proposals.add_cells_view_paths" do
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::ReportingProposals::Engine.root}/app/cells/")
       end
     end
   end
