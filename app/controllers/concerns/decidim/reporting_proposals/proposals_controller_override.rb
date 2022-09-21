@@ -7,6 +7,8 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        helper_method :reporting_proposal?
+
         def new
           enforce_permission_to :create, :proposal
           @step = :step_1
@@ -44,20 +46,20 @@ module Decidim
 
           @form.attachment = form_attachment_new
 
-          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposals?
+          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
         end
 
         private
 
         def new_proposal_form
-          reporting_proposals? ? Decidim::Proposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
+          reporting_proposal? ? Decidim::Proposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
         end
 
         def create_proposal_command
-          reporting_proposals? ? CreateReportingProposal : Decidim::Proposals::CreateProposal
+          reporting_proposal? ? CreateReportingProposal : Decidim::Proposals::CreateProposal
         end
 
-        def reporting_proposals?
+        def reporting_proposal?
           component = current_component || @form.component
           component.manifest_name == "reporting_proposals"
         end

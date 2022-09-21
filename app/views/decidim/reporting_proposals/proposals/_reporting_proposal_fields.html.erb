@@ -1,0 +1,13 @@
+<% if @form.categories&.any? %>
+  <div class="field">
+    <%= form.categories_select :category_id, @form.categories, include_blank: t("decidim.proposals.proposals.edit.select_a_category") %>
+  </div>
+<% end %>
+
+<div class="field hashtags__container">
+  <%= form.text_field :title, class: "js-hashtags" %>
+</div>
+
+<div class="field hashtags__container">
+  <%= text_editor_for_proposal_body(form) %>
+</div>
