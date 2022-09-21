@@ -4,6 +4,25 @@
   </div>
 <% end %>
 
+<% if @form.geocoding_enabled? %>
+  <div class="field">
+  </div>
+
+  <div class="field" id="address_input">
+    <div class="address-fill">
+      <%= form.geocoding_field :address, placeholder: t("decidim.proposals.proposals.placeholder.address") %>
+    </div>
+    <div class="has_no_address">
+      <%= form.check_box :has_no_address %>
+      <%= form.hidden_field :has_address, value: "1" %>
+    </div>
+    <div class="map address-fill" id="address_map">
+      <%= render partial: "dynamic_map_instructions" %>
+      <%= dynamic_map_for proposal_preview_data_for_map(@form.to_h) %>
+    </div>
+  </div>
+<% end %>
+
 <div class="field hashtags__container">
   <%= form.text_field :title, class: "js-hashtags" %>
 </div>

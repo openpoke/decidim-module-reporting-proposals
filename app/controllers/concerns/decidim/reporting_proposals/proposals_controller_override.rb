@@ -52,7 +52,7 @@ module Decidim
         private
 
         def new_proposal_form
-          reporting_proposal? ? Decidim::Proposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
+          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
         end
 
         def create_proposal_command

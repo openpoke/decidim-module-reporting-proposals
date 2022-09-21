@@ -12,17 +12,25 @@ describe "Reporting proposals overrides", type: :system do
   let(:proposal_category) { category }
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let!(:another_category) { create :category, participatory_space: participatory_process }
+  let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
+  let(:latitude) { 41.3825 }
+  let(:longitude) { 2.1772 }
 
   before do
+    stub_geocoding(address, [latitude, longitude])
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
 
-  def fill_proposal(extra_fields: true)
+  def fill_proposal(extra_fields: true, skip_address: false)
     within ".card__content form" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
-      select translated(proposal_category.name), from: :proposal_category_id if extra_fields
+      if extra_fields
+        select translated(proposal_category.name), from: :proposal_category_id
+        fill_in :proposal_address, with: address
+        check "proposal_has_no_address" if skip_address
+      end
       find("*[type=submit]").click
     end
   end
@@ -71,6 +79,9 @@ describe "Reporting proposals overrides", type: :system do
       expect(page).to have_content(proposal_title)
       expect(translated(proposal.body)).to eq(proposal_body)
       expect(proposal.category).to eq(category)
+      expect(proposal.address).to eq(address)
+      expect(proposal.latitude).to eq(latitude)
+      expect(proposal.longitude).to eq(longitude)
       # expect(proposal.scope).to eq(scope)
     end
 
@@ -88,6 +99,23 @@ describe "Reporting proposals overrides", type: :system do
       expect(page).to have_content(proposal_title)
       expect(translated(proposal.body)).to eq(proposal_body)
       expect(proposal.category).to eq(another_category)
+    end
+
+    it "stores no address if checked" do
+      click_link "New proposal"
+
+      fill_proposal(skip_address: true)
+
+      click_button "Publish"
+
+      expect(page).to have_content("successfully published")
+
+      expect(page).to have_content(proposal_title)
+      expect(translated(proposal.body)).to eq(proposal_body)
+      expect(proposal.category).to eq(category)
+      expect(proposal.address).to be_nil
+      expect(proposal.latitude).to be_nil
+      expect(proposal.longitude).to be_nil
     end
   end
 

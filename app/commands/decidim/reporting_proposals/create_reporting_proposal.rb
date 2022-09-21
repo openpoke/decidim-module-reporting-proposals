@@ -19,6 +19,10 @@ module Decidim
                 I18n.locale => body_with_hashtags
               },
               category: form.category,
+              scope: form.scope,
+              address: form.address,
+              latitude: form.latitude,
+              longitude: form.longitude,
               component: form.component
             )
             proposal.add_coauthor(@current_user, user_group: user_group)
