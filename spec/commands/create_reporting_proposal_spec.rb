@@ -130,6 +130,18 @@ module Decidim
           end
         end
 
+        context "with a proposal limit" do
+          let(:component) do
+            create(:reporting_proposals_component, settings: { "proposal_limit" => 2 })
+          end
+
+          it "checks the author doesn't exceed the amount of proposals" do
+            expect { command.call }.to broadcast(:ok)
+            expect { command.call }.to broadcast(:ok)
+            expect { command.call }.to broadcast(:invalid)
+          end
+        end
+
         it "creates multiple atachments for the proposal" do
           expect { command.call }.to change(Decidim::Attachment, :count).by(2)
           last_attachment = Decidim::Attachment.last
