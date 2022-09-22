@@ -6,7 +6,9 @@ module Decidim
       include ::Decidim::MultipleAttachmentsMethods
       include ::Decidim::Proposals::GalleryMethods
 
-      def prepare_attachments
+      def call
+        return broadcast(:invalid) if form.invalid?
+
         if process_attachments?
           build_attachments
           return broadcast(:invalid) if attachments_invalid?
@@ -16,17 +18,24 @@ module Decidim
           build_gallery
           return broadcast(:invalid) if gallery_invalid?
         end
+
+        if proposal_limit_reached?
+          form.errors.add(:base, I18n.t("decidim.proposals.new.limit_reached"))
+          return broadcast(:invalid)
+        end
+
+        transaction do
+          create_reporting_proposal
+
+          @attached_to = @proposal
+          create_gallery if process_gallery?
+          create_attachments if process_attachments?
+        end
+
+        broadcast(:ok, proposal)
       end
 
-      def save_attachments
-        @attached_to = @proposal
-        create_gallery if process_gallery?
-        create_attachments if process_attachments?
-      end
-
-      def create_proposal
-        prepare_attachments
-
+      def create_reporting_proposal
         PaperTrail.request(enabled: false) do
           @proposal = Decidim.traceability.perform_action!(
             :create,
@@ -53,8 +62,6 @@ module Decidim
             proposal
           end
         end
-
-        save_attachments
       end
     end
   end

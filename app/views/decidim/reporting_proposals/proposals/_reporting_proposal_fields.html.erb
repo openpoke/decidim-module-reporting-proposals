@@ -4,6 +4,32 @@
   </div>
 <% end %>
 
+<% if component_settings.attachments_allowed?%>
+  <fieldset class="gallery__container photos_container">
+    <legend><%= t("gallery_legend", scope: "decidim.proposals.proposals.edit") %></legend>
+
+    <% if @form.photos.any? %>
+      <% @form.photos.each do |photo| %>
+        <div class="callout gallery__item" id="attachment_<%= photo.id %>" data-closable>
+          <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: photo.file.filename %>
+          <%= form.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
+          <button class="close-button"
+                  aria-label="<%= t("delete_image", scope: "decidim.proposals.proposals.edit") %>"
+                  title="<%= t("delete_image", scope: "decidim.proposals.proposals.edit") %>"
+                  type="button"
+                  data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="row column">
+      <%= form.file_field :add_photos, multiple: false, label: t("add_images", scope: "decidim.proposals.proposals.edit") %>
+    </div>
+  </fieldset>
+<% end %>
+
 <% if @form.geocoding_enabled? %>
   <div class="field">
   </div>
@@ -62,30 +88,6 @@
 <% end %>
 
 <% if component_settings.attachments_allowed?%>
-  <fieldset class="gallery__container photos_container">
-    <legend><%= t("gallery_legend", scope: "decidim.proposals.proposals.edit") %></legend>
-
-    <% if @form.photos.any? %>
-      <% @form.photos.each do |photo| %>
-        <div class="callout gallery__item" id="attachment_<%= photo.id %>" data-closable>
-          <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: photo.file.filename %>
-          <%= form.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
-          <button class="close-button"
-                  aria-label="<%= t("delete_image", scope: "decidim.proposals.proposals.edit") %>"
-                  title="<%= t("delete_image", scope: "decidim.proposals.proposals.edit") %>"
-                  type="button"
-                  data-close>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-
-    <div class="row column">
-      <%= form.file_field :add_photos, multiple: false, label: t("add_images", scope: "decidim.proposals.proposals.edit") %>
-    </div>
-  </fieldset>
-
   <fieldset class="attachments_container gallery__container documents_container">
     <legend><%= t("attachment_legend", scope: "decidim.proposals.proposals.edit") %></legend>
 

@@ -91,7 +91,7 @@ shared_examples "3 steps" do
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content("RELATED IMAGES")
-    # expect(page).to have_content("RELATED DOCUMENTS")
+    expect(page).to have_content("RELATED DOCUMENTS")
   end
 
   it "modifies the proposal" do
@@ -99,9 +99,15 @@ shared_examples "3 steps" do
 
     fill_proposal
 
+    expect(page).not_to have_content("RELATED IMAGES")
+    expect(page).not_to have_content("RELATED DOCUMENTS")
+
     click_link "Modify the proposal"
 
-    complete_proposal
+    complete_proposal(attach: true)
+
+    expect(page).to have_content("RELATED IMAGES")
+    expect(page).to have_content("RELATED DOCUMENTS")
 
     click_button "Publish"
 

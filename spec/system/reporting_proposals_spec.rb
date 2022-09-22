@@ -50,6 +50,7 @@ describe "Reporting proposals overrides", type: :system do
 
       check "proposal_has_no_address" if skip_address
       attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
+      attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf")) if attach
 
       find("*[type=submit]").click
     end
@@ -61,6 +62,7 @@ describe "Reporting proposals overrides", type: :system do
       select user_group.name, from: :proposal_user_group_id
 
       attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
+      attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf")) if attach
 
       find("*[type=submit]").click
     end
