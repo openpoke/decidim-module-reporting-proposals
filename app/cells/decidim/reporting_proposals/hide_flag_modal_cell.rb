@@ -4,6 +4,7 @@ module Decidim
   module ReportingProposals
     class HideFlagModalCell < Decidim::ViewModel
       include ActionView::Helpers::FormOptionsHelper
+      include Decidim::LayoutHelper
 
       def cache_hash
         hash = []

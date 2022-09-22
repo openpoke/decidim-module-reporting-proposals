@@ -13,7 +13,7 @@ module Decidim
         Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
         Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
         Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
-        Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
+        Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
       end
 

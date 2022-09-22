@@ -327,4 +327,4 @@ en:
           proposals: Reporting proposals
     shared:
       flag_modal:
-        hide: Hide proposal
+        hide: Hide this proposal
