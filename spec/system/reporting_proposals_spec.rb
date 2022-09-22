@@ -5,12 +5,14 @@ require "spec_helper"
 describe "Reporting proposals overrides", type: :system do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
+  let!(:scope) { create :scope, organization: organization }
   let!(:component) do
     create(:reporting_proposals_component,
            :with_extra_hashtags,
            participatory_space: participatory_process,
            suggested_hashtags: suggested_hashtags,
-           automatic_hashtags: automatic_hashtags)
+           automatic_hashtags: automatic_hashtags,
+           settings: { scopes_enabled: true })
   end
   let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
   let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
@@ -24,6 +26,7 @@ describe "Reporting proposals overrides", type: :system do
   let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
   let(:latitude) { 41.3825 }
   let(:longitude) { 2.1772 }
+  let(:scope_picker) { select_data_picker(:proposal_scope_id) }
 
   before do
     stub_geocoding(address, [latitude, longitude])
@@ -31,7 +34,7 @@ describe "Reporting proposals overrides", type: :system do
     login_as user, scope: :user
   end
 
-  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false)
+  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false)
     within ".card__content form" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
@@ -41,6 +44,7 @@ describe "Reporting proposals overrides", type: :system do
         check "#HashtagSuggested1"
         select user_group.name, from: :proposal_user_group_id unless skip_group
         check "proposal_has_no_address" if skip_address
+        scope_pick scope_picker, scope unless skip_scope
       end
       find("*[type=submit]").click
     end
@@ -100,7 +104,7 @@ describe "Reporting proposals overrides", type: :system do
       expect(body).to have_content("HashtagSuggested1")
       expect(body).not_to have_content("HashtagSuggested2")
       expect(proposal.identities.first).to eq(user_group)
-      # expect(proposal.scope).to eq(scope)
+      expect(proposal.scope).to eq(scope)
     end
 
     it "modifies the proposal" do
@@ -122,7 +126,7 @@ describe "Reporting proposals overrides", type: :system do
     it "stores no address if checked" do
       click_link "New proposal"
 
-      fill_proposal(skip_address: true, skip_group: true)
+      fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
 
       click_button "Publish"
 
@@ -132,6 +136,7 @@ describe "Reporting proposals overrides", type: :system do
       expect(translated(proposal.body)).to have_content(proposal_body)
       expect(proposal.category).to eq(category)
       expect(proposal.identities.first).to eq(user)
+      expect(proposal.scope).to be_nil
       expect(proposal.address).to be_nil
       expect(proposal.latitude).to be_nil
       expect(proposal.longitude).to be_nil
@@ -177,7 +182,7 @@ describe "Reporting proposals overrides", type: :system do
     end
   end
 
-  context "when creating a new proposal" do
+  context "when creating a new proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
     end
