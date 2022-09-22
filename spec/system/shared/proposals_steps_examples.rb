@@ -60,7 +60,7 @@ shared_examples "3 steps" do
 
   it_behaves_like "map can be hidden"
 
-  it "publishes the proposal" do
+  it "publishes the reporting proposal" do
     click_link "New proposal"
 
     fill_proposal
@@ -82,6 +82,16 @@ shared_examples "3 steps" do
     expect(body).not_to have_content("HashtagSuggested2")
     expect(proposal.identities.first).to eq(user_group)
     expect(proposal.scope).to eq(scope)
+  end
+
+  it "uploads attachments", :slow do
+    click_link "New proposal"
+
+    fill_proposal(attach: true, extra_fields: false, skip_address: true)
+
+    expect(page).to have_content(proposal_title)
+    expect(page).to have_content("RELATED IMAGES")
+    # expect(page).to have_content("RELATED DOCUMENTS")
   end
 
   it "modifies the proposal" do

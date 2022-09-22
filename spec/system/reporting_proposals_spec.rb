@@ -35,26 +35,33 @@ describe "Reporting proposals overrides", type: :system do
     login_as user, scope: :user
   end
 
-  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false)
+  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false)
     within ".card__content form" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
+
       if extra_fields
         select translated(proposal_category.name), from: :proposal_category_id
         fill_in :proposal_address, with: address
         check "#HashtagSuggested1"
         select user_group.name, from: :proposal_user_group_id unless skip_group
-        check "proposal_has_no_address" if skip_address
         scope_pick scope_picker, scope unless skip_scope
       end
+
+      check "proposal_has_no_address" if skip_address
+      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
+
       find("*[type=submit]").click
     end
   end
 
-  def complete_proposal
+  def complete_proposal(attach: false)
     within ".card__content form" do
       select translated(another_category.name), from: :proposal_category_id
       select user_group.name, from: :proposal_user_group_id
+
+      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
+
       find("*[type=submit]").click
     end
   end
@@ -72,6 +79,7 @@ describe "Reporting proposals overrides", type: :system do
     let!(:component) do
       create(:proposal_component,
              :with_creation_enabled,
+             :with_attachments_allowed,
              :with_geocoding_enabled,
              participatory_space: participatory_process)
     end

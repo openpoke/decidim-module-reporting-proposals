@@ -3,7 +3,30 @@
 module Decidim
   module ReportingProposals
     class CreateReportingProposal < Decidim::Proposals::CreateProposal
+      include ::Decidim::MultipleAttachmentsMethods
+      include ::Decidim::Proposals::GalleryMethods
+
+      def prepare_attachments
+        if process_attachments?
+          build_attachments
+          return broadcast(:invalid) if attachments_invalid?
+        end
+
+        if process_gallery?
+          build_gallery
+          return broadcast(:invalid) if gallery_invalid?
+        end
+      end
+
+      def save_attachments
+        @attached_to = @proposal
+        create_gallery if process_gallery?
+        create_attachments if process_attachments?
+      end
+
       def create_proposal
+        prepare_attachments
+
         PaperTrail.request(enabled: false) do
           @proposal = Decidim.traceability.perform_action!(
             :create,
@@ -30,6 +53,8 @@ module Decidim
             proposal
           end
         end
+
+        save_attachments
       end
     end
   end
