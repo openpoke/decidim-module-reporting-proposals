@@ -58,6 +58,16 @@ shared_examples "3 steps" do
     expect(page).to have_selector("a", text: "Modify the proposal")
   end
 
+  context "when draft exists" do
+    let!(:proposal_draft) { create(:proposal, :draft, users: [user], component: component, title: proposal_title, body: proposal_body) }
+
+    it "redirects to complete" do
+      click_link "New proposal"
+
+      expect(page).to have_content("EDIT PROPOSAL DRAFT")
+    end
+  end
+
   it_behaves_like "map can be hidden"
 
   it "publishes the reporting proposal" do
@@ -103,6 +113,8 @@ shared_examples "3 steps" do
     expect(page).not_to have_content("RELATED DOCUMENTS")
 
     click_link "Modify the proposal"
+
+    expect(page).to have_content("EDIT PROPOSAL DRAFT")
 
     complete_proposal(attach: true)
 
