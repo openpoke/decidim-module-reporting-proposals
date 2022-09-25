@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require_relative "admin/engine"
+
 module Decidim
   module ReportingProposals
     module Admin
-      include Decidim::CreateReport
-      include Decidim::Admin::HideResource
     end
   end
 end
