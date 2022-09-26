@@ -8,8 +8,6 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          helper_method :proposals, :query, :form_presenter, :proposal, :proposal_ids, :hide
-
           def hide
             Decidim::Admin::HideResource.call(proposal, current_user) do
               on(:ok) do
