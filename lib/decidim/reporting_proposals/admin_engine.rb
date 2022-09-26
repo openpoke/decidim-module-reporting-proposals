@@ -9,16 +9,12 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        resources :reporting_proposals, controller: "proposals_manager_controller" do
-          put :hide, on: :member
-        end
-      end
-
-      initializer "decidim_reporting_proposals_admin.mount_routes", before: "decidim_admin.mount_routes" do
-        # Mount the engine routes to Decidim::Core::Engine because otherwise
-        # they would not get mounted properly.
-        Decidim::Admin::Engine.routes.append do
-          mount Decidim::ReportingProposals::Admin::Engine => "/"
+        resources :reporting_proposals do
+          resources :proposals do
+            member do
+              put :hide
+            end
+          end
         end
       end
     end

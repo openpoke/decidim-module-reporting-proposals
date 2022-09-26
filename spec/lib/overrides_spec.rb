@@ -18,7 +18,8 @@ checksums = [
     files: {
       "/app/controllers/decidim/proposals/proposals_controller.rb" => "6f73c3cad3c713358535c92e2ed84f60",
       "/app/helpers/decidim/proposals/proposal_wizard_helper.rb" => "75d875f3323e75273819d526731140da",
-      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "e0a162954ca45ab6b3d71e61635eddbd"
+      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "e0a162954ca45ab6b3d71e61635eddbd",
+      "/app/controllers/decidim/proposals/admin/proposals_controller.rb" => "992c8db60bfde09efdb221930f6e1bb1"
     }
   }
 ]
