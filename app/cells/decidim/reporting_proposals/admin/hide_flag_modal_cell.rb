@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 module Decidim
-    module ReportingProposals
-      module Admin
+  module ReportingProposals
+    module Admin
       class HideFlagModalCell < Decidim::ViewModel
         include ActionView::Helpers::FormOptionsHelper
         include Decidim::LayoutHelper
-        include Decidim::ReportingProposals::Engine.routes.url_helpers
-        include Decidim::ResourceHelper
-
-        property :moderation
 
         def cache_hash
           hash = []
@@ -19,10 +15,6 @@ module Decidim
           hash.push(model.class.name.gsub("::", ":"))
           hash.push(model.id)
           hash.join(Decidim.cache_key_separator)
-        end
-
-        def show
-          render
         end
 
         private

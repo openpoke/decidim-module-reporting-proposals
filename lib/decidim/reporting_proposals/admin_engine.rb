@@ -10,10 +10,8 @@ module Decidim
 
       routes do
         resources :reporting_proposals, controller: "proposals_manager_controller" do
-          patch :hide, on: :member
+          put :hide, on: :member
         end
-
-        root to: "proposals#index"
       end
 
       initializer "decidim_reporting_proposals_admin.mount_routes", before: "decidim_admin.mount_routes" do
