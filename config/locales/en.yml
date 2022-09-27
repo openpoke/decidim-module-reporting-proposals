@@ -223,6 +223,11 @@ en:
                 one: 1 sec. ago to evaluate
                 other: "%{count} sec. ago to evaluate"
                 zero: right now to evaluate
+        proposals:
+          proposal_photos:
+            title: Photos
+            add_images: Add images
+            upload_msg: No files selected
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
