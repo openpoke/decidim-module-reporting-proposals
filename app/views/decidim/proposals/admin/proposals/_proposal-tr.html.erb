@@ -123,7 +123,7 @@
       </button>
     <% end %>
     <% if proposal.reported? %>
-      <%= icon_link_to "eye", hide_proposal_path(id: proposal),
+      <%= icon_link_to "trash", hide_proposal_path(id: proposal),
                        t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon--hide"%>
     <% end %>
   </td>
