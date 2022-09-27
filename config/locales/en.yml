@@ -1,5 +1,9 @@
 ---
 en:
+  activemodel:
+    attributes:
+      proposal:
+        has_no_address: Has no address
   decidim:
     components:
       proposals:

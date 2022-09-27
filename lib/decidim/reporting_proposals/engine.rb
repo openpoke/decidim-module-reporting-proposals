@@ -7,15 +7,21 @@ module Decidim
       isolate_namespace Decidim::ReportingProposals
 
       # overrides for proposals
-      config.after_initialize do
-        Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
-        Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
-        Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
-        Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
-        Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
-        Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
-        Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
+      config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
+      end
+
+      initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
+        config.to_prepare do
+          Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+          Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
+          Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+          Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
+          Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
+          Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
+          Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
+          ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
+        end
       end
 
       initializer "decidim_reporting_proposals.component_overdue_options" do
