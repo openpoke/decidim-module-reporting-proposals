@@ -12,6 +12,14 @@ module Decidim
 
       included do
         def geocoding_field(object_name, method, options = {})
+          unless template.snippets.any?(:reporting_proposals_geocoding_addons)
+            template.snippets.add(:reporting_proposals_geocoding_addons, template.javascript_pack_tag("decidim_reporting_proposals_geocoding"))
+            template.snippets.add(:reporting_proposals_geocoding_addons, template.stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
+
+            # This will display the snippets in the <head> part of the page.
+            template.snippets.add(:head, template.snippets.for(:reporting_proposals_geocoding_addons))
+          end
+
           options[:autocomplete] ||= "off"
           options[:class] ||= "input-group-field"
 

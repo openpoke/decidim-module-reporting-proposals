@@ -9,7 +9,8 @@ checksums = [
   {
     package: "decidim-core",
     files: {
-      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9"
+      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
+      "/lib/decidim/map/autocomplete.rb" => "65df8e58433814e6b35b52c1bff19ed2"
     }
   },
   {
