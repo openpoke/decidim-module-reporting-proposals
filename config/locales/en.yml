@@ -329,3 +329,5 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+      forms:
+        use_my_location: Use my location
