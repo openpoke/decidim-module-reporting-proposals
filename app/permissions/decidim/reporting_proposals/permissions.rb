@@ -8,9 +8,15 @@ module Decidim
 
         return Decidim::ReportingProposals::Admin::Permissions.new(user, permission_action, context).permissions if permission_action.scope == :admin
 
-        editor_image_action?
+        geocoding_action?
 
         permission_action
+      end
+
+      def geocoding_action?
+        return unless permission_action.subject == :geocoding
+
+        allow!
       end
     end
   end

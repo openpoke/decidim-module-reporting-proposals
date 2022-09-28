@@ -3,11 +3,28 @@
 module Decidim
   module ReportingProposals
     class GeolocationController < Decidim::ReportingProposals::ApplicationController
+      # overwrite original rescue_from to ensure we print messages from ajax methods (update)
+      rescue_from Decidim::ActionForbidden, with: :ajax_user_has_no_permission
+
       def address
+        enforce_permission_to :address, :geocoding
+
+        return render(json: { message: "unconfigured", found: false }, status: :unprocessable_entity) unless Decidim::Map.configured?
+
         # TODO: return :unprocessable_entity if not configured or failure
         geocoder = Decidim::Map.utility(:geocoding, organization: current_organization)
         address = geocoder.address([params[:latitude], params[:longitude]])
         render json: { address: address, found: address.present? }
+      end
+
+      private
+
+      # Rescue ajax calls and print the update.js view which prints the info on the message ajax form
+      # Only if the request is AJAX, otherwise behave as Decidim standards
+      def ajax_user_has_no_permission
+        return user_has_no_permission unless request.xhr?
+
+        render json: { message: I18n.t("actions.unauthorized", scope: "decidim.core") }, status: :unprocessable_entity
       end
     end
   end
