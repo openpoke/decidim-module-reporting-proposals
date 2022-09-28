@@ -1,5 +1,9 @@
 ---
 en:
+  activemodel:
+    attributes:
+      proposal:
+        has_no_address: Has no address
   decidim:
     components:
       proposals:
@@ -134,6 +138,14 @@ en:
             votes_enabled: Supports enabled
             votes_hidden: Supports hidden (if supports are enabled, checking this
               will hide the number of supports)
+    moderations:
+      actions:
+        hide: Hide
+      admin:
+        reportable:
+          hide:
+            invalid: There was a problem hiding the resource.
+            success: Resource successfully hidden.
     proposals:
       admin:
         answer_overdue:
