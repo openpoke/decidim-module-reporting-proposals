@@ -31,8 +31,14 @@ describe "Report and hide proposal", type: :system do
     it "admin can be report and hide the proposal" do
       expect(page).to have_css("button svg.icon--flag")
 
+      expect(proposal).not_to be_hidden
+      expect(proposal).not_to be_reported
+
       find("button svg.icon--flag").click
       find("button[type=submit]", text: "Report").click
+
+      expect(proposal.reload).not_to be_hidden
+      expect(proposal).to be_reported
 
       expect(page).to have_css("a svg.icon--trash")
 
@@ -40,6 +46,9 @@ describe "Report and hide proposal", type: :system do
 
       expect(page).not_to have_css("a svg.icon--trash")
       expect(page).not_to have_css("button svg.icon--flag")
+
+      expect(proposal.reload).to be_hidden
+      expect(proposal).to be_reported
     end
   end
 end

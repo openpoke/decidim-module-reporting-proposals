@@ -108,7 +108,7 @@
     <%= icon_link_to "eye", resource_locator(proposal).path, t("actions.preview", scope: "decidim.proposals.admin"), class: "action-icon--preview", target: :blank %>
 
     <% if Decidim::ReportingProposals.allow_admins_to_hide_proposals && !proposal.reported? %>
-      <%= cell("decidim/reporting_proposals/admin/hide_flag_modal", proposal, modal_id: "flagModal#{proposal.id}") %>
+      <%= cell("decidim/flag_modal", proposal, modal_id: "flagModal#{proposal.id}") %>
       <button type="button" class="link-alt"
               data-open="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
               title="<%= t("report", scope: "decidim.proposals.proposals.show") %>"
