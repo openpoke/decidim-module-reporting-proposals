@@ -330,4 +330,7 @@ en:
           proposal_comments: Comments
           proposals: Reporting proposals
       forms:
+        errors:
+          device_not_supported: Geolocation is not supported by your browser.
+          no_device_location: Sorry, we couldn't detect your location.
         use_my_location: Use my location

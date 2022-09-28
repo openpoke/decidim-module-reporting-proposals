@@ -6,9 +6,8 @@ module Decidim
       extend ActiveSupport::Concern
       include Decidim::LayoutHelper
 
-      # These methods might not be available in this context when this is called, thus the delegation
-      delegate :content_tag, to: "template"
-      delegate :asset_pack_path, to: "ActionController::Base.helpers"
+      # These methods are used in deeper levels and might not be available in this context when this is called, thus the delegation
+      delegate :content_tag, :asset_pack_path, to: :template
 
       included do
         def geocoding_field(object_name, method, options = {})
@@ -29,8 +28,15 @@ module Decidim
               method,
               options.merge("data-decidim-geocoding" => view_options.to_json)
             ) +
-              template.content_tag(:div, class: "input-group-button") do
-                template.content_tag(:button, class: "button secondary") do
+              template.content_tag(:div, class: "input-group-button user-device-location") do
+                template.content_tag(:button, class: "button secondary", type: "button", data: {
+                                       input: "#{object_name}_#{method}",
+                                       latitude: "#{object_name}_latitude",
+                                       longitude: "#{object_name}_longitude",
+                                       error_no_location: I18n.t("errors.no_device_location", scope: "decidim.reporting_proposals.forms"),
+                                       error_unsupported: I18n.t("errors.device_not_supported", scope: "decidim.reporting_proposals.forms"),
+                                       url: Decidim::ReportingProposals::Engine.routes.url_helpers.address_path
+                                     }) do
                   icon("location", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_location", scope: "decidim.reporting_proposals.forms")}"
                 end
               end
