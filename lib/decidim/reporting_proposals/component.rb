@@ -59,7 +59,6 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_wizard_step_4_help_text, type: :text, translated: true, editor: true
     settings.attribute :unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue
     settings.attribute :evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue
-    settings.attribute :allow_admins_to_hide_proposals, type: :integer, default: Decidim::ReportingProposals.allow_admins_to_hide_proposals
   end
 
   component.settings(:step) do |settings|

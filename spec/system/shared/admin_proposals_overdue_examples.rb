@@ -91,21 +91,3 @@ shared_examples "proposals list has overdue dates" do
     end
   end
 end
-
-shared_examples "proposals can be hidden by admin" do
-  context "when config allows to hide proposals" do
-    let(:allow_admins_to_hide_proposals) { true }
-
-    it "actions have flag to report and hide" do
-      expect(page).to have_css(".icon--flag")
-    end
-  end
-
-  context "when config doesn't allow to hide proposals" do
-    let(:allow_admins_to_hide_proposals) { false }
-
-    it "actions have flag to report and hide" do
-      expect(page).not_to have_css(".icon--flag")
-    end
-  end
-end

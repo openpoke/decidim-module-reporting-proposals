@@ -124,7 +124,7 @@
     <% end %>
     <% if proposal.reported? %>
       <%= icon_link_to "trash", decidim_admin_reporting_proposals.hide_proposal_path(id: proposal),
-                       t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon"%>
+                       t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon" %>
     <% end %>
   </td>
 </tr>

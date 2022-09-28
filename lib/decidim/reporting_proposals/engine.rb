@@ -28,7 +28,6 @@ module Decidim
           component.settings(:global) do |settings|
             settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
             settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
-            settings.attribute(:allow_admins_to_hide_proposals, type: :boolean, default: Decidim::ReportingProposals.allow_admins_to_hide_proposals)
           end
         end
       end
