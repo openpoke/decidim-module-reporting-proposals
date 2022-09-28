@@ -34,6 +34,7 @@ module Decidim::ReportingProposals
       it "fails" do
         put :address, params: params, xhr: true
         expect(response).to have_http_status(:unprocessable_entity)
+        expect(json["message"]).to have_content("not configured")
         expect(json["found"]).to be_blank
       end
     end
@@ -43,6 +44,7 @@ module Decidim::ReportingProposals
         put :address, params: params, xhr: true
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json["address"]).not_to eq(address)
+        expect(json["message"]).to have_content("not authorized")
         expect(json["found"]).to be_blank
       end
     end

@@ -5,6 +5,9 @@ en:
       proposal:
         has_no_address: Has no address
   decidim:
+    application:
+      geocoding:
+        unconfigured: Geocoding is not configured!
     components:
       proposals:
         settings:

@@ -9,7 +9,9 @@ module Decidim
       def address
         enforce_permission_to :address, :geocoding
 
-        return render(json: { message: "unconfigured", found: false }, status: :unprocessable_entity) unless Decidim::Map.configured?
+        unless Decidim::Map.configured?
+          return render(json: { message: I18n.t("unconfigured", scope: "decidim.application.geocoding"), found: false }, status: :unprocessable_entity)
+        end
 
         # TODO: return :unprocessable_entity if not configured or failure
         geocoder = Decidim::Map.utility(:geocoding, organization: current_organization)
