@@ -22,6 +22,8 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
           Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
           Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
+          Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
+          ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
           Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
         end
       end
@@ -43,6 +45,11 @@ module Decidim
 
       initializer "decidim_reporting_proposals.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
+      end
+
+      initializer "decidim_reporting_proposals.add_cells_view_paths" do
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::ReportingProposals::Engine.root}/app/cells")
+        Cell::ViewModel.view_paths << File.expand_path("#{Decidim::ReportingProposals::Engine.root}/app/views")
       end
     end
   end
