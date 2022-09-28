@@ -9,7 +9,8 @@ checksums = [
   {
     package: "decidim-core",
     files: {
-      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9"
+      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
+      "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5"
     }
   },
   {
