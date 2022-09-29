@@ -24,8 +24,6 @@ $(() => {
     }
 
     const $input = $(`#${e.target.dataset.input}`);
-    const $latitude = $(`#${e.target.dataset.latitude}`);
-    const $longitude = $(`#${e.target.dataset.longitude}`);
     const errorNoLocation = e.target.dataset.errorNoLocation;
     const errorUnsupported = e.target.dataset.errorUnsupported;
     const url = e.target.dataset.url;
@@ -34,15 +32,15 @@ $(() => {
       setLocating($this, true);
       navigator.geolocation.getCurrentPosition((position) => {
         const coordinates  = [position.coords.latitude, position.coords.longitude];
-        $input.trigger(
-          "geocoder-suggest-coordinates.decidim",
-          [coordinates]
-        );
         // reverse geolocation
         $.post(url, { latitude: coordinates[0], longitude: coordinates[1] }, (data) => {
           $input.val(data.address)
         })
         setLocating($this, false);
+        $input.trigger(
+          "geocoder-suggest-coordinates.decidim",
+          [coordinates]
+        );
       }, (evt) => { 
         info($input, `${errorNoLocation} ${evt.message}`);
         $this.attr("disabled", false);
