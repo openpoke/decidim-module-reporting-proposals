@@ -29,7 +29,6 @@ $(() => {
     const errorNoLocation = e.target.dataset.errorNoLocation;
     const errorUnsupported = e.target.dataset.errorUnsupported;
     const url = e.target.dataset.url;
-    console.log("locator", $input, $latitude, $longitude, url, e);
 
     if (navigator.geolocation) {
       setLocating($this, true);

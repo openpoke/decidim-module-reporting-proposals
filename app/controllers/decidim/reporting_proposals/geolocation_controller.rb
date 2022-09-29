@@ -13,7 +13,6 @@ module Decidim
           return render(json: { message: I18n.t("unconfigured", scope: "decidim.application.geocoding"), found: false }, status: :unprocessable_entity)
         end
 
-        # TODO: return :unprocessable_entity if not configured or failure
         geocoder = Decidim::Map.utility(:geocoding, organization: current_organization)
         address = geocoder.address([params[:latitude], params[:longitude]])
         render json: { address: address, found: address.present? }

@@ -22,5 +22,11 @@ module Decidim
     config_accessor :allow_admins_to_hide_proposals do
       true
     end
+
+    # Public Setting that allows to configure which component will have "Use my location" button
+    # in a geocoded address field. Accepts an array of component manifest names
+    config_accessor :show_my_location_button do
+      [:proposals, :meetings, :reporting_proposals]
+    end
   end
 end

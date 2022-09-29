@@ -10,7 +10,11 @@ module Decidim
       delegate :content_tag, :asset_pack_path, to: :template
 
       included do
+        alias_method :original_geocoding_field, :geocoding_field
+
         def geocoding_field(object_name, method, options = {})
+          return original_geocoding_field(object_name, method, options) unless show_my_location_button?
+
           unless template.snippets.any?(:reporting_proposals_geocoding_addons)
             template.snippets.add(:reporting_proposals_geocoding_addons, template.javascript_pack_tag("decidim_reporting_proposals_geocoding"))
             template.snippets.add(:reporting_proposals_geocoding_addons, template.stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
@@ -41,6 +45,14 @@ module Decidim
                 end
               end
           end
+        end
+
+        private
+
+        def show_my_location_button?
+          return unless template.respond_to?(:current_component)
+
+          Decidim::ReportingProposals.show_my_location_button.include?(template.current_component.manifest_name.to_sym)
         end
       end
     end

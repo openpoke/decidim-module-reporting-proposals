@@ -5,12 +5,16 @@
     margin-top: 2.3rem;
   }
 }
+
 .user-device-location {
   button {
+    max-height: 3rem;
+
     &.loading-spinner {
       position: relative;
       margin: 0 !important;
-      &:before {
+
+      &::before {
         position: absolute;
         top: 6px;
         left: 12px;
