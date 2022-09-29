@@ -28,5 +28,9 @@ module Decidim
     config_accessor :show_my_location_button do
       [:proposals, :meetings, :reporting_proposals]
     end
+
+    config_accessor :use_camera_button do
+      [:proposals, :meetings, :reporting_proposals]
+    end
   end
 end

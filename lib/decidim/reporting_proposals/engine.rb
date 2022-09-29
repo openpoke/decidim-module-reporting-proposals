@@ -25,6 +25,7 @@ module Decidim
           Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
           ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
           Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
+          Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
         end
       end
 

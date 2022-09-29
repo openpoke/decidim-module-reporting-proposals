@@ -5,11 +5,14 @@ module Decidim
     class ProposalForm < Decidim::Proposals::ProposalForm
       attribute :address, String
       attribute :has_no_address, Boolean
+      attribute :has_no_image, Boolean
 
-      def has_address?
-        return if has_no_address
+      validates :add_photos, presence: true, if: ->(form) { form.has_camera? }
 
-        geocoding_enabled?
+      def has_camera?
+        return if has_no_image
+
+        current_component.settings.attachments_allowed?
       end
     end
   end
