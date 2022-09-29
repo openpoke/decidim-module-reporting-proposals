@@ -6,6 +6,10 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::ReportingProposals
 
+      routes do
+        post :address, to: "geolocation#address"
+      end
+
       # overrides for proposals
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
@@ -20,6 +24,13 @@ module Decidim
           Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
           Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
           ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
+          Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
+        end
+      end
+
+      initializer "decidim_reporting_proposals.mount_routes" do
+        Decidim::Core::Engine.routes do
+          mount Decidim::ReportingProposals::Engine, at: "/reporting_proposals", as: "decidim_reporting_proposals"
         end
       end
 
