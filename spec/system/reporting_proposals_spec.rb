@@ -54,8 +54,8 @@ describe "Reporting proposals overrides", type: :system do
       if attach
         attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
         attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf"))
-      else
-        check "proposal_has_no_image" if manifest_name == "reporting_proposals"
+      elsif manifest_name == "reporting_proposals"
+        check "proposal_has_no_image"
       end
 
       find("*[type=submit]").click
