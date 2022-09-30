@@ -6,7 +6,7 @@
 
 <% if component_settings.attachments_allowed? %>
     <div class="field row column">
-      <%= form.file_field :add_photos, multiple: false, label: t("add_images", scope: "decidim.reporting_proposals.proposals.form") %>
+      <%= form.file_field :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form") %>
 
       <div class="has_no_image">
         <%= form.check_box :has_no_image %>
@@ -69,7 +69,7 @@
   </div>
 <% end %>
 
-<% if component_settings.attachments_allowed? %>
+<% if component_settings.attachments_allowed? && !component_settings.only_photo_attachments? %>
   <fieldset class="attachments_container gallery__container documents_container">
     <legend><%= t("attachment_legend", scope: "decidim.proposals.proposals.edit") %></legend>
 

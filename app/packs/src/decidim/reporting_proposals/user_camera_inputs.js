@@ -14,7 +14,6 @@ $(() => {
 
     if ($checkbox.length > 0) {
       const toggleInput = () => {
-        console.log("toggleInput", $checkbox)
         if ($checkbox[0].checked) {
           $input.prop("disabled", true);
           $button.prop("disabled", true);

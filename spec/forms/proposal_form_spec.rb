@@ -23,7 +23,9 @@ module Decidim
       let(:latitude) { 40.1234 }
       let(:longitude) { 2.1234 }
       let(:has_no_address) { false }
+      let(:has_no_image) { false }
       let(:address) { "Some address" }
+      let(:image) { Decidim::Dev.asset("city.jpeg") }
       let(:suggested_hashtags) { [] }
       let(:attachment_params) { nil }
       let(:meeting_as_author) { false }
@@ -38,6 +40,8 @@ module Decidim
           latitude: latitude,
           longitude: longitude,
           has_no_address: has_no_address,
+          has_no_image: has_no_image,
+          add_photos: image,
           meeting_as_author: meeting_as_author,
           attachment: attachment_params,
           suggested_hashtags: suggested_hashtags
@@ -76,6 +80,18 @@ module Decidim
 
         context "and address is not required" do
           let(:has_no_address) { true }
+
+          it { is_expected.to be_valid }
+        end
+      end
+
+      context "when there's no image" do
+        let(:image) { nil }
+
+        it { is_expected.to be_invalid }
+
+        context "and image is not required" do
+          let(:has_no_image) { true }
 
           it { is_expected.to be_valid }
         end
