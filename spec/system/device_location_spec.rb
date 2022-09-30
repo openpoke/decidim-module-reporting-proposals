@@ -5,28 +5,16 @@ require "spec_helper"
 describe "User location button", type: :system do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
-  let!(:scope) { create :scope, organization: organization }
   let!(:component) do
     create(:reporting_proposals_component,
            :with_extra_hashtags,
-           participatory_space: participatory_process,
-           suggested_hashtags: suggested_hashtags,
-           automatic_hashtags: automatic_hashtags,
-           settings: { scopes_enabled: true })
+           participatory_space: participatory_process)
   end
-  let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
-  let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
   let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
-  let!(:user_group) { create(:user_group, :verified, users: [user], organization: organization) }
-  let(:proposal_title) { "More sidewalks and less roads" }
-  let(:proposal_body) { "Cities need more people, not more cars" }
-  let(:proposal_category) { category }
   let(:proposal) { Decidim::Proposals::Proposal.last }
-  let!(:another_category) { create :category, participatory_space: participatory_process }
   let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
   let(:latitude) { 41.3825 }
   let(:longitude) { 2.1772 }
-  let(:scope_picker) { select_data_picker(:proposal_scope_id) }
   let(:all_manifests) { [:proposals, :meetings, :reporting_proposals] }
   let(:manifests) { all_manifests }
 

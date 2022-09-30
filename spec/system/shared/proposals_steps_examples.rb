@@ -2,8 +2,6 @@
 
 shared_examples "map can be hidden" do
   it "checkbox hides the map" do
-    click_link "New proposal"
-
     fill_in :proposal_address, with: address
     within ".tribute-container" do
       page.find("li", match: :first).click
@@ -18,8 +16,6 @@ end
 
 shared_examples "map can be shown" do
   it "checkbox shows the map" do
-    click_link "New proposal"
-
     fill_proposal(extra_fields: false)
 
     expect(page).not_to have_content("You can move the point on the map")
@@ -35,8 +31,6 @@ end
 
 shared_examples "3 steps" do
   it "sidebar does not have the complete step" do
-    click_link "New proposal"
-
     expect(page).to have_content("Step 1 of 3")
     within ".wizard__steps" do
       expect(page).not_to have_content("Complete")
@@ -44,8 +38,6 @@ shared_examples "3 steps" do
   end
 
   it "redirects to the publish step" do
-    click_link "New proposal"
-
     fill_proposal
 
     expect(page).to have_content(proposal_title)
@@ -62,17 +54,34 @@ shared_examples "3 steps" do
     let!(:proposal_draft) { create(:proposal, :draft, users: [user], component: component, title: proposal_title, body: proposal_body) }
 
     it "redirects to complete" do
+      visit_component
       click_link "New proposal"
 
       expect(page).to have_content("EDIT PROPOSAL DRAFT")
     end
   end
 
+  context "when only_photo_attachments is enabled" do
+    let(:only_photos) { true }
+
+    it "does not show the attachments" do
+      expect(page).not_to have_content("Add an attachment")
+      expect(page).to have_content("Image/photo")
+    end
+
+    context "and attachment are not active" do
+      let(:attachments) { false }
+
+      it "does not show the attachments or photos" do
+        expect(page).not_to have_content("Add an attachment")
+        expect(page).not_to have_content("Image/photo")
+      end
+    end
+  end
+
   it_behaves_like "map can be hidden"
 
   it "publishes the reporting proposal" do
-    click_link "New proposal"
-
     fill_proposal
 
     click_button "Publish"
@@ -95,8 +104,6 @@ shared_examples "3 steps" do
   end
 
   it "uploads attachments", :slow do
-    click_link "New proposal"
-
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
@@ -105,8 +112,6 @@ shared_examples "3 steps" do
   end
 
   it "modifies the proposal" do
-    click_link "New proposal"
-
     fill_proposal
 
     expect(page).not_to have_content("RELATED IMAGES")
@@ -129,8 +134,6 @@ shared_examples "3 steps" do
   end
 
   it "stores no address if checked" do
-    click_link "New proposal"
-
     fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
 
     click_button "Publish"
@@ -150,8 +153,6 @@ end
 
 shared_examples "4 steps" do
   it "sidebar has the complete step" do
-    click_link "New proposal"
-
     expect(page).to have_content("Step 1 of 4")
     within ".wizard__steps" do
       expect(page).to have_content("Complete")
@@ -161,8 +162,6 @@ shared_examples "4 steps" do
   it_behaves_like "map can be shown"
 
   it "redirects to the complete step" do
-    click_link "New proposal"
-
     fill_proposal(extra_fields: false)
 
     within ".section-heading" do
@@ -173,8 +172,6 @@ shared_examples "4 steps" do
   end
 
   it "publishes the proposal" do
-    click_link "New proposal"
-
     fill_proposal(extra_fields: false)
     expect(proposal.identities.first).to eq(user)
 
