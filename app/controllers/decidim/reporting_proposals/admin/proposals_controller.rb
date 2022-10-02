@@ -20,6 +20,12 @@ module Decidim
           redirect_back(fallback_location: decidim_admin.root_path)
         end
 
+        def show
+          @notes_form = form(ProposalNoteForm).instance
+          @answer_form = form(Admin::ProposalAnswerForm).from_model(proposal)
+          @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).instance
+        end
+
         private
 
         def proposal

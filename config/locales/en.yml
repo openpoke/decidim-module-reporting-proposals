@@ -236,9 +236,11 @@ en:
                 other: "%{count} sec. ago to evaluate"
                 zero: right now to evaluate
         proposals:
-          proposal_photos:
-            title: Photos
+          photo_form:
+            action: Add image
             add_images: Add images
+            gallery_legend: Add images
+            title: Photos
             upload_msg: No files selected
     reporting_proposals:
       actions:
