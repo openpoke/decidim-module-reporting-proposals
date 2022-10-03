@@ -21,11 +21,11 @@ module Decidim
         end
 
         def photos_proposal
-          enforce_permission_to :edit, :proposal, proposal: proposal
+          enforce_permission_to :edit, :resource, resource: proposal
 
           @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
 
-          Admin::UpdateProposal.call(@photo_form, @proposal) do
+          Decidim::ReportingProposals::Admin::UpdateProposal.call(@photo_form, proposal) do
             on(:ok) do |_proposal|
               flash[:notice] = t("proposals.update.success", scope: "decidim")
               redirect_to :show

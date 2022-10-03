@@ -31,7 +31,7 @@ module Decidim
         end
 
         def photos_action?
-          allow! if permission_action.subject == :proposal && permission_action.action == :edit
+          allow! if permission_action.subject == :resource && permission_action.action == :edit
         end
       end
     end
