@@ -138,7 +138,7 @@
   </div>
 </div>
 
-<% if allowed_to? :edit, :proposal, proposal: proposal %>
+<% if allowed_to? :create, :proposal_answer, proposal: proposal %>
     <%= render partial: "photo_form" %>
 <% end %>
 

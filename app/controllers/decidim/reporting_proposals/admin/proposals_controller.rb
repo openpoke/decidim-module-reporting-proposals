@@ -28,7 +28,7 @@ module Decidim
           Decidim::ReportingProposals::Admin::UpdateProposal.call(@photo_form, proposal) do
             on(:ok) do |_proposal|
               flash[:notice] = t("proposals.update.success", scope: "decidim")
-              redirect_to :show
+              redirect_to decidim_admin_proposals.proposal_path(proposal)
             end
 
             on(:invalid) do

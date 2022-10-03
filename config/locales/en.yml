@@ -242,6 +242,8 @@ en:
             gallery_legend: Add images
             title: Photos
             upload_msg: No files selected
+          proposal_photos:
+            title: Photos
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal

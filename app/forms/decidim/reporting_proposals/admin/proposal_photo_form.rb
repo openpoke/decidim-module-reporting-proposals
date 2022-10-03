@@ -7,6 +7,10 @@ module Decidim
         include Decidim::AttachmentAttributes
         attribute :attachment, AttachmentForm
         attachments_attribute :photos
+
+        def current_component
+          @current_component ||= @proposal&.component
+        end
       end
     end
   end
