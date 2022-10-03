@@ -4,7 +4,8 @@
     </h2>
   </div>
   <div class="card-section">
-    <%= decidim_form_for(proposal, url: proposal_path(proposal),
+    <%= decidim_form_for(@photo_form, url: decidim_admin_reporting_proposals.photos_proposal_path(id: proposal.id),
+                         method: :post,
                          html: { multipart: true, class: "form edit_proposal proposal_form_admin" }) do |f| %>
       <%#= f.hidden_field :proposal_id, value: proposal.id %>
 

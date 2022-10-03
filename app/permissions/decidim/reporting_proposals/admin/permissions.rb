@@ -11,6 +11,7 @@ module Decidim
           return permission_action unless same_organization?
 
           hide_content_action?
+          photos_action?
 
           permission_action
         end
@@ -27,6 +28,10 @@ module Decidim
                         permission_action.subject == :resource
 
           allow!
+        end
+
+        def photos_action?
+          allow! if permission_action.subject == :proposal && permission_action.action == :edit
         end
       end
     end

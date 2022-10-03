@@ -20,10 +20,22 @@ module Decidim
           redirect_back(fallback_location: decidim_admin.root_path)
         end
 
-        def show
-          @notes_form = form(ProposalNoteForm).instance
-          @answer_form = form(Admin::ProposalAnswerForm).from_model(proposal)
-          @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).instance
+        def photos_proposal
+          enforce_permission_to :edit, :proposal, proposal: proposal
+
+          @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
+
+          Admin::UpdateProposal.call(@photo_form, @proposal) do
+            on(:ok) do |_proposal|
+              flash[:notice] = t("proposals.update.success", scope: "decidim")
+              redirect_to :show
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = t("proposals.update.error", scope: "decidim")
+              render :show
+            end
+          end
         end
 
         private
