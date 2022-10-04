@@ -8,8 +8,12 @@ module Decidim
         attribute :attachment, AttachmentForm
         attachments_attribute :photos
 
+        def proposal
+          @proposal ||= Decidim::Proposals::Proposal.find(id)
+        end
+
         def current_component
-          @current_component ||= @proposal&.component
+          @current_component ||= proposal&.component
         end
       end
     end
