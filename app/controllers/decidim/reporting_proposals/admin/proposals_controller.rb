@@ -28,14 +28,13 @@ module Decidim
           Decidim::ReportingProposals::Admin::UpdateProposal.call(@photo_form, proposal) do
             on(:ok) do |_proposal|
               flash[:notice] = t("proposals.update.success", scope: "decidim")
-              redirect_to decidim_admin_proposals.proposal_path(proposal)
             end
-
+            
             on(:invalid) do
-              flash.now[:alert] = t("proposals.update.error", scope: "decidim")
-              render :show
+              flash[:alert] = t("proposals.update.error", scope: "decidim")
             end
           end
+          redirect_to Decidim::ResourceLocatorPresenter.new(proposal).admin_url
         end
 
         private
