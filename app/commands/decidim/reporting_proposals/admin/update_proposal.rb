@@ -24,22 +24,12 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          # delete_attachment(form.attachment) if delete_attachment?
-
-          # if process_attachments?
-          #   @proposal.attachments.destroy_all
-
-          #   build_attachment
-          #   return broadcast(:invalid) if attachment_invalid?
-          # end
-
           if process_gallery?
             build_gallery
             return broadcast(:invalid) if gallery_invalid?
           end
 
           transaction do
-            # create_attachment if process_attachments?
             create_gallery if process_gallery?
             photo_cleanup!
           end
@@ -49,7 +39,7 @@ module Decidim
 
         private
 
-        attr_reader :form, :proposal, :attachment, :gallery
+        attr_reader :form, :proposal, :gallery
       end
     end
   end

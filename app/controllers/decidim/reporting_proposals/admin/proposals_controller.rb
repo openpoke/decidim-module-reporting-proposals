@@ -29,12 +29,12 @@ module Decidim
             on(:ok) do |_proposal|
               flash[:notice] = t("proposals.update.success", scope: "decidim")
             end
-            
+
             on(:invalid) do
               flash[:alert] = t("proposals.update.error", scope: "decidim")
             end
           end
-          redirect_to Decidim::ResourceLocatorPresenter.new(proposal).admin_url
+          redirect_to Decidim::ResourceLocatorPresenter.new(proposal).show
         end
 
         private
