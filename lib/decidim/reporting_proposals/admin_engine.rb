@@ -12,7 +12,6 @@ module Decidim
       routes do
         # Add admin engine routes here
         put :hide_proposal, to: "proposals#hide_proposal"
-        put :photos_proposal, to: "proposals#photos_proposal"
         post :photos_proposal, to: "proposals#photos_proposal"
       end
 
