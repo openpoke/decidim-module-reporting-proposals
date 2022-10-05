@@ -150,95 +150,6 @@ en:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
-    proposals:
-      admin:
-        answer_overdue:
-          datetime:
-            distance_in_words:
-              about_x_hours:
-                one: about 1 hour overdue
-                other: about %{count} hours overdue
-              about_x_months:
-                one: about 1 month overdue
-                other: about %{count} months overdue
-              half_a_minute: half a minute overdue
-              less_than_x_minutes:
-                one: less than a min. overdue
-                other: less than %{count} min. overdue
-              less_than_x_seconds:
-                one: right now overdue
-                other: less than %{count} sec. overdue
-              x_days:
-                one: 1 day ago overdue
-                other: "%{count} days ago overdue"
-              x_hours:
-                one: 1 hour ago overdue
-                other: "%{count} hours ago overdue"
-              x_minutes:
-                one: 1 min. ago overdue
-                other: "%{count} min. ago overdue"
-              x_seconds:
-                one: 1 sec. ago overdue
-                other: "%{count} sec. ago overdue"
-                zero: right now overdue
-        answer_pending:
-          datetime:
-            distance_in_words:
-              about_x_hours:
-                one: about 1 hour to answer
-                other: about %{count} hours to answer
-              about_x_months:
-                one: about 1 month to answer
-                other: about %{count} months to answer
-              half_a_minute: half a minute to answer
-              less_than_x_minutes:
-                one: less than a min. to answer
-                other: less than %{count} min. to answer
-              less_than_x_seconds:
-                one: right now to answer
-                other: less than %{count} sec. to answer
-              x_days:
-                one: 1 day ago to answer
-                other: "%{count} days ago to answer"
-              x_hours:
-                one: 1 hour ago to answer
-                other: "%{count} hours ago to answer"
-              x_minutes:
-                one: 1 min. ago to answer
-                other: "%{count} min. ago to answer"
-              x_seconds:
-                one: 1 sec. ago to answer
-                other: "%{count} sec. ago to answer"
-                zero: right now to answer
-        evaluate_pending:
-          datetime:
-            distance_in_words:
-              about_x_hours:
-                one: about 1 hour to evaluate
-                other: about %{count} hours to evaluate
-              about_x_months:
-                one: about 1 month to evaluate
-                other: about %{count} months to evaluate
-              half_a_minute: half a minute to evaluate
-              less_than_x_minutes:
-                one: less than a min. to evaluate
-                other: less than %{count} min. to evaluate
-              less_than_x_seconds:
-                one: right now to evaluate
-                other: less than %{count} sec. to evaluate
-              x_days:
-                one: 1 day ago to evaluate
-                other: "%{count} days ago to evaluate"
-              x_hours:
-                one: 1 hour ago to evaluate
-                other: "%{count} hours ago to evaluate"
-              x_minutes:
-                one: 1 min. ago to evaluate
-                other: "%{count} min. ago to evaluate"
-              x_seconds:
-                one: 1 sec. ago to evaluate
-                other: "%{count} sec. ago to evaluate"
-                zero: right now to evaluate
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
@@ -268,76 +179,76 @@ en:
                 one: right now overdue
                 other: less than %{count} sec. overdue
               x_days:
-                one: 1 day ago overdue
-                other: "%{count} days ago overdue"
+                one: 1 day overdue
+                other: "%{count} days overdue"
               x_hours:
-                one: 1 hour ago overdue
-                other: "%{count} hours ago overdue"
+                one: 1 hour overdue
+                other: "%{count} hours overdue"
               x_minutes:
-                one: 1 min. ago overdue
-                other: "%{count} min. ago overdue"
+                one: 1 min. overdue
+                other: "%{count} min. overdue"
               x_seconds:
-                one: 1 sec. ago overdue
-                other: "%{count} sec. ago overdue"
-                zero: right now overdue
+                one: 1 sec. overdue
+                other: "%{count} sec. overdue"
+                zero: overdue right now
         answer_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to answer
-                other: about %{count} hours to answer
+                one: about 1 hour left to answer
+                other: about %{count} hours left to answer
               about_x_months:
-                one: about 1 month to answer
-                other: about %{count} months to answer
-              half_a_minute: half a minute to answer
+                one: about 1 month left to answer
+                other: about %{count} months left to answer
+              half_a_minute: half a minute left to answer
               less_than_x_minutes:
-                one: less than a min. to answer
-                other: less than %{count} min. to answer
+                one: less than a min. left to answer
+                other: less than %{count} min. left to answer
               less_than_x_seconds:
-                one: right now to answer
-                other: less than %{count} sec. to answer
+                one: right now left to answer
+                other: less than %{count} sec. left to answer
               x_days:
-                one: 1 day ago to answer
-                other: "%{count} days ago to answer"
+                one: 1 day left to answer
+                other: "%{count} days left to answer"
               x_hours:
-                one: 1 hour ago to answer
-                other: "%{count} hours ago to answer"
+                one: 1 hour left to answer
+                other: "%{count} hours left to answer"
               x_minutes:
-                one: 1 min. ago to answer
-                other: "%{count} min. ago to answer"
+                one: 1 min. left to answer
+                other: "%{count} min. left to answer"
               x_seconds:
-                one: 1 sec. ago to answer
-                other: "%{count} sec. ago to answer"
-                zero: right now to answer
+                one: 1 sec. left to answer
+                other: "%{count} sec. left to answer"
+                zero: time left to answer expired
         evaluate_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to evaluate
-                other: about %{count} hours to evaluate
+                one: about 1 hour left to evaluate
+                other: about %{count} hours left to evaluate
               about_x_months:
-                one: about 1 month to evaluate
-                other: about %{count} months to evaluate
-              half_a_minute: half a minute to evaluate
+                one: about 1 month left to evaluate
+                other: about %{count} months left to evaluate
+              half_a_minute: half a minute left to evaluate
               less_than_x_minutes:
-                one: less than a min. to evaluate
-                other: less than %{count} min. to evaluate
+                one: less than a min. left to evaluate
+                other: less than %{count} min. left to evaluate
               less_than_x_seconds:
-                one: right now to evaluate
-                other: less than %{count} sec. to evaluate
+                one: right now left to evaluate
+                other: less than %{count} sec. left to evaluate
               x_days:
-                one: 1 day ago to evaluate
-                other: "%{count} days ago to evaluate"
+                one: 1 day left to evaluate
+                other: "%{count} days left to evaluate"
               x_hours:
-                one: 1 hour ago to evaluate
-                other: "%{count} hours ago to evaluate"
+                one: 1 hour left to evaluate
+                other: "%{count} hours left to evaluate"
               x_minutes:
-                one: 1 min. ago to evaluate
-                other: "%{count} min. ago to evaluate"
+                one: 1 min. left to evaluate
+                other: "%{count} min. left to evaluate"
               x_seconds:
-                one: 1 sec. ago to evaluate
-                other: "%{count} sec. ago to evaluate"
-                zero: right now to evaluate
+                one: 1 sec. left to evaluate
+                other: "%{count} sec. left to evaluate"
+                zero: time left to evaluate expired
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals

@@ -24,22 +24,22 @@
         <% if unanswered_proposals_overdue?(proposal) %>
           <div class="help-text-overdue text-alert">
             <%= time_ago_in_words(last_day_to_answer(proposal),
-                                  scope: "decidim.proposals.admin.answer_overdue.datetime.distance_in_words") %>
+                                  scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words") %>
           </div>
         <% elsif evaluating_proposals_overdue?(proposal) %>
           <div class="help-text-overdue text-alert">
             <%= time_ago_in_words(last_day_to_evaluate(proposal),
-                                  scope: "decidim.proposals.admin.answer_overdue.datetime.distance_in_words") %>
+                                  scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words") %>
           </div>
         <% elsif grace_period_unanswered?(proposal) %>
           <div class="help-text-overdue text-warning">
             <%= time_ago_in_words(last_day_to_answer(proposal),
-                                  scope: "decidim.proposals.admin.answer_pending.datetime.distance_in_words") %>
+                                  scope: "decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words") %>
           </div>
         <% elsif grace_period_evaluating?(proposal) %>
           <div class="help-text-overdue text-warning">
             <%= time_ago_in_words(last_day_to_evaluate(proposal),
-                                  scope: "decidim.proposals.admin.evaluate_pending.datetime.distance_in_words") %>
+                                  scope: "decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words") %>
           </div>
         <% end %>
       </div>
