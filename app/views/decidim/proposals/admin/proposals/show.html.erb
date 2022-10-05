@@ -139,7 +139,7 @@
 </div>
 
 <% if allowed_to? :create, :proposal_answer, proposal: proposal %>
-    <%= render partial: "photo_form" %>
+    <%= render partial: "photo_form" if reporting_proposal? %>
 <% end %>
 
 <% if proposal.valuators.any? %>
