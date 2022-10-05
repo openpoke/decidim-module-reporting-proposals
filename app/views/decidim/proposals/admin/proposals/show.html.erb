@@ -125,11 +125,18 @@
     <% if proposal.photos.any? %>
       <div class="row column">
         <strong><%= t(".photos") %>:</strong>
-        <div id="photos" class="gallery row">
+        <div id="photos" class="gallery row flex--fsc">
           <% proposal.photos.each do |photo| %>
-            <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
-              <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
-            <% end %>
+            <div class="proposal-photo gallery__item">
+              <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
+                <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
+                <%= icon_link_to 'x',
+                                 decidim_admin_reporting_proposals.remove_photo_path(id: proposal.id),
+                                 t(".delete_image"),
+                                 method: :delete,
+                                 class: "delete-proposal__button", style: "color:white;" %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -139,46 +146,46 @@
 </div>
 
 <% if allowed_to? :create, :proposal_answer, proposal: proposal %>
-    <%= render partial: "photo_form" if reporting_proposal? %>
+  <%= render partial: "photo_form" if reporting_proposal? %>
 <% end %>
 
 <% if proposal.valuators.any? %>
-<div class="card">
-  <div class="card-divider">
-    <h2 class="card-title">
-      <%= t ".valuators" %>
-    </h2>
-  </div>
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title">
+        <%= t ".valuators" %>
+      </h2>
+    </div>
 
-  <div class="card-section">
-    <div class="row column">
-      <strong><%= t ".assigned_valuators" %>:</strong>
-      <ul id="valuators">
-        <% proposal.valuation_assignments.each do |assignment| %>
-          <% presented_valuator = present(assignment.valuator) %>
+    <div class="card-section">
+      <div class="row column">
+        <strong><%= t ".assigned_valuators" %>:</strong>
+        <ul id="valuators">
+          <% proposal.valuation_assignments.each do |assignment| %>
+            <% presented_valuator = present(assignment.valuator) %>
             <li>
               <%= link_to(
-                presented_valuator.name,
-                presented_valuator.profile_path,
-                target: :blank
-              ) %>
+                    presented_valuator.name,
+                    presented_valuator.profile_path,
+                    target: :blank
+                  ) %>
 
               <% if allowed_to? :unassign_from_valuator, :proposals, valuator: assignment.valuator %>
                 <%= icon_link_to(
-                  "circle-x",
-                  proposal_valuation_assignment_path(proposal, assignment.valuator_role),
-                  t(".remove_assignment"),
-                  method: :delete,
-                  data: { confirm: t(".remove_assignment_confirmation") },
-                  class: "red-icon"
-                ) %>
+                      "circle-x",
+                      proposal_valuation_assignment_path(proposal, assignment.valuator_role),
+                      t(".remove_assignment"),
+                      method: :delete,
+                      data: { confirm: t(".remove_assignment_confirmation") },
+                      class: "red-icon"
+                    ) %>
               <% end %>
             </li>
-        <% end %>
-      </ul>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 <% end %>
 
 <% if allowed_to?(:create, :proposal_note, proposal: proposal) %>

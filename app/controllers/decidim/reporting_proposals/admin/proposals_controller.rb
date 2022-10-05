@@ -37,6 +37,14 @@ module Decidim
           redirect_to Decidim::ResourceLocatorPresenter.new(proposal).show
         end
 
+        def remove_photo
+          enforce_permission_to :edit, :resource, resource: proposal
+
+          proposal.photo.destroy!
+
+          redirect_to Decidim::ResourceLocatorPresenter.new(proposal).show
+        end
+
         private
 
         def proposal

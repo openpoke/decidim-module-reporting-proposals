@@ -10,17 +10,21 @@
         <fieldset>
           <legend><%= t(".gallery_legend") %></legend>
           <% if proposal.photos.any? %>
-            <% proposal.photos.each do |photo| %>
-                <%= f.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
-            <% end %>
+            <div class="gallery row">
+              <% proposal.photos.each do |photo| %>
+                <div class="callout gallery__item">
+                  <%= f.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
+                </div>
+              <% end %>
+            </div>
           <% end %>
           <div class="row column">
             <%= f.file_field :add_photos, multiple: true %>
           </div>
+          <div class="actions">
+            <%= f.submit t(".action") %>
+          </div>
         </fieldset>
-      </div>
-      <div class="actions">
-        <%= f.submit t(".action") %>
       </div>
     <% end %>
   </div>

@@ -244,6 +244,8 @@ en:
             upload_msg: No files selected
           proposal_photos:
             title: Photos
+          show:
+            delete_image: Delete image
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
