@@ -21,7 +21,7 @@ module Decidim
         end
 
         def photos_proposal
-          enforce_permission_to :edit, :resource, resource: proposal
+          enforce_permission_to :create, :proposal_answer, resource: proposal
 
           @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
 
@@ -38,7 +38,7 @@ module Decidim
         end
 
         def remove_photo
-          enforce_permission_to :edit, :resource, resource: proposal
+          enforce_permission_to :create, :proposal_answer, resource: proposal
 
           proposal.photo.destroy!
 

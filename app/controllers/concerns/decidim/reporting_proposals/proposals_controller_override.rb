@@ -60,7 +60,7 @@ module Decidim
         end
 
         def reporting_proposal?
-          component = current_component || @form.current_component
+          component = current_component || @form.component
           component.manifest_name == "reporting_proposals"
         end
       end

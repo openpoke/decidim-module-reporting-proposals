@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     module Admin
-      class Permissions < Decidim::DefaultPermissions
+      class Permissions < Decidim::Proposals::Admin::Permissions
         def permissions
           return permission_action if permission_action.scope != :admin
           return permission_action unless user
@@ -31,7 +31,7 @@ module Decidim
         end
 
         def photos_action?
-          allow! if permission_action.subject == :resource && permission_action.action == :edit
+          allow! if permission_action.subject == :proposal_answer && permission_action.action == :create
         end
       end
     end

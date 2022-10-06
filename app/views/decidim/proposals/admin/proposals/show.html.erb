@@ -125,9 +125,9 @@
     <% if proposal.photos.any? %>
       <div class="row column">
         <strong><%= t(".photos") %>:</strong>
-        <div id="photos" class="gallery row flex--fsc">
+        <div id="photos proposal-<%= proposal.id %>" class="gallery row flex--fsc">
           <% proposal.photos.each do |photo| %>
-            <div class="proposal-photo gallery__item">
+            <div class="proposal-photo gallery__item" id="photo-<%= photo.id %>">
               <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
                 <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
                 <%= icon_link_to 'x',
