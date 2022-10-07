@@ -5,27 +5,27 @@
   }
 }
 
-.proposal-photo.gallery__item{
+.proposal-photo.gallery__item {
   position: relative;
-  margin: 0 0 1rem 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 1rem;
+  border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 0;
   background-color: white;
   color: #202734;
 }
 
-.proposal-photo .thumbnail{
+.proposal-photo .thumbnail {
   margin-bottom: 0;
 }
 
-.delete-proposal__button{
+.delete-proposal__button {
   position: absolute;
   right: 0;
   top: 7px;
   width: 2rem;
   height: 2rem;
   background: rgba(var(--primary-rgb), .8);
-  color: #ffffff;
+  color: #fff;
   border-radius: 50%;
   text-align: center;
 }
