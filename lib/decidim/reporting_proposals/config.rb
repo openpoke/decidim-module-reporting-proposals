@@ -38,5 +38,11 @@ module Decidim
     config_accessor :camera_button_on_attachments do
       true
     end
+
+    # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+    # otherwise can be configured at the component level
+    config_accessor :allow_proposal_photo_editing do
+      true
+    end
   end
 end

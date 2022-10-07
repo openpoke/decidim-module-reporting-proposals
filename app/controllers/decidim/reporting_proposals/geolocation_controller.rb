@@ -6,8 +6,8 @@ module Decidim
       # overwrite original rescue_from to ensure we print messages from ajax methods (update)
       rescue_from Decidim::ActionForbidden, with: :ajax_user_has_no_permission
 
-      def address
-        enforce_permission_to :address, :geocoding
+      def locate
+        enforce_permission_to :locate, :geolocation
 
         unless Decidim::Map.configured?
           return render(json: { message: I18n.t("unconfigured", scope: "decidim.application.geocoding"), found: false }, status: :unprocessable_entity)

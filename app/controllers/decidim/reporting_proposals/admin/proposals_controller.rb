@@ -4,9 +4,8 @@ module Decidim
   module ReportingProposals
     module Admin
       class ProposalsController < Admin::ApplicationController
-        # TODO: permissions
         def hide_proposal
-          enforce_permission_to :hide, :resource, resource: proposal
+          enforce_permission_to :hide_proposal, :proposals, proposal: proposal
 
           Decidim::Admin::HideResource.call(proposal, current_user) do
             on(:ok) do
@@ -20,8 +19,8 @@ module Decidim
           redirect_back(fallback_location: decidim_admin.root_path)
         end
 
-        def photos_proposal
-          enforce_permission_to :create, :proposal_answer, resource: proposal
+        def add_photos
+          enforce_permission_to :edit_photos, :proposals, proposal: proposal
 
           @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
 
@@ -38,9 +37,15 @@ module Decidim
         end
 
         def remove_photo
-          enforce_permission_to :create, :proposal_answer, resource: proposal
+          enforce_permission_to :edit_photos, :proposals, proposal: proposal
 
-          proposal.photo.destroy!
+          attachment = proposal.attachments.find_by(id: params[:photo_id])
+          if attachment.try(:photo?)
+            attachment.destroy!
+            flash[:notice] = t("proposals.update.success", scope: "decidim")
+          else
+            flash[:alert] = t("proposals.update.error", scope: "decidim")
+          end
 
           redirect_to Decidim::ResourceLocatorPresenter.new(proposal).show
         end
@@ -48,7 +53,7 @@ module Decidim
         private
 
         def proposal
-          @proposal || Decidim::Proposals::Proposal.find(params[:id])
+          @proposal ||= Decidim::Proposals::Proposal.find(params[:id])
         end
       end
     end

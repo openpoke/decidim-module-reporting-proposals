@@ -12,9 +12,8 @@ module Decidim
       routes do
         # Add admin engine routes here
         put :hide_proposal, to: "proposals#hide_proposal"
-        post :photos_proposal, to: "proposals#photos_proposal"
+        post :add_photos, to: "proposals#add_photos"
         delete :remove_photo, to: "proposals#remove_photo"
-        get :remove_photo, to: "proposals#remove_photo"
       end
 
       initializer "decidim_reporting_proposals.admin_mount_routes" do

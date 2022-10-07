@@ -59,17 +59,8 @@ describe "Report and hide proposal", type: :system do
     let(:reportable) { proposal }
 
     it "dows not allow to report proposals but allows to hide it if reported" do
-      expect(proposal).to be_reported
-      expect(page).not_to have_css("button svg.icon--flag")
-
-      expect(page).to have_css("a svg.icon--trash")
-
-      find("a svg.icon--trash").click
-
       expect(page).not_to have_css("a svg.icon--trash")
       expect(page).not_to have_css("button svg.icon--flag")
-
-      expect(proposal.reload).to be_hidden
     end
   end
 end

@@ -107,24 +107,25 @@
 
     <%= icon_link_to "eye", resource_locator(proposal).path, t("actions.preview", scope: "decidim.proposals.admin"), class: "action-icon--preview", target: :blank %>
 
-    <% if Decidim::ReportingProposals.allow_admins_to_hide_proposals && !proposal.reported? %>
-      <%= cell("decidim/flag_modal", proposal, modal_id: "flagModal#{proposal.id}") %>
-      <button type="button" class="link-alt"
-              data-open="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
-              title="<%= t("report", scope: "decidim.proposals.proposals.show") %>"
-              aria-controls="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
-              aria-haspopup="true"
-              tabindex="0"
-              style="color:#97a2b2; cursor: pointer">
-        <%= icon "flag", aria_hidden: true, class: "action-icon--preview", role: "img", "aria-hidden": true %>
-        <span class="show-for-sr">
-      <%= t("report", scope: "decidim.proposals.proposals.show") %>
-    </span>
-      </button>
-    <% end %>
-    <% if proposal.reported? %>
-      <%= icon_link_to "trash", decidim_admin_reporting_proposals.hide_proposal_path(id: proposal),
-                       t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon" %>
+    <% if admin_allowed_to?(:hide_proposal, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions]) %>
+      <% if proposal.reported? %>
+        <%= icon_link_to "trash", decidim_admin_reporting_proposals.hide_proposal_path(id: proposal),
+                         t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon" %>
+      <% else %>
+        <%= cell("decidim/flag_modal", proposal, modal_id: "flagModal#{proposal.id}") %>
+        <button type="button" class="link-alt"
+                data-open="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
+                title="<%= t("report", scope: "decidim.proposals.proposals.show") %>"
+                aria-controls="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
+                aria-haspopup="true"
+                tabindex="0"
+                style="color:#97a2b2; cursor: pointer">
+          <%= icon "flag", aria_hidden: true, class: "action-icon--preview", role: "img", "aria-hidden": true %>
+          <span class="show-for-sr">
+        <%= t("report", scope: "decidim.proposals.proposals.show") %>
+      </span>
+        </button>
+      <% end %>
     <% end %>
   </td>
 </tr>
