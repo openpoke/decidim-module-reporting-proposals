@@ -7,13 +7,15 @@ describe "Reporting proposals overrides", type: :system do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:scope) { create :scope, organization: organization }
+  let(:only_photos) { false }
+  let(:attachments) { true }
   let!(:component) do
     create(:reporting_proposals_component,
            :with_extra_hashtags,
            participatory_space: participatory_process,
            suggested_hashtags: suggested_hashtags,
            automatic_hashtags: automatic_hashtags,
-           settings: { scopes_enabled: true })
+           settings: { scopes_enabled: true, attachments_allowed: attachments, only_photo_attachments: only_photos })
   end
   let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
   let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
@@ -49,8 +51,12 @@ describe "Reporting proposals overrides", type: :system do
       end
 
       check "proposal_has_no_address" if skip_address
-      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
-      attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf")) if attach
+      if attach
+        attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+        attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf"))
+      elsif manifest_name == "reporting_proposals"
+        check "proposal_has_no_image"
+      end
 
       find("*[type=submit]").click
     end
@@ -61,8 +67,10 @@ describe "Reporting proposals overrides", type: :system do
       select translated(another_category.name), from: :proposal_category_id
       select user_group.name, from: :proposal_user_group_id
 
-      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg")) if attach
-      attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf")) if attach
+      if attach
+        attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+        attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf"))
+      end
 
       find("*[type=submit]").click
     end
@@ -71,6 +79,7 @@ describe "Reporting proposals overrides", type: :system do
   context "when creating a new proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
+      click_link "New proposal"
     end
 
     it_behaves_like "3 steps"
@@ -88,6 +97,7 @@ describe "Reporting proposals overrides", type: :system do
 
     before do
       visit_component
+      click_link "New proposal"
     end
 
     it_behaves_like "4 steps"

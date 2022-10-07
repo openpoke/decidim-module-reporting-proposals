@@ -22,5 +22,21 @@ module Decidim
     config_accessor :allow_admins_to_hide_proposals do
       true
     end
+
+    # Public Setting that allows to configure which component will have "Use my location" button
+    # in a geocoded address field. Accepts an array of component manifest names
+    config_accessor :show_my_location_button do
+      [:proposals, :meetings, :reporting_proposals]
+    end
+
+    # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
+    config_accessor :use_camera_button do
+      [:proposals, :reporting_proposals]
+    end
+
+    # Public Setting to prevent adding the camera button on not photo/image input[type=file]
+    config_accessor :camera_button_on_attachments do
+      true
+    end
   end
 end
