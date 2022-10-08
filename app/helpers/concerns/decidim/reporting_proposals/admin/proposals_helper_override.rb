@@ -50,6 +50,12 @@ module Decidim
           def last_day_to_evaluate(proposal)
             (proposal.answered_at + days_evaluating(proposal).days).to_date if proposal.answered?
           end
+
+          def time_elapsed_to_answer(proposal)
+            distance_of_time_in_words(proposal.answered_at, proposal.created_at,
+                                      include_seconds: true,
+                                      scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
+          end
         end
       end
     end
