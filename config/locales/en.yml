@@ -249,6 +249,10 @@ en:
                 one: 1 sec. left to evaluate
                 other: "%{count} sec. left to evaluate"
                 zero: time left to evaluate expired
+        exports:
+          proposal_comments: Comments
+          proposals: Reporting proposals
+        resolution_time: Resolution time
         time_elapsed:
           datetime:
             distance_in_words:
@@ -277,10 +281,6 @@ en:
               x_seconds:
                 one: 1 sec.
                 other: "%{count} sec."
-        resolution_time: Resolution time
-        exports:
-          proposal_comments: Comments
-          proposals: Reporting proposals
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.
