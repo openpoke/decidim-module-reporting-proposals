@@ -53,7 +53,6 @@ module Decidim
 
           def time_elapsed_to_answer(proposal)
             distance_of_time_in_words(proposal.answered_at, proposal.created_at,
-                                      include_seconds: true,
                                       scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
           end
         end
