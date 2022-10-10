@@ -9,6 +9,7 @@ module Decidim
 
         included do
           # Helpers for overdue proposals
+          include ActionView::Helpers::DateHelper
 
           def unanswered_proposals_overdue?(proposal)
             grace_period = days_unanswered(proposal)
@@ -52,10 +53,8 @@ module Decidim
           end
 
           def time_elapsed_to_answer(proposal)
-            if proposal.accepted? || proposal.rejected?
-              distance_of_time_in_words(proposal.answered_at, proposal.created_at,
-                                        scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
-            end
+            distance_of_time_in_words(proposal.answered_at, proposal.created_at,
+                                      scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
           end
         end
       end

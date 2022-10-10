@@ -6,6 +6,8 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        include ActionView::Helpers::DateHelper
+
         def serialize
           {
             id: proposal.id,
@@ -30,7 +32,7 @@ module Decidim
             state: proposal.state.to_s,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
-            answered_at: Decidim::ReportingProposals::Admin::ProposalsHelperOverride.time_elapsed_to_answer(proposal),
+            time_elapsed_to_answer: time_elapsed_to_answer(proposal),
             supports: proposal.proposal_votes_count,
             endorsements: {
               total_count: proposal.endorsements.size,
@@ -49,6 +51,17 @@ module Decidim
               url: original_proposal_url
             }
           }
+        end
+
+        private
+
+        def time_elapsed_to_answer(proposal)
+          if proposal.accepted? || proposal.rejected?
+            distance_of_time_in_words(proposal.answered_at, proposal.created_at,
+                                      scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
+          else
+            ""
+          end
         end
       end
     end
