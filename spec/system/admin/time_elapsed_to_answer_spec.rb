@@ -8,9 +8,9 @@ describe "Time elapsed to answer", type: :system do
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
 
   let!(:reporting_proposals_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
-  let!(:reporting_proposal) {
+  let!(:reporting_proposal) do
     create(:proposal, state: state, state_published_at: 10.days.ago, answered_at: answered_at, component: reporting_proposals_component)
-  }
+  end
   let(:component) { reporting_proposals_component }
 
   before do
