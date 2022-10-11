@@ -14,6 +14,7 @@ es:
           global:
             evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
             unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
             unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
       reporting_proposals:
@@ -59,6 +60,7 @@ es:
               limited: Allow editing of proposals within a specific timeframe
             proposal_length: Maximum proposal body length
             proposal_limit: Proposal limit per participant
+            proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
             proposal_wizard_step_1_help_text: Proposal wizard "Create" step help text
             proposal_wizard_step_2_help_text: Proposal wizard "Compare" step help text
             proposal_wizard_step_3_help_text: Proposal wizard "Complete" step help text
@@ -116,6 +118,19 @@ es:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
+    proposals:
+      admin:
+        proposals:
+          photo_form:
+            action: Add image
+            add_images: Add images
+            gallery_legend: Add images
+            title: Photos
+            upload_msg: No files selected
+          proposal_photos:
+            title: Photos
+          show:
+            delete_image: Delete image
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
@@ -215,6 +230,35 @@ es:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        resolution_time: Resolution time
+        time_elapsed:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour
+                other: about %{count} hours
+              about_x_months:
+                one: about 1 month
+                other: about %{count} months
+              half_a_minute: half a minute
+              less_than_x_minutes:
+                one: less than a min.
+                other: less than %{count} min.
+              less_than_x_seconds:
+                one: right now
+                other: less than %{count} sec.
+              x_days:
+                one: 1 day
+                other: "%{count} days"
+              x_hours:
+                one: 1 hour
+                other: "%{count} hours"
+              x_minutes:
+                one: 1 min.
+                other: "%{count} min."
+              x_seconds:
+                one: 1 sec.
+                other: "%{count} sec."
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.
