@@ -13,7 +13,8 @@ shared_examples "proposals list has no due dates" do
     let(:evaluating_days_overdue) { 0 }
 
     it "proposals are not highlighted" do
-      expect(page).not_to have_css(".help-text-overdue")
+      expect(page).not_to have_css(".help-text-overdue .text-warning")
+      expect(page).not_to have_css(".help-text-overdue .text-alert")
     end
   end
 end
