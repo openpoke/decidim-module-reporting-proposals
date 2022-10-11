@@ -32,7 +32,7 @@ module Decidim
             state: proposal.state.to_s,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
-            time_elapsed_to_answer: time_elapsed_to_answer(proposal),
+            answer_time: time_elapsed_to_answer(proposal),
             supports: proposal.proposal_votes_count,
             endorsements: {
               total_count: proposal.endorsements.size,
