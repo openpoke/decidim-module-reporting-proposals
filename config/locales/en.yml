@@ -252,6 +252,36 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        resolution_time: Resolution time
+        time_elapsed:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour
+                other: about %{count} hours
+              about_x_months:
+                one: about 1 month
+                other: about %{count} months
+              half_a_minute: half a minute
+              less_than_x_minutes:
+                one: less than a min.
+                other: less than %{count} min.
+              less_than_x_seconds:
+                one: right now
+                other: less than %{count} sec.
+              x_days:
+                one: 1 day
+                other: "%{count} days"
+              x_hours:
+                one: 1 hour
+                other: "%{count} hours"
+              x_minutes:
+                one: 1 min.
+                other: "%{count} min."
+              x_seconds:
+                one: 1 sec.
+                other: "%{count} sec."
+                zero: just now
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.

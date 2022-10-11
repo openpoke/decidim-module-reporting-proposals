@@ -41,6 +41,11 @@
             <%= time_ago_in_words(last_day_to_evaluate(proposal),
                                   scope: "decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words") %>
           </div>
+          <% elsif proposal.accepted? || proposal.rejected? %>
+          <div class="help-text-overdue text-success">
+            <%= t("decidim.reporting_proposals.admin.resolution_time") %>:
+            <%= time_elapsed_to_answer(proposal) %>
+          </div>
         <% end %>
       </div>
     </div>

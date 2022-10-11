@@ -35,8 +35,6 @@ Decidim::ReportingProposals.configure do |config|
 end
 ```
 
-And, of course, having these values in your `config/secrets.yml` file.
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/openpoke/decidim-module-reporting_proposals.
@@ -66,15 +64,29 @@ order to create the dummy test app database.
 Then to test how the module works in Decidim, start the development server:
 
 ```bash
-$ cd development_app
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rails s
+$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bin/rails s
 ```
+
+Note that `bin/rails` is a convinient wrapper around the command `cd development_app; bundle exec rails`.
 
 In case you are using [rbenv](https://github.com/rbenv/rbenv) and have the
 [rbenv-vars](https://github.com/rbenv/rbenv-vars) plugin installed for it, you
 can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
+
+#### Webpacker notes
+
+As latests versions of Decidim, this repository uses Webpacker for Rails. This means that compilation
+of assets is required everytime a Javascript or CSS file is modified. Usually, this happens
+automatically, but in some cases (specially when actively changes that type of files) you want to 
+speed up the process. 
+
+To do that, start in a separate terminal than the one with `bin/rails s`, and BEFORE it, the following command:
+
+```
+bin/webpack-dev-server
+```
 
 #### Code Styling
 
@@ -97,6 +109,16 @@ favorite editor, such as:
 - Atom - [linter-rubocop](https://atom.io/packages/linter-rubocop)
 - Sublime Text - [Sublime RuboCop](https://github.com/pderichs/sublime_rubocop)
 - Visual Studio Code - [Rubocop for Visual Studio Code](https://github.com/misogi/vscode-ruby-rubocop)
+
+#### Non-Ruby Code Styling
+
+There are other linters for Javascript and CSS. These run using NPM packages. You can
+run the following commands:
+
+1. `npm run lint`: Runs the linter for Javascript files.
+2. `npm run lint-fix`: Automatically fix issues for Javascript files (if possible).
+3. `npm run stylelint`: Runs the linter for SCSS files.
+4. `npm run stylelint-fix`: Automatically fix issues for SCSS files (if possible).
 
 ### Testing
 
