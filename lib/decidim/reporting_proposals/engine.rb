@@ -7,7 +7,7 @@ module Decidim
       isolate_namespace Decidim::ReportingProposals
 
       routes do
-        post :address, to: "geolocation#address"
+        post :locate, to: "geolocation#locate"
       end
 
       # overrides for proposals
@@ -19,6 +19,7 @@ module Decidim
         config.to_prepare do
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+          Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
           Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
           Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
@@ -41,6 +42,7 @@ module Decidim
           component.settings(:global) do |settings|
             settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
             settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
+            settings.attribute(:proposal_photo_editing_enabled, type: :boolean, default: false)
           end
         end
       end
