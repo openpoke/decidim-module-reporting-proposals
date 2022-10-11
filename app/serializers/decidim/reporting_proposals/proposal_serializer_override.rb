@@ -7,6 +7,7 @@ module Decidim
 
       included do
         include ActionView::Helpers::DateHelper
+        include Decidim::Proposals::Admin::ProposalsHelper
 
         def serialize
           {
@@ -51,17 +52,6 @@ module Decidim
               url: original_proposal_url
             }
           }
-        end
-
-        private
-
-        def time_elapsed_to_answer(proposal)
-          if proposal.accepted? || proposal.rejected?
-            distance_of_time_in_words(proposal.answered_at, proposal.created_at,
-                                      scope: "decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words")
-          else
-            ""
-          end
         end
       end
     end
