@@ -3,11 +3,11 @@ ca:
   activemodel:
     attributes:
       proposal:
-        has_no_address: Has no address
+        has_no_address: No té adreça
   decidim:
     application:
       geocoding:
-        unconfigured: Geocoding is not configured!
+        unconfigured: La geocodificació no esà configurada!
     components:
       proposals:
         settings:
