@@ -44,10 +44,5 @@ module Decidim
     config_accessor :allow_proposal_photo_editing do
       true
     end
-
-    # Public setting to allow admins to create additional buttons
-    config_accessor :additional_buttons_show do
-      false
-    end
   end
 end
