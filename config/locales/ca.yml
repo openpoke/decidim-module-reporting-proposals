@@ -61,88 +61,88 @@ ca:
             proposal_length: Longitud màxima del cos de la proposta
             proposal_limit: Límit de propostes per participant
             proposal_photo_editing_enabled: Permet a les administradores i avaluadores editar les fotos quan responen a les propostes
-            proposal_wizard_step_1_help_text: Proposal wizard "Create" step help text
-            proposal_wizard_step_2_help_text: Proposal wizard "Compare" step help text
-            proposal_wizard_step_3_help_text: Proposal wizard "Complete" step help text
-            proposal_wizard_step_4_help_text: Proposal wizard "Publish" step help text
-            resources_permissions_enabled: Actions permissions can be set for each proposal
-            scope_id: Scope
-            scopes_enabled: Scopes enabled
-            threshold_per_proposal: Threshold per proposal
+            proposal_wizard_step_1_help_text: Text d'ajuda pel pas "Crear" de l'assistent de propostes
+            proposal_wizard_step_2_help_text: Text d'ajuda pel pas "Comparar" de l'assistent de propostes
+            proposal_wizard_step_3_help_text: Text d'ajuda pel pas "Completar" de l'assistent de propostes
+            proposal_wizard_step_4_help_text: Text d'ajuda pel pas "Publicar" de l'assistent de propostes
+            resources_permissions_enabled: Es poden establir permisos d'accions per a cada proposta
+            scope_id: Àmbit
+            scopes_enabled: Àmbits habilitats
+            threshold_per_proposal: Llindar per proposta
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
-            vote_limit: Support limit per participant
+            vote_limit: Límit de suports per participant
           step:
-            amendment_creation_enabled: Amendment creation enabled
-            amendment_creation_enabled_help: Participant can amend proposals.
-            amendment_promotion_enabled: Amendment promotion enabled
-            amendment_promotion_enabled_help: Emandation authors will be able to promote to Proposal the rejected emendation.
-            amendment_reaction_enabled: Amendment reaction enabled
-            amendment_reaction_enabled_help: Proposal's authors will be able to accept or reject Participant's emendations.
-            amendments_visibility: Amendments visibility
+            amendment_creation_enabled: Creació d'esmena habilitada
+            amendment_creation_enabled_help: La participant pot esmenar propostes
+            amendment_promotion_enabled: Promoció d'esmenes habilitada
+            amendment_promotion_enabled_help: Les autores de les esmenes rebutjades poden promocionar-les a propostes.
+            amendment_reaction_enabled: Resposta a l'esmena habilitada
+            amendment_reaction_enabled_help: Les autores de les propostes poden acceptar o rebutjar les esmenes proposades pels participants.
+            amendments_visibility: Visibilitat de les esmenes
             amendments_visibility_choices:
-              all: Amendments are visible to all
-              participants: Amendments are visible only to their authors
-            amendments_visibility_help: If the option "Amendments are visible only to their authors" is selected, participant must be logged in to see the amendments made.
-            announcement: Announcement
-            answers_with_costs: Enable costs on proposal answers
-            automatic_hashtags: Hashtags added to all proposals
-            comments_blocked: Comments blocked
-            creation_enabled: Participants can create proposals
-            creation_enabled_readonly: This setting is disabled when you activate the Participatory Texts functionality. To upload proposals as participatory text click on the Participatory Texts button and follow the instructions.
-            default_sort_order: Default proposal sorting
-            default_sort_order_help: Default it means that if the supports are enabled, the proposals will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
+              all: Les esmenes són visibles per tothom
+              participants: Les esmenes són visibles només per les autores
+            amendments_visibility_help: Si es selecciona l'opció "Les esmenes són visibles únicament per als seus autors", els participants han d'estar identificats per a veure les esmenes realitzades.
+            announcement: Anunci
+            answers_with_costs: Habilita el cost en la resposta de les propostes
+            automatic_hashtags: Hashtags afegits a totes les propostes
+            comments_blocked: Comentaris bloquejats
+            creation_enabled: Les participants poden crear propostes directes
+            creation_enabled_readonly: Aquesta opció es desactiva quan actives la funcionalitat de Textos Participatius. Per a pujar propostes com a text participatiu fes clic al botó de Textos Participatius i segueix les instruccions.
+            default_sort_order: Ordre de propostes per defecte
+            default_sort_order_help: '''Per defecte'' vol dir que si els suports estan habilitats, les propostes es mostraran aleatòriament, i si els suports estan bloquejats, aleshores es mostraran de més a menys suports.'
             default_sort_order_options:
-              default: Default
-              most_commented: Most commented
-              most_endorsed: Most endorsed
-              most_followed: Most followed
-              most_voted: Most supported
-              random: Random
+              default: Per defecte
+              most_commented: Més comentada
+              most_endorsed: Més adhesions
+              most_followed: Més seguida
+              most_voted: Més suports
+              random: Aleatori
               recent: Recent
-              with_more_authors: With more authors
-            endorsements_blocked: Endorsements blocked
-            endorsements_enabled: Endorsements enabled
-            proposal_answering_enabled: Proposal answering enabled
-            publish_answers_immediately: Publish proposal answers immediately
-            publish_answers_immediately_help_html: 'Mind that if you answer any proposal without this enabled, you''ll need to publish them manually by selecting them and using the action for publication. For more info on how this works, see <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals'' answers documentation page</a>.'
-            suggested_hashtags: Hashtags suggested to participants for new proposals
-            votes_blocked: Supports blocked
-            votes_enabled: Supports enabled
-            votes_hidden: Supports hidden (if supports are enabled, checking this will hide the number of supports)
+              with_more_authors: Amb més autores
+            endorsements_blocked: Adhesions bloquejades
+            endorsements_enabled: Adhesions habilitades
+            proposal_answering_enabled: Resposta a les propostes habilitat
+            publish_answers_immediately: Publica la resposta de la proposta immediatament
+            publish_answers_immediately_help_html: 'Tingues present que si respons alguna proposta sense que això estigui habilitat, l''hauràs de publicar manualment seleccionant i fent servir l''acció de publicar. Per a més informació sobre el funcionament, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">pàgina de documentació de les respostes a les propostes</a>.'
+            suggested_hashtags: Hashtags suggerits a les participants per a noves propostes
+            votes_blocked: Suports bloquejats
+            votes_enabled: Suports habilitats
+            votes_hidden: Suports ocults (si els suports estan habilitats, marcant aquesta opció s'amagarà el nombre de suports)
     moderations:
       actions:
-        hide: Hide
+        hide: Amagar
       admin:
         reportable:
           hide:
-            invalid: There was a problem hiding the resource.
-            success: Resource successfully hidden.
+            invalid: Hi ha hagut un problema amagant aquest recurs.
+            success: Recurs amagat amb èxit.
     proposals:
       admin:
         proposals:
           photo_form:
-            action: Add image
-            add_images: Add images
-            gallery_legend: Add images
-            title: Photos
-            upload_msg: No files selected
+            action: Afageix imatge
+            add_images: Afageix imatges
+            gallery_legend: Afageix imatges
+            title: Fotografies
+            upload_msg: Cap arxiu seleccionat
           proposal_photos:
-            title: Photos
+            title: Fotografies
           show:
-            delete_image: Delete image
+            delete_image: Esborrar imatge
     reporting_proposals:
       actions:
-        answer_proposal: Answer proposal
-        edit_proposal: Edit proposal
-        import: Import proposals from another component
-        new: New proposal
-        participatory_texts: Participatory texts
-        show: Show proposal
-        title: Actions
+        answer_proposal: Resposta de la proposta
+        edit_proposal: Edita la proposta
+        import: Importa propostes d'un altre component
+        new: Nova proposta
+        participatory_texts: Textos participatius
+        show: Veure proposta
+        title: Accions
       admin:
         actions:
-          preview: Preview
+          preview: Vista prèvia
         answer_overdue:
           datetime:
             distance_in_words:
@@ -210,8 +210,8 @@ ca:
                 other: about %{count} months left to evaluate
               half_a_minute: half a minute left to evaluate
               less_than_x_minutes:
-                one: less than a min. left to evaluate
-                other: less than %{count} min. left to evaluate
+                one: queda menys min. per avaluar
+                other: queda menys de %{count} min. per avaluar
               less_than_x_seconds:
                 one: right now left to evaluate
                 other: less than %{count} sec. left to evaluate
@@ -228,9 +228,9 @@ ca:
                 one: 1 sec. left to evaluate
                 other: "%{count} sec. left to evaluate"
         exports:
-          proposal_comments: Comments
-          proposals: Reporting proposals
-        resolution_time: Resolution time
+          proposal_comments: Comentaris
+          proposals: Propostes directes
+        resolution_time: Temps de resolució
         time_elapsed:
           datetime:
             distance_in_words:
@@ -261,10 +261,10 @@ ca:
                 other: "%{count} sec."
       forms:
         errors:
-          device_not_supported: Geolocation is not supported by your browser.
-          no_device_location: Sorry, we couldn't detect your location.
-        use_my_camera: Use my camera
-        use_my_location: Use my location
+          device_not_supported: La geolocalització no és compatible amb el vostre navegador.
+          no_device_location: Ho sentim, no hem pogut detectar la teva localització.
+        use_my_camera: Usa la meva càmera
+        use_my_location: Usa la meva localització
       proposals:
         form:
-          image: Image/photo
+          image: Imatge/fotografia
