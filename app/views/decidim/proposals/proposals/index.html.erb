@@ -32,7 +32,7 @@
       <%= render partial: "count" %>
     </h2>
     <% if current_settings.creation_enabled && current_component.participatory_space.can_participate?(current_user) &&
-      (current_component.settings.try(:additional_buttons_show) )%>
+      current_component.settings.try(:additional_buttons_show) %>
       <%= action_authorized_link_to "", component_settings.additional_button_link, class: "title-action__action
       button small" do %>
         <%= translated_attribute(component_settings.additional_button_text) %>
