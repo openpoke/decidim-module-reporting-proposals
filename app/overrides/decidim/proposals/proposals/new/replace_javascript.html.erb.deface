@@ -1,0 +1,8 @@
+<!-- replace "erb[loud][3]" -->
+
+<% if reporting_proposal? %>
+  <%= javascript_pack_tag "decidim_reporting_proposals" %>
+  <%= stylesheet_pack_tag "decidim_reporting_proposals" %>
+<% else %>
+  <%= javascript_pack_tag "decidim_proposals" %>
+<% end %>
