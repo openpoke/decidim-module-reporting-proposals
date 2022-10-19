@@ -118,19 +118,6 @@ ca:
           hide:
             invalid: Hi ha hagut un problema amagant aquest recurs.
             success: Recurs amagat amb èxit.
-    proposals:
-      admin:
-        proposals:
-          photo_form:
-            action: Afageix imatge
-            add_images: Afageix imatges
-            gallery_legend: Afageix imatges
-            title: Fotografies
-            upload_msg: Cap arxiu seleccionat
-          proposal_photos:
-            title: Fotografies
-          show:
-            delete_image: Esborrar imatge
     reporting_proposals:
       actions:
         answer_proposal: Resposta de la proposta
@@ -230,6 +217,18 @@ ca:
         exports:
           proposal_comments: Comentaris
           proposals: Propostes directes
+        proposals:
+          photo_form:
+            action: Add image
+            add_images: Add images
+            gallery_legend: Add images
+            title: Photos
+            upload_msg: No files selected
+          photo_gallery:
+            delete_image: Delete image
+            photos: Photos
+          photos:
+            title: Photos
         resolution_time: Temps de resolució
         time_elapsed:
           datetime:
