@@ -11,7 +11,7 @@ describe "Additional button", type: :system do
            settings: {
              additional_buttons_show: additional_buttons_show,
              additional_button_text: { en: "My button" },
-             additional_button_link: "https://1.lvh.me/processes/onion-dynamic/f/20/"
+             additional_button_link: "https://#{organization.host}/processes/onion-dynamic/f/20/"
            })
   end
   let!(:participatory_process) { create :participatory_process, :published }
@@ -22,7 +22,7 @@ describe "Additional button", type: :system do
     visit_component
   end
 
-  context "when the component has the additional button customized" do
+  context "when the component does not have the additional button customized" do
     let(:additional_buttons_show) { false }
 
     it "does not have an additional button" do
@@ -35,7 +35,7 @@ describe "Additional button", type: :system do
 
     it "has an additional button" do
       expect(page).to have_content("My button")
-      expect(page).to have_css("a[href='https://1.lvh.me/processes/onion-dynamic/f/20/']")
+      expect(page).to have_css("a[href='https://#{organization.host}/processes/onion-dynamic/f/20/']")
     end
   end
 end
