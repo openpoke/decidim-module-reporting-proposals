@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "deface"
+
 module Decidim
   module ReportingProposals
     # This is the engine that runs on the public interface of decidim-ReportingProposals.

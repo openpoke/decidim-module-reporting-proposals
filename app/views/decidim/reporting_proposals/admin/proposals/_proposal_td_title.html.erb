@@ -1,0 +1,41 @@
+<div class="table__title-block">
+  <span class="table__title-icon">
+    <% if unanswered_proposals_overdue?(proposal) || evaluating_proposals_overdue?(proposal) %>
+      <%= icon "datetime", class: "text-alert" %>
+    <% elsif grace_period_unanswered?(proposal) || grace_period_evaluating?(proposal) %>
+      <%= icon "timer", class: "text-warning" %>
+    <% end %>
+  </span>
+  <div class="table__list-title">
+    <%= link_to(
+          decidim_html_escape(present(proposal).title).html_safe,
+          proposal_path(proposal)
+        ) %>
+    <% if unanswered_proposals_overdue?(proposal) %>
+      <div class="help-text-overdue text-alert">
+        <%= time_ago_in_words(last_day_to_answer(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words") %>
+      </div>
+    <% elsif evaluating_proposals_overdue?(proposal) %>
+      <div class="help-text-overdue text-alert">
+        <%= time_ago_in_words(last_day_to_evaluate(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words") %>
+      </div>
+    <% elsif grace_period_unanswered?(proposal) %>
+      <div class="help-text-overdue text-warning">
+        <%= time_ago_in_words(last_day_to_answer(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words") %>
+      </div>
+    <% elsif grace_period_evaluating?(proposal) %>
+      <div class="help-text-overdue text-warning">
+        <%= time_ago_in_words(last_day_to_evaluate(proposal),
+                              scope: "decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words") %>
+      </div>
+      <% elsif proposal.accepted? || proposal.rejected? %>
+      <div class="help-text-overdue text-success">
+        <%= t("decidim.reporting_proposals.admin.resolution_time") %>:
+        <%= time_elapsed_to_answer(proposal) %>
+      </div>
+    <% end %>
+  </div>
+</div>

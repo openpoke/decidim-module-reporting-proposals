@@ -154,19 +154,6 @@ en:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
-    proposals:
-      admin:
-        proposals:
-          photo_form:
-            action: Add image
-            add_images: Add images
-            gallery_legend: Add images
-            title: Photos
-            upload_msg: No files selected
-          proposal_photos:
-            title: Photos
-          show:
-            delete_image: Delete image
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
@@ -269,6 +256,18 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        proposals:
+          photo_form:
+            action: Add image
+            add_images: Add images
+            gallery_legend: Add images
+            title: Photos
+            upload_msg: No files selected
+          photo_gallery:
+            delete_image: Delete image
+            photos: Photos
+          photos:
+            title: Photos
         resolution_time: Resolution time
         time_elapsed:
           datetime:

@@ -1,0 +1,24 @@
+<%= decidim_form_for(@photo_form, url: decidim_admin_reporting_proposals.add_photos_path(id: proposal.id),
+                     method: :post,
+                     html: { multipart: true, class: "form edit_proposal proposal_form_admin" }) do |f| %>
+  <div class="row column gallery__container">
+    <fieldset>
+      <legend><%= t(".gallery_legend") %></legend>
+      <% if proposal.photos.any? %>
+        <div class="gallery row">
+          <% proposal.photos.each do |photo| %>
+            <div class="callout gallery__item">
+              <%= f.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="row column">
+        <%= f.file_field :add_photos, multiple: true %>
+      </div>
+      <div class="actions">
+        <%= f.submit t(".action") %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>

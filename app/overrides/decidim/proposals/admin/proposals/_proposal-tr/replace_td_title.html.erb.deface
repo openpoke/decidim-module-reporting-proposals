@@ -1,0 +1,3 @@
+<!-- replace_contents "td[3]" -->
+
+<%= render "decidim/reporting_proposals/admin/proposals/proposal_td_title", proposal: proposal %>

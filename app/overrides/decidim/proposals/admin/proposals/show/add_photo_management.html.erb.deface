@@ -1,0 +1,3 @@
+<!-- insert_after ".card[1]" -->
+
+<%= render partial: "decidim/reporting_proposals/admin/proposals/photos" %>
