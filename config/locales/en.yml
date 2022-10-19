@@ -157,12 +157,6 @@ en:
     proposals:
       admin:
         proposals:
-          photo_form:
-            action: Add image
-            add_images: Add images
-            gallery_legend: Add images
-            title: Photos
-            upload_msg: No files selected
           proposal_photos:
             title: Photos
           show:
@@ -269,6 +263,13 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        proposals:
+          photo_form:
+            action: Add image
+            add_images: Add images
+            gallery_legend: Add images
+            title: Photos
+            upload_msg: No files selected
         resolution_time: Resolution time
         time_elapsed:
           datetime:

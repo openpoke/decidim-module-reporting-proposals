@@ -148,7 +148,7 @@
 </div>
 
 <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
-  <%= render partial: "photo_form" %>
+  <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_form" %>
 <% end %>
 
 <% if proposal.valuators.any? %>
