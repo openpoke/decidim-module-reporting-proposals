@@ -1,0 +1,4 @@
+<!-- replace "erb[silent]:contains('if proposal.photos.any?')" -->
+
+<% if nil %>
+	

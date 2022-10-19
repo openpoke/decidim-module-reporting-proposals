@@ -1,4 +1,4 @@
-<!-- replace "erb[loud][3]" -->
+<!-- replace "erb[loud]:contains('javascript_pack_tag')" -->
 
 <% if reporting_proposal? %>
   <%= javascript_pack_tag "decidim_reporting_proposals" %>

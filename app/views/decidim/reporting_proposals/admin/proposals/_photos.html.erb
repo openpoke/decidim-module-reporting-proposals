@@ -1,0 +1,14 @@
+<% if proposal.photos.any? || component_settings.attachments_allowed? %>
+  <div class="card">
+    <div class="card-divider">
+      <h2 class="card-title"><%= t(".title") %></h2>
+    </div>
+    <div class="card-section">
+      <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_gallery" %>
+
+      <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
+        <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_form" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
