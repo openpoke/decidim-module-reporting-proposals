@@ -1,0 +1,3 @@
+<!-- insert_before "erb:contains('if component_settings.collaborative_drafts_enabled?')" -->
+
+<%= render partial: "decidim/proposals/proposals/additional_button" %>
