@@ -21,6 +21,9 @@ ca:
         name: Propostes directes
         settings:
           global:
+            additional_button_link: Additional action button next to new proposal (link)
+            additional_button_text: Additional action button next to new proposal (text)
+            additional_buttons_show: Display the button in the index public view
             amendments_enabled: Esmenes habilitades
             amendments_enabled_help: Si l'actives, configura les funcionalitats de l'esmena per cada fase.
             amendments_wizard_help_text: Text d'ajuda al crear una nova esmena
