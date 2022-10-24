@@ -1,0 +1,4 @@
+<% if current_component.settings.try(:additional_buttons_show) %>
+  <%= link_to translated_attribute(component_settings.additional_button_text),
+              component_settings.additional_button_link, class: "title-action__action button small ml-s" %>
+<% end %>

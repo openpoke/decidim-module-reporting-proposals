@@ -61,6 +61,9 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue
     settings.attribute :evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue
     settings.attribute :proposal_photo_editing_enabled, type: :boolean, default: true
+    settings.attribute :additional_buttons_show, type: :boolean, default: false
+    settings.attribute :additional_button_text, type: :string, translated: true, editor: true
+    settings.attribute :additional_button_link, type: :string, editor: true
   end
 
   component.settings(:step) do |settings|
