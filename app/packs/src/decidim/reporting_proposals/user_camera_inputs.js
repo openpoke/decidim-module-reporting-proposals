@@ -5,11 +5,12 @@ $(() => {
     const $button = $inputField.find("button:first");
     const $checkbox = $inputField.find("input:checkbox[name$='[has_no_image]']");
 
-    $input.attr("capture", "camera");
     $input.attr("accept", "image/*");
 
     $button.on("click", () => {
+      $input.attr("capture", "camera");
       $input.click();
+      $input.removeAttr("capture", "camera")
     });
 
     if ($checkbox.length > 0) {

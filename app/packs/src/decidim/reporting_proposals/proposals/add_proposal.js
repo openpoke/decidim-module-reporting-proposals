@@ -20,6 +20,7 @@ $(() => {
       if ($checkbox[0].checked) {
         $map.hide();
         $addressInputField.prop("disabled", true);
+        $addressInputField.val("");
       } else {
         if ($(`input[name='${latFieldName}']`).val()) {
           $map.show();
