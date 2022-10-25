@@ -49,16 +49,9 @@ module Decidim
           redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
         end
 
-        def edit_form
-          form_attachment_model = form(AttachmentForm).from_model(@proposal.attachments.first)
-          @form = form_reporting_proposals_model
-          @form.attachment = form_attachment_model
-          @form
-        end
-
         private
 
-        def form_reporting_proposals_model
+        def form_proposal_model
           reporting_proposal? ? form(Decidim::ReportingProposals::ProposalForm).from_model(@proposal) : form(Decidim::Proposals::ProposalForm).from_model(@proposal)
         end
 
