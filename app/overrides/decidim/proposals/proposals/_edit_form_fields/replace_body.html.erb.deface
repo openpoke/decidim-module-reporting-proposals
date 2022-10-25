@@ -1,0 +1,3 @@
+<!-- replace ".hashtags__container+.hashtags__container" -->
+
+<%= render "decidim/reporting_proposals/proposals/#{reporting_proposal? ? 'edit_draft_proposal_fields' : 'edit_form_fields'}", form: form %>
