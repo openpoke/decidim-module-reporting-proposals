@@ -1,3 +1,3 @@
 <!-- insert_before ".actions" -->
 
-<%= render partial: "decidim/reporting_proposals/proposals/user_group", locals: { form: form } %>
+<%= render partial: "decidim/reporting_proposals/proposals/user_group", locals: { form: form } if reporting_proposal? %>
