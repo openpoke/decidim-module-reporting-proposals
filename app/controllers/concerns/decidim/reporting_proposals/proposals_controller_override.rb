@@ -50,7 +50,7 @@ module Decidim
         end
 
         def edit_draft
-          @step = :step_1
+          @step = reporting_proposal? ? :step_1 : :step_3
           enforce_permission_to :edit, :proposal, proposal: @proposal
         end
 
