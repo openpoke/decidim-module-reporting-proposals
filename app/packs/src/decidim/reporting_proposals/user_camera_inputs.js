@@ -12,7 +12,7 @@ $(() => {
     $button.on("click", () => {
       $input.attr("capture", "camera");
       $input.click();
-      $input.removeAttr("capture", "camera")
+      $input.removeAttr("capture", "camera");
     });
 
     if ($checkbox.length > 0) {
@@ -21,8 +21,8 @@ $(() => {
           $input.prop("disabled", true);
           $input.removeClass("is-invalid-input");
           $button.prop("disabled", true);
-          $formError.removeClass("is-visible")
-          $labelInput.removeClass("is-invalid-label")
+          $formError.removeClass("is-visible");
+          $labelInput.removeClass("is-invalid-label");
         } else {
           $input.prop("disabled", false);
           $button.prop("disabled", false);
