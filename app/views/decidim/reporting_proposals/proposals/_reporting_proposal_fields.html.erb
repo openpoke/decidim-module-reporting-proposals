@@ -5,6 +5,7 @@
 <% end %>
 
 <% if component_settings.attachments_allowed? %>
+  <fieldset class="gallery__container photos_container">
   <% if @form.photos.any? %>
     <% @form.photos.each do |photo| %>
       <div class="callout gallery__item" id="attachment_<%= photo.id %>" data-closable>
@@ -27,6 +28,7 @@
         <%= form.check_box :has_no_image %>
       </div>
     </div>
+  </fieldset>
 
 <% end %>
 
