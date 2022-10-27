@@ -58,6 +58,7 @@ shared_examples "3 steps" do
       click_link "New proposal"
 
       expect(page).to have_content("EDIT PROPOSAL DRAFT")
+      expect(page).to have_content("Step 1 of 3")
     end
   end
 
