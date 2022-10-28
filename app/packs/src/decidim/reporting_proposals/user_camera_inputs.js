@@ -15,20 +15,22 @@ $(() => {
       $input.removeAttr("capture", "camera");
     });
 
-    if ($checkbox.length > 0) {
-      const toggleInput = () => {
-        if ($checkbox[0].checked) {
-          $input.prop("disabled", true);
-          $input.removeClass("is-invalid-input");
-          $button.prop("disabled", true);
-          $formError.removeClass("is-visible");
-          $labelInput.removeClass("is-invalid-label");
-        } else {
-          $input.prop("disabled", false);
-          $button.prop("disabled", false);
-        }
+    const toggleInput = () => {
+      if ($checkbox[0].checked) {
+        $input.prop("disabled", true);
+        $input.removeClass("is-invalid-input");
+        $button.prop("disabled", true);
+        $formError.removeClass("is-visible");
+        $labelInput.removeClass("is-invalid-label");
+      } else {
+        $input.prop("disabled", false);
+        $button.prop("disabled", false);
       }
+    }
+
+    if ($checkbox.length > 0) {
       $checkbox.on("change", toggleInput);
+      toggleInput();
     }
   });
 }); 

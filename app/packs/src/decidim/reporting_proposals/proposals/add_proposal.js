@@ -24,7 +24,6 @@ $(() => {
 
         $map.hide();
         $addressInputField.prop("disabled", true);
-        $addressInputField.val("");
         $addressInputField.removeClass("is-invalid-input");
         $labelInput.removeClass("is-invalid-label");
         $buttonLocation.prop("disabled", true);
@@ -39,7 +38,7 @@ $(() => {
         $buttonLocation.prop("disabled", false);
       }
     }
-    // toggleInput();
+    toggleInput();
     $checkbox.on("change", toggleInput);
   }
 
