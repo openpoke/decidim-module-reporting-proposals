@@ -36,7 +36,7 @@ describe "User location button", type: :system do
       end
 
       it "the button should be deactivated and the errors  removed" do
-        expect(page).to have_css(".user-device-location button")
+        expect(page).to have_css(".user-device-location button[disabled]")
         expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
         expect(page).to have_css("input#proposal_address[disabled]")
       end

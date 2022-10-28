@@ -83,6 +83,7 @@ describe "Reporting proposals overrides", type: :system do
     end
 
     it_behaves_like "3 steps"
+    it_behaves_like "remove errors"
   end
 
   context "and component is a normal proposal", :serves_geocoding_autocomplete do

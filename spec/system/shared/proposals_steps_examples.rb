@@ -119,7 +119,9 @@ shared_examples "3 steps" do
     expect(page).not_to have_content("RELATED DOCUMENTS")
 
     click_link "Modify the proposal"
+    find("#proposal_has_no_image").click
 
+    expect(page).to have_content("Step 1 of 3")
     expect(page).to have_content("EDIT PROPOSAL DRAFT")
 
     complete_proposal(attach: true)
@@ -149,6 +151,15 @@ shared_examples "3 steps" do
     expect(proposal.address).to be_nil
     expect(proposal.latitude).to be_nil
     expect(proposal.longitude).to be_nil
+  end
+
+  it "remember has_no_address and has_no_image" do
+    fill_proposal(skip_address: true, attach: false)
+
+    click_link "Modify the proposal"
+
+    expect(page).to have_css(".user-device-location button[disabled]")
+    expect(page).to have_css("button.user-device-camera[disabled]")
   end
 end
 
@@ -184,5 +195,17 @@ shared_examples "4 steps" do
     expect(translated(proposal.body)).to eq(proposal_body)
     expect(proposal.category).to eq(another_category)
     expect(proposal.identities.first).to eq(user_group)
+  end
+end
+
+shared_examples "remove errors" do
+  it "remove errors when has_no_address is checked " do
+    click_button "Continue"
+
+    expect(page).to have_css("label[for=proposal_address].is-invalid-label")
+
+    find("#proposal_has_no_address").click
+
+    expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
   end
 end
