@@ -14,10 +14,9 @@ shared_examples "map can be hidden" do
   end
 end
 
-shared_examples "map can be shown" do
+shared_examples "map can be shown" do |fill|
   it "checkbox shows the map" do
-    fill_proposal(extra_fields: false)
-
+    fill_proposal(extra_fields: false) if fill
     expect(page).not_to have_content("You can move the point on the map")
     check "proposal_has_address"
     fill_in :proposal_address, with: address
@@ -29,6 +28,18 @@ shared_examples "map can be shown" do
   end
 end
 
+shared_examples "reuses draft if exists" do
+  let!(:proposal_draft) { create(:proposal, :draft, users: [user], component: component, title: proposal_title, body: proposal_body) }
+
+  it "redirects to complete" do
+    visit_component
+    click_link "New proposal"
+
+    expect(page).to have_content("EDIT PROPOSAL DRAFT")
+    expect(page).to have_content("Step 1 of 3")
+  end
+end
+
 shared_examples "3 steps" do
   it "sidebar does not have the complete step" do
     expect(page).to have_content("Step 1 of 3")
@@ -36,7 +47,40 @@ shared_examples "3 steps" do
       expect(page).not_to have_content("Complete")
     end
   end
+end
 
+shared_examples "customized form" do
+  context "when only_photo_attachments is enabled" do
+    let(:only_photos) { true }
+
+    it "does not show the attachments" do
+      uncheck "proposal_has_no_image"
+      expect(page).not_to have_content("Add an attachment")
+      expect(page).to have_content("Image/photo")
+    end
+
+    context "and attachment are not active" do
+      let(:attachments) { false }
+
+      it "does not show the attachments or photos" do
+        expect(page).not_to have_checked_field("proposal_has_no_image")
+        expect(page).not_to have_content("Add an attachment")
+        expect(page).not_to have_content("Image/photo")
+      end
+    end
+  end
+
+  it "uploads attachments", :slow do
+    uncheck "proposal_has_no_image"
+    fill_proposal(attach: true, extra_fields: false, skip_address: true)
+
+    expect(page).to have_content(proposal_title)
+    expect(page).to have_content("RELATED IMAGES")
+    expect(page).to have_content("RELATED DOCUMENTS")
+  end
+end
+
+shared_examples "creates reporting proposal" do
   it "redirects to the publish step" do
     fill_proposal
 
@@ -49,38 +93,6 @@ shared_examples "3 steps" do
 
     expect(page).to have_selector("a", text: "Modify the proposal")
   end
-
-  context "when draft exists" do
-    let!(:proposal_draft) { create(:proposal, :draft, users: [user], component: component, title: proposal_title, body: proposal_body) }
-
-    it "redirects to complete" do
-      visit_component
-      click_link "New proposal"
-
-      expect(page).to have_content("EDIT PROPOSAL DRAFT")
-      expect(page).to have_content("Step 1 of 3")
-    end
-  end
-
-  context "when only_photo_attachments is enabled" do
-    let(:only_photos) { true }
-
-    it "does not show the attachments" do
-      expect(page).not_to have_content("Add an attachment")
-      expect(page).to have_content("Image/photo")
-    end
-
-    context "and attachment are not active" do
-      let(:attachments) { false }
-
-      it "does not show the attachments or photos" do
-        expect(page).not_to have_content("Add an attachment")
-        expect(page).not_to have_content("Image/photo")
-      end
-    end
-  end
-
-  it_behaves_like "map can be hidden"
 
   it "publishes the reporting proposal" do
     fill_proposal
@@ -102,14 +114,6 @@ shared_examples "3 steps" do
     expect(body).not_to have_content("HashtagSuggested2")
     expect(proposal.identities.first).to eq(user_group)
     expect(proposal.scope).to eq(scope)
-  end
-
-  it "uploads attachments", :slow do
-    fill_proposal(attach: true, extra_fields: false, skip_address: true)
-
-    expect(page).to have_content(proposal_title)
-    expect(page).to have_content("RELATED IMAGES")
-    expect(page).to have_content("RELATED DOCUMENTS")
   end
 
   it "modifies the proposal" do
@@ -136,6 +140,15 @@ shared_examples "3 steps" do
     expect(proposal.category).to eq(another_category)
   end
 
+  it "remember has_no_address and has_no_image" do
+    fill_proposal(skip_address: true, attach: false)
+
+    click_link "Modify the proposal"
+
+    expect(page).to have_css(".user-device-location button[disabled]")
+    expect(page).to have_css("button.user-device-camera[disabled]")
+  end
+
   it "stores no address if checked" do
     fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
 
@@ -152,14 +165,38 @@ shared_examples "3 steps" do
     expect(proposal.latitude).to be_nil
     expect(proposal.longitude).to be_nil
   end
+end
 
-  it "remember has_no_address and has_no_image" do
-    fill_proposal(skip_address: true, attach: false)
+shared_examples "maintains errors" do
+  it "has errors in standard fields" do
+    expect(page).to have_unchecked_field("proposal_has_no_address")
 
-    click_link "Modify the proposal"
+    check "proposal_has_no_address"
+    fill_in :proposal_title, with: ""
 
-    expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("button.user-device-camera[disabled]")
+    click_button "Send"
+
+    expect(page).to have_checked_field("proposal_has_no_address")
+    within first(".field.hashtags__container") do
+      expect(page).to have_content("There's an error in this field")
+    end
+  end
+
+  it "has errors in address field" do
+    uncheck "proposal_has_no_address"
+    fill_in :proposal_address, with: ""
+    click_button "Send"
+
+    expect(page).to have_unchecked_field("proposal_has_no_address")
+    expect(page).to have_css("label[for=proposal_address].is-invalid-label")
+  end
+
+  it "has errors in photo address field" do
+    expect(page).not_to have_css("label[for=proposal_add_photos].is-invalid-label")
+
+    uncheck "proposal_has_no_image"
+    click_button "Send"
+    expect(page).to have_css("label[for=proposal_add_photos].is-invalid-label")
   end
 end
 
@@ -170,9 +207,16 @@ shared_examples "4 steps" do
       expect(page).to have_content("Complete")
     end
   end
+end
 
-  it_behaves_like "map can be shown"
+shared_examples "normal form" do
+  it "does not have modified fields" do
+    expect(page).not_to have_field("proposal_has_no_address")
+    expect(page).not_to have_field("proposal_has_no_image")
+  end
+end
 
+shared_examples "creates normal proposal" do
   it "redirects to the complete step" do
     fill_proposal(extra_fields: false)
 
@@ -198,13 +242,18 @@ shared_examples "4 steps" do
   end
 end
 
-shared_examples "remove errors" do
+shared_examples "remove errors" do |continue|
   it "remove errors when has_no_address is checked " do
-    click_button "Continue"
+    fill_in :proposal_address, with: ""
+    if continue
+      click_button "Continue"
+    else
+      click_button "Send"
+    end
 
     expect(page).to have_css("label[for=proposal_address].is-invalid-label")
 
-    find("#proposal_has_no_address").click
+    check "proposal_has_no_address"
 
     expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
   end

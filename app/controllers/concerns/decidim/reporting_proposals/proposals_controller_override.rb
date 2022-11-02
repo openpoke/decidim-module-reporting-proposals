@@ -56,8 +56,16 @@ module Decidim
 
         private
 
+        def form_proposal_params
+          form(edit_proposal_form).from_params(params)
+        end
+
         def form_proposal_model
-          reporting_proposal? ? form(Decidim::ReportingProposals::ProposalForm).from_model(@proposal) : form(Decidim::Proposals::ProposalForm).from_model(@proposal)
+          form(edit_proposal_form).from_model(@proposal)
+        end
+
+        def edit_proposal_form
+          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalForm
         end
 
         def new_proposal_form
