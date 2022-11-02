@@ -8,6 +8,8 @@ $(() => {
   const $map = $("#address_map");
   let latFieldName = "proposal[latitude]";
   let longFieldName = "proposal[longitude]";
+  const $labelInput = $("label[for='proposal_address']");
+  const $buttonLocation = $(".user-device-location button");
 
   $map.hide();
 
@@ -18,16 +20,25 @@ $(() => {
         : 1);
 
       if ($checkbox[0].checked) {
+        const $formError = $labelInput.find('span.form-error[style="display: block;"]');
+
         $map.hide();
         $addressInputField.prop("disabled", true);
+        $addressInputField.removeClass("is-invalid-input");
+        $labelInput.removeClass("is-invalid-label");
+        $buttonLocation.prop("disabled", true);
+        $buttonLocation.removeClass("loading-spinner");
+        $formError.attr("style", "display:none;");
+
       } else {
         if ($(`input[name='${latFieldName}']`).val()) {
           $map.show();
         }
         $addressInputField.prop("disabled", false);
+        $buttonLocation.prop("disabled", false);
       }
     }
-    // toggleInput();
+    toggleInput();
     $checkbox.on("change", toggleInput);
   }
 

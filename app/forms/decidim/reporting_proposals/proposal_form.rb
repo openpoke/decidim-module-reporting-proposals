@@ -9,6 +9,14 @@ module Decidim
 
       validates :add_photos, presence: true, if: ->(form) { form.has_camera? }
 
+      # Set the has no address
+      def map_model(model)
+        super(model)
+
+        self.has_no_address = true if model.address.blank?
+        self.has_no_image = true if model.photo.blank?
+      end
+
       def has_address?
         return if has_no_address
 

@@ -49,7 +49,24 @@ module Decidim
           redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
         end
 
+        def edit_draft
+          @step = reporting_proposal? ? :step_1 : :step_3
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+        end
+
         private
+
+        def form_proposal_params
+          form(edit_proposal_form).from_params(params)
+        end
+
+        def form_proposal_model
+          form(edit_proposal_form).from_model(@proposal)
+        end
+
+        def edit_proposal_form
+          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalForm
+        end
 
         def new_proposal_form
           reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm

@@ -76,13 +76,39 @@ describe "Reporting proposals overrides", type: :system do
     end
   end
 
-  context "when creating a new proposal", :serves_geocoding_autocomplete do
+  context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
       click_link "New proposal"
     end
 
     it_behaves_like "3 steps"
+    it_behaves_like "customized form"
+    it_behaves_like "map can be hidden"
+    it_behaves_like "creates reporting proposal"
+    it_behaves_like "reuses draft if exists"
+    it_behaves_like "remove errors", continue: true
+  end
+
+  context "when editing a existing reporting proposal", :serves_geocoding_autocomplete do
+    let!(:proposal) { create :proposal, users: [user], component: component }
+
+    before do
+      visit_component
+      click_link translated(proposal.title)
+      click_link "Edit proposal"
+    end
+
+    it_behaves_like "customized form"
+    it_behaves_like "maintains errors"
+    it_behaves_like "remove errors"
+
+    context "when has an image" do
+      let!(:proposal) { create :proposal, :with_photo, users: [user], component: component }
+
+      it_behaves_like "customized form"
+      it_behaves_like "map can be hidden"
+    end
   end
 
   context "and component is a normal proposal", :serves_geocoding_autocomplete do
@@ -95,11 +121,29 @@ describe "Reporting proposals overrides", type: :system do
              participatory_space: participatory_process)
     end
 
-    before do
-      visit_component
-      click_link "New proposal"
+    context "when creating" do
+      before do
+        visit_component
+        click_link "New proposal"
+      end
+
+      it_behaves_like "4 steps"
+      it_behaves_like "normal form"
+      it_behaves_like "map can be shown", fill: true
+      it_behaves_like "creates normal proposal"
     end
 
-    it_behaves_like "4 steps"
+    context "when editing" do
+      let!(:proposal) { create :proposal, address: nil, users: [user], component: component }
+
+      before do
+        visit_component
+        click_link translated(proposal.title)
+        click_link "Edit proposal"
+      end
+
+      it_behaves_like "normal form"
+      it_behaves_like "map can be shown"
+    end
   end
 end
