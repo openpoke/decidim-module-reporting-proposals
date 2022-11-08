@@ -1,0 +1,272 @@
+---
+ca:
+  activemodel:
+    attributes:
+      proposal:
+        has_no_address: No té adreça
+  decidim:
+    application:
+      geocoding:
+        unconfigured: La geocodificació no esà configurada!
+    components:
+      proposals:
+        settings:
+          global:
+            evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
+            evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            proposal_photo_editing_enabled: Permet que les administradores i les avaluadores editin les fotos quan responen les propostes
+            unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
+            unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+      reporting_proposals:
+        name: Propostes directes
+        settings:
+          global:
+            additional_button_link: Additional action button next to new proposal (link)
+            additional_button_text: Additional action button next to new proposal (text)
+            additional_buttons_show: Display the button in the index public view
+            amendments_enabled: Esmenes habilitades
+            amendments_enabled_help: Si l'actives, configura les funcionalitats de l'esmena per cada fase.
+            amendments_wizard_help_text: Text d'ajuda al crear una nova esmena
+            announcement: Anunci
+            attachments_allowed: Permetre arxius adjunts
+            can_accumulate_supports_beyond_threshold: Pot acumular suports més enllà del llindar
+            collaborative_drafts_enabled: Esborranys col·labartius habilitats
+            comments_enabled: Comentaris habilitats
+            comments_max_length: Longitud màxima dels comentaris (deixa 0 si vols mantenir la configuració per defecte)
+            default_sort_order: Ordre de propostes directes per defecte
+            default_sort_order_help: '''Per defecte'' vol dir que si els suports estan habilitats, les propostes es mostraran aleatòriament, i si els suports estan bloquejats, aleshores es mostraran de més a menys suports.'
+            default_sort_order_options:
+              default: Per defecte
+              most_commented: Més comentada
+              most_endorsed: Més adhesions
+              most_followed: Més seguida
+              most_voted: Més suports
+              random: Aleatori
+              recent: Recent
+              with_more_authors: Amb més autores
+            evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
+            evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            geocoding_enabled: Geocodificació habilitada
+            minimum_votes_per_user: Suports mínims per participant
+            new_proposal_body_template: Plantilla pel text de nova proposta
+            new_proposal_body_template_help: Pots definir el text predefinit que hauria de tenir una nova proposta
+            new_proposal_help_text: Text d'ajuda per la creació d'una nova proposta
+            official_proposals_enabled: Propostes d'administradora (oficials) habilitades
+            only_photo_attachments: Utilitza només fitxers de fotos
+            participatory_texts_enabled: Textos participatius habilitats
+            participatory_texts_enabled_readonly: No es pot interactuar amb aquesta configuració si hi ha propostes existents. Si us plau, crea un nou 'component de propostes' si vols habilitar aquesta característica o descarta totes les propostes importades al menú "textos participatius" si vols deshabilitar-lo.
+            proposal_answering_enabled: Resposta a les propostes habilitada
+            proposal_edit_before_minutes: Les propostes poden ser editades per les autores abans que passin aquests minuts
+            proposal_edit_time: Edició de proposta
+            proposal_edit_time_choices:
+              infinite: Permet l'edició de propostes durant un període infinit
+              limited: Permet l'edició de propostes durant una finestra temporal específica
+            proposal_length: Longitud màxima del cos de la proposta
+            proposal_limit: Límit de propostes per participant
+            proposal_photo_editing_enabled: Permet a les administradores i avaluadores editar les fotos quan responen a les propostes
+            proposal_wizard_step_1_help_text: Text d'ajuda pel pas "Crear" de l'assistent de propostes
+            proposal_wizard_step_2_help_text: Text d'ajuda pel pas "Comparar" de l'assistent de propostes
+            proposal_wizard_step_3_help_text: Text d'ajuda pel pas "Completar" de l'assistent de propostes
+            proposal_wizard_step_4_help_text: Text d'ajuda pel pas "Publicar" de l'assistent de propostes
+            resources_permissions_enabled: Es poden establir permisos d'accions per a cada proposta
+            scope_id: Àmbit
+            scopes_enabled: Àmbits habilitats
+            threshold_per_proposal: Llindar per proposta
+            unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
+            unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            vote_limit: Límit de suports per participant
+          step:
+            amendment_creation_enabled: Creació d'esmena habilitada
+            amendment_creation_enabled_help: La participant pot esmenar propostes
+            amendment_promotion_enabled: Promoció d'esmenes habilitada
+            amendment_promotion_enabled_help: Les autores de les esmenes rebutjades poden promocionar-les a propostes.
+            amendment_reaction_enabled: Resposta a l'esmena habilitada
+            amendment_reaction_enabled_help: Les autores de les propostes poden acceptar o rebutjar les esmenes proposades pels participants.
+            amendments_visibility: Visibilitat de les esmenes
+            amendments_visibility_choices:
+              all: Les esmenes són visibles per tothom
+              participants: Les esmenes són visibles només per les autores
+            amendments_visibility_help: Si es selecciona l'opció "Les esmenes són visibles únicament per als seus autors", els participants han d'estar identificats per a veure les esmenes realitzades.
+            announcement: Anunci
+            answers_with_costs: Habilita el cost en la resposta de les propostes
+            automatic_hashtags: Hashtags afegits a totes les propostes
+            comments_blocked: Comentaris bloquejats
+            creation_enabled: Les participants poden crear propostes directes
+            creation_enabled_readonly: Aquesta opció es desactiva quan actives la funcionalitat de Textos Participatius. Per a pujar propostes com a text participatiu fes clic al botó de Textos Participatius i segueix les instruccions.
+            default_sort_order: Ordre de propostes per defecte
+            default_sort_order_help: '''Per defecte'' vol dir que si els suports estan habilitats, les propostes es mostraran aleatòriament, i si els suports estan bloquejats, aleshores es mostraran de més a menys suports.'
+            default_sort_order_options:
+              default: Per defecte
+              most_commented: Més comentada
+              most_endorsed: Més adhesions
+              most_followed: Més seguida
+              most_voted: Més suports
+              random: Aleatori
+              recent: Recent
+              with_more_authors: Amb més autores
+            endorsements_blocked: Adhesions bloquejades
+            endorsements_enabled: Adhesions habilitades
+            proposal_answering_enabled: Resposta a les propostes habilitat
+            publish_answers_immediately: Publica la resposta de la proposta immediatament
+            publish_answers_immediately_help_html: 'Tingues present que si respons alguna proposta sense que això estigui habilitat, l''hauràs de publicar manualment seleccionant i fent servir l''acció de publicar. Per a més informació sobre el funcionament, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">pàgina de documentació de les respostes a les propostes</a>.'
+            suggested_hashtags: Hashtags suggerits a les participants per a noves propostes
+            votes_blocked: Suports bloquejats
+            votes_enabled: Suports habilitats
+            votes_hidden: Suports ocults (si els suports estan habilitats, marcant aquesta opció s'amagarà el nombre de suports)
+    moderations:
+      actions:
+        hide: Amagar
+      admin:
+        reportable:
+          hide:
+            invalid: Hi ha hagut un problema amagant aquest recurs.
+            success: Recurs amagat amb èxit.
+    reporting_proposals:
+      actions:
+        answer_proposal: Resposta de la proposta
+        edit_proposal: Edita la proposta
+        import: Importa propostes d'un altre component
+        new: Nova proposta
+        participatory_texts: Textos participatius
+        show: Veure proposta
+        title: Accions
+      admin:
+        actions:
+          preview: Vista prèvia
+        answer_overdue:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour overdue
+                other: about %{count} hours overdue
+              about_x_months:
+                one: about 1 month overdue
+                other: about %{count} months overdue
+              half_a_minute: half a minute overdue
+              less_than_x_minutes:
+                one: less than a min. overdue
+                other: less than %{count} min. overdue
+              less_than_x_seconds:
+                one: right now overdue
+                other: less than %{count} sec. overdue
+              x_days:
+                one: 1 day overdue
+                other: "%{count} days overdue"
+              x_hours:
+                one: 1 hour overdue
+                other: "%{count} hours overdue"
+              x_minutes:
+                one: 1 min. overdue
+                other: "%{count} min. overdue"
+              x_seconds:
+                one: 1 sec. overdue
+                other: "%{count} sec. overdue"
+        answer_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour left to answer
+                other: about %{count} hours left to answer
+              about_x_months:
+                one: about 1 month left to answer
+                other: about %{count} months left to answer
+              half_a_minute: half a minute left to answer
+              less_than_x_minutes:
+                one: less than a min. left to answer
+                other: less than %{count} min. left to answer
+              less_than_x_seconds:
+                one: right now left to answer
+                other: less than %{count} sec. left to answer
+              x_days:
+                one: 1 day left to answer
+                other: "%{count} days left to answer"
+              x_hours:
+                one: 1 hour left to answer
+                other: "%{count} hours left to answer"
+              x_minutes:
+                one: 1 min. left to answer
+                other: "%{count} min. left to answer"
+              x_seconds:
+                one: 1 sec. left to answer
+                other: "%{count} sec. left to answer"
+        evaluate_pending:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour left to evaluate
+                other: about %{count} hours left to evaluate
+              about_x_months:
+                one: about 1 month left to evaluate
+                other: about %{count} months left to evaluate
+              half_a_minute: half a minute left to evaluate
+              less_than_x_minutes:
+                one: queda menys min. per avaluar
+                other: queda menys de %{count} min. per avaluar
+              less_than_x_seconds:
+                one: right now left to evaluate
+                other: less than %{count} sec. left to evaluate
+              x_days:
+                one: 1 day left to evaluate
+                other: "%{count} days left to evaluate"
+              x_hours:
+                one: 1 hour left to evaluate
+                other: "%{count} hours left to evaluate"
+              x_minutes:
+                one: 1 min. left to evaluate
+                other: "%{count} min. left to evaluate"
+              x_seconds:
+                one: 1 sec. left to evaluate
+                other: "%{count} sec. left to evaluate"
+        exports:
+          proposal_comments: Comentaris
+          proposals: Propostes directes
+        proposals:
+          photo_form:
+            action: Add image
+            add_images: Add images
+            gallery_legend: Add images
+            title: Photos
+            upload_msg: No files selected
+          photo_gallery:
+            delete_image: Delete image
+            photos: Photos
+          photos:
+            title: Photos
+        resolution_time: Temps de resolució
+        time_elapsed:
+          datetime:
+            distance_in_words:
+              about_x_hours:
+                one: about 1 hour
+                other: about %{count} hours
+              about_x_months:
+                one: about 1 month
+                other: about %{count} months
+              half_a_minute: half a minute
+              less_than_x_minutes:
+                one: less than a min.
+                other: less than %{count} min.
+              less_than_x_seconds:
+                one: right now
+                other: less than %{count} sec.
+              x_days:
+                one: 1 day
+                other: "%{count} days"
+              x_hours:
+                one: 1 hour
+                other: "%{count} hours"
+              x_minutes:
+                one: 1 min.
+                other: "%{count} min."
+              x_seconds:
+                one: 1 sec.
+                other: "%{count} sec."
+      forms:
+        errors:
+          device_not_supported: La geolocalització no és compatible amb el vostre navegador.
+          no_device_location: Ho sentim, no hem pogut detectar la teva localització.
+        use_my_camera: Usa la meva càmera
+        use_my_location: Usa la meva localització
+      proposals:
+        form:
+          image: Imatge/fotografia
