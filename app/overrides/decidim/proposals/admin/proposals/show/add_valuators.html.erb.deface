@@ -1,0 +1,1 @@
+<!-- remove "erb[silent]:contains('if proposal.valuators.any?')" closing_selector "erb[silent]:contains('end')" -->
