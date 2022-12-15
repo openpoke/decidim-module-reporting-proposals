@@ -1,57 +1,18 @@
-<% if reporting_proposal? %>
-<div class="card">
-  <div class="card-divider">
-    <h2 class="card-title">
-      <%= t ".valuators" %>
-    </h2>
-  </div>
-  <div class="card-section">
-    <% if proposal.valuators.any? %>
-      <div class="row column">
-        <strong><%= t ".assigned_valuators" %>:</strong>
-        <ul id="valuators">
-          <% proposal.valuation_assignments.each do |assignment| %>
-            <% presented_valuator = present(assignment.valuator) %>
-            <li>
-              <%= link_to(
-                    presented_valuator.name,
-                    presented_valuator.profile_path,
-                    target: :blank
-                  ) %>
-
-              <% if allowed_to? :unassign_from_valuator, :proposals, valuator: assignment.valuator %>
-                <%= icon_link_to(
-                      "circle-x",
-                      proposal_valuation_assignment_path(proposal, assignment.valuator_role),
-                      t(".remove_assignment"),
-                      method: :delete,
-                      data: { confirm: t(".remove_assignment_confirmation") },
-                      class: "red-icon"
-                    ) %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+<% if allowed_to? :assign_to_valuator, :proposals %>
+  <div id="js-assign-proposal-to-valuator-actions" class="js-bulk-action-form form-single-proposal"
+       style="max-width:400px">
+    <%= form_tag(valuation_assignment_path, method: :post, id: "js-form-assign-proposal-to-valuator",
+                 class: "flex--lc flex-gap--1") do %>
+      <div class="checkboxes hide">
+        <%= check_box_tag "proposal_ids[]", proposal.id, true,
+                          class: "js-check-all-proposal js-proposal-id-#{proposal.id}" %>
       </div>
-    <% end %>
-    <% if allowed_to? :assign_to_valuator, :proposals %>
-      <div id="js-assign-proposal-to-valuator-actions" class="js-bulk-action-form form-single-proposal"
-           style="max-width:400px">
-        <%= form_tag(valuation_assignment_path, method: :post, id: "js-form-assign-proposal-to-valuator",
-                     class: "flex--lc flex-gap--1") do %>
-          <div class="checkboxes hide">
-            <%= check_box_tag "proposal_ids[]", proposal.id, true,
-                              class: "js-check-all-proposal js-proposal-id-#{proposal.id}" %>
-          </div>
 
-          <%= bulk_valuators_select(current_participatory_space, t("decidim.proposals.admin.proposals.index.assign_to_valuator")) %>
+      <%= bulk_valuators_select(current_participatory_space, t("decidim.proposals.admin.proposals.index.assign_to_valuator")) %>
 
-          <%= submit_tag(t("decidim.proposals.admin.proposals.index.assign_to_valuator_button"),
-                         id: "js-submit-assign-proposal-to-valuator",
-                         class: "button small button--simple float-left") %>
-        <% end %>
-      </div>
+      <%= submit_tag(t("decidim.proposals.admin.proposals.index.assign_to_valuator_button"),
+                     id: "js-submit-assign-proposal-to-valuator",
+                     class: "button small button--simple float-left") %>
     <% end %>
   </div>
-</div>
 <% end %>

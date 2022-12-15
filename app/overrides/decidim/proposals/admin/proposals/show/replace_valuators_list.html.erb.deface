@@ -1,0 +1,3 @@
+<!-- insert_after "#valuators" -->
+
+<%= render partial: "decidim/reporting_proposals/admin/proposals/add_valuators" %>

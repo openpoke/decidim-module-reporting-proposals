@@ -262,7 +262,7 @@ en:
           proposal_comments: Comments
           proposals: Reporting proposals
         proposals:
-          add_valuators:
+          valuators_list:
             valuators: Valuators
             assigned_valuators: Assigned valuators
             remove_assignment: remove assignment
