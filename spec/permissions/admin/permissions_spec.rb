@@ -138,11 +138,8 @@ module Decidim::ReportingProposals::Admin
         let(:action) do
           { scope: :admin, action: :assign_to_valuator, subject: :proposals }
         end
-        it " " do
-          byebug
-          is_expected.to eq false
-        end
-        # it { is_expected.to eq false }
+
+        it { is_expected.to eq false }
       end
     end
 
