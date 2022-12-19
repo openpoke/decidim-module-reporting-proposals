@@ -23,7 +23,6 @@ module Decidim::ReportingProposals::Admin
       double(
         proposal_answering_enabled: proposal_answering_enabled?,
         proposal_photo_editing_enabled: proposal_photo_editing_enabled?,
-        allow_to_assign_other_valuators: allow_to_assign_other_valuators,
         participatory_texts_enabled?: false
       )
     end
@@ -31,6 +30,7 @@ module Decidim::ReportingProposals::Admin
     let(:proposal_photo_editing_enabled?) { true }
     let(:allow_proposal_photo_editing) { true }
     let(:allow_admins_to_hide_proposals) { true }
+    let(:allow_to_assign_other_valuators) { true }
     let(:permission_action) { Decidim::PermissionAction.new(action) }
 
     before do
@@ -121,8 +121,6 @@ module Decidim::ReportingProposals::Admin
 
     shared_examples "can add valuators to the proposal" do
       describe "add other valuators" do
-        let(:allow_to_assign_other_valuators) { true }
-
         let(:action) do
           { scope: :admin, action: :assign_to_valuator, subject: :proposals }
         end
