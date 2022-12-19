@@ -23,6 +23,7 @@ module Decidim::ReportingProposals::Admin
       double(
         proposal_answering_enabled: proposal_answering_enabled?,
         proposal_photo_editing_enabled: proposal_photo_editing_enabled?,
+        allow_to_assign_other_valuators: allow_to_assign_other_valuators,
         participatory_texts_enabled?: false
       )
     end
@@ -35,6 +36,7 @@ module Decidim::ReportingProposals::Admin
     before do
       allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
       allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
+      allow(Decidim::ReportingProposals).to receive(:allow_to_assign_other_valuators).and_return(allow_to_assign_other_valuators)
     end
 
     shared_examples "can answer proposals" do
@@ -117,6 +119,33 @@ module Decidim::ReportingProposals::Admin
       end
     end
 
+    shared_examples "can add valuators to the proposal" do
+      describe "add other valuators" do
+        let(:allow_to_assign_other_valuators) { true }
+
+        let(:action) do
+          { scope: :admin, action: :assign_to_valuator, subject: :proposals }
+        end
+
+        it { is_expected.to eq true }
+      end
+    end
+
+    shared_examples "cannot add valuators to the proposal" do
+      describe "add other valuators" do
+        let!(:allow_to_assign_other_valuators) { false }
+
+        let(:action) do
+          { scope: :admin, action: :assign_to_valuator, subject: :proposals }
+        end
+        it " " do
+          byebug
+          is_expected.to eq false
+        end
+        # it { is_expected.to eq false }
+      end
+    end
+
     it_behaves_like "can answer proposals"
     it_behaves_like "can edit photos"
     it_behaves_like "can hide proposals"
@@ -127,6 +156,8 @@ module Decidim::ReportingProposals::Admin
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
+      it_behaves_like "can add valuators to the proposal"
+      it_behaves_like "cannot add valuators to the proposal"
 
       context "and can valuate the current proposal" do
         let!(:assignment) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role }
