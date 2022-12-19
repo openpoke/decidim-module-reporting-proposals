@@ -7,7 +7,6 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-
           private
 
           def valuator_can_unassign_valuator_from_proposals?
