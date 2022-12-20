@@ -46,7 +46,7 @@ module Decidim
     end
 
     # Public setting to allow to assign other valuators
-    config_accessor :allow_to_assign_other_valuators do
+    config_accessor :valuators_assign_other_valuators do
       true
     end
   end
