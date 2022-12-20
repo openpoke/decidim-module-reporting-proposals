@@ -12,7 +12,8 @@ checksums = [
       "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
       "/lib/decidim/map/autocomplete.rb" => "65df8e58433814e6b35b52c1bff19ed2",
       "/lib/decidim/form_builder.rb" => "91c55f8197a9e3892e94f5c13ca40905",
-      "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5"
+      "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5",
+      "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf"
     }
   },
   {
@@ -26,7 +27,8 @@ checksums = [
       "/app/views/decidim/proposals/proposals/edit.html.erb" => "7071f1e5e10a22e79511875c50ce63be",
       "/app/views/decidim/proposals/proposals/edit_draft.html.erb" => "0b832f705872e1aea3eefbd76ef4f1fa",
       "/app/views/decidim/proposals/proposals/_edit_form_fields.html.erb" => "6893bb3cc0fe99f4de986f829af26d50",
-      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "e0a162954ca45ab6b3d71e61635eddbd"
+      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "e0a162954ca45ab6b3d71e61635eddbd",
+      "/app/permissions/decidim/proposals/admin/permissions.rb" => "751b15ced553b17b7203f66a0152fb75"
     }
   }
 ]
