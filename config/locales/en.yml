@@ -229,6 +229,9 @@ en:
                 one: 1 sec. left to answer
                 other: "%{count} sec. left to answer"
                 zero: time left to answer expired
+        categories:
+          index:
+            valuators_column: Automatic valuators
         evaluate_pending:
           datetime:
             distance_in_words:
