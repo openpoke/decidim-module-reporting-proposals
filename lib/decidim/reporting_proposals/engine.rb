@@ -30,6 +30,8 @@ module Decidim
           Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
           Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
           Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
+          Decidim::User.include(Decidim::ReportingProposals::UserOverride)
+          Decidim::Category.include(Decidim::ReportingProposals::CategoryOverride)
         end
       end
 
