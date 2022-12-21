@@ -232,6 +232,11 @@ es:
             photos: Photos
           photos:
             title: Photos
+          valuators_list:
+            assigned_valuators: Assigned valuators
+            remove_assignment: remove assignment
+            remove_assignment_confirmation: remove assignment confirmation
+            valuators: Valuators
         resolution_time: Resolution time
         time_elapsed:
           datetime:
