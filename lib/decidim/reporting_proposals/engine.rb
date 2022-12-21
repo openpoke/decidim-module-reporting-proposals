@@ -19,6 +19,8 @@ module Decidim
 
       initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
         config.to_prepare do
+          Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
+          Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
