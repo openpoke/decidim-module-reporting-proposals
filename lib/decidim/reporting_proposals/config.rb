@@ -44,5 +44,10 @@ module Decidim
     config_accessor :allow_proposal_photo_editing do
       true
     end
+
+    # Public setting to allow to assign other valuators
+    config_accessor :valuators_assign_other_valuators do
+      true
+    end
   end
 end
