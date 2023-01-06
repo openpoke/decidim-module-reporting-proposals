@@ -12,26 +12,27 @@ module Decidim
         post :locate, to: "geolocation#locate"
       end
 
-      # overrides for proposals
+      # generic overrides
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
+        Decidim::Category.include(Decidim::ReportingProposals::CategoryOverride)
+        Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
+        Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
+        Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
+        Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
+        Decidim::User.include(Decidim::ReportingProposals::UserOverride)
+        Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
       end
 
+      # controllers and helpers overrides
       initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
         config.to_prepare do
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
+          Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
+          Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
-          Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
-          Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
-          Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
-          ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
-          Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
-          Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
-          Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
-          Decidim::User.include(Decidim::ReportingProposals::UserOverride)
-          Decidim::Category.include(Decidim::ReportingProposals::CategoryOverride)
         end
       end
 

@@ -11,7 +11,7 @@ module Decidim
                  foreign_key: :decidim_user_id,
                  dependent: :destroy
 
-        has_many :users, through: :categories_valuators, class_name: "Decidim::Category", foreign_key: :decidim_user_id
+        has_many :valuators, through: :categories_valuators, class_name: "Decidim::Category", foreign_key: :decidim_user_id, source: :user
       end
     end
   end

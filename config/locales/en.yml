@@ -171,6 +171,7 @@ en:
       admin:
         actions:
           preview: Preview
+          edit_valuators: Edit valuators
         answer_overdue:
           datetime:
             distance_in_words:
