@@ -21,7 +21,7 @@ module Decidim
 
       describe "when the form is not valid" do
         before do
-          expect(form).to receive(:invalid?).and_return(true)
+          allow(form).to receive(:invalid?).and_return(true)
         end
 
         it "broadcasts invalid" do
@@ -35,7 +35,7 @@ module Decidim
 
       describe "when the form is valid" do
         before do
-          expect(form).to receive(:invalid?).and_return(false)
+          allow(form).to receive(:invalid?).and_return(false)
         end
 
         it "broadcasts ok" do
@@ -50,7 +50,7 @@ module Decidim
 
         context "and the reportable has been already reported two times" do
           before do
-            expect(form).to receive(:invalid?).at_least(:once).and_return(false)
+            allow(form).to receive(:invalid?).at_least(:once).and_return(false)
             (Decidim.max_reports_before_hiding - 1).times do
               described_class.new(form, reportable, create(:user, organization: organization)).call
             end
