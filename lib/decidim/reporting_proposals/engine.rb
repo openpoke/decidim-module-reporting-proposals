@@ -27,8 +27,13 @@ module Decidim
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
 
         # Search user roles for different participatory spaces and apply override to all of them
-        Decidim.participatory_space_manifests.each do |manifest|
-          manifest.model_class_name.constantize.new.user_roles.model.include(Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride)
+        # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
+        begin
+          Decidim.participatory_space_manifests.each do |manifest|
+            manifest.model_class_name.constantize.new.user_roles.model.include(Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride)
+          end
+        rescue StandardError => e
+          Rails.logger.error("Error while trying to include Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride: #{e.message}")
         end
       end
 
