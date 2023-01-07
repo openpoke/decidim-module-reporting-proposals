@@ -23,13 +23,18 @@ module Decidim
         Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
         Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
         Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
+        Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
+        Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
+
+        # Search user roles for different participatory spaces and apply override to all of them
+        Decidim.participatory_space_manifests.each do |manifest|
+          manifest.model_class_name.constantize.new.user_roles.model.include(Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride)
+        end
       end
 
       # controllers and helpers overrides
       initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
         config.to_prepare do
-          Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
-          Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
           Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
