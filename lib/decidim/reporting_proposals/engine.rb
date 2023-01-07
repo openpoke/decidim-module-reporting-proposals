@@ -20,8 +20,9 @@ module Decidim
         Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
         Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
-        Decidim::User.include(Decidim::ReportingProposals::UserOverride)
         Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
+        Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
+        Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
       end
 
       # controllers and helpers overrides
@@ -35,6 +36,7 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
+          Decidim::Admin::CategoriesController.include(Decidim::ReportingProposals::Admin::CategoriesControllerOverride)
         end
       end
 

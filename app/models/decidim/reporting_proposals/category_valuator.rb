@@ -3,16 +3,16 @@
 module Decidim
   module ReportingProposals
     class CategoryValuator < ApplicationRecord
-      self.table_name = "decidim_categories_valuators"
+      self.table_name = "decidim_reporting_proposals_category_valuators"
 
       belongs_to :category,
                  foreign_key: "decidim_category_id",
-                 class_name: "Decidim::Category",
+                 class_name: "Decidim::Category"
+
+      belongs_to :valuator_role,
                  polymorphic: true
 
-      belongs_to :user,
-                 foreign_key: "decidim_user_id",
-                 class_name: "Decidim::User"
+      delegate :user, to: :valuator_role
     end
   end
 end

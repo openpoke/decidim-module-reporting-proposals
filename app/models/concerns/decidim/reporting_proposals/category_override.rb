@@ -6,12 +6,18 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        has_many :categories_valuators,
+        has_many :category_valuators,
                  class_name: "Decidim::ReportingProposals::CategoryValuator",
-                 foreign_key: :decidim_user_id,
+                 foreign_key: :decidim_category_id,
                  dependent: :destroy
 
-        has_many :valuators, through: :categories_valuators, class_name: "Decidim::Category", foreign_key: :decidim_user_id, source: :user
+        def valuator_users
+          category_valuators.map(&:user)
+        end
+
+        def valuator_names
+          valuator_users.map(&:name)
+        end
       end
     end
   end

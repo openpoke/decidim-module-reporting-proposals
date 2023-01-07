@@ -1,3 +1,0 @@
-<!-- insert_bottom ".table-list__actions" -->
-
-<%= render "decidim/reporting_proposals/admin/categories/valuator_link", category: defined?(subcategory) ? subcategory : category %>

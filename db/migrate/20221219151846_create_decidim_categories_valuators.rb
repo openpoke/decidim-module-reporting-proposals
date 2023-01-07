@@ -2,15 +2,16 @@
 
 class CreateDecidimCategoriesValuators < ActiveRecord::Migration[6.0]
   def change
-    create_table :decidim_categories_valuators do |t|
-      t.references :decidim_category, null: false, index: true, foreign_key: { to_table: "decidim_categories" }
-      t.references :decidim_user, null: false, index: true, foreign_key: { to_table: "decidim_users" }
+    create_table :decidim_reporting_proposals_category_valuators do |t|
+      t.references :decidim_category, null: false, foreign_key: { to_table: "decidim_categories" }, index: { name: "decidim_reporting_proposals_category_category_id" }
+      t.references :valuator_role, polymorphic: true, null: false, index: { name: "decidim_reporting_proposals_category_valuator_role" }
+
       t.timestamps
     end
 
-    add_index :decidim_categories_valuators,
-              [:decidim_category_id, :decidim_user_id],
+    add_index :decidim_reporting_proposals_category_valuators,
+              [:decidim_category_id, :valuator_role_id, :valuator_role_type],
               unique: true,
-              name: "decidim_categories_valuators_category_user_unique"
+              name: "decidim_reporting_proposals_category_valuator_unique"
   end
 end

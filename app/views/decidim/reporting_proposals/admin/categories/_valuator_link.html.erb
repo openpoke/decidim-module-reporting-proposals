@@ -1,3 +1,0 @@
-<% if allowed_to? :update, :category, category: category %>
-  <%= icon_link_to "people", decidim_admin_reporting_proposals.edit_category_valuator_path(category), t("actions.edit_valuators", scope: "decidim.reporting_proposals.admin"), class: "action-icon--edit" %>
-<% end %>
