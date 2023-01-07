@@ -4,6 +4,7 @@ PATH
     decidim-reporting_proposals (0.1.0)
       decidim-admin (>= 0.25.0, < 0.27)
       decidim-core (>= 0.25.0, < 0.27)
+      decidim-participatory_processes (>= 0.25.0, < 0.27)
       decidim-proposals (>= 0.25.0, < 0.27)
       deface (>= 1.9)
 

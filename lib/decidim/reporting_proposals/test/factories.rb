@@ -5,4 +5,9 @@ FactoryBot.define do
     name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :reporting_proposals).i18n_name }
     manifest_name { :reporting_proposals }
   end
+
+  factory :category_valuator, class: "Decidim::ReportingProposals::CategoryValuator" do
+    category { create :category, participatory_space: valuator_role.participatory_space }
+    valuator_role { create :participatory_process_user_role, role: "valuator" }
+  end
 end

@@ -13,6 +13,16 @@ module Decidim
                  polymorphic: true
 
       delegate :user, to: :valuator_role
+
+      validate :category_belongs_to_same_participatory_space
+
+      private
+
+      def category_belongs_to_same_participatory_space
+        return if category.participatory_space == valuator_role.participatory_space
+
+        errors.add(:category, :invalid)
+      end
     end
   end
 end

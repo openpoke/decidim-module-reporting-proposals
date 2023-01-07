@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "decidim-admin", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-core", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.add_dependency "decidim-participatory_processes", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-proposals", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "deface", ">= 1.9"
 
