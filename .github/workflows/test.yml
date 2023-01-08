@@ -41,6 +41,12 @@ jobs:
 
       - name: Setup Database
         run: bundle exec rake test_app
+
+      - name: Precompile test app assets
+        run: bundle exec rake assets:precompile
+        working-directory: ./spec/decidim_dummy_app
+        env:
+          RAILS_ENV: test
     
       - name: Run RSpec
         run: bundle exec rspec

@@ -66,6 +66,12 @@ module Decidim
         end
       end
 
+      initializer "decidim_reporting_proposals.on_publish_proposals" do
+        Decidim::EventsManager.subscribe("decidim.events.proposals.proposal_published") do |_event_name, data|
+          Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
+        end
+      end
+
       initializer "decidim_reporting_proposals.webpacker.assets_path" do
         Decidim.register_assets_path File.expand_path("app/packs", root)
       end
