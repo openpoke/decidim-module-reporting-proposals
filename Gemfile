@@ -26,11 +26,11 @@ group :development, :test do
 end
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
+  gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
-  gem "rubocop-faker", "~> 1.1"
-  gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
+  gem "rubocop-faker"
+  gem "spring"
+  gem "spring-watcher-listen"
   gem "web-console"
 end
 

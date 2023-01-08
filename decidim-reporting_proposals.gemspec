@@ -23,7 +23,9 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "decidim-admin", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-core", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.add_dependency "decidim-participatory_processes", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "decidim-proposals", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "deface", ">= 1.9"
 

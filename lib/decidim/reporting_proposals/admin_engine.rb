@@ -17,8 +17,8 @@ module Decidim
       end
 
       initializer "decidim_reporting_proposals.admin_mount_routes" do
-        Decidim::Core::Engine.routes do
-          mount Decidim::ReportingProposals::AdminEngine, at: "/admin/reporting_proposals", as: "decidim_admin_reporting_proposals"
+        Decidim::Admin::Engine.routes do
+          mount Decidim::ReportingProposals::AdminEngine, at: "/reporting_proposals", as: "decidim_admin_reporting_proposals"
         end
       end
 

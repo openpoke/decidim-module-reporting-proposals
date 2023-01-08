@@ -2,6 +2,8 @@
 en:
   activemodel:
     attributes:
+      category:
+        valuator_ids: Automatic valuators
       proposal:
         has_no_address: Has no address
   decidim:
@@ -170,6 +172,7 @@ en:
         title: Actions
       admin:
         actions:
+          edit_valuators: Edit valuators
           preview: Preview
         answer_overdue:
           datetime:
@@ -229,6 +232,12 @@ en:
                 one: 1 sec. left to answer
                 other: "%{count} sec. left to answer"
                 zero: time left to answer expired
+        categories:
+          form:
+            valuators_help: Select valuators that will be assigned automatically when
+              a proposal is published in this category (they will receive a notification).
+          index:
+            valuators_column: Automatic valuators
         evaluate_pending:
           datetime:
             distance_in_words:

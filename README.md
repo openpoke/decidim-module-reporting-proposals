@@ -22,6 +22,8 @@ And then execute:
 
 ```
 bundle
+And then execute:
+bundle exec rails decidim_reporting_proposals:install:migrations
 ```
 
 ## Usage

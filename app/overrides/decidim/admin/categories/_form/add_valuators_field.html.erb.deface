@@ -1,0 +1,3 @@
+<!-- insert_bottom ".card-section" -->
+
+<%= render "decidim/reporting_proposals/admin/categories/valuators_field", form: form %>
