@@ -8,18 +8,27 @@ module Decidim
 
       def perform(data)
         @resource = data[:resource]
+        participatory_space = data[:extra][:participatory_space]
 
-        return unless valuator_roles
+        return if valuator_roles.blank?
+        return unless participatory_space
 
         valuator_roles.each do |valuator_role|
-          Decidim::Proposals::AssignProposalsToValuator.call(form(valuator_role))
+          Decidim::Proposals::Admin::AssignProposalsToValuator.call(form(valuator_role)) do
+            on(:ok) do
+              Rails.logger.info("Automatically assigned valuator #{valuator_role.user.name} to proposal ##{resource.id}")
+            end
+            on(:invalid) do
+              Rails.logger.warn("Couldn't automatically assign valuator #{valuator_role.user.name} to proposal ##{resource.id}")
+            end
+          end
         end
       end
 
       def form(valuator_role)
-        Decidim::Proposals::ValuationAssignmentForm.from_params(
+        Decidim::Proposals::Admin::ValuationAssignmentForm.from_params(
           id: valuator_role.id,
-          proposals_ids: [resource.id]
+          proposal_ids: [resource.id]
         ).with_context(
           current_component: resource.component,
           current_user: resource.organization.users.first # first admin for the traceability
@@ -32,7 +41,7 @@ module Decidim
       end
 
       def category
-        @category ||= proposal.category
+        @category ||= resource.category
       end
     end
   end
