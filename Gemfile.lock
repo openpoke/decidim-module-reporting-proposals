@@ -487,6 +487,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.17.0)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.27)
@@ -506,6 +507,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
@@ -785,6 +789,7 @@ GEM
     zeitwerk (2.6.6)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -804,7 +809,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.7.6p219
+   ruby 2.7.7p221
 
 BUNDLED WITH
    2.3.20
