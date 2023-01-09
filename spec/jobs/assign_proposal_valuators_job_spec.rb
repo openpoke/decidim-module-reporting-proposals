@@ -12,25 +12,44 @@ module Decidim::ReportingProposals
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
     let!(:proposal) { create :proposal, :unpublished, component: component, category: category }
     let(:user) { proposal.authors.first }
+    let(:admin_follower) { create :user, :admin, organization: organization }
+    let(:extra) { {} }
+    let(:followers) { [] }
     let(:data) do
       {
         affected_users: [],
         event_class: "Decidim::Proposals::PublishProposalEvent",
-        extra: {},
-        followers: [],
+        extra: extra,
+        followers: followers,
         force_send: false,
         resource: proposal
       }
     end
 
     context "when publishing a proposal" do
+      let!(:follow) { create :follow, followable: proposal, user: admin_follower }
+
       it "broadcasts ok" do
         expect(subject.call).to broadcast(:ok)
       end
 
-      it "enqueues the job twice" do
-        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later).with(data)
-        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later).with(data.merge(extra: { participatory_space: true }))
+      it "enqueues the job 3 times" do
+        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+          .with(data)
+        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+          .with(data.merge(
+                  extra: {
+                    participatory_space: true
+                  }
+                ))
+        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+          .with(data.merge(
+                  extra: {
+                    participatory_space: true,
+                    type: "admin"
+                  },
+                  followers: [admin_follower]
+                ))
         subject.call
       end
     end

@@ -8,10 +8,10 @@ module Decidim
 
       def perform(data)
         @resource = data[:resource]
-        participatory_space = data[:extra][:participatory_space]
 
         return if valuator_roles.blank?
-        return unless participatory_space
+        return unless data[:extra][:participatory_space]
+        return if data[:extra][:type] == "admin"
 
         valuator_roles.each do |valuator_role|
           Decidim::Proposals::Admin::AssignProposalsToValuator.call(form(valuator_role)) do
