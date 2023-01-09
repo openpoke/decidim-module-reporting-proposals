@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/openpoke/decidim.git
-  revision: 1a32d4925dab30f7721d807f14f1c2817c33cf27
+  revision: 6dfde8c97e86c9041e3532beb38e5bf47f4353e5
   branch: feat/evaluator-emails
   specs:
     decidim (0.26.4)
@@ -717,7 +717,7 @@ GEM
       version_gem (~> 1.1, >= 1.1.1)
     social-share-button (1.2.4)
       coffee-rails
-    spring (4.1.0)
+    spring (4.1.1)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
