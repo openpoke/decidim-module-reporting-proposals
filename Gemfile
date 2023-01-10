@@ -10,9 +10,7 @@ base_path = ""
 base_path = "../" if File.basename(__dir__) == "development_app"
 require_relative "#{base_path}lib/decidim/reporting_proposals/version"
 
-# DECIDIM_VERSION = Decidim::ReportingProposals::DECIDIM_VERSION
-# Provisional until https://github.com/openpoke/decidim/pull/23 is merge in upstream
-DECIDIM_VERSION = { github: "openpoke/decidim", branch: "feat/evaluator-emails" }.freeze
+DECIDIM_VERSION = Decidim::ReportingProposals::DECIDIM_VERSION
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-reporting_proposals", path: "."

@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/openpoke/decidim.git
-  revision: 6dfde8c97e86c9041e3532beb38e5bf47f4353e5
-  branch: feat/evaluator-emails
+  revision: 8d28c77c60fd6d43da9b1738262a7e7c8f72c663
+  branch: 0.26-lucerne
   specs:
     decidim (0.26.4)
       decidim-accountability (= 0.26.4)
