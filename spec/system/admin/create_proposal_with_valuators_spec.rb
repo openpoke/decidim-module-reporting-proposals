@@ -24,12 +24,10 @@ describe "Create proposal with valuators", type: :system do
       click_link("New proposal")
 
       fill_in("proposal_title_en", with: "Test title for proposal")
-      find('.ql-editor').set('Test description for proposal')
+      find(".ql-editor").set("Test description for proposal")
       select category.name["en"], from: :proposal_category_id
 
-      perform_enqueued_jobs {
-        click_button "Create"
-      }
+      perform_enqueued_jobs { click_button "Create" }
 
       within(".valuators-count") do
         expect(page).to have_content("1")
@@ -52,9 +50,7 @@ describe "Create proposal with valuators", type: :system do
       fill_in("proposal_body", with: "Test description for proposal")
       click_button "Continue"
 
-      perform_enqueued_jobs {
-        click_button "Publish"
-      }
+      perform_enqueued_jobs { click_button "Publish" }
 
       switch_to_window original_page
       click_link component.name["en"]
