@@ -4,9 +4,9 @@ module Decidim
   module ReportingProposals
     VERSION = "0.2.0"
     # DECIDIM_VERSION = "0.26.5"
-    # Provisional until 
+    # Provisional until
     #   https://github.com/openpoke/decidim/pull/23
-    #   https://github.com/openpoke/decidim/pull/37 
+    #   https://github.com/openpoke/decidim/pull/37
     # are merged on upstream
     DECIDIM_VERSION = { github: "openpoke/decidim", branch: "0.26-lucerne" }.freeze
 

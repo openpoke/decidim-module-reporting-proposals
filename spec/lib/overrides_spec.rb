@@ -52,7 +52,7 @@ checksums = [
   }
 ]
 
-describe "Overriden files" do
+describe "Overriden files", type: :view do
   checksums.each do |item|
     # rubocop:disable Rails/DynamicFindBy
     spec = ::Gem::Specification.find_by_name(item[:package])
