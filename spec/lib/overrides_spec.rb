@@ -29,6 +29,12 @@ checksums = [
     }
   },
   {
+    package: "decidim-templates",
+    files: {
+      "/app/controllers/decidim/templates/admin/proposal_answer_templates_controller.rb" => "11677320c5263e2fe13371ec2d057480"
+    }
+  },
+  {
     package: "decidim-proposals",
     files: {
       "/app/controllers/decidim/proposals/proposals_controller.rb" => "6f73c3cad3c713358535c92e2ed84f60",
