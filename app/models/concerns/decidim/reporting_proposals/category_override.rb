@@ -11,6 +11,10 @@ module Decidim
                  foreign_key: :decidim_category_id,
                  dependent: :destroy
 
+        def valuator_roles
+          category_valuators.map(&:valuator_role)
+        end
+
         def valuator_users
           category_valuators.map(&:user)
         end
