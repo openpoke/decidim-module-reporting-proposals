@@ -1,7 +1,8 @@
 # Reporting proposals component for Decidim
 
 [![[CI] Lint](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/lint.yml)
-[![[CI] Test](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test.yml)
+[![[CI] Test (unit)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test_unit.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test_unit.yml)
+[![[CI] Test (integration)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test_integration.yml/badge.svg)](https://github.com/openpoke/decidim-module-reporting-proposals/actions/workflows/test_integration.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1b469dba958dedd29046/maintainability)](https://codeclimate.com/github/openpoke/decidim-module-reporting-proposals/maintainability)
 [![codecov](https://codecov.io/gh/openpoke/decidim-module-reporting-proposals/branch/main/graph/badge.svg?token=X11YWWSMO4)](https://codecov.io/gh/openpoke/decidim-module-reporting-proposals)
 [![Gem Version](https://badge.fury.io/rb/decidim-reporting_proposals.svg)](https://badge.fury.io/rb/decidim-reporting_proposals)

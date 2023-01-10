@@ -47,6 +47,11 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
           Decidim::Admin::CategoriesController.include(Decidim::ReportingProposals::Admin::CategoriesControllerOverride)
+          begin
+            Decidim::Templates::Admin::ProposalAnswerTemplatesController.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplatesControllerOverride)
+          rescue StandardError => e
+            Rails.logger.error("Error while trying to include Decidim::Templates::Admin::ProposalAnswerTemplatesControllerOverride: #{e.message}")
+          end
         end
       end
 
@@ -62,6 +67,14 @@ module Decidim
             settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
             settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
             settings.attribute(:proposal_photo_editing_enabled, type: :boolean, default: false)
+          end
+        end
+      end
+
+      initializer "decidim_reporting_proposals.on_publish_proposals" do
+        config.to_prepare do
+          Decidim::EventsManager.subscribe("decidim.events.proposals.proposal_published") do |_event_name, data|
+            Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
         end
       end
