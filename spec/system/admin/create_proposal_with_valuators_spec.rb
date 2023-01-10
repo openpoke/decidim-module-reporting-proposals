@@ -20,19 +20,49 @@ describe "Create proposal with valuators", type: :system do
   end
 
   context "when an admin manages the component" do
-    before do
+    it "has a valuator after creating" do
       click_link("New proposal")
 
       fill_in("proposal_title_en", with: "Test title for proposal")
       find('.ql-editor').set('Test description for proposal')
       select category.name["en"], from: :proposal_category_id
 
-      click_button "Create"
+      perform_enqueued_jobs {
+        click_button "Create"
+      }
+
+      within(".valuators-count") do
+        expect(page).to have_content("1")
+      end
+    end
+  end
+
+  context "when a proposal was published in public side" do
+    before do
+      original_page = page.current_window
+      new_window = window_opened_by { click_link "View public page" }
+
+      switch_to_window new_window
+      click_link component.name["en"]
+      click_link "New proposal"
+      select category.name["en"], from: :proposal_category_id
+      check "Has no address"
+      check "Has no image"
+      fill_in("proposal_title", with: "Test title for proposal")
+      fill_in("proposal_body", with: "Test description for proposal")
+      click_button "Continue"
+
+      perform_enqueued_jobs {
+        click_button "Publish"
+      }
+
+      switch_to_window original_page
+      click_link component.name["en"]
     end
 
     it "has a valuator after creating" do
       within(".valuators-count") do
-        expect(page).to have_content("1")
+        expect(page).to have_content("1", count: 1)
       end
     end
   end
