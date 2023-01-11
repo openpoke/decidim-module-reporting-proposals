@@ -10,9 +10,11 @@ module Decidim
         @resource = data[:resource]
 
         return if valuator_roles.blank?
-        return unless data[:extra][:participatory_space]
-        return if data[:extra][:type] == "admin"
 
+        unless data[:event_class] == "Decidim::Proposals::Admin::UpdateProposalCategoryEvent"
+          return unless data[:extra][:participatory_space]
+          return if data[:extra][:type] == "admin"
+        end
         valuator_roles.each do |valuator_role|
           Decidim::Proposals::Admin::AssignProposalsToValuator.call(form(valuator_role)) do
             on(:ok) do
