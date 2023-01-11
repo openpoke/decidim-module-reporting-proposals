@@ -95,7 +95,7 @@ describe "Reporting proposals overrides", type: :system do
 
     before do
       visit_component
-      click_link translated(proposal.title)
+      click_link translated(proposal.title), match: :first
       click_link "Edit proposal"
     end
 
