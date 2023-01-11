@@ -28,14 +28,11 @@ describe "Assign valuators after update category", type: :system do
       click_button "Change category"
       select category_new.name["en"], from: :category_id
       perform_enqueued_jobs { click_button "Update" }
-      refresh
     end
 
     it "has a valuator after updating" do
-      click_link component.name["en"]
-      within(".valuators-count") do
-        expect(page).to have_content("1", count: 1)
+      click_link proposal.title["en"]
+        expect(page).to have_content(valuator_role.user.name, count: 1)
       end
-    end
   end
 end
