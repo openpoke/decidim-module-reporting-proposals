@@ -98,10 +98,6 @@ module Decidim::ReportingProposals
       end
     end
 
-<<<<<<< HEAD
-    # rubocop:disable RSpec/AnyInstance
-=======
->>>>>>> main
     context "when executing the job" do
       let(:valuator_user) { create(:user, :confirmed, organization: organization) }
       let!(:category_valuator) { create(:category_valuator, valuator_role: valuator_role, category: category) }
