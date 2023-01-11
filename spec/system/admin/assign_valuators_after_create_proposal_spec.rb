@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Create proposal with valuators", type: :system do
+describe "Automatic assign valuators after create proposals", type: :system do
   let!(:organization) { create :organization }
   let!(:participatory_process) { create :participatory_process, organization: organization }
   let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
@@ -19,7 +19,7 @@ describe "Create proposal with valuators", type: :system do
     visit manage_component_path(component)
   end
 
-  context "when an admin manages the component" do
+  context "when an admin create the proposal" do
     it "has a valuator after creating" do
       click_link("New proposal")
 

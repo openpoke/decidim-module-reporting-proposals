@@ -23,6 +23,7 @@ module Decidim
         Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
         Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
         Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
+        Decidim::Proposals::Admin::UpdateProposalCategory.include(Decidim::ReportingProposals::Admin::UpdateProposalCategoryOverride)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
 
@@ -69,6 +70,10 @@ module Decidim
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
           Decidim::EventsManager.subscribe("decidim.events.proposals.proposal_published") do |_event_name, data|
+            Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
+          end
+
+          Decidim::EventsManager.subscribe("decidim.events.proposals.proposal_update_category") do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
         end
