@@ -13,7 +13,6 @@ module Decidim
 
         valuator_roles.each do |valuator_role|
           Decidim::Proposals::Admin::AssignProposalsToValuator.call(form(valuator_role)) do
-
             on(:ok) do
               Rails.logger.info("Automatically assigned valuator #{valuator_role.user.name} to proposal ##{resource.id}")
             end
