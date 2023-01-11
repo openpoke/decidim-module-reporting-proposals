@@ -47,6 +47,11 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
           Decidim::Admin::CategoriesController.include(Decidim::ReportingProposals::Admin::CategoriesControllerOverride)
+          begin
+            Decidim::Templates::Admin::ProposalAnswerTemplatesController.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplatesControllerOverride)
+          rescue StandardError => e
+            Rails.logger.error("Error while trying to include Decidim::Templates::Admin::ProposalAnswerTemplatesControllerOverride: #{e.message}")
+          end
         end
       end
 
