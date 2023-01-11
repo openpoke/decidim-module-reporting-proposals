@@ -73,7 +73,7 @@ module Decidim
 
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
-          Decidim::EventsManager.subscribe("decidim.events.proposals.proposal_published") do |_event_name, data|
+          Decidim::EventsManager.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
         end
