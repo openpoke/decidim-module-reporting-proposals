@@ -32,7 +32,8 @@ describe "Assign valuators after update category", type: :system do
 
     it "has a valuator after updating" do
       click_link proposal.title["en"]
-        expect(page).to have_content(valuator_role.user.name, count: 1)
-      end
+
+      expect(page).to have_content(valuator_role.user.name, count: 1)
+    end
   end
 end
