@@ -26,7 +26,6 @@ describe "Assign valuators after update category", type: :system do
       find("#proposal_ids_s_").set(true)
       click_button "Actions"
       click_button "Change category"
-      find("select#category_id").click
       select category_new.name["en"], from: :category_id
       perform_enqueued_jobs { click_button "Update" }
       refresh
