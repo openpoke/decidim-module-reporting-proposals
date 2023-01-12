@@ -28,14 +28,14 @@ module Decidim
 
         def hide_content_action?
           return unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
-
-          toggle_allow(admin_hide_proposals_enabled? && user_allowed_or_assigned?)
+          # byebug
+          toggle_allow((admin_hide_proposals_enabled? && user_allowed_or_assigned?) || user_administrator?)
         end
 
         def edit_photos_action?
           return unless permission_action.action == :edit_photos && permission_action.subject == :proposals
 
-          toggle_allow(admin_proposal_photo_editing_enabled? && user_allowed_or_assigned?)
+          toggle_allow(admin_proposal_photo_editing_enabled? && (user_allowed_or_assigned? || user_administrator?))
         end
 
         def admin_proposal_photo_editing_enabled?
@@ -49,6 +49,16 @@ module Decidim
 
         def user_allowed_or_assigned?
           user.admin? || (user_is_valuator? && valuator_assigned_to_proposal?)
+        end
+
+        def user_administrator?
+          process = Decidim::ParticipatoryProcess.where(organization: context[:proposal].try(:organization))
+
+          admin = Decidim::User.where(id: Decidim::ParticipatoryProcessUserRole
+                                               .where(participatory_process: process, role: :admin)
+                                               .select(user.id))
+
+          admin.exists? ? user : nil
         end
       end
     end
