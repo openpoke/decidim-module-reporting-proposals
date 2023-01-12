@@ -28,7 +28,7 @@ module Decidim
 
         def hide_content_action?
           return unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
-          # byebug
+
           toggle_allow((admin_hide_proposals_enabled? && user_allowed_or_assigned?) || user_administrator?)
         end
 
@@ -55,8 +55,8 @@ module Decidim
           process = Decidim::ParticipatoryProcess.where(organization: context[:proposal].try(:organization))
 
           admin = Decidim::User.where(id: Decidim::ParticipatoryProcessUserRole
-                                               .where(participatory_process: process, role: :admin)
-                                               .select(user.id))
+                                            .where(participatory_process: process, role: :admin)
+                                            .select(user.id))
 
           admin.exists? ? user : nil
         end
