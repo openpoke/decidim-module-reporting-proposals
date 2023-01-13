@@ -21,4 +21,14 @@
       }
     }
   }
+
+  @media only screen and (max-width: 596px) {
+    display: block !important;
+    margin-top: 1rem;
+    margin-bottom: -.5rem;
+
+    button {
+      border-radius: 4px !important;
+    }
+  }
 }
