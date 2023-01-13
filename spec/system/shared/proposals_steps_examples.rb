@@ -258,3 +258,62 @@ shared_examples "remove errors" do |continue|
     expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
   end
 end
+
+shared_examples "prevents post if etiquette errors" do
+  context "when title caps error" do
+    let(:proposal_title) { "i do not start with caps" }
+
+    it "shows errors" do
+      fill_proposal
+
+      within ".card__content form" do
+        expect(page).not_to have_content("Publish")
+        expect(page).to have_content("must start with a capital letter")
+
+        fill_in :proposal_title, with: "I start with caps"
+        find("*[type=submit]").click
+      end
+
+      click_button "Publish"
+      expect(page).to have_content("successfully published")
+    end
+  end
+
+  context "when body caps error" do
+    let(:proposal_body) { "i do not start with caps" }
+
+    it "shows errors" do
+      fill_proposal
+
+      within ".card__content form" do
+        expect(page).not_to have_content("Publish")
+        expect(page).to have_content("must start with a capital letter")
+
+        fill_in :proposal_body, with: "I start with caps"
+        find("*[type=submit]").click
+      end
+
+      click_button "Publish"
+      expect(page).to have_content("successfully published")
+    end
+  end
+
+  context "when body length error" do
+    let(:proposal_body) { "I am short" }
+
+    it "shows errors" do
+      fill_proposal
+
+      within ".card__content form" do
+        expect(page).not_to have_content("Publish")
+        expect(page).to have_content("There's an error in this field")
+
+        fill_in :proposal_body, with: "I am long enough to meet the requirements"
+        find("*[type=submit]").click
+      end
+
+      click_button "Publish"
+      expect(page).to have_content("successfully published")
+    end
+  end
+end

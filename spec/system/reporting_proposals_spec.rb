@@ -91,6 +91,7 @@ describe "Reporting proposals overrides", type: :system do
       end
     end
 
+    it_behaves_like "prevents post if etiquette errors"
     it_behaves_like "3 steps"
     it_behaves_like "customized form"
     it_behaves_like "map can be hidden"

@@ -5,6 +5,7 @@ module Decidim
     # Exposes the proposal resource so users can view and create them.
     module ProposalsControllerOverride
       extend ActiveSupport::Concern
+      include NeedsProposalExtraValidationsSnippets
 
       included do
         helper_method :reporting_proposal?
