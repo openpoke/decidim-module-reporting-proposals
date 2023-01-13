@@ -31,6 +31,7 @@ module Decidim
         etiquette_validator = EtiquetteValidator.new(attributes: [:title, :body])
         etiquette_validator.validate(model)
         {
+          genericError: I18n.t("decidim.forms.errors.error"),
           title: {
             caps: {
               enabled: model.errors.details[:title].to_s.include?(":must_start_with_caps"),

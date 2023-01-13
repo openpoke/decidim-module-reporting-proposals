@@ -13,6 +13,7 @@
     },
     "globals": {
         "require": false,
+        "Decidim": false,
         "$": false,
         "jQuery": false,
         "L": false
