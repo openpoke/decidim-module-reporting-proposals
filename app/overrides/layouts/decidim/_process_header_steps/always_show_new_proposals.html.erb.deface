@@ -1,0 +1,3 @@
+<!-- replace "erb[loud]:contains('button small button--sc show-for-medium')" -->
+
+<%= link_to(cta_text, step_cta_url(participatory_process), class: "button small button--sc") %>

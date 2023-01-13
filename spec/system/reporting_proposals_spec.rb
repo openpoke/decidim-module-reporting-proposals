@@ -77,11 +77,21 @@ describe "Reporting proposals overrides", type: :system do
   end
 
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
+    let(:step) { participatory_process.steps.last }
+
     before do
+      step.update!(cta_path: "some-action", cta_text: { en: "Some Action" })
       visit_component
       click_link "New proposal"
     end
 
+    it "always shows steps action button" do
+      within ".process-header__phase" do
+        expect(page).not_to have_css(".show-for-medium", text: "SOME ACTION")
+      end
+    end
+
+    it_behaves_like "prevents post if etiquette errors"
     it_behaves_like "3 steps"
     it_behaves_like "customized form"
     it_behaves_like "map can be hidden"

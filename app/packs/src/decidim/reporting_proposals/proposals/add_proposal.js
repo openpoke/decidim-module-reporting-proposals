@@ -13,6 +13,7 @@ $(() => {
 
   $map.hide();
 
+  // Handle no address checkbox in reverse, mandatory by default instead of default decidim
   if ($checkbox.length > 0) {
     const toggleInput = () => {
       $hasAdressInput.val($checkbox[0].checked
@@ -60,4 +61,6 @@ $(() => {
       });
     });
   }
+
+
 });
