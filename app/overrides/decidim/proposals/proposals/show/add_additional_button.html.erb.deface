@@ -1,0 +1,3 @@
+<!-- insert_bottom ".m-bottom" -->
+
+<%= render partial: "decidim/proposals/proposals/additional_button_for_show" %>
