@@ -36,7 +36,7 @@ describe "Create proposal with valuators", type: :system do
   end
 
   context "when a proposal was published in public side" do
-    before do
+    it "has a valuator after creating" do
       original_page = page.current_window
       new_window = window_opened_by { click_link "View public page" }
 
@@ -54,9 +54,7 @@ describe "Create proposal with valuators", type: :system do
 
       switch_to_window original_page
       click_link component.name["en"]
-    end
 
-    it "has a valuator after creating" do
       within(".valuators-count") do
         expect(page).to have_content("1", count: 1)
       end
