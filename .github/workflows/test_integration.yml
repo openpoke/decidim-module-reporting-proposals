@@ -12,8 +12,14 @@ env:
   NODE_VERSION: 16.9.1
 
 jobs:
-  test-report:
+  test-integration:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - rspec: system/admin
+          - rspec: system/*_spec.rb
+      fail-fast: false
 
     services:
       postgres:
@@ -49,9 +55,9 @@ jobs:
         working-directory: ./spec/decidim_dummy_app
         env:
           RAILS_ENV: test
-    
+
       - name: Run RSpec
-        run: bundle exec rspec spec/system
+        run: bundle exec rspec ${{ matrix.rspec }}
         env:
           SIMPLECOV: 1
           CODECOV: 1
