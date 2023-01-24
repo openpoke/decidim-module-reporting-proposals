@@ -8,5 +8,6 @@ require "decidim/reporting_proposals/component"
 
 module Decidim
   module ReportingProposals
+    autoload :ReportingProposalsType, "decidim/api/reporting_proposals_type"
   end
 end

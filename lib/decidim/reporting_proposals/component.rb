@@ -19,7 +19,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.actions = %w(endorse vote create withdraw amend comment vote_comment)
 
-  component.query_type = "Decidim::Proposals::ProposalsType"
+  component.query_type = "Decidim::ReportingProposals::ReportingProposalsType"
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
