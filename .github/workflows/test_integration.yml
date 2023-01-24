@@ -17,8 +17,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - rspec: admin
-          - rspec: "*_spec.rb"
+          - name: "Admin"
+            rspec: admin
+          - name: "Public"
+            rspec: "*_spec.rb"
       fail-fast: false
 
     services:
@@ -74,5 +76,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: screenshots
+          name: screenshots-${{ matrix.name }}
           path: ./spec/decidim_dummy_app/tmp/screenshots
