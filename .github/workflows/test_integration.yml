@@ -57,7 +57,7 @@ jobs:
 
       - name: Precompile test app assets
         run: bundle exec rake assets:precompile
-        working-directory: ./spec/decidim_dummy_app          
+        working-directory: ./spec/decidim_dummy_app
 
       - run: tar -zcf /tmp/testapp-env.tar.gz ./spec/decidim_dummy_app
 
@@ -96,19 +96,21 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: workspace
-          path: /tmp
-      
-      - run: tar -zxf /tmp/testapp-env.tar.gz
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: workspace
+          path: /tmp
+      
+      - run: ls
+      - run: tar -zxf /tmp/testapp-env.tar.gz
+      - run: ls
       - run: bundle exec rails db:schema:load
+        working-directory: ./spec/decidim_dummy_app
 
       - name: Run RSpec
         run: bundle exec rspec spec/system/${{ matrix.rspec }}
