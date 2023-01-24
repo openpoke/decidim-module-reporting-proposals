@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - rspec: system/admin
-          - rspec: system/*_spec.rb
+          - rspec: admin
+          - rspec: "*_spec.rb"
       fail-fast: false
 
     services:
@@ -57,7 +57,7 @@ jobs:
           RAILS_ENV: test
 
       - name: Run RSpec
-        run: bundle exec rspec ${{ matrix.rspec }}
+        run: bundle exec rspec spec/system/${{ matrix.rspec }}
         env:
           SIMPLECOV: 1
           CODECOV: 1
