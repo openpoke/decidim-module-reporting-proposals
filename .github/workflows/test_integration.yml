@@ -92,6 +92,10 @@ jobs:
           POSTGRES_PASSWORD: postgres
 
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
       - uses: actions/download-artifact@v3
         with:
           name: workspace
