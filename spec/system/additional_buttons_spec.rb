@@ -17,6 +17,7 @@ describe "Additional button", type: :system do
                additional_buttons_show: additional_buttons_show,
                additional_button_text: { en: "My button" },
                additional_button_link: "https://#{organization.host}/processes/onion-dynamic/f/20/",
+               additional_buttons_for_show_proposal_show: additional_buttons_show,
                additional_button_for_show_proposal_text: { en: "My button 2" },
                additional_button_for_show_proposal_link: "https://#{organization.host}/processes/onion-dynamic/f/22/"
              })
