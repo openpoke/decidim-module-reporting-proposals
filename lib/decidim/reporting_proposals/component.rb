@@ -4,6 +4,7 @@ require "decidim/components/namer"
 require "decidim/meetings"
 
 Decidim.register_component(:reporting_proposals) do |component|
+  # reuses the same public/admin controllers as proposals, custom engines from this module are used for custom actions
   component.engine = Decidim::Proposals::Engine
   component.admin_engine = Decidim::Proposals::AdminEngine
   component.stylesheet = "decidim/proposals/proposals"
@@ -19,7 +20,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.actions = %w(endorse vote create withdraw amend comment vote_comment)
 
-  component.query_type = "Decidim::Proposals::ProposalsType"
+  component.query_type = "Decidim::ReportingProposals::ReportingProposalsType"
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
