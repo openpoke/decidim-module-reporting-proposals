@@ -16,9 +16,13 @@ describe "Additional button", type: :system do
              settings: {
                additional_buttons_show: additional_buttons_show,
                additional_button_text: { en: "My button" },
-               additional_button_link: "https://#{organization.host}/processes/onion-dynamic/f/20/"
+               additional_button_link: "https://#{organization.host}/processes/onion-dynamic/f/20/",
+               additional_buttons_for_show_proposal_show: additional_buttons_show,
+               additional_button_for_show_proposal_text: { en: "My button 2" },
+               additional_button_for_show_proposal_link: "https://#{organization.host}/processes/onion-dynamic/f/22/"
              })
     end
+    let!(:reporting_proposal) { create(:proposal, component: component) }
 
     before do
       switch_to_host(organization.host)
@@ -31,6 +35,11 @@ describe "Additional button", type: :system do
       it "does not have an additional button" do
         expect(page).not_to have_content("My button")
       end
+
+      it "does not have an additional button on show proposal page" do
+        click_link reporting_proposal.title["en"]
+        expect(page).not_to have_content("My button 2")
+      end
     end
 
     context "when the component has the additional button customized" do
@@ -40,11 +49,18 @@ describe "Additional button", type: :system do
         expect(page).to have_content("My button")
         expect(page).to have_css("a[href='https://#{organization.host}/processes/onion-dynamic/f/20/']")
       end
+
+      it "has an additional button on show proposal page" do
+        click_link reporting_proposal.title["en"]
+        expect(page).to have_content("My button 2")
+        expect(page).to have_css("a[href='https://#{organization.host}/processes/onion-dynamic/f/22/']")
+      end
     end
   end
 
   describe "proposal component" do
     let(:component) { create(:proposal_component, participatory_space: participatory_process) }
+    let!(:proposal) { create(:proposal, component: component) }
 
     context "when the component has the additional button customized" do
       let(:additional_buttons_show) { true }
@@ -55,6 +71,11 @@ describe "Additional button", type: :system do
 
       it "does not have an additional button" do
         expect(page).not_to have_content("My button")
+      end
+
+      it "does not have an additional button on show proposal page" do
+        click_link proposal.title["en"]
+        expect(page).not_to have_content("My button 2")
       end
     end
   end

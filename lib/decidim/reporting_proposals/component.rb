@@ -65,6 +65,9 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :additional_buttons_show, type: :boolean, default: false
     settings.attribute :additional_button_text, type: :string, translated: true, editor: true
     settings.attribute :additional_button_link, type: :string, editor: true
+    settings.attribute :additional_buttons_for_show_proposal_show, type: :boolean, default: false
+    settings.attribute :additional_button_for_show_proposal_text, type: :string, translated: true, editor: true
+    settings.attribute :additional_button_for_show_proposal_link, type: :string, editor: true
   end
 
   component.settings(:step) do |settings|
