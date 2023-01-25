@@ -23,8 +23,11 @@ es:
         name: Reporting proposals
         settings:
           global:
+            additional_button_for_show_proposal_link: Additional action button after the "back to list" link when visiting a particular proposal (link)
+            additional_button_for_show_proposal_text: Additional action button after the "back to list" link when visiting a particular proposal (text)
             additional_button_link: Additional action button next to new proposal (link)
             additional_button_text: Additional action button next to new proposal (text)
+            additional_buttons_for_show_proposal_show: Display an additional button in the show public view
             additional_buttons_show: Display an additional button in the index public view
             additional_buttons_show_help: Add the text and link bellow
             amendments_enabled: Amendments enabled
