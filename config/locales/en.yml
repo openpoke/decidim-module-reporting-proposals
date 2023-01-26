@@ -23,6 +23,11 @@ en:
               by distance proximity instead of text similarity. This feature requires
               a geocoding service to be configured and enabled in the component (otherwise
               defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last
+              X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing
+              proposals by distance proximity. Proposals older than the specified
+              number of days will be ignored. Leave at zero to compare all proposals.
             geocoding_comparison_radius: Maximum radius (in meters) for considering
               proposals similar (will be ordered by proximity) by distance proximity
             proposal_photo_editing_enabled: Allow admins and valuators to edit photos
@@ -81,6 +86,11 @@ en:
               by distance proximity instead of text similarity. This feature requires
               a geocoding service to be configured and enabled in the component (otherwise
               defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last
+              X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing
+              proposals by distance proximity. Proposals older than the specified
+              number of days will be ignored. Leave at zero to compare all proposals.
             geocoding_comparison_radius: Maximum radius (in meters) for considering
               proposals similar (will be ordered by proximity) by distance proximity
             geocoding_enabled: Geocoding enabled

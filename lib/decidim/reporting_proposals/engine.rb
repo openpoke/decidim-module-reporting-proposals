@@ -67,6 +67,7 @@ module Decidim
           component.settings(:global) do |settings|
             settings.attribute :geocoding_comparison_enabled, type: :boolean, default: false
             settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
+            settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
             settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
             settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
             settings.attribute(:proposal_photo_editing_enabled, type: :boolean, default: false)

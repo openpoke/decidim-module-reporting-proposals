@@ -9,14 +9,16 @@ module Decidim::ReportingProposals
     let(:component) { create(:reporting_proposals_component, participatory_space: participatory_process, settings: settings) }
     let(:settings) do
       {
-        "geocoding_comparison_radius" => radius
+        "geocoding_comparison_radius" => radius,
+        "geocoding_comparison_newer_than" => newer_than
       }
     end
     let(:radius) { 30 }
+    let(:newer_than) { 60 }
     let!(:proposal) { create(:proposal, component: component, longitude: longitude, latitude: latitude) }
-    let!(:proposal_near) { create(:proposal, component: component, longitude: longitude_near, latitude: latitude_near) }
-    let!(:proposal_far) { create(:proposal, component: component, longitude: longitude_far, latitude: latitude_far) }
-    let!(:proposal_missed) { create(:proposal, component: component, longitude: longitude_missed, latitude: latitude_missed) }
+    let!(:proposal_near) { create(:proposal, component: component, longitude: longitude_near, latitude: latitude_near, published_at: published_near) }
+    let!(:proposal_far) { create(:proposal, component: component, longitude: longitude_far, latitude: latitude_far, published_at: published_far) }
+    let!(:proposal_missed) { create(:proposal, component: component, longitude: longitude_missed, latitude: latitude_missed, published_at: published_missed) }
 
     # 41.4273° N, 2.1815° E (Canodrom, Barcelona)
     let(:latitude) { 41.4273 }
@@ -31,10 +33,14 @@ module Decidim::ReportingProposals
     let(:latitude_missed) { 41.42758 }
     let(:longitude_missed) { 2.1817 }
 
+    let(:published_near) { 10.days.ago }
+    let(:published_far) { 30.days.ago }
+    let(:published_missed) { 50.days.ago }
     let(:result) { described_class.for([component], proposal).map(&:id) }
 
     it "finds 2 proposals and exclude 1" do
       expect(result).to eq([proposal.id, proposal_near.id, proposal_far.id])
+      expect(result).not_to eq([proposal.id, proposal_far.id, proposal_near.id])
     end
 
     context "when radius is 15 meters" do
@@ -75,6 +81,24 @@ module Decidim::ReportingProposals
 
       it "fins the ones that do" do
         expect(result).to eq([proposal.id, proposal_near.id, proposal_missed.id])
+      end
+    end
+
+    context "when proposal is older than settings" do
+      let(:newer_than) { 40 }
+      let(:radius) { 40 }
+
+      it "fins only the new ones" do
+        expect(result).to eq([proposal.id, proposal_near.id, proposal_far.id])
+      end
+    end
+
+    context "when settings is 0 days" do
+      let(:newer_than) { 0 }
+      let(:radius) { 40 }
+
+      it "does not filter by date" do
+        expect(result).to eq([proposal.id, proposal_near.id, proposal_far.id, proposal_missed.id])
       end
     end
   end

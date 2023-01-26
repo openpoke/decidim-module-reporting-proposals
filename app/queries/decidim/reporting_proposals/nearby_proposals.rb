@@ -19,18 +19,26 @@ module Decidim
       def initialize(components, proposal)
         @components = components
         @proposal = proposal
-        @radius = proposal.component.settings.geocoding_comparison_radius.to_f
-        # @after_date = proposal.component.geocoding_comparison_after_date
+        @radius = proposal.component.settings.geocoding_comparison_radius
+        @newer_than = proposal.component.settings.geocoding_comparison_newer_than
       end
 
       # Retrieves similar proposals
       def query
-        Decidim::Proposals::Proposal
-          .where(component: @components)
-          .published
-          .not_hidden
-          .near([@proposal.latitude, @proposal.longitude], @radius / 1000, units: :km)
+        base_query
+          .near([@proposal.latitude, @proposal.longitude], @radius.to_f / 1000, units: :km)
           .limit(Decidim::Proposals.similarity_limit)
+      end
+
+      def base_query
+        @base_query = Decidim::Proposals::Proposal
+                      .where(component: @components)
+                      .published
+                      .not_hidden
+
+        return @base_query if @newer_than.zero?
+
+        @base_query.where("published_at > ?", @newer_than.days.ago)
       end
     end
   end
