@@ -39,6 +39,26 @@ module Decidim
           end
         end
 
+        # change comparison class if geocoding comparison is enabled
+        def compare
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+          @step = :step_2
+          klass = if geocoding_comparison?
+                    Decidim::ReportingProposals::NearbyProposals
+                  else
+                    Decidim::Proposals::SimilarProposals
+                  end
+          @similar_proposals ||= klass
+                                 .for(current_component, @proposal)
+                                 .all
+
+          if @similar_proposals.blank?
+            flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
+          end
+        end
+
+        # disable this step for reporting proposals
         def complete
           enforce_permission_to :edit, :proposal, proposal: @proposal
           @step = :step_3
