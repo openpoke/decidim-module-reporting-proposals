@@ -43,6 +43,8 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :comments_enabled, type: :boolean, default: true
     settings.attribute :comments_max_length, type: :integer, required: false
     settings.attribute :geocoding_enabled, type: :boolean, default: true
+    settings.attribute :geocoding_comparison_enabled, type: :boolean, default: true
+    settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
     settings.attribute :attachments_allowed, type: :boolean, default: true
     settings.attribute :only_photo_attachments, type: :boolean, default: true
     settings.attribute :resources_permissions_enabled, type: :boolean, default: true

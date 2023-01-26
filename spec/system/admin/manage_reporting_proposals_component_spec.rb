@@ -24,12 +24,38 @@ describe "Managing reporting proposals component", type: :system do
     expect(page).not_to have_content("Participatory texts enabled")
   end
 
+  it "has default values for settings" do
+    expect(page).to have_content("Compare proposals by distance proximity")
+    expect(page).to have_checked_field("component_settings_geocoding_comparison_enabled")
+    expect(page).to have_content("Maximum radius (in meters)")
+    expect(page).to have_field("component_settings_geocoding_comparison_radius", with: 30)
+    expect(page).to have_content("After how many days a not-answered proposal is considered overdue")
+    expect(page).to have_field("component_settings_unanswered_proposals_overdue", with: 7)
+    expect(page).to have_content("After how many days a proposal in its evaluating state is considered overdue")
+    expect(page).to have_field("component_settings_evaluating_proposals_overdue", with: 3)
+    expect(page).to have_content("Allow admins and valuators to edit photos when answering proposals")
+    expect(page).to have_checked_field("component_settings_proposal_photo_editing_enabled")
+  end
+
   context "when managing standard proposals" do
     let!(:component) { create :proposal_component, participatory_space: participatory_process }
 
     it "does not hide readonly attributes" do
       expect(page).to have_content("Collaborative drafts enabled")
       expect(page).to have_content("Participatory texts enabled")
+    end
+
+    it "has default values for settings" do
+      expect(page).to have_content("Compare proposals by distance proximity")
+      expect(page).to have_unchecked_field("component_settings_geocoding_comparison_enabled")
+      expect(page).to have_content("Maximum radius (in meters)")
+      expect(page).to have_field("component_settings_geocoding_comparison_radius", with: 30)
+      expect(page).to have_content("After how many days a not-answered proposal is considered overdue")
+      expect(page).to have_field("component_settings_unanswered_proposals_overdue", with: 7)
+      expect(page).to have_content("After how many days a proposal in its evaluating state is considered overdue")
+      expect(page).to have_field("component_settings_evaluating_proposals_overdue", with: 3)
+      expect(page).to have_content("Allow admins and valuators to edit photos when answering proposals")
+      expect(page).to have_unchecked_field("component_settings_proposal_photo_editing_enabled")
     end
   end
 end

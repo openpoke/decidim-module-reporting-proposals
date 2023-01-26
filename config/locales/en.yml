@@ -24,6 +24,12 @@ en:
               is considered overdue
             unanswered_proposals_overdue_help: This adds a visual alert to the list
               of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals
+              by distance proximity instead of text similarity. This feature requires
+              a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity)
+              by distance proximity
       reporting_proposals:
         name: Reporting proposals
         settings:
@@ -70,6 +76,12 @@ en:
             evaluating_proposals_overdue_help: This adds a visual alert to the list
               of proposals. Leave it to zero to disable this feature.
             geocoding_enabled: Geocoding enabled
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals
+              by distance proximity instead of text similarity. This feature requires
+              a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity)
+              by distance proximity
             minimum_votes_per_user: Minimum supports per user
             new_proposal_body_template: New proposal body template
             new_proposal_body_template_help: You can define prefilled text that the

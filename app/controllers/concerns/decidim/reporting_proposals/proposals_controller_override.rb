@@ -8,7 +8,7 @@ module Decidim
       include NeedsProposalExtraValidationsSnippets
 
       included do
-        helper_method :reporting_proposal?
+        helper_method :reporting_proposal?, :geocoding_comparison?
 
         def new
           enforce_permission_to :create, :proposal
@@ -80,6 +80,10 @@ module Decidim
         def reporting_proposal?
           component = current_component || @form.component
           component.manifest_name == "reporting_proposals"
+        end
+
+        def geocoding_comparison?
+          Decidim::Map.configured? && component_settings.geocoding_enabled? && component_settings.geocoding_comparison_enabled?
         end
       end
     end
