@@ -34,13 +34,21 @@ module Decidim
           end
         end
 
+        # rubocop:disable Rails/HelperInstanceVariable:
+        def distance(meters = nil)
+          meters = @proposal.component.settings.geocoding_comparison_radius.to_f if meters.nil?
+
+          return "#{meters.round}m" if meters < 1000
+
+          "#{(meters / 1000).round}Km"
+        end
+
         private
 
         def total_steps
           reporting_proposals_component? ? 3 : 4
         end
 
-        # rubocop:disable Rails/HelperInstanceVariable:
         def reporting_proposals_component?
           return unless @form&.component&.manifest_name
 

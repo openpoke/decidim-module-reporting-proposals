@@ -103,7 +103,9 @@ module Decidim
         end
 
         def geocoding_comparison?
-          Decidim::Map.configured? && component_settings.geocoding_enabled? && component_settings.geocoding_comparison_enabled?
+          if Decidim::Map.configured? && component_settings.geocoding_enabled? && component_settings.geocoding_comparison_enabled?
+            @proposal ? @proposal.geocoded? : true
+          end
         end
       end
     end

@@ -21,7 +21,7 @@ module Decidim::Proposals
     shared_examples "geocoding comparison" do |enabled|
       it "has geocoding helper" do
         get :index
-        expect(controller.helpers.geocoding_comparison?).to eq(enabled)
+        expect(controller.helpers.geocoding_comparison?).to(enabled ? be_truthy : be_falsey)
       end
 
       context "when settings is enabled" do
@@ -34,7 +34,7 @@ module Decidim::Proposals
 
         it "geocoding comparison is on" do
           get :index
-          expect(controller.helpers.geocoding_comparison?).to eq(true)
+          expect(controller.helpers).to be_geocoding_comparison
         end
       end
 
@@ -48,7 +48,7 @@ module Decidim::Proposals
 
         it "geocoding comparison is off" do
           get :index
-          expect(controller.helpers.geocoding_comparison?).to eq(false)
+          expect(controller.helpers).not_to be_geocoding_comparison
         end
       end
 
@@ -62,7 +62,7 @@ module Decidim::Proposals
 
         it "geocoding comparison is off" do
           get :index
-          expect(controller.helpers.geocoding_comparison?).to eq(false)
+          expect(controller.helpers).not_to be_geocoding_comparison
         end
       end
 
@@ -73,7 +73,16 @@ module Decidim::Proposals
 
         it "geocoding comparison is off" do
           get :index
-          expect(controller.helpers.geocoding_comparison?).to eq(false)
+          expect(controller.helpers).not_to be_geocoding_comparison
+        end
+      end
+
+      context "when proposal is not geocoded" do
+        let(:proposal) { create(:proposal, component: component, latitude: nil, longitude: nil) }
+
+        it "geocoding comparison is off" do
+          get :show, params: { id: proposal.id }
+          expect(controller.helpers).not_to be_geocoding_comparison
         end
       end
     end
@@ -92,7 +101,7 @@ module Decidim::Proposals
       it "is aware of not being reporting_proposals_component" do
         get :index
         expect(response).to have_http_status(:ok)
-        expect(controller.helpers.reporting_proposal?).to eq(false)
+        expect(controller.helpers).to be_reporting_proposal
       end
 
       it_behaves_like "geocoding comparison", false

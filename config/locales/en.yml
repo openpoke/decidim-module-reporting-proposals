@@ -400,5 +400,10 @@ en:
         use_my_camera: Use my camera
         use_my_location: Use my location
       proposals:
+        compare:
+          geocoding:
+            title: "Nearby proposals"
+            description: "These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one."
+            away: "%{meters} away"
         form:
           image: Image/photo
