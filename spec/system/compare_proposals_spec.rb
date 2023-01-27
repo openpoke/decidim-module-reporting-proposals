@@ -57,13 +57,15 @@ describe "Reporting proposals overrides", type: :system do
       expect(page).not_to have_i18n_content(proposal_missed.title)
     end
 
-    context "when no proposals are found" do
-      let(:latitude) { 41.1 }
-      let(:longitude) { 2.2 }
+    context "when the proposal is too old" do
+      let(:published_near) { 61.days.ago }
 
-      it "shows no proposals found" do
-        expect(page).to have_content("PUBLISH YOUR PROPOSAL")
-        expect(page).to have_i18n_content(proposal_draft.title)
+      it "are excluded from the search" do
+        expect(page).not_to have_i18n_content(proposal_near.title)
+        expect(page).not_to have_i18n_content("10m away")
+        expect(page).to have_i18n_content(proposal_far.title)
+        expect(page).to have_i18n_content("20m away")
+        expect(page).not_to have_i18n_content(proposal_missed.title)
       end
     end
   end
@@ -86,9 +88,41 @@ describe "Reporting proposals overrides", type: :system do
 
   it_behaves_like "compares using geocoding"
 
+  context "when no proposals are found" do
+    let(:latitude) { 41.1 }
+    let(:longitude) { 2.2 }
+
+    it "shows no proposals found" do
+      expect(page).to have_content("PUBLISH YOUR PROPOSAL")
+      expect(page).to have_i18n_content(proposal_draft.title)
+    end
+  end
+
   context "when is a normal proposal component" do
-    let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
+    let!(:component) { create(:proposal_component, settings: settings, participatory_space: participatory_process) }
+    let(:settings) { {} }
 
     it_behaves_like "compares using text"
+
+    context "when geocoding comparison is active" do
+      let(:settings) do
+        {
+          "geocoding_enabled" => true,
+          "geocoding_comparison_enabled" => true
+        }
+      end
+
+      it_behaves_like "compares using geocoding"
+
+      context "when no proposals are found" do
+        let(:latitude) { 41.1 }
+        let(:longitude) { 2.2 }
+
+        it "shows no proposals found" do
+          expect(page).to have_content("COMPLETE YOUR PROPOSAL")
+          expect(page).to have_i18n_content("Well done! No similar proposals found")
+        end
+      end
+    end
   end
 end
