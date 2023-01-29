@@ -143,6 +143,7 @@ Decidim.register_component(:reporting_proposals) do |component|
       collection = Decidim::Proposals::Proposal
                    .published
                    .where(component: component_instance)
+                   .where.not(answered_at: nil)
                    .includes(:scope, :category, :component)
 
       if space.user_roles(:valuator).where(user: user).any?

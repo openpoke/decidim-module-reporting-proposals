@@ -12,6 +12,7 @@ module Decidim
       end
 
       let!(:proposal) { create(:proposal, :accepted) }
+      let!(:unanswered_proposal) { create(:proposal, :not_answered) }
       let(:participatory_process) { component.participatory_space }
       let(:component) { proposal.component }
 
@@ -22,6 +23,10 @@ module Decidim
 
         it "serializes the answer_time" do
           expect(serialized).to include(answer_time: time_elapsed_to_answer(proposal))
+        end
+
+        it "does not serialize unanswered proposals" do
+          expect(serialized).not_to include(unanswered_proposal)
         end
       end
     end
