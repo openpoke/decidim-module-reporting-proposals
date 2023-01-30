@@ -12,7 +12,6 @@ describe "Show valuators name", type: :system do
   let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
   let!(:valuator2) { create :user, :confirmed, organization: organization }
   let!(:valuator_role2) { create :participatory_process_user_role, role: :valuator, user: valuator2, participatory_process: participatory_process }
-  let!(:valuation_assignment) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role }
 
   before do
     switch_to_host(organization.host)
@@ -21,17 +20,27 @@ describe "Show valuators name", type: :system do
 
   it "shows the valuator name in the list" do
     visit manage_component_path(proposal_component)
-    expect(page).to have_content(valuator.name)
+    expect(page).not_to have_content(valuator.name)
     expect(page).not_to have_content("(+1)")
   end
 
-  context "when more than one valuator" do
-    let!(:valuation_assignment2) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role2 }
+  context "when one valuator" do
+    let!(:valuation_assignment) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role }
 
     it "shows the valuator name in the list" do
       visit manage_component_path(proposal_component)
       expect(page).to have_content(valuator.name)
-      expect(page).to have_content("(+1)")
+      expect(page).not_to have_content("(+1)")
+    end
+
+    context "and more than one valuator" do
+      let!(:valuation_assignment2) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role2 }
+
+      it "shows the valuator name in the list" do
+        visit manage_component_path(proposal_component)
+        expect(page).to have_content(valuator.name)
+        expect(page).to have_content("(+1)")
+      end
     end
   end
 end
