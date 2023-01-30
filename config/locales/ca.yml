@@ -16,6 +16,11 @@ ca:
           global:
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
             evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             proposal_photo_editing_enabled: Permet que les administradores i les avaluadores editin les fotos quan responen les propostes
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
@@ -52,6 +57,11 @@ ca:
               with_more_authors: Amb més autores
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
             evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             geocoding_enabled: Geocodificació habilitada
             minimum_votes_per_user: Suports mínims per participant
             new_proposal_body_template: Plantilla pel text de nova proposta
@@ -333,5 +343,10 @@ ca:
         use_my_camera: Usa la meva càmera
         use_my_location: Usa la meva localització
       proposals:
+        compare:
+          geocoding:
+            away: "%{meters} away"
+            description: These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one.
+            title: Nearby proposals
         form:
           image: Imatge/fotografia
