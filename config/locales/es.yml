@@ -16,6 +16,11 @@ es:
           global:
             evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
             unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
             unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
@@ -52,6 +57,11 @@ es:
               with_more_authors: With more authors
             evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             geocoding_enabled: Geocoding enabled
             minimum_votes_per_user: Minimum supports per user
             new_proposal_body_template: New proposal body template
@@ -333,5 +343,10 @@ es:
         use_my_camera: Use my camera
         use_my_location: Use my location
       proposals:
+        compare:
+          geocoding:
+            away: "%{meters} away"
+            description: These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one.
+            title: Nearby proposals
         form:
           image: Image/photo
