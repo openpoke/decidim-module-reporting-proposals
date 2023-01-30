@@ -30,7 +30,7 @@ describe "Automatic assign valuators after create proposals", type: :system do
       perform_enqueued_jobs { click_button "Create" }
 
       within(".valuators-count") do
-        expect(page).to have_content("1")
+        expect(page).to have_content(valuator.name)
       end
     end
   end
@@ -56,7 +56,7 @@ describe "Automatic assign valuators after create proposals", type: :system do
       click_link component.name["en"]
 
       within(".valuators-count") do
-        expect(page).to have_content("1", count: 1)
+        expect(page).to have_content(valuator.name)
       end
     end
   end
