@@ -1,0 +1,9 @@
+<!-- replace "erb[loud]:contains('proposal.valuation_assignments.count')" -->
+
+<% count = proposal.valuation_assignments.count %>
+<% if count.zero? %>
+  0
+<% else %>
+	<%= proposal.valuation_assignments.first.valuator.name %>
+	<%= "(+#{(count - 1)})" if count > 1 %>
+<% end %>
