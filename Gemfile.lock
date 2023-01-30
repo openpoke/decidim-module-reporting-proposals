@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/openpoke/decidim.git
-  revision: 8d28c77c60fd6d43da9b1738262a7e7c8f72c663
+  revision: dea17e20388a0e9ca5e63f3a267a676523ead06a
   branch: 0.26-lucerne
   specs:
     decidim (0.26.4)
@@ -248,7 +248,7 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
-    axe-core-api (4.5.1)
+    axe-core-api (4.6.0)
       dumb_delegator
       virtus
     axe-core-rspec (4.1.0)
@@ -270,7 +270,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
-    bootsnap (1.15.0)
+    bootsnap (1.16.0)
       msgpack (~> 1.2)
     browser (2.7.1)
     builder (3.2.4)
@@ -359,7 +359,7 @@ GEM
       nokogiri (>= 1.13.2, < 1.14.0)
       rubyzip (~> 2.3.0)
     docile (1.4.0)
-    doorkeeper (5.6.2)
+    doorkeeper (5.6.3)
       railties (>= 5)
     doorkeeper-i18n (4.0.1)
     dumb_delegator (1.0.0)
@@ -375,7 +375,7 @@ GEM
     erbse (0.1.4)
       temple
     erubi (1.12.0)
-    excon (0.97.2)
+    excon (0.98.0)
     execjs (2.8.1)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -406,7 +406,7 @@ GEM
       activesupport (>= 4.1, < 7.1)
       railties (>= 4.1, < 7.1)
     geocoder (1.7.5)
-    globalid (1.0.1)
+    globalid (1.1.0)
       activesupport (>= 5.0)
     graphql (1.12.24)
     hashdiff (1.0.1)
@@ -558,7 +558,7 @@ GEM
       activerecord (>= 5.2)
       activesupport (>= 5.2)
     polyglot (0.3.5)
-    premailer (1.18.0)
+    premailer (1.19.0)
       addressable
       css_parser (>= 1.12.0)
       htmlentities (>= 4.0.0)
@@ -629,7 +629,7 @@ GEM
       activesupport (>= 4.1.0)
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
-    redcarpet (3.5.1)
+    redcarpet (3.6.0)
     redis (4.8.0)
     regexp_parser (2.6.2)
     request_store (1.5.1)
@@ -737,7 +737,7 @@ GEM
     tilt (2.0.11)
     timeout (0.3.1)
     tomlrb (2.0.3)
-    tzinfo (1.2.10)
+    tzinfo (1.2.11)
       thread_safe (~> 0.1)
     uber (0.1.0)
     unicode-display_width (1.8.0)
