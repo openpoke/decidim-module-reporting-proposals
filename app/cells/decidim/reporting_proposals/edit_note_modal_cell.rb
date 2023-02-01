@@ -6,26 +6,28 @@ module Decidim
       include ActionView::Helpers::FormOptionsHelper
       include Decidim::ReportingProposals::AdminEngine.routes.url_helpers
 
-      property :note, :proposal, :notes_form
-
       def show
         render if note
+      end
+
+      def note
+        model
+      end
+
+      def proposal
+        Decidim::Proposals::Proposal.find(model.decidim_proposal_id)
+      end
+
+      def note_body
+        model.body
       end
 
       def modal_id
         options[:modal_id] || "editNoteModal"
       end
 
-      def note
-        @note ||= Decidim::Proposals::ProposalNote.find(params[:id])
-      end
-
-      def proposal
-        @proposal ||= Decidim::Proposals::Proposal.find(note.decidim_proposal_id)
-      end
-
       def notes_form
-        @notes_form ||= Decidim::Proposals::Admin::ProposalNoteForm.from_params(params)
+        @notes_form = Decidim::Proposals::Admin::ProposalNoteForm.from_model(note)
       end
     end
   end

@@ -9,21 +9,14 @@ module Decidim
         included do
           helper_method :note
 
-          def show
-            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_model(note)
-          end
-
           def edit
-            enforce_permission_to :update, :note, proposal: proposal
-
+            enforce_permission_to :edit_note, :proposals, proposal_note: note
             @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_model(note)
           end
 
           def update
-            enforce_permission_to :update, :note, proposal: proposal
-
-            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(note_params)
-            @notes_form.body = params[:note][:body]
+            enforce_permission_to :edit_note, :proposals, proposal_note: note
+            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(params)
 
             Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, note) do
               on(:ok) do
@@ -32,7 +25,7 @@ module Decidim
               end
 
               on(:invalid) do
-                flash.keep[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
+                flash.now[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
                 render :edit
               end
             end
@@ -42,10 +35,6 @@ module Decidim
 
           def note
             @note ||= Decidim::Proposals::ProposalNote.find(params[:id])
-          end
-
-          def note_params
-            params.require(:proposal_note).permit(:body)
           end
         end
       end

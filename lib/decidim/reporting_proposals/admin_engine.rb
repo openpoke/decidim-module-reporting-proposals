@@ -15,7 +15,11 @@ module Decidim
         post :add_photos, to: "proposals#add_photos"
         delete :remove_photo, to: "proposals#remove_photo"
         resources :proposals do
-          resources :proposal_notes, only: [:edit, :update]
+          resources :proposal_notes do
+            member do
+              patch :update
+            end
+          end
         end
       end
 

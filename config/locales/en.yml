@@ -313,6 +313,7 @@ en:
           proposals: Reporting proposals
         proposal_notes:
           modal:
+            body: Note
             title: Edit proposal notes
             update: Update
           update:

@@ -11,8 +11,11 @@ module Decidim
 
           hide_content_action?
           edit_photos_action?
+          edit_proposal_note?
           super
         end
+
+        private
 
         def current_organization
           context[:proposal].try(:organization) || context[:current_organization]
@@ -26,6 +29,14 @@ module Decidim
           context[:proposal].try(:component) || context[:current_component]
         end
 
+        def proposal_note
+          @proposal_note ||= proposal.notes.find_by(author: user)
+        end
+
+        def user_author_note?
+          proposal_note.author == user
+        end
+
         def hide_content_action?
           return unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
 
@@ -36,6 +47,12 @@ module Decidim
           return unless permission_action.action == :edit_photos && permission_action.subject == :proposals
 
           toggle_allow(admin_proposal_photo_editing_enabled? && (user_allowed_or_assigned? || user_administrator?))
+        end
+
+        def edit_proposal_note?
+          return unless permission_action.action == :edit_note && permission_action.subject == :proposals
+
+          allow! if user_author_note?
         end
 
         def admin_proposal_photo_editing_enabled?
