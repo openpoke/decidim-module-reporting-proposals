@@ -1,0 +1,17 @@
+<div class="reveal edit-note-modal" id="<%= modal_id %>" data-reveal role="dialog" aria-modal="true"
+     aria-labelledby="<%= modal_id %>-label">
+  <div class="reveal__header">
+    <h3 id="<%= modal_id %>-label" class="reveal__title"><%= t("modal.title", scope: "decidim.reporting_proposals.admin.proposal_notes") %></h3>
+    <button class="close-button" data-close aria-label="Close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <%= decidim_form_for(notes_form, url: proposal_proposal_note_path(proposal, note), html: { class: "form edit_proposal_note" }) do |f| %>
+    <div class="row column">
+      <%= f.text_area :body, rows: 10 %>
+    </div>
+    <div class="button--double">
+      <%= f.submit t("modal.update", scope: "decidim.reporting_proposals.admin.proposal_notes") %>
+    </div>
+  <% end %>
+</div>

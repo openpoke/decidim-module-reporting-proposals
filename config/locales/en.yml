@@ -312,6 +312,9 @@ en:
           proposal_comments: Comments
           proposals: Reporting proposals
         proposal_notes:
+          modal:
+            title: Edit proposal notes
+            update: Update
           update:
             invalid: There was a problem updating the proposal note.
             success: Proposal note successfully updated.

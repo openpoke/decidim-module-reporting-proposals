@@ -7,20 +7,25 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          helper_method :proposal_note
+          helper_method :note
+
+          def show
+            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_model(note)
+          end
 
           def edit
-            enforce_permission_to :update, :proposal_note, proposal: proposal
+            enforce_permission_to :update, :note, proposal: proposal
 
-            @notes_form = form(ProposalNoteForm).from_model(proposal_note)
+            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_model(note)
           end
 
           def update
-            enforce_permission_to :update, :proposal_note, proposal: proposal
+            enforce_permission_to :update, :note, proposal: proposal
 
-            @notes_form = form(ProposalNoteForm).from_params(params)
+            @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(note_params)
+            @notes_form.body = params[:note][:body]
 
-            Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, proposal_note) do
+            Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, note) do
               on(:ok) do
                 flash[:notice] = I18n.t("proposal_notes.update.success", scope: "decidim.reporting_proposals.admin")
                 redirect_to proposal_path(id: proposal.id)
@@ -28,15 +33,19 @@ module Decidim
 
               on(:invalid) do
                 flash.keep[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
-                redirect_to proposal_path(id: proposal.id)
+                render :edit
               end
             end
           end
 
           private
 
-          def proposal_note
-            @proposal_note ||= Decidim::Proposals::ProposalNote.find(params[:id])
+          def note
+            @note ||= Decidim::Proposals::ProposalNote.find(params[:id])
+          end
+
+          def note_params
+            params.require(:proposal_note).permit(:body)
           end
         end
       end
