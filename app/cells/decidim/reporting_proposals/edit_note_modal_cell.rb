@@ -4,7 +4,6 @@ module Decidim
   module ReportingProposals
     class EditNoteModalCell < Decidim::ViewModel
       include ActionView::Helpers::FormOptionsHelper
-      include Decidim::ReportingProposals::AdminEngine.routes.url_helpers
 
       def show
         render if note
@@ -28,6 +27,10 @@ module Decidim
 
       def notes_form
         @notes_form = Decidim::Proposals::Admin::ProposalNoteForm.from_model(note)
+      end
+
+      def note_path
+        Decidim::ReportingProposals::AdminEngine.routes.url_helpers.proposal_note_path(proposal_id: proposal.id, id: note)
       end
     end
   end
