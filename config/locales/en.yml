@@ -338,9 +338,10 @@ en:
         proposal_notes:
           modal:
             body: Note
-            title: Edit proposal notes
+            title: Edit proposal note
             update: Update
           update:
+            edited: Edited
             invalid: There was a problem updating the proposal note.
             success: Proposal note successfully updated.
         proposals:
