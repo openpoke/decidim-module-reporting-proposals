@@ -9,9 +9,9 @@ module Decidim
         #
         # form         - A form object with the params.
         # proposal_note - the proposal_note to update.
-        def initialize(notes_form, proposal_note)
+        def initialize(notes_form, note)
           @notes_form = notes_form
-          @proposal_note = proposal_note
+          @note = note
         end
 
         def call
@@ -19,26 +19,16 @@ module Decidim
 
           update_proposal_note
 
-          broadcast(:ok, proposal_note)
+          broadcast(:ok, note)
         end
 
         private
 
-        attr_reader :notes_form, :proposal_note, :proposal
+        attr_reader :notes_form, :note, :proposal
 
         def update_proposal_note
-          @proposal_note = Decidim.traceability.update!(
-            ProposalNote,
-            notes_form.current_user,
-            {
-              body: form.body,
-              proposal: proposal,
-              author: form.current_user
-            },
-            resource: {
-              title: proposal.title
-            }
-          )
+          note.body = notes_form.body
+          note.save!
         end
       end
     end
