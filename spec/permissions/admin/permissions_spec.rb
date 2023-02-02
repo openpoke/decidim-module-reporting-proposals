@@ -11,7 +11,7 @@ module Decidim::ReportingProposals::Admin
     let(:space) { current_component.participatory_space }
     let(:current_component) { create(:proposal_component) }
     let(:proposal) { create :proposal, component: current_component }
-    let(:proposal_note) { create :proposal_note, proposal: proposal}
+    let(:proposal_note) { create :proposal_note, proposal: proposal }
     let(:context) do
       {
         proposal: proposal,
