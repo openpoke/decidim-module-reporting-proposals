@@ -15,7 +15,7 @@ module Decidim
         end
 
         def call
-          return broadcast(:invalid) if form.invalid?
+          return broadcast(:invalid) if notes_form.invalid?
 
           update_proposal_note
 
