@@ -3,7 +3,7 @@ ca:
   activemodel:
     attributes:
       category:
-        valuator_ids: Automatic valuators
+        valuator_ids: Avaluadores assignades
       proposal:
         has_no_address: No té adreça
   decidim:
@@ -16,11 +16,11 @@ ca:
           global:
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
             evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
-            geocoding_comparison_enabled: Compare proposals by distance proximity
-            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
-            geocoding_comparison_newer_than: Compare only proposal made in the last X days
-            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
-            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
+            geocoding_comparison_enabled: Compara propostes per proximitat de distància
+            geocoding_comparison_enabled_help: La configuració permet comparar propostes per proximitat de distància en lloc de semblança de text. Aquesta característica requereix que un servei de geocodificació estigui configurat i habilitat al component (en cas contrari, el valor predeterminat és la comparació de semblança de text).
+            geocoding_comparison_newer_than: Compareu només les propostes fetes en els últims X dies
+            geocoding_comparison_newer_than_help: Aquesta configuració només s'aplica quan es comparen propostes per proximitat a distància. Les propostes anteriors al nombre de dies especificat són ignorades. Deixeu a zero per comparar totes les propostes.
+            geocoding_comparison_radius: Radi màxim (en metres) per considerar propostes similars (s'ordenaran per proximitat) per distància proximitat
             proposal_photo_editing_enabled: Permet que les administradores i les avaluadores editin les fotos quan responen les propostes
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
@@ -28,13 +28,13 @@ ca:
         name: Propostes directes
         settings:
           global:
-            additional_button_for_show_proposal_link: Additional action button after the "back to list" link when visiting a particular proposal (link)
-            additional_button_for_show_proposal_text: Additional action button after the "back to list" link when visiting a particular proposal (text)
-            additional_button_link: Additional action button next to new proposal (link)
-            additional_button_text: Additional action button next to new proposal (text)
-            additional_buttons_for_show_proposal_show: Display an additional button in the show public view
-            additional_buttons_show: Display an additional button in the index public view
-            additional_buttons_show_help: Add the text and link bellow
+            additional_button_for_show_proposal_link: Botó d'acció addicional després de l'enllaç "tornar a la llista" quan visiteu una proposta concreta (enllaç)
+            additional_button_for_show_proposal_text: Botó d'acció addicional després de l'enllaç "tornar a la llista" quan visiteu una proposta concreta (text)
+            additional_button_link: Botó d'acció addicional al costat de la proposta nova (enllaç)
+            additional_button_text: Botó d'acció addicional al costat de la proposta nova (text)
+            additional_buttons_for_show_proposal_show: Mostra un botó addicional a la vista pública en el detall de les propostes
+            additional_buttons_show: Mostra un botó addicional a la vista pública del llistat de propostes
+            additional_buttons_show_help: Afegeix el text i l'enllaç a sota
             amendments_enabled: Esmenes habilitades
             amendments_enabled_help: Si l'actives, configura les funcionalitats de l'esmena per cada fase.
             amendments_wizard_help_text: Text d'ajuda al crear una nova esmena
@@ -57,11 +57,11 @@ ca:
               with_more_authors: Amb més autores
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
             evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
-            geocoding_comparison_enabled: Compare proposals by distance proximity
-            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
-            geocoding_comparison_newer_than: Compare only proposal made in the last X days
-            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
-            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
+            geocoding_comparison_enabled: Compara propostes per proximitat de distància
+            geocoding_comparison_enabled_help: La configuració permet comparar propostes per proximitat de distància en lloc de semblança de text. Aquesta característica requereix que un servei de geocodificació estigui configurat i habilitat al component (en cas contrari, el valor predeterminat és la comparació de semblança de text).
+            geocoding_comparison_newer_than: Compareu només les propostes fetes en els últims X dies
+            geocoding_comparison_newer_than_help: Aquesta configuració només s'aplica quan es comparen propostes per proximitat a distància. Les propostes anteriors al nombre de dies especificat són ignorades. Deixeu a zero per comparar totes les propostes.
+            geocoding_comparison_radius: Radi màxim (en metres) per considerar propostes similars (s'ordenaran per proximitat) per distància proximitat
             geocoding_enabled: Geocodificació habilitada
             minimum_votes_per_user: Suports mínims per participant
             new_proposal_body_template: Plantilla pel text de nova proposta
@@ -148,24 +148,24 @@ ca:
         title: Accions
       admin:
         actions:
-          edit_valuators: Edit valuators
+          edit_valuators: Edita les avaluadores
           preview: Vista prèvia
         answer_overdue:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour overdue
-                other: about %{count} hours overdue
+                one: aproximadament 1 hora de retard
+                other: aproximadament %{count} hores de retard
               about_x_months:
-                one: about 1 month overdue
-                other: about %{count} months overdue
+                one: aproximadament 1 mes de retard
+                other: aproximadament %{count} mesos de retard
               about_x_years:
-                one: about 1 year overdue
-                other: about %{count} years overdue
+                one: aproximadament 1 any de retard
+                other: aproximadament %{count} anys de retard
               almost_x_years:
-                one: almost 1 year overdue
-                other: almost %{count} years overdue
-              half_a_minute: half a minute overdue
+                one: aproximadament 1 any de retard
+                other: aproximadament %{count} anys de retard
+              half_a_minute: mig minut de retard
               less_than_x_minutes:
                 one: less than a minute overdue
                 other: less than %{count} minutes overdue
