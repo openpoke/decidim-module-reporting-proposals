@@ -9,13 +9,13 @@ ca:
   decidim:
     application:
       geocoding:
-        unconfigured: La geocodificació no esà configurada!
+        unconfigured: La geocodificació no està configurada!
     components:
       proposals:
         settings:
           global:
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
-            evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            evaluating_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
             geocoding_comparison_enabled: Compara propostes per proximitat de distància
             geocoding_comparison_enabled_help: La configuració permet comparar propostes per proximitat de distància en lloc de semblança de text. Aquesta característica requereix que un servei de geocodificació estigui configurat i habilitat al component (en cas contrari, el valor predeterminat és la comparació de semblança de text).
             geocoding_comparison_newer_than: Compareu només les propostes fetes en els últims X dies
@@ -37,11 +37,11 @@ ca:
             additional_buttons_show_help: Afegeix el text i l'enllaç a sota
             amendments_enabled: Esmenes habilitades
             amendments_enabled_help: Si l'actives, configura les funcionalitats de l'esmena per cada fase.
-            amendments_wizard_help_text: Text d'ajuda al crear una nova esmena
+            amendments_wizard_help_text: Text d'ajuda en crear una nova esmena
             announcement: Anunci
             attachments_allowed: Permetre arxius adjunts
             can_accumulate_supports_beyond_threshold: Pot acumular suports més enllà del llindar
-            collaborative_drafts_enabled: Esborranys col·labartius habilitats
+            collaborative_drafts_enabled: Esborranys col·laboratius habilitats
             comments_enabled: Comentaris habilitats
             comments_max_length: Longitud màxima dels comentaris (deixa 0 si vols mantenir la configuració per defecte)
             default_sort_order: Ordre de propostes directes per defecte
@@ -93,7 +93,7 @@ ca:
             vote_limit: Límit de suports per participant
           step:
             amendment_creation_enabled: Creació d'esmena habilitada
-            amendment_creation_enabled_help: La participant pot esmenar propostes
+            amendment_creation_enabled_help: La participant pot esmenar propostes.
             amendment_promotion_enabled: Promoció d'esmenes habilitada
             amendment_promotion_enabled_help: Les autores de les esmenes rebutjades poden promocionar-les a propostes.
             amendment_reaction_enabled: Resposta a l'esmena habilitada
@@ -102,7 +102,7 @@ ca:
             amendments_visibility_choices:
               all: Les esmenes són visibles per tothom
               participants: Les esmenes són visibles només per les autores
-            amendments_visibility_help: Si es selecciona l'opció "Les esmenes són visibles únicament per als seus autors", els participants han d'estar identificats per a veure les esmenes realitzades.
+            amendments_visibility_help: Si se selecciona l'opció "Les esmenes són visibles únicament per als seus autors", els participants han d'estar identificats per a veure les esmenes realitzades.
             announcement: Anunci
             answers_with_costs: Habilita el cost en la resposta de les propostes
             automatic_hashtags: Hashtags afegits a totes les propostes
@@ -122,7 +122,7 @@ ca:
               with_more_authors: Amb més autores
             endorsements_blocked: Adhesions bloquejades
             endorsements_enabled: Adhesions habilitades
-            proposal_answering_enabled: Resposta a les propostes habilitat
+            proposal_answering_enabled: Resposta a les propostes habilitada
             publish_answers_immediately: Publica la resposta de la proposta immediatament
             publish_answers_immediately_help_html: 'Tingues present que si respons alguna proposta sense que això estigui habilitat, l''hauràs de publicar manualment seleccionant i fent servir l''acció de publicar. Per a més informació sobre el funcionament, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">pàgina de documentació de les respostes a les propostes</a>.'
             suggested_hashtags: Hashtags suggerits a les participants per a noves propostes
@@ -167,175 +167,175 @@ ca:
                 other: aproximadament %{count} anys de retard
               half_a_minute: mig minut de retard
               less_than_x_minutes:
-                one: less than a minute overdue
-                other: less than %{count} minutes overdue
+                one: menys d'un minut de retard
+                other: menys de %{count} minuts de retard
               less_than_x_seconds:
-                one: less than 1 second overdue
-                other: less than %{count} seconds overdue
+                one: menys d'1 segon de retard
+                other: menys de %{count} segons de retard
               over_x_years:
-                one: over 1 year overdue
-                other: over %{count} years overdue
+                one: més d'1 any de retard
+                other: més de %{count} anys de retard
               x_days:
-                one: 1 day overdue
-                other: "%{count} days overdue"
+                one: 1 dia de retard
+                other: "%{count} dies de retard"
               x_minutes:
-                one: 1 minute overdue
-                other: "%{count} minutes overdue"
+                one: 1 minut de retard
+                other: "%{count} minuts de retard"
               x_months:
-                one: 1 month overdue
-                other: "%{count} months overdue"
+                one: 1 mes de retard
+                other: "%{count} mesos de retard"
               x_seconds:
-                one: 1 second overdue
-                other: "%{count} seconds overdue"
+                one: 1 segon de retard
+                other: "%{count} segons de retard"
               x_years:
-                one: 1 year overdue
-                other: "%{count} years overdue"
+                one: 1 any de retard
+                other: "%{count} anys de retard"
         answer_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to answer
-                other: about %{count} hours to answer
+                one: aproximadament 1 hora per respondre
+                other: aproximadament %{count} hores per respondre
               about_x_months:
-                one: about 1 month to answer
-                other: about %{count} months to answer
+                one: aproximadament 1 mes per respondre
+                other: uns %{count} mesos per respondre
               about_x_years:
-                one: about 1 year to answer
-                other: about %{count} years to answer
+                one: aproximadament 1 any per respondre
+                other: aproximadament %{count} anys per respondre
               almost_x_years:
-                one: almost 1 year to answer
-                other: almost %{count} years to answer
-              half_a_minute: half a minute to answer
+                one: gairebé 1 any per respondre
+                other: gairebé %{count} anys per respondre
+              half_a_minute: mig minut per respondre
               less_than_x_minutes:
-                one: less than a minute to answer
-                other: less than %{count} minutes to answer
+                one: menys d'un minut per respondre
+                other: menys de %{count} minuts per respondre
               less_than_x_seconds:
-                one: less than 1 second to answer
-                other: less than %{count} seconds to answer
+                one: menys d'1 segon per respondre
+                other: menys de %{count} segons per respondre
               over_x_years:
-                one: over 1 year to answer
-                other: over %{count} years to answer
+                one: més d'1 any per respondre
+                other: més de %{count} anys per respondre
               x_days:
-                one: 1 day to answer
-                other: "%{count} days to answer"
+                one: 1 dia per respondre
+                other: "%{count} dies per respondre"
               x_minutes:
-                one: 1 minute to answer
-                other: "%{count} minutes to answer"
+                one: 1 minut per respondre
+                other: "%{count} minuts per respondre"
               x_months:
-                one: 1 month to answer
-                other: "%{count} months to answer"
+                one: 1 mes per respondre
+                other: "%{count} mesos per respondre"
               x_seconds:
-                one: 1 second to answer
-                other: "%{count} seconds to answer"
+                one: 1 segon per respondre
+                other: "%{count} segons per respondre"
               x_years:
-                one: 1 year to answer
-                other: "%{count} years to answer"
+                one: 1 any per respondre
+                other: "%{count} anys per respondre"
         categories:
           form:
-            valuators_help: Select valuators that will be assigned automatically when a proposal is published in this category (they will receive a notification).
+            valuators_help: Seleccioneu les avaluadores que s'assignaran automàticament quan es publiqui una proposta en aquesta categoria (rebran una notificació).
           index:
-            valuators_column: Automatic valuators
+            valuators_column: Avaluadores assignades
         evaluate_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to evaluate
-                other: about %{count} hours to evaluate
+                one: aproximadament 1 hora per avaluar
+                other: aproximadament %{count} hores per avaluar
               about_x_months:
-                one: about 1 month to evaluate
-                other: about %{count} months to evaluate
+                one: aproximadament 1 hora per avaluar
+                other: aproximadament %{count} mesos per avaluar
               about_x_years:
-                one: about 1 year to evaluate
-                other: about %{count} years to evaluate
+                one: aproximadament 1 any per avaluar
+                other: aproximadament %{count} anys per avaluar
               almost_x_years:
-                one: almost 1 year to evaluate
-                other: almost %{count} years to evaluate
+                one: gairebé 1 any per avaluar
+                other: gairebé %{count} anys per avaluar
               half_a_minute: half a minute to evaluate
               less_than_x_minutes:
-                one: less than a minute to evaluate
-                other: less than %{count} minutes to evaluate
+                one: menys d'un minut per avaluar
+                other: menys de %{count} minuts per avaluar
               less_than_x_seconds:
-                one: less than 1 second to evaluate
-                other: less than %{count} seconds to evaluate
+                one: menys d'1 segon per avaluar
+                other: menys de %{count} segons per avaluar
               over_x_years:
-                one: over 1 year to evaluate
-                other: over %{count} years to evaluate
+                one: més d'1 any per avaluar
+                other: més de %{count} anys per avaluar
               x_days:
-                one: 1 day to evaluate
-                other: "%{count} days to evaluate"
+                one: 1 dia per avaluar
+                other: "%{count} dies per avaluar"
               x_minutes:
-                one: 1 minute to evaluate
-                other: "%{count} minutes to evaluate"
+                one: 1 minut per avaluar
+                other: "%{count} minuts per avaluar"
               x_months:
-                one: 1 month to evaluate
-                other: "%{count} months to evaluate"
+                one: 1 mes per avaluar
+                other: "%{count} mesos per avaluar"
               x_seconds:
-                one: 1 second to evaluate
-                other: "%{count} seconds to evaluate"
+                one: 1 segon per avaluar
+                other: "%{count} segons per avaluar"
               x_years:
-                one: 1 year to evaluate
-                other: "%{count} years to evaluate"
+                one: 1 any per avaluar
+                other: "%{count} anys per avaluar"
         exports:
           proposal_comments: Comentaris
           proposals: Propostes directes
         proposals:
           photo_form:
-            action: Add image
-            add_images: Add images
-            gallery_legend: Add images
-            title: Photos
-            upload_msg: No files selected
+            action: Afageix imatge
+            add_images: Afegeix imatges
+            gallery_legend: Afegeix imatges
+            title: Fotografies
+            upload_msg: Cap arxiu seleccionat
           photo_gallery:
-            delete_image: Delete image
-            photos: Photos
+            delete_image: Esborrar imatge
+            photos: Fotografies
           photos:
-            title: Photos
+            title: Fotografies
           valuators_list:
-            assigned_valuators: Assigned valuators
-            remove_assignment: remove assignment
-            remove_assignment_confirmation: remove assignment confirmation
-            valuators: Valuators
+            assigned_valuators: Avaluadores assignades
+            remove_assignment: desfer assignació
+            remove_assignment_confirmation: eliminar la confirmació de l'assignació
+            valuators: Avaluadores
         resolution_time: Temps de resolució
         time_elapsed:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour
-                other: about %{count} hours
+                one: aproximadament 1 hora
+                other: aproximadament %{count} hores
               about_x_months:
-                one: about 1 month
-                other: about %{count} months
+                one: aproximadament 1 mes
+                other: aproximadament %{count} mesos
               about_x_years:
-                one: about 1 year
-                other: about %{count} years
+                one: aproximadament 1 any
+                other: aproximadament %{count} anys
               almost_x_years:
-                one: almost 1 year
-                other: almost %{count} years
-              half_a_minute: half a minute
+                one: gairebé 1 any
+                other: gairebé %{count} anys
+              half_a_minute: mig minut
               less_than_x_minutes:
-                one: less than a minute
-                other: less than %{count} minutes
+                one: menys d'un minut
+                other: menys de %{count} minuts
               less_than_x_seconds:
-                one: less than 1 second
-                other: less than %{count} seconds
+                one: menys d'un segon
+                other: menys de %{count} segons
               over_x_years:
-                one: over 1 year
-                other: over %{count} years
+                one: més d’1 any
+                other: més de %{count} anys
               x_days:
-                one: 1 day
-                other: "%{count} days"
+                one: 1 dia
+                other: "%{count} dies"
               x_minutes:
-                one: 1 minute
-                other: "%{count} minutes"
+                one: 1 minut
+                other: "%{count} minuts"
               x_months:
-                one: 1 month
-                other: "%{count} months"
+                one: 1 mes
+                other: "%{count} mesos"
               x_seconds:
-                one: 1 second
-                other: "%{count} seconds"
+                one: 1 segon
+                other: "%{count} segons"
               x_years:
-                one: 1 year
-                other: "%{count} years"
+                one: 1 any
+                other: "%{count} anys"
       forms:
         errors:
           device_not_supported: La geolocalització no és compatible amb el vostre navegador.
@@ -345,8 +345,8 @@ ca:
       proposals:
         compare:
           geocoding:
-            away: "%{meters} away"
-            description: These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one.
-            title: Nearby proposals
+            away: "%{meters} de distància"
+            description: Aquestes són propostes que es troben en un radi de %{meters} respecte a la que esteu creant. En cas que trobeu un altra proposta d'informe en la mateixa situació, podeu optar per donar-li una adhesió en comptes de crear-ne un de nou.
+            title: Propostes properes
         form:
           image: Imatge/fotografia
