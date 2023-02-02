@@ -33,7 +33,7 @@ module Decidim
             state: proposal.state.to_s,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
-            answer_time: time_elapsed_to_answer(proposal),
+            answer_time: answer_time(proposal),
             supports: proposal.proposal_votes_count,
             endorsements: {
               total_count: proposal.endorsements.size,
@@ -52,6 +52,24 @@ module Decidim
               url: original_proposal_url
             }
           }
+        end
+
+        def answer_time(proposal)
+          if unanswered_proposals_overdue?(proposal)
+            time_ago_in_words(last_day_to_answer(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words")
+          elsif evaluating_proposals_overdue?(proposal)
+            time_ago_in_words(last_day_to_evaluate(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words")
+          elsif grace_period_unanswered?(proposal)
+            time_ago_in_words(last_day_to_answer(proposal),
+                              scope: "decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words")
+          elsif grace_period_evaluating?(proposal)
+            time_ago_in_words(last_day_to_evaluate(proposal),
+                              scope: "decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words")
+          elsif proposal.accepted? || proposal.rejected?
+            "#{I18n.t("decidim.reporting_proposals.admin.resolution_time")}: #{time_elapsed_to_answer(proposal)}"
+          end
         end
       end
     end

@@ -22,11 +22,53 @@ module Decidim
         let(:serialized) { subject.serialize }
 
         it "serializes the answer_time" do
-          expect(serialized).to include(answer_time: time_elapsed_to_answer(proposal))
+          expect(serialized).to include(answer_time: "#{I18n.t("decidim.reporting_proposals.admin.resolution_time")}: #{time_elapsed_to_answer(proposal)}")
         end
 
         it "does not serialize unanswered proposals" do
           expect(serialized).not_to include(unanswered_proposal)
+        end
+      end
+
+      describe "#answer_time" do
+        context "when the proposal is unanswered and overdue" do
+          before do
+            allow(subject).to receive(:unanswered_proposals_overdue?).with(proposal).and_return(true)
+          end
+
+          it "returns the time in words since the last day to answer the proposal" do
+            expect(subject.answer_time(proposal)).to eq(time_ago_in_words(last_day_to_answer(proposal), scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words"))
+          end
+        end
+
+        context "when the proposal is in evaluation and overdue" do
+          before do
+            allow(subject).to receive(:evaluating_proposals_overdue?).with(proposal).and_return(true)
+          end
+
+          it "returns the time in words since the last day to evaluate the proposal" do
+            expect(subject.answer_time(proposal)).to eq(time_ago_in_words(last_day_to_evaluate(proposal), scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words"))
+          end
+        end
+
+        context "when the proposal is unanswered and in grace period" do
+          before do
+            allow(subject).to receive(:grace_period_unanswered?).with(proposal).and_return(true)
+          end
+
+          it "returns the time in words until the last day to answer the proposal" do
+            expect(subject.answer_time(proposal)).to eq(time_ago_in_words(last_day_to_answer(proposal), scope: "decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words"))
+          end
+        end
+
+        context "when the proposal is in evaluation and in grace period" do
+          before do
+            allow(subject).to receive(:grace_period_evaluating?).with(proposal).and_return(true)
+          end
+
+          it "returns the time in words until the last day to evaluate the proposal" do
+            expect(subject.answer_time(proposal)).to eq(time_ago_in_words(last_day_to_evaluate(proposal), scope: "decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words"))
+          end
         end
       end
     end
