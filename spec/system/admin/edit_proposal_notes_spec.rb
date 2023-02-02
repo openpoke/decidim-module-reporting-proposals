@@ -66,4 +66,26 @@ describe "Edit Proposal Notes", type: :system do
       end
     end
   end
+
+  context "when the note has not been edited" do
+    let(:author) { user }
+
+    it "does not display the edited status" do
+      expect(page).not_to have_content("Edited")
+    end
+  end
+
+  context "when the proposal note has been edited" do
+    let(:author) { user }
+
+    before do
+      proposal_notes.last.update(body: "Edited body")
+      visit current_path
+    end
+
+    it "displays the edited status" do
+      expect(page).to have_content("Edited")
+      expect(page).to have_content((proposal_notes.last.updated_at.strftime("%d/%m/%Y %H:%M")))
+    end
+  end
 end
