@@ -7,7 +7,7 @@
     </button>
   </div>
   <%= decidim_form_for(notes_form,
-                       url: proposal_proposal_notes_path(proposal_id: proposal.id, id: note),
+                       url: proposal_proposal_note_path(proposal_id: proposal.id, id: note),
                        method: :patch,
                        html: { class: "form edit_proposal_note" }) do |f| %>
     <div class="row column">
