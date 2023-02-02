@@ -29,12 +29,8 @@ module Decidim
           context[:proposal].try(:component) || context[:current_component]
         end
 
-        def proposal_note
-          @proposal_note ||= proposal.notes.find_by(author: user)
-        end
-
         def user_author_note?
-          proposal_note.author == user
+          context[:proposal_note].author == user
         end
 
         def hide_content_action?
@@ -50,9 +46,10 @@ module Decidim
         end
 
         def edit_proposal_note?
-          return unless permission_action.action == :edit_note && permission_action.subject == :proposals
+          return unless permission_action.action == :edit_note && permission_action.subject == :proposal_note
 
-          allow! if user_author_note?
+          toggle_allow(user_author_note?)
+          # allow! if user_author_note?
         end
 
         def admin_proposal_photo_editing_enabled?

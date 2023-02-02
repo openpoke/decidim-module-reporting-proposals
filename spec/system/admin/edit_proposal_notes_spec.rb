@@ -48,11 +48,11 @@ describe "Edit Proposal Notes", type: :system do
       within ".edit_proposal_note" do
         expect(page).to have_content("Test body")
         fill_in :proposal_note_body, with: "New awesome body"
-        # find("*[type=submit]").click
+        find("*[type=submit]").click
       end
 
-      # expect(page).to have_admin_callout("successfully updated")
-      # expect(page).to have_content("New awesome body")
+      expect(page).to have_admin_callout("successfully updated")
+      expect(page).to have_content("New awesome body")
     end
   end
 

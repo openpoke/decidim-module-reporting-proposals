@@ -18,13 +18,12 @@ module Decidim
           Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, note) do
             on(:ok) do
               flash[:notice] = I18n.t("proposal_notes.update.success", scope: "decidim.reporting_proposals.admin")
-              redirect_to proposal_path(id: proposal.id)
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
-              render :edit
+              flash[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
             end
+            redirect_back(fallback_location: decidim_admin.root_path)
           end
         end
 
