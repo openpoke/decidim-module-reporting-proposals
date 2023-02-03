@@ -23,7 +23,7 @@ ca:
             geocoding_comparison_radius: Radi màxim (en metres) per considerar propostes similars (s'ordenaran per proximitat) per distància proximitat
             proposal_photo_editing_enabled: Permet que les administradores i les avaluadores editin les fotos quan responen les propostes
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
-            unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
       reporting_proposals:
         name: Propostes directes
         settings:
@@ -56,7 +56,7 @@ ca:
               recent: Recent
               with_more_authors: Amb més autores
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
-            evaluating_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            evaluating_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
             geocoding_comparison_enabled: Compara propostes per proximitat de distància
             geocoding_comparison_enabled_help: La configuració permet comparar propostes per proximitat de distància en lloc de semblança de text. Aquesta característica requereix que un servei de geocodificació estigui configurat i habilitat al component (en cas contrari, el valor predeterminat és la comparació de semblança de text).
             geocoding_comparison_newer_than: Compareu només les propostes fetes en els últims X dies
@@ -89,7 +89,7 @@ ca:
             scopes_enabled: Àmbits habilitats
             threshold_per_proposal: Llindar per proposta
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
-            unanswered_proposals_overdue_help: Aquesta regla afageix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
+            unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
             vote_limit: Límit de suports per participant
           step:
             amendment_creation_enabled: Creació d'esmena habilitada
