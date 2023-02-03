@@ -1,0 +1,4 @@
+<p>
+  <%= link_to t(".send_mail"), "mailto:#{presented_author.email}?subject=#{translated_attribute(proposal.title)}&body=#{resource_locator(proposal).url}",
+              class: "button tiny", target: "_blank" %>
+</p>

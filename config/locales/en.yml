@@ -193,6 +193,11 @@ en:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
+    proposals:
+      admin:
+        proposals:
+          send_email_button:
+            send_mail: Send an email to user
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
