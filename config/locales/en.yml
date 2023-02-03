@@ -338,7 +338,7 @@ en:
         proposal_notes:
           modal:
             body: Note
-            title: Edit proposal note
+            title: Edit note
             update: Update
           update:
             edited: Edited

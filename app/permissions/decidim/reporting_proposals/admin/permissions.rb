@@ -30,7 +30,7 @@ module Decidim
         end
 
         def user_author_note?
-          context[:proposal_note].author == user
+          context[:proposal_note].try(:author) == user
         end
 
         def hide_content_action?
@@ -49,7 +49,6 @@ module Decidim
           return unless permission_action.action == :edit_note && permission_action.subject == :proposal_note
 
           toggle_allow(user_author_note?)
-          # allow! if user_author_note?
         end
 
         def admin_proposal_photo_editing_enabled?
