@@ -33,7 +33,7 @@ module Decidim
             state: proposal.state.to_s,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
-            answer_time: answer_time(proposal),
+            answer_time: answer_time,
             supports: proposal.proposal_votes_count,
             endorsements: {
               total_count: proposal.endorsements.size,
@@ -54,7 +54,7 @@ module Decidim
           }
         end
 
-        def answer_time(proposal)
+        def answer_time
           if unanswered_proposals_overdue?(proposal)
             time_ago_in_words(last_day_to_answer(proposal),
                               scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words")
