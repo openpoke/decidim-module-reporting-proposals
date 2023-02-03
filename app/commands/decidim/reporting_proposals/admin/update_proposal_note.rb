@@ -8,7 +8,7 @@ module Decidim
         # Public: Initializes the command.
         #
         # form         - A form object with the params.
-        # proposal_note - the proposal_note to update.
+        # note - the proposal_note to update.
         def initialize(notes_form, note)
           @notes_form = notes_form
           @note = note
