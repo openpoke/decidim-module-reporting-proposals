@@ -90,7 +90,7 @@ module Decidim::Proposals
     it "is aware of being reporting_proposals_component" do
       get :index
       expect(response).to have_http_status(:ok)
-      expect(controller.helpers.reporting_proposal?).to eq(true)
+      expect(controller.helpers).to be_reporting_proposal
     end
 
     it_behaves_like "geocoding comparison", true
