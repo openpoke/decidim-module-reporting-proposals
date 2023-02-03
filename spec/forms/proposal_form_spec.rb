@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module ReportingProposals
     describe ProposalForm do
-      subject { form }
+      subject { described_class.from_params(params).with_context(context) }
 
       let(:organization) { create(:organization, available_locales: [:en]) }
       let(:participatory_space) { create(:participatory_process, :with_steps, organization: organization) }
@@ -47,13 +47,12 @@ module Decidim
           suggested_hashtags: suggested_hashtags
         }
       end
-
-      let(:form) do
-        described_class.from_params(params).with_context(
+      let(:context) do
+        {
           current_component: component,
           current_organization: component.organization,
           current_participatory_space: participatory_space
-        )
+        }
       end
 
       before do
@@ -64,12 +63,12 @@ module Decidim
         it { is_expected.to be_valid }
 
         it "form returns all values" do
-          expect(form.title).to eq(title)
-          expect(form.body).to eq(body)
-          expect(form.category_id).to eq(category_id)
-          expect(form.address).to eq(address)
-          expect(form.latitude).to eq(latitude)
-          expect(form.longitude).to eq(longitude)
+          expect(subject.title).to eq(title)
+          expect(subject.body).to eq(body)
+          expect(subject.category_id).to eq(category_id)
+          expect(subject.address).to eq(address)
+          expect(subject.latitude).to eq(latitude)
+          expect(subject.longitude).to eq(longitude)
         end
       end
 
@@ -95,6 +94,21 @@ module Decidim
 
           it { is_expected.to be_valid }
         end
+      end
+
+      context "when editing an existing proposal" do
+        subject { described_class.from_model(proposal).with_context(context) }
+
+        let!(:proposal) { create(:proposal, :with_photo, component: component) }
+
+        # there's a bug in the form as title/body is a hash but it is validated as a string
+
+        before do
+          allow(subject).to receive(:title).and_return(title)
+          allow(subject).to receive(:body).and_return(body)
+        end
+
+        it { is_expected.to be_valid }
       end
     end
   end

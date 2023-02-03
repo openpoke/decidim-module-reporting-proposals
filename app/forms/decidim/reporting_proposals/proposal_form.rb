@@ -7,7 +7,7 @@ module Decidim
       attribute :has_no_address, Boolean
       attribute :has_no_image, Boolean
 
-      validates :add_photos, presence: true, if: ->(form) { form.has_camera? }
+      validates :add_photos, presence: true, if: ->(form) { form.has_camera? && form.photos.blank? }
 
       # Set the has no address
       def map_model(model)
