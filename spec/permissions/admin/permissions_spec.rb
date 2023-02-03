@@ -11,12 +11,14 @@ module Decidim::ReportingProposals::Admin
     let(:space) { current_component.participatory_space }
     let(:current_component) { create(:proposal_component) }
     let(:proposal) { create :proposal, component: current_component }
+    let(:proposal_note) { create :proposal_note, proposal: proposal }
     let(:context) do
       {
         proposal: proposal,
         current_component: current_component,
         current_settings: component_settings,
-        component_settings: component_settings
+        component_settings: component_settings,
+        proposal_note: proposal_note
       }
     end
     let(:component_settings) do
@@ -31,6 +33,7 @@ module Decidim::ReportingProposals::Admin
     let(:allow_proposal_photo_editing) { true }
     let(:allow_admins_to_hide_proposals) { true }
     let(:valuators_assign_other_valuators) { true }
+    let(:edit_proposal_note?) { true }
     let(:permission_action) { Decidim::PermissionAction.new(action) }
 
     before do
@@ -141,9 +144,32 @@ module Decidim::ReportingProposals::Admin
       end
     end
 
+    shared_examples "edit proposal note" do
+      describe "edit proposal note" do
+        let(:action) do
+          { scope: :admin, action: :edit_note, subject: :proposal_note }
+        end
+
+        let(:author) { create :user, :admin, :confirmed, organization: organization }
+
+        context "when author edits his own note" do
+          let!(:proposal_note) { create :proposal_note, proposal: proposal, author: user }
+
+          it { is_expected.to eq true }
+        end
+
+        context "when the author of the note is a different user" do
+          let!(:proposal_note) { create :proposal_note, proposal: proposal, author: author }
+
+          it { is_expected.to eq false }
+        end
+      end
+    end
+
     it_behaves_like "can answer proposals"
     it_behaves_like "can edit photos"
     it_behaves_like "can hide proposals"
+    it_behaves_like "edit proposal note"
 
     context "when user is a valuator" do
       let!(:valuator_role) { create :participatory_process_user_role, user: user, role: :valuator, participatory_process: space }
