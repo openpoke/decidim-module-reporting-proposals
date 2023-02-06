@@ -137,6 +137,11 @@ ca:
           hide:
             invalid: Hi ha hagut un problema amagant aquest recurs.
             success: Recurs amagat amb èxit.
+    proposals:
+      admin:
+        proposals:
+          send_email_button:
+            send_mail: Send an email to user
     reporting_proposals:
       actions:
         answer_proposal: Resposta de la proposta
