@@ -41,6 +41,18 @@ describe "Show valuators name", type: :system do
         expect(page).to have_content(valuator.name)
         expect(page).to have_content("(+1)")
       end
+
+      context "when the valuator is removed and there's an orphan entry in the database" do
+        before do
+          valuator_role.delete
+        end
+
+        it "shows the valuator name in the list" do
+          visit manage_component_path(proposal_component)
+          expect(page).not_to have_content(valuator.name)
+          expect(page).to have_content("(+1)")
+        end
+      end
     end
   end
 end

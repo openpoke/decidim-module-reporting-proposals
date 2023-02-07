@@ -57,6 +57,20 @@ module Decidim::ReportingProposals
       it "does not destroy participatory_process_user_role on destroy" do
         expect { subject.destroy }.not_to(change { Decidim::ParticipatoryProcessUserRole.count })
       end
+
+      # test to ensure valuationassignments are destroyed when valuator role is destroyed
+      # we might have to remove this when https://github.com/decidim/decidim/issues/10353 is solved
+      context "when participatory_process_user_role is a valuator" do
+        let!(:valuation_assignment) { create(:valuation_assignment, proposal: proposal) }
+        let(:proposal) { create(:proposal, component: component) }
+        let(:component) { create(:proposal_component, participatory_space: participatory_process) }
+        let(:valuator_role) { valuation_assignment.valuator_role }
+
+        it "destroys valuation assignments when participatory_process_user_role is destroyed" do
+          expect(Decidim::Proposals::ValuationAssignment.count).to eq(1)
+          expect { valuator_role.destroy }.to change { Decidim::Proposals::ValuationAssignment.count }.by(-1)
+        end
+      end
     end
   end
 end
