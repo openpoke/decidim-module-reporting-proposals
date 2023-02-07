@@ -3,13 +3,13 @@ de:
   activemodel:
     attributes:
       category:
-        valuator_ids: Automatic valuators
+        valuator_ids: Automatisch zugewiesen an
       proposal:
-        has_no_address: Has no address
+        has_no_address: Hat keine Adresse
   decidim:
     application:
       geocoding:
-        unconfigured: Geocoding is not configured!
+        unconfigured: Geocoding ist nicht konfiguriert!
     components:
       proposals:
         settings:
