@@ -205,60 +205,60 @@ de:
                 one: noch etwa 1 Monat zur Beantwortung
                 other: noch etwa %{count} Monate zur Beantwortung
               about_x_years:
-                one: about 1 year to answer
-                other: about %{count} years to answer
+                one: noch etwa 1 Jahr zur Beantwortung
+                other: noch etwa %{count} Jahre zur Beantwortung
               almost_x_years:
-                one: almost 1 year to answer
-                other: almost %{count} years to answer
-              half_a_minute: half a minute to answer
+                one: fast noch 1 Jahr zur Beantwortung
+                other: fast noch %{count} Jahre zur Beantwortung
+              half_a_minute: eine halbe Minute zur Beantwortung
               less_than_x_minutes:
-                one: less than a minute to answer
-                other: less than %{count} minutes to answer
+                one: weniger als eine Minute zur Beantwortung
+                other: weniger als %{count} Minuten zur Beantwortung
               less_than_x_seconds:
-                one: less than 1 second to answer
-                other: less than %{count} seconds to answer
+                one: weniger als 1 Sekunde zur Beantwortung
+                other: weniger als %{count} Sekunden zur Beantwortung
               over_x_years:
-                one: over 1 year to answer
-                other: over %{count} years to answer
+                one: über 1 Jahr zur Beantwortung
+                other: über %{count} Jahre zur Beantwortung
               x_days:
-                one: 1 day to answer
-                other: "%{count} days to answer"
+                one: 1 Tag zur Beantwortung
+                other: "%{count} Tage zur Beantwortung"
               x_minutes:
-                one: 1 minute to answer
-                other: "%{count} minutes to answer"
+                one: 1 Minute zur Beantwortung
+                other: "%{count} Minuten zur Beantwortung"
               x_months:
-                one: 1 month to answer
-                other: "%{count} months to answer"
+                one: 1 Monat zur Beantwortung
+                other: "%{count} Monate zur Beantwortung"
               x_seconds:
-                one: 1 second to answer
-                other: "%{count} seconds to answer"
+                one: 1 Sekunde zur Beantwortung
+                other: "%{count} Sekunden zur Beantwortung"
               x_years:
-                one: 1 year to answer
-                other: "%{count} years to answer"
+                one: 1 Jahr zur Beantwortung
+                other: "%{count} Jahre zur Beantwortung"
         categories:
           form:
-            valuators_help: Select valuators that will be assigned automatically when a proposal is published in this category (they will receive a notification).
+            valuators_help: Wählen Sie Experten aus, die automatisch zugewiesen werden, wenn eine Meldung in dieser Kategorie veröffentlicht wird (diese erhalten eine Benachrichtigung).
           index:
-            valuators_column: Automatic valuators
+            valuators_column: Automatisch zugewiesen an
         evaluate_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to evaluate
-                other: about %{count} hours to evaluate
+                one: noch etwa 1 Stunde zur Bearbeitung
+                other: noch etwa %{count} Stunden zur Bearbeitung
               about_x_months:
-                one: about 1 month to evaluate
-                other: about %{count} months to evaluate
+                one: noch etwa 1 Monat zur Bearbeitung
+                other: noch etwa %{count} Monate zur Bearbeitung
               about_x_years:
-                one: about 1 year to evaluate
-                other: about %{count} years to evaluate
+                one: noch etwa 1 Jahr zur Bearbeitung
+                other: noch etwa %{count} Jahre zur Bearbeitung
               almost_x_years:
-                one: almost 1 year to evaluate
-                other: almost %{count} years to evaluate
-              half_a_minute: half a minute to evaluate
+                one: etwa 1 Jahr zur Bearbeitung
+                other: etwa %{count} Jahre zur Bearbeitung
+              half_a_minute: eine halbe Minute zur Bearbeitung
               less_than_x_minutes:
-                one: less than a minute to evaluate
-                other: less than %{count} minutes to evaluate
+                one: weniger als 1 Minute zur Bearbeitung
+                other: weniger als %{count} Minuten zur Bearbeitung
               less_than_x_seconds:
                 one: weniger als 1 Sekunde um zu bewerten
                 other: weniger als %{count} Sekunden um zu bewerten
