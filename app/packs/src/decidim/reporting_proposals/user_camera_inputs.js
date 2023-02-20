@@ -1,5 +1,5 @@
 $(() => {
-  $('input[type="file"]').each((_i, el) => {
+  $('input[name="proposal[add_photos]"]').each((_i, el) => {
     const $input = $(el);
     const $inputField = $input.closest(".row.column");
     const $button = $inputField.find("button:first");
@@ -15,19 +15,28 @@ $(() => {
       $input.removeAttr("capture", "camera");
     });
 
-    if ($checkbox.length > 0) {
-      const toggleInput = () => {
-        if ($checkbox[0].checked) {
-          $input.prop("disabled", true);
-          $input.removeClass("is-invalid-input");
-          $button.prop("disabled", true);
-          $formError.removeClass("is-visible");
-          $labelInput.removeClass("is-invalid-label");
-        } else {
-          $input.prop("disabled", false);
-          $button.prop("disabled", false);
-        }
+    const removeErrors = () => {
+      $input.removeClass("is-invalid-input");
+      $formError.removeClass("is-visible");
+      $labelInput.removeClass("is-invalid-label");
+    };
+
+    const toggleInput = () => {
+      if ($checkbox[0].checked) {
+        $input.prop("disabled", true);
+        $button.prop("disabled", true);
+        removeErrors();
+      } else {
+        $input.prop("disabled", false);
+        $button.prop("disabled", false);
       }
+    };
+
+    $input.on("blur", () => {
+      removeErrors();
+    });
+
+    if ($checkbox.length > 0) {
       $checkbox.on("change", toggleInput);
       toggleInput();
     }
