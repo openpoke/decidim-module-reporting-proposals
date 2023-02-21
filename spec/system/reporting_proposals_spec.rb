@@ -77,10 +77,7 @@ describe "Reporting proposals overrides", type: :system do
   end
 
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
-    let(:step) { participatory_process.steps.last }
-
     before do
-      step.update!(cta_path: "some-action", cta_text: { en: "Some Action" })
       visit_component
       click_link "New proposal"
     end
