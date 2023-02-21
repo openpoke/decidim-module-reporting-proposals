@@ -6,7 +6,7 @@ $(() => {
   try {
     quill = window.Quill.find(document.querySelector(".editor-container"));
   } catch (e) {
-    console.error("Quill not found");
+    console.log("Quill not found");
   }
   const $form = $title.closest("form");
 
@@ -15,7 +15,7 @@ $(() => {
     if (!$closest.length) {
       $closest = $field.closest(".editor");
     }
-    console.log("findError", $closest, $field, prop);
+    // console.log("findError", $closest, $field, prop);
     let search = `.form-error.${prop}`;
     if (!prop) {
       search = ".form-error"
@@ -32,7 +32,7 @@ $(() => {
   };
   
   const addError = ($field, options, prop) => {
-    console.log("addError", $field, options, prop)
+    // console.log("addError", $field, options, prop)
     let $error = findError($field, prop);
     $error.addClass("is-visible");
     if (options && options[prop]) {
@@ -42,7 +42,7 @@ $(() => {
   };
   
   const validate = ($field, value, options) => {
-    console.log("validate", $field, value, options);
+    // console.log("validate", $field, value, options);
 
     // validate caps if needed
     const minLen = $field.attr("minlength");
