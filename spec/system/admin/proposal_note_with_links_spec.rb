@@ -19,7 +19,10 @@ describe "Proposal note with links", type: :system do
     end
   end
 
-  it "shows the link" do
-    expect(page).to have_css("a[href='https://github.com']")
+  it "shows the link and opens it in a new tab" do
+    within ".comment__content" do
+      expect(page).to have_selector("a[href='https://github.com'][target='_blank']", text: "https://github.com")
+      find("a[href='https://github.com']", text: "https://github.com").click
+    end
   end
 end
