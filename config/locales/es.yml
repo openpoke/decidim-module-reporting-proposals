@@ -2,6 +2,8 @@
 es:
   activemodel:
     attributes:
+      category:
+        valuator_ids: Automatic valuators
       proposal:
         has_no_address: Has no address
   decidim:
@@ -14,6 +16,11 @@ es:
           global:
             evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
             unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
             unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
@@ -21,9 +28,13 @@ es:
         name: Reporting proposals
         settings:
           global:
+            additional_button_for_show_proposal_link: Additional action button after the "back to list" link when visiting a particular proposal (link)
+            additional_button_for_show_proposal_text: Additional action button after the "back to list" link when visiting a particular proposal (text)
             additional_button_link: Additional action button next to new proposal (link)
             additional_button_text: Additional action button next to new proposal (text)
-            additional_buttons_show: Display the button in the index public view
+            additional_buttons_for_show_proposal_show: Display an additional button in the show public view
+            additional_buttons_show: Display an additional button in the index public view
+            additional_buttons_show_help: Add the text and link bellow
             amendments_enabled: Amendments enabled
             amendments_enabled_help: If active, configure Amendment features for each step.
             amendments_wizard_help_text: Amendments Wizard help text
@@ -46,6 +57,11 @@ es:
               with_more_authors: With more authors
             evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_enabled: Compare proposals by distance proximity
+            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
+            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
+            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             geocoding_enabled: Geocoding enabled
             minimum_votes_per_user: Minimum supports per user
             new_proposal_body_template: New proposal body template
@@ -121,6 +137,11 @@ es:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
+    proposals:
+      admin:
+        proposals:
+          send_email_button:
+            send_mail: Send an email to user
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
@@ -132,6 +153,7 @@ es:
         title: Actions
       admin:
         actions:
+          edit_valuators: Edit valuators
           preview: Preview
         answer_overdue:
           datetime:
@@ -142,84 +164,134 @@ es:
               about_x_months:
                 one: about 1 month overdue
                 other: about %{count} months overdue
+              about_x_years:
+                one: about 1 year overdue
+                other: about %{count} years overdue
+              almost_x_years:
+                one: almost 1 year overdue
+                other: almost %{count} years overdue
               half_a_minute: half a minute overdue
               less_than_x_minutes:
-                one: less than a min. overdue
-                other: less than %{count} min. overdue
+                one: less than a minute overdue
+                other: less than %{count} minutes overdue
               less_than_x_seconds:
-                one: right now overdue
-                other: less than %{count} sec. overdue
+                one: less than 1 second overdue
+                other: less than %{count} seconds overdue
+              over_x_years:
+                one: over 1 year overdue
+                other: over %{count} years overdue
               x_days:
                 one: 1 day overdue
                 other: "%{count} days overdue"
-              x_hours:
-                one: 1 hour overdue
-                other: "%{count} hours overdue"
               x_minutes:
-                one: 1 min. overdue
-                other: "%{count} min. overdue"
+                one: 1 minute overdue
+                other: "%{count} minutes overdue"
+              x_months:
+                one: 1 month overdue
+                other: "%{count} months overdue"
               x_seconds:
-                one: 1 sec. overdue
-                other: "%{count} sec. overdue"
+                one: 1 second overdue
+                other: "%{count} seconds overdue"
+              x_years:
+                one: 1 year overdue
+                other: "%{count} years overdue"
         answer_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour left to answer
-                other: about %{count} hours left to answer
+                one: about 1 hour to answer
+                other: about %{count} hours to answer
               about_x_months:
-                one: about 1 month left to answer
-                other: about %{count} months left to answer
-              half_a_minute: half a minute left to answer
+                one: about 1 month to answer
+                other: about %{count} months to answer
+              about_x_years:
+                one: about 1 year to answer
+                other: about %{count} years to answer
+              almost_x_years:
+                one: almost 1 year to answer
+                other: almost %{count} years to answer
+              half_a_minute: half a minute to answer
               less_than_x_minutes:
-                one: less than a min. left to answer
-                other: less than %{count} min. left to answer
+                one: less than a minute to answer
+                other: less than %{count} minutes to answer
               less_than_x_seconds:
-                one: right now left to answer
-                other: less than %{count} sec. left to answer
+                one: less than 1 second to answer
+                other: less than %{count} seconds to answer
+              over_x_years:
+                one: over 1 year to answer
+                other: over %{count} years to answer
               x_days:
-                one: 1 day left to answer
-                other: "%{count} days left to answer"
-              x_hours:
-                one: 1 hour left to answer
-                other: "%{count} hours left to answer"
+                one: 1 day to answer
+                other: "%{count} days to answer"
               x_minutes:
-                one: 1 min. left to answer
-                other: "%{count} min. left to answer"
+                one: 1 minute to answer
+                other: "%{count} minutes to answer"
+              x_months:
+                one: 1 month to answer
+                other: "%{count} months to answer"
               x_seconds:
-                one: 1 sec. left to answer
-                other: "%{count} sec. left to answer"
+                one: 1 second to answer
+                other: "%{count} seconds to answer"
+              x_years:
+                one: 1 year to answer
+                other: "%{count} years to answer"
+        categories:
+          form:
+            valuators_help: Select valuators that will be assigned automatically when a proposal is published in this category (they will receive a notification).
+          index:
+            valuators_column: Automatic valuators
         evaluate_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour left to evaluate
-                other: about %{count} hours left to evaluate
+                one: about 1 hour to evaluate
+                other: about %{count} hours to evaluate
               about_x_months:
-                one: about 1 month left to evaluate
-                other: about %{count} months left to evaluate
-              half_a_minute: half a minute left to evaluate
+                one: about 1 month to evaluate
+                other: about %{count} months to evaluate
+              about_x_years:
+                one: about 1 year to evaluate
+                other: about %{count} years to evaluate
+              almost_x_years:
+                one: almost 1 year to evaluate
+                other: almost %{count} years to evaluate
+              half_a_minute: half a minute to evaluate
               less_than_x_minutes:
-                one: less than a min. left to evaluate
-                other: less than %{count} min. left to evaluate
+                one: less than a minute to evaluate
+                other: less than %{count} minutes to evaluate
               less_than_x_seconds:
-                one: right now left to evaluate
-                other: less than %{count} sec. left to evaluate
+                one: less than 1 second to evaluate
+                other: less than %{count} seconds to evaluate
+              over_x_years:
+                one: over 1 year to evaluate
+                other: over %{count} years to evaluate
               x_days:
-                one: 1 day left to evaluate
-                other: "%{count} days left to evaluate"
-              x_hours:
-                one: 1 hour left to evaluate
-                other: "%{count} hours left to evaluate"
+                one: 1 day to evaluate
+                other: "%{count} days to evaluate"
               x_minutes:
-                one: 1 min. left to evaluate
-                other: "%{count} min. left to evaluate"
+                one: 1 minute to evaluate
+                other: "%{count} minutes to evaluate"
+              x_months:
+                one: 1 month to evaluate
+                other: "%{count} months to evaluate"
               x_seconds:
-                one: 1 sec. left to evaluate
-                other: "%{count} sec. left to evaluate"
+                one: 1 second to evaluate
+                other: "%{count} seconds to evaluate"
+              x_years:
+                one: 1 year to evaluate
+                other: "%{count} years to evaluate"
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        proposal_notes:
+          modal:
+            body: Note
+            title: Edit note
+            update: Update
+          update:
+            edited: Edited
+            invalid: There was a problem updating the proposal note.
+            success: Proposal note successfully updated.
         proposals:
           photo_form:
             action: Add image
@@ -232,6 +304,11 @@ es:
             photos: Photos
           photos:
             title: Photos
+          valuators_list:
+            assigned_valuators: Assigned valuators
+            remove_assignment: remove assignment
+            remove_assignment_confirmation: remove assignment confirmation
+            valuators: Valuators
         resolution_time: Resolution time
         time_elapsed:
           datetime:
@@ -242,25 +319,37 @@ es:
               about_x_months:
                 one: about 1 month
                 other: about %{count} months
+              about_x_years:
+                one: about 1 year
+                other: about %{count} years
+              almost_x_years:
+                one: almost 1 year
+                other: almost %{count} years
               half_a_minute: half a minute
               less_than_x_minutes:
-                one: less than a min.
-                other: less than %{count} min.
+                one: less than a minute
+                other: less than %{count} minutes
               less_than_x_seconds:
-                one: right now
-                other: less than %{count} sec.
+                one: less than 1 second
+                other: less than %{count} seconds
+              over_x_years:
+                one: over 1 year
+                other: over %{count} years
               x_days:
                 one: 1 day
                 other: "%{count} days"
-              x_hours:
-                one: 1 hour
-                other: "%{count} hours"
               x_minutes:
-                one: 1 min.
-                other: "%{count} min."
+                one: 1 minute
+                other: "%{count} minutes"
+              x_months:
+                one: 1 month
+                other: "%{count} months"
               x_seconds:
-                one: 1 sec.
-                other: "%{count} sec."
+                one: 1 second
+                other: "%{count} seconds"
+              x_years:
+                one: 1 year
+                other: "%{count} years"
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.
@@ -268,5 +357,10 @@ es:
         use_my_camera: Use my camera
         use_my_location: Use my location
       proposals:
+        compare:
+          geocoding:
+            away: "%{meters} away"
+            description: These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one.
+            title: Nearby proposals
         form:
           image: Image/photo
