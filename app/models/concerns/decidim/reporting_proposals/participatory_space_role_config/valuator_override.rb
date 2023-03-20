@@ -7,11 +7,10 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          # store the current value class-wide so it is compatible with other module adding accepted_components elements
-          @@currently_accepted_components = new(nil).accepted_components
+          alias_method :original_accepted_components, :accepted_components
 
           def accepted_components
-            @accepted_components ||= @@currently_accepted_components + [:reporting_proposals]
+            @accepted_components ||= original_accepted_components + [:reporting_proposals]
           end
         end
       end
