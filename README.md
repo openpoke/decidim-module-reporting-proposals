@@ -9,8 +9,6 @@
 
 This module creates a new component to be used in participatory spaces that allows to create proposals orientated to manage geolocated issues in a city. For instance Damages or new ideas of improving a particular street or public good.
 
-> NOTE: in development, not ready for production.
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -27,14 +25,73 @@ And then execute:
 bundle exec rails decidim_reporting_proposals:install:migrations
 ```
 
+> **IMPORTANT:**
+>
+> This module makes use of the [Deface](https://github.com/spree/deface) gem.
+> In conjuntion with other modules (we know [Term Customizer](https://github.com/mainio/decidim-module-term_customizer/) is one of them) it might cause errors when precompiling assets for production sites. But only if during this process the compiling machine does not have access to the database.
+>
+> It is easy to overcome this problem. Just add the following line to your `config/environments/production.rb` file:
+> 
+> ```ruby
+> config.deface.enabled = ENV['DB_ADAPTER'].blank? || ENV['DB_ADAPTER'] == 'postgresql'
+> ```
+>
+> Then precompile with these ENV enabled in your CI:
+>
+> ```bash
+> DB_ADAPTER=nulldb RAILS_ENV=production rake assets:precompile
+> ```
+>
+> Alternatively, use any other ENV var to set up the `config.deface.enabled` to `false` during the precompilation phase.
+
 ## Usage
 
+This module works very similarly as the Proposals module, in fact, it extends it to provide additional features and some different defaults.
+
+It provides a new component called "Reporting Proposals" that can be added in addition or instead of the Proposals component in any participatory space.
+
+### Features
+
 TODO...
+
+### Customization
+
+Almost all the features of this module can be customized through an initializer.
+
+For instance, you can create an initializer an change some of the available options as follows (**This is optional, you don't need to do this, by default all options are enabled**):
 
 ```ruby
 # config/initializers/reporting_proposals.rb
 
 Decidim::ReportingProposals.configure do |config|
+  # Public Setting that defines after how many days a not-answered proposal is overdue
+  # Set it to 0 (zero) if you don't want to use this feature
+  config.unanswered_proposals_overdue = 7
+
+  # Public Setting that defines after how many days an evaluating-state proposal is overdue
+  # Set it to 0 (zero) if you don't want to use this feature
+  config.evaluating_proposals_overdue = 3
+
+  # Public Setting that defines whether the administrator is allowed to hide the proposals.
+  # Set to false if you do not want to use this feature
+  config.allow_admins_to_hide_proposals =true
+
+  # Public Setting that allows to configure which component will have "Use my location" button
+  # in a geocoded address field. Accepts an array of component manifest names
+  config.show_my_location_button = [:proposals, :meetings, :reporting_proposals]
+
+  # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
+  config.use_camera_button = [:proposals, :reporting_proposals]
+
+  # Public Setting to prevent adding the camera button on not photo/image input[type=file]
+  config.camera_button_on_attachments = false
+
+  # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+  # otherwise can be configured at the component level
+  config.allow_proposal_photo_editing = true
+
+  # Public setting to allow to assign other valuators
+  config.valuators_assign_other_valuators = true
 end
 ```
 
@@ -70,7 +127,7 @@ Then to test how the module works in Decidim, start the development server:
 $ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bin/rails s
 ```
 
-Note that `bin/rails` is a convinient wrapper around the command `cd development_app; bundle exec rails`.
+Note that `bin/rails` is a convenient wrapper around the command `cd development_app; bundle exec rails`.
 
 In case you are using [rbenv](https://github.com/rbenv/rbenv) and have the
 [rbenv-vars](https://github.com/rbenv/rbenv-vars) plugin installed for it, you
