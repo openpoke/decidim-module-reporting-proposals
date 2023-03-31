@@ -6,6 +6,7 @@ de:
         valuator_ids: Automatisch zugewiesen an
       proposal:
         has_no_address: Hat keine Adresse
+        has_no_image: Has no image
   decidim:
     application:
       geocoding:
