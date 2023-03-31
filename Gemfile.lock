@@ -175,7 +175,7 @@ GIT
 PATH
   remote: .
   specs:
-    decidim-reporting_proposals (0.2.0)
+    decidim-reporting_proposals (0.3.0)
       decidim-admin (>= 0.25.0, < 0.27)
       decidim-core (>= 0.25.0, < 0.27)
       decidim-participatory_processes (>= 0.25.0, < 0.27)

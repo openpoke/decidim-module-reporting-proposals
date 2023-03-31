@@ -2,7 +2,7 @@
 
 module Decidim
   module ReportingProposals
-    VERSION = "0.2.0"
+    VERSION = "0.3.0"
     # DECIDIM_VERSION = "0.26.5"
     # Provisional until
     #   https://github.com/openpoke/decidim/pull/23

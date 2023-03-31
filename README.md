@@ -14,6 +14,12 @@ This module creates a new component to be used in participatory spaces that allo
 Add this line to your application's Gemfile:
 
 ```ruby
+gem 'decidim-reporting_proposals'
+```
+
+Or, if you want to stay up to date with the latest changes use this line instead:
+
+```ruby
 gem 'decidim-reporting_proposals', git: "https://github.com/openpoke/decidim-module-reporting_proposals"
 ```
 
@@ -114,8 +120,8 @@ You can create the development app by running the following commands after
 cloning this project:
 
 ```bash
-$ bundle
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake development_app
+bundle
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake development_app
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -124,7 +130,7 @@ order to create the dummy test app database.
 Then to test how the module works in Decidim, start the development server:
 
 ```bash
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bin/rails s
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bin/rails s
 ```
 
 Note that `bin/rails` is a convenient wrapper around the command `cd development_app; bundle exec rails`.
@@ -144,7 +150,7 @@ speed up the process.
 
 To do that, start in a separate terminal than the one with `bin/rails s`, and BEFORE it, the following command:
 
-```
+```bash
 bin/webpack-dev-server
 ```
 
@@ -159,14 +165,13 @@ project is set to follow the same rules that Decidim itself follows.
 You can run the code styling checks by running the following commands from the
 console:
 
-```
-$ bundle exec rubocop
+```bash
+bundle exec rubocop
 ```
 
 To ease up following the style guide, you should install the plugin to your
 favorite editor, such as:
 
-- Atom - [linter-rubocop](https://atom.io/packages/linter-rubocop)
 - Sublime Text - [Sublime RuboCop](https://github.com/pderichs/sublime_rubocop)
 - Visual Studio Code - [Rubocop for Visual Studio Code](https://github.com/misogi/vscode-ruby-rubocop)
 
@@ -185,9 +190,9 @@ run the following commands:
 To run the tests run the following in the gem development path:
 
 ```bash
-$ bundle
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
+bundle
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -201,11 +206,10 @@ commands shown above.
 
 ### Test code coverage
 
-If you want to generate the code coverage report for the tests, you can use
-the `SIMPLECOV=1` environment variable in the rspec command as follows:
+Running tests automatically generates a code coverage report. To generate the complete report run all the tests using this command:
 
 ```bash
-$ SIMPLECOV=1 bundle exec rspec
+bundle exec rspec
 ```
 
 This will generate a folder named `coverage` in the project root which contains
