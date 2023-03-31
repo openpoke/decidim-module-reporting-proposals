@@ -6,6 +6,7 @@ ca:
         valuator_ids: Avaluadores assignades
       proposal:
         has_no_address: No té adreça
+        has_no_image: Has no image
   decidim:
     application:
       geocoding:
