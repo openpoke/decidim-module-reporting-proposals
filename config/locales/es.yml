@@ -6,6 +6,7 @@ es:
         valuator_ids: Automatic valuators
       proposal:
         has_no_address: Has no address
+        has_no_image: Has no image
   decidim:
     application:
       geocoding:
