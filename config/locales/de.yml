@@ -5,8 +5,8 @@ de:
       category:
         valuator_ids: Automatisch zugewiesen an
       proposal:
-        has_no_address: Hat keine Adresse
-        has_no_image: Has no image
+        has_no_address: Adresse unbekannt
+        has_no_image: Kein Foto vorhanden
   decidim:
     application:
       geocoding:
