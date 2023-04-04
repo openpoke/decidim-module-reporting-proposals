@@ -197,6 +197,8 @@ en:
     proposals:
       admin:
         proposals:
+          address:
+            geolocated_at: Geolocated at
           send_email_button:
             send_mail: Send an email to user
     reporting_proposals:
