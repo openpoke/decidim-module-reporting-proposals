@@ -14,7 +14,7 @@ module Decidim
         put :hide_proposal, to: "proposals#hide_proposal"
         post :add_photos, to: "proposals#add_photos"
         delete :remove_photo, to: "proposals#remove_photo"
-        resources :proposal_notes, only: [:edit, :update]
+        resources :proposal_notes, only: :update
       end
 
       initializer "decidim_reporting_proposals.template_routes" do

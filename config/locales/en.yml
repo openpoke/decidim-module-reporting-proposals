@@ -11,6 +11,14 @@ en:
         scope_for_availability: Restrict availability to the component
   decidim:
     admin:
+      hidden_resource_mailer:
+        notify_mail:
+          body_1: An administrator removed your proposal because it has been reported.
+          body_2: If you feel that has been a mistake please contact the administrators
+            of
+          hello: Hello,
+          reason: 'Reason: %{reason}'
+          subject: Your proposal has been hidden
       templates:
         missing_resource: "(missing resource)"
     application:
@@ -191,6 +199,21 @@ en:
             votes_enabled: Supports enabled
             votes_hidden: Supports hidden (if supports are enabled, checking this
               will hide the number of supports)
+    events:
+      proposals:
+        proposal_published_for_admin:
+          admin_panel: admin panel
+          email_intro: The proposal <a href="%{resource_path}">%{resource_title}</a>
+            has been added to %{participatory_space_title} by %{author}. Check it
+            out of the %{admin_url}
+          email_outro: You have received this notification because you are admin of
+            the participatory space "%{participatory_space_title}".
+          email_subject: New proposal "%{resource_title}" added to %{participatory_space_title}
+          notification_title: The proposal <a href="%{resource_path}">%{resource_title}</a>
+            has been added to %{participatory_space_title} by %{author}. Check it
+            out of the %{admin_url}
+          notification_title_official: The official proposal <a href="%{resource_path}">%{resource_title}</a>
+            has been added to %{participatory_space_title}. Check it out of the %{admin_url}
     moderations:
       actions:
         hide: Hide
@@ -206,6 +229,19 @@ en:
             geolocated_at: Geolocated at
           send_email_button:
             send_mail: Send an email to user
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: admin panel
+            email_body: You've been assigned as a valuator for the proposals listed
+              below. This means you've been trusted to give them feedback and a proper
+              response in the next coming days.
+            gratitude: Thanks for your help!
+            greeting: Hi %{name}
+            public_side: public side
+            subject: New proposals assigned to you for evaluation
+    reported_mailer:
+      report:
+        admin_resource: Admin this resource
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal

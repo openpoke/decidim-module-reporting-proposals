@@ -1,0 +1,5 @@
+<!-- insert_after ".email-instructions" -->
+
+<% if resource_admin_url.present? %>
+  <p><%= link_to t("admin_resource", scope: "decidim.reported_mailer.report"), resource_admin_url, target: "_blank" %></p>
+<% end %>

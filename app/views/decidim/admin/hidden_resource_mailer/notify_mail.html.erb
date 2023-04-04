@@ -1,0 +1,12 @@
+<p class="email-greeting"><%= t "hello", scope: "decidim.admin.hidden_resource_mailer.notify_mail" %></p>
+
+<p class="email-instructions"><%= t "body_1", scope: "decidim.admin.hidden_resource_mailer.notify_mail" %></p>
+
+<p><strong><%= t "reason", scope: "decidim.admin.hidden_resource_mailer.notify_mail", reason: h(@reason.join(", ")) %></strong></p>
+
+<p><strong><%= translated_attribute(@resource.title) %></strong></p>
+
+<p class="email-instructions">
+  <%= t "body_2", scope: "decidim.admin.hidden_resource_mailer.notify_mail" %>
+  <%= link_to @organization.name, decidim.root_url(host: @organization.host).html_safe %>
+</p>

@@ -26,6 +26,18 @@ module Decidim
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
 
+        # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
+        Decidim::ReportedMailer.include(Decidim::ReportedMailerOverride)
+        Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
+        Decidim::ResourceManifest.include(Decidim::ResourceManifestOverride)
+        Decidim::Proposals::PublishProposal.include(Decidim::Proposals::PublishProposalOverride)
+        Decidim.find_resource_manifest(:proposal).admin_route_name = "proposal"
+        Decidim::Proposals::PublishProposalEvent.include(Decidim::Proposals::PublishProposalEventOverride)
+        Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::Proposals::Admin::AssignProposalsToValuatorOverride)
+        Decidim::Admin::HideResource.include(Decidim::Admin::HideResourceOverride)
+        Decidim::Templates::Admin::CopyQuestionnaireTemplate.include(Decidim::Templates::Admin::CopyQuestionnaireTemplateOverride)
+        Decidim::Templates::Admin::CreateQuestionnaireTemplate.include(Decidim::Templates::Admin::CreateQuestionnaireTemplateOverride)
+
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
         begin
@@ -49,6 +61,10 @@ module Decidim
           Decidim::Proposals::Admin::ProposalAnswersController.include(Decidim::ReportingProposals::Admin::ProposalAnswersControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
           Decidim::Templates::Admin::ApplicationController.include(Decidim::Templates::Admin::ApplicationControllerOverride)
+
+          # port of https://github.com/openpoke/decidim/pull/24
+          Decidim::Proposals::Admin::ValuationAssignmentsController.include(Decidim::Proposals::Admin::ValuationAssignmentsControllerOverride)
+
           begin
             Decidim::Templates::Admin::ProposalAnswerTemplatesController.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplatesControllerOverride)
           rescue StandardError => e
