@@ -141,6 +141,8 @@ de:
     proposals:
       admin:
         proposals:
+          address:
+            geolocated_at: Geolocated at
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
     reporting_proposals:
