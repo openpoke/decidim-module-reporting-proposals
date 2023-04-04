@@ -11,3 +11,13 @@ FactoryBot.define do
     valuator_role { create :participatory_process_user_role, role: "valuator" }
   end
 end
+
+FactoryBot.modify do
+  factory :template, class: "Decidim::Templates::Template" do
+    trait :proposal_answer do
+      templatable { organization }
+      target { :proposal_answer }
+      field_values { { internal_state: :accepted } }
+    end
+  end
+end
