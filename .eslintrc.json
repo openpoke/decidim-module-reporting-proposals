@@ -16,6 +16,7 @@
         "Decidim": false,
         "$": false,
         "jQuery": false,
+        "Quill": false,
         "L": false
     },
   "rules": {

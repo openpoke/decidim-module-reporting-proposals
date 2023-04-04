@@ -17,6 +17,21 @@ module Decidim
         resources :proposal_notes, only: [:edit, :update]
       end
 
+      initializer "decidim_reporting_proposals.template_routes" do
+        if defined? Decidim::Templates::AdminEngine
+          Decidim::Templates::AdminEngine.routes do
+            resources :proposal_answer_templates do
+              member do
+                post :copy
+              end
+              collection do
+                get :fetch
+              end
+            end
+          end
+        end
+      end
+
       initializer "decidim_reporting_proposals.admin_mount_routes" do
         Decidim::Admin::Engine.routes do
           mount Decidim::ReportingProposals::AdminEngine, at: "/reporting_proposals", as: "decidim_admin_reporting_proposals"
