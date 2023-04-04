@@ -203,6 +203,12 @@ en:
       proposals:
         proposal_published_for_admin:
           admin_panel: admin panel
+          email_intro: The proposal <a href="%{resource_path}">%{resource_title}</a>
+            has been added to %{participatory_space_title} by %{author}. Check it
+            out of the %{admin_url}
+          email_outro: You have received this notification because you are admin of
+            the participatory space "%{participatory_space_title}".
+          email_subject: New proposal "%{resource_title}" added to %{participatory_space_title}
           notification_title: The proposal <a href="%{resource_path}">%{resource_title}</a>
             has been added to %{participatory_space_title} by %{author}. Check it
             out of the %{admin_url}

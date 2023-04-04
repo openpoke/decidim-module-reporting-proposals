@@ -26,7 +26,7 @@ module Decidim
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
 
-        # port of https://github.com/openpoke/decidim/pull/31,23,29,24
+        # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
         Decidim::ReportedMailer.include(Decidim::ReportedMailerOverride)
         Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
         Decidim::ResourceManifest.include(Decidim::ResourceManifestOverride)
