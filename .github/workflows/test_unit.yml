@@ -8,9 +8,9 @@ on:
 
 env:
   CI: "true"
+  CODECOV: "true"
   RUBY_VERSION: 2.7.7
   NODE_VERSION: 16.9.1
-  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
   test-unit:
@@ -52,4 +52,4 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ env.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
