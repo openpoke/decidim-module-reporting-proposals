@@ -6,6 +6,20 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        def call
+          return broadcast(:invalid) unless @proposal.authored_by?(@current_user)
+
+          transaction do
+            publish_proposal
+            increment_scores
+            send_notification
+            send_notification_to_participatory_space
+            send_notification_to_admins
+          end
+
+          broadcast(:ok, @proposal)
+        end
+
         private
 
         def send_notification_to_participatory_space

@@ -16,6 +16,18 @@ module Decidim
 
           super.merge({ author: author_string, admin_url: resource_admin_path })
         end
+
+        private
+
+        def i18n_scope
+          return super unless participatory_space_event?
+
+          @i18n_scope ||= if extra[:type].to_s == "admin"
+                            "decidim.events.proposals.proposal_published_for_admin"
+                          else
+                            "decidim.events.proposals.proposal_published_for_space"
+                          end
+        end
       end
     end
   end
