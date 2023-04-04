@@ -197,10 +197,10 @@ en:
     proposals:
       admin:
         proposals:
-          send_email_button:
-            send_mail: Send an email to user
           address:
             geolocated_at: Geolocated at
+          send_email_button:
+            send_mail: Send an email to user
     reporting_proposals:
       actions:
         answer_proposal: Answer proposal
