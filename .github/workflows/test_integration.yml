@@ -77,6 +77,8 @@ jobs:
             rspec: admin
           - name: "Public"
             rspec: "*_spec.rb"
+          - name: "Decidim"
+            rspec: "decidim"
       fail-fast: false
 
     services:
