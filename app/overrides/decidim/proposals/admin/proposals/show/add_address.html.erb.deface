@@ -1,0 +1,3 @@
+<!-- insert_after ".row.column[3]" -->
+
+<%= render partial: "decidim/proposals/admin/proposals/address", locals: { component_settings: component_settings, proposal: proposal } %>
