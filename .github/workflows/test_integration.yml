@@ -14,6 +14,7 @@ env:
   DATABASE_USERNAME: postgres
   DATABASE_PASSWORD: postgres
   DATABASE_HOST: localhost
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
   build:
@@ -117,6 +118,8 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
 
       - uses: actions/upload-artifact@v3
         if: always()
