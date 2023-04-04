@@ -25,7 +25,10 @@ module Decidim
         Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
-
+        Decidim::ResourceLocatorPresenter.include(Decidim::ReportingProposals::ResourceLocatorPresenterOverride)
+        Decidim::Proposals::PublishProposal.include(Decidim::ReportingProposals::PublishProposalOverride)
+        Decidim::Proposals::PublishProposalEvent.include(Decidim::ReportingProposals::PublishProposalEventOverride)
+        Decidim::ResourceManifest.include(Decidim::ReportingProposals::ResourceManifestOverride)
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
         begin
