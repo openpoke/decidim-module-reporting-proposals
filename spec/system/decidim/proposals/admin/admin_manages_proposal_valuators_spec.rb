@@ -12,6 +12,8 @@ describe "Admin manages proposals valuators", type: :system do
   end
   let!(:valuator) { create :user, organization: organization }
   let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
+  let(:second_valuator) { create :user, organization: organization }
+  let(:second_valuator_role) { create :participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process: participatory_process }
   let!(:admin) { create(:user, :admin, organization: organization) }
 
   include Decidim::ComponentPathHelper
@@ -52,7 +54,7 @@ describe "Admin manages proposals valuators", type: :system do
         expect(page).to have_content("Proposals assigned to a valuator successfully")
 
         within find("tr", text: translated(proposal.title)) do
-          expect(page).to have_selector("td.valuators-count", text: 1)
+          expect(page).to have_selector("td.valuators-count", text: valuator.name)
         end
       end
 
@@ -62,6 +64,20 @@ describe "Admin manages proposals valuators", type: :system do
         expect(last_email.to).to eq([valuator.email])
         expect(last_email.body.encoded).to include("You've been assigned as a valuator")
         expect(last_email.body.encoded).to include(Decidim::ResourceLocatorPresenter.new(proposal).admin_url)
+      end
+
+      context "when a valuator already exists" do
+        before do
+          create :valuation_assignment, proposal: proposal, valuator_role: second_valuator_role
+
+          visit current_path
+        end
+
+        it "assigns the proposals to the valuator" do
+          within find("tr", text: translated(proposal.title)) do
+            expect(page).to have_selector("td.valuators-count", text: "#{valuator.name} (+1)")
+          end
+        end
       end
     end
   end

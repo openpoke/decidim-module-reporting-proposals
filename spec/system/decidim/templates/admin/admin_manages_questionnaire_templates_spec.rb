@@ -5,6 +5,7 @@ require "spec_helper"
 describe "Admin manages questionnaire templates", type: :system do
   let!(:organization) { create :organization }
   let!(:user) { create :user, :confirmed, organization: organization }
+  let(:last_template) { Decidim::Templates::Template.last }
 
   before do
     switch_to_host(organization.host)
@@ -55,6 +56,7 @@ describe "Admin manages questionnaire templates", type: :system do
       end
 
       expect(page).to have_admin_callout("successfully")
+      expect(last_template.target).to eq("questionnaire")
 
       within ".container" do
         expect(page).to have_current_path decidim_admin_templates.edit_questionnaire_template_path(Decidim::Templates::Template.last.id)
@@ -186,6 +188,7 @@ describe "Admin manages questionnaire templates", type: :system do
 
       expect(page).to have_admin_callout("successfully")
       expect(page).to have_content(template.name["en"], count: 2)
+      expect(last_template.target).to eq("questionnaire")
     end
   end
 

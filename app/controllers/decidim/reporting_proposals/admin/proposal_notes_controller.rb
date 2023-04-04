@@ -6,11 +6,6 @@ module Decidim
       class ProposalNotesController < Admin::ApplicationController
         helper_method :note
 
-        def edit
-          enforce_permission_to :edit_note, :proposal_note, proposal_note: note
-          @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_model(note)
-        end
-
         def update
           enforce_permission_to :edit_note, :proposal_note, proposal_note: note
           @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(params)

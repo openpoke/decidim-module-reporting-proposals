@@ -152,6 +152,7 @@ describe "Admin manages proposal answer templates", type: :system do
 
   describe "copying a template" do
     let!(:template) { create(:template, :proposal_answer, organization: organization) }
+    let(:last_template) { Decidim::Templates::Template.last }
 
     before do
       visit decidim_admin_templates.proposal_answer_templates_path
@@ -164,6 +165,7 @@ describe "Admin manages proposal answer templates", type: :system do
 
       expect(page).to have_admin_callout("successfully")
       expect(page).to have_content(template.name["en"], count: 2)
+      expect(last_template.target).to eq("proposal_answer")
     end
   end
 

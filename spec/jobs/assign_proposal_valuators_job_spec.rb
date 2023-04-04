@@ -11,8 +11,8 @@ module Decidim::ReportingProposals
     let(:participatory_process) { create(:participatory_process, organization: organization) }
     let(:category) { create(:category, participatory_space: participatory_process) }
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-    let!(:proposal) { create :proposal, :unpublished, component: component, category: category }
-    let(:user) { proposal.authors.first }
+    let!(:proposal) { create :proposal, :unpublished, users: [user], component: component, category: category }
+    let(:user) { create :user, :confirmed, organization: organization }
     let(:admin_follower) { create :user, :admin, organization: organization }
 
     shared_examples "assigns valuator once" do

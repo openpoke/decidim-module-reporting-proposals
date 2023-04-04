@@ -35,6 +35,8 @@ module Decidim
         Decidim::Proposals::PublishProposalEvent.include(Decidim::Proposals::PublishProposalEventOverride)
         Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::Proposals::Admin::AssignProposalsToValuatorOverride)
         Decidim::Admin::HideResource.include(Decidim::Admin::HideResourceOverride)
+        Decidim::Templates::Admin::CopyQuestionnaireTemplate.include(Decidim::Templates::Admin::CopyQuestionnaireTemplateOverride)
+        Decidim::Templates::Admin::CreateQuestionnaireTemplate.include(Decidim::Templates::Admin::CreateQuestionnaireTemplateOverride)
 
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
