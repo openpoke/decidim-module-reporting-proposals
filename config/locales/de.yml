@@ -7,7 +7,19 @@ de:
       proposal:
         has_no_address: Adresse unbekannt
         has_no_image: Kein Foto vorhanden
+      template:
+        scope_for_availability: Verfügbarkeit der Komponente einschränken
   decidim:
+    admin:
+      hidden_resource_mailer:
+        notify_mail:
+          body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
+          body_2: Wenn Sie glauben, dass dies ein Fehler war, wenden Sie sich bitte an die Administratoren von
+          hello: Guten Tag,
+          reason: 'Grund: %{reason}'
+          subject: Ihre Meldung wurde ausgeblendet
+      templates:
+        missing_resource: "(fehlende Ressource)"
     application:
       geocoding:
         unconfigured: Geocoding ist nicht konfiguriert!
@@ -15,7 +27,7 @@ de:
       proposals:
         settings:
           global:
-            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung als überfällig gekennzeichnet werden
+            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
             evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
             geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den Vergleich von Meldungen nach Entfernung und nicht nach Textähnlichkeit. Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente konfiguriert und aktiviert wird (andernfalls wird standardmäßig der Vergleich von Text-Ähnlichkeiten vorgenommen).
@@ -56,7 +68,7 @@ de:
               random: Zufällig
               recent: Neueste
               with_more_authors: Mit mehreren Autoren
-            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung als überfällig gekennzeichnet werden
+            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
             evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
             geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den Vergleich von Vorschlägen nach Entfernung und nicht nach Textähnlichkeit. Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente konfiguriert und aktiviert wird (andernfalls wird standardmäßig der Vergleich von Text-Ähnlichkeiten vorgenommen).
@@ -130,6 +142,15 @@ de:
             votes_blocked: Gefällt mir-Angaben blockieren
             votes_enabled: Gefällt mir-Angaben erlauben
             votes_hidden: Gefällt-mir Anhaben nicht öffentlich anzeigen
+    events:
+      proposals:
+        proposal_published_for_admin:
+          admin_panel: Admin Panel
+          email_intro: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
+          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie Administrator/in von "%{participatory_space_title} " sind.
+          email_subject: Eine neue Meldung "%{resource_title}" wurde zu %{participatory_space_title} hinzugefügt
+          notification_title: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
+          notification_title_official: 'Die offizielle Meldung <a href="%{resource_path}">%{resource_title}</a> wurde in %{participatory_space_title} hinzugefügt. Link: %{admin_url}'
     moderations:
       actions:
         hide: Verbergen
@@ -141,8 +162,21 @@ de:
     proposals:
       admin:
         proposals:
+          address:
+            geolocated_at: Hier geolokalisiert
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: Admin Panel
+            email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
+            gratitude: Vielen Dank!
+            greeting: Hallo %{name}
+            public_side: User-Ansicht
+            subject: Dir wurden neue Meldungen zugewiesen
+    reported_mailer:
+      report:
+        admin_resource: Diese Ressource moderieren
     reporting_proposals:
       actions:
         answer_proposal: Meldung beantworten
@@ -365,3 +399,25 @@ de:
             title: Bestehende Meldungen in der Umgebung
         form:
           image: Foto
+    templates:
+      admin:
+        proposal_answer_templates:
+          form:
+            answer_template: Standardantworten
+            hint: "<strong>Hinweis:</strong> Diese Platzhalter kannst du überall in den Standortantworten verwenden. Sie werden dann durch die entsprechenden Inhalte ersetzt"
+            hint1: "<strong>%{organization}</strong> wird durch den Namen der Organisation ersetzt"
+            hint2: "<strong>%{name}</strong> wird durch den Namen des Autors ersetzt"
+            hint3: "<strong>%{admin}</strong> wird durch den Namen der Person ersetzt, die den Vorschlag beantwortet"
+            save: Speichern
+            scope_for_availability_help: Beachte, dass nur Prozesse mit Komponenten des Typs "Vorschlag" aufgelistet werden.
+            template_title: Titel der Vorlage
+          index:
+            confirm_delete: Möchten Sie diese Vorlage wirklich löschen?
+            global_scope: Global (überall verfügbar)
+            internal_state: Interner Status
+            scope_for_availability: Bereich
+            title: Antworten für Vorschläge / Meldungen
+          template_chooser:
+            select_template: Wähle eine Vorlage
+      template_types:
+        proposal_answer_templates: Antworten für Vorschläge / Meldungen
