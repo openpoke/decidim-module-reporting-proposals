@@ -22,6 +22,10 @@ module Decidim
           end
         end
 
+        def current_component
+          note&.proposal&.component
+        end
+
         private
 
         def note
