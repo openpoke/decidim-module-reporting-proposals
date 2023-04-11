@@ -27,7 +27,7 @@ de:
       proposals:
         settings:
           global:
-            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung als überfällig gekennzeichnet werden
+            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
             evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
             geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den Vergleich von Meldungen nach Entfernung und nicht nach Textähnlichkeit. Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente konfiguriert und aktiviert wird (andernfalls wird standardmäßig der Vergleich von Text-Ähnlichkeiten vorgenommen).
