@@ -144,7 +144,7 @@ module Decidim
         def avaliablity_options
           @avaliablity_options = {}
           Decidim::Component.includes(:participatory_space).where(manifest_name: accepted_components)
-                            .select { |a| a.participatory_space.decidim_organization_id == current_organization.id }.each do |component|
+                            .select { |a| a.participatory_space&.decidim_organization_id == current_organization.id }.each do |component|
             @avaliablity_options["components-#{component.id}"] = formated_name(component)
           end
           global_scope = { "organizations-#{current_organization.id}" => t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index") }
