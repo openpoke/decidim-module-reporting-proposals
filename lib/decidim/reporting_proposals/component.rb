@@ -96,7 +96,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :suggested_hashtags, type: :text, editor: false, required: false
   end
 
-  component.register_resource(:proposal) do |resource|
+  component.register_resource(:reporting_proposal) do |resource|
     resource.model_class_name = "Decidim::Proposals::Proposal"
     resource.template = "decidim/proposals/proposals/linked_proposals"
     resource.card = "decidim/proposals/proposal"

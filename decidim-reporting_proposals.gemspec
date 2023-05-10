@@ -30,6 +30,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "decidim-templates", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_dependency "deface", ">= 1.9"
 
+  spec.add_development_dependency "decidim-accountability", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.add_development_dependency "decidim-budgets", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-dev", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.add_development_dependency "decidim-elections", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.add_development_dependency "decidim-meetings", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-templates", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
 end
