@@ -9,6 +9,14 @@ module Decidim
 
         helper_method :availability_option_as_text, :availability_options_for_select
 
+        rescue_from ActiveRecord::RecordNotFound do |exception|
+          if request.xhr?
+            render json: { msg: I18n.t("templates.fetch.error", scope: "decidim.admin"), error: exception.message }, status: :unprocessable_entity
+          else
+            throw exception
+          end
+        end
+
         def new
           enforce_permission_to :create, :template
           @form = form(ProposalAnswerTemplateForm).instance
@@ -161,7 +169,7 @@ module Decidim
         end
 
         def template
-          @template ||= Template.find_by(id: params[:id])
+          @template ||= Template.find(params[:id])
         end
 
         def collection

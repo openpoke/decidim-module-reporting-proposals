@@ -21,6 +21,8 @@ en:
           subject: Your proposal has been hidden
       templates:
         missing_resource: "(missing resource)"
+        fetch:
+          error: Couldn't find this template, maybe has been deleted?
     application:
       geocoding:
         unconfigured: Geocoding is not configured!
