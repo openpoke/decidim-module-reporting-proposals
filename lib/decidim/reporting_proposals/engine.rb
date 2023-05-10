@@ -25,6 +25,8 @@ module Decidim
         Decidim::Accountability::Admin::CreateResult.include(Decidim::ReportingProposals::Admin::CreateResultOverride)
         Decidim::Accountability::Admin::UpdateResult.include(Decidim::ReportingProposals::Admin::UpdateResultOverride)
         Decidim::Accountability::Admin::UpdateImportedResult.include(Decidim::ReportingProposals::Admin::UpdateResultOverride)
+        Decidim::Meetings::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
+        Decidim::Meetings::Admin::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
         Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
         Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
         Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)

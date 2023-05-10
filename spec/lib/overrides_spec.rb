@@ -88,8 +88,8 @@ checksums = [
   {
     package: "decidim-meetings",
     files: {
-      "/app/forms/decidim/meetings/admin/close_meeting_form.rb" => "4c8a7686cc05ad207bd7c041c99c4ef5",
-      "/app/forms/decidim/meetings/close_meeting_form.rb" => "4c8a7686cc05ad207bd7c041c99c4ef5"
+      "/app/forms/decidim/meetings/admin/close_meeting_form.rb" => "59e5ec9d638c17d5fa7b0f42f7dfbf27",
+      "/app/forms/decidim/meetings/close_meeting_form.rb" => "d47828f1c0401082939f096fcca233c3"
     }
   }
 ]
