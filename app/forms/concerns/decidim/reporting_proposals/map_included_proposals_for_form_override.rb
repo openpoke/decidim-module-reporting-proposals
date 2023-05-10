@@ -2,7 +2,7 @@
 
 module Decidim
   module ReportingProposals
-    module CloseMeetingFormOverride
+    module MapIncludedProposalsForFormOverride
       extend ActiveSupport::Concern
 
       included do
@@ -10,7 +10,7 @@ module Decidim
 
         def map_model(model)
           map_model_original(model)
-          self.proposal_ids += model.linked_resources(:reporting_proposals, "proposals_from_meeting").pluck(:id)
+          self.proposal_ids += model.linked_resources(:reporting_proposals, "included_proposals").pluck(:id)
         end
 
         def proposals

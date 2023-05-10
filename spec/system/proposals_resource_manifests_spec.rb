@@ -39,4 +39,6 @@ describe "Admin find_resource_manifest", type: :system do
     expect(page).to have_content(translated(proposal.title))
     expect(page).to have_content(translated(reporting_proposal.title))
   end
+
+  # TODO: meetings, budgets, elections
 end

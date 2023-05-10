@@ -76,13 +76,13 @@ checksums = [
   {
     package: "decidim-budgets",
     files: {
-      "/app/forms/decidim/budgets/admin/project_form.rb" => "4c8a7686cc05ad207bd7c041c99c4ef5"
+      "/app/forms/decidim/budgets/admin/project_form.rb" => "906fb91a57237fab33a3e74d24f21c37"
     }
   },
   {
     package: "decidim-elections",
     files: {
-      "/app/forms/decidim/elections/admin/answer_form.rb" => "4c8a7686cc05ad207bd7c041c99c4ef5"
+      "/app/forms/decidim/elections/admin/answer_form.rb" => "082e6529c78cee6e2b9b78368ca4ca46"
     }
   },
   {
