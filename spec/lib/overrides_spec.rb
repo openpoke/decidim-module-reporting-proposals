@@ -12,6 +12,7 @@ checksums = [
       "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
       "/lib/decidim/map/autocomplete.rb" => "65df8e58433814e6b35b52c1bff19ed2",
       "/lib/decidim/form_builder.rb" => "3ea9c3c51ea6e5e54d293326a529d27a",
+      "/app/helpers/decidim/resource_helper.rb" => "78a09dc6a9430a3f00e6c34abd51c14a",
       "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5",
       "/app/models/decidim/category.rb" => "f3a51a9e8377f8a658a35363ce1ba8c1",
       "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf",
@@ -61,7 +62,36 @@ checksums = [
       "/app/views/decidim/proposals/proposals/show.html.erb" => "f27bbec257eb6da28dbdd07ac0a224a5",
       "/app/views/decidim/proposals/proposals/_proposal_similar.html.erb" => "c530c9ee044c1ca3fb9a92c4abcfe3b2",
       "/app/views/decidim/proposals/proposals/_wizard_header.html.erb" => "ff854b9f14b712aa7e1972ca23a54e25",
-      "/app/views/decidim/proposals/admin/proposal_notes/_proposal_notes.html.erb" => "058a26c30a66477e76fb6e84d9618d5e"
+      "/app/views/decidim/proposals/admin/proposal_notes/_proposal_notes.html.erb" => "058a26c30a66477e76fb6e84d9618d5e",
+      "/app/cells/decidim/proposals/proposals_picker_cell.rb" => "a90bce30cd07ed77b3d2dbc0c2774f6a"
+    }
+  },
+  {
+    package: "decidim-accountability",
+    files: {
+      "/app/forms/decidim/accountability/admin/result_form.rb" => "1b2a1c92532899b99570726bbcf11889",
+      "/app/commands/decidim/accountability/admin/create_result.rb" => "3c1900b314ef0a6a801bee37bfa0934a",
+      "/app/commands/decidim/accountability/admin/update_result.rb" => "31074f2fe62c7c49ddb9914b82326f4f"
+    }
+  },
+  {
+    package: "decidim-budgets",
+    files: {
+      "/app/forms/decidim/budgets/admin/project_form.rb" => "906fb91a57237fab33a3e74d24f21c37"
+    }
+  },
+  {
+    package: "decidim-elections",
+    files: {
+      "/app/forms/decidim/elections/admin/answer_form.rb" => "082e6529c78cee6e2b9b78368ca4ca46"
+    }
+  },
+  {
+    package: "decidim-meetings",
+    files: {
+      "/app/forms/decidim/meetings/admin/close_meeting_form.rb" => "59e5ec9d638c17d5fa7b0f42f7dfbf27",
+      "/app/forms/decidim/meetings/close_meeting_form.rb" => "d47828f1c0401082939f096fcca233c3",
+      "/app/commands/decidim/meetings/admin/close_meeting.rb" => "babdfb6203fd96ae971af818b1b394a6"
     }
   }
 ]

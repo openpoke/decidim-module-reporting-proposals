@@ -20,6 +20,8 @@ en:
           reason: 'Reason: %{reason}'
           subject: Your proposal has been hidden
       templates:
+        fetch:
+          error: Couldn't find this template, maybe has been deleted?
         missing_resource: "(missing resource)"
     application:
       geocoding:

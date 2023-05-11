@@ -104,5 +104,14 @@ describe "Admin manages proposal answer templates", type: :system do
         expect(page).to have_content("Evaluating")
       end
     end
+
+    it "shows an error message if the template is removed" do
+      within ".edit_proposal_answer" do
+        template.destroy!
+        select template.name["en"], from: :proposal_answer_template_chooser
+        expect(page).not_to have_content(description)
+        expect(page).to have_content("Couldn't find this template")
+      end
+    end
   end
 end
