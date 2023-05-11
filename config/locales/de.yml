@@ -19,6 +19,8 @@ de:
           reason: 'Grund: %{reason}'
           subject: Ihre Meldung wurde ausgeblendet
       templates:
+        fetch:
+          error: Couldn't find this template, maybe has been deleted?
         missing_resource: "(fehlende Ressource)"
     application:
       geocoding:
