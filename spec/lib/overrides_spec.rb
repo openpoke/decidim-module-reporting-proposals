@@ -12,6 +12,7 @@ checksums = [
       "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
       "/lib/decidim/map/autocomplete.rb" => "65df8e58433814e6b35b52c1bff19ed2",
       "/lib/decidim/form_builder.rb" => "3ea9c3c51ea6e5e54d293326a529d27a",
+      "/app/helpers/decidim/resource_helper.rb" => "78a09dc6a9430a3f00e6c34abd51c14a",
       "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5",
       "/app/models/decidim/category.rb" => "f3a51a9e8377f8a658a35363ce1ba8c1",
       "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf",
@@ -89,7 +90,8 @@ checksums = [
     package: "decidim-meetings",
     files: {
       "/app/forms/decidim/meetings/admin/close_meeting_form.rb" => "59e5ec9d638c17d5fa7b0f42f7dfbf27",
-      "/app/forms/decidim/meetings/close_meeting_form.rb" => "d47828f1c0401082939f096fcca233c3"
+      "/app/forms/decidim/meetings/close_meeting_form.rb" => "d47828f1c0401082939f096fcca233c3",
+      "/app/commands/decidim/meetings/admin/close_meeting.rb" => "babdfb6203fd96ae971af818b1b394a6"
     }
   }
 ]
