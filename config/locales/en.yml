@@ -254,6 +254,14 @@ en:
         show: Show proposal
         title: Actions
       admin:
+        notification_answer_proposal_mailer:
+          notify_proposal_author:
+            subject: Your proposal has been answered
+            greeting: Hi, %{recipient}!
+            email_body: |
+              Your proposal has been answered.
+              You can read the answer here:<br>
+              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
         actions:
           edit_valuators: Edit valuators
           preview: Preview
