@@ -22,6 +22,7 @@ module Decidim
         Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
         Decidim::Proposals::ProposalsPickerCell.include(Decidim::ReportingProposals::ProposalsPickerCellOverride)
+        Decidim::Proposals::PublishProposal.include(Decidim::Proposals::PublishProposalOverride)
         Decidim::Proposals::Admin::AnswerProposal.include(Decidim::Proposals::Admin::AnswerProposalOverride)
         Decidim::Accountability::Admin::ResultForm.include(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
         Decidim::Accountability::Admin::CreateResult.include(Decidim::ReportingProposals::Admin::CreateResultOverride)
