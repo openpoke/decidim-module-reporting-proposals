@@ -3,37 +3,37 @@ es:
   activemodel:
     attributes:
       category:
-        valuator_ids: Automatic valuators
+        valuator_ids: Evaluadores automáticos
       proposal:
-        has_no_address: Has no address
-        has_no_image: Has no image
+        has_no_address: No tiene dirección
+        has_no_image: No tiene imagen
       template:
-        scope_for_availability: Restrict availability to the component
+        scope_for_availability: Restringir disponibilidad al componente
   decidim:
     admin:
       hidden_resource_mailer:
         notify_mail:
-          body_1: An administrator removed your proposal because it has been reported.
-          body_2: If you feel that has been a mistake please contact the administrators of
-          hello: Hello,
-          reason: 'Reason: %{reason}'
-          subject: Your proposal has been hidden
+          body_1: Un administrador eliminó su propuesta porque ha sido denunciada.
+          body_2: Si crees que ha sido un error, ponte en contacto con los administradores de
+          hello: Hola,
+          reason: 'Motivo: %{reason}'
+          subject: Tu propuesta ha sido ocultada
       templates:
         fetch:
-          error: Couldn't find this template, maybe has been deleted?
-        missing_resource: "(missing resource)"
+          error: No se pudo encontrar esta plantilla, ¿tal vez se ha eliminado?
+        missing_resource: "(recurso ausente)"
     application:
       geocoding:
-        unconfigured: Geocoding is not configured!
+        unconfigured: '¡La geocodificación no está configurada!'
     components:
       proposals:
         settings:
           global:
-            evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
-            evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
-            geocoding_comparison_enabled: Compare proposals by distance proximity
-            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
-            geocoding_comparison_newer_than: Compare only proposal made in the last X days
+            evaluating_proposals_overdue: Después de cuántos días una propuesta en su estado de evaluación es considerada atrasada
+            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            geocoding_comparison_enabled: Comparar propuestas por proximidad
+            geocoding_comparison_enabled_help: Esta configuración permite comparar propuestas por proximidad en lugar de similitud de texto. Esta característica requiere que un servicio de geocodificación esté configurado y habilitado en el componente (en caso contrario se usará la comparación por similitud de texto).
+            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los últimos X días
             geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
             geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
             proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
@@ -258,183 +258,183 @@ es:
                 one: over 1 year to answer
                 other: over %{count} years to answer
               x_days:
-                one: 1 day to answer
-                other: "%{count} days to answer"
+                one: 1 día para responder
+                other: "%{count} días para responder"
               x_minutes:
-                one: 1 minute to answer
-                other: "%{count} minutes to answer"
+                one: 1 minuto para responder
+                other: "%{count} minutos para responder"
               x_months:
-                one: 1 month to answer
-                other: "%{count} months to answer"
+                one: 1 mes para responder
+                other: "%{count} meses a responder"
               x_seconds:
-                one: 1 second to answer
-                other: "%{count} seconds to answer"
+                one: 1 segundo para responder
+                other: "%{count} segundos para responder"
               x_years:
-                one: 1 year to answer
-                other: "%{count} years to answer"
+                one: 1 año para responder
+                other: "%{count} años para responder"
         categories:
           form:
-            valuators_help: Select valuators that will be assigned automatically when a proposal is published in this category (they will receive a notification).
+            valuators_help: Seleccione los evaluadores que serán asignados automáticamente cuando una propuesta se publique en esta categoría (recibirán una notificación).
           index:
-            valuators_column: Automatic valuators
+            valuators_column: Evaluadores automáticos
         evaluate_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to evaluate
-                other: about %{count} hours to evaluate
+                one: aproximadamente 1 hora para evaluar
+                other: alrededor de %{count} horas para evaluar
               about_x_months:
-                one: about 1 month to evaluate
-                other: about %{count} months to evaluate
+                one: alrededor de 1 mes para evaluar
+                other: cerca de %{count} meses para evaluar
               about_x_years:
-                one: about 1 year to evaluate
-                other: about %{count} years to evaluate
+                one: cerca de 1 año para evaluar
+                other: alrededor de %{count} años para evaluar
               almost_x_years:
-                one: almost 1 year to evaluate
-                other: almost %{count} years to evaluate
-              half_a_minute: half a minute to evaluate
+                one: casi 1 año para evaluar
+                other: casi %{count} años para evaluar
+              half_a_minute: medio minuto para evaluar
               less_than_x_minutes:
-                one: less than a minute to evaluate
-                other: less than %{count} minutes to evaluate
+                one: menos de un minuto para evaluar
+                other: menos de %{count} minutos para evaluar
               less_than_x_seconds:
-                one: less than 1 second to evaluate
-                other: less than %{count} seconds to evaluate
+                one: menos de 1 segundo para evaluar
+                other: menos de %{count} segundos para evaluar
               over_x_years:
-                one: over 1 year to evaluate
-                other: over %{count} years to evaluate
+                one: más de 1 año para evaluar
+                other: más de %{count} años para evaluar
               x_days:
-                one: 1 day to evaluate
-                other: "%{count} days to evaluate"
+                one: 1 día para evaluar
+                other: "%{count} días para evaluar"
               x_minutes:
-                one: 1 minute to evaluate
-                other: "%{count} minutes to evaluate"
+                one: 1 día para evaluar
+                other: "%{count} minutos para evaluar"
               x_months:
-                one: 1 month to evaluate
-                other: "%{count} months to evaluate"
+                one: 1 mes para evaluar
+                other: "%{count} meses para evaluar"
               x_seconds:
-                one: 1 second to evaluate
-                other: "%{count} seconds to evaluate"
+                one: 1 segundo para evaluar
+                other: "%{count} segundos para evaluar"
               x_years:
-                one: 1 year to evaluate
-                other: "%{count} years to evaluate"
+                one: 1 año para evaluar
+                other: "%{count} años para evaluar"
         exports:
-          proposal_comments: Comments
-          proposals: Reporting proposals
+          proposal_comments: Comentarios
+          proposals: Propuestas de informe
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
-              Your proposal has been answered.
-              You can read the answer here:<br>
+              Tu propuesta ha sido respondida.
+              Puedes leer la respuesta aquí:<br>
               <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hi, %{recipient}!
-            subject: Your proposal has been answered
+            greeting: '¡Hola, %{recipient}!'
+            subject: Su propuesta ha sido respondida
         proposal_notes:
           modal:
-            body: Note
-            title: Edit note
-            update: Update
+            body: Nota
+            title: Editar la nota
+            update: Actualizar
           update:
-            edited: Edited
-            invalid: There was a problem updating the proposal note.
-            success: Proposal note successfully updated.
+            edited: Editado
+            invalid: Hubo un problema al actualizar la nota de la propuesta.
+            success: Nota de propuesta actualizada correctamente.
         proposals:
           photo_form:
-            action: Add image
-            add_images: Add images
-            gallery_legend: Add images
-            title: Photos
-            upload_msg: No files selected
+            action: Añadir imagen
+            add_images: Añadir imágenes
+            gallery_legend: Añadir imágenes
+            title: Fotos
+            upload_msg: No hay archivos seleccionados
           photo_gallery:
-            delete_image: Delete image
-            photos: Photos
+            delete_image: Eliminar imagen
+            photos: Fotos
           photos:
-            title: Photos
+            title: Fotos
           valuators_list:
-            assigned_valuators: Assigned valuators
-            remove_assignment: remove assignment
-            remove_assignment_confirmation: remove assignment confirmation
-            valuators: Valuators
-        resolution_time: Resolution time
+            assigned_valuators: Asignar evaluadoras
+            remove_assignment: eliminar asignación
+            remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
+            valuators: Evaluadoras
+        resolution_time: Tiempo de resolución
         time_elapsed:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour
-                other: about %{count} hours
+                one: alrededor de 1 hora
+                other: alrededor de %{count} horas
               about_x_months:
-                one: about 1 month
-                other: about %{count} months
+                one: alrededor de 1 mes
+                other: alrededor de %{count} meses
               about_x_years:
-                one: about 1 year
-                other: about %{count} years
+                one: alrededor de 1 año
+                other: alrededor de %{count} años
               almost_x_years:
-                one: almost 1 year
-                other: almost %{count} years
-              half_a_minute: half a minute
+                one: casi 1 año
+                other: casi %{count} años
+              half_a_minute: medio minuto
               less_than_x_minutes:
-                one: less than a minute
-                other: less than %{count} minutes
+                one: menos de 1 minuto
+                other: menos de %{count} minutos
               less_than_x_seconds:
-                one: less than 1 second
-                other: less than %{count} seconds
+                one: menos de 1 segundo
+                other: menos de %{count} segundos
               over_x_years:
-                one: over 1 year
-                other: over %{count} years
+                one: más de 1 año
+                other: más de %{count} años
               x_days:
-                one: 1 day
-                other: "%{count} days"
+                one: 1 día
+                other: "%{count} días"
               x_minutes:
-                one: 1 minute
-                other: "%{count} minutes"
+                one: 1 minuto
+                other: "%{count} minutos"
               x_months:
-                one: 1 month
-                other: "%{count} months"
+                one: 1 mes
+                other: "%{count} meses"
               x_seconds:
-                one: 1 second
-                other: "%{count} seconds"
+                one: 1 segundo
+                other: "%{count} segundos"
               x_years:
-                one: 1 year
-                other: "%{count} years"
+                one: 1 año
+                other: "%{count} años"
       forms:
         errors:
-          device_not_supported: Geolocation is not supported by your browser.
-          no_device_location: Sorry, we couldn't detect your location.
-        use_my_camera: Use my camera
-        use_my_location: Use my location
+          device_not_supported: Este navegador no admite geolocalización.
+          no_device_location: Lo sentimos, no hemos podido detectar tu ubicación.
+        use_my_camera: Usar mi cámara
+        use_my_location: Detectar mi ubicación
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |
-            Your proposal has been published.
-            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-          greeting: Hi, %{recipient}!
-          subject: Your proposal has been published
+            Tu propuesta ha sido publicada.
+            Puedes verla aquí <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+          greeting: '¡Hola, %{recipient}!'
+          subject: Tu propuesta ha sido publicada
       proposals:
         compare:
           geocoding:
-            away: "%{meters} away"
-            description: These are proposals that are in a radius of %{meters} to the one you are creating. In case you find another one reporting the same situation, you can choose to support it instead of creating a new one.
-            title: Nearby proposals
+            away: "A %{meters} de distancia"
+            description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
+            title: Propuestas cercanas
         form:
-          image: Image/photo
+          image: Imágen/foto
     templates:
       admin:
         proposal_answer_templates:
           form:
-            answer_template: Answer template
-            hint: "<strong>Hint:</strong> You can use these variables anywhere on the answer template that will be replaced when using the template"
-            hint1: "<strong>%{organization}</strong> will be replaced by the organization's name"
-            hint2: "<strong>%{name}</strong> will be replaced by the author's name"
-            hint3: "<strong>%{admin}</strong> will be replaced by the admin's name (the one answering the proposal)"
-            save: Save
-            scope_for_availability_help: Note that only participatory spaces having components of the type "proposals" will be listed.
-            template_title: Template information
+            answer_template: Plantilla de Respuesta
+            hint: "<strong>Sugerencia:</strong> Puede utilizar estas variables en cualquier lugar de la plantilla de respuesta que se reemplazarán cuando utilice la plantilla"
+            hint1: "<strong>%{organization}</strong> será reemplazado por el nombre de la organización"
+            hint2: "<strong>%{name}</strong> será reemplazado por el nombre del autor"
+            hint3: "<strong>%{admin}</strong> será sustituido por el nombre del administrador (el que responde a la propuesta)"
+            save: Guardar
+            scope_for_availability_help: Tenga en cuenta que sólo los espacios participativos que tengan componentes del tipo "propuestas" serán listados.
+            template_title: Información de la plantilla
           index:
-            confirm_delete: Are you sure you want to delete this template?
-            global_scope: Global (available everywhere)
-            internal_state: Internal State
-            scope_for_availability: Scope
-            title: Proposal answers
+            confirm_delete: '¿Está seguro de querer eliminar esta plantilla?'
+            global_scope: Global (disponible en todas partes)
+            internal_state: Estado interno
+            scope_for_availability: Ámbito
+            title: Respuestas a propuestas
           template_chooser:
-            select_template: Select a template answer
+            select_template: Selecciona una plantilla de respuesta
       template_types:
-        proposal_answer_templates: Proposal answers
+        proposal_answer_templates: Respuestas a propuestas
