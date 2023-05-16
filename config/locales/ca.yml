@@ -401,6 +401,13 @@ ca:
           no_device_location: Ho sentim, no hem pogut detectar la teva localització.
         use_my_camera: Usa la meva càmera
         use_my_location: Usa la meva localització
+      notification_publish_proposal_mailer:
+        notify_proposal_author:
+          email_body: |
+            Your proposal has been published.
+            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+          greeting: Hi, %{recipient}!
+          subject: Your proposal has been published
       proposals:
         compare:
           geocoding:
