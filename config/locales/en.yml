@@ -253,13 +253,6 @@ en:
         participatory_texts: Participatory texts
         show: Show proposal
         title: Actions
-      notification_publish_proposal_mailer:
-        notify_proposal_author:
-          subject: Your proposal has been published
-          email_body: |
-            Your proposal has been published.
-            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-          greeting: Hi, %{recipient}!
       admin:
         actions:
           edit_valuators: Edit valuators
