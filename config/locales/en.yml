@@ -386,6 +386,14 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        notification_answer_proposal_mailer:
+          notify_proposal_author:
+            email_body: |
+              Your proposal has been answered.
+              You can read the answer here:<br>
+              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+            greeting: Hi, %{recipient}!
+            subject: Your proposal has been answered
         proposal_notes:
           modal:
             body: Note

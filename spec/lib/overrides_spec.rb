@@ -48,6 +48,7 @@ checksums = [
       "/app/helpers/decidim/proposals/proposal_wizard_helper.rb" => "75d875f3323e75273819d526731140da",
       "/app/commands/decidim/proposals/create_proposal.rb" => "8808a4239d750a86edd6e9c309533788",
       "/app/commands/decidim/proposals/publish_proposal.rb" => "6d5a18f4a50842c0223ccf51d7f8d405",
+      "/app/commands/decidim/proposals/admin/answer_proposal.rb" => "1412ec79087fe2f6af5e9c861c65892f",
       "/app/forms/decidim/proposals/proposal_form.rb" => "ec488556b51b8f28c5031552b04844c1",
       "/app/views/decidim/proposals/proposals/new.html.erb" => "085e99f32228bbf0a6d1089ade641d71",
       "/app/views/decidim/proposals/proposals/edit.html.erb" => "7071f1e5e10a22e79511875c50ce63be",
