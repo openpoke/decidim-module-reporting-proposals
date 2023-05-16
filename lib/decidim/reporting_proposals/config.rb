@@ -59,5 +59,10 @@ module Decidim
     config_accessor :notify_authors_on_answering do
       [:proposals, :reporting_proposals]
     end
+
+    # Public setting to to get an e-mail notification when the proposal is published
+    config_accessor :notify_authors_on_publish do
+      [:proposals, :reporting_proposals]
+    end
   end
 end
