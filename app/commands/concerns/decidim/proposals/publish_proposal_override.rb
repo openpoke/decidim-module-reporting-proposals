@@ -6,6 +6,22 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
+        def call
+          return broadcast(:invalid) unless @proposal.authored_by?(@current_user)
+
+          transaction do
+            publish_proposal
+            increment_scores
+            send_notification
+            send_email_to_author
+            send_notification_to_participatory_space
+          end
+
+          broadcast(:ok, @proposal)
+        end
+
+        private
+
         def send_notification_to_participatory_space
           Decidim::EventsManager.publish(
             event: "decidim.events.proposals.proposal_published",
@@ -18,7 +34,6 @@ module Decidim
           )
           # put here to avoid override the call method
           send_notification_to_admins
-          send_email_to_author
         end
 
         def send_notification_to_admins
