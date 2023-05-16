@@ -253,13 +253,6 @@ en:
         participatory_texts: Participatory texts
         show: Show proposal
         title: Actions
-      notification_publish_proposal_mailer:
-        notify_proposal_author:
-          subject: Your proposal has been published
-          email_body: |
-            Your proposal has been published.
-            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-          greeting: Hi, %{recipient}!
       admin:
         actions:
           edit_valuators: Edit valuators
@@ -466,6 +459,13 @@ en:
           no_device_location: Sorry, we couldn't detect your location.
         use_my_camera: Use my camera
         use_my_location: Use my location
+      notification_publish_proposal_mailer:
+        notify_proposal_author:
+          email_body: |
+            Your proposal has been published.
+            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+          greeting: Hi, %{recipient}!
+          subject: Your proposal has been published
       proposals:
         compare:
           geocoding:
