@@ -12,7 +12,7 @@ $(() => {
     }).done((data) => {
       $(`#proposal_answer_internal_state_${data.state}`).trigger("click");
 
-      const $editors = $dropDown.parent().parent().find(".tabs-panel").find(".editor-container");
+      const $editors = $dropDown.parent().parent().find(".editor-container");
       $editors.each((index, element) => {
         const localElement = $(element);
         const $locale = localElement.siblings("input[type=hidden]").attr("id").replace("proposal_answer_answer_", "");
