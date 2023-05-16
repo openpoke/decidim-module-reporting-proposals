@@ -20,7 +20,7 @@ module Decidim::Proposals::Admin
 
     context "when proposal component enabled" do
       before do
-        Decidim::ReportingProposals.notify_authors_on_publish = [:proposals]
+        Decidim::ReportingProposals.notify_authors_on_answering = [:proposals]
       end
 
       it "sends email to all users" do
@@ -44,7 +44,7 @@ module Decidim::Proposals::Admin
 
     context "when reporting_proposal component enabled" do
       before do
-        Decidim::ReportingProposals.notify_authors_on_publish = [:reporting_proposals]
+        Decidim::ReportingProposals.notify_authors_on_answering = [:reporting_proposals]
       end
 
       it "sends email to all users" do

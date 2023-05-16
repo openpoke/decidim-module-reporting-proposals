@@ -24,7 +24,7 @@ module Decidim
           private
 
           def send_email_to_author
-            return unless Decidim::ReportingProposals.notify_authors_on_publish.include?(proposal.component.manifest_name.to_sym)
+            return unless Decidim::ReportingProposals.notify_authors_on_answering.include?(proposal.component.manifest_name.to_sym)
 
             affected_users.each do |user|
               Decidim::Proposals::Admin::NotificationAnswerProposalMailer.notify_proposal_author(proposal, user).deliver_later
