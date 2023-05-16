@@ -18,6 +18,7 @@ module Decidim
           )
           # put here to avoid override the call method
           send_notification_to_admins
+          send_email_to_author
         end
 
         def send_notification_to_admins
@@ -37,6 +38,18 @@ module Decidim
 
         def admins_followers
           @proposal.followers.where(admin: true).uniq
+        end
+
+        def send_email_to_author
+          return unless Decidim::ReportingProposals.notify_authors_on_publish.include?(@proposal.component.manifest_name.to_sym)
+
+          affected_users.each do |user|
+            Decidim::Proposals::NotificationPublishProposalMailer.notify_proposal_author(@proposal, user).deliver_later
+          end
+        end
+
+        def affected_users
+          @proposal.notifiable_identities
         end
       end
     end

@@ -1,0 +1,7 @@
+<p class="email-greeting"><%= t("greeting", scope: "decidim.reporting_proposals.notification_publish_proposal_mailer.notify_proposal_author", recipient: @recipient.name) %></p>
+
+<p class="email-instructions">
+  <%= sanitize t("email_body", scope: "decidim.reporting_proposals.notification_publish_proposal_mailer.notify_proposal_author",
+                 proposal_title: translated_attribute(@proposal.title),
+                 answer_url: Decidim::ResourceLocatorPresenter.new(@proposal).url) %>
+</p>
