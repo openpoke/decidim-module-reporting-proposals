@@ -40,7 +40,7 @@ es:
             unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
             unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
       reporting_proposals:
-        name: Propuestas de informe
+        name: Propuestas directas
         settings:
           global:
             additional_button_for_show_proposal_link: Botón de acción adicional después del enlace "Volver a la lista" al visitar una propuesta en particular (enlace)
@@ -319,7 +319,7 @@ es:
                 other: "%{count} años para evaluar"
         exports:
           proposal_comments: Comentarios
-          proposals: Propuestas de informe
+          proposals: Propuestas directas
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
