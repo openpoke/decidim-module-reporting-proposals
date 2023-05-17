@@ -102,46 +102,46 @@ es:
             resources_permissions_enabled: Se pueden establecer permisos de acciones para cada propuesta
             scope_id: Ámbito
             scopes_enabled: Ámbitos habilitados
-            threshold_per_proposal: Threshold per proposal
-            unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
-            unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
-            vote_limit: Support limit per participant
+            threshold_per_proposal: Umbral por propuesta
+            unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
+            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            vote_limit: Límite de apoyos por participante
           step:
-            amendment_creation_enabled: Amendment creation enabled
-            amendment_creation_enabled_help: Participant can amend proposals.
-            amendment_promotion_enabled: Amendment promotion enabled
-            amendment_promotion_enabled_help: Emandation authors will be able to promote to Proposal the rejected emendation.
-            amendment_reaction_enabled: Amendment reaction enabled
-            amendment_reaction_enabled_help: Proposal's authors will be able to accept or reject Participant's emendations.
-            amendments_visibility: Amendments visibility
+            amendment_creation_enabled: Creación de enmiendas habilitada
+            amendment_creation_enabled_help: El participante puede enmendar propuestas.
+            amendment_promotion_enabled: Promoción de enmiendas activada
+            amendment_promotion_enabled_help: Las autoras de la enmienda podrán promover la enmienda rechazada como nueva propuesta.
+            amendment_reaction_enabled: Reacciones a las enmiendas activada
+            amendment_reaction_enabled_help: Las autoras de la propuesta podrán aceptar o rechazar las enmiendas de otras participantes.
+            amendments_visibility: Visibilidad de las enmiendas
             amendments_visibility_choices:
-              all: Amendments are visible to all
-              participants: Amendments are visible only to their authors
-            amendments_visibility_help: If the option "Amendments are visible only to their authors" is selected, participant must be logged in to see the amendments made.
-            announcement: Announcement
-            answers_with_costs: Enable costs on proposal answers
-            automatic_hashtags: Hashtags added to all proposals
-            comments_blocked: Comments blocked
-            creation_enabled: Participants can create proposals
-            creation_enabled_readonly: This setting is disabled when you activate the Participatory Texts functionality. To upload proposals as participatory text click on the Participatory Texts button and follow the instructions.
-            default_sort_order: Default proposal sorting
-            default_sort_order_help: Default it means that if the supports are enabled, the proposals will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
+              all: Las enmiendas son visibles para todos
+              participants: Las enmiendas son visibles sólo para sus autoras
+            amendments_visibility_help: Si se selecciona la opción "Las enmiendas son visibles sólo para sus autoras", las participantes deberán iniciar sesión para ver las enmiendas realizadas.
+            announcement: Anuncio
+            answers_with_costs: Habilitar costes en las respuestas a las propuestas
+            automatic_hashtags: Hashtags añadidos a todas las propuestas
+            comments_blocked: Comentarios bloqueados
+            creation_enabled: Las participantes pueden crear propuestas
+            creation_enabled_readonly: Esta opción se desactiva cuando activas la funcionalidad de Textos Participativos. Para subir propuestas como texto participativo haz clic en el botón Textos Participativos y sigue las instrucciones.
+            default_sort_order: Orden predeterminado de propuestas
+            default_sort_order_help: Por defecto significa que si los apoyos están habilitados, las propuestas se mostrarán en orden aleatorio, y si los apoyos están bloqueados, se ordenarán por las más apoyadas.
             default_sort_order_options:
-              default: Default
-              most_commented: Most commented
-              most_endorsed: Most endorsed
-              most_followed: Most followed
-              most_voted: Most supported
-              random: Random
-              recent: Recent
-              with_more_authors: With more authors
-            endorsements_blocked: Endorsements blocked
-            endorsements_enabled: Endorsements enabled
-            proposal_answering_enabled: Proposal answering enabled
-            publish_answers_immediately: Publish proposal answers immediately
-            publish_answers_immediately_help_html: 'Mind that if you answer any proposal without this enabled, you''ll need to publish them manually by selecting them and using the action for publication. For more info on how this works, see <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals'' answers documentation page</a>.'
-            suggested_hashtags: Hashtags suggested to participants for new proposals
-            votes_blocked: Supports blocked
+              default: Predeterminado
+              most_commented: Más comentadas
+              most_endorsed: Con más adhesiones
+              most_followed: Más seguidas
+              most_voted: Con más apoyos
+              random: Aleatorio
+              recent: Recientes
+              with_more_authors: Con más autores
+            endorsements_blocked: Adhesiones bloqueadas
+            endorsements_enabled: Adhesiones habilitadas
+            proposal_answering_enabled: Respuesta a las propuestas habilitada
+            publish_answers_immediately: Publicar respuestas a las propuestas inmediatamente
+            publish_answers_immediately_help_html: 'Ten en cuenta que si respondes a alguna propuesta sin que esto esté habilitado, tendrás que publicarlas manualmente seleccionándolas y utilizando la acción de publicar. Para más información sobre el funcionamiento, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">página de documentación de respuestas a las propuestas</a>.'
+            suggested_hashtags: Hashtags sugeridos a las participantes para nuevas propuestas
+            votes_blocked: Apoyos bloqueados
             votes_enabled: Apoyos habilitados
             votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando esta opción ocultarás el número de apoyos)
     events:
