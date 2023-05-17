@@ -34,74 +34,74 @@ es:
             geocoding_comparison_enabled: Comparar propuestas por proximidad
             geocoding_comparison_enabled_help: Esta configuración permite comparar propuestas por proximidad en lugar de similitud de texto. Esta característica requiere que un servicio de geocodificación esté configurado y habilitado en el componente (en caso contrario se usará la comparación por similitud de texto).
             geocoding_comparison_newer_than: Compara solo la propuesta hecha en los últimos X días
-            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
-            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
-            proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
-            unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
-            unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
+            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando se comparan propuestas por proximidad. Las propuestas más antiguas que el número especificado de días serán ignoradas. Usar cero para comparar todas las propuestas sin importar la distancia.
+            geocoding_comparison_radius: Radio máximo (en metros) para considerar propuestas similares (se ordenará por distancia) por proximidad
+            proposal_photo_editing_enabled: Permitir a administradores y evaluadores editar fotos cuando respondan propuestas
+            unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
+            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
       reporting_proposals:
-        name: Reporting proposals
+        name: Propuestas de informe
         settings:
           global:
-            additional_button_for_show_proposal_link: Additional action button after the "back to list" link when visiting a particular proposal (link)
-            additional_button_for_show_proposal_text: Additional action button after the "back to list" link when visiting a particular proposal (text)
-            additional_button_link: Additional action button next to new proposal (link)
-            additional_button_text: Additional action button next to new proposal (text)
-            additional_buttons_for_show_proposal_show: Display an additional button in the show public view
-            additional_buttons_show: Display an additional button in the index public view
-            additional_buttons_show_help: Add the text and link bellow
-            amendments_enabled: Amendments enabled
-            amendments_enabled_help: If active, configure Amendment features for each step.
-            amendments_wizard_help_text: Amendments Wizard help text
-            announcement: Announcement
-            attachments_allowed: Allow attachments
-            can_accumulate_supports_beyond_threshold: Can accumulate supports beyond threshold
-            collaborative_drafts_enabled: Collaborative drafts enabled
-            comments_enabled: Comments enabled
-            comments_max_length: Comments max length (Leave 0 for default value)
-            default_sort_order: Default proposal sorting
-            default_sort_order_help: Default means that if the supports are enabled, the proposals will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
+            additional_button_for_show_proposal_link: Botón de acción adicional después del enlace "Volver a la lista" al visitar una propuesta en particular (enlace)
+            additional_button_for_show_proposal_text: Botón de acción adicional después del enlace "Volver a la lista" cuando visite una propuesta en particular (texto)
+            additional_button_link: Botón de acción adicional junto a la nueva propuesta (enlace)
+            additional_button_text: Botón de acción adicional junto a la nueva propuesta (texto)
+            additional_buttons_for_show_proposal_show: Mostrar un botón adicional en la vista pública
+            additional_buttons_show: Mostrar un botón adicional en la vista pública del listado de propuestas
+            additional_buttons_show_help: Añadir el texto y enlazar abajo
+            amendments_enabled: Enmiendas habilitadas
+            amendments_enabled_help: Si está activo, configura las opciones de enmiendas para cada fase.
+            amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
+            announcement: Anuncio
+            attachments_allowed: Permitir los archivos adjuntos
+            can_accumulate_supports_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
+            collaborative_drafts_enabled: Borradores colaborativos habilitados
+            comments_enabled: Comentarios habilitados
+            comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)
+            default_sort_order: Orden predeterminado de propuestas
+            default_sort_order_help: Por defecto significa que si los apoyos están habilitados, las propuestas se mostrarán en orden aleatorio, y si los apoyos están bloqueados, se ordenarán por las más apoyadas.
             default_sort_order_options:
-              default: Default
-              most_commented: Most commented
-              most_endorsed: Most endorsed
-              most_followed: Most followed
-              most_voted: Most supported
-              random: Random
-              recent: Recent
-              with_more_authors: With more authors
-            evaluating_proposals_overdue: After how many days a proposal in its evaluating state is considered overdue
-            evaluating_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
-            geocoding_comparison_enabled: Compare proposals by distance proximity
-            geocoding_comparison_enabled_help: This settings allows to compare proposals by distance proximity instead of text similarity. This feature requires a geocoding service to be configured and enabled in the component (otherwise defaults to text similarity comparison).
-            geocoding_comparison_newer_than: Compare only proposal made in the last X days
-            geocoding_comparison_newer_than_help: This setting only applies when comparing proposals by distance proximity. Proposals older than the specified number of days will be ignored. Leave at zero to compare all proposals.
-            geocoding_comparison_radius: Maximum radius (in meters) for considering proposals similar (will be ordered by proximity) by distance proximity
-            geocoding_enabled: Geocoding enabled
-            minimum_votes_per_user: Minimum supports per user
-            new_proposal_body_template: New proposal body template
-            new_proposal_body_template_help: You can define prefilled text that the new Proposals will have
-            new_proposal_help_text: New proposal help text
-            official_proposals_enabled: Official proposals enabled
-            only_photo_attachments: Use only photo attachments
-            participatory_texts_enabled: Participatory texts enabled
-            participatory_texts_enabled_readonly: Cannot interact with this setting if there are existing proposals. Please, create a new `Proposals component` if you want to enable this feature or discard all imported proposals in the `Participatory Texts` menu if you want to disable it.
-            proposal_answering_enabled: Proposal answering enabled
-            proposal_edit_before_minutes: Proposals can be edited by authors before this many minutes passes
-            proposal_edit_time: Proposal editing
+              default: Predeterminado
+              most_commented: Más comentadas
+              most_endorsed: Con más adhesiones
+              most_followed: Más seguidas
+              most_voted: Con más apoyos
+              random: Aleatorio
+              recent: Recientes
+              with_more_authors: Con más autores
+            evaluating_proposals_overdue: Después de cuántos días una propuesta en su estado de evaluación es considerada atrasada
+            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            geocoding_comparison_enabled: Comparar propuestas por proximidad
+            geocoding_comparison_enabled_help: Esta configuración permite comparar propuestas por proximidad en lugar de similitud de texto. Esta característica requiere que un servicio de geocodificación esté configurado y habilitado en el componente (en caso contrario se usará la comparación por similitud de texto).
+            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los últimos X días
+            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando se comparan propuestas por proximidad. Las propuestas más antiguas que el número especificado de días serán ignoradas. Usar cero para comparar todas las propuestas sin importar la distancia.
+            geocoding_comparison_radius: Radio máximo (en metros) para considerar propuestas similares (se ordenará por distancia) por proximidad
+            geocoding_enabled: Geolocalización habilitada
+            minimum_votes_per_user: Apoyos mínimos por participante
+            new_proposal_body_template: Plantilla para el texto de nueva propuesta
+            new_proposal_body_template_help: Puede definir el texto predefinido que tendrán las nuevas propuestas
+            new_proposal_help_text: Texto de ayuda al crear una propuesta
+            official_proposals_enabled: Propuestas oficiales habilitadas
+            only_photo_attachments: Permitir solo fotos en los archivos adjuntos
+            participatory_texts_enabled: Textos participativos habilitados
+            participatory_texts_enabled_readonly: No se puede interactuar con esta configuración si hay propuestas existentes. Por favor, crea un nuevo componente de propuesta si quieres activar esta característica o descartar todas las propuestas importadas en el menú "Textos Participativos" si quieres desactivarla.
+            proposal_answering_enabled: Respuesta a las propuestas habilitada
+            proposal_edit_before_minutes: Los autores pueden editar las propuestas antes de que pase este número de minutos
+            proposal_edit_time: Edición de propuestas
             proposal_edit_time_choices:
-              infinite: Allow editing proposals for an infinite amount of time
-              limited: Allow editing of proposals within a specific timeframe
-            proposal_length: Maximum proposal body length
-            proposal_limit: Proposal limit per participant
-            proposal_photo_editing_enabled: Allow admins and valuators to edit photos when answering proposals
-            proposal_wizard_step_1_help_text: Proposal wizard "Create" step help text
-            proposal_wizard_step_2_help_text: Proposal wizard "Compare" step help text
-            proposal_wizard_step_3_help_text: Proposal wizard "Complete" step help text
-            proposal_wizard_step_4_help_text: Proposal wizard "Publish" step help text
-            resources_permissions_enabled: Actions permissions can be set for each proposal
-            scope_id: Scope
-            scopes_enabled: Scopes enabled
+              infinite: Permitir editar propuestas por una cantidad infinita de tiempo
+              limited: Permitir la edición de propuestas dentro de un plazo específico
+            proposal_length: Longitud máxima del cuerpo de la propuesta
+            proposal_limit: Límite de propuestas por participante
+            proposal_photo_editing_enabled: Permitir a administradores y evaluadores editar fotos cuando respondan propuestas
+            proposal_wizard_step_1_help_text: Texto de ayuda para el paso "Crear" del asistente de propuesta
+            proposal_wizard_step_2_help_text: Texto de ayuda para el paso "Comparar" del asistente de propuesta
+            proposal_wizard_step_3_help_text: Texto de ayuda para el paso «Completar» del asistente para propuestas
+            proposal_wizard_step_4_help_text: Texto de ayuda para el paso "Publicar" del asistente de propuesta
+            resources_permissions_enabled: Se pueden establecer permisos de acciones para cada propuesta
+            scope_id: Ámbito
+            scopes_enabled: Ámbitos habilitados
             threshold_per_proposal: Threshold per proposal
             unanswered_proposals_overdue: After how many days a not-answered proposal is considered overdue
             unanswered_proposals_overdue_help: This adds a visual alert to the list of proposals. Leave it to zero to disable this feature.
@@ -142,121 +142,121 @@ es:
             publish_answers_immediately_help_html: 'Mind that if you answer any proposal without this enabled, you''ll need to publish them manually by selecting them and using the action for publication. For more info on how this works, see <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">proposals'' answers documentation page</a>.'
             suggested_hashtags: Hashtags suggested to participants for new proposals
             votes_blocked: Supports blocked
-            votes_enabled: Supports enabled
-            votes_hidden: Supports hidden (if supports are enabled, checking this will hide the number of supports)
+            votes_enabled: Apoyos habilitados
+            votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando esta opción ocultarás el número de apoyos)
     events:
       proposals:
         proposal_published_for_admin:
-          admin_panel: admin panel
-          email_intro: The proposal <a href="%{resource_path}">%{resource_title}</a> has been added to %{participatory_space_title} by %{author}. Check it out of the %{admin_url}
-          email_outro: You have received this notification because you are admin of the participatory space "%{participatory_space_title}".
-          email_subject: New proposal "%{resource_title}" added to %{participatory_space_title}
-          notification_title: The proposal <a href="%{resource_path}">%{resource_title}</a> has been added to %{participatory_space_title} by %{author}. Check it out of the %{admin_url}
-          notification_title_official: The official proposal <a href="%{resource_path}">%{resource_title}</a> has been added to %{participatory_space_title}. Check it out of the %{admin_url}
+          admin_panel: panel de administración
+          email_intro: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
+          email_outro: Has recibido esta notificación porque eres administrador/a del espacio participativo "%{participatory_space_title}".
+          email_subject: Nueva propuesta «%{resource_title}» añadida a %{participatory_space_title}
+          notification_title: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
+          notification_title_official: La propuesta oficial <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}
     moderations:
       actions:
-        hide: Hide
+        hide: Ocultar
       admin:
         reportable:
           hide:
-            invalid: There was a problem hiding the resource.
-            success: Resource successfully hidden.
+            invalid: Se ha producido un error al ocultar el recurso.
+            success: Recurso correctamente ocultado.
     proposals:
       admin:
         proposals:
           address:
-            geolocated_at: Geolocated at
+            geolocated_at: Geolocalizada en
           send_email_button:
-            send_mail: Send an email to user
+            send_mail: Enviar un correo electrónico al usuario
         proposals_valuator_mailer:
           notify_proposals_valuator:
-            admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
+            admin_panel: panel de administración
+            email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
+            gratitude: '¡Gracias por tu ayuda!'
+            greeting: Hola %{name},
+            public_side: parte pública
+            subject: Nuevas propuestas asignadas para su evaluación
     reported_mailer:
       report:
-        admin_resource: Admin this resource
+        admin_resource: Administrar este recurso
     reporting_proposals:
       actions:
-        answer_proposal: Answer proposal
-        edit_proposal: Edit proposal
-        import: Import proposals from another component
-        new: New proposal
-        participatory_texts: Participatory texts
-        show: Show proposal
-        title: Actions
+        answer_proposal: Responder a la propuesta
+        edit_proposal: Editar propuesta
+        import: Importar propuestas de otro componente
+        new: Nueva propuesta
+        participatory_texts: Textos participativos
+        show: Ver propuesta
+        title: Acciones
       admin:
         actions:
-          edit_valuators: Edit valuators
-          preview: Preview
+          edit_valuators: Editar evaluadores
+          preview: Previsualizar
         answer_overdue:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour overdue
-                other: about %{count} hours overdue
+                one: alrededor de 1 hora atrasada
+                other: alrededor de %{count} horas atrasadas
               about_x_months:
-                one: about 1 month overdue
-                other: about %{count} months overdue
+                one: alrededor de 1 mes atrasada
+                other: alrededor de %{count} meses atrasada
               about_x_years:
-                one: about 1 year overdue
-                other: about %{count} years overdue
+                one: alrededor de 1 año atrasada
+                other: alrededor de %{count} años atrasada
               almost_x_years:
-                one: almost 1 year overdue
-                other: almost %{count} years overdue
-              half_a_minute: half a minute overdue
+                one: casi de 1 año atrasada
+                other: casi %{count} años atrasada
+              half_a_minute: medio minuto atrasada
               less_than_x_minutes:
-                one: less than a minute overdue
-                other: less than %{count} minutes overdue
+                one: menos de un minuto atrasada
+                other: menos de %{count} minutos atrasada
               less_than_x_seconds:
-                one: less than 1 second overdue
-                other: less than %{count} seconds overdue
+                one: menos de un segundo atrasada
+                other: menos de %{count} segundos atrasada
               over_x_years:
-                one: over 1 year overdue
-                other: over %{count} years overdue
+                one: alrededor de 1 año atrasada
+                other: alrededor de %{count} años atrasada
               x_days:
-                one: 1 day overdue
-                other: "%{count} days overdue"
+                one: 1 día atrasada
+                other: "%{count} días atrasada"
               x_minutes:
-                one: 1 minute overdue
-                other: "%{count} minutes overdue"
+                one: 1 minuto atrasada
+                other: "%{count} minutos atrasada"
               x_months:
-                one: 1 month overdue
-                other: "%{count} months overdue"
+                one: 1 mes atrasada
+                other: "%{count} meses atrasada"
               x_seconds:
-                one: 1 second overdue
-                other: "%{count} seconds overdue"
+                one: 1 segundo atrasada
+                other: "%{count} segundos atrasada"
               x_years:
-                one: 1 year overdue
-                other: "%{count} years overdue"
+                one: 1 año atrasada
+                other: "%{count} años atrasada"
         answer_pending:
           datetime:
             distance_in_words:
               about_x_hours:
-                one: about 1 hour to answer
-                other: about %{count} hours to answer
+                one: aproximadamente 1 hora para evaluar
+                other: alrededor de %{count} horas para evaluar
               about_x_months:
-                one: about 1 month to answer
-                other: about %{count} months to answer
+                one: alrededor de 1 mes para responder
+                other: alrededor de %{count} meses para responder
               about_x_years:
-                one: about 1 year to answer
-                other: about %{count} years to answer
+                one: alrededor de 1 año para responder
+                other: alrededor de %{count} años para responder
               almost_x_years:
-                one: almost 1 year to answer
-                other: almost %{count} years to answer
-              half_a_minute: half a minute to answer
+                one: casi 1 año para responder
+                other: casi %{count} años para responder
+              half_a_minute: medio minuto para responder
               less_than_x_minutes:
-                one: less than a minute to answer
-                other: less than %{count} minutes to answer
+                one: menos de un minuto para responder
+                other: menos de %{count} minutos para responder
               less_than_x_seconds:
-                one: less than 1 second to answer
-                other: less than %{count} seconds to answer
+                one: menos de un segundo para responder
+                other: menos de %{count} segundo para responder
               over_x_years:
-                one: over 1 year to answer
-                other: over %{count} years to answer
+                one: más de 1 año para responder
+                other: más de %{count} años para responder
               x_days:
                 one: 1 día para responder
                 other: "%{count} días para responder"
