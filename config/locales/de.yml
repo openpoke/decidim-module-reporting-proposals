@@ -20,7 +20,7 @@ de:
           subject: Ihre Meldung wurde ausgeblendet
       templates:
         fetch:
-          error: Couldn't find this template, maybe has been deleted?
+          error: Diese Vorlage kann nicht gefunden werden, vielleicht wurde sie gelöscht?
         missing_resource: "(fehlende Ressource)"
     application:
       geocoding:
@@ -323,11 +323,11 @@ de:
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
-              Your proposal has been answered.
-              You can read the answer here:<br>
+              Dein Beitrag wurde beantwortet.
+              Du kannst die Antwort hier einsehen:<br>
               <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hi, %{recipient}!
-            subject: Your proposal has been answered
+            greeting: Hallo %{recipient}!
+            subject: Dein Beitrag wurde beantwortet
         proposal_notes:
           modal:
             body: Notiz
@@ -404,10 +404,10 @@ de:
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |
-            Your proposal has been published.
-            You can view it here <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-          greeting: Hi, %{recipient}!
-          subject: Your proposal has been published
+            Dein Beitrag wurde veröffentlicht.
+            Du kannst ihn hier einsehen <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+          greeting: Hallo %{recipient}!
+          subject: Dein Beitrag wurde veröffentlicht
       proposals:
         compare:
           geocoding:
