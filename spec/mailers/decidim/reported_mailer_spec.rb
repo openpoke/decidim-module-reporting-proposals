@@ -2,6 +2,7 @@
 
 require "spec_helper"
 
+# rubocop:disable RSpec/SubjectDeclaration
 module Decidim
   describe ReportedMailer, type: :mailer do
     let(:organization) { create(:organization, name: "Test Organization") }
@@ -152,3 +153,4 @@ module Decidim
     end
   end
 end
+# rubocop:enable RSpec/SubjectDeclaration

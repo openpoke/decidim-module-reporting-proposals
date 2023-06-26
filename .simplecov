@@ -8,6 +8,6 @@ SimpleCov.start do
   add_filter "/spec"
 end
 
-SimpleCov.command_name ENV["COMMAND_NAME"] || File.basename(Dir.pwd)
+SimpleCov.command_name ENV.fetch("COMMAND_NAME", nil) || File.basename(Dir.pwd)
 
 SimpleCov.merge_timeout 1800

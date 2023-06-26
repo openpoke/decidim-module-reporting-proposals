@@ -4,6 +4,6 @@
 <% if count.zero? %>
   0
 <% else %>
-	<%= proposal.valuation_assignments.first&.valuator_role&.user&.name %>
-	<%= "(+#{(count - 1)})" if count > 1 %>
+  <%= proposal.valuation_assignments.first&.valuator_role&.user&.name %>
+  <%= "(+#{(count - 1)})" if count > 1 %>
 <% end %>
