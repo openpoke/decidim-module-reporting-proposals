@@ -36,13 +36,11 @@ module Decidim
         end
 
         def current_component
-          @current_component ||= begin
-            if defined?(query_scope) && query_scope.respond_to?(:find)
-              query_scope.find_by(id: params[:id])
-            elsif params.has_key?(:component_id)
-              Decidim::Component.find_by(id: params[:component_id])
-            end
-          end
+          @current_component ||= if defined?(query_scope) && query_scope.respond_to?(:find)
+                                   query_scope.find_by(id: params[:id])
+                                 elsif params.has_key?(:component_id)
+                                   Decidim::Component.find_by(id: params[:component_id])
+                                 end
         end
       end
     end

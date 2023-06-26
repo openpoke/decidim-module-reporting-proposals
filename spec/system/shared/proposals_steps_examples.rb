@@ -243,7 +243,7 @@ shared_examples "creates normal proposal" do
 end
 
 shared_examples "remove errors" do |continue|
-  it "remove errors when has_no_address is checked " do
+  it "remove errors when has_no_address is checked" do
     fill_in :proposal_address, with: ""
     if continue
       click_button "Continue"

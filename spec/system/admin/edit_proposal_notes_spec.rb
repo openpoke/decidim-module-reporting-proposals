@@ -85,7 +85,7 @@ describe "Edit Proposal Notes", type: :system do
 
     it "displays the edited status" do
       expect(page).to have_content("Edited")
-      expect(page).to have_content((proposal_notes.last.updated_at.strftime("%d/%m/%Y %H:%M")))
+      expect(page).to have_content(proposal_notes.last.updated_at.strftime("%d/%m/%Y %H:%M"))
     end
   end
 end

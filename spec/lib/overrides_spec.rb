@@ -42,7 +42,7 @@ checksums = [
   {
     package: "decidim-proposals",
     files: {
-      "/lib/decidim/proposals/component.rb" => "d7cb7ac92fa70dce6f43c687de900445",
+      "/lib/decidim/proposals/component.rb" => "cf5b88a9b882643e437ec19f2bc83885",
       "/app/events/decidim/proposals/publish_proposal_event.rb" => "09a89a62bd06731b12acc8589e1e998f",
       "/app/controllers/decidim/proposals/proposals_controller.rb" => "81075a969be2732d21f244eff3c4c56e",
       "/app/helpers/decidim/proposals/proposal_wizard_helper.rb" => "75d875f3323e75273819d526731140da",
@@ -99,9 +99,7 @@ checksums = [
 
 describe "Overriden files", type: :view do
   checksums.each do |item|
-    # rubocop:disable Rails/DynamicFindBy
-    spec = ::Gem::Specification.find_by_name(item[:package])
-    # rubocop:enable Rails/DynamicFindBy
+    spec = Gem::Specification.find_by_name(item[:package])
     item[:files].each do |file, signature|
       it "#{spec.gem_dir}#{file} matches checksum" do
         expect(md5("#{spec.gem_dir}#{file}")).to eq(signature)

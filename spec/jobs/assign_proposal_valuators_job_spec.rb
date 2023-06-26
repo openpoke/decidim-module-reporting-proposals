@@ -29,7 +29,7 @@ module Decidim::ReportingProposals
             perform_enqueued_jobs do
               subject.call
             end
-          end.to change { Decidim::Proposals::ValuationAssignment.count }.by(1)
+          end.to change(Decidim::Proposals::ValuationAssignment, :count).by(1)
         end
       end
 

@@ -49,13 +49,13 @@ module Decidim::ReportingProposals::Admin
         end
 
         context "when everything is OK" do
-          it { is_expected.to eq true }
+          it { is_expected.to be true }
         end
 
         context "when answering is disabled" do
           let(:proposal_answering_enabled?) { false }
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
       end
     end
@@ -66,7 +66,7 @@ module Decidim::ReportingProposals::Admin
           { scope: :admin, action: :edit_photos, subject: :proposals }
         end
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -77,19 +77,19 @@ module Decidim::ReportingProposals::Admin
         end
 
         context "when everything is OK" do
-          it { is_expected.to eq true }
+          it { is_expected.to be true }
         end
 
         context "when photo editing is disabled at the module level" do
           let(:allow_proposal_photo_editing) { false }
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
 
         context "when photo editing is disabled at the component level" do
           let(:proposal_photo_editing_enabled?) { false }
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
       end
     end
@@ -101,13 +101,13 @@ module Decidim::ReportingProposals::Admin
         end
 
         context "when everything is OK" do
-          it { is_expected.to eq true }
+          it { is_expected.to be true }
         end
 
         context "when hide proposals is disabled" do
           let(:allow_admins_to_hide_proposals) { false }
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
       end
     end
@@ -118,7 +118,7 @@ module Decidim::ReportingProposals::Admin
           { scope: :admin, action: :hide_proposal, subject: :proposals }
         end
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -128,7 +128,7 @@ module Decidim::ReportingProposals::Admin
           { scope: :admin, action: :assign_to_valuator, subject: :proposals }
         end
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
     end
 
@@ -140,7 +140,7 @@ module Decidim::ReportingProposals::Admin
           { scope: :admin, action: :assign_to_valuator, subject: :proposals }
         end
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -155,13 +155,13 @@ module Decidim::ReportingProposals::Admin
         context "when author edits his own note" do
           let!(:proposal_note) { create :proposal_note, proposal: proposal, author: user }
 
-          it { is_expected.to eq true }
+          it { is_expected.to be true }
         end
 
         context "when the author of the note is a different user" do
           let!(:proposal_note) { create :proposal_note, proposal: proposal, author: author }
 
-          it { is_expected.to eq false }
+          it { is_expected.to be false }
         end
       end
     end

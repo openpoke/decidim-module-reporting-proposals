@@ -48,9 +48,24 @@ module Decidim
 
         # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
         Decidim::ReportedMailer.include(Decidim::ReportedMailerOverride)
-        Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
+
+        # since version 0.27 Decidim uses its own version of attribute validation (used to be Rectify::Forms)
+        # To patch the ResourceManifest directly does not work now as the class is initialized by the proposals module on requiring the file component.rb
+        # So we remove the manifest and create it again after patching the class ResourceManifest
         Decidim::ResourceManifest.include(Decidim::ResourceManifestOverride)
+        Decidim.resource_manifests.delete(Decidim.find_resource_manifest(:proposal))
+        component = Decidim.find_component_manifest(:proposals)
+        component.register_resource(:proposal) do |resource|
+          resource.model_class_name = "Decidim::Proposals::Proposal"
+          resource.template = "decidim/proposals/proposals/linked_proposals"
+          resource.card = "decidim/proposals/proposal"
+          resource.reported_content_cell = "decidim/proposals/reported_content"
+          resource.actions = %w(endorse vote amend comment vote_comment)
+          resource.searchable = true
+        end
+        Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
         Decidim::Proposals::PublishProposal.include(Decidim::Proposals::PublishProposalOverride)
+
         Decidim.find_resource_manifest(:proposal).admin_route_name = "proposal"
         Decidim::Proposals::PublishProposalEvent.include(Decidim::Proposals::PublishProposalEventOverride)
         Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::Proposals::Admin::AssignProposalsToValuatorOverride)

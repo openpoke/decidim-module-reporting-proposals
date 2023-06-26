@@ -23,7 +23,7 @@ module Decidim::ReportingProposals
       { scope: :anything, action: :locate, subject: :geolocation }
     end
 
-    it { is_expected.to eq true }
+    it { is_expected.to be true }
 
     context "when scope is admin" do
       let(:action) do

@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "decidim-elections", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-meetings", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-templates", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
