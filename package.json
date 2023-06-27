@@ -183,7 +183,6 @@
     }
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-standard": "^11.0.0",
@@ -191,5 +190,6 @@
     "stylelint": "13.11.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
