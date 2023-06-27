@@ -19,6 +19,8 @@ de:
           reason: 'Grund: %{reason}'
           subject: Ihre Meldung wurde ausgeblendet
       templates:
+        fetch:
+          error: Diese Vorlage kann nicht gefunden werden, vielleicht wurde sie gelöscht?
         missing_resource: "(fehlende Ressource)"
     application:
       geocoding:
@@ -318,6 +320,14 @@ de:
         exports:
           proposal_comments: Kommentare
           proposals: Meldungen
+        notification_answer_proposal_mailer:
+          notify_proposal_author:
+            email_body: |
+              Dein Beitrag wurde beantwortet.
+              Du kannst die Antwort hier einsehen:<br>
+              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+            greeting: Hallo %{recipient}!
+            subject: Dein Beitrag wurde beantwortet
         proposal_notes:
           modal:
             body: Notiz
@@ -391,6 +401,13 @@ de:
           no_device_location: Entschuldigung, wir konnten deinen Standort nicht erkennen.
         use_my_camera: Kamera verwenden
         use_my_location: Standort verwenden
+      notification_publish_proposal_mailer:
+        notify_proposal_author:
+          email_body: |
+            Dein Beitrag wurde veröffentlicht.
+            Du kannst ihn hier einsehen <a href=%{answer_url} target="_blank">%{proposal_title}</a>
+          greeting: Hallo %{recipient}!
+          subject: Dein Beitrag wurde veröffentlicht
       proposals:
         compare:
           geocoding:
