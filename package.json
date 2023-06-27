@@ -26,11 +26,12 @@
     "extends": "@decidim/stylelint-config"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@decidim/stylelint-config": "^0.27.3",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.0",
-    "stylelint": "13.11.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "stylelint": "13.11.0"
   }
 }
