@@ -9,11 +9,11 @@ module Decidim
       included do
         def proposal_wizard_stepper(current_step)
           steps = %(
-            #{proposal_wizard_stepper_step(ProposalsController::STEP1, current_step)}
-            #{proposal_wizard_stepper_step(ProposalsController::STEP2, current_step)}
+            #{proposal_wizard_stepper_step(Proposals::ProposalsController::STEP1, current_step)}
+            #{proposal_wizard_stepper_step(Proposals::ProposalsController::STEP2, current_step)}
           )
-          steps = %(#{steps} #{proposal_wizard_stepper_step(ProposalsController::STEP3, current_step)}) unless reporting_proposals_component?
-          steps = %(#{steps} #{proposal_wizard_stepper_step(ProposalsController::STEP4, current_step)})
+          steps = %(#{steps} #{proposal_wizard_stepper_step(Proposals::ProposalsController::STEP3, current_step)}) unless reporting_proposals_component?
+          steps = %(#{steps} #{proposal_wizard_stepper_step(Proposals::ProposalsController::STEP4, current_step)})
 
           content_tag :ol, class: "wizard__steps" do
             steps.html_safe
