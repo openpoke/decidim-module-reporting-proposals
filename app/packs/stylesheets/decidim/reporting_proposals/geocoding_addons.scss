@@ -1,20 +1,20 @@
-.input-group.has-tribute {
+.input-group.has-tribute{
   position: relative;
 
-  .tribute-container {
+  .tribute-container{
     margin-top: 2.3rem;
   }
 }
 
-.user-device-location {
-  button {
+.user-device-location{
+  button{
     max-height: 3rem;
 
-    &.loading-spinner {
+    &.loading-spinner{
       position: relative;
       margin: 0 !important;
 
-      &::before {
+      &::before{
         position: absolute;
         top: 6px;
         left: 12px;
@@ -22,12 +22,12 @@
     }
   }
 
-  @media only screen and (max-width: 596px) {
+  @media only screen and (max-width: 596px){
     display: block !important;
     margin-top: 1rem;
     margin-bottom: -.5rem;
 
-    button {
+    button{
       border-radius: 4px !important;
     }
   }
