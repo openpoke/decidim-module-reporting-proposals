@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     # Class used to retrieve similar proposals.
-    class NearbyProposals < Rectify::Query
+    class NearbyProposals < Decidim::Query
       # Syntactic sugar to initialize the class and return the queried objects.
       #
       # components - Decidim::CurrentComponent

@@ -9,11 +9,11 @@ checksums = [
   {
     package: "decidim-core",
     files: {
-      "/lib/decidim/component_validator.rb" => "2e3eb588a9579b94c21f4f440751d9a9",
+      "/lib/decidim/component_validator.rb" => "f2d90649846a7a5b834d4e46b006d0d9",
       "/lib/decidim/map/autocomplete.rb" => "ebb08d858ca97b8f94c3db6072357598",
-      "/lib/decidim/form_builder.rb" => "3ea9c3c51ea6e5e54d293326a529d27a",
+      "/lib/decidim/form_builder.rb" => "2effa083f9f64680cde462dc308f593a",
       "/app/helpers/decidim/resource_helper.rb" => "78a09dc6a9430a3f00e6c34abd51c14a",
-      "/app/commands/decidim/create_report.rb" => "41c95f194f5ccb5ff32efc43644c9ce5",
+      "/app/commands/decidim/create_report.rb" => "d871d245789e6f20f8197a4d7939889d",
       "/app/models/decidim/category.rb" => "fc044f23d00373d62693ee7f044558fe",
       "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf",
       "/app/mailers/decidim/reported_mailer.rb" => "1d027b93e14e662d7e6f7cc9814e67b5",
@@ -35,8 +35,8 @@ checksums = [
   {
     package: "decidim-templates",
     files: {
-      "/app/commands/decidim/templates/admin/copy_questionnaire_template.rb" => "4c8a7686cc05ad207bd7c041c99c4ef5",
-      "/app/commands/decidim/templates/admin/create_questionnaire_template.rb" => "14b1479a6de1153c4396bfbaf2f05703"
+      "/app/commands/decidim/templates/admin/copy_questionnaire_template.rb" => "ee7a0eb341baca868b8e7169e8871106",
+      "/app/commands/decidim/templates/admin/create_questionnaire_template.rb" => "5a9a8f92416c04aeaf7123a934118544"
     }
   },
   {
@@ -44,9 +44,9 @@ checksums = [
     files: {
       "/lib/decidim/proposals/component.rb" => "cf5b88a9b882643e437ec19f2bc83885",
       "/app/events/decidim/proposals/publish_proposal_event.rb" => "09a89a62bd06731b12acc8589e1e998f",
-      "/app/controllers/decidim/proposals/proposals_controller.rb" => "81075a969be2732d21f244eff3c4c56e",
+      "/app/controllers/decidim/proposals/proposals_controller.rb" => "b263741e3335110fa0e37c488c777190",
       "/app/helpers/decidim/proposals/proposal_wizard_helper.rb" => "75d875f3323e75273819d526731140da",
-      "/app/commands/decidim/proposals/create_proposal.rb" => "8808a4239d750a86edd6e9c309533788",
+      "/app/commands/decidim/proposals/create_proposal.rb" => "7a6b8a1ea733e1e331b5251accfc9126",
       "/app/commands/decidim/proposals/publish_proposal.rb" => "1e7e3c982b4cfd6806f0719cc985f2d1",
       "/app/commands/decidim/proposals/admin/answer_proposal.rb" => "4ee0bce9fc065ed1b7b03a8cd05ccc2f",
       "/app/forms/decidim/proposals/proposal_form.rb" => "ec488556b51b8f28c5031552b04844c1",
@@ -56,7 +56,7 @@ checksums = [
       "/app/views/decidim/proposals/proposals/_edit_form_fields.html.erb" => "6893bb3cc0fe99f4de986f829af26d50",
       "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "b1076d75afb140ded26d4837618f2af5",
       "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "653949a89a736379aca2ce4efe44203d",
-      "/app/commands/decidim/proposals/admin/assign_proposals_to_valuator.rb" => "9f87025037a9f4e3f7b22e7b3d70da7c",
+      "/app/commands/decidim/proposals/admin/assign_proposals_to_valuator.rb" => "595ed7561131c9ee8a79bb4806f7a9bb",
       "/app/permissions/decidim/proposals/admin/permissions.rb" => "751b15ced553b17b7203f66a0152fb75",
       "/app/controllers/decidim/proposals/admin/proposal_answers_controller.rb" => "51f25d8b36bca87fe5cb2637149b45fb",
       "/app/controllers/decidim/proposals/admin/valuation_assignments_controller.rb" => "c558d21a69ea1c9c9e7d70fdc8f7d20e",
@@ -71,8 +71,8 @@ checksums = [
     package: "decidim-accountability",
     files: {
       "/app/forms/decidim/accountability/admin/result_form.rb" => "1b2a1c92532899b99570726bbcf11889",
-      "/app/commands/decidim/accountability/admin/create_result.rb" => "3c1900b314ef0a6a801bee37bfa0934a",
-      "/app/commands/decidim/accountability/admin/update_result.rb" => "31074f2fe62c7c49ddb9914b82326f4f"
+      "/app/commands/decidim/accountability/admin/create_result.rb" => "cf29e89997407c150481ad185b6b5b82",
+      "/app/commands/decidim/accountability/admin/update_result.rb" => "f7edc5a92b8ff8cf0ddf6176f23615b4"
     }
   },
   {

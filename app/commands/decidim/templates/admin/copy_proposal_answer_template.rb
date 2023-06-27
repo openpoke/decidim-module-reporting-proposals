@@ -4,7 +4,7 @@ module Decidim
   module Templates
     # A command with all the business logic when duplicating a proposal's answer template
     module Admin
-      class CopyProposalAnswerTemplate < Rectify::Command
+      class CopyProposalAnswerTemplate < Decidim::Command
         def initialize(template)
           @template = template
         end

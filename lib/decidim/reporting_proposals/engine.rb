@@ -62,11 +62,9 @@ module Decidim
           resource.reported_content_cell = "decidim/proposals/reported_content"
           resource.actions = %w(endorse vote amend comment vote_comment)
           resource.searchable = true
+          resource.admin_route_name = "proposal"
         end
         Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
-        Decidim::Proposals::PublishProposal.include(Decidim::Proposals::PublishProposalOverride)
-
-        Decidim.find_resource_manifest(:proposal).admin_route_name = "proposal"
         Decidim::Proposals::PublishProposalEvent.include(Decidim::Proposals::PublishProposalEventOverride)
         Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::Proposals::Admin::AssignProposalsToValuatorOverride)
         Decidim::Admin::HideResource.include(Decidim::Admin::HideResourceOverride)
