@@ -100,7 +100,7 @@ module Decidim
                 participatory_process_slug: component.participatory_space.slug,
                 component_id: component.id,
                 filter: {
-                  state: [state]
+                  with_any_state: [state]
                 }
               }
             end
