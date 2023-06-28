@@ -26,14 +26,24 @@ module Decidim
         create(:user_group, :verified, organization: organization, users: [author])
       end
 
+      # let(:uploaded_files) do
+      #   [
+      #     Decidim::Dev.test_file("Exampledocument.pdf", "application/pdf")
+      #   ]
+      # end
       let(:uploaded_files) do
         [
-          Decidim::Dev.test_file("Exampledocument.pdf", "application/pdf")
+          {
+            file: upload_test_file(Decidim::Dev.asset("Exampledocument.pdf"), content_type: "application/pdf")
+          }
         ]
       end
+
       let(:uploaded_photos) do
         [
-          Decidim::Dev.test_file("city.jpeg", "image/jpeg")
+          {
+            file: upload_test_file(Decidim::Dev.test_file("city.jpeg", "image/jpeg"))
+          }
         ]
       end
       let(:latitude) { 40.1234 }
@@ -151,8 +161,8 @@ module Decidim
         context "when attachments are allowed and file is invalid" do
           let(:uploaded_files) do
             [
-              Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
-              Decidim::Dev.test_file("verify_user_groups.csv", "text/csv")
+              { file: upload_test_file(Decidim::Dev.test_file("city.jpeg", "image/jpeg")) },
+              { file: upload_test_file(Decidim::Dev.test_file("verify_user_groups.csv", "text/csv")) }
             ]
           end
 
