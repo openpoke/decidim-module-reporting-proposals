@@ -25,7 +25,7 @@ module Decidim
       let(:has_no_address) { false }
       let(:has_no_image) { false }
       let(:address) { "Some address" }
-      let(:image) { Decidim::Dev.asset("city.jpeg") }
+      let(:image) { [Decidim::Dev.test_file("city.jpeg", "image/jpeg")] }
       let(:suggested_hashtags) { [] }
       let(:attachment_params) { nil }
       let(:meeting_as_author) { false }
@@ -99,14 +99,14 @@ module Decidim
       context "when editing an existing proposal" do
         subject { described_class.from_model(proposal).with_context(context) }
 
-        let!(:proposal) { create(:proposal, :with_photo, component: component) }
-
+        let!(:proposal) { create(:proposal, attachments: attachments, component: component) }
+        let(:attachments) { [create(:attachment, :with_image, weight: 0)] }
         # there's a bug in the form as title/body is a hash but it is validated as a string
 
-        before do
-          allow(subject).to receive(:title).and_return(title)
-          allow(subject).to receive(:body).and_return(body)
-        end
+        # before do
+        #   allow(subject).to receive(:title).and_return(title)
+        #   allow(subject).to receive(:body).and_return(body)
+        # end
 
         it { is_expected.to be_valid }
       end
