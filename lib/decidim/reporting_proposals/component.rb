@@ -96,15 +96,6 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :suggested_hashtags, type: :text, editor: false, required: false
   end
 
-  component.register_resource(:reporting_proposal) do |resource|
-    resource.model_class_name = "Decidim::Proposals::Proposal"
-    resource.template = "decidim/proposals/proposals/linked_proposals"
-    resource.card = "decidim/proposals/proposal"
-    resource.reported_content_cell = "decidim/proposals/reported_content"
-    resource.actions = %w(endorse vote amend comment vote_comment)
-    resource.searchable = true
-  end
-
   component.register_resource(:collaborative_draft) do |resource|
     resource.model_class_name = "Decidim::Proposals::CollaborativeDraft"
     resource.card = "decidim/proposals/collaborative_draft"
