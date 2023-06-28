@@ -10,35 +10,38 @@ module Decidim
       delegate :asset_pack_path, to: :@template
 
       included do
-        def file_field(object_name, method, options = {})
-          return super(object_name, method, options) unless use_camera_button?(object_name)
+        alias_method :original_attachment, :attachment
 
-          unless @template.snippets.any?(:reporting_proposals_camera_addons)
-            @template.snippets.add(:reporting_proposals_camera_addons, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
-            @template.snippets.add(:reporting_proposals_camera_addons, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
+        def attachment(attribute, options = {})
+          original = original_attachment(attribute, options)
+
+          return original unless use_camera_button?(attribute)
+
+          unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
+            @template.snippets.add(:reporting_proposals_camera_scripts, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
+            @template.snippets.add(:reporting_proposals_camera_styles, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
 
             # This will display the snippets in the <head> part of the page.
-            @template.snippets.add(:head, @template.snippets.for(:reporting_proposals_camera_addons))
+            @template.snippets.add(:head, @template.snippets.for(:reporting_proposals_camera_styles))
+            @template.snippets.add(:foot, @template.snippets.for(:reporting_proposals_camera_scripts))
           end
 
-          content_tag(:div, class: "input-group") do
-            super(object_name, method, options) +
-              content_tag(:div, class: "input-group-button") do
-                content_tag(:button, class: "button secondary user-device-camera", type: "button", data: { input: "#{object_name}_#{method}" }) do
-                  icon("camera-slr", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_camera", scope: "decidim.reporting_proposals.forms")}"
-                end
+          content_tag(:div, class: "camera-container") do
+            original +
+              content_tag(:button, class: "button secondary user-device-camera", type: "button", data: { input: attribute }) do
+                icon("camera-slr", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_camera", scope: "decidim.reporting_proposals.forms")}"
               end
           end
         end
 
         private
 
-        def use_camera_button?(object_name)
+        def use_camera_button?(attribute)
           return unless @template.respond_to?(:current_component)
 
           return unless Decidim::ReportingProposals.use_camera_button.include?(@template.current_component.manifest_name.to_sym)
 
-          return object_name == :add_photos unless Decidim::ReportingProposals.camera_button_on_attachments
+          return attribute == :photos unless Decidim::ReportingProposals.camera_button_on_attachments
 
           true
         end
