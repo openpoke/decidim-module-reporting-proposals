@@ -18,7 +18,7 @@ module Decidim::ReportingProposals
       }
     end
 
-    let(:permission_action) { Decidim::PermissionAction.new(action) }
+    let(:permission_action) { Decidim::PermissionAction.new(**action) }
     let(:action) do
       { scope: :anything, action: :locate, subject: :geolocation }
     end

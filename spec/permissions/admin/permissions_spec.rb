@@ -34,7 +34,7 @@ module Decidim::ReportingProposals::Admin
     let(:allow_admins_to_hide_proposals) { true }
     let(:valuators_assign_other_valuators) { true }
     let(:edit_proposal_note?) { true }
-    let(:permission_action) { Decidim::PermissionAction.new(action) }
+    let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     before do
       allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
