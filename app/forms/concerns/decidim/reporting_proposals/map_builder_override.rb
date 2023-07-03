@@ -22,7 +22,7 @@ module Decidim
             # This will display the snippets in the <head> part of the page.
             template.snippets.add(:head, template.snippets.for(:reporting_proposals_geocoding_styles))
             # This will display the snippets in the bottom part of the page.
-            template.snippets.add(:foot, @template.snippets.for(:reporting_proposals_geocoding_scripts))
+            template.snippets.add(:foot, template.snippets.for(:reporting_proposals_geocoding_scripts))
           end
 
           options[:autocomplete] ||= "off"

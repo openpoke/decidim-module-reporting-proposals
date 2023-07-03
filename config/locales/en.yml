@@ -483,6 +483,8 @@ en:
               same situation, you can choose to support it instead of creating a new
               one.
             title: Nearby proposals
+        edit:
+          delete_image: Delete image
         form:
           image: Image/photo
     templates:

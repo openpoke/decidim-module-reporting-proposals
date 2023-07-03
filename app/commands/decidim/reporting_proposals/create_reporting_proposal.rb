@@ -35,6 +35,8 @@ module Decidim
         broadcast(:ok, proposal)
       end
 
+      private
+
       def create_reporting_proposal
         PaperTrail.request(enabled: false) do
           @proposal = Decidim.traceability.perform_action!(

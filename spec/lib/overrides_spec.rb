@@ -14,6 +14,7 @@ checksums = [
       "/lib/decidim/form_builder.rb" => "2effa083f9f64680cde462dc308f593a",
       "/app/helpers/decidim/resource_helper.rb" => "78a09dc6a9430a3f00e6c34abd51c14a",
       "/app/commands/decidim/create_report.rb" => "d871d245789e6f20f8197a4d7939889d",
+      "/app/commands/decidim/gallery_methods.rb" => "2b1d3b8f67f9e8f5516605acc2acb053",
       "/app/models/decidim/category.rb" => "fc044f23d00373d62693ee7f044558fe",
       "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf",
       "/app/mailers/decidim/reported_mailer.rb" => "1d027b93e14e662d7e6f7cc9814e67b5",
