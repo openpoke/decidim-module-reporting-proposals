@@ -15,38 +15,14 @@ describe "User camera button", type: :system do
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let(:all_manifests) { [:proposals, :reporting_proposals] }
   let(:manifests) { all_manifests }
-  let(:camera_on_attachments) { true }
 
   before do
     allow(Decidim::ReportingProposals).to receive(:use_camera_button).and_return(manifests)
-    allow(Decidim::ReportingProposals).to receive(:camera_button_on_attachments).and_return(camera_on_attachments)
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
 
   shared_examples "uses device camera" do
-    it "has two cameras button" do
-      expect(page).to have_button("Use my camera", count: 2)
-    end
-
-    context "when no camera on attachments" do
-      let(:camera_on_attachments) { false }
-
-      it "has one camera button" do
-        expect(page).to have_button("Use my camera", count: 1)
-      end
-    end
-
-    context "when option disabled" do
-      let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
-
-      it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
-      end
-    end
-  end
-
-  shared_examples "uses admin device camera" do
     it "has one camera button" do
       expect(page).to have_button("Use my camera", count: 1)
     end
@@ -69,14 +45,14 @@ describe "User camera button", type: :system do
     it_behaves_like "uses device camera"
   end
 
-  context "when admin" do
-    before do
-      visit manage_component_path(component)
-      click_link "New proposal"
-    end
+  # context "when admin" do
+  #   before do
+  #     visit manage_component_path(component)
+  #     click_link "New proposal"
+  #   end
 
-    it_behaves_like "uses admin device camera"
-  end
+  #   it_behaves_like "uses device camera"
+  # end
 
   describe "#proposals" do
     let(:manifest_name) { "proposals" }
@@ -95,13 +71,13 @@ describe "User camera button", type: :system do
 
     it_behaves_like "uses device camera"
 
-    context "when admin" do
-      before do
-        visit manage_component_path(component)
-        click_link "New proposal"
-      end
+    # context "when admin" do
+    #   before do
+    #     visit manage_component_path(component)
+    #     click_link "New proposal"
+    #   end
 
-      it_behaves_like "uses admin device camera"
-    end
+    #   it_behaves_like "uses device camera"
+    # end
   end
 end

@@ -31,12 +31,7 @@ module Decidim
 
     # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
     config_accessor :use_camera_button do
-      [:proposals, :reporting_proposals]
-    end
-
-    # Public Setting to prevent adding the camera button on not photo/image input[type=file]
-    config_accessor :camera_button_on_attachments do
-      false
+      [:proposals]
     end
 
     # Public setting to prevent valuators or admins to modify the photos attached to a proposal
