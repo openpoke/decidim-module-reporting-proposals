@@ -51,13 +51,16 @@ describe "Reporting proposals overrides", type: :system do
       end
 
       check "proposal_has_no_address" if skip_address
-      if attach
-        attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
-        attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf"))
-      elsif manifest_name == "reporting_proposals"
-        check "proposal_has_no_image"
-      end
+    end
 
+    if attach
+      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
+    elsif manifest_name == "reporting_proposals"
+      check "proposal_has_no_image"
+    end
+
+    within ".card__content form" do
       find("*[type=submit]").click
     end
   end
@@ -66,12 +69,14 @@ describe "Reporting proposals overrides", type: :system do
     within ".card__content form" do
       select translated(another_category.name), from: :proposal_category_id
       select user_group.name, from: :proposal_user_group_id
+    end
 
-      if attach
-        attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
-        attach_file(:proposal_add_documents, Decidim::Dev.asset("Exampledocument.pdf"))
-      end
+    if attach
+      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
+    end
 
+    within ".card__content form" do
       find("*[type=submit]").click
     end
   end

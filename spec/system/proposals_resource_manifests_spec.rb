@@ -150,7 +150,7 @@ describe "Admin find_resource_manifest", type: :system do
 
   describe "meetings" do
     let(:component) { create :meeting_component, :with_creation_enabled, participatory_space: participatory_process }
-    let!(:meeting) { create(:meeting, :past, component: component, author: user) }
+    let!(:meeting) { create(:meeting, :past, :published, component: component, author: user) }
 
     it "user can choose reporting_proposals" do
       visit main_component_path(component)
@@ -195,7 +195,7 @@ describe "Admin find_resource_manifest", type: :system do
     end
 
     context "when admin" do
-      let!(:meeting) { create(:meeting, :past, component: component) }
+      let!(:meeting) { create(:meeting, :past, :published, component: component) }
 
       it "admin can choose reporting proposals" do
         visit manage_component_path(component)
