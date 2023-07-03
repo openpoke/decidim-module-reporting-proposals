@@ -123,9 +123,7 @@ module Decidim
         private
 
         def populate_template_interpolations(proposal)
-          template.description.to_h do |row|
-            language = row.first
-            value = row.last
+          template.description do |language, value|
             value.gsub!("%{organization}", proposal.organization.name)
             value.gsub!("%{name}", proposal.creator_author.name)
             value.gsub!("%{admin}", current_user.name)
