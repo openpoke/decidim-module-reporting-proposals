@@ -21,7 +21,7 @@ describe "Process admin manages proposals", type: :system do
   end
 
   context "when the process admin reports" do
-    it "has a flag report " do
+    it "has a flag report" do
       expect(page).to have_css("button.link-alt", count: 1)
     end
   end

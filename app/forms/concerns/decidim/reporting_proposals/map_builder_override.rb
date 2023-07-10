@@ -15,12 +15,14 @@ module Decidim
         def geocoding_field(object_name, method, options = {})
           return original_geocoding_field(object_name, method, options) unless show_my_location_button?
 
-          unless template.snippets.any?(:reporting_proposals_geocoding_addons)
-            template.snippets.add(:reporting_proposals_geocoding_addons, template.javascript_pack_tag("decidim_reporting_proposals_geocoding"))
-            template.snippets.add(:reporting_proposals_geocoding_addons, template.stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
+          unless template.snippets.any?(:reporting_proposals_geocoding_scripts) || template.snippets.any?(:reporting_proposals_geocoding_styles)
+            template.snippets.add(:reporting_proposals_geocoding_scripts, template.javascript_pack_tag("decidim_reporting_proposals_geocoding"))
+            template.snippets.add(:reporting_proposals_geocoding_styles, template.stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
 
             # This will display the snippets in the <head> part of the page.
-            template.snippets.add(:head, template.snippets.for(:reporting_proposals_geocoding_addons))
+            template.snippets.add(:head, template.snippets.for(:reporting_proposals_geocoding_styles))
+            # This will display the snippets in the bottom part of the page.
+            template.snippets.add(:foot, template.snippets.for(:reporting_proposals_geocoding_scripts))
           end
 
           options[:autocomplete] ||= "off"

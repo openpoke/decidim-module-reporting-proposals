@@ -3,7 +3,7 @@
 module Decidim
   module Templates
     module Admin
-      class CreateProposalAnswerTemplate < Rectify::Command
+      class CreateProposalAnswerTemplate < Decidim::Command
         # Initializes the command.
         #
         # form - The source for this ProposalAnswerTemplate.

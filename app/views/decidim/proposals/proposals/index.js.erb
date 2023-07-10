@@ -8,7 +8,7 @@ $orderFilterInput.val('<%= order %>');
 var $dropdownMenu = $('.dropdown.menu', $proposals);
 $dropdownMenu.foundation();
 
-var markerData = JSON.parse('<%= escape_javascript proposals_data_for_map(search.results.select(&:geocoded_and_valid?))
+var markerData = JSON.parse('<%= escape_javascript proposals_data_for_map(search.result.select(&:geocoded_and_valid?))
 .to_json.html_safe %>');
 
 var $map = $("#map");

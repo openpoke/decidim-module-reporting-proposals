@@ -3,7 +3,7 @@
 shared_examples "map can be hidden" do
   it "checkbox hides the map" do
     fill_in :proposal_address, with: address
-    within ".tribute-container" do
+    within ".autoComplete_wrapper" do
       page.find("li", match: :first).click
     end
 
@@ -20,7 +20,7 @@ shared_examples "map can be shown" do |fill|
     expect(page).not_to have_content("You can move the point on the map")
     check "proposal_has_address"
     fill_in :proposal_address, with: address
-    within ".tribute-container" do
+    within ".autoComplete_wrapper" do
       page.find("li", match: :first).click
     end
 
@@ -243,7 +243,7 @@ shared_examples "creates normal proposal" do
 end
 
 shared_examples "remove errors" do |continue|
-  it "remove errors when has_no_address is checked " do
+  it "remove errors when has_no_address is checked" do
     fill_in :proposal_address, with: ""
     if continue
       click_button "Continue"

@@ -37,11 +37,11 @@ module Decidim::ReportingProposals
 
       it "destroys category valuators when category is destroyed" do
         expect(Decidim::ReportingProposals::CategoryValuator.count).to eq(1)
-        expect { category.destroy }.to change { Decidim::ReportingProposals::CategoryValuator.count }.by(-1)
+        expect { category.destroy }.to change(Decidim::ReportingProposals::CategoryValuator, :count).by(-1)
       end
 
       it "does not destroy category on destroy" do
-        expect { subject.destroy }.not_to(change { Decidim::Category.count })
+        expect { subject.destroy }.not_to(change(Decidim::Category, :count))
       end
     end
 
@@ -51,11 +51,11 @@ module Decidim::ReportingProposals
 
       it "destroys category valuators when participatory_process_user_role is destroyed" do
         expect(Decidim::ReportingProposals::CategoryValuator.count).to eq(1)
-        expect { valuator_role.destroy }.to change { Decidim::ReportingProposals::CategoryValuator.count }.by(-1)
+        expect { valuator_role.destroy }.to change(Decidim::ReportingProposals::CategoryValuator, :count).by(-1)
       end
 
       it "does not destroy participatory_process_user_role on destroy" do
-        expect { subject.destroy }.not_to(change { Decidim::ParticipatoryProcessUserRole.count })
+        expect { subject.destroy }.not_to(change(Decidim::ParticipatoryProcessUserRole, :count))
       end
 
       # test to ensure valuationassignments are destroyed when valuator role is destroyed
@@ -68,7 +68,7 @@ module Decidim::ReportingProposals
 
         it "destroys valuation assignments when participatory_process_user_role is destroyed" do
           expect(Decidim::Proposals::ValuationAssignment.count).to eq(1)
-          expect { valuator_role.destroy }.to change { Decidim::Proposals::ValuationAssignment.count }.by(-1)
+          expect { valuator_role.destroy }.to change(Decidim::Proposals::ValuationAssignment, :count).by(-1)
         end
       end
     end

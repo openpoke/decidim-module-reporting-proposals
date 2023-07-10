@@ -85,3 +85,6 @@ Rails/SkipsModelValidations:
 Rails/Validation:
   Include:
     - app/models/**/*.rb
+
+Rails/CompactBlank:
+  Enabled: false

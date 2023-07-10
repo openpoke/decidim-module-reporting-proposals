@@ -17,7 +17,7 @@ module Decidim
       let(:mail) { described_class.report(user, report) }
 
       describe "localisation" do
-        let(:subject) { "Un contingut ha estat denunciat" }
+        let(:mail_subject) { "Un contingut ha estat denunciat" }
         let(:default_subject) { "A resource has been reported" }
 
         let(:body) { "ha estat reportat" }
@@ -35,7 +35,7 @@ module Decidim
           expect(email_body(mail)).to have_link(href: Decidim::ResourceLocatorPresenter.new(reportable).admin_url)
         end
 
-        context "when the reported content is a resource without a admin url " do
+        context "when the reported content is a resource without a admin url" do
           let(:meetings_component) { create :component, manifest_name: "meetings" }
           let(:meeting) { create :meeting, component: meetings_component }
           let(:moderation) { create(:moderation, reportable: meeting, participatory_space: meetings_component.participatory_space, report_count: 1) }
@@ -142,7 +142,7 @@ module Decidim
     describe "#hide" do
       let(:mail) { described_class.hide(user, report) }
 
-      let(:subject) { "Un contingut s'ha ocultat automàticament" }
+      let(:mail_subject) { "Un contingut s'ha ocultat automàticament" }
       let(:default_subject) { "A resource has been hidden automatically" }
 
       let(:body) { "ocultat automàticament" }

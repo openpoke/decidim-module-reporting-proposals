@@ -59,14 +59,16 @@ describe "User camera button", type: :system do
     it_behaves_like "uses device camera"
   end
 
-  context "when admin" do
-    before do
-      visit manage_component_path(component)
-      click_link "New proposal"
-    end
+  # version .27 uses a modal to upload files, we are not touching it (for the moment)
+  # In case we want to add the "use my camera" button in the admin, this should be reactivated
+  # context "when admin" do
+  #   before do
+  #     visit manage_component_path(component)
+  #     click_link "New proposal"
+  #   end
 
-    it_behaves_like "uses admin device camera"
-  end
+  #   it_behaves_like "uses admin device camera"
+  # end
 
   describe "#proposals" do
     let(:manifest_name) { "proposals" }
@@ -85,13 +87,13 @@ describe "User camera button", type: :system do
 
     it_behaves_like "uses device camera"
 
-    context "when admin" do
-      before do
-        visit manage_component_path(component)
-        click_link "New proposal"
-      end
+    # context "when admin" do
+    #   before do
+    #     visit manage_component_path(component)
+    #     click_link "New proposal"
+    #   end
 
-      it_behaves_like "uses admin device camera"
-    end
+    #   it_behaves_like "uses admin device camera"
+    # end
   end
 end

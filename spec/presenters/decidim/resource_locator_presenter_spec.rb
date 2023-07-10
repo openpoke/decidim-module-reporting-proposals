@@ -22,7 +22,7 @@ module Decidim
       describe "#url" do
         subject { described_class.new(resource).url }
 
-        it { is_expected.to eq("http://1.lvh.me/processes/my-process/f/1/dummy_resources/1") }
+        it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/processes/my-process/f/1/dummy_resources/1}) }
 
         context "when specific port configured" do
           before do
@@ -63,7 +63,7 @@ module Decidim
             allow(resource.resource_manifest).to receive(:admin_route_name).and_return("dummy_resource")
           end
 
-          it { is_expected.to eq("http://1.lvh.me/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1") }
+          it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1}) }
         end
       end
     end
@@ -78,7 +78,7 @@ module Decidim
           allow(resource.resource_manifest).to receive(:admin_route_name).and_return("dummy_resource")
         end
 
-        it { is_expected.to eq("http://1.lvh.me/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1") }
+        it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1}) }
       end
     end
 
@@ -90,7 +90,7 @@ module Decidim
       describe "#url" do
         subject { described_class.new([resource, nested_resource]).url }
 
-        it { is_expected.to eq("http://1.lvh.me/processes/my-process/f/1/dummy_resources/1/nested_dummy_resources/1") }
+        it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/processes/my-process/f/1/dummy_resources/1/nested_dummy_resources/1}) }
 
         context "when specific port configured" do
           before do
@@ -144,7 +144,7 @@ module Decidim
             allow(nested_resource.resource_manifest).to receive(:admin_route_name).and_return("nested_dummy_resource")
           end
 
-          it { is_expected.to eq("http://1.lvh.me/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1/nested_dummy_resources/1") }
+          it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/admin/participatory_processes/my-process/components/1/manage/dummy_resources/1/nested_dummy_resources/1}) }
         end
       end
     end
@@ -153,7 +153,7 @@ module Decidim
       describe "#url" do
         subject { described_class.new(participatory_process).url }
 
-        it { is_expected.to start_with("http://1.lvh.me/processes/my-process") }
+        it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/processes/my-process}) }
       end
 
       describe "#path" do
@@ -172,7 +172,7 @@ module Decidim
             allow(participatory_process.resource_manifest).to receive(:admin_route_name).and_return("participatory_process")
           end
 
-          it { is_expected.to start_with("http://1.lvh.me/admin/participatory_processes/my-process") }
+          it { is_expected.to match(%r{http://1\.lvh\.me:[0-9]+/admin/participatory_processes/my-process}) }
         end
       end
     end

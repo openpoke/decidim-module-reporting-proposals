@@ -12,7 +12,7 @@ module Decidim
 
         def new
           enforce_permission_to :create, :proposal
-          @step = :step_1
+          @step = Proposals::ProposalsController::STEP1
           if proposal_draft.present?
             redirect_to edit_draft_proposal_path(proposal_draft, component_id: proposal_draft.component.id, question_slug: proposal_draft.component.participatory_space.slug)
           else
@@ -22,7 +22,7 @@ module Decidim
 
         def create
           enforce_permission_to :create, :proposal
-          @step = :step_1
+          @step = Proposals::ProposalsController::STEP1
           @form = form(new_proposal_form).from_params(proposal_creation_params)
 
           create_proposal_command.call(@form, current_user) do
@@ -42,7 +42,7 @@ module Decidim
         # change comparison class if geocoding comparison is enabled
         def compare
           enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = :step_2
+          @step = Proposals::ProposalsController::STEP2
           klass = if geocoding_comparison?
                     Decidim::ReportingProposals::NearbyProposals
                   else
@@ -61,7 +61,7 @@ module Decidim
         # disable this step for reporting proposals
         def complete
           enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = :step_3
+          @step = Proposals::ProposalsController::STEP3
 
           @form = form_proposal_model
 
@@ -71,7 +71,7 @@ module Decidim
         end
 
         def edit_draft
-          @step = reporting_proposal? ? :step_1 : :step_3
+          @step = reporting_proposal? ? Proposals::ProposalsController::STEP1 : Proposals::ProposalsController::STEP3
           enforce_permission_to :edit, :proposal, proposal: @proposal
         end
 

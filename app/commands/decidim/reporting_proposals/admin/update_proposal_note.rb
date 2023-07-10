@@ -4,7 +4,7 @@ module Decidim
   module ReportingProposals
     module Admin
       # A command with all the business logic when a user updates a proposal note.
-      class UpdateProposalNote < Rectify::Command
+      class UpdateProposalNote < Decidim::Command
         # Public: Initializes the command.
         #
         # form         - A form object with the params.

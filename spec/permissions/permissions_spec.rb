@@ -18,12 +18,12 @@ module Decidim::ReportingProposals
       }
     end
 
-    let(:permission_action) { Decidim::PermissionAction.new(action) }
+    let(:permission_action) { Decidim::PermissionAction.new(**action) }
     let(:action) do
       { scope: :anything, action: :locate, subject: :geolocation }
     end
 
-    it { is_expected.to eq true }
+    it { is_expected.to be true }
 
     context "when scope is admin" do
       let(:action) do

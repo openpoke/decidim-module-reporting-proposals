@@ -8,13 +8,13 @@ on:
 
 env:
   CI: "true"
-  RUBY_VERSION: 2.7.7
+  RUBY_VERSION: 3.0.5
   NODE_VERSION: 16.9.1
 
 jobs:
   lint-report:
     name: Linting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2

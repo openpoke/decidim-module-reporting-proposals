@@ -3,7 +3,7 @@
 module Decidim
   module Templates
     module Admin
-      class UpdateProposalAnswerTemplate < Rectify::Command
+      class UpdateProposalAnswerTemplate < Decidim::Command
         # Initializes the command.
         #
         # template - The Template to update.

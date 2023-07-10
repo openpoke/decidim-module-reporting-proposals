@@ -10,21 +10,22 @@ module Decidim
       delegate :asset_pack_path, to: :@template
 
       included do
-        def file_field(object_name, method, options = {})
-          return super(object_name, method, options) unless use_camera_button?(object_name)
+        def file_field(object_name, options = {})
+          return super(object_name, options) unless use_camera_button?(object_name)
 
-          unless @template.snippets.any?(:reporting_proposals_camera_addons)
-            @template.snippets.add(:reporting_proposals_camera_addons, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
-            @template.snippets.add(:reporting_proposals_camera_addons, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
+          unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
+            @template.snippets.add(:reporting_proposals_camera_scripts, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
+            @template.snippets.add(:reporting_proposals_camera_styles, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
 
             # This will display the snippets in the <head> part of the page.
-            @template.snippets.add(:head, @template.snippets.for(:reporting_proposals_camera_addons))
+            @template.snippets.add(:head, @template.snippets.for(:reporting_proposals_camera_styles))
+            @template.snippets.add(:foot, @template.snippets.for(:reporting_proposals_camera_scripts))
           end
 
           content_tag(:div, class: "input-group") do
-            super(object_name, method, options) +
+            super(object_name, options) +
               content_tag(:div, class: "input-group-button") do
-                content_tag(:button, class: "button secondary user-device-camera", type: "button", data: { input: "#{object_name}_#{method}" }) do
+                content_tag(:button, class: "button secondary user-device-camera", type: "button", data: { input: object_name }) do
                   icon("camera-slr", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_camera", scope: "decidim.reporting_proposals.forms")}"
                 end
               end

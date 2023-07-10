@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   CODECOV: "true"
-  RUBY_VERSION: 2.7.7
+  RUBY_VERSION: 3.0.5
   NODE_VERSION: 16.9.1
   RAILS_ENV: test
   DATABASE_USERNAME: postgres
@@ -18,7 +18,7 @@ env:
 jobs:
   build:
     name: Build & Precompile
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:

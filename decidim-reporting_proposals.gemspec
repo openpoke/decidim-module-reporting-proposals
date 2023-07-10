@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = "A module for Decidim that facilitates the creation of proposals related to geolocated issues in a city"
   spec.license = "AGPL-3.0"
   spec.homepage = "https://github.com/openpoke/decidim-module-reporting_proposals"
-  spec.required_ruby_version = ">= 2.7"
+  spec.required_ruby_version = ">= 3.0"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "decidim-elections", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-meetings", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
   spec.add_development_dependency "decidim-templates", Decidim::ReportingProposals::COMPAT_DECIDIM_VERSION
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

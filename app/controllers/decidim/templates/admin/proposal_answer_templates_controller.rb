@@ -123,15 +123,13 @@ module Decidim
         private
 
         def populate_template_interpolations(proposal)
-          template.description.map do |row|
-            language = row.first
-            value = row.last
+          template.description do |language, value|
             value.gsub!("%{organization}", proposal.organization.name)
             value.gsub!("%{name}", proposal.creator_author.name)
             value.gsub!("%{admin}", current_user.name)
 
             [language, value]
-          end.to_h
+          end
         end
 
         def proposal
@@ -156,7 +154,7 @@ module Decidim
             @avaliablity_options["components-#{component.id}"] = formated_name(component)
           end
           global_scope = { "organizations-#{current_organization.id}" => t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index") }
-          @avaliablity_options = global_scope.merge(Hash[@avaliablity_options.sort_by { |_, val| val }])
+          @avaliablity_options = global_scope.merge(@avaliablity_options.sort_by { |_, val| val }.to_h)
         end
 
         def formated_name(component)

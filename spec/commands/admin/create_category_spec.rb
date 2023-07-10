@@ -6,6 +6,7 @@ module Decidim::Admin
   describe CreateCategory do
     let(:organization) { create(:organization) }
     let(:user) { create(:user, organization: organization) }
+    let(:admin) { create(:user, :admin, organization: organization) }
     let(:participatory_space) { create(:participatory_process, organization: organization) }
     let(:valuator_ids) { [valuator_role.id] }
     let(:form_params) do
@@ -27,7 +28,7 @@ module Decidim::Admin
     end
 
     let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: user, participatory_process: participatory_space) }
-    let(:command) { described_class.new(form, participatory_space) }
+    let(:command) { described_class.new(form, participatory_space, admin) }
     let(:category) { Decidim::Category.last }
 
     it "adds the valuator roles" do

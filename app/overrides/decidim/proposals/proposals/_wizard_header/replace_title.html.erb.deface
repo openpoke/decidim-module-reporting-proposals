@@ -1,14 +1,14 @@
 <!-- replace ".section-heading" -->
 
 <% if geocoding_comparison? && action_name == "compare" %>
-	<h2 class="section-heading">
-	  <%= t("title", scope: "decidim.reporting_proposals.proposals.compare.geocoding") %>
-	  <%= "(#{@similar_proposals.count})" if @similar_proposals.present? %>
-	</h2>
-	<p><%= t("description", scope: "decidim.reporting_proposals.proposals.compare.geocoding", meters: distance) %></p>
+  <h2 class="section-heading">
+    <%= t("title", scope: "decidim.reporting_proposals.proposals.compare.geocoding") %>
+    <%= "(#{@similar_proposals.count})" if @similar_proposals.present? %>
+  </h2>
+  <p><%= t("description", scope: "decidim.reporting_proposals.proposals.compare.geocoding", meters: distance) %></p>
 <% else %>
-	<h2 class="section-heading">
-	  <%= proposal_wizard_step_title action_name %>
-	  <%= "(#{@similar_proposals.count})" if @similar_proposals.present? %>
-	</h2>
+  <h2 class="section-heading">
+    <%= proposal_wizard_step_title action_name %>
+    <%= "(#{@similar_proposals.count})" if @similar_proposals.present? %>
+  </h2>
 <% end %>

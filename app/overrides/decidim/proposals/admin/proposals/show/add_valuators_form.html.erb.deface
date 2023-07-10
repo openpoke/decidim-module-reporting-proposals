@@ -15,5 +15,5 @@
                      id: "js-submit-assign-proposal-to-valuator",
                      class: "button small button--simple float-left") %>
     <% end %>
-	</div>
+  </div>
 <% end %>
