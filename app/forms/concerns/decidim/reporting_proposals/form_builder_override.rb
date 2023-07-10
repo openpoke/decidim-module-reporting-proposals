@@ -36,6 +36,8 @@ module Decidim
         def use_camera_button?(object_name)
           return unless @template.respond_to?(:current_component)
 
+          return unless Decidim::ReportingProposals.use_camera_button.include?(@template.current_component.manifest_name.to_sym)
+
           object_name == :add_photos
         end
       end

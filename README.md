@@ -9,6 +9,8 @@
 
 This module creates a new component to be used in participatory spaces that allows to create proposals orientated to manage geolocated issues in a city. For instance Damages or new ideas of improving a particular street or public good.
 
+[👉 See features & screenshots](#features)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -34,7 +36,7 @@ bundle exec rails decidim_reporting_proposals:install:migrations
 > **IMPORTANT:**
 >
 > This module makes use of the [Deface](https://github.com/spree/deface) gem.
-> In conjuntion with other modules (we know [Term Customizer](https://github.com/mainio/decidim-module-term_customizer/) is one of them) it might cause errors when precompiling assets for production sites. But only if during this process the compiling machine does not have access to the database.
+> In conjunction with other modules (we know [Term Customizer](https://github.com/mainio/decidim-module-term_customizer/) is one of them) it might cause errors when precompiling assets for production sites. But only if during this process the compiling machine does not have access to the database.
 >
 > It is easy to overcome this problem. Just add the following line to your `config/environments/production.rb` file:
 > 
@@ -50,6 +52,13 @@ bundle exec rails decidim_reporting_proposals:install:migrations
 >
 > Alternatively, use any other ENV var to set up the `config.deface.enabled` to `false` during the precompilation phase.
 
+Depending on your Decidim version, you can choose the corresponding version to ensure compatibility:
+
+| Version | Compatible Decidim versions |
+|---|---|
+| 0.5.x | 0.27.x |
+| 0.4.x | 0.26.x |
+
 ## Usage
 
 This module works very similarly as the Proposals module, in fact, it extends it to provide additional features and some different defaults.
@@ -58,11 +67,34 @@ It provides a new component called "Reporting Proposals" that can be added in ad
 
 ### Features
 
-TODO...
+This module provides the following features:
+
+1. **Reporting Proposals Component**: A new component that can be added to any participatory space. It allows to create proposals in one-step form with some optimization for mobile devices. Users can add photos using the phone's camera directly and also use the device's GPS to establish a precise a geolocated address with one click. Some of the options can be used in the normal proposal's component too (but in this case they 2 steps behavior is maintained).
+  ![Reporting proposal creationg](features/proposal.png)
+
+2. **Comparison by proximity**: By default, reporting proposals are compared by proximity before publishing (as they are geolocated by default). This can be disabled in the component's settings.
+  ![Compare by proximity](features/proximity.png)
+
+3. **Automatic assignation of valuators**: When a proposal is created, admins usually have to assign valuators manually to it. This module allows admins to assign valuators to a category directly. This will automatically assign all valuators in that category to any proposal/reporting proposal created under it (and also existing proposals). This avoids the need of manually assign proposals to valuators. This behavior can be disabled in the component's settings.
+  ![Valuators in categories](features/categories.png)
+
+4. **Valuators empowerment**: A number of features allow valuators to have more control over the proposals they are evaluating. They can assign other valuators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, valuators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
+  ![Valuators empowerment](features/answering1.png)
+
+5. **Overdue proposals**: This module allows to set a number of days after which a proposal is considered overdue. This is configurable and can be disabled. This feature affects the admin list of proposals, adding visual notes, color coded, to facilitate the identification of overdue proposals and preventing admins to leave unanswered proposals for a long time.
+  ![Overdue proposals](features/overdues.png)
+
+6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, valuators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
+
+7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
+
+8. **Proposal answers templates**: Administrators can create templates for the answers to proposals. This is useful to provide a standard answer to proposals that are similar. This feature requires to enable the `decidim-templates` official module.
+  ![Templates for proposals answers](features/templates1.png)
+  ![Applying a template](features/templates2.png)
 
 ### Customization
 
-Almost all the features of this module can be customized through an initializer.
+Almost all the features of this module can be customized/disabled through an initializer.
 
 For instance, you can create an initializer an change some of the available options as follows (**This is optional, you don't need to do this, by default all options are enabled**):
 
@@ -89,9 +121,6 @@ Decidim::ReportingProposals.configure do |config|
   # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
   config.use_camera_button = [:proposals, :reporting_proposals]
 
-  # Public Setting to prevent adding the camera button on not photo/image input[type=file]
-  config.camera_button_on_attachments = false
-
   # Public setting to prevent valuators or admins to modify the photos attached to a proposal
   # otherwise can be configured at the component level
   config.allow_proposal_photo_editing = true
@@ -100,6 +129,8 @@ Decidim::ReportingProposals.configure do |config|
   config.valuators_assign_other_valuators = true
 end
 ```
+
+Find all the available options in the [config.rb](lib/decidim/reporting_proposals/config.rb) file.
 
 ## Contributing
 
