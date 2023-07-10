@@ -34,11 +34,6 @@ module Decidim
       [:proposals, :reporting_proposals]
     end
 
-    # Public Setting to prevent adding the camera button on not photo/image input[type=file]
-    config_accessor :camera_button_on_attachments do
-      false
-    end
-
     # Public setting to prevent valuators or admins to modify the photos attached to a proposal
     # otherwise can be configured at the component level
     config_accessor :allow_proposal_photo_editing do

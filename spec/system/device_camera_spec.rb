@@ -19,7 +19,6 @@ describe "User camera button", type: :system do
 
   before do
     allow(Decidim::ReportingProposals).to receive(:use_camera_button).and_return(manifests)
-    allow(Decidim::ReportingProposals).to receive(:camera_button_on_attachments).and_return(camera_on_attachments)
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
