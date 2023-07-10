@@ -15,7 +15,7 @@ env:
 jobs:
   test-unit:
     name: Test (unit)
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
