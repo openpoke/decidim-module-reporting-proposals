@@ -15,7 +15,6 @@ describe "User camera button", type: :system do
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let(:all_manifests) { [:proposals, :reporting_proposals] }
   let(:manifests) { all_manifests }
-  let(:camera_on_attachments) { true }
 
   before do
     allow(Decidim::ReportingProposals).to receive(:use_camera_button).and_return(manifests)
@@ -24,16 +23,8 @@ describe "User camera button", type: :system do
   end
 
   shared_examples "uses device camera" do
-    it "has two cameras button" do
-      expect(page).to have_button("Use my camera", count: 2)
-    end
-
-    context "when no camera on attachments" do
-      let(:camera_on_attachments) { false }
-
-      it "has one camera button" do
-        expect(page).to have_button("Use my camera", count: 1)
-      end
+    it "has one camera button" do
+      expect(page).to have_button("Use my camera", count: 1)
     end
 
     context "when option disabled" do
