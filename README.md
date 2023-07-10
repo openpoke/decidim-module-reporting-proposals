@@ -25,12 +25,12 @@ Or, if you want to stay up to date with the latest changes use this line instead
 gem 'decidim-reporting_proposals', git: "https://github.com/openpoke/decidim-module-reporting_proposals"
 ```
 
-And then execute:
+And then execute (do also this on upgrades):
 
 ```
 bundle
-And then execute:
 bundle exec rails decidim_reporting_proposals:install:migrations
+bin/rails db:migrate
 ```
 
 > **IMPORTANT:**
