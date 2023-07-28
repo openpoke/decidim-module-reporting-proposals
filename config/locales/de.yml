@@ -415,7 +415,7 @@ de:
             description: Dies sind Vorschläge, die in einem Radius von %{meters} zu dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende Meldung Unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
         edit:
-          delete_image: Delete image
+          delete_image: Bild löschen
         form:
           image: Foto
     templates:
