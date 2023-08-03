@@ -414,6 +414,8 @@ es:
             away: "A %{meters} de distancia"
             description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
+        edit:
+          delete_image: Eliminar imagen
         form:
           image: Imágen/foto
     templates:

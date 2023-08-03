@@ -414,6 +414,8 @@ ca:
             away: "%{meters} de distància"
             description: Aquestes són propostes que es troben en un radi de %{meters} respecte a la que esteu creant. En cas que trobeu un altra proposta d'informe en la mateixa situació, podeu optar per donar-li una adhesió en comptes de crear-ne un de nou.
             title: Propostes properes
+        edit:
+          delete_image: Esborra la imatge
         form:
           image: Imatge/fotografia
     templates:
