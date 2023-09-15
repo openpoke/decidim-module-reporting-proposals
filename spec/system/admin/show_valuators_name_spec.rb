@@ -8,9 +8,9 @@ describe "Show valuators name", type: :system do
   let!(:participatory_process) { create(:participatory_process, organization: organization) }
   let!(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
   let!(:proposal) { create :proposal, component: proposal_component }
-  let!(:valuator) { create :user, :confirmed, organization: organization }
+  let!(:valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
   let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
-  let!(:valuator2) { create :user, :confirmed, organization: organization }
+  let!(:valuator2) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
   let!(:valuator_role2) { create :participatory_process_user_role, role: :valuator, user: valuator2, participatory_process: participatory_process }
 
   before do

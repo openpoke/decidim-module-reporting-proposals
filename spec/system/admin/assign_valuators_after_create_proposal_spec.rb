@@ -8,7 +8,7 @@ describe "Automatic assign valuators after create proposals", type: :system do
   let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
   let!(:category) { create(:category, participatory_space: participatory_process) }
   let!(:admin) { create(:user, :confirmed, :admin, organization: organization) }
-  let!(:valuator) { create :user, :confirmed, organization: organization }
+  let!(:valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
   let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
   let!(:category_valuator) { create(:category_valuator, valuator_role: valuator_role, category: category) }
 

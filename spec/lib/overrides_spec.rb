@@ -11,7 +11,7 @@ checksums = [
     files: {
       "/lib/decidim/component_validator.rb" => "f2d90649846a7a5b834d4e46b006d0d9",
       "/lib/decidim/map/autocomplete.rb" => "ebb08d858ca97b8f94c3db6072357598",
-      "/lib/decidim/form_builder.rb" => "2effa083f9f64680cde462dc308f593a",
+      "/lib/decidim/form_builder.rb" => "bf93115683b45fc7b9ecd6e17e25ebc1",
       "/app/helpers/decidim/resource_helper.rb" => "78a09dc6a9430a3f00e6c34abd51c14a",
       "/app/commands/decidim/create_report.rb" => "d871d245789e6f20f8197a4d7939889d",
       "/app/commands/decidim/gallery_methods.rb" => "2b1d3b8f67f9e8f5516605acc2acb053",
@@ -29,7 +29,7 @@ checksums = [
       "/app/commands/decidim/admin/update_category.rb" => "a201920bf2f026694f26dae3b10a73f5",
       "/app/commands/decidim/admin/hide_resource.rb" => "3b242efd1b7e86b30d861a7162312eb1",
       "/app/controllers/decidim/admin/categories_controller.rb" => "07eb3f5f4fdf3a1e71b4bc0fa9be46aa",
-      "/app/views/decidim/admin/categories/index.html.erb" => "c02468d9ad4f74c46408075b1ec0770b",
+      "/app/views/decidim/admin/categories/index.html.erb" => "4e1d63ff8ef26d91102b0f41b745ff4b",
       "/app/views/decidim/admin/categories/_form.html.erb" => "b6a178b11d2a68cfff9aeefb14fd6ab4"
     }
   },
@@ -56,7 +56,7 @@ checksums = [
       "/app/views/decidim/proposals/proposals/edit_draft.html.erb" => "983f3378b26bf51ec34247277acae429",
       "/app/views/decidim/proposals/proposals/_edit_form_fields.html.erb" => "3cf530a07e4498195dab8d94b7df19d1",
       "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "b1076d75afb140ded26d4837618f2af5",
-      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "653949a89a736379aca2ce4efe44203d",
+      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "bd36bf5588cdd7293f44dc1146fecc49",
       "/app/commands/decidim/proposals/admin/assign_proposals_to_valuator.rb" => "595ed7561131c9ee8a79bb4806f7a9bb",
       "/app/permissions/decidim/proposals/admin/permissions.rb" => "751b15ced553b17b7203f66a0152fb75",
       "/app/controllers/decidim/proposals/admin/proposal_answers_controller.rb" => "51f25d8b36bca87fe5cb2637149b45fb",

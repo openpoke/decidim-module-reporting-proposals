@@ -10,7 +10,7 @@ describe "Assign valuators", type: :system do
   let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
   let!(:proposal) { create :proposal, component: component }
   let!(:user) { create :user, :confirmed, :admin, organization: organization }
-  let!(:valuator) { create :user, :confirmed, organization: organization }
+  let!(:valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
   let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
 
   include_context "when managing a component as an admin"
@@ -47,7 +47,7 @@ describe "Assign valuators", type: :system do
   end
 
   context "when a valuator manages assignments" do
-    let!(:second_valuator) { create :user, :confirmed, organization: organization }
+    let!(:second_valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
     let!(:second_valuator_role) { create :participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process: participatory_process }
 
     before do

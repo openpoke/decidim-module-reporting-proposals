@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "Admin manages questionnaire templates", type: :system do
-  let!(:organization) { create :organization }
-  let!(:user) { create :user, :confirmed, organization: organization }
   let(:last_template) { Decidim::Templates::Template.last }
+  let!(:organization) { create :organization }
+  let!(:user) { create :user, :admin, :confirmed, organization: organization }
 
   before do
     switch_to_host(organization.host)

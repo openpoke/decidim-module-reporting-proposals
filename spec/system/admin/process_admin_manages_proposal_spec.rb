@@ -7,7 +7,7 @@ describe "Process admin manages proposals", type: :system do
   let(:participatory_process) { create :participatory_process, organization: organization }
   let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
   let!(:proposal) { create :proposal, component: component }
-  let(:user) { create(:user, :confirmed, organization: organization) }
+  let(:user) { create(:user, :confirmed, :admin_terms_accepted, organization: organization) }
   let!(:user_role) { create(:participatory_process_user_role, role: :admin, user: user, participatory_process: participatory_process) }
 
   def edit_component_path(component)
