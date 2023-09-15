@@ -11,7 +11,6 @@ module Decidim
           return permission_action unless user
           return permission_action if context[:current_organization] != user.organization
 
-          # return permission_action if context[:current_organization] != user.organization
           allow! if user_has_a_role? && (permission_action.subject == :template && permission_action.action == :read)
 
           super
