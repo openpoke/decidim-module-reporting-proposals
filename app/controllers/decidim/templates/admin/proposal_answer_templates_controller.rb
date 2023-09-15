@@ -7,6 +7,10 @@ module Decidim
         include Decidim::TranslatableAttributes
         include Decidim::Paginable
 
+        def permission_class_chain
+          [::Decidim::Templates::Admin::ExtraPermissions] + super
+        end
+
         helper_method :availability_option_as_text, :availability_options_for_select
 
         rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -57,7 +61,7 @@ module Decidim
         end
 
         def fetch
-          enforce_permission_to :read, :template, template: template
+          enforce_permission_to :read, :template, template: template, proposal: proposal
 
           response_object = {
             state: template.field_values["internal_state"],
