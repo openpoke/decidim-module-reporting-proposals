@@ -70,17 +70,23 @@ describe "Assign valuators", type: :system do
       it_behaves_like "assigns a valuator"
     end
 
-    it "can remove only himself from the evaluators" do
-      accept_confirm do
-        within find("#valuators li", text: second_valuator.name) do
-          find("a.red-icon").click
-        end
+    context "when valuator removes assigment" do
+      before do
+        create :valuation_assignment, proposal: proposal, valuator_role: valuator_role
       end
 
-      expect(page).to have_content("Valuator unassigned from proposals successfully")
+      it "can remove only himself from the evaluators" do
+        expect(page).to have_css("a.red-icon", count: 1)
+        expect(page).to have_content(valuator.name)
+        expect(page).to have_content(second_valuator.name)
 
-      within find("#valuators") do
-        expect(page).not_to have_selector(".red-icon")
+        accept_confirm do
+          within find("#valuators li", text: second_valuator.name) do
+            find("a.red-icon").click
+          end
+        end
+
+        expect(page).to have_content("Valuator unassigned from proposals successfully")
       end
     end
   end
