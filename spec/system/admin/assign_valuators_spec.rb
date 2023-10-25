@@ -10,15 +10,32 @@ describe "Assign valuators", type: :system do
   let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
   let!(:proposal) { create :proposal, component: component }
   let!(:user) { create :user, :confirmed, :admin, organization: organization }
-  let!(:valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
-  let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
+  let!(:valuator) { valuator_role.user }
+  let!(:valuator_role) { logged_valuator_role }
+  let!(:logged_valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
+  let!(:another_valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
+  let!(:logged_valuator_role) { create :participatory_process_user_role, role: :valuator, user: logged_valuator, participatory_process: participatory_process }
+  let!(:another_valuator_role) { create :participatory_process_user_role, role: :valuator, user: another_valuator, participatory_process: participatory_process }
+  let(:login) { user }
 
   include_context "when managing a component as an admin"
 
+  before do
+    switch_to_host(organization.host)
+    login_as login, scope: :user
+    visit current_path
+  end
+
   shared_examples "assigns a valuator" do
     it "assigns the proposals to the valuator" do
+      click_link translated(proposal.title)
       within "#valuators" do
         expect(page).not_to have_content(valuator.name)
+      end
+
+      within "#js-form-assign-proposal-to-valuator" do
+        find("#valuator_role_id").click
+        find("option", text: valuator.name).click
       end
 
       click_button "Assign"
@@ -31,57 +48,76 @@ describe "Assign valuators", type: :system do
     end
   end
 
-  context "when admin assigns a validator" do
+  shared_examples "unassigns a valuator" do
     before do
+      create :valuation_assignment, proposal: proposal, valuator_role: valuator_role
       visit current_path
+    end
 
+    it "unassigns the proposals from the valuator" do
       click_link translated(proposal.title)
+      expect(page).to have_css("a.red-icon", count: 1)
+      expect(page).to have_content(logged_valuator.name)
+      expect(page).to have_content(another_valuator.name)
 
-      within "#js-form-assign-proposal-to-valuator" do
-        find("#valuator_role_id").click
-        find("option", text: valuator.name).click
-      end
-    end
-
-    it_behaves_like "assigns a valuator"
-  end
-
-  context "when a valuator manages assignments" do
-    let!(:second_valuator) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
-    let!(:second_valuator_role) { create :participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process: participatory_process }
-
-    before do
-      switch_to_host(organization.host)
-      login_as second_valuator, scope: :user
-      create :valuation_assignment, proposal: proposal, valuator_role: second_valuator_role
-
-      visit current_path
-      click_link translated(proposal.title)
-    end
-
-    context "when a valuator assigns other valuators" do
-      before do
-        within "#js-form-assign-proposal-to-valuator" do
-          find("#valuator_role_id").click
-          find("option", text: valuator.name).click
-        end
-      end
-
-      it_behaves_like "assigns a valuator"
-    end
-
-    it "can remove only himself from the evaluators" do
       accept_confirm do
-        within find("#valuators li", text: second_valuator.name) do
+        within find("#valuators li", text: valuator.name) do
           find("a.red-icon").click
         end
       end
 
       expect(page).to have_content("Valuator unassigned from proposals successfully")
+    end
+  end
 
-      within find("#valuators") do
-        expect(page).not_to have_selector(".red-icon")
+  context "when admin assigns a validator" do
+    it_behaves_like "assigns a valuator"
+    it_behaves_like "unassigns a valuator"
+  end
+
+  context "when a valuator manages assignments" do
+    let(:login) { logged_valuator }
+    let(:valuator_role) { another_valuator_role }
+
+    before do
+      create :valuation_assignment, proposal: proposal, valuator_role: logged_valuator_role
+      visit current_path
+    end
+
+    it_behaves_like "assigns a valuator"
+
+    it "cannot unnassign other valuators" do
+      create :valuation_assignment, proposal: proposal, valuator_role: another_valuator_role
+      click_link translated(proposal.title)
+      within find("#valuators li", text: logged_valuator.name) do
+        expect(page).to have_css("a.red-icon", count: 1)
+      end
+      within find("#valuators li", text: another_valuator.name) do
+        expect(page).not_to have_css("a.red-icon", count: 1)
       end
     end
+
+    context "when valuator is not assigned to the proposal" do
+      let!(:another_proposal) { create :proposal, component: component }
+
+      it "has permission to access assigned" do
+        visit Decidim::EngineRouter.admin_proxy(component).proposal_path(proposal)
+        expect(page).to have_content(proposal.title["en"])
+        expect(page).not_to have_content("You are not authorized to perform this action")
+      end
+
+      it "has no permission to access" do
+        visit Decidim::EngineRouter.admin_proxy(component).proposal_path(another_proposal)
+        expect(page).not_to have_content(another_proposal.title["en"])
+        expect(page).to have_content("You are not authorized to perform this action")
+      end
+    end
+  end
+
+  context "when managing myself" do
+    let(:login) { logged_valuator }
+    let(:valuator_role) { logged_valuator_role }
+
+    it_behaves_like "unassigns a valuator"
   end
 end
