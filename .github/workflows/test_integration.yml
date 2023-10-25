@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.0.5
+  RUBY_VERSION: 3.0.6
   NODE_VERSION: 16.9.1
   RAILS_ENV: test
   DATABASE_USERNAME: postgres
@@ -68,7 +68,7 @@ jobs:
 
   test:
     name: Integration Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: build
     strategy:
       matrix:
