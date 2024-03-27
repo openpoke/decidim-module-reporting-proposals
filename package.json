@@ -1,6 +1,6 @@
 {
   "name": "decidim_module_reporting_proposals",
-  "version": "0.5",
+  "version": "0.6",
   "description": "A 3 steps proposals for Decidim",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,12 +25,16 @@
   "stylelint": {
     "extends": "@decidim/stylelint-config"
   },
+  "engines": {
+    "node": "18.17.1",
+    "npm": ">=9.6.7"
+  },
   "devDependencies": {
-    "@decidim/stylelint-config": "^0.27.3",
+    "@decidim/stylelint-config": "^0.28.0",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.0",
-    "stylelint": "13.11.0"
+    "stylelint": "15.3.0"
   }
 }

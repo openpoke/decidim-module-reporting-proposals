@@ -55,9 +55,10 @@ bin/rails db:migrate
 Depending on your Decidim version, you can choose the corresponding version to ensure compatibility:
 
 | Version | Compatible Decidim versions |
-|---|---|
-| 0.5.x | 0.27.x |
-| 0.4.x | 0.26.x |
+|---------|-----------------------------|
+| 0.6.x   | 0.28.x                      |
+| 0.5.x   | 0.27.x                      |
+| 0.4.x   | 0.26.x                      |
 
 ## Usage
 
