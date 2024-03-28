@@ -248,7 +248,7 @@ Decidim.register_component(:reporting_proposals) do |component|
                                           elsif n.positive?
                                             ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), nil]
                                           else
-                                            [nil, nil, nil]
+                                            ["not_answered", nil, nil]
                                           end
 
       params = {
