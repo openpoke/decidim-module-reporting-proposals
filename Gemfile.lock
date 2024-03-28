@@ -527,6 +527,10 @@ GEM
     nio4r (2.7.1)
     nokogiri (1.16.3-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.3-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.3-x86_64-linux)
+      racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
       snaky_hash (~> 2.0)
@@ -824,6 +828,8 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x86_64-darwin-23
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap (~> 1.7)
@@ -845,7 +851,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.1.1p18
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.4.22
