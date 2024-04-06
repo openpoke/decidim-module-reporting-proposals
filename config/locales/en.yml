@@ -231,6 +231,8 @@ en:
             geolocated_at: Geolocated at
           send_email_button:
             send_mail: Send an email to user
+          show:
+            report: Report
         proposals_valuator_mailer:
           notify_proposals_valuator:
             admin_panel: admin panel

@@ -29,7 +29,7 @@
               <td><%= l template.created_at, format: :long %></td>
               <td class="table-list__actions">
                 <% if allowed_to?(:update, :template, template: template) %>
-                  <%= icon_link_to "pencil", edit_proposal_answer_template_path(template), t("actions.edit", scope: "decidim.admin"), class: "edit" %>
+                  <%= icon_link_to "pencil-line", edit_proposal_answer_template_path(template), t("actions.edit", scope: "decidim.admin"), class: "edit" %>
                 <% end %>
                 <% if allowed_to?(:copy, :template, template: template) %>
                   <%= icon_link_to "clipboard", copy_proposal_answer_template_path(template), t("actions.duplicate", scope: "decidim.admin"), method: :post %>

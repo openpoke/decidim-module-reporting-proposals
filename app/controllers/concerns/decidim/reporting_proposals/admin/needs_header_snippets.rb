@@ -8,7 +8,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          helper_method :snippets
+          # helper_method :snippets
         end
 
         def snippets

@@ -3,7 +3,7 @@
     <% if unanswered_proposals_overdue?(proposal) || evaluating_proposals_overdue?(proposal) %>
       <%= icon "datetime", class: "text-alert" %>
     <% elsif grace_period_unanswered?(proposal) || grace_period_evaluating?(proposal) %>
-      <%= icon "timer", class: "text-warning" %>
+      <%= icon "timer-line", class: "text-warning" %>
     <% end %>
   </span>
   <div class="table__list-title">
