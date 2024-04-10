@@ -1,13 +1,16 @@
 <% if proposal.photos.any? %>
   <div class="row column">
     <strong><%= t(".photos") %>:</strong>
-    <div id="photos" class="gallery row flex--fsc proposal-<%= proposal.id %>">
+    <div id="photos" class="gallery row proposal-<%= proposal.id %>" data-gallery>
       <% proposal.photos.each do |photo| %>
         <div class="proposal-photo gallery__item" id="photo-<%= photo.id %>">
-          <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
-            <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
+          <% proposal.photos.each do |photo| %>
+            <%= link_to photo.big_url, target: "_blank", rel: "noopener" do %>
+              <%= image_tag photo.thumbnail_url,
+                            class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
+            <% end %>
             <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
-              <%= icon_link_to "x",
+              <%= icon_link_to "close-circle-line",
                                decidim_admin_reporting_proposals.remove_photo_path(id: proposal.id, photo_id: photo.id),
                                t(".delete_image"),
                                method: :delete,
