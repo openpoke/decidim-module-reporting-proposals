@@ -11,6 +11,8 @@ en:
         scope_for_availability: Restrict availability to the component
   decidim:
     admin:
+      actions:
+        manage: Manage
       hidden_resource_mailer:
         notify_mail:
           body_1: An administrator removed your proposal because it has been reported.
@@ -407,9 +409,10 @@ en:
             success: Proposal note successfully updated.
         proposals:
           photo_form:
-            action: Add image
+            action: Save images
             add_images: Add images
-            gallery_legend: Add images
+            edit_images: Edit images
+            gallery_legend: Add an image gallery (Optional)
             title: Photos
             upload_msg: No files selected
           photo_gallery:
