@@ -1,27 +1,27 @@
-.table__title-block{
+.table__title-block {
   display: flex;
   align-items: flex-start;
 }
 
-.table__title-icon{
+.table__title-icon {
   width: 20px;
   padding: 3px;
   margin-right: 5px;
   float: left;
 }
 
-.table__list-title{
+.table__list-title {
   display: flex;
   flex-direction: column;
   align-items: start;
 }
 
-.table__list-title a{
+.table__list-title a {
   text-align: start;
 }
 
-.help-text-overdue{
+.help-text-overdue {
   font-style: italic;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
   text-align: start;
 }

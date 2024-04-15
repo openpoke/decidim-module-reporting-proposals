@@ -14,8 +14,8 @@ module Decidim
           return super(object_name, options) unless use_camera_button?(object_name)
 
           unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
-            # @template.snippets.add(:reporting_proposals_camera_scripts, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
-            # @template.snippets.add(:reporting_proposals_camera_styles, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
+            @template.snippets.add(:reporting_proposals_camera_scripts, @template.javascript_pack_tag("decidim_reporting_proposals_camera"))
+            @template.snippets.add(:reporting_proposals_camera_styles, @template.stylesheet_pack_tag("decidim_reporting_proposals_camera"))
 
             # This will display the snippets in the <head> part of the page.
             @template.snippets.add(:head, @template.snippets.for(:reporting_proposals_camera_styles))

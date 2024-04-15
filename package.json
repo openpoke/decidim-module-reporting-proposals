@@ -29,12 +29,13 @@
     "node": "18.17.1",
     "npm": ">=9.6.7"
   },
+  "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/stylelint-config": "^0.28.0",
-    "eslint": "^7.25.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.22.0",
-    "stylelint": "15.3.0"
+    "@decidim/dev": "0.28.0",
+    "@decidim/eslint-config": "0.28.0",
+    "@decidim/prettier-config": "0.28.0",
+    "@decidim/stylelint-config": "0.28.0",
+    "postcss-scss": "^4.0.9",
+    "sass-embedded": "~1.57.1"
   }
 }
