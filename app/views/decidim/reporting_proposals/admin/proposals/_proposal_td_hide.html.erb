@@ -10,7 +10,7 @@
             aria-controls="<%= current_user.present? ? "flagModal#{proposal.id}" : "loginModal" %>"
             aria-haspopup="true"
             tabindex="0">
-      <%= icon "flag-line", aria_hidden: true, class: "action-icon icon--small action-icon--show-proposal", role: "img", "aria-hidden": true %>
+      <%= icon "flag-line", aria_hidden: true, class: "hide-button icon--small action-icon--show-proposal", role: "img", "aria-hidden": true %>
     </button>
   <% end %>
 <% end %>

@@ -61,6 +61,10 @@
   align-self: center;
 }
 
+.layout-content table svg.hide-button {
+  fill: var(--secondary);
+}
+
 /* Elevate z-index of sticky footer to prevent overlap with absolutely positioned elements. */
 .item__edit-sticky {
   z-index: 10;
