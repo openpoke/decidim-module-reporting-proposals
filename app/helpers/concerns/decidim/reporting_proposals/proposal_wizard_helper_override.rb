@@ -29,12 +29,11 @@ module Decidim
             concat ")"
           end
           content_tag :span, class: "text-small" do
-            concat t(:"decidim.proposals.proposals.wizard_steps.step_of", current_step_num: current_step_num, total_steps: total_steps)
+            concat t(:"decidim.proposals.proposals.wizard_steps.step_of", current_step_num:, total_steps:)
             concat see_steps
           end
         end
 
-        # rubocop:disable Rails/HelperInstanceVariable:
         def distance(meters = nil)
           meters = @proposal.component.settings.geocoding_comparison_radius.to_f if meters.nil?
 
@@ -54,7 +53,6 @@ module Decidim
 
           @form.component.manifest_name == "reporting_proposals"
         end
-        # rubocop:enable Rails/HelperInstanceVariable:
       end
     end
   end

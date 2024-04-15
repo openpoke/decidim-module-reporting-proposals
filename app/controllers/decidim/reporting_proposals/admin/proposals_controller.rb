@@ -5,7 +5,7 @@ module Decidim
     module Admin
       class ProposalsController < Admin::ApplicationController
         def hide_proposal
-          enforce_permission_to :hide_proposal, :proposals, proposal: proposal
+          enforce_permission_to(:hide_proposal, :proposals, proposal:)
 
           Decidim::Admin::HideResource.call(proposal, current_user) do
             on(:ok) do
@@ -20,7 +20,7 @@ module Decidim
         end
 
         def add_photos
-          enforce_permission_to :edit_photos, :proposals, proposal: proposal
+          enforce_permission_to(:edit_photos, :proposals, proposal:)
 
           @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
 
@@ -37,7 +37,7 @@ module Decidim
         end
 
         def remove_photo
-          enforce_permission_to :edit_photos, :proposals, proposal: proposal
+          enforce_permission_to(:edit_photos, :proposals, proposal:)
 
           attachment = proposal.attachments.find_by(id: params[:photo_id])
           if attachment.try(:photo?)

@@ -8,20 +8,20 @@ module Decidim::ReportingProposals::Admin
 
     let(:component) { create(:reporting_proposals_component) }
     let(:organization) { component.organization }
-    let(:user) { create :user, :admin, :confirmed, organization: organization }
+    let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:form) do
       Decidim::Proposals::Admin::ProposalNoteForm.from_params(
         form_params
       )
     end
 
-    let!(:note) { create(:proposal_note, proposal: proposal, author: user) }
+    let!(:note) { create(:proposal_note, proposal:, author: user) }
     let(:command) { described_class.new(form, note) }
-    let!(:proposal) { create :proposal, :official, component: component }
+    let!(:proposal) { create(:proposal, :official, component:) }
 
     describe "call" do
       let(:form_params) do
-        { body: body }
+        { body: }
       end
 
       context "when the form is valid" do

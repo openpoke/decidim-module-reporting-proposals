@@ -8,16 +8,16 @@ module Decidim::ReportingProposals
     end
 
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:category) { create(:category, participatory_space: participatory_process) }
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-    let!(:proposal) { create :proposal, :unpublished, users: [user], component: component, category: category }
-    let(:user) { create :user, :confirmed, organization: organization }
-    let(:admin_follower) { create :user, :admin, organization: organization }
+    let!(:proposal) { create(:proposal, :unpublished, users: [user], component:, category:) }
+    let(:user) { create(:user, :confirmed, organization:) }
+    let(:admin_follower) { create(:user, :admin, organization:) }
 
     shared_examples "assigns valuator once" do
       context "when there's admin followers" do
-        let!(:follow) { create :follow, followable: proposal, user: admin_follower }
+        let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
         before do
           # simulate a race condition when checking for the assignment already done is not yet in the database
@@ -71,7 +71,7 @@ module Decidim::ReportingProposals
           resource: proposal
         }
       end
-      let!(:follow) { create :follow, followable: proposal, user: admin_follower }
+      let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
       it "broadcasts ok" do
         expect(subject.call).to broadcast(:ok)
@@ -99,9 +99,9 @@ module Decidim::ReportingProposals
     end
 
     context "when executing the job" do
-      let(:valuator_user) { create(:user, :confirmed, organization: organization) }
-      let!(:category_valuator) { create(:category_valuator, valuator_role: valuator_role, category: category) }
-      let(:valuator_role) { create :participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process: participatory_process }
+      let(:valuator_user) { create(:user, :confirmed, organization:) }
+      let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
+      let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process:) }
 
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
@@ -128,7 +128,7 @@ module Decidim::ReportingProposals
             resource: proposal
           }
         end
-        let!(:follow) { create :follow, followable: proposal, user: admin_follower }
+        let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
         it "broadcasts ok" do
           expect(subject.call).to broadcast(:update_proposals_category)
@@ -142,9 +142,9 @@ module Decidim::ReportingProposals
       end
 
       context "when executing the job" do
-        let(:valuator_user) { create(:user, :confirmed, organization: organization) }
-        let!(:category_valuator) { create(:category_valuator, valuator_role: valuator_role, category: new_category) }
-        let(:valuator_role) { create :participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process: participatory_process }
+        let(:valuator_user) { create(:user, :confirmed, organization:) }
+        let!(:category_valuator) { create(:category_valuator, valuator_role:, category: new_category) }
+        let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process:) }
 
         before do
           allow(Rails.logger).to receive(:info).at_least(:once)

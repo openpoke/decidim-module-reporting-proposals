@@ -3,15 +3,15 @@
 require "spec_helper"
 
 module Decidim::ReportingProposals
-  describe GeolocationController, type: :controller do
+  describe GeolocationController do
     routes { Decidim::ReportingProposals::Engine.routes }
 
     let(:organization) { create(:organization) }
-    let(:current_user) { create(:user, :confirmed, organization: organization) }
+    let(:current_user) { create(:user, :confirmed, organization:) }
     let(:params) do
       {
-        latitude: latitude,
-        longitude: longitude
+        latitude:,
+        longitude:
       }
     end
 
@@ -19,9 +19,9 @@ module Decidim::ReportingProposals
     let(:longitude) { 2.1 }
     let(:address) { "Puddle Lane" }
     let(:result) do
-      [double(coordinates: [latitude, longitude], address: address)]
+      [double(coordinates: [latitude, longitude], address:)]
     end
-    let(:json) { JSON.parse(response.body) }
+    let(:json) { response.parsed_body }
 
     before do
       # stub_geocoding(address, [latitude, longitude])
@@ -32,7 +32,7 @@ module Decidim::ReportingProposals
 
     shared_examples "error" do
       it "fails" do
-        post :locate, params: params, xhr: true
+        post :locate, params:, xhr: true
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json["message"]).to have_content("not configured")
         expect(json["found"]).to be_blank
@@ -41,7 +41,7 @@ module Decidim::ReportingProposals
 
     shared_examples "not found" do
       it "fails" do
-        post :locate, params: params, xhr: true
+        post :locate, params:, xhr: true
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json["address"]).not_to eq(address)
         expect(json["message"]).to have_content("not authorized")
@@ -51,7 +51,7 @@ module Decidim::ReportingProposals
 
     shared_examples "found" do
       it "succeeds" do
-        post :locate, params: params, xhr: true
+        post :locate, params:, xhr: true
         expect(response).to have_http_status(:ok)
         expect(json["address"]).to eq(address)
         expect(json["found"]).to be_truthy

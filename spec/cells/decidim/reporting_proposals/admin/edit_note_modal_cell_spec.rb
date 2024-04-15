@@ -22,13 +22,13 @@ module Decidim::ReportingProposals
       end
 
       it "has the modal id set to the specified value or default" do
-        expect(subject).to have_selector("##{options[:modal_id]}")
+        expect(subject).to have_css("##{options[:modal_id]}")
       end
     end
 
     context "when the proposal note exists" do
       it "renders the view" do
-        expect(subject).to have_selector("#editNoteModal")
+        expect(subject).to have_css("#editNoteModal")
       end
 
       it "assigns the correct proposal to the view" do

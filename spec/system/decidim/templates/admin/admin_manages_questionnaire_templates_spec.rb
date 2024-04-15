@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-describe "Admin manages questionnaire templates", type: :system do
+describe "Admin manages questionnaire templates" do
   let(:last_template) { Decidim::Templates::Template.last }
-  let!(:organization) { create :organization }
-  let!(:user) { create :user, :admin, :confirmed, organization: organization }
+  let!(:organization) { create(:organization) }
+  let!(:user) { create(:user, :admin, :confirmed, organization:) }
 
   before do
     switch_to_host(organization.host)
@@ -14,7 +14,7 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "listing templates" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
@@ -31,7 +31,7 @@ describe "Admin manages questionnaire templates", type: :system do
   describe "creating a questionnaire_template" do
     before do
       within ".layout-content" do
-        click_link("New")
+        click_link_or_button("New")
       end
     end
 
@@ -62,7 +62,7 @@ describe "Admin manages questionnaire templates", type: :system do
         expect(page).to have_current_path decidim_admin_templates.edit_questionnaire_template_path(Decidim::Templates::Template.last.id)
         expect(page.find("#template_name_en").value).to eq("My template")
 
-        click_link "Edit"
+        click_link_or_button "Edit"
       end
 
       within ".card-section" do
@@ -91,7 +91,7 @@ describe "Admin manages questionnaire templates", type: :system do
   describe "trying to create a questionnaire_template with invalid data" do
     before do
       within ".layout-content" do
-        click_link("New")
+        click_link_or_button("New")
       end
     end
 
@@ -120,11 +120,11 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "updating a template" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
-      click_link translated(template.name)
+      click_link_or_button translated(template.name)
     end
 
     it "updates a template" do
@@ -150,11 +150,11 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "updating a template with invalid values" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
-      click_link translated(template.name)
+      click_link_or_button translated(template.name)
     end
 
     it "does not update the template" do
@@ -175,15 +175,15 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "copying a template" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
     end
 
     it "copies the template" do
-      within find("tr", text: translated(template.name)) do
-        click_link "Duplicate"
+      within "tr", text: translated(template.name) do
+        click_link_or_button "Duplicate"
       end
 
       expect(page).to have_admin_callout("successfully")
@@ -193,7 +193,7 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "editing the questionnaire_template's questionnaire" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
@@ -201,11 +201,11 @@ describe "Admin manages questionnaire templates", type: :system do
 
     it "shows a functional questionnaire form" do
       within ".layout-content" do
-        click_link("Edit")
+        click_link_or_button("Edit")
       end
 
       within ".container" do
-        click_link("Edit")
+        click_link_or_button("Edit")
       end
 
       within ".edit_questionnaire" do
@@ -225,7 +225,7 @@ describe "Admin manages questionnaire templates", type: :system do
           ca: "Els meus termes"
         )
 
-        click_button "Add question"
+        click_link_or_button "Add question"
         find(".button.expand-all").click
 
         within ".questionnaire-question" do
@@ -245,30 +245,30 @@ describe "Admin manages questionnaire templates", type: :system do
 
     it "doesn't show preview or answers buttons" do
       within ".layout-content" do
-        click_link("Edit")
+        click_link_or_button("Edit")
       end
 
       within ".container" do
-        click_link("Edit")
+        click_link_or_button("Edit")
       end
 
       within ".card-title" do
-        expect(page).not_to have_button("Preview")
-        expect(page).not_to have_button("No answers yet")
+        expect(page).to have_no_button("Preview")
+        expect(page).to have_no_button("No answers yet")
       end
     end
   end
 
   describe "destroying a template" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
 
     before do
       visit decidim_admin_templates.questionnaire_templates_path
     end
 
     it "destroys the template" do
-      within find("tr", text: translated(template.name)) do
-        accept_confirm { click_link "Delete" }
+      within "tr", text: translated(template.name) do
+        accept_confirm { click_link_or_button "Delete" }
       end
 
       expect(page).to have_admin_callout("successfully")
@@ -277,7 +277,7 @@ describe "Admin manages questionnaire templates", type: :system do
   end
 
   describe "previewing a questionnaire_template" do
-    let!(:template) { create(:questionnaire_template, organization: organization) }
+    let!(:template) { create(:questionnaire_template, organization:) }
     let!(:questions) { create_list(:questionnaire_question, 3, questionnaire: template.templatable) }
     let(:questionnaire) { template.templatable }
 
@@ -289,8 +289,8 @@ describe "Admin manages questionnaire templates", type: :system do
       within ".questionnaire-template-preview" do
         expect(page).to have_i18n_content(questionnaire.title, upcase: true)
         expect(page).to have_i18n_content(questionnaire.questions.first.body)
-        expect(page).to have_selector("input#questionnaire_responses_0")
-        expect(page).to have_selector("button[type=submit][disabled]")
+        expect(page).to have_field("#questionnaire_responses_0")
+        expect(page).to have_css("button[type=submit][disabled]")
       end
     end
   end

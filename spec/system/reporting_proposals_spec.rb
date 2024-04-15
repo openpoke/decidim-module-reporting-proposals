@@ -3,29 +3,29 @@
 require "spec_helper"
 require "system/shared/proposals_steps_examples"
 
-describe "Reporting proposals overrides", type: :system do
+describe "Reporting proposals overrides" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
-  let!(:scope) { create :scope, organization: organization }
+  let!(:scope) { create(:scope, organization:) }
   let(:only_photos) { false }
   let(:attachments) { true }
   let!(:component) do
     create(:reporting_proposals_component,
            :with_extra_hashtags,
            participatory_space: participatory_process,
-           suggested_hashtags: suggested_hashtags,
-           automatic_hashtags: automatic_hashtags,
+           suggested_hashtags:,
+           automatic_hashtags:,
            settings: { scopes_enabled: true, attachments_allowed: attachments, only_photo_attachments: only_photos })
   end
   let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
   let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
-  let!(:user) { create(:user, :confirmed, organization: organization) }
-  let!(:user_group) { create(:user_group, :verified, users: [user], organization: organization) }
+  let!(:user) { create(:user, :confirmed, organization:) }
+  let!(:user_group) { create(:user_group, :verified, users: [user], organization:) }
   let(:proposal_title) { "More sidewalks and less roads" }
   let(:proposal_body) { "Cities need more people, not more cars" }
   let(:proposal_category) { category }
   let(:proposal) { Decidim::Proposals::Proposal.last }
-  let!(:another_category) { create :category, participatory_space: participatory_process }
+  let!(:another_category) { create(:category, participatory_space: participatory_process) }
   let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
   let(:latitude) { 41.3825 }
   let(:longitude) { 2.1772 }
@@ -84,12 +84,12 @@ describe "Reporting proposals overrides", type: :system do
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
-      click_link "New proposal"
+      click_link_or_button "New proposal"
     end
 
     it "always shows steps action button" do
       within ".process-header__phase" do
-        expect(page).not_to have_css(".show-for-medium", text: "SOME ACTION")
+        expect(page).to have_no_css(".show-for-medium", text: "SOME ACTION")
       end
     end
 
@@ -103,12 +103,12 @@ describe "Reporting proposals overrides", type: :system do
   end
 
   context "when editing a existing reporting proposal", :serves_geocoding_autocomplete do
-    let!(:proposal) { create :proposal, users: [user], component: component }
+    let!(:proposal) { create(:proposal, users: [user], component:) }
 
     before do
       visit_component
-      click_link translated(proposal.title), match: :first
-      click_link "Edit proposal"
+      click_link_or_button translated(proposal.title), match: :first
+      click_link_or_button "Edit proposal"
     end
 
     it_behaves_like "customized form"
@@ -116,7 +116,7 @@ describe "Reporting proposals overrides", type: :system do
     it_behaves_like "remove errors"
 
     context "when has an image" do
-      let!(:proposal) { create :proposal, :with_photo, users: [user], component: component }
+      let!(:proposal) { create(:proposal, :with_photo, users: [user], component:) }
 
       it_behaves_like "customized form"
       it_behaves_like "map can be hidden"
@@ -136,7 +136,7 @@ describe "Reporting proposals overrides", type: :system do
     context "when creating" do
       before do
         visit_component
-        click_link "New proposal"
+        click_link_or_button "New proposal"
       end
 
       it_behaves_like "4 steps"
@@ -146,12 +146,12 @@ describe "Reporting proposals overrides", type: :system do
     end
 
     context "when editing" do
-      let!(:proposal) { create :proposal, address: nil, users: [user], component: component }
+      let!(:proposal) { create(:proposal, address: nil, users: [user], component:) }
 
       before do
         visit_component
-        click_link translated(proposal.title)
-        click_link "Edit proposal"
+        click_link_or_button translated(proposal.title)
+        click_link_or_button "Edit proposal"
       end
 
       it_behaves_like "normal form"

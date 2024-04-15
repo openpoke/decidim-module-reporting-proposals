@@ -8,15 +8,15 @@ module Decidim
       subject { described_class.from_params(params).with_context(context) }
 
       let(:organization) { create(:organization, available_locales: [:en]) }
-      let(:participatory_space) { create(:participatory_process, :with_steps, organization: organization) }
-      let(:component) { create(:reporting_proposals_component, participatory_space: participatory_space) }
+      let(:participatory_space) { create(:participatory_process, :with_steps, organization:) }
+      let(:component) { create(:reporting_proposals_component, participatory_space:) }
       let(:title) { "More sidewalks and less roads!" }
       let(:body) { "Everything would be better" }
-      let(:author) { create(:user, organization: organization) }
-      let(:user_group) { create(:user_group, :verified, users: [author], organization: organization) }
+      let(:author) { create(:user, organization:) }
+      let(:user_group) { create(:user_group, :verified, users: [author], organization:) }
       let(:user_group_id) { user_group.id }
-      let(:category) { create(:category, participatory_space: participatory_space) }
-      let(:parent_scope) { create(:scope, organization: organization) }
+      let(:category) { create(:category, participatory_space:) }
+      let(:parent_scope) { create(:scope, organization:) }
       let(:scope) { create(:subscope, parent: parent_scope) }
       let(:category_id) { category.try(:id) }
       let(:scope_id) { scope.try(:id) }
@@ -31,20 +31,20 @@ module Decidim
       let(:meeting_as_author) { false }
       let(:params) do
         {
-          title: title,
-          body: body,
-          author: author,
-          category_id: category_id,
-          scope_id: scope_id,
-          address: address,
-          latitude: latitude,
-          longitude: longitude,
-          has_no_address: has_no_address,
-          has_no_image: has_no_image,
+          title:,
+          body:,
+          author:,
+          category_id:,
+          scope_id:,
+          address:,
+          latitude:,
+          longitude:,
+          has_no_address:,
+          has_no_image:,
           add_photos: image,
-          meeting_as_author: meeting_as_author,
+          meeting_as_author:,
           attachment: attachment_params,
-          suggested_hashtags: suggested_hashtags
+          suggested_hashtags:
         }
       end
       let(:context) do
@@ -75,7 +75,7 @@ module Decidim
       context "when there's no address" do
         let(:address) { nil }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "and address is not required" do
           let(:has_no_address) { true }
@@ -87,7 +87,7 @@ module Decidim
       context "when there's no image" do
         let(:image) { nil }
 
-        it { is_expected.to be_invalid }
+        it { is_expected.not_to be_valid }
 
         context "and image is not required" do
           let(:has_no_image) { true }
@@ -99,7 +99,7 @@ module Decidim
       context "when editing an existing proposal" do
         subject { described_class.from_model(proposal).with_context(context) }
 
-        let!(:proposal) { create(:proposal, attachments: attachments, component: component) }
+        let!(:proposal) { create(:proposal, attachments:, component:) }
         let(:attachments) { [create(:attachment, :with_image, weight: 0)] }
 
         it { is_expected.to be_valid }

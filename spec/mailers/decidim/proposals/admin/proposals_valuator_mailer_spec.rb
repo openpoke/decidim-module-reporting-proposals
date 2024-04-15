@@ -3,14 +3,14 @@
 require "spec_helper"
 
 module Decidim::Proposals::Admin
-  describe ProposalsValuatorMailer, type: :mailer do
+  describe ProposalsValuatorMailer do
     include ActionView::Helpers::SanitizeHelper
 
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
-    let(:user) { create(:user, organization: organization, name: "Tamilla", email: "valuator@example.org") }
-    let(:admin) { create(:user, :admin, organization: organization, name: "Mark") }
+    let(:user) { create(:user, organization:, name: "Tamilla", email: "valuator@example.org") }
+    let(:admin) { create(:user, :admin, organization:, name: "Mark") }
     let(:proposals) { create_list(:proposal, 3, component: proposals_component) }
 
     def proposal_url(proposal)

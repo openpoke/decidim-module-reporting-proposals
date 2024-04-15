@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User camera button", type: :system do
+describe "User camera button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
@@ -11,7 +11,7 @@ describe "User camera button", type: :system do
            participatory_space: participatory_process,
            settings: { only_photo_attachments: false })
   end
-  let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let(:all_manifests) { [:proposals, :reporting_proposals] }
   let(:manifests) { all_manifests }
@@ -31,7 +31,7 @@ describe "User camera button", type: :system do
       let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -45,7 +45,7 @@ describe "User camera button", type: :system do
       let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -53,7 +53,7 @@ describe "User camera button", type: :system do
   describe "#reporting_proposals" do
     before do
       visit_component
-      click_link "New proposal"
+      click_link_or_button "New proposal"
     end
 
     it_behaves_like "uses device camera"
@@ -64,7 +64,7 @@ describe "User camera button", type: :system do
   # context "when admin" do
   #   before do
   #     visit manage_component_path(component)
-  #     click_link "New proposal"
+  #     click_link_or_button "New proposal"
   #   end
 
   #   it_behaves_like "uses admin device camera"
@@ -78,7 +78,7 @@ describe "User camera button", type: :system do
              :with_attachments_allowed,
              participatory_space: participatory_process)
     end
-    let(:proposal) { create(:proposal, :draft, component: component, users: [user]) }
+    let(:proposal) { create(:proposal, :draft, component:, users: [user]) }
 
     before do
       visit_component
@@ -90,7 +90,7 @@ describe "User camera button", type: :system do
     # context "when admin" do
     #   before do
     #     visit manage_component_path(component)
-    #     click_link "New proposal"
+    #     click_link_or_button "New proposal"
     #   end
 
     #   it_behaves_like "uses admin device camera"

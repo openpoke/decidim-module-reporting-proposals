@@ -10,7 +10,7 @@ module Decidim
         included do
           helper_method :reporting_proposal?, :proposals, :query, :form_presenter, :proposal, :proposal_ids
           def show
-            enforce_permission_to :show, :proposal, proposal: proposal
+            enforce_permission_to(:show, :proposal, proposal:)
 
             @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).instance
             @answer_form = form(Decidim::Proposals::Admin::ProposalAnswerForm).from_model(proposal)

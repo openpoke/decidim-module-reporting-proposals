@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-describe "Answer form without status", type: :system do
-  let(:organization) { create :organization }
-  let(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
-  let!(:user) { create(:user, :confirmed, :admin, organization: organization) }
-  let!(:proposal) { create(:proposal, component: component) }
+describe "Answer form without status" do
+  let(:organization) { create(:organization) }
+  let(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
+  let!(:user) { create(:user, :confirmed, :admin, organization:) }
+  let!(:proposal) { create(:proposal, component:) }
 
   before do
     switch_to_host(organization.host)
@@ -28,7 +28,7 @@ describe "Answer form without status", type: :system do
     end
 
     it "does not have error 500, it has an alert" do
-      click_button "Answer"
+      click_link_or_button "Answer"
 
       expect(page).to have_content("There's been a problem answering this proposal")
     end

@@ -29,7 +29,7 @@ module Decidim
         def user_has_a_role?
           return unless user_roles
 
-          user_roles.exists?(user: user)
+          user_roles.exists?(user:)
         end
       end
     end

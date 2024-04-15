@@ -6,19 +6,19 @@ module Decidim::Templates::Admin
   describe ExtraPermissions do
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
-    let(:organization) { create :organization }
-    let(:participatory_process) { create :participatory_process, organization: organization }
-    let(:user) { create :user, :confirmed, :admin_terms_accepted, organization: organization }
-    let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: user, participatory_process: participatory_process }
+    let(:organization) { create(:organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
+    let(:user) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
+    let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
     let(:current_component) { create(:proposal_component, participatory_space: participatory_process) }
-    let(:proposal) { create :proposal, component: current_component }
+    let(:proposal) { create(:proposal, component: current_component) }
     let(:context) do
       {
-        proposal: proposal,
+        proposal:,
         current_organization: organization,
-        current_component: current_component,
+        current_component:,
         current_settings: component_settings,
-        component_settings: component_settings
+        component_settings:
       }
     end
     let(:component_settings) do

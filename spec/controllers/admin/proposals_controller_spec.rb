@@ -4,16 +4,16 @@ require "spec_helper"
 
 module Decidim::ReportingProposals
   module Admin
-    describe ProposalsController, type: :controller do
+    describe ProposalsController do
       routes { Decidim::ReportingProposals::AdminEngine.routes }
 
       let(:component) { create(:reporting_proposals_component) }
       let(:organization) { component.organization }
-      let(:user) { create(:user, :confirmed, :admin, organization: organization) }
-      let(:proposal) { create(:proposal, component: component) }
+      let(:user) { create(:user, :confirmed, :admin, organization:) }
+      let(:proposal) { create(:proposal, component:) }
       let(:reportable) { proposal }
-      let(:moderation) { create :moderation, reportable: reportable, report_count: 1, participatory_space: component.participatory_space }
-      let!(:report) { create :report, moderation: moderation }
+      let(:moderation) { create(:moderation, reportable:, report_count: 1, participatory_space: component.participatory_space) }
+      let!(:report) { create(:report, moderation:) }
       let(:image) do
         Rack::Test::UploadedFile.new(
           Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
@@ -23,7 +23,7 @@ module Decidim::ReportingProposals
 
       let(:params) do
         {
-          id: id
+          id:
         }
       end
 
@@ -32,15 +32,17 @@ module Decidim::ReportingProposals
       let(:allow_admins_to_hide_proposals) { true }
 
       before do
+        # rubocop:disable RSpec/ReceiveMessages
         allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
         allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
         request.env["decidim.current_organization"] = organization
         sign_in user, scope: :user
+        # rubocop:enable RSpec/ReceiveMessages
       end
 
       shared_examples "hide success" do
         it "hides the proposal" do
-          put :hide_proposal, params: params
+          put(:hide_proposal, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:alert]).to be_blank
           expect(controller.flash[:notice]).to have_content("Resource successfully hidden")
@@ -51,7 +53,7 @@ module Decidim::ReportingProposals
       shared_examples "hide failure" do |msg|
         msg ||= "There was a problem hiding the resource"
         it "hides the proposal" do
-          put :hide_proposal, params: params
+          put(:hide_proposal, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:notice]).to be_blank
           expect(controller.flash[:alert]).to have_content(msg)
@@ -61,7 +63,7 @@ module Decidim::ReportingProposals
 
       shared_examples "can edit photos" do
         it "allows to add photos" do
-          post :add_photos, params: params
+          post(:add_photos, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:alert]).to be_blank
           expect(controller.flash[:notice]).to have_content("Proposal successfully updated")
@@ -71,7 +73,7 @@ module Decidim::ReportingProposals
 
       shared_examples "cannot edit photos" do
         it "does not allow to add photos" do
-          post :add_photos, params: params
+          post(:add_photos, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:notice]).to be_blank
           expect(controller.flash[:alert]).to have_content("There was a problem saving the proposal")
@@ -81,7 +83,7 @@ module Decidim::ReportingProposals
 
       shared_examples "can remove photo" do
         it "allows to remove photos" do
-          delete :remove_photo, params: params
+          delete(:remove_photo, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:alert]).to be_blank
           expect(controller.flash[:notice]).to have_content("Proposal successfully updated")
@@ -91,7 +93,7 @@ module Decidim::ReportingProposals
 
       shared_examples "cannot remove photo" do
         it "does not allow to remove photos" do
-          delete :remove_photo, params: params
+          delete(:remove_photo, params:)
           expect(response).to have_http_status(:redirect)
           expect(controller.flash[:notice]).to be_blank
           expect(controller.flash[:alert]).to have_content("There was a problem saving the proposal")
@@ -109,7 +111,7 @@ module Decidim::ReportingProposals
         end
 
         context "when the user is not admin" do
-          let(:user) { create(:user, :confirmed, organization: organization) }
+          let(:user) { create(:user, :confirmed, organization:) }
 
           it_behaves_like "hide failure", ""
         end
@@ -131,7 +133,7 @@ module Decidim::ReportingProposals
       describe "#add_photos" do
         let(:params) do
           {
-            id: id,
+            id:,
             add_photos: [image]
           }
         end
@@ -141,7 +143,7 @@ module Decidim::ReportingProposals
         context "when no attachment" do
           let(:params) do
             {
-              id: id
+              id:
             }
           end
 
@@ -150,10 +152,10 @@ module Decidim::ReportingProposals
       end
 
       describe "#remove_photo" do
-        let(:proposal) { create(:proposal, :with_photo, component: component) }
+        let(:proposal) { create(:proposal, :with_photo, component:) }
         let(:params) do
           {
-            id: id,
+            id:,
             photo_id: proposal.photo.id
           }
         end
@@ -163,7 +165,7 @@ module Decidim::ReportingProposals
         context "when no photo id" do
           let(:params) do
             {
-              id: id
+              id:
             }
           end
 

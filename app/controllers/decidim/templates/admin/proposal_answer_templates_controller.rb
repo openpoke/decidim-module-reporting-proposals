@@ -21,13 +21,29 @@ module Decidim
           end
         end
 
+        def index
+          enforce_permission_to :index, :templates
+          @templates = collection
+
+          respond_to do |format|
+            format.html { render :index }
+            format.json do
+              term = params[:term]
+
+              @templates = search(term)
+
+              render json: @templates.map { |t| { value: t.id, label: translated_attribute(t.name) } }
+            end
+          end
+        end
+
         def new
           enforce_permission_to :create, :template
           @form = form(ProposalAnswerTemplateForm).instance
         end
 
         def edit
-          enforce_permission_to :update, :template, template: template
+          enforce_permission_to(:update, :template, template:)
           @form = form(ProposalAnswerTemplateForm).from_model(template)
         end
 
@@ -49,34 +65,8 @@ module Decidim
           end
         end
 
-        def destroy
-          enforce_permission_to :destroy, :template, template: template
-
-          DestroyTemplate.call(template, current_user) do
-            on(:ok) do
-              flash[:notice] = I18n.t("templates.destroy.success", scope: "decidim.admin")
-              redirect_to action: :index
-            end
-          end
-        end
-
-        def fetch
-          enforce_permission_to :read, :template, template: template, proposal: proposal
-
-          response_object = {
-            state: template.field_values["internal_state"],
-            template: populate_template_interpolations(proposal)
-          }
-
-          respond_to do |format|
-            format.json do
-              render json: response_object.to_json
-            end
-          end
-        end
-
         def update
-          enforce_permission_to :update, :template, template: template
+          enforce_permission_to(:update, :template, template:)
           @form = form(ProposalAnswerTemplateForm).from_params(params)
           UpdateProposalAnswerTemplate.call(template, @form, current_user) do
             on(:ok) do |_questionnaire_template|
@@ -88,6 +78,32 @@ module Decidim
               @template = template
               flash.now[:error] = I18n.t("templates.update.error", scope: "decidim.admin")
               render action: :edit
+            end
+          end
+        end
+
+        def destroy
+          enforce_permission_to(:destroy, :template, template:)
+
+          DestroyTemplate.call(template, current_user) do
+            on(:ok) do
+              flash[:notice] = I18n.t("templates.destroy.success", scope: "decidim.admin")
+              redirect_to action: :index
+            end
+          end
+        end
+
+        def fetch
+          enforce_permission_to(:read, :template, template:, proposal:)
+
+          response_object = {
+            state: template.field_values["internal_state"],
+            template: populate_template_interpolations(proposal)
+          }
+
+          respond_to do |format|
+            format.json do
+              render json: response_object.to_json
             end
           end
         end
@@ -104,22 +120,6 @@ module Decidim
             on(:invalid) do
               flash[:alert] = I18n.t("templates.copy.error", scope: "decidim.admin")
               redirect_to action: :index
-            end
-          end
-        end
-
-        def index
-          enforce_permission_to :index, :templates
-          @templates = collection
-
-          respond_to do |format|
-            format.html { render :index }
-            format.json do
-              term = params[:term]
-
-              @templates = search(term)
-
-              render json: @templates.map { |t| { value: t.id, label: translated_attribute(t.name) } }
             end
           end
         end

@@ -8,7 +8,7 @@ module Decidim::ReportingProposals::Admin
 
     let(:component) { create(:reporting_proposals_component) }
     let(:organization) { component.organization }
-    let(:user) { create :user, :admin, :confirmed, organization: organization }
+    let(:user) { create(:user, :admin, :confirmed, organization:) }
     let(:form) do
       form_klass.from_params(
         form_params
@@ -20,7 +20,7 @@ module Decidim::ReportingProposals::Admin
       )
     end
 
-    let!(:proposal) { create :proposal, :official, component: component }
+    let!(:proposal) { create(:proposal, :official, component:) }
 
     let(:uploaded_photos) { [] }
     let(:current_photos) { [] }

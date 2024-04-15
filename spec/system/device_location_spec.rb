@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User location button", type: :system do
+describe "User location button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
@@ -10,7 +10,7 @@ describe "User location button", type: :system do
            :with_extra_hashtags,
            participatory_space: participatory_process)
   end
-  let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
   let(:latitude) { 41.3825 }
@@ -34,7 +34,7 @@ describe "User location button", type: :system do
       let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
 
       it "does not has the location button" do
-        expect(page).not_to have_button("Use my location")
+        expect(page).to have_no_button("Use my location")
       end
     end
   end
@@ -47,7 +47,7 @@ describe "User location button", type: :system do
 
       it "the button should be deactivated and the errors removed" do
         expect(page).to have_css(".user-device-location button[disabled]")
-        expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
+        expect(page).to have_no_css("label[for=proposal_address].is-invalid-label")
         expect(page).to have_css("input#proposal_address[disabled]")
       end
     end
@@ -56,7 +56,7 @@ describe "User location button", type: :system do
   describe "#reporting_proposals", :serves_geocoding_autocomplete do
     before do
       visit_component
-      click_link "New proposal"
+      click_link_or_button "New proposal"
     end
 
     it_behaves_like "uses device location"
@@ -66,7 +66,7 @@ describe "User location button", type: :system do
   context "when admin", :serves_geocoding_autocomplete do
     before do
       visit manage_component_path(component)
-      click_link "New proposal"
+      click_link_or_button "New proposal"
     end
 
     it_behaves_like "uses device location"
@@ -80,7 +80,7 @@ describe "User location button", type: :system do
              :with_geocoding_enabled,
              participatory_space: participatory_process)
     end
-    let(:proposal) { create(:proposal, :draft, component: component, users: [user]) }
+    let(:proposal) { create(:proposal, :draft, component:, users: [user]) }
 
     before do
       visit_component
@@ -93,7 +93,7 @@ describe "User location button", type: :system do
     context "when admin", :serves_geocoding_autocomplete do
       before do
         visit manage_component_path(component)
-        click_link "New proposal"
+        click_link_or_button "New proposal"
       end
 
       it_behaves_like "uses device location"
@@ -110,7 +110,7 @@ describe "User location button", type: :system do
 
     before do
       visit_component
-      click_link "New meeting"
+      click_link_or_button "New meeting"
       select "In person", from: :meeting_type_of_meeting
     end
 
@@ -119,7 +119,7 @@ describe "User location button", type: :system do
     context "when admin", :serves_geocoding_autocomplete do
       before do
         visit manage_component_path(component)
-        click_link "New meeting"
+        click_link_or_button "New meeting"
         select "In person", from: :meeting_type_of_meeting
       end
 

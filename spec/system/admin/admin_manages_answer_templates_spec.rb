@@ -3,12 +3,12 @@
 require "spec_helper"
 require "decidim/templates/test/factories"
 
-describe "Admin manages proposal answer templates", type: :system do
-  let(:organization) { create :organization }
-  let(:user) { create :user, :admin, :confirmed, organization: organization }
-  let(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:proposal_component) { create :component, manifest_name: :proposals, participatory_space: participatory_process }
-  let!(:reporting_component) { create :component, manifest_name: :reporting_proposals, settings: settings, default_step_settings: settings, participatory_space: participatory_process }
+describe "Admin manages proposal answer templates" do
+  let(:organization) { create(:organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
+  let(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:proposal_component) { create(:component, manifest_name: :proposals, participatory_space: participatory_process) }
+  let!(:reporting_component) { create(:component, manifest_name: :reporting_proposals, settings:, default_step_settings: settings, participatory_space: participatory_process) }
   let(:settings) do
     { proposal_answering_enabled: true }
   end
@@ -19,8 +19,8 @@ describe "Admin manages proposal answer templates", type: :system do
   end
 
   describe "listing templates" do
-    let!(:template1) { create(:template, :proposal_answer, organization: organization, templatable: proposal_component) }
-    let!(:template2) { create(:template, :proposal_answer, organization: organization, templatable: reporting_component) }
+    let!(:template1) { create(:template, :proposal_answer, organization:, templatable: proposal_component) }
+    let!(:template2) { create(:template, :proposal_answer, organization:, templatable: reporting_component) }
 
     before do
       visit decidim_admin_templates.proposal_answer_templates_path
@@ -42,7 +42,7 @@ describe "Admin manages proposal answer templates", type: :system do
     before do
       visit decidim_admin_templates.proposal_answer_templates_path
       within ".layout-content" do
-        click_link("New")
+        click_link_or_button("New")
       end
     end
 
@@ -83,7 +83,7 @@ describe "Admin manages proposal answer templates", type: :system do
     let(:values) do
       { internal_state: "evaluating" }
     end
-    let!(:template) { create(:template, :proposal_answer, description: { en: description }, field_values: values, organization: organization, templatable: reporting_component) }
+    let!(:template) { create(:template, :proposal_answer, description: { en: description }, field_values: values, organization:, templatable: reporting_component) }
     let!(:proposal) { create(:proposal, component: reporting_component) }
 
     before do
@@ -95,12 +95,12 @@ describe "Admin manages proposal answer templates", type: :system do
       within ".edit_proposal_answer" do
         select template.name["en"], from: :proposal_answer_template_chooser
         expect(page).to have_content(description)
-        click_button "Answer"
+        click_link_or_button "Answer"
       end
 
       expect(page).to have_admin_callout("Proposal successfully answered")
 
-      within find("tr", text: proposal.title["en"]) do
+      within "tr", text: proposal.title["en"] do
         expect(page).to have_content("Evaluating")
       end
     end
@@ -109,7 +109,7 @@ describe "Admin manages proposal answer templates", type: :system do
       within ".edit_proposal_answer" do
         template.destroy!
         select template.name["en"], from: :proposal_answer_template_chooser
-        expect(page).not_to have_content(description)
+        expect(page).to have_no_content(description)
         expect(page).to have_content("Couldn't find this template")
       end
     end

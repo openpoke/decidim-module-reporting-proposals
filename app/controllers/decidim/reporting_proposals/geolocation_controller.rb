@@ -15,7 +15,7 @@ module Decidim
 
         geocoder = Decidim::Map.utility(:geocoding, organization: current_organization)
         address = geocoder.address([params[:latitude], params[:longitude]])
-        render json: { address: address, found: address.present? }
+        render json: { address:, found: address.present? }
       end
 
       private

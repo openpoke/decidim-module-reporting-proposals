@@ -7,14 +7,14 @@ module Decidim::ReportingProposals
     subject { category_valuator }
 
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:category_valuator) { build(:category_valuator) }
 
     it { is_expected.to be_valid }
 
     context "when category belongs to a different participatory space" do
       let(:category) { create(:category, participatory_space: participatory_process) }
-      let(:category_valuator) { build(:category_valuator, category: category) }
+      let(:category_valuator) { build(:category_valuator, category:) }
 
       it { is_expected.not_to be_valid }
     end
@@ -61,8 +61,8 @@ module Decidim::ReportingProposals
       # test to ensure valuationassignments are destroyed when valuator role is destroyed
       # we might have to remove this when https://github.com/decidim/decidim/issues/10353 is solved
       context "when participatory_process_user_role is a valuator" do
-        let!(:valuation_assignment) { create(:valuation_assignment, proposal: proposal) }
-        let(:proposal) { create(:proposal, component: component) }
+        let!(:valuation_assignment) { create(:valuation_assignment, proposal:) }
+        let(:proposal) { create(:proposal, component:) }
         let(:component) { create(:proposal_component, participatory_space: participatory_process) }
         let(:valuator_role) { valuation_assignment.valuator_role }
 

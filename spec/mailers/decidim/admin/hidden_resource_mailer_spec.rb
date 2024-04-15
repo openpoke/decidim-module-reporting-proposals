@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::Admin
-  describe HiddenResourceMailer, type: :mailer do
+  describe HiddenResourceMailer do
     # include ActionView::Helpers::SanitizeHelper
 
     let!(:proposal) { create(:proposal) }

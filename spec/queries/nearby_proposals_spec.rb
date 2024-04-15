@@ -5,8 +5,8 @@ require "spec_helper"
 module Decidim::ReportingProposals
   describe NearbyProposals do
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
-    let(:component) { create(:reporting_proposals_component, participatory_space: participatory_process, settings: settings) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
+    let(:component) { create(:reporting_proposals_component, participatory_space: participatory_process, settings:) }
     let(:settings) do
       {
         "geocoding_comparison_radius" => radius,
@@ -15,10 +15,10 @@ module Decidim::ReportingProposals
     end
     let(:radius) { 30 }
     let(:newer_than) { 60 }
-    let!(:proposal_missed) { create(:proposal, component: component, longitude: longitude_missed, latitude: latitude_missed, published_at: published_missed) }
-    let!(:proposal_far) { create(:proposal, component: component, longitude: longitude_far, latitude: latitude_far, published_at: published_far) }
-    let!(:proposal_near) { create(:proposal, component: component, longitude: longitude_near, latitude: latitude_near, published_at: published_near) }
-    let!(:proposal) { create(:proposal, component: component, longitude: longitude, latitude: latitude) }
+    let!(:proposal_missed) { create(:proposal, component:, longitude: longitude_missed, latitude: latitude_missed, published_at: published_missed) }
+    let!(:proposal_far) { create(:proposal, component:, longitude: longitude_far, latitude: latitude_far, published_at: published_far) }
+    let!(:proposal_near) { create(:proposal, component:, longitude: longitude_near, latitude: latitude_near, published_at: published_near) }
+    let!(:proposal) { create(:proposal, component:, longitude:, latitude:) }
 
     # 41.4273° N, 2.1815° E (Canodrom, Barcelona)
     let(:latitude) { 41.4273 }
@@ -76,7 +76,7 @@ module Decidim::ReportingProposals
     end
 
     context "when no proposals are found" do
-      let(:proposal) { create(:proposal, :draft, component: component, longitude: nil, latitude: nil) }
+      let(:proposal) { create(:proposal, :draft, component:, longitude: nil, latitude: nil) }
 
       it "finds nothing" do
         expect(result).to be_blank
@@ -119,7 +119,7 @@ module Decidim::ReportingProposals
     end
 
     context "when it is not published" do
-      let(:proposal_far) { create(:proposal, :unpublished, component: component, longitude: longitude_far, latitude: latitude_far) }
+      let(:proposal_far) { create(:proposal, :unpublished, component:, longitude: longitude_far, latitude: latitude_far) }
 
       it "is not found" do
         expect(result).to eq([proposal.id, proposal_near.id])
@@ -127,7 +127,7 @@ module Decidim::ReportingProposals
     end
 
     context "when it is hidden" do
-      let(:proposal_far) { create(:proposal, :hidden, component: component, longitude: longitude_far, latitude: latitude_far) }
+      let(:proposal_far) { create(:proposal, :hidden, component:, longitude: longitude_far, latitude: latitude_far) }
 
       it "is not found" do
         expect(result).to eq([proposal.id, proposal_near.id])

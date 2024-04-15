@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-describe "Edit Proposal Notes", type: :system do
+describe "Edit Proposal Notes" do
   let(:component) { create(:proposal_component) }
   let(:organization) { component.organization }
   let(:manifest_name) { "proposals" }
-  let(:proposal) { create(:proposal, component: component) }
+  let(:proposal) { create(:proposal, component:) }
   let(:participatory_space) { component.participatory_space }
 
   let(:body) { "Test body" }
@@ -16,17 +16,17 @@ describe "Edit Proposal Notes", type: :system do
     create_list(
       :proposal_note,
       proposal_notes_count,
-      proposal: proposal,
-      author: author,
-      body: body
+      proposal:,
+      author:,
+      body:
     )
   end
 
   include_context "when managing a component as an admin"
 
   before do
-    within find("tr", text: translated(proposal.title)) do
-      click_link translated(proposal.title)
+    within "tr", text: translated(proposal.title) do
+      click_link_or_button translated(proposal.title)
     end
   end
 
@@ -57,11 +57,11 @@ describe "Edit Proposal Notes", type: :system do
   end
 
   context "when the user is not the author of the proposal note" do
-    let(:author) { create(:user, organization: organization) }
+    let(:author) { create(:user, organization:) }
 
     it "shows proposal notes for the current proposal" do
       proposal_notes.each do |proposal_note|
-        expect(page).not_to have_css(".link-alt")
+        expect(page).to have_no_css(".link-alt")
         expect(page).to have_content(proposal_note.author.name)
       end
     end
@@ -71,7 +71,7 @@ describe "Edit Proposal Notes", type: :system do
     let(:author) { user }
 
     it "does not display the edited status" do
-      expect(page).not_to have_content("Edited")
+      expect(page).to have_no_content("Edited")
     end
   end
 

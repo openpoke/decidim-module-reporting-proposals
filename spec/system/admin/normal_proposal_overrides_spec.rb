@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-describe "Send email to user with link", type: :system do
+describe "Send email to user with link" do
   let(:component) { create(:proposal_component) }
   let(:organization) { component.organization }
   let(:manifest_name) { "proposals" }
-  let!(:proposal) { create(:proposal, component: component) }
+  let!(:proposal) { create(:proposal, component:) }
   let(:participatory_space) { component.participatory_space }
   let(:address) { "Some address" }
   let(:latitude) { 40.1234 }
@@ -15,8 +15,8 @@ describe "Send email to user with link", type: :system do
   include_context "when managing a component as an admin"
 
   before do
-    within find("tr", text: translated(proposal.title)) do
-      click_link "Answer proposal"
+    within "tr", text: translated(proposal.title) do
+      click_link_or_button "Answer proposal"
     end
   end
 
@@ -25,23 +25,23 @@ describe "Send email to user with link", type: :system do
   end
 
   it "has a link to send email with author's email" do
-    expect(page).to have_selector("a[href*='mailto:#{proposal.creator_author.email}']")
+    expect(page).to have_css("a[href*='mailto:#{proposal.creator_author.email}']")
   end
 
   context "when it is a proposal with geocoding data" do
-    let!(:proposal) { create(:proposal, component: component, address: address, latitude: latitude, longitude: longitude) }
+    let!(:proposal) { create(:proposal, component:, address:, latitude:, longitude:) }
 
     it "does not show the address" do
-      expect(page).not_to have_css(".address")
-      expect(page).not_to have_css(".address__info")
-      expect(page).not_to have_css(".address__map")
-      expect(page).not_to have_content(address)
+      expect(page).to have_no_css(".address")
+      expect(page).to have_no_css(".address__info")
+      expect(page).to have_no_css(".address__map")
+      expect(page).to have_no_content(address)
     end
 
     context "when component has geocoding enabled" do
       let!(:component) do
         create(:proposal_component,
-               manifest: manifest,
+               manifest:,
                participatory_space: participatory_process,
                settings: {
                  geocoding_enabled: true

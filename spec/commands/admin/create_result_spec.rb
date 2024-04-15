@@ -7,16 +7,16 @@ module Decidim::Accountability
   describe Admin::CreateResult do
     subject { described_class.new(form) }
 
-    let(:organization) { create :organization, available_locales: [:en] }
-    let(:user) { create :user, organization: organization }
-    let(:participatory_process) { create :participatory_process, organization: organization }
-    let(:current_component) { create :accountability_component, participatory_space: participatory_process }
-    let(:scope) { create :scope, organization: organization }
-    let(:category) { create :category, participatory_space: participatory_process }
+    let(:organization) { create(:organization, available_locales: [:en]) }
+    let(:user) { create(:user, organization:) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
+    let(:current_component) { create(:accountability_component, participatory_space: participatory_process) }
+    let(:scope) { create(:scope, organization:) }
+    let(:category) { create(:category, participatory_space: participatory_process) }
 
     let(:start_date) { Date.yesterday }
     let(:end_date) { Date.tomorrow }
-    let(:status) { create :status, component: current_component, key: "ongoing", name: { en: "Ongoing" } }
+    let(:status) { create(:status, component: current_component, key: "ongoing", name: { en: "Ongoing" }) }
     let(:progress) { 89 }
     let(:external_id) { "external-id" }
     let(:weight) { 0.3 }
@@ -33,21 +33,21 @@ module Decidim::Accountability
     let(:form) do
       double(
         invalid?: invalid,
-        current_component: current_component,
+        current_component:,
         title: { en: "title" },
         description: { en: "description" },
         proposal_ids: [proposal.id, reporting_proposal.id],
         project_ids: [],
-        scope: scope,
-        category: category,
-        start_date: start_date,
-        end_date: end_date,
+        scope:,
+        category:,
+        start_date:,
+        end_date:,
         decidim_accountability_status_id: status.id,
-        progress: progress,
+        progress:,
         current_user: user,
         parent_id: nil,
-        external_id: external_id,
-        weight: weight
+        external_id:,
+        weight:
       )
     end
     let(:invalid) { false }
@@ -58,12 +58,12 @@ module Decidim::Accountability
       it "links proposals" do
         subject.call
         linked_proposals = result.linked_resources(:proposals, "included_proposals") + result.linked_resources(:reporting_proposals, "included_proposals")
-        expect(linked_proposals).to match_array([proposal, reporting_proposal])
+        expect(linked_proposals).to contain_exactly(proposal, reporting_proposal)
       end
 
       it "notifies the linked proposals followers" do
-        proposal_follower = create(:user, organization: organization)
-        reporting_follower = create(:user, organization: organization)
+        proposal_follower = create(:user, organization:)
+        reporting_follower = create(:user, organization:)
         create(:follow, followable: proposal, user: proposal_follower)
         create(:follow, followable: reporting_proposal, user: reporting_follower)
 

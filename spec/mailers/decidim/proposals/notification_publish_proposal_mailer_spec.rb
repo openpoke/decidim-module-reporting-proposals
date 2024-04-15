@@ -3,15 +3,15 @@
 require "spec_helper"
 
 module Decidim::Proposals
-  describe NotificationPublishProposalMailer, type: :mailer do
+  describe NotificationPublishProposalMailer do
     include ActionView::Helpers::SanitizeHelper
 
     let(:organization) { create(:organization) }
-    let(:participatory_process) { create(:participatory_process, organization: organization) }
+    let(:participatory_process) { create(:participatory_process, organization:) }
     let(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
     let(:reporting_proposals_component) { create(:component, manifest_name: "reporting_proposals", participatory_space: participatory_process) }
-    let(:users) { create_list(:user, 3, organization: organization) }
-    let(:proposal) { create(:proposal, component: proposals_component, users: users) }
+    let(:users) { create_list(:user, 3, organization:) }
+    let(:proposal) { create(:proposal, component: proposals_component, users:) }
     let(:reporting_proposal) { create(:proposal, component: reporting_proposals_component) }
 
     def proposal_url(proposal)

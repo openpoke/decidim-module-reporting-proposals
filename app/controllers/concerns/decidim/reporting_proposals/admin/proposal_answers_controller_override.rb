@@ -10,7 +10,7 @@ module Decidim
         included do
           helper Decidim::Proposals::Admin::ProposalBulkActionsHelper
           def update
-            enforce_permission_to :create, :proposal_answer, proposal: proposal
+            enforce_permission_to(:create, :proposal_answer, proposal:)
 
             @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).instance
             @answer_form = form(Decidim::Proposals::Admin::ProposalAnswerForm).from_params(params)
