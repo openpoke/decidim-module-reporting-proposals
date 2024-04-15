@@ -103,13 +103,13 @@ describe "Assign valuators" do
       it "has permission to access assigned" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(proposal)
         expect(page).to have_content(proposal.title["en"])
-        expect(page).to have_no_content("You are not authorized to perform this action")
+        expect(page).to have_no_content("You are not authorized to perform this action.")
       end
 
       it "has no permission to access" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(another_proposal)
         expect(page).to have_no_content(another_proposal.title["en"])
-        expect(page).to have_content("You are not authorized to perform this action")
+        expect(page).to have_content("You are not authorized to perform this action.")
       end
     end
   end

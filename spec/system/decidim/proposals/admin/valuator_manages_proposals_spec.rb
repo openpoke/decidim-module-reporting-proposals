@@ -60,7 +60,7 @@ describe "Valuator manages proposals" do
         click_link_or_button("button#js-submit-unassign-proposals-from-valuator")
       end
 
-      expect(page).to have_content("You are not authorized to perform this action")
+      expect(page).to have_content("You are not authorized to perform this action.")
     end
   end
 
