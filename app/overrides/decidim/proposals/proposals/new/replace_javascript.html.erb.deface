@@ -3,5 +3,5 @@
 <% if reporting_proposal? %>
   <%= prepend_javascript_pack_tag "decidim_reporting_proposals" %>
 <% else %>
-  <%= javascript_pack_tag "decidim_proposals" %>
+  <%= prepend_javascript_pack_tag "decidim_proposals" %>
 <% end %>
