@@ -8,6 +8,11 @@ button.user-device-camera {
   text-align: right;
 }
 
+#proposal_add_photos {
+  display: block;
+  margin-top: 1rem;
+}
+
 @media only screen and (max-width: 596px) {
   .gallery__container .input-group .input-group-button {
     display: block;

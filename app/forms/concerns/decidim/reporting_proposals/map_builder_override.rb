@@ -17,7 +17,7 @@ module Decidim
 
           unless template.snippets.any?(:reporting_proposals_geocoding_scripts) || template.snippets.any?(:reporting_proposals_geocoding_styles)
             template.snippets.add(:reporting_proposals_geocoding_scripts, template.prepend_javascript_pack_tag("decidim_reporting_proposals_geocoding"))
-            template.snippets.add(:reporting_proposals_geocoding_styles, template.stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
+            template.snippets.add(:reporting_proposals_geocoding_styles, template.append_stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
 
             # This will display the snippets in the <head> part of the page.
             template.snippets.add(:head, template.snippets.for(:reporting_proposals_geocoding_styles))
@@ -28,14 +28,14 @@ module Decidim
           options[:autocomplete] ||= "off"
           options[:class] ||= "input-group-field"
 
-          template.content_tag(:div, class: "input-group") do
+          template.content_tag(:div, class: "flex mb-4") do
             template.text_field(
               object_name,
               method,
               options.merge("data-decidim-geocoding" => view_options.to_json)
             ) +
               template.content_tag(:div, class: "input-group-button user-device-location") do
-                template.content_tag(:button, class: "button secondary", type: "button", data: {
+                template.content_tag(:button, class: "button button__secondary flex-none whitespace-nowrap w-auto p-4 mt-2", type: "button", data: {
                                        input: "#{object_name}_#{method}",
                                        latitude: "#{object_name}_latitude",
                                        longitude: "#{object_name}_longitude",
@@ -43,7 +43,7 @@ module Decidim
                                        error_unsupported: I18n.t("errors.device_not_supported", scope: "decidim.reporting_proposals.forms"),
                                        url: Decidim::ReportingProposals::Engine.routes.url_helpers.locate_path
                                      }) do
-                  icon("location", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_location", scope: "decidim.reporting_proposals.forms")}"
+                  icon("map-pin-line", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_location", scope: "decidim.reporting_proposals.forms")}"
                 end
               end
           end

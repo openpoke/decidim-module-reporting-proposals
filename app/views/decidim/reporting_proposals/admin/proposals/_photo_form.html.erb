@@ -11,10 +11,19 @@
                        button_edit_label: t(".edit_images"),
                        button_class: "button button__sm button__transparent-secondary mr-2",
                        attachments: proposal.photos,
+                       extension_allowlist: Decidim::OrganizationSettings.for(current_organization).upload_allowed_file_extensions_image,
                        help_i18n_scope: "decidim.forms.file_help.image" %>
+      <%= f.hidden_field :photos, multiple: true, accept: "image/*", capture: "camera", id: "camera-input", style: "display: none;" %>
+
+      <button id="use-camera-button" class="button button__sm button__transparent-secondary mt-2 user-device-camera" type="button">
+        <%= icon("camera-line", role: "img", "aria-hidden" => true) %> <%= t("use_my_camera", scope: "decidim.reporting_proposals.forms") %>
+      </button>
     </div>
   </fieldset>
   <div>
     <%= f.submit t(".action"), class: "button button__sm button__secondary mt-2" %>
   </div>
 <% end %>
+<!--add assets if snippets need to be removed -->
+<%# append_javascript_pack_tag("decidim_reporting_proposals_camera") %>
+<%# append_stylesheet_pack_tag("decidim_reporting_proposals_camera") %>
