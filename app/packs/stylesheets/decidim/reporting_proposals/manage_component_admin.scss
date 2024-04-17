@@ -20,14 +20,38 @@
 
 .delete-proposal__button {
   position: absolute;
-  right: 0;
+  right: 7px;
   top: 7px;
-  width: 2rem;
-  height: 2rem;
-  background: rgba(var(--primary-rgb), 0.8);
-  color: #fff;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: rgba(var(--tertiary-rgb) / 0.8);
   border-radius: 50%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  svg {
+    fill: #fff;
+    stroke: #fff;
+    stroke-width: 2px;
+  }
+}
+
+.delete-proposal__button:hover {
+  background: rgba(var(--tertiary-rgb) / 1);
+}
+
+.delete-proposal__button:active {
+  transform: scale(0.95);
+}
+
+#proposal_photo_add_photos {
+    display: block;
+    margin-top: 1rem;
 }
 
 //Variables
@@ -63,9 +87,4 @@
 
 .layout-content table svg.hide-button {
   fill: var(--secondary);
-}
-
-/* Elevate z-index of sticky footer to prevent overlap with absolutely positioned elements. */
-.item__edit-sticky {
-  z-index: 10;
 }

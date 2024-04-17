@@ -9,6 +9,7 @@
       </button>
       <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
         <div id="panel-photos">
+          <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_gallery" %>
           <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_form" %>
         </div>
       <% end %>

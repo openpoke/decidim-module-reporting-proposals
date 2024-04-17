@@ -1,6 +1,11 @@
 button.user-device-camera {
   border-radius: 4px !important;
   max-height: 3rem;
+
+  svg {
+    fill: #fff;
+    margin-right: 0.5rem;
+  }
 }
 
 .has_no_image {
