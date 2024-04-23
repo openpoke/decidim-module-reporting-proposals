@@ -10,3 +10,8 @@
     color: var(--alert);
   }
 }
+
+/* reporting proposals have only 3 steps */
+.wizard-steps > * {
+  width: 33%;
+}
