@@ -5,7 +5,6 @@ require "decidim/accountability/test/factories"
 require "decidim/meetings/test/factories"
 require "decidim/budgets/test/factories"
 require "decidim/elections/test/factories"
-require "decidim/proposals/test/capybara_proposals_picker"
 
 describe "Admin find_resource_manifest" do
   let(:organization) { create(:organization) }
@@ -42,7 +41,7 @@ describe "Admin find_resource_manifest" do
           en: "A longer description"
         )
 
-        proposals_pick(select_data_picker(:result_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
@@ -58,7 +57,7 @@ describe "Admin find_resource_manifest" do
       visit manage_component_path(component)
       click_link_or_button "Edit"
       within ".edit_result" do
-        proposals_pick(select_data_picker(:result_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
@@ -72,7 +71,7 @@ describe "Admin find_resource_manifest" do
       visit manage_component_path(component)
       click_link_or_button "Edit"
       within ".edit_result" do
-        proposals_pick(select_data_picker(:result_proposals, multiple: true), [proposal])
+        tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
@@ -104,7 +103,7 @@ describe "Admin find_resource_manifest" do
           en: "A longer description"
         )
         fill_in :project_budget_amount, with: 22_000_000
-        proposals_pick(select_data_picker(:project_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
@@ -122,7 +121,7 @@ describe "Admin find_resource_manifest" do
       click_link_or_button "Manage projects"
       click_link_or_button "Edit"
       within ".edit_project" do
-        proposals_pick(select_data_picker(:project_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
@@ -137,7 +136,7 @@ describe "Admin find_resource_manifest" do
       click_link_or_button "Manage projects"
       click_link_or_button "Edit"
       within ".edit_project" do
-        proposals_pick(select_data_picker(:project_proposals, multiple: true), [proposal])
+        tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
@@ -165,7 +164,7 @@ describe "Admin find_resource_manifest" do
         fill_in :close_meeting_closing_report, with: "Very nice meeting"
         fill_in :close_meeting_attendees_count, with: 10
 
-        proposals_pick(select_data_picker(:close_meeting_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
 
         click_link_or_button "Close meeting"
       end
@@ -186,7 +185,7 @@ describe "Admin find_resource_manifest" do
         fill_in :close_meeting_closing_report, with: "Very nice meeting"
         fill_in :close_meeting_attendees_count, with: 10
 
-        proposals_pick(select_data_picker(:close_meeting_proposals, multiple: true), [proposal])
+        tom_select("#proposals_list", option_id: [proposal.id])
 
         click_link_or_button "Close meeting"
       end
@@ -210,7 +209,7 @@ describe "Admin find_resource_manifest" do
             en: "The meeting was great!"
           )
           fill_in :close_meeting_attendees_count, with: 12
-          proposals_pick(select_data_picker(:close_meeting_proposals, multiple: true), [proposal, reporting_proposal])
+          tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
           click_link_or_button "Close"
         end
 
@@ -235,7 +234,7 @@ describe "Admin find_resource_manifest" do
             en: "The meeting was great!"
           )
           fill_in :close_meeting_attendees_count, with: 12
-          proposals_pick(select_data_picker(:close_meeting_proposals, multiple: true), [proposal])
+          tom_select("#proposals_list", option_id: [proposal.id])
           click_link_or_button "Close"
         end
 
@@ -269,7 +268,7 @@ describe "Admin find_resource_manifest" do
           "#answer-title-tabs",
           en: "A Question"
         )
-        proposals_pick(select_data_picker(:answer_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         click_link_or_button "Update answer"
       end
 
@@ -294,7 +293,7 @@ describe "Admin find_resource_manifest" do
           "#answer-title-tabs",
           en: "A Question"
         )
-        proposals_pick(select_data_picker(:answer_proposals, multiple: true), [proposal, reporting_proposal])
+        tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         click_link_or_button "Create answer"
       end
 

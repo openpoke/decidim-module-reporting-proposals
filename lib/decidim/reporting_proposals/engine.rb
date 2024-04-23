@@ -78,7 +78,6 @@ module Decidim
         Decidim::ResourceLocatorPresenter.include(Decidim::ResourceLocatorPresenterOverride)
         Decidim::Proposals::PublishProposalEvent.include(Decidim::Proposals::PublishProposalEventOverride)
         Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::Proposals::Admin::AssignProposalsToValuatorOverride)
-        Decidim::Admin::HideResource.include(Decidim::Admin::HideResourceOverride)
 
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
@@ -138,6 +137,14 @@ module Decidim
           Decidim::EventsManager.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
+        end
+      end
+
+      initializer "decidim_reporting_proposals.on_hiding_resource" do
+        Decidim::EventsManager.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
+          Decidim::Admin::HiddenResourceMailer.notify_mail(
+            data[:resource], data[:affected_users], data[:extra][:report_reasons]
+          ).deliver_later
         end
       end
 

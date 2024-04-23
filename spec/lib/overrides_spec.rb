@@ -27,7 +27,6 @@ checksums = [
       "/app/forms/decidim/admin/category_form.rb" => "cb56a20226a48af9cebca68d3c612d6b",
       "/app/commands/decidim/admin/create_category.rb" => "fdbe8b71ebe724f8bc97ef8c5c862ad0",
       "/app/commands/decidim/admin/update_category.rb" => "c3d8a49dd6a9d7c51f9e9d0c6c4b5cb1",
-      "/app/commands/decidim/admin/hide_resource.rb" => "7d0c46bb73096a0c9ca3e9f43c7a0265",
       "/app/controllers/decidim/admin/categories_controller.rb" => "5030981cb309d05a8fe41c220367986b",
       "/app/views/decidim/admin/categories/index.html.erb" => "a37f7bee7121fdbc309e3f748cf80a5c",
       "/app/views/decidim/admin/categories/_form.html.erb" => "fbdcbd4745300402700b2ff386d7f56d"
@@ -36,8 +35,7 @@ checksums = [
   {
     package: "decidim-templates",
     files: {
-      "/app/commands/decidim/templates/admin/copy_questionnaire_template.rb" => "8bc9ae54c05201ce212a450a5c5eedfc",
-      "/app/commands/decidim/templates/admin/create_questionnaire_template.rb" => "7eb6849ba2078da8df757f6d4d234ccc"
+      "/app/controllers/decidim/templates/admin/proposal_answer_templates_controller.rb" => "8bc9ae54c05201ce212a450a5c5eedfc"
     }
   },
   {

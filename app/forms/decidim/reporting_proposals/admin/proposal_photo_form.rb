@@ -8,13 +8,15 @@ module Decidim
         attribute :attachment, AttachmentForm
         attachments_attribute :photos
 
-        def proposal
-          @proposal ||= Decidim::Proposals::Proposal.find(id)
-        end
+        validates :add_photos, presence: true
 
-        def current_component
-          @current_component ||= proposal&.component
-        end
+        # def proposal
+        #   @proposal ||= Decidim::Proposals::Proposal.find(id)
+        # end
+
+        # def current_component
+        #   @current_component ||= proposal&.component
+        # end
       end
     end
   end
