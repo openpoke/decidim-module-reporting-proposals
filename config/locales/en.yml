@@ -13,6 +13,7 @@ en:
     admin:
       actions:
         manage: Manage
+        new: New
       hidden_resource_mailer:
         notify_mail:
           body_1: An administrator removed your proposal because it has been reported.

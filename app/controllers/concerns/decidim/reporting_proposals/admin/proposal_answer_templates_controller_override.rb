@@ -8,6 +8,20 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
+          def avaliablity_options
+            @avaliablity_options = []
+            @avaliablity_options.push [t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index"), 0]
+
+            Decidim::Component.includes(:participatory_space).where(manifest_name: accepted_components)
+                              .select { |a| a.participatory_space.decidim_organization_id == current_organization.id }.each do |component|
+              @avaliablity_options.push [formatted_name(component), component.id]
+            end
+
+            @avaliablity_options.sort_by!(&:first)
+          end
+
+          private
+
           def accepted_components
             [:proposals, :reporting_proposals]
           end
