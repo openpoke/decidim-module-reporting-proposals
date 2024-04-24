@@ -29,7 +29,7 @@ And then execute (do also this on upgrades):
 
 ```
 bundle
-bundle exec rails decidim_reporting_proposals:install:migrations
+bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
@@ -51,6 +51,14 @@ bin/rails db:migrate
 > ```
 >
 > Alternatively, use any other ENV var to set up the `config.deface.enabled` to `false` during the precompilation phase.
+
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-reporting_proposals` gem will run the following (that can also be run manually if you consider):
+> 
+> ```bash
+> bin/rails decidim_reporting_proposals:install:migrations
+> ```
 
 Depending on your Decidim version, you can choose the corresponding version to ensure compatibility:
 
@@ -88,10 +96,6 @@ This module provides the following features:
 6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, valuators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
 
 7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
-
-8. **Proposal answers templates**: Administrators can create templates for the answers to proposals. This is useful to provide a standard answer to proposals that are similar. This feature requires to enable the `decidim-templates` official module.
-  ![Templates for proposals answers](features/templates1.png)
-  ![Applying a template](features/templates2.png)
 
 ### Customization
 

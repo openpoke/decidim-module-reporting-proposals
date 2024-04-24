@@ -7,8 +7,6 @@ ca:
       proposal:
         has_no_address: No té adreça
         has_no_image: Sense imatge
-      template:
-        scope_for_availability: Limita la disponibilitat al component
   decidim:
     admin:
       hidden_resource_mailer:

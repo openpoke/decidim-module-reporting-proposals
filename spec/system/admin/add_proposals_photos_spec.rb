@@ -17,20 +17,19 @@ describe "Add proposals photos" do
     page.find(".table__list-title a").click
   end
 
-  it "has 'Photos' section" do
-    expect(page).to have_content("Add image")
-  end
-
   context "when photos are added" do
     it "the photos are rendered in the photo section" do
+      click_link_or_button "Photos"
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Add image"
+      click_link_or_button "Save images"
+      click_link_or_button "Photos"
 
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Add image"
+      click_link_or_button "Save images"
 
+      click_link_or_button "Photos"
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 2)
 
       expect(page).to have_css(".delete-proposal__button", count: 2)
