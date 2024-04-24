@@ -54,37 +54,16 @@
   margin-top: 1rem;
 }
 
+.admin-address {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  .component__show-address {
+    max-height: 3rem;
+  }
+}
+
 //Variables
-
-/* Card address */
-.address {
-  display: flex;
-  padding: 1rem;
-}
-
-.address--alone {
-  flex-grow: 1;
-}
-
-.address__info {
-  display: flex;
-  flex-grow: 1;
-}
-
-.address__icon {
-  float: left;
-  display: flex;
-  align-self: center;
-  fill: var(--primary);
-}
-
-.address__details {
-  float: left;
-  max-width: 100%; //IE10 bug fix
-  padding-left: 0.5em;
-  align-self: center;
-}
-
 .layout-content table svg.hide-button {
   fill: var(--secondary);
 }

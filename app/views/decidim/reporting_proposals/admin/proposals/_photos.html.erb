@@ -1,4 +1,4 @@
-<% if proposal.photos.any? || component_settings.attachments_allowed? %>
+<% if component_settings.attachments_allowed? %>
   <div class="card-section">
     <div class="component__show_photos" data-component="accordion" id="accordion-photos">
       <button class="card-divider-button" data-controls="panel-photos" type="button">
@@ -7,12 +7,12 @@
           <%= t(".title") %>
         </h2>
       </button>
-      <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
-        <div id="panel-photos">
-          <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_gallery" %>
+      <div id="panel-photos">
+        <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_gallery" %>
+        <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
           <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_form" %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>

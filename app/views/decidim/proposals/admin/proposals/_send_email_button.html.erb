@@ -1,4 +1,6 @@
-<p>
-  <%= link_to t(".send_mail"), "mailto:#{presented_author.email}?subject=#{translated_attribute(proposal.title)}&body=#{resource_locator(proposal).url}",
-              class: "button tiny", target: "_blank" %>
-</p>
+<% if presented_author.respond_to?(:email) %>
+  <p>
+    <%= link_to t(".send_mail"), "mailto:#{presented_author.email}?subject=#{translated_attribute(proposal.title)}&body=#{resource_locator(proposal).url}",
+                class: "help-text", target: "_blank" %>
+  </p>
+<% end %>
