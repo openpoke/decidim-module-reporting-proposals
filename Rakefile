@@ -3,8 +3,6 @@
 require "decidim/dev/common_rake"
 
 def install_module(path)
-  # maintain until https://github.com/decidim/decidim/commit/51b81b37004708ab72e70993fef4634eef18ee6c is in the decidim version used
-  FileUtils.cp("babel.config.json", "#{path}/babel.config.json")
   Dir.chdir(path) do
     system("bundle exec rake decidim_reporting_proposals:install:migrations")
     system("bundle exec rake db:migrate")
