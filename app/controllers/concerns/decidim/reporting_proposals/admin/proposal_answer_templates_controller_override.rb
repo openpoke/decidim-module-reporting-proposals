@@ -20,6 +20,22 @@ module Decidim
             @avaliablity_options.prepend [t("global_scope", scope: "decidim.templates.admin.proposal_answer_templates.index"), 0]
           end
 
+          # This is overriden because a bug in decidim templates that prevents valuators to use templates
+          def fetch
+            enforce_permission_to(:read, :template, template:, proposal:)
+
+            response_object = {
+              state: template.field_values["internal_state"],
+              template: populate_template_interpolations(proposal)
+            }
+
+            respond_to do |format|
+              format.json do
+                render json: response_object.to_json
+              end
+            end
+          end
+
           private
 
           def accepted_components
