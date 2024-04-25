@@ -13,43 +13,40 @@ describe "Report and hide proposal" do
   let(:moderation) { create(:moderation, reportable:, report_count: 1, participatory_space: participatory_process) }
   let!(:report) { create(:report, moderation:) }
 
+  def component_path
+    Decidim::EngineRouter.admin_proxy(proposal_component).proposals_path(proposal_component.id)
+  end
+
   before do
     switch_to_host(organization.host)
     allow(Decidim::ReportingProposals.config).to receive(:allow_admins_to_hide_proposals).and_return(enabled)
     login_as admin, scope: :user
-    visit decidim_admin.root_path
-    click_link_or_button "Processes"
-
-    within "#processes" do
-      click_link_or_button translated(participatory_process.title)
-    end
-
-    click_link_or_button "Components"
-
-    within "#components-list" do
-      click_link_or_button "Proposals"
-    end
+    visit component_path
   end
 
   it "admin can be report and hide the proposal" do
-    expect(page).to have_css("button svg.icon--flag")
+    expect(page).to have_button("Report")
 
     expect(proposal).not_to be_hidden
     expect(proposal).not_to be_reported
+    expect(page).to have_content(proposal.title["en"])
 
-    find("button svg.icon--flag").click
-    click_link_or_button("button[type=submit]", text: "Report")
+    click_link_or_button("Report")
+    within ".modal__report" do
+      click_link_or_button("Report")
+    end
 
     expect(proposal.reload).not_to be_hidden
     expect(proposal).to be_reported
+    expect(page).to have_content(proposal.title["en"])
+    expect(page).to have_no_button("Report")
+    expect(page).to have_link("Hide")
 
-    expect(page).to have_css("a svg.icon--trash")
+    click_link_or_button "Hide"
 
-    find("a svg.icon--trash").click
-
-    expect(page).to have_no_css("a svg.icon--trash")
-    expect(page).to have_no_css("button svg.icon--flag")
-
+    expect(page).to have_no_link("Hide")
+    expect(page).to have_no_button("Report")
+    expect(page).to have_no_content(proposal.title["en"])
     expect(proposal.reload).to be_hidden
     expect(proposal).to be_reported
   end
@@ -59,8 +56,8 @@ describe "Report and hide proposal" do
     let(:reportable) { proposal }
 
     it "dows not allow to report proposals but allows to hide it if reported" do
-      expect(page).to have_no_css("a svg.icon--trash")
-      expect(page).to have_no_css("button svg.icon--flag")
+      expect(page).to have_no_button("Report")
+      expect(page).to have_no_link("Hide")
     end
   end
 end
