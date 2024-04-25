@@ -34,15 +34,17 @@ describe "Edit Proposal Notes" do
     let(:author) { user }
 
     it "shows proposal notes for the current proposal" do
+      click_link_or_button "Private notes"
       proposal_notes.each do |proposal_note|
-        expect(page).to have_css(".link-alt")
+        expect(page).to have_button("Edit note")
         expect(page).to have_content(proposal_note.author.name)
       end
     end
 
     it "edits a proposal note" do
-      within ".comment-thread .card:last-child" do
-        find(".link-alt").click
+      click_link_or_button "Private notes"
+      within ".comment:last-child" do
+        click_link_or_button "Edit note"
       end
 
       within ".edit_proposal_note" do
@@ -52,6 +54,7 @@ describe "Edit Proposal Notes" do
       end
 
       expect(page).to have_admin_callout("successfully updated")
+      click_link_or_button "Private notes"
       expect(page).to have_content("New awesome body")
     end
   end
@@ -60,8 +63,9 @@ describe "Edit Proposal Notes" do
     let(:author) { create(:user, organization:) }
 
     it "shows proposal notes for the current proposal" do
+      click_link_or_button "Private notes"
       proposal_notes.each do |proposal_note|
-        expect(page).to have_no_css(".link-alt")
+        expect(page).to have_no_button("Edit note")
         expect(page).to have_content(proposal_note.author.name)
       end
     end
@@ -71,6 +75,7 @@ describe "Edit Proposal Notes" do
     let(:author) { user }
 
     it "does not display the edited status" do
+      click_link_or_button "Private notes"
       expect(page).to have_no_content("Edited")
     end
   end
@@ -84,6 +89,7 @@ describe "Edit Proposal Notes" do
     end
 
     it "displays the edited status" do
+      click_link_or_button "Private notes"
       expect(page).to have_content("Edited")
       expect(page).to have_content(proposal_notes.last.updated_at.strftime("%d/%m/%Y %H:%M"))
     end
