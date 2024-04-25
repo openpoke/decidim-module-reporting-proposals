@@ -5,6 +5,7 @@ module Decidim
     module Admin
       # this is here due a bug in Decidim 0.28 when they introduced proposal answer templates
       # they didn't take into account that valuators can answer proposals
+      # This can be removed after https://github.com/decidim/decidim/pull/12765 is merge & backported
       class Permissions < Decidim::DefaultPermissions
         def permissions
           return permission_action if permission_action.scope != :admin

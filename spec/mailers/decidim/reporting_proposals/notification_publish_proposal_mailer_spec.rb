@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-module Decidim::Proposals
+module Decidim::ReportingProposals
   describe NotificationPublishProposalMailer do
     include ActionView::Helpers::SanitizeHelper
 

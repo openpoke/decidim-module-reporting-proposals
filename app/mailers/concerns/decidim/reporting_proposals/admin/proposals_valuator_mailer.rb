@@ -21,7 +21,7 @@ module Decidim
 
           with_user(user) do
             mail to: "#{user.name} <#{user.email}>",
-                 subject: t("subject", scope: "decidim.proposals.admin.proposals_valuator_mailer.notify_proposals_valuator")
+                 subject: t("subject", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator")
           end
         end
       end

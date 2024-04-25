@@ -1,0 +1,17 @@
+<p class="email-greeting"><%= t("greeting", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator", name: @valuator_user.name) %></p>
+
+<p class="email-instructions"><%= t("email_body", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator") %></p>
+
+<p class="email-instructions">
+  <ul>
+    <% @proposals.each do |proposal| %>
+      <li class="mb-sm">
+        <span><%= translated_attribute(proposal.title) %></span>:
+        <%= sanitize link_to(t("public_side", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator"), Decidim::ResourceLocatorPresenter.new(proposal).url), tags: ["a"], attributes: ["href"] %>,
+        <%= sanitize link_to(t("admin_panel", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator"), Decidim::ResourceLocatorPresenter.new(proposal).admin_url), tags: ["a"], attributes: ["href"] %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<p class="email-closing"><%= t("gratitude", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator") %></p>

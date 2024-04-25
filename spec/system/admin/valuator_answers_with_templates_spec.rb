@@ -27,7 +27,6 @@ describe "Valuator answers with templates" do
     expect(proposal.reload.internal_state).to eq("not_answered")
     within ".edit_proposal_answer" do
       select template.name["en"], from: :proposal_answer_template_chooser
-      sleep 1
       expect(page).to have_content(description)
       click_on "Answer"
     end

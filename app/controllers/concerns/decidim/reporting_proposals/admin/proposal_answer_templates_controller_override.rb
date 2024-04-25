@@ -21,6 +21,7 @@ module Decidim
           end
 
           # This is overriden because a bug in decidim templates that prevents valuators to use templates
+          # This can be removed after https://github.com/decidim/decidim/pull/12765 is merge & backported
           def fetch
             enforce_permission_to(:read, :template, template:, proposal:)
 

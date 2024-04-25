@@ -230,16 +230,6 @@ en:
             send_mail: Send an email to user
           show:
             report: Report
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed
-              below. This means you've been trusted to give them feedback and a proper
-              response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
     reported_mailer:
       report:
         admin_resource: Admin this resource
@@ -420,6 +410,16 @@ en:
             remove_assignment: remove assignment
             remove_assignment_confirmation: remove assignment confirmation
             valuators: Valuators
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: admin panel
+            email_body: You've been assigned as a valuator for the proposals listed
+              below. This means you've been trusted to give them feedback and a proper
+              response in the next coming days.
+            gratitude: Thanks for your help!
+            greeting: Hi %{name}
+            public_side: public side
+            subject: New proposals assigned to you for evaluation
         resolution_time: Resolution time
         time_elapsed:
           datetime:

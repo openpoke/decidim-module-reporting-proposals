@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-module Decidim::Admin
+module Decidim::ReportingProposals::Admin
   describe HiddenResourceMailer do
     # include ActionView::Helpers::SanitizeHelper
 
