@@ -29,14 +29,14 @@ module Decidim
           options[:autocomplete] ||= "off"
           options[:class] ||= "input-group-field"
 
-          template.content_tag(:div, class: "flex mb-4 items-end") do
+          template.content_tag(:div, class: "geocoding-container") do
             template.text_field(
               object_name,
               method,
               options.merge("data-decidim-geocoding" => view_options.to_json)
             ) +
               template.content_tag(:div, class: "input-group-button user-device-location") do
-                template.content_tag(:button, class: "button button__secondary whitespace-nowrap p-2", type: "button", data: {
+                template.content_tag(:button, class: "button button__secondary", type: "button", data: {
                                        input: "#{object_name}_#{method}",
                                        latitude: "#{object_name}_latitude",
                                        longitude: "#{object_name}_longitude",

@@ -1,21 +1,17 @@
-.autoComplete_wrapper {
-  @apply w-full mr-2;
-}
+.geocoding-container {
+  @apply sm:flex sm:items-end;
 
-.user-device-location {
-  button {
-    svg {
-      margin-right: 0.2rem;
-    }
+  .autoComplete_wrapper {
+    @apply w-full mb-2 sm:m-0 sm:mr-2;
   }
 
-//   @media only screen and (max-width: 596px) {
-//     display: block !important;
-//     margin-top: 1rem;
-//     margin-bottom: -0.5rem;
+  .user-device-location {
+    button {
+      @apply whitespace-nowrap p-2 w-full sm:w-auto;
 
-//     button {
-//       border-radius: 4px !important;
-//     }
-//   }
+      svg {
+        margin-right: 0.2rem;
+      }
+    }
+  }
 }
