@@ -91,8 +91,7 @@ describe "Edit Proposal Notes" do
 
     it "shows the link and opens it in a new tab" do
       click_link_or_button "Private notes"
-      expect(page).to have_css("a[href='https://github.com'][target='_blank']", text: "https://github.com")
-      click_link_or_button("https://github.com")
+      expect(page).to have_css("a[href='https://github.com'][target='_blank']", text: "https://github.com", count: 5)
     end
   end
 end
