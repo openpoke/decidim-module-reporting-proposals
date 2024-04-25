@@ -42,9 +42,11 @@ end
 
 shared_examples "3 steps" do
   it "sidebar does not have the complete step" do
-    expect(page).to have_content("Step 1 of 3")
-    within ".wizard__steps" do
+    within ".wizard-steps" do
+      expect(page).to have_content("Create your proposal")
+      expect(page).to have_content("Compare")
       expect(page).to have_no_content("Complete")
+      expect(page).to have_content("Publish your proposal")
     end
   end
 end
@@ -75,8 +77,8 @@ shared_examples "customized form" do
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
-    expect(page).to have_content("RELATED IMAGES")
-    expect(page).to have_content("RELATED DOCUMENTS")
+    expect(page).to have_button("Images")
+    expect(page).to have_button("Documents")
   end
 end
 
@@ -178,7 +180,7 @@ shared_examples "maintains errors" do
 
     expect(page).to have_checked_field("proposal_has_no_address")
     within first(".field.hashtags__container") do
-      expect(page).to have_content("There's an error in this field")
+      expect(page).to have_content("There is an error in this field")
     end
   end
 
@@ -202,9 +204,11 @@ end
 
 shared_examples "4 steps" do
   it "sidebar has the complete step" do
-    expect(page).to have_content("Step 1 of 4")
-    within ".wizard__steps" do
+    within ".wizard-steps" do
+      expect(page).to have_content("Create your proposal")
+      expect(page).to have_content("Compare")
       expect(page).to have_content("Complete")
+      expect(page).to have_content("Publish your proposal")
     end
   end
 end
@@ -266,7 +270,7 @@ shared_examples "prevents post if etiquette errors" do
     it "shows errors" do
       fill_proposal
 
-      within ".card__content form" do
+      within ".new_proposal" do
         expect(page).to have_no_content("Publish")
         expect(page).to have_content("must start with a capital letter")
 
@@ -285,7 +289,7 @@ shared_examples "prevents post if etiquette errors" do
     it "shows errors" do
       fill_proposal
 
-      within ".card__content form" do
+      within ".new_proposal" do
         expect(page).to have_no_content("Publish")
         expect(page).to have_content("must start with a capital letter")
 
@@ -304,9 +308,9 @@ shared_examples "prevents post if etiquette errors" do
     it "shows errors" do
       fill_proposal
 
-      within ".card__content form" do
+      within ".new_proposal" do
         expect(page).to have_no_content("Publish")
-        expect(page).to have_content("There's an error in this field")
+        expect(page).to have_content("There is an error in this field")
 
         fill_in :proposal_body, with: "I am long enough to meet the requirements"
         find("*[type=submit]").click

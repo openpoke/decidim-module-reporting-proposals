@@ -43,7 +43,10 @@ $(() => {
     $checkbox.on("change", toggleInput);
   }
 
-  if ($addressInput.length > 0) {
+  $("[data-decidim-map]").on("ready.decidim", () => {
+    if ($addressInput.length <= 0) {
+      return;
+    }
     const ctrl = $("[data-decidim-map]").data("map-controller");
     ctrl.setEventHandler("coordinates", (ev) => {
       $(`input[name='${latFieldName}']`).val(ev.lat);
@@ -60,7 +63,5 @@ $(() => {
         address: $addressInputField.val()
       });
     });
-  }
-
-
+  });
 });
