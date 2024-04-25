@@ -1,5 +1,5 @@
 <% note.body.split("\n").each_with_index do |paragraph, index| %>
-  <%= Decidim::ContentRenderers::LinkRenderer.new(paragraph.gsub(URI.regexp, '<a href="\0" target="_blank">\0</a>')).render.html_safe %>
+  <%= Decidim::ContentRenderers::LinkRenderer.new(paragraph).render("data-external-link"=> false).html_safe %>
   <% unless index == note.body.split("\n").size - 1 %>
     <br>
   <% end %>

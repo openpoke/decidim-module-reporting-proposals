@@ -64,6 +64,12 @@
   }
 }
 
+.component__show_notes-grid {
+  a {
+    text-decoration: underline;
+  }
+}
+
 //Variables
 .layout-content table svg.hide-button {
   fill: var(--secondary);
