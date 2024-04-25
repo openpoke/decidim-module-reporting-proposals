@@ -143,7 +143,7 @@ module Decidim
 
       initializer "decidim_reporting_proposals.on_hiding_resource" do
         Decidim::EventsManager.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
-          Decidim::Admin::HiddenResourceMailer.notify_mail(
+          Decidim::ReportingProposals::Admin::HiddenResourceMailer.notify_mail(
             data[:resource], data[:affected_users], data[:extra][:report_reasons]
           ).deliver_later
         end

@@ -59,7 +59,7 @@ module Decidim
           return unless Decidim::ReportingProposals.notify_authors_on_publish.include?(@proposal.component.manifest_name.to_sym)
 
           affected_users.each do |user|
-            Decidim::Proposals::NotificationPublishProposalMailer.notify_proposal_author(@proposal, user).deliver_later
+            Decidim::ReportingProposals::NotificationPublishProposalMailer.notify_proposal_author(@proposal, user).deliver_later
           end
         end
 
