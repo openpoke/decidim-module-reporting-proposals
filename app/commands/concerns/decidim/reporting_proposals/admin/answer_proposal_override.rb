@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Decidim
-  module Proposals
+  module ReportingProposals
     module Admin
       module AnswerProposalOverride
         extend ActiveSupport::Concern
@@ -27,7 +27,7 @@ module Decidim
             return unless Decidim::ReportingProposals.notify_authors_on_answering.include?(proposal.component.manifest_name.to_sym)
 
             affected_users.each do |user|
-              Decidim::Proposals::Admin::NotificationAnswerProposalMailer.notify_proposal_author(proposal, user).deliver_later
+              Decidim::ReportingProposals::Admin::NotificationAnswerProposalMailer.notify_proposal_author(proposal, user).deliver_later
             end
           end
 

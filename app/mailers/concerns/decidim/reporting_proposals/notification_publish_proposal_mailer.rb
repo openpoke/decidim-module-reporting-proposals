@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Decidim
-  module Proposals
+  module ReportingProposals
     class NotificationPublishProposalMailer < Decidim::ApplicationMailer
       include Decidim::TranslationsHelper
       include Decidim::SanitizeHelper

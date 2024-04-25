@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Decidim
-  module Proposals
+  module ReportingProposals
     module PublishProposalOverride
       extend ActiveSupport::Concern
 
