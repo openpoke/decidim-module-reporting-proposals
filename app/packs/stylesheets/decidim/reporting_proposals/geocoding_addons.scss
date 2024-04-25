@@ -1,40 +1,21 @@
-.input-group.has-tribute {
-  position: relative;
-
-  .tribute-container {
-    margin-top: 2.3rem;
-  }
+.autoComplete_wrapper {
+  @apply w-full mr-2;
 }
 
 .user-device-location {
   button {
-    max-height: 3rem;
-    margin-top: 1rem;
-
-    &.loading-spinner {
-      position: relative;
-      margin: 0 !important;
-
-      &::before {
-        position: absolute;
-        top: 6px;
-        left: 12px;
-      }
-    }
-
     svg {
-      fill: #fff;
-      margin-right: 0.5rem;
+      margin-right: 0.2rem;
     }
   }
 
-  @media only screen and (max-width: 596px) {
-    display: block !important;
-    margin-top: 1rem;
-    margin-bottom: -0.5rem;
+//   @media only screen and (max-width: 596px) {
+//     display: block !important;
+//     margin-top: 1rem;
+//     margin-bottom: -0.5rem;
 
-    button {
-      border-radius: 4px !important;
-    }
-  }
+//     button {
+//       border-radius: 4px !important;
+//     }
+//   }
 }

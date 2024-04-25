@@ -2,14 +2,12 @@
 
 shared_examples "map can be hidden" do
   it "checkbox hides the map" do
-    fill_in :proposal_address, with: address
-    within ".autoComplete_wrapper" do
-      page.find("li", match: :first).click
-    end
+    fill_in_geocoding :proposal_address, with: address
 
     expect(page).to have_content("You can move the point on the map")
 
     check "proposal_has_no_address"
+
     expect(page).to have_no_content("You can move the point on the map")
   end
 end
@@ -17,12 +15,11 @@ end
 shared_examples "map can be shown" do |fill|
   it "checkbox shows the map" do
     fill_proposal(extra_fields: false) if fill
+
     expect(page).to have_no_content("You can move the point on the map")
+
     check "proposal_has_address"
-    fill_in :proposal_address, with: address
-    within ".autoComplete_wrapper" do
-      page.find("li", match: :first).click
-    end
+    fill_in_geocoding :proposal_address, with: address
 
     expect(page).to have_content("You can move the point on the map")
   end
