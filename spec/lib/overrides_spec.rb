@@ -18,7 +18,8 @@ checksums = [
       "/app/models/decidim/category.rb" => "fc044f23d00373d62693ee7f044558fe",
       "/app/models/decidim/participatory_space_role_config/valuator.rb" => "8dbcc7c787a7db6e9cdebccf888ffbdf",
       "/app/mailers/decidim/reported_mailer.rb" => "4a902dfb5d444f48518166bdad808151",
-      "/app/presenters/decidim/resource_locator_presenter.rb" => "84a195ea879885bd7fa78dfa51ee7f12"
+      "/app/presenters/decidim/resource_locator_presenter.rb" => "84a195ea879885bd7fa78dfa51ee7f12",
+      "/app/cells/decidim/linked_resources_for_cell.rb" => "960a6d404ba9e9f4a3b3d9160193ea5c"
     }
   },
   {

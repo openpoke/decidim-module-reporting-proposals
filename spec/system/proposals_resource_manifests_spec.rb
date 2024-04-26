@@ -10,9 +10,9 @@ describe "Admin find_resource_manifest" do
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
-  let!(:proposal) { create(:proposal, title: { en: "proposal" }, component: proposal_component) }
+  let!(:proposal) { create(:proposal, title: { en: "A proposal" }, component: proposal_component) }
   let(:reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
-  let!(:reporting_proposal) { create(:proposal, title: { en: "reporting_proposal" }, component: reporting_component) }
+  let!(:reporting_proposal) { create(:proposal, title: { en: "A reporting proposal" }, component: reporting_component) }
   let(:user) { create(:user, :confirmed, :admin, organization:) }
 
   before do
@@ -26,8 +26,8 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals on creating" do
       visit manage_component_path(component)
-      within ".button--title" do
-        click_link_or_button "New Result"
+      within ".item_show__header" do
+        click_link_or_button "New result"
       end
       within ".new_result" do
         fill_in_i18n(
@@ -49,8 +49,10 @@ describe "Admin find_resource_manifest" do
       within "tr", text: "My result" do
         click_link_or_button "Edit"
       end
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
 
     it "admin can choose reporting proposals" do
@@ -63,8 +65,10 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       click_link_or_button "Edit"
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
 
     it "admin can choose normal proposals" do
@@ -77,8 +81,10 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       click_link_or_button "Edit"
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_no_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_no_content(translated(reporting_proposal.title))
+      end
     end
   end
 
@@ -89,7 +95,7 @@ describe "Admin find_resource_manifest" do
     it "admin can choose reporting proposals when creating" do
       visit manage_component_path(component)
       click_link_or_button "Manage projects"
-      click_link_or_button "New Project"
+      click_link_or_button "New project"
 
       within ".new_project" do
         fill_in_i18n(
@@ -112,8 +118,10 @@ describe "Admin find_resource_manifest" do
       within "tr", text: "My project" do
         click_link_or_button "Edit"
       end
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
 
     it "admin can choose reporting proposals" do
@@ -127,8 +135,10 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       click_link_or_button "Edit"
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
 
     it "admin can choose normal proposals" do
@@ -142,8 +152,10 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       click_link_or_button "Edit"
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_no_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_no_content(translated(reporting_proposal.title))
+      end
     end
   end
 
@@ -157,9 +169,9 @@ describe "Admin find_resource_manifest" do
       click_link_or_button translated(meeting.title)
       click_link_or_button "Close meeting"
 
-      expect(page).to have_content "CLOSE MEETING"
+      expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
-        expect(page).to have_content "Choose proposals"
+        expect(page).to have_content "Proposals"
 
         fill_in :close_meeting_closing_report, with: "Very nice meeting"
         fill_in :close_meeting_attendees_count, with: 10
@@ -178,9 +190,9 @@ describe "Admin find_resource_manifest" do
       click_link_or_button translated(meeting.title)
       click_link_or_button "Close meeting"
 
-      expect(page).to have_content "CLOSE MEETING"
+      expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
-        expect(page).to have_content "Choose proposals"
+        expect(page).to have_content "Proposals"
 
         fill_in :close_meeting_closing_report, with: "Very nice meeting"
         fill_in :close_meeting_attendees_count, with: 10
@@ -201,7 +213,7 @@ describe "Admin find_resource_manifest" do
         page.click_link_or_button "Close"
 
         within ".edit_close_meeting" do
-          expect(page).to have_content "Choose proposals"
+          expect(page).to have_content "Proposals"
 
           fill_in_i18n_editor(
             :close_meeting_closing_report,
@@ -217,8 +229,10 @@ describe "Admin find_resource_manifest" do
         expect(page).to have_content("Yes")
 
         page.click_link_or_button "Close"
-        expect(page).to have_content(translated(proposal.title))
-        expect(page).to have_content(translated(reporting_proposal.title))
+        within ".plugin-dropdown_input" do
+          expect(page).to have_content(translated(proposal.title))
+          expect(page).to have_content(translated(reporting_proposal.title))
+        end
       end
 
       it "admin can choose normal proposals" do
@@ -226,7 +240,7 @@ describe "Admin find_resource_manifest" do
         page.click_link_or_button "Close"
 
         within ".edit_close_meeting" do
-          expect(page).to have_content "Choose proposals"
+          expect(page).to have_content "Proposals"
 
           fill_in_i18n_editor(
             :close_meeting_closing_report,
@@ -242,8 +256,10 @@ describe "Admin find_resource_manifest" do
         expect(page).to have_content("Yes")
 
         page.click_link_or_button "Close"
-        expect(page).to have_content(translated(proposal.title))
-        expect(page).to have_no_content(translated(reporting_proposal.title))
+        within ".plugin-dropdown_input" do
+          expect(page).to have_content(translated(proposal.title))
+          expect(page).to have_no_content(translated(reporting_proposal.title))
+        end
       end
     end
   end
@@ -261,7 +277,7 @@ describe "Admin find_resource_manifest" do
       click_link_or_button "Edit"
 
       within ".edit_answer" do
-        expect(page).to have_content "Choose proposals"
+        expect(page).to have_content "Proposals"
 
         fill_in_i18n(
           :answer_title,
@@ -275,18 +291,20 @@ describe "Admin find_resource_manifest" do
       expect(page).to have_admin_callout("Answer successfully updated")
 
       page.click_link_or_button "Edit"
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
 
     it "admin can choose reporting proposals on create" do
       visit manage_component_path(component)
       click_link_or_button "Manage questions"
       click_link_or_button "Manage answers"
-      click_link_or_button "New Answer"
+      click_link_or_button "New answer"
 
       within ".new_answer" do
-        expect(page).to have_content "Choose proposals"
+        expect(page).to have_content "Proposals"
 
         fill_in_i18n(
           :answer_title,
@@ -302,8 +320,10 @@ describe "Admin find_resource_manifest" do
       within "tr", text: "A Question" do
         page.click_link_or_button "Edit"
       end
-      expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_content(translated(reporting_proposal.title))
+      within ".plugin-dropdown_input" do
+        expect(page).to have_content(translated(proposal.title))
+        expect(page).to have_content(translated(reporting_proposal.title))
+      end
     end
   end
 end
