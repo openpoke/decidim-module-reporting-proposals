@@ -18,7 +18,6 @@ shared_examples "map can be shown" do |fill|
 
     expect(page).to have_no_content("You can move the point on the map")
 
-    check "proposal_has_address"
     fill_in_geocoding :proposal_address, with: address
 
     expect(page).to have_content("You can move the point on the map")
@@ -32,8 +31,13 @@ shared_examples "reuses draft if exists" do
     visit_component
     click_link_or_button "New proposal"
 
-    expect(page).to have_content("EDIT PROPOSAL DRAFT")
-    expect(page).to have_content("Step 1 of 3")
+    expect(page).to have_content("Edit Proposal Draft")
+    within ".wizard-steps" do
+      expect(page).to have_content("Create your proposal")
+      expect(page).to have_content("Compare")
+      expect(page).to have_no_content("Complete")
+      expect(page).to have_content("Publish your proposal")
+    end
   end
 end
 
@@ -81,7 +85,7 @@ end
 
 shared_examples "creates reporting proposal" do
   it "redirects to the publish step" do
-    fill_proposal
+    fill_proposal(skip_group: true)
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(user.name)
@@ -118,19 +122,25 @@ shared_examples "creates reporting proposal" do
   it "modifies the proposal" do
     fill_proposal
 
-    expect(page).to have_no_content("RELATED IMAGES")
-    expect(page).to have_no_content("RELATED DOCUMENTS")
+    expect(page).to have_no_content("Images")
+    expect(page).to have_no_content("Documents")
 
     click_link_or_button "Modify the proposal"
     find("#proposal_has_no_image").click
 
-    expect(page).to have_content("Step 1 of 3")
-    expect(page).to have_content("EDIT PROPOSAL DRAFT")
+    within ".wizard-steps" do
+      expect(page).to have_content("Create your proposal")
+      expect(page).to have_content("Compare")
+      expect(page).to have_no_content("Complete")
+      expect(page).to have_content("Publish your proposal")
+    end
+
+    expect(page).to have_content("Edit Proposal Draft")
 
     complete_proposal(attach: true)
 
-    expect(page).to have_content("RELATED IMAGES")
-    expect(page).to have_content("RELATED DOCUMENTS")
+    expect(page).to have_content("Images")
+    expect(page).to have_content("Documents")
 
     click_link_or_button "Publish"
 
@@ -176,7 +186,7 @@ shared_examples "maintains errors" do
     click_link_or_button "Send"
 
     expect(page).to have_checked_field("proposal_has_no_address")
-    within first(".field.hashtags__container") do
+    within "label[for=proposal_title]" do
       expect(page).to have_content("There is an error in this field")
     end
   end
@@ -221,8 +231,8 @@ shared_examples "creates normal proposal" do
   it "redirects to the complete step" do
     fill_proposal(extra_fields: false)
 
-    within ".section-heading" do
-      expect(page).to have_content("COMPLETE YOUR PROPOSAL")
+    within "#content" do
+      expect(page).to have_content("Complete your proposal")
     end
 
     expect(page).to have_css(".edit_proposal")

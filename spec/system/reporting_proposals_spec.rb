@@ -37,7 +37,7 @@ describe "Reporting proposals overrides" do
   end
 
   def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false)
-    within ".new_proposal" do
+    within "#content" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
 
@@ -59,13 +59,13 @@ describe "Reporting proposals overrides" do
       check "proposal_has_no_image"
     end
 
-    within ".new_proposal" do
+    within "#content" do
       find("*[type=submit]").click
     end
   end
 
   def complete_proposal(attach: false)
-    within ".new_proposal" do
+    within ".edit_proposal" do
       select translated(another_category.name), from: :proposal_category_id
       select user_group.name, from: :proposal_user_group_id
     end
@@ -75,7 +75,7 @@ describe "Reporting proposals overrides" do
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     end
 
-    within ".new_proposal" do
+    within ".edit_proposal" do
       find("*[type=submit]").click
     end
   end

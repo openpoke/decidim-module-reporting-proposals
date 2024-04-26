@@ -12,7 +12,9 @@ $(() => {
   const $buttonLocation = $(".user-device-location button");
 
   if ($map.length) {
-    $map.hide();
+    if (!$addressInputField.data("coordinates")) {
+      $map.hide();
+    }
     $addressInputField.on("geocoder-suggest-coordinates.decidim", () => $map.show());
 
     // Handle no address checkbox in reverse, mandatory by default instead of default decidim
