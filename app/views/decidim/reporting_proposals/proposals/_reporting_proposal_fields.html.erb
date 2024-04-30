@@ -5,33 +5,7 @@
     </div>
   <% end %>
 
-  <% if component_settings.attachments_allowed? %>
-    <div class="gallery__container photos_container">
-      <% if @form.photos.any? %>
-        <% @form.photos.each do |photo| %>
-          <div class="callout gallery__item" id="attachment_<%= photo.id %>" data-closable>
-            <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: photo.file.filename %>
-            <%= form.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
-            <button class="close-button"
-                    aria-label="<%= t("delete_image", scope: "decidim.reporting_proposals.proposals.edit") %>"
-                    title="<%= t("delete_image", scope: "decidim.reporting_proposals.proposals.edit") %>"
-                    type="button"
-                    data-close>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <% end %>
-      <% end %>
-      <div class="field">
-        <%= form.file_field :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form") %>
-
-        <div class="has_no_image">
-          <%= form.check_box :has_no_image %>
-        </div>
-      </div>
-    </div>
-
-  <% end %>
+  <%= render "decidim/reporting_proposals/proposals/camera_button", form: form %>
 
   <% if @form.geocoding_enabled? %>
     <div id="address_input">

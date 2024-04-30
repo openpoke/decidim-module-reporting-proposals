@@ -93,6 +93,23 @@ module Decidim
           end
         end
 
+        def update
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+
+          @form = form_proposal_params
+          update_proposal_command.call(@form, current_user, @proposal) do
+            on(:ok) do |proposal|
+              flash[:notice] = I18n.t("proposals.update.success", scope: "decidim")
+              redirect_to Decidim::ResourceLocatorPresenter.new(proposal).path
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("proposals.update.error", scope: "decidim")
+              render :edit
+            end
+          end
+        end
+
         private
 
         def form_proposal_params

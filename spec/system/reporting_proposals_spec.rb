@@ -139,7 +139,7 @@ describe "Reporting proposals overrides" do
     end
 
     context "when editing" do
-      let!(:proposal) { create(:proposal, address: nil, users: [user], component:) }
+      let!(:proposal) { create(:proposal, address: nil, latitude: nil, longitude: nil, users: [user], component:) }
 
       before do
         visit_component
