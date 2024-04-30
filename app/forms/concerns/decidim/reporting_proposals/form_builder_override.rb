@@ -22,11 +22,11 @@ module Decidim
             @template.snippets.add(:foot, @template.snippets.for(:reporting_proposals_camera_scripts))
           end
 
-          content_tag(:div, class: "input-group flex justify-between items-center mb-4") do
+          content_tag(:div, class: "camera-container input-group") do
             super(object_name, options) +
               content_tag(:div, class: "input-group-button") do
                 content_tag(:button,
-                            class: "button button__secondary flex-none whitespace-nowrap w-auto p-4 mt-2 user-device-camera",
+                            class: "button button__secondary user-device-camera",
                             type: "button",
                             data: { input: object_name }) do
                   icon("camera-line", role: "img", "aria-hidden": true) + " #{I18n.t("use_my_camera", scope: "decidim.reporting_proposals.forms")}"

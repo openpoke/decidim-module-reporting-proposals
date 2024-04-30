@@ -96,7 +96,7 @@ describe "Reporting proposals overrides" do
   end
 
   context "when editing a existing reporting proposal", :serves_geocoding_autocomplete do
-    let!(:proposal) { create(:proposal, users: [user], component:) }
+    let!(:proposal) { create(:proposal, users: [user], address:, component:) }
 
     before do
       visit_component

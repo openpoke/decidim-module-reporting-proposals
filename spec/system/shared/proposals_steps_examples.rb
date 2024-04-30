@@ -204,6 +204,7 @@ shared_examples "maintains errors" do
     expect(page).to have_no_css("label[for=proposal_add_photos].is-invalid-label")
 
     uncheck "proposal_has_no_image"
+
     click_link_or_button "Send"
     expect(page).to have_css("label[for=proposal_add_photos].is-invalid-label")
   end
