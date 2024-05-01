@@ -28,9 +28,9 @@ module Decidim
         end
 
         def reporting_proposals_component?
-          return unless @form&.component&.manifest_name
+          return unless current_component&.manifest_name
 
-          @form.component.manifest_name == "reporting_proposals"
+          current_component.manifest_name == "reporting_proposals"
         end
       end
     end

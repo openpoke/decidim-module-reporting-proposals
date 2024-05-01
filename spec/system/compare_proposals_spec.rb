@@ -41,16 +41,16 @@ describe "Reporting proposals overrides" do
 
   shared_examples "compares using geocoding" do
     it "shows comparison text" do
-      expect(page).to have_content("NEARBY PROPOSALS (2)")
+      expect(page).to have_content("Nearby proposals (2)")
       expect(page).to have_content("These are proposals that are in a radius of 30m to the one you are creating.")
     end
 
     it "shows found proposals in order" do
-      within ".card--proposal", match: :first do
+      within ".card__list-content", match: :first do
         expect(page).to have_i18n_content(proposal_near.title)
         expect(page).to have_i18n_content("10m away")
       end
-      within all(".card--proposal")[1] do
+      within all(".card__list-content")[1] do
         expect(page).to have_i18n_content(proposal_far.title)
         expect(page).to have_i18n_content("20m away")
       end
@@ -72,8 +72,8 @@ describe "Reporting proposals overrides" do
 
   shared_examples "compares using text" do
     it "shows comparison text" do
-      expect(page).to have_no_content("NEARBY PROPOSALS")
-      expect(page).to have_content("SIMILAR PROPOSALS (1)")
+      expect(page).to have_no_content("Nearby proposals")
+      expect(page).to have_content("Similar proposals (1)")
       expect(page).to have_no_content("These are proposals that are in a radius")
     end
 
@@ -93,7 +93,7 @@ describe "Reporting proposals overrides" do
     let(:longitude) { 2.2 }
 
     it "shows no proposals found" do
-      expect(page).to have_content("PUBLISH YOUR PROPOSAL")
+      expect(page).to have_content("Publish your proposal")
       expect(page).to have_i18n_content(proposal_draft.title)
     end
   end
@@ -119,7 +119,7 @@ describe "Reporting proposals overrides" do
         let(:longitude) { 2.2 }
 
         it "shows no proposals found" do
-          expect(page).to have_content("COMPLETE YOUR PROPOSAL")
+          expect(page).to have_content("Complete your proposal")
           expect(page).to have_i18n_content("Well done! No similar proposals found")
         end
       end
