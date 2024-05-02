@@ -53,10 +53,10 @@ en:
         name: Reporting proposals
         settings:
           global:
-            additional_button_for_show_proposal_link: Additional action button after
-              the "back to list" link when visiting a particular proposal (link)
-            additional_button_for_show_proposal_text: Additional action button after
-              the "back to list" link when visiting a particular proposal (text)
+            additional_button_for_show_proposal_link: Additional sidebar action button
+              when visiting a particular proposal (link)
+            additional_button_for_show_proposal_text: Additional sidebar action button
+              when visiting a particular proposal (text)
             additional_button_link: Additional action button next to new proposal
               (link)
             additional_button_text: Additional action button next to new proposal

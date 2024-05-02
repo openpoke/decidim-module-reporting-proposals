@@ -124,7 +124,7 @@ Decidim::ReportingProposals.configure do |config|
   config.show_my_location_button = [:proposals, :meetings, :reporting_proposals]
 
   # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
-  config.use_camera_button = [:proposals, :reporting_proposals]
+  config.use_camera_button = true
 
   # Public setting to prevent valuators or admins to modify the photos attached to a proposal
   # otherwise can be configured at the component level

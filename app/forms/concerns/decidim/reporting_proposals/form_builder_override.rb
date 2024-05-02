@@ -11,7 +11,7 @@ module Decidim
 
       included do
         def file_field(object_name, options = {})
-          return super(object_name, options) unless use_camera_button?(object_name)
+          return super(object_name, options) unless Decidim::ReportingProposals.use_camera_button
 
           unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
             @template.snippets.add(:reporting_proposals_camera_scripts, @template.prepend_javascript_pack_tag("decidim_reporting_proposals_camera"))
@@ -33,16 +33,6 @@ module Decidim
                 end
               end
           end
-        end
-
-        private
-
-        def use_camera_button?(object_name)
-          return unless @template.respond_to?(:current_component)
-
-          return unless Decidim::ReportingProposals.use_camera_button.include?(@template.current_component.manifest_name.to_sym)
-
-          object_name == :add_photos
         end
       end
     end

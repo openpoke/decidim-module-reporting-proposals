@@ -5,4 +5,6 @@
     <span class="label secondary float-right"><%= icon("map-pin-line") %> <%= t("away", scope: "decidim.reporting_proposals.proposals.compare.geocoding", meters: distance(1000 * @proposal.distance_from([proposal.latitude, proposal.longitude], :km))) %></span>
     <%= card_for proposal %>
   </div>
+<% else %>
+  <%= card_for proposal %>
 <% end %>
