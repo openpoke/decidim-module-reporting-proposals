@@ -46,11 +46,11 @@ describe "Reporting proposals overrides" do
     end
 
     it "shows found proposals in order" do
-      within ".card__list-content", match: :first do
+      within ".compare-by-distance", match: :first do
         expect(page).to have_i18n_content(proposal_near.title)
         expect(page).to have_i18n_content("10m away")
       end
-      within all(".card__list-content")[1] do
+      within all(".compare-by-distance")[1] do
         expect(page).to have_i18n_content(proposal_far.title)
         expect(page).to have_i18n_content("20m away")
       end
