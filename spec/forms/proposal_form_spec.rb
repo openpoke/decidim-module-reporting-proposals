@@ -74,6 +74,8 @@ module Decidim
 
       context "when there's no address" do
         let(:address) { nil }
+        let(:latitude) { nil }
+        let(:longitude) { nil }
 
         it { is_expected.not_to be_valid }
 

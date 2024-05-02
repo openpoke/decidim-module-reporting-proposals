@@ -1,5 +1,0 @@
-<!-- insert_top ".card-section" -->
-
-<% if defined?(Decidim::Templates) %>
-  <%= render "decidim/templates/admin/proposal_answer_templates/template_chooser", form: f %>
-<% end %>

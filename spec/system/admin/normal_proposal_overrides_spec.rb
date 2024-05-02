@@ -49,8 +49,8 @@ describe "Send email to user with link" do
       end
 
       it "shows the address" do
-        within ".address__info" do
-          expect(page).to have_css(".address__details")
+        within ".admin-address" do
+          expect(page).to have_content("Geolocated at")
           expect(page).to have_content(address)
         end
       end

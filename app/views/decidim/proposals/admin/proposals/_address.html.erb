@@ -1,13 +1,14 @@
 <% if component_settings.geocoding_enabled? %>
-  <div class="row column">
-    <strong><%= t ".geolocated_at" %>:</strong>
-    <div class="address__info">
-      <div class="address__icon">
-        <%= icon "proposals", role: "img", "aria-hidden": true, width: 40, height: 70 %>
-      </div>
-      <div class="address__details">
-        <%= render partial: "decidim/shared/address_details", locals: { geolocalizable: proposal } %>
-      </div>
+  </div><!-- close previous .row.column -->
+  <div class="row column admin-address">
+    <div class="left">
+      <span class="component__show-title"><%= t ".geolocated_at" %>:</span>
+      <%= cell("decidim/address", proposal) %>
     </div>
-  </div>
+    <div class="component__show-address">
+      <% if Decidim::Map.available?(:static) || Decidim::Map.available?(:dynamic) %>
+        <%= static_map_link(proposal) %>
+      <% end %>
+    </div>
+  <%# Skip close here as is in the overriden view %>
 <% end %>

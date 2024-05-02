@@ -9,10 +9,8 @@ $(() => {
 
   const setLocating = ($button, enable) => {
     if (enable) {
-      $button.addClass("loading-spinner");
       $button.attr("disabled", true);
     } else {
-      $button.removeClass("loading-spinner");
       $button.attr("disabled", false);
     }
   }

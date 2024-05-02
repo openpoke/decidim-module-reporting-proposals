@@ -1,4 +1,4 @@
-<%= decidim_modal id: current_user.present? ? "editNoteModal#{note.id}" : "loginModal" do %>
+<%= decidim_modal id: modal_id do %>
   <div data-dialog-container>
     <%= icon "edit-line" %>
     <h3 id="<%= modal_id %>-label" class="h3" tabindex="-1" data-dialog-title>

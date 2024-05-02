@@ -22,7 +22,7 @@ module Decidim
         def add_photos
           enforce_permission_to(:edit_photos, :proposals, proposal:)
 
-          @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params)
+          @photo_form = form(Decidim::ReportingProposals::Admin::ProposalPhotoForm).from_params(params, current_component: proposal.component)
 
           Decidim::ReportingProposals::Admin::UpdateProposal.call(@photo_form, proposal) do
             on(:ok) do |_proposal|

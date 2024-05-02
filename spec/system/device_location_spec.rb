@@ -85,7 +85,6 @@ describe "User location button" do
     before do
       visit_component
       visit "#{Decidim::EngineRouter.main_proxy(component).proposal_path(proposal)}/complete"
-      check "proposal_has_address"
     end
 
     it_behaves_like "uses device location"

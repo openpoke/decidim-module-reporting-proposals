@@ -1,29 +1,27 @@
-button.user-device-camera {
-  border-radius: 4px !important;
-  max-height: 3rem;
+.camera-container {
+  @apply md:flex md:justify-between md:items-center;
 
-  svg {
-    fill: #fff;
-    margin-right: 0.5rem;
+  button.user-device-camera {
+    @apply md:flex-none whitespace-nowrap w-full md:w-auto p-2 mt-2 text-lg;
+
+    svg {
+      margin-right: 0.2rem;
+    }
+  }
+
+  .input-group-button {
+    @apply w-full md:w-auto;
+  }
+
+  label {
+    @apply truncate mr-2;
+  }
+
+  #proposal_add_photos {
+    @apply mt-2 block;
   }
 }
 
 .has_no_image {
-  margin-top: -1rem;
-  text-align: right;
-}
-
-#proposal_add_photos {
-  display: block;
-  margin-top: 1rem;
-}
-
-@media only screen and (max-width: 596px) {
-  .gallery__container .input-group .input-group-button {
-    display: block;
-  }
-
-  .has_no_image {
-    margin-top: -0.5rem;
-  }
+  @apply md:text-right -mt-1;
 }

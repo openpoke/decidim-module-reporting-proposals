@@ -1,9 +1,8 @@
 $(() => {
   const $input = $("#proposal_add_photos");
-  const $inputField = $input.closest(".row.column");
-  const $button = $inputField.find("button:first");
-  const $checkbox = $inputField.find("input:checkbox[name$='[has_no_image]']");
-  const $formError = $inputField.find("span.form-error")
+  const $button = $(".camera-container .user-device-camera");
+  const $checkbox = $("#proposal_has_no_image");
+  const $formError = $(".camera-container .form-error")
   const $labelInput = $("label[for='proposal_add_photos']")
 
   const removeErrors = () => {
@@ -26,19 +25,20 @@ $(() => {
   $input.attr("accept", "image/*");
 
   $button.on("click", () => {
-    console.log("click button")
+    // console.log("click button")
     $input.attr("capture", "camera");
     $input.click();
     $input.removeAttr("capture", "camera");
   });
 
   $input.on("click", () => {
-    console.log("click", $input);
+    // console.log("click", $input);
     $input.one("blur", () => {
-      console.log("blur", $input);
+      // console.log("blur", $input);
       removeErrors();
     });
   });
+
 
   if ($checkbox.length > 0) {
     $checkbox.on("change", toggleInput);

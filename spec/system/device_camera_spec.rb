@@ -13,11 +13,10 @@ describe "User camera button" do
   end
   let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
-  let(:all_manifests) { [:proposals, :reporting_proposals] }
-  let(:manifests) { all_manifests }
+  let(:use_camera_button) { true }
 
   before do
-    allow(Decidim::ReportingProposals).to receive(:use_camera_button).and_return(manifests)
+    allow(Decidim::ReportingProposals).to receive(:use_camera_button).and_return(use_camera_button)
     switch_to_host(organization.host)
     login_as user, scope: :user
   end
@@ -28,7 +27,7 @@ describe "User camera button" do
     end
 
     context "when option disabled" do
-      let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+      let(:use_camera_button) { false }
 
       it "does not has the camera button" do
         expect(page).to have_no_button("Use my camera")
@@ -42,7 +41,7 @@ describe "User camera button" do
     end
 
     context "when option disabled" do
-      let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+      let(:use_camera_button) { false }
 
       it "does not has the camera button" do
         expect(page).to have_no_button("Use my camera")
@@ -57,43 +56,5 @@ describe "User camera button" do
     end
 
     it_behaves_like "uses device camera"
-  end
-
-  # version .27 uses a modal to upload files, we are not touching it (for the moment)
-  # In case we want to add the "use my camera" button in the admin, this should be reactivated
-  # context "when admin" do
-  #   before do
-  #     visit manage_component_path(component)
-  #     click_link_or_button "New proposal"
-  #   end
-
-  #   it_behaves_like "uses admin device camera"
-  # end
-
-  describe "#proposals" do
-    let(:manifest_name) { "proposals" }
-    let!(:component) do
-      create(:proposal_component,
-             :with_creation_enabled,
-             :with_attachments_allowed,
-             participatory_space: participatory_process)
-    end
-    let(:proposal) { create(:proposal, :draft, component:, users: [user]) }
-
-    before do
-      visit_component
-      visit "#{Decidim::EngineRouter.main_proxy(component).proposal_path(proposal)}/complete"
-    end
-
-    it_behaves_like "uses device camera"
-
-    # context "when admin" do
-    #   before do
-    #     visit manage_component_path(component)
-    #     click_link_or_button "New proposal"
-    #   end
-
-    #   it_behaves_like "uses admin device camera"
-    # end
   end
 end

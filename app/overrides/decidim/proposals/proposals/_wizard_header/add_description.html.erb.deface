@@ -1,0 +1,5 @@
+<!-- insert_after "erb[loud]:contains('wizard_steps(@step)')" -->
+
+<% if geocoding_comparison? && action_name == "compare" %>
+  <p><%= t("description", scope: "decidim.reporting_proposals.proposals.compare.geocoding", meters: distance) %></p>
+<% end %>

@@ -5,33 +5,7 @@
     </div>
   <% end %>
 
-  <% if component_settings.attachments_allowed? %>
-    <fieldset class="gallery__container photos_container">
-      <% if @form.photos.any? %>
-        <% @form.photos.each do |photo| %>
-          <div class="callout gallery__item" id="attachment_<%= photo.id %>" data-closable>
-            <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: photo.file.filename %>
-            <%= form.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
-            <button class="close-button"
-                    aria-label="<%= t("delete_image", scope: "decidim.reporting_proposals.proposals.edit") %>"
-                    title="<%= t("delete_image", scope: "decidim.reporting_proposals.proposals.edit") %>"
-                    type="button"
-                    data-close>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <% end %>
-      <% end %>
-      <div class="field row column">
-        <%= form.file_field :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form") %>
-
-        <div class="has_no_image">
-          <%= form.check_box :has_no_image %>
-        </div>
-      </div>
-    </fieldset>
-
-  <% end %>
+  <%= render "decidim/reporting_proposals/proposals/camera_button", form: form %>
 
   <% if @form.geocoding_enabled? %>
     <div id="address_input">
@@ -48,7 +22,7 @@
         </p>
         <%= dynamic_map_for proposal_preview_data_for_map(@form.to_h) %>
       </div>
-      </div>
+    </div>
   <% end %>
 
   <div class="field hashtags__container">
@@ -86,7 +60,7 @@
   <% end %>
 
   <% if component_settings.attachments_allowed? && !component_settings.only_photo_attachments? %>
-    <fieldset class="attachments_container gallery__container documents_container">
+    <div class="attachments_container gallery__container documents_container">
       <legend><%= t("attachment_legend", scope: "decidim.proposals.proposals.edit") %></legend>
       <div>
         <%= form.attachment :documents,
@@ -97,6 +71,6 @@
                             button_class: "button button__lg button__transparent-secondary w-full",
                             help_i18n_scope: "decidim.forms.file_help.file" %>
       </div>
-    </fieldset>
+    </div>
   <% end %>
 </div>

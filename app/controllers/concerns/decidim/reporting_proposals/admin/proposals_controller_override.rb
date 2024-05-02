@@ -20,7 +20,7 @@ module Decidim
           private
 
           def reporting_proposal?
-            component = current_component || @photo_form.current_component
+            component = current_component || proposal.current_component
             component.manifest_name == "reporting_proposals"
           end
         end

@@ -6,7 +6,6 @@ PATH
       decidim-core (>= 0.28, < 0.29)
       decidim-participatory_processes (>= 0.28, < 0.29)
       decidim-proposals (>= 0.28, < 0.29)
-      decidim-templates (>= 0.28, < 0.29)
       deface (>= 1.9)
 
 GEM

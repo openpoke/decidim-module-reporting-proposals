@@ -15,8 +15,9 @@ module Decidim
         def geocoding_field(object_name, method, options = {})
           return original_geocoding_field(object_name, method, options) unless show_my_location_button?
 
+          append_assets
           unless template.snippets.any?(:reporting_proposals_geocoding_scripts) || template.snippets.any?(:reporting_proposals_geocoding_styles)
-            template.snippets.add(:reporting_proposals_geocoding_scripts, template.prepend_javascript_pack_tag("decidim_reporting_proposals_geocoding"))
+            template.snippets.add(:reporting_proposals_geocoding_scripts, template.append_javascript_pack_tag("decidim_reporting_proposals_geocoding"))
             template.snippets.add(:reporting_proposals_geocoding_styles, template.append_stylesheet_pack_tag("decidim_reporting_proposals_geocoding"))
 
             # This will display the snippets in the <head> part of the page.
@@ -28,14 +29,14 @@ module Decidim
           options[:autocomplete] ||= "off"
           options[:class] ||= "input-group-field"
 
-          template.content_tag(:div, class: "flex mb-4") do
+          template.content_tag(:div, class: "geocoding-container") do
             template.text_field(
               object_name,
               method,
               options.merge("data-decidim-geocoding" => view_options.to_json)
             ) +
               template.content_tag(:div, class: "input-group-button user-device-location") do
-                template.content_tag(:button, class: "button button__secondary flex-none whitespace-nowrap w-auto p-4 mt-2", type: "button", data: {
+                template.content_tag(:button, class: "button button__secondary", type: "button", data: {
                                        input: "#{object_name}_#{method}",
                                        latitude: "#{object_name}_latitude",
                                        longitude: "#{object_name}_longitude",

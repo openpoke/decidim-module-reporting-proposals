@@ -2,5 +2,5 @@
   current_component.settings.additional_button_text.present? &&
   current_component.settings.additional_button_link.present? %>
   <%= link_to translated_attribute(component_settings.additional_button_text),
-              component_settings.additional_button_link, class: "title-action__action button small ml-s" %>
+              component_settings.additional_button_link, class: "button button__sm button__transparent-secondary" %>
 <% end %>
