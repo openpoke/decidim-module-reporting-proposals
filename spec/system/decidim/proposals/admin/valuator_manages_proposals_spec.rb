@@ -48,7 +48,7 @@ describe "Valuator manages proposals" do
     it "can unassign themselves" do
       within "#js-form-unassign-proposals-from-valuator" do
         select user.name, from: :valuator_role_id
-        click_link_or_button("#js-submit-unassign-proposals-from-valuator")
+        click_link_or_button("Unassign")
       end
 
       expect(page).to have_content("Valuator unassigned from proposals successfully")
@@ -57,7 +57,7 @@ describe "Valuator manages proposals" do
     it "cannot unassign others" do
       within "#js-form-unassign-proposals-from-valuator" do
         select another_user.name, from: :valuator_role_id
-        click_link_or_button("button#js-submit-unassign-proposals-from-valuator")
+        click_link_or_button("Unassign")
       end
 
       expect(page).to have_content("You are not authorized to perform this action.")
@@ -92,13 +92,14 @@ describe "Valuator manages proposals" do
     end
 
     it "can leave proposal notes" do
-      expect(page).to have_content("Private notes")
+      click_link_or_button("Private notes")
       within ".add-comment" do
         fill_in "Note", with: " This is my note"
         click_link_or_button "Submit"
       end
 
-      within ".comment-thread" do
+      click_link_or_button("Private notes")
+      within ".comment" do
         expect(page).to have_content("This is my note")
       end
     end

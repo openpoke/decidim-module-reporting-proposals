@@ -37,7 +37,7 @@ describe "Admin manages proposals valuators" do
     end
 
     it "shows an update button" do
-      expect(page).to have_button("#js-submit-assign-proposals-to-valuator", count: 1)
+      expect(page).to have_button("Assign", count: 1)
     end
 
     context "when submitting the form" do
@@ -45,7 +45,7 @@ describe "Admin manages proposals valuators" do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-valuator" do
             select valuator.name, from: :valuator_role_id
-            click_link_or_button("#js-submit-assign-proposals-to-valuator")
+            click_link_or_button("Assign")
           end
         end
       end
@@ -128,14 +128,14 @@ describe "Admin manages proposals valuators" do
     end
 
     it "shows an update button" do
-      expect(page).to have_button("#js-submit-unassign-proposals-from-valuator", count: 1)
+      expect(page).to have_button("Unassign", count: 1)
     end
 
     context "when submitting the form" do
       before do
         within "#js-form-unassign-proposals-from-valuator" do
           select valuator.name, from: :valuator_role_id
-          click_link_or_button("button#js-submit-unassign-proposals-from-valuator")
+          click_link_or_button("Unassign")
         end
       end
 
