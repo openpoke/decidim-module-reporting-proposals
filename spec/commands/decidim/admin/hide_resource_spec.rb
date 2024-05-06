@@ -5,9 +5,9 @@ require "spec_helper"
 module Decidim::Admin
   describe HideResource do
     let(:reportable) { create(:dummy_resource) }
-    let(:moderation) { create(:moderation, reportable: reportable, report_count: 1) }
-    let!(:report) { create(:report, moderation: moderation) }
-    let(:current_user) { create :user, organization: reportable.participatory_space.organization }
+    let(:moderation) { create(:moderation, reportable:, report_count: 1) }
+    let!(:report) { create(:report, moderation:) }
+    let(:current_user) { create(:user, organization: reportable.participatory_space.organization) }
     let(:command) { described_class.new(reportable, current_user) }
     let(:author_notification) do
       {
@@ -31,10 +31,10 @@ module Decidim::Admin
         expect(reportable.reload).to be_hidden
       end
 
-      it "traces the action", versioning: true do
+      it "traces the action", :versioning do
         expect(Decidim.traceability)
           .to receive(:perform_action!)
-          .with("hide", moderation, current_user, extra: { reportable_type: "Decidim::DummyResources::DummyResource" })
+          .with("hide", moderation, current_user, extra: { reportable_type: "Decidim::Dev::DummyResource" })
           .and_call_original
 
         expect { command.call }.to change(Decidim::ActionLog, :count)
@@ -51,7 +51,7 @@ module Decidim::Admin
     end
 
     context "when the resource is already hidden" do
-      let(:moderation) { create(:moderation, reportable: reportable, report_count: 1, hidden_at: Time.current) }
+      let(:moderation) { create(:moderation, reportable:, report_count: 1, hidden_at: Time.current) }
       let(:authors) { reportable.try(:authors) || [reportable.try(:author)] }
       let(:reasons) { reportable.moderation.reports.pluck(:reason).uniq }
 

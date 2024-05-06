@@ -14,7 +14,6 @@ module Decidim
         @snippets ||= Decidim::Snippets.new
 
         unless @snippets.any?(:reporting_proposals_js_validations)
-          @snippets.add(:reporting_proposals_js_validations, ActionController::Base.helpers.javascript_pack_tag("decidim_reporting_proposals_js_validations"))
           @snippets.add(:reporting_proposals_js_validations, rules_tag)
           @snippets.add(:foot, @snippets.for(:reporting_proposals_js_validations))
         end

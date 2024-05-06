@@ -3,10 +3,10 @@
 require "spec_helper"
 require "system/shared/admin_proposals_overdue_examples"
 
-describe "Highlighted proposal", type: :system do
-  let(:admin) { create :user, :admin, :confirmed }
+describe "Highlighted proposal" do
+  let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
-  let!(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
   let!(:proposals) do
     [

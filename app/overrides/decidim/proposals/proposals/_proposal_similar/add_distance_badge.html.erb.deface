@@ -1,5 +1,0 @@
-<!-- insert_before ".card__header" -->
-
-<% if geocoding_comparison? %>
-  <span class="label secondary float-right"><%= icon("location") %> <%= t("away", scope: "decidim.reporting_proposals.proposals.compare.geocoding", meters: distance(1000 * @proposal.distance_from([proposal.latitude, proposal.longitude], :km))) %></span>
-<% end %>

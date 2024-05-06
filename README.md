@@ -29,7 +29,7 @@ And then execute (do also this on upgrades):
 
 ```
 bundle
-bundle exec rails decidim_reporting_proposals:install:migrations
+bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
@@ -52,12 +52,21 @@ bin/rails db:migrate
 >
 > Alternatively, use any other ENV var to set up the `config.deface.enabled` to `false` during the precompilation phase.
 
+> **EXPERTS ONLY**
+>
+> Under the hood, when running `bundle exec rails decidim:upgrade` the `decidim-reporting_proposals` gem will run the following (that can also be run manually if you consider):
+> 
+> ```bash
+> bin/rails decidim_reporting_proposals:install:migrations
+> ```
+
 Depending on your Decidim version, you can choose the corresponding version to ensure compatibility:
 
 | Version | Compatible Decidim versions |
-|---|---|
-| 0.5.x | 0.27.x |
-| 0.4.x | 0.26.x |
+|---------|-----------------------------|
+| 0.6.x   | 0.28.x                      |
+| 0.5.x   | 0.27.x                      |
+| 0.4.x   | 0.26.x                      |
 
 ## Usage
 
@@ -88,10 +97,6 @@ This module provides the following features:
 
 7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
 
-8. **Proposal answers templates**: Administrators can create templates for the answers to proposals. This is useful to provide a standard answer to proposals that are similar. This feature requires to enable the `decidim-templates` official module.
-  ![Templates for proposals answers](features/templates1.png)
-  ![Applying a template](features/templates2.png)
-
 ### Customization
 
 Almost all the features of this module can be customized/disabled through an initializer.
@@ -119,7 +124,7 @@ Decidim::ReportingProposals.configure do |config|
   config.show_my_location_button = [:proposals, :meetings, :reporting_proposals]
 
   # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
-  config.use_camera_button = [:proposals, :reporting_proposals]
+  config.use_camera_button = true
 
   # Public setting to prevent valuators or admins to modify the photos attached to a proposal
   # otherwise can be configured at the component level

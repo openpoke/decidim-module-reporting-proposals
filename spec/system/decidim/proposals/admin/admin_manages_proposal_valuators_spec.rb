@@ -2,19 +2,19 @@
 
 require "spec_helper"
 
-describe "Admin manages proposals valuators", type: :system do
+describe "Admin manages proposals valuators" do
   let(:manifest_name) { "proposals" }
-  let!(:proposal) { create :proposal, component: current_component }
+  let!(:proposal) { create(:proposal, component: current_component) }
   let!(:reportables) { create_list(:proposal, 3, component: current_component) }
-  let(:participatory_process) { create(:participatory_process, :with_steps, organization: organization) }
+  let(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
   let(:participatory_space_path) do
     decidim_admin_participatory_processes.edit_participatory_process_path(participatory_process)
   end
-  let!(:valuator) { create :user, organization: organization }
-  let!(:valuator_role) { create :participatory_process_user_role, role: :valuator, user: valuator, participatory_process: participatory_process }
-  let(:second_valuator) { create :user, organization: organization }
-  let(:second_valuator_role) { create :participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process: participatory_process }
-  let!(:admin) { create(:user, :admin, organization: organization) }
+  let!(:valuator) { create(:user, organization:) }
+  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user: valuator, participatory_process:) }
+  let(:second_valuator) { create(:user, organization:) }
+  let(:second_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process:) }
+  let!(:admin) { create(:user, :admin, organization:) }
 
   include Decidim::ComponentPathHelper
 
@@ -24,12 +24,12 @@ describe "Admin manages proposals valuators", type: :system do
     before do
       visit current_path
 
-      within find("tr", text: translated(proposal.title)) do
+      within "tr", text: translated(proposal.title) do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_button "Actions"
-      click_button "Assign to valuator"
+      click_link_or_button "Actions"
+      click_link_or_button "Assign to valuator"
     end
 
     it "shows the component select" do
@@ -37,7 +37,7 @@ describe "Admin manages proposals valuators", type: :system do
     end
 
     it "shows an update button" do
-      expect(page).to have_css("button#js-submit-assign-proposals-to-valuator", count: 1)
+      expect(page).to have_button("Assign", count: 1)
     end
 
     context "when submitting the form" do
@@ -45,7 +45,7 @@ describe "Admin manages proposals valuators", type: :system do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-valuator" do
             select valuator.name, from: :valuator_role_id
-            page.find("button#js-submit-assign-proposals-to-valuator").click
+            click_link_or_button("Assign")
           end
         end
       end
@@ -53,8 +53,8 @@ describe "Admin manages proposals valuators", type: :system do
       it "assigns the proposals to the valuator" do
         expect(page).to have_content("Proposals assigned to a valuator successfully")
 
-        within find("tr", text: translated(proposal.title)) do
-          expect(page).to have_selector("td.valuators-count", text: valuator.name)
+        within "tr", text: translated(proposal.title) do
+          expect(page).to have_css("td.valuators-count", text: valuator.name)
         end
       end
 
@@ -68,14 +68,14 @@ describe "Admin manages proposals valuators", type: :system do
 
       context "when a valuator already exists" do
         before do
-          create :valuation_assignment, proposal: proposal, valuator_role: second_valuator_role
+          create(:valuation_assignment, proposal:, valuator_role: second_valuator_role)
 
           visit current_path
         end
 
         it "assigns the proposals to the valuator" do
-          within find("tr", text: translated(proposal.title)) do
-            expect(page).to have_selector("td.valuators-count", text: "#{valuator.name} (+1)")
+          within "tr", text: translated(proposal.title) do
+            expect(page).to have_css("td.valuators-count", text: "#{valuator.name} (+1)")
           end
         end
       end
@@ -83,11 +83,11 @@ describe "Admin manages proposals valuators", type: :system do
   end
 
   context "when filtering proposals by assigned valuator" do
-    let!(:unassigned_proposal) { create :proposal, component: component }
+    let!(:unassigned_proposal) { create(:proposal, component:) }
     let(:assigned_proposal) { proposal }
 
     before do
-      create :valuation_assignment, proposal: proposal, valuator_role: valuator_role
+      create(:valuation_assignment, proposal:, valuator_role:)
 
       visit current_path
     end
@@ -111,16 +111,16 @@ describe "Admin manages proposals valuators", type: :system do
     let(:assigned_proposal) { proposal }
 
     before do
-      create :valuation_assignment, proposal: proposal, valuator_role: valuator_role
+      create(:valuation_assignment, proposal:, valuator_role:)
 
       visit current_path
 
-      within find("tr", text: translated(proposal.title)) do
+      within "tr", text: translated(proposal.title) do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_button "Actions"
-      click_button "Unassign from valuator"
+      click_link_or_button "Actions"
+      click_link_or_button "Unassign from valuator"
     end
 
     it "shows the component select" do
@@ -128,22 +128,22 @@ describe "Admin manages proposals valuators", type: :system do
     end
 
     it "shows an update button" do
-      expect(page).to have_css("button#js-submit-unassign-proposals-from-valuator", count: 1)
+      expect(page).to have_button("Unassign", count: 1)
     end
 
     context "when submitting the form" do
       before do
         within "#js-form-unassign-proposals-from-valuator" do
           select valuator.name, from: :valuator_role_id
-          page.find("button#js-submit-unassign-proposals-from-valuator").click
+          click_link_or_button("Unassign")
         end
       end
 
       it "unassigns the proposals to the valuator" do
         expect(page).to have_content("Valuator unassigned from proposals successfully")
 
-        within find("tr", text: translated(proposal.title)) do
-          expect(page).to have_selector("td.valuators-count", text: 0)
+        within "tr", text: translated(proposal.title) do
+          expect(page).to have_css("td.valuators-count", text: 0)
         end
       end
     end
@@ -153,7 +153,7 @@ describe "Admin manages proposals valuators", type: :system do
     let(:assigned_proposal) { proposal }
 
     before do
-      create :valuation_assignment, proposal: proposal, valuator_role: valuator_role
+      create(:valuation_assignment, proposal:, valuator_role:)
 
       visit current_path
 
@@ -192,10 +192,10 @@ describe "Admin manages proposals valuators", type: :system do
         find("option", text: valuator.name).click
       end
 
-      click_button "Assign"
+      click_link_or_button "Assign"
 
       expect(current_url).to end_with(current_path)
-      expect(page).to have_selector(".red-icon")
+      expect(page).to have_css(".red-icon")
       expect(page).to have_content(valuator.name)
     end
   end

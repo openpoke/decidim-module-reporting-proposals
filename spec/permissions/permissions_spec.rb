@@ -7,14 +7,14 @@ module Decidim::ReportingProposals
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
     let(:organization) { space.organization }
-    let(:user) { build :user, organization: organization }
+    let(:user) { build(:user, organization:) }
     let(:space) { current_component.participatory_space }
     let(:current_component) { create(:proposal_component) }
-    let(:proposal) { create :proposal, component: current_component }
+    let(:proposal) { create(:proposal, component: current_component) }
     let(:context) do
       {
-        proposal: proposal,
-        current_component: current_component
+        proposal:,
+        current_component:
       }
     end
 

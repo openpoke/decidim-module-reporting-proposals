@@ -38,6 +38,10 @@ module Decidim
         end
       end
 
+      initializer "decidim_reporting_proposals.register_icons" do
+        Decidim.icons.register(name: "camera-line", icon: "camera-line", category: "system", description: "", engine: :decidim_reporting_proposals)
+      end
+
       def load_seed
         nil
       end

@@ -3,13 +3,13 @@
 require "spec_helper"
 
 module Decidim::Proposals
-  describe ProposalsController, type: :controller do
+  describe ProposalsController do
     routes { Decidim::Proposals::Engine.routes }
 
-    let(:component) { create(:reporting_proposals_component, settings: settings) }
+    let(:component) { create(:reporting_proposals_component, settings:) }
     let(:settings) { {} }
     let(:organization) { component.organization }
-    let(:current_user) { create(:user, :confirmed, organization: organization) }
+    let(:current_user) { create(:user, :confirmed, organization:) }
 
     before do
       request.env["decidim.current_organization"] = organization
@@ -78,7 +78,7 @@ module Decidim::Proposals
       end
 
       context "when proposal is not geocoded" do
-        let(:proposal) { create(:proposal, component: component, latitude: nil, longitude: nil) }
+        let(:proposal) { create(:proposal, component:, latitude: nil, longitude: nil) }
 
         it "geocoding comparison is off" do
           get :show, params: { id: proposal.id }
@@ -96,7 +96,7 @@ module Decidim::Proposals
     it_behaves_like "geocoding comparison", true
 
     context "when component is a normal proposal component" do
-      let(:component) { create(:proposal_component, settings: settings) }
+      let(:component) { create(:proposal_component, settings:) }
 
       it "is aware of not being reporting_proposals_component" do
         get :index

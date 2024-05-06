@@ -8,7 +8,7 @@ module Decidim
       let(:form_klass) { ProposalForm }
       let(:component) { create(:reporting_proposals_component) }
       let(:organization) { component.organization }
-      let(:user) { create :user, :admin, :confirmed, organization: organization }
+      let(:user) { create(:user, :admin, :confirmed, organization:) }
       let(:form) do
         form_klass.from_params(
           form_params
@@ -20,10 +20,10 @@ module Decidim
         )
       end
 
-      let(:author) { create(:user, organization: organization) }
+      let(:author) { create(:user, organization:) }
 
       let(:user_group) do
-        create(:user_group, :verified, organization: organization, users: [author])
+        create(:user_group, :verified, organization:, users: [author])
       end
 
       # let(:uploaded_files) do
@@ -54,10 +54,10 @@ module Decidim
       let(:has_no_address) { false }
       let(:form_params) do
         {
-          title: title,
-          body: body,
-          address: address,
-          has_no_address: has_no_address,
+          title:,
+          body:,
+          address:,
+          has_no_address:,
           user_group_id: user_group.try(:id),
           add_photos: uploaded_photos,
           add_documents: uploaded_files
@@ -104,9 +104,9 @@ module Decidim
         it "sets the body and title as i18n" do
           command.call
 
-          expect(proposal.title).to be_kind_of(Hash)
+          expect(proposal.title).to be_a(Hash)
           expect(proposal.title[I18n.locale.to_s]).to eq form_params[:title]
-          expect(proposal.body).to be_kind_of(Hash)
+          expect(proposal.body).to be_a(Hash)
           expect(proposal.body[I18n.locale.to_s]).to eq form_params[:body]
         end
 

@@ -1,5 +1,0 @@
-<!-- insert_before "erb[silent]:contains(':js_content')" -->
-
-<% if reporting_proposal? %>
-  <%= stylesheet_pack_tag "decidim_reporting_proposals" %>
-<% end %>

@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-describe "Time elapsed to answer", type: :system do
-  let(:admin) { create :user, :admin, :confirmed }
+describe "Time elapsed to answer" do
+  let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
-  let!(:participatory_process) { create(:participatory_process, organization: organization) }
+  let!(:participatory_process) { create(:participatory_process, organization:) }
 
   let!(:reporting_proposals_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
   let!(:reporting_proposal) do
-    create(:proposal, state: state, state_published_at: 10.days.ago, answered_at: answered_at, component: reporting_proposals_component)
+    create(:proposal, state:, state_published_at: 10.days.ago, answered_at:, component: reporting_proposals_component)
   end
   let(:component) { reporting_proposals_component }
 
@@ -42,7 +42,7 @@ describe "Time elapsed to answer", type: :system do
     let(:answered_at) { nil }
 
     it "proposal has time elapsed to answer" do
-      expect(page).not_to have_content("Resolution time:")
+      expect(page).to have_no_content("Resolution time:")
     end
   end
 end

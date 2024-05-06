@@ -6,7 +6,7 @@ module Decidim::Meetings
   describe CloseMeetingForm do
     subject { described_class.from_model(meeting).with_context(context) }
 
-    let(:meeting) { create(:meeting, component: component) }
+    let(:meeting) { create(:meeting, component:) }
     let(:component) { create(:meeting_component) }
     let(:context) do
       {

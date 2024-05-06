@@ -3,11 +3,10 @@
                      html: { multipart: true, class: "form edit_proposal proposal_form_admin" }) do |f| %>
   <div class="row column gallery__container">
     <fieldset>
-      <legend><%= t(".gallery_legend") %></legend>
       <% if proposal.photos.any? %>
         <div class="gallery row">
           <% proposal.photos.each do |photo| %>
-            <div class="callout gallery__item">
+            <div class="gallery__item">
               <%= f.hidden_field :photos, multiple: true, value: photo.id, id: "photo-#{photo.id}" %>
             </div>
           <% end %>
@@ -17,7 +16,7 @@
         <%= f.file_field :add_photos, multiple: true %>
       </div>
       <div class="actions">
-        <%= f.submit t(".action") %>
+        <%= f.submit t(".action"), class: "button button__sm button__secondary" %>
       </div>
     </fieldset>
   </div>

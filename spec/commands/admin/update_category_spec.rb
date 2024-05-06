@@ -5,9 +5,9 @@ require "spec_helper"
 module Decidim::Admin
   describe UpdateCategory do
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, organization: organization) }
-    let(:admin) { create(:user, :admin, organization: organization) }
-    let(:participatory_space) { create(:participatory_process, organization: organization) }
+    let(:user) { create(:user, organization:) }
+    let(:admin) { create(:user, :admin, organization:) }
+    let(:participatory_space) { create(:participatory_process, organization:) }
     let(:valuator_ids) { [valuator_role.id] }
     let(:form_params) do
       {
@@ -27,8 +27,8 @@ module Decidim::Admin
       )
     end
 
-    let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: user, participatory_process: participatory_space) }
-    let(:category) { create(:category, participatory_space: participatory_space) }
+    let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user:, participatory_process: participatory_space) }
+    let(:category) { create(:category, participatory_space:) }
     let(:command) { described_class.new(category, form, admin) }
 
     it "adds the valuator roles" do
@@ -40,7 +40,7 @@ module Decidim::Admin
 
     context "when removing valuator roles" do
       let(:valuator_ids) { [] }
-      let!(:category_valuator) { create(:category_valuator, valuator_role: valuator_role, category: category) }
+      let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
 
       it "removes the valuator roles" do
         expect(category.valuator_users).to eq([valuator_role.user])

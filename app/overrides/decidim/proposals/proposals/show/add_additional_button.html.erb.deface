@@ -1,3 +1,3 @@
-<!-- insert_bottom ".m-bottom" -->
+<!-- insert_before "erb[loud]:contains('proposal_aside')" -->
 
 <%= render partial: "decidim/reporting_proposals/proposals/additional_button_for_show" %>

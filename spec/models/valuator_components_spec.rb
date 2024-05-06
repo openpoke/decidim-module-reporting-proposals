@@ -24,7 +24,7 @@ module Decidim::ParticipatorySpaceRoleConfig
     end
 
     it "has default accepted components" do
-      expect(subject.accepted_components).to match_array([:proposals, :reporting_proposals])
+      expect(subject.accepted_components).to contain_exactly(:proposals, :reporting_proposals)
     end
 
     context "when non default accepted components are added" do
@@ -33,14 +33,14 @@ module Decidim::ParticipatorySpaceRoleConfig
       TestValuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
 
       it "has default accepted components" do
-        expect(alt_valuator.accepted_components).to match_array([:proposals, :test, :reporting_proposals])
+        expect(alt_valuator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals)
         TestValuator.include(TestValuatorOverride)
 
-        expect(alt_valuator.accepted_components).to match_array([:proposals, :test, :reporting_proposals, :another_component])
+        expect(alt_valuator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals, :another_component)
       end
 
       it "original class has default accepted components" do
-        expect(subject.accepted_components).to match_array([:proposals, :reporting_proposals])
+        expect(subject.accepted_components).to contain_exactly(:proposals, :reporting_proposals)
       end
     end
   end

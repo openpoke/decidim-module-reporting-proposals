@@ -3,14 +3,14 @@
 require "spec_helper"
 
 module Decidim
-  describe ReportedMailer, type: :mailer do
+  describe ReportedMailer do
     let(:organization) { create(:organization, name: "Test Organization") }
-    let(:user) { create(:user, :admin, organization: organization) }
-    let(:component) { create(:component, organization: organization) }
+    let(:user) { create(:user, :admin, organization:) }
+    let(:component) { create(:component, organization:) }
     let(:reportable) { create(:proposal, title: Decidim::Faker::Localized.sentence, body: Decidim::Faker::Localized.paragraph(sentence_count: 3)) }
-    let(:moderation) { create(:moderation, reportable: reportable, participatory_space: component.participatory_space, report_count: 1) }
+    let(:moderation) { create(:moderation, reportable:, participatory_space: component.participatory_space, report_count: 1) }
     let(:author) { reportable.creator_identity }
-    let!(:report) { create(:report, moderation: moderation, details: "bacon eggs spam") }
+    let!(:report) { create(:report, moderation:, details: "bacon eggs spam") }
     let(:decidim) { Decidim::Core::Engine.routes.url_helpers }
 
     describe "#report" do
@@ -36,12 +36,12 @@ module Decidim
         end
 
         context "when the reported content is a resource without a admin url" do
-          let(:meetings_component) { create :component, manifest_name: "meetings" }
-          let(:meeting) { create :meeting, component: meetings_component }
+          let(:meetings_component) { create(:component, manifest_name: "meetings") }
+          let(:meeting) { create(:meeting, component: meetings_component) }
           let(:moderation) { create(:moderation, reportable: meeting, participatory_space: meetings_component.participatory_space, report_count: 1) }
 
           it "doesn't have the admin url" do
-            expect(email_body(mail)).not_to have_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
+            expect(email_body(mail)).to have_no_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
           end
         end
 
@@ -105,7 +105,7 @@ module Decidim
           end
 
           it "includes the name of the author but no link to his profile" do
-            expect(mail).not_to have_link(author.name)
+            expect(mail).to have_no_link(author.name)
           end
         end
 
@@ -126,14 +126,14 @@ module Decidim
         end
 
         context "when the author is a meeting" do
-          let(:meetings_component) { create :component, manifest_name: :meetings, organization: reportable.organization }
-          let!(:meeting) { create :meeting, component: meetings_component }
+          let(:meetings_component) { create(:component, manifest_name: :meetings, organization: reportable.organization) }
+          let!(:meeting) { create(:meeting, title: { en: "A simple title" }, component: meetings_component) }
 
           it "includes the title of the meeting" do
             reportable.coauthorships.destroy_all
-            create :coauthorship, coauthorable: reportable, author: meeting
+            create(:coauthorship, coauthorable: reportable, author: meeting)
 
-            expect(email_body(mail)).to match(translated(meeting.title))
+            expect(email_body(mail)).to match(meeting.title["en"])
           end
         end
       end

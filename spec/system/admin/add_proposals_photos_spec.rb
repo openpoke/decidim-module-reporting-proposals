@@ -2,38 +2,50 @@
 
 require "spec_helper"
 
-describe "Add proposals photos", type: :system do
-  let(:organization) { create :organization }
-  let(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:component) { create :reporting_proposals_component, participatory_space: participatory_process }
-  let!(:user) { create(:user, :confirmed, :admin, organization: organization) }
-  let!(:proposal) { create(:proposal, component: component) }
+describe "Add proposals photos" do
+  let(:organization) { create(:organization) }
+  let(:participatory_process) { create(:participatory_process, organization:) }
+  let!(:reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
+  let!(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
+  let(:component) { reporting_component }
+  let!(:user) { create(:user, :confirmed, :admin, organization:) }
+  let!(:proposal) { create(:proposal, component:) }
 
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
+    proposal_component.update!(
+      settings: { attachments_allowed: true, proposal_photo_editing_enabled: true }
+    )
 
     visit manage_component_path(component)
     page.find(".table__list-title a").click
   end
 
-  it "has 'Photos' section" do
-    expect(page).to have_content("Add image")
-  end
-
-  context "when photos are added" do
-    it "the photos are rendered in the photo section" do
+  shared_examples "can add photos" do
+    it "has a photo section" do
+      click_link_or_button "Photos"
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_button "Add image"
+      click_link_or_button "Save images"
+      click_link_or_button "Photos"
 
-      expect(page).to have_selector("img[src*=\"city.jpeg\"]", count: 1)
+      expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_button "Add image"
+      click_link_or_button "Save images"
 
-      expect(page).to have_selector("img[src*=\"city.jpeg\"]", count: 2)
+      click_link_or_button "Photos"
+      expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 2)
 
       expect(page).to have_css(".delete-proposal__button", count: 2)
     end
+  end
+
+  it_behaves_like "can add photos"
+
+  context "when normal proposals component" do
+    let(:component) { proposal_component }
+
+    it_behaves_like "can add photos"
   end
 end

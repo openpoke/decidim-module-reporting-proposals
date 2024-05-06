@@ -25,3 +25,5 @@ development_app
 *.gem
 node_modules/
 npm_debug.log
+tailwind.config.js
+.rubocop-http*

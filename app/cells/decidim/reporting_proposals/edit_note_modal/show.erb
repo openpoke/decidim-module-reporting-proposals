@@ -1,20 +1,23 @@
-<div class="reveal edit-note-modal" id="<%= modal_id %>" data-reveal role="dialog" aria-modal="true"
-     aria-labelledby="<%= modal_id %>-label">
-  <div class="reveal__header">
-    <h3 id="<%= modal_id %>-label" class="reveal__title"><%= t("modal.title", scope: "decidim.reporting_proposals.admin.proposal_notes") %></h3>
-    <button class="close-button" data-close aria-label="Close" type="button">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<%= decidim_modal id: modal_id do %>
+  <div data-dialog-container>
+    <%= icon "edit-line" %>
+    <h3 id="<%= modal_id %>-label" class="h3" tabindex="-1" data-dialog-title>
+      <%= t("modal.title", scope: "decidim.reporting_proposals.admin.proposal_notes") %>
+    </h3>
   </div>
-  <%= decidim_form_for(notes_form,
-                       url: note_path,
-                       method: :patch,
-                       html: { class: "form edit_proposal_note" }) do |f| %>
-    <div class="row column">
-      <%= f.text_area :body, rows: 10, label: t("modal.body", scope: "decidim.reporting_proposals.admin.proposal_notes"), value: note_body %>
-    </div>
-    <div class="button--double">
-      <%= f.submit t("modal.update", scope: "decidim.reporting_proposals.admin.proposal_notes") %>
-    </div>
-  <% end %>
-</div>
+  <div data-dialog-container>
+    <%= decidim_form_for(notes_form,
+                         url: note_path,
+                         method: :patch,
+                         html: { class: "form form-defaults edit_proposal_note" }) do |f| %>
+      <div class="form__wrapper gap-2">
+        <%= f.text_area :body, rows: 10, label: t("modal.body", scope: "decidim.reporting_proposals.admin.proposal_notes"), value: note_body %>
+      </div>
+      <div data-dialog-actions>
+        <div class="button button__sm button__secondary">
+          <%= f.submit t("modal.update", scope: "decidim.reporting_proposals.admin.proposal_notes") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

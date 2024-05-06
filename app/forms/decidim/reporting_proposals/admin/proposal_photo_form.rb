@@ -10,12 +10,8 @@ module Decidim
 
         validates :add_photos, presence: true
 
-        def proposal
-          @proposal ||= Decidim::Proposals::Proposal.find(id)
-        end
-
         def current_component
-          @current_component ||= proposal&.component
+          @current_component ||= context&.current_component
         end
       end
     end

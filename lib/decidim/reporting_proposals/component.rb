@@ -139,7 +139,7 @@ Decidim.register_component(:reporting_proposals) do |component|
                    .where(component: component_instance)
                    .includes(:scope, :category, :component)
 
-      if space.user_roles(:valuator).where(user: user).any?
+      if space.user_roles(:valuator).where(user:).any?
         collection.with_valuation_assigned_to(user, space)
       else
         collection
@@ -168,7 +168,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     imports.form_class_name = "Decidim::Proposals::Admin::ProposalsFileImportForm"
 
     imports.messages do |msg|
-      msg.set(:resource_name) { |count: 1| I18n.t("decidim.proposals.admin.imports.resources.proposals", count: count) }
+      msg.set(:resource_name) { |count: 1| I18n.t("decidim.proposals.admin.imports.resources.proposals", count:) }
       msg.set(:title) { I18n.t("decidim.proposals.admin.imports.title.proposals") }
       msg.set(:label) { I18n.t("decidim.proposals.admin.imports.label.proposals") }
       msg.set(:help) { I18n.t("decidim.proposals.admin.imports.help.proposals") }
@@ -179,7 +179,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.imports :answers do |imports|
     imports.messages do |msg|
-      msg.set(:resource_name) { |count: 1| I18n.t("decidim.proposals.admin.imports.resources.answers", count: count) }
+      msg.set(:resource_name) { |count: 1| I18n.t("decidim.proposals.admin.imports.resources.answers", count:) }
       msg.set(:title) { I18n.t("decidim.proposals.admin.imports.title.answers") }
       msg.set(:label) { I18n.t("decidim.proposals.admin.imports.label.answers") }
       msg.set(:help) { I18n.t("decidim.proposals.admin.imports.help.answers") }
@@ -213,12 +213,12 @@ Decidim.register_component(:reporting_proposals) do |component|
       name: Decidim::Components::Namer.new(participatory_space.organization.available_locales, :reporting_proposals).i18n_name,
       manifest_name: :reporting_proposals,
       published_at: Time.current,
-      participatory_space: participatory_space,
+      participatory_space:,
       settings: {
         vote_limit: 0,
         collaborative_drafts_enabled: true
       },
-      step_settings: step_settings
+      step_settings:
     }
 
     component = Decidim.traceability.perform_action!(
@@ -248,19 +248,19 @@ Decidim.register_component(:reporting_proposals) do |component|
                                           elsif n.positive?
                                             ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), nil]
                                           else
-                                            [nil, nil, nil]
+                                            ["not_answered", nil, nil]
                                           end
 
       params = {
-        component: component,
+        component:,
         category: participatory_space.categories.sample,
         scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
         title: { en: Faker::Lorem.sentence(word_count: 2) },
         body: { en: Faker::Lorem.paragraphs(number: 2).join("\n") },
-        state: state,
-        answer: answer,
+        state:,
+        answer:,
         answered_at: state.present? ? Time.current : nil,
-        state_published_at: state_published_at,
+        state_published_at:,
         published_at: Time.current
       }
 
@@ -279,7 +279,7 @@ Decidim.register_component(:reporting_proposals) do |component|
       if n.positive?
         Decidim::User.where(decidim_organization_id: participatory_space.decidim_organization_id).all.sample(n).each do |author|
           user_group = [true, false].sample ? Decidim::UserGroups::ManageableUserGroups.for(author).verified.sample : nil
-          proposal.add_coauthor(author, user_group: user_group)
+          proposal.add_coauthor(author, user_group:)
         end
       end
 
@@ -287,11 +287,11 @@ Decidim.register_component(:reporting_proposals) do |component|
         email = "amendment-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-amend#{n}@example.org"
         name = "#{Faker::Name.name} #{participatory_space.id} #{n} amend#{n}"
 
-        author = Decidim::User.find_or_initialize_by(email: email)
+        author = Decidim::User.find_or_initialize_by(email:)
         author.update!(
           password: "decidim123456",
           password_confirmation: "decidim123456",
-          name: name,
+          name:,
           nickname: Faker::Twitter.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
@@ -318,7 +318,7 @@ Decidim.register_component(:reporting_proposals) do |component|
         )
 
         params = {
-          component: component,
+          component:,
           category: participatory_space.categories.sample,
           scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: { en: "#{proposal.title["en"]} #{Faker::Lorem.sentence(word_count: 1)}" },
@@ -344,7 +344,7 @@ Decidim.register_component(:reporting_proposals) do |component|
         Decidim::Amendment.create!(
           amender: author,
           amendable: proposal,
-          emendation: emendation,
+          emendation:,
           state: "evaluating"
         )
       end
@@ -353,11 +353,11 @@ Decidim.register_component(:reporting_proposals) do |component|
         email = "vote-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-#{m}@example.org"
         name = "#{Faker::Name.name} #{participatory_space.id} #{n} #{m}"
 
-        author = Decidim::User.find_or_initialize_by(email: email)
+        author = Decidim::User.find_or_initialize_by(email:)
         author.update!(
           password: "decidim123456",
           password_confirmation: "decidim123456",
-          name: name,
+          name:,
           nickname: Faker::Twitter.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
@@ -366,8 +366,8 @@ Decidim.register_component(:reporting_proposals) do |component|
           about: Faker::Lorem.paragraph(sentence_count: 2)
         )
 
-        Decidim::Proposals::ProposalVote.create!(proposal: proposal, author: author) unless proposal.published_state? && proposal.rejected?
-        Decidim::Proposals::ProposalVote.create!(proposal: emendation, author: author) if emendation
+        Decidim::Proposals::ProposalVote.create!(proposal:, author:) unless proposal.published_state? && proposal.rejected?
+        Decidim::Proposals::ProposalVote.create!(proposal: emendation, author:) if emendation
       end
 
       unless proposal.published_state? && proposal.rejected?
@@ -375,11 +375,11 @@ Decidim.register_component(:reporting_proposals) do |component|
           email = "endorsement-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-endr#{index}@example.org"
           name = "#{Faker::Name.name} #{participatory_space.id} #{n} endr#{index}"
 
-          author = Decidim::User.find_or_initialize_by(email: email)
+          author = Decidim::User.find_or_initialize_by(email:)
           author.update!(
             password: "decidim123456",
             password_confirmation: "decidim123456",
-            name: name,
+            name:,
             nickname: Faker::Twitter.unique.screen_name,
             organization: component.organization,
             tos_agreement: "1",
@@ -405,7 +405,7 @@ Decidim.register_component(:reporting_proposals) do |component|
               user_group: group
             )
           end
-          Decidim::Endorsement.create!(resource: proposal, author: author, user_group: author.user_groups.first)
+          Decidim::Endorsement.create!(resource: proposal, author:, user_group: author.user_groups.first)
         end
       end
 
@@ -413,7 +413,7 @@ Decidim.register_component(:reporting_proposals) do |component|
         author_admin = Decidim::User.where(organization: component.organization, admin: true).all.sample
 
         Decidim::Proposals::ProposalNote.create!(
-          proposal: proposal,
+          proposal:,
           author: author_admin,
           body: Faker::Lorem.paragraphs(number: 2).join("\n")
         )
@@ -435,12 +435,12 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       draft = Decidim.traceability.perform_action!("create", Decidim::Proposals::CollaborativeDraft, author) do
         draft = Decidim::Proposals::CollaborativeDraft.new(
-          component: component,
+          component:,
           category: participatory_space.categories.sample,
           scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: Faker::Lorem.sentence(word_count: 2),
           body: Faker::Lorem.paragraphs(number: 2).join("\n"),
-          state: state,
+          state:,
           published_at: Time.current
         )
         draft.coauthorships.build(author: participatory_space.organization)
@@ -471,7 +471,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     Decidim.traceability.update!(
       Decidim::Proposals::CollaborativeDraft.all.sample,
       Decidim::User.where(organization: component.organization).all.sample,
-      component: component,
+      component:,
       category: participatory_space.categories.sample,
       scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
       title: Faker::Lorem.sentence(word_count: 2),

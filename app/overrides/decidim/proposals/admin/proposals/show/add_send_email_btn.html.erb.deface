@@ -1,3 +1,3 @@
-<!-- insert_after "erb[loud]:contains('current_or_new_conversation_path_with(presented_author)')" -->
+<!-- insert_after ".component__show_nav-author-title" -->
 
 <%= render partial: "decidim/proposals/admin/proposals/send_email_button", locals: { presented_author: presented_author } %>

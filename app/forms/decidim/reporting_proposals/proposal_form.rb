@@ -7,6 +7,8 @@ module Decidim
       attribute :has_no_address, Boolean
       attribute :has_no_image, Boolean
 
+      attachments_attribute :photos
+
       validates :add_photos, presence: true, if: ->(form) { form.has_camera? && form.photos.blank? }
 
       # Set the has no address

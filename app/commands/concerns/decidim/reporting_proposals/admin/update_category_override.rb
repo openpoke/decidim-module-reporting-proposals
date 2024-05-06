@@ -22,7 +22,7 @@ module Decidim
           def update_valuators
             category.category_valuators.destroy_all
             category.participatory_space.user_roles.where(id: form.valuator_ids).each do |valuator|
-              Decidim::ReportingProposals::CategoryValuator.create!(category: category, valuator_role: valuator)
+              Decidim::ReportingProposals::CategoryValuator.create!(category:, valuator_role: valuator)
             end
           end
         end

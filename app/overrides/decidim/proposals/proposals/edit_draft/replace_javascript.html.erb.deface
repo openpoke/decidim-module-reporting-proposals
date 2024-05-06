@@ -1,8 +1,8 @@
 <!-- replace "erb[loud]:contains('javascript_pack_tag')" -->
 
 <% if reporting_proposal? %>
-  <%= javascript_pack_tag "decidim_reporting_proposals" %>
-  <%= stylesheet_pack_tag "decidim_reporting_proposals" %>
+  <%= prepend_javascript_pack_tag "decidim_reporting_proposals" %>
+  <%= append_stylesheet_pack_tag "decidim_reporting_proposals" %>
 <% else %>
-  <%= javascript_pack_tag "decidim_proposals" %>
+  <%= prepend_javascript_pack_tag "decidim_proposals" %>
 <% end %>

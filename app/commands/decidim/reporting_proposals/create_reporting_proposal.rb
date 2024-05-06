@@ -59,7 +59,7 @@ module Decidim
               longitude: form.longitude,
               component: form.component
             )
-            proposal.add_coauthor(@current_user, user_group: user_group)
+            proposal.add_coauthor(@current_user, user_group:)
             proposal.save!
             proposal
           end

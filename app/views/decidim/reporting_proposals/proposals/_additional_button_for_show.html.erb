@@ -1,6 +1,9 @@
 <% if current_component.settings.try(:additional_buttons_for_show_proposal_show) &&
   current_component.settings.additional_button_for_show_proposal_text.present? &&
   current_component.settings.additional_button_for_show_proposal_link.present? %>
-  <%= link_to translated_attribute(component_settings.additional_button_for_show_proposal_text),
-              component_settings.additional_button_for_show_proposal_link, class: "title-action__action button small ml-s" %>
+
+  <section class="layout-aside__section">
+    <%= link_to translated_attribute(component_settings.additional_button_for_show_proposal_text),
+              component_settings.additional_button_for_show_proposal_link, class: "button button__sm button__transparent-secondary w-full" %>
+  </section>
 <% end %>

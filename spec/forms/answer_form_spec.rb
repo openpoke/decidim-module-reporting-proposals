@@ -11,18 +11,18 @@ module Decidim::Elections::Admin
       {
         current_organization: component.organization,
         current_component: component,
-        election: election,
-        question: question
+        election:,
+        question:
       }
     end
     let(:election) { question.election }
-    let(:question) { create :question }
+    let(:question) { create(:question) }
     let(:component) { election.component }
-    let(:proposals_component) { create :component, manifest_name: :proposals, participatory_space: component.participatory_space }
-    let(:proposals) { create_list :proposal, 2, component: proposals_component }
-    let(:reporting_component) { create :component, manifest_name: :reporting_proposals, participatory_space: component.participatory_space }
-    let(:reporting_proposals) { create_list :proposal, 2, component: reporting_component }
-    let(:answer) { create :election_answer, question: question }
+    let(:proposals_component) { create(:component, manifest_name: :proposals, participatory_space: component.participatory_space) }
+    let(:proposals) { create_list(:proposal, 2, component: proposals_component) }
+    let(:reporting_component) { create(:component, manifest_name: :reporting_proposals, participatory_space: component.participatory_space) }
+    let(:reporting_proposals) { create_list(:proposal, 2, component: reporting_component) }
+    let(:answer) { create(:election_answer, question:) }
 
     before do
       answer.link_resources(proposals + reporting_proposals, "related_proposals")

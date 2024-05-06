@@ -7,18 +7,18 @@ module Decidim::ReportingProposals::Admin
     subject { described_class.new(user, permission_action, context).permissions.allowed? }
 
     let(:organization) { space.organization }
-    let(:user) { build :user, :admin, organization: organization }
+    let(:user) { build(:user, :admin, organization:) }
     let(:space) { current_component.participatory_space }
     let(:current_component) { create(:proposal_component) }
-    let(:proposal) { create :proposal, component: current_component }
-    let(:proposal_note) { create :proposal_note, proposal: proposal }
+    let(:proposal) { create(:proposal, component: current_component) }
+    let(:proposal_note) { create(:proposal_note, proposal:) }
     let(:context) do
       {
-        proposal: proposal,
-        current_component: current_component,
+        proposal:,
+        current_component:,
         current_settings: component_settings,
-        component_settings: component_settings,
-        proposal_note: proposal_note
+        component_settings:,
+        proposal_note:
       }
     end
     let(:component_settings) do
@@ -37,9 +37,11 @@ module Decidim::ReportingProposals::Admin
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     before do
+      # rubocop:disable RSpec/ReceiveMessages
       allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
       allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
       allow(Decidim::ReportingProposals).to receive(:valuators_assign_other_valuators).and_return(valuators_assign_other_valuators)
+      # rubocop:enable RSpec/ReceiveMessages
     end
 
     shared_examples "can answer proposals" do
@@ -150,16 +152,16 @@ module Decidim::ReportingProposals::Admin
           { scope: :admin, action: :edit_note, subject: :proposal_note }
         end
 
-        let(:author) { create :user, :admin, :confirmed, organization: organization }
+        let(:author) { create(:user, :admin, :confirmed, organization:) }
 
         context "when author edits his own note" do
-          let!(:proposal_note) { create :proposal_note, proposal: proposal, author: user }
+          let!(:proposal_note) { create(:proposal_note, proposal:, author: user) }
 
           it { is_expected.to be true }
         end
 
         context "when the author of the note is a different user" do
-          let!(:proposal_note) { create :proposal_note, proposal: proposal, author: author }
+          let!(:proposal_note) { create(:proposal_note, proposal:, author:) }
 
           it { is_expected.to be false }
         end
@@ -172,8 +174,8 @@ module Decidim::ReportingProposals::Admin
     it_behaves_like "edit proposal note"
 
     context "when user is a valuator" do
-      let!(:valuator_role) { create :participatory_process_user_role, user: user, role: :valuator, participatory_process: space }
-      let!(:user) { create :user, organization: organization }
+      let!(:valuator_role) { create(:participatory_process_user_role, user:, role: :valuator, participatory_process: space) }
+      let!(:user) { create(:user, organization:) }
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
@@ -181,7 +183,7 @@ module Decidim::ReportingProposals::Admin
       it_behaves_like "cannot add valuators to the proposal"
 
       context "and can valuate the current proposal" do
-        let!(:assignment) { create :valuation_assignment, proposal: proposal, valuator_role: valuator_role }
+        let!(:assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
 
         it_behaves_like "can answer proposals"
         it_behaves_like "can edit photos"
@@ -190,7 +192,7 @@ module Decidim::ReportingProposals::Admin
     end
 
     context "when the user has no role" do
-      let!(:user) { create :user, organization: organization }
+      let!(:user) { create(:user, organization:) }
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
