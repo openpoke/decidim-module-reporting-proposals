@@ -16,13 +16,13 @@ describe "Assign valuators" do
   let!(:another_valuator) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
   let!(:logged_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: logged_valuator, participatory_process:) }
   let!(:another_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: another_valuator, participatory_process:) }
-  let(:login) { user }
+  let(:login_user) { user }
 
   include_context "when managing a component as an admin"
 
   before do
     switch_to_host(organization.host)
-    login_as login, scope: :user
+    login_as login_user, scope: :user
     visit current_path
   end
 
@@ -49,10 +49,7 @@ describe "Assign valuators" do
   end
 
   shared_examples "unassigns a valuator" do
-    before do
-      create(:valuation_assignment, proposal:, valuator_role:)
-      visit current_path
-    end
+    let!(:valuation_assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
 
     it "unassigns the proposals from the valuator" do
       click_link_or_button translated(proposal.title)
@@ -76,11 +73,13 @@ describe "Assign valuators" do
   end
 
   context "when a valuator manages assignments" do
-    let(:login) { logged_valuator }
+    let(:login_user) { logged_valuator }
     let(:valuator_role) { another_valuator_role }
+    let!(:my_assignement) { create(:valuation_assignment, proposal:, valuator_role: logged_valuator_role) }
 
     before do
-      create(:valuation_assignment, proposal:, valuator_role: logged_valuator_role)
+      switch_to_host(organization.host)
+      login_as login_user, scope: :user
       visit current_path
     end
 
@@ -115,7 +114,7 @@ describe "Assign valuators" do
   end
 
   context "when managing myself" do
-    let(:login) { logged_valuator }
+    let(:login_user) { logged_valuator }
     let(:valuator_role) { logged_valuator_role }
 
     it_behaves_like "unassigns a valuator"
