@@ -15,7 +15,7 @@ module Decidim::ReportingProposals
     let(:user) { create(:user, :confirmed, organization:) }
     let(:admin_follower) { create(:user, :admin, organization:) }
 
-    shared_examples "assigns valuator once" do
+    shared_examples "assigns valuator once" do |use_last_email: true|
       context "when there's admin followers" do
         let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
@@ -39,7 +39,7 @@ module Decidim::ReportingProposals
         end
         expect(Rails.logger).to have_received(:info).with(/Automatically assigned valuator #{valuator_user.name}/).once
 
-        email = last_email
+        email = use_last_email ? last_email : emails.first
         expect(email.subject).to include("New proposals assigned to you for evaluation")
         expect(email.body.encoded).to include(ERB::Util.html_escape(proposal.title["en"]).gsub("&quot;", '"'))
       end
@@ -55,7 +55,9 @@ module Decidim::ReportingProposals
             subject.call
           end
           expect(Rails.logger).to have_received(:warn).with(/Couldn't automatically assign valuator #{valuator_user.name}/).once
-          expect(last_email.subject).not_to include("New proposals assigned to you for evaluation")
+
+          email = use_last_email ? last_email : emails.first
+          expect(email.subject).not_to include("New proposals assigned to you for evaluation")
         end
       end
     end
@@ -150,7 +152,7 @@ module Decidim::ReportingProposals
           allow(Rails.logger).to receive(:info).at_least(:once)
         end
 
-        it_behaves_like "assigns valuator once"
+        it_behaves_like "assigns valuator once", use_last_email: false
       end
     end
   end
