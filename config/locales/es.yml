@@ -7,10 +7,11 @@ es:
       proposal:
         has_no_address: No tiene dirección
         has_no_image: No tiene imagen
-      template:
-        scope_for_availability: Restringir disponibilidad al componente
   decidim:
     admin:
+      actions:
+        manage: Manage
+        new: New
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador eliminó su propuesta porque ha sido denunciada.
@@ -18,10 +19,6 @@ es:
           hello: Hola,
           reason: 'Motivo: %{reason}'
           subject: Tu propuesta ha sido ocultada
-      templates:
-        fetch:
-          error: No se pudo encontrar esta plantilla, ¿tal vez se ha eliminado?
-        missing_resource: "(recurso ausente)"
     application:
       geocoding:
         unconfigured: '¡La geocodificación no está configurada!'
@@ -43,8 +40,8 @@ es:
         name: Propuestas directas
         settings:
           global:
-            additional_button_for_show_proposal_link: Botón de acción adicional después del enlace "Volver a la lista" al visitar una propuesta en particular (enlace)
-            additional_button_for_show_proposal_text: Botón de acción adicional después del enlace "Volver a la lista" cuando visite una propuesta en particular (texto)
+            additional_button_for_show_proposal_link: Additional sidebar action button when visiting a particular proposal (link)
+            additional_button_for_show_proposal_text: Additional sidebar action button when visiting a particular proposal (text)
             additional_button_link: Botón de acción adicional junto a la nueva propuesta (enlace)
             additional_button_text: Botón de acción adicional junto a la nueva propuesta (texto)
             additional_buttons_for_show_proposal_show: Mostrar un botón adicional en la vista pública
@@ -168,14 +165,8 @@ es:
             geolocated_at: Geolocalizada en
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: panel de administración
-            email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
-            gratitude: '¡Gracias por tu ayuda!'
-            greeting: Hola %{name},
-            public_side: parte pública
-            subject: Nuevas propuestas asignadas para su evaluación
+          show:
+            report: Report
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
@@ -339,9 +330,10 @@ es:
             success: Nota de propuesta actualizada correctamente.
         proposals:
           photo_form:
-            action: Añadir imagen
+            action: Save images
             add_images: Añadir imágenes
-            gallery_legend: Añadir imágenes
+            edit_images: Edit images
+            gallery_legend: Add an image gallery (Optional)
             title: Fotos
             upload_msg: No hay archivos seleccionados
           photo_gallery:
@@ -354,6 +346,14 @@ es:
             remove_assignment: eliminar asignación
             remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
             valuators: Evaluadoras
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: admin panel
+            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
+            gratitude: Thanks for your help!
+            greeting: Hi %{name}
+            public_side: public side
+            subject: New proposals assigned to you for evaluation
         resolution_time: Tiempo de resolución
         time_elapsed:
           datetime:
@@ -418,25 +418,3 @@ es:
           delete_image: Eliminar imagen
         form:
           image: Imágen/foto
-    templates:
-      admin:
-        proposal_answer_templates:
-          form:
-            answer_template: Plantilla de Respuesta
-            hint: "<strong>Sugerencia:</strong> Puede utilizar estas variables en cualquier lugar de la plantilla de respuesta que se reemplazarán cuando utilice la plantilla"
-            hint1: "<strong>%{organization}</strong> será reemplazado por el nombre de la organización"
-            hint2: "<strong>%{name}</strong> será reemplazado por el nombre del autor"
-            hint3: "<strong>%{admin}</strong> será sustituido por el nombre del administrador (el que responde a la propuesta)"
-            save: Guardar
-            scope_for_availability_help: Tenga en cuenta que sólo los espacios participativos que tengan componentes del tipo "propuestas" serán listados.
-            template_title: Información de la plantilla
-          index:
-            confirm_delete: '¿Está seguro de querer eliminar esta plantilla?'
-            global_scope: Global (disponible en todas partes)
-            internal_state: Estado interno
-            scope_for_availability: Ámbito
-            title: Respuestas a propuestas
-          template_chooser:
-            select_template: Selecciona una plantilla de respuesta
-      template_types:
-        proposal_answer_templates: Respuestas a propuestas

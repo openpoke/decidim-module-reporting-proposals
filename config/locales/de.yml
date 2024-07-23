@@ -7,10 +7,11 @@ de:
       proposal:
         has_no_address: Adresse unbekannt
         has_no_image: Kein Foto vorhanden
-      template:
-        scope_for_availability: Verfügbarkeit der Komponente einschränken
   decidim:
     admin:
+      actions:
+        manage: Manage
+        new: New
       hidden_resource_mailer:
         notify_mail:
           body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
@@ -18,10 +19,6 @@ de:
           hello: Guten Tag,
           reason: 'Grund: %{reason}'
           subject: Ihre Meldung wurde ausgeblendet
-      templates:
-        fetch:
-          error: Diese Vorlage kann nicht gefunden werden, vielleicht wurde sie gelöscht?
-        missing_resource: "(fehlende Ressource)"
     application:
       geocoding:
         unconfigured: Geocoding ist nicht konfiguriert!
@@ -43,8 +40,8 @@ de:
         name: Meldungen
         settings:
           global:
-            additional_button_for_show_proposal_link: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Ziel-Link)
-            additional_button_for_show_proposal_text: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Button-Text)
+            additional_button_for_show_proposal_link: Additional sidebar action button when visiting a particular proposal (link)
+            additional_button_for_show_proposal_text: Additional sidebar action button when visiting a particular proposal (text)
             additional_button_link: Zusätzlicher Button neben dem Button "neue Meldung" (Ziel-Link)
             additional_button_text: Zusätzlicher Button neben dem Button "neue Meldung" (Button-Text)
             additional_buttons_for_show_proposal_show: Einen zusätzlichen Button in der öffentlichen Ansicht anzeigen
@@ -168,14 +165,8 @@ de:
             geolocated_at: Hier geolokalisiert
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: Admin Panel
-            email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
-            gratitude: Vielen Dank!
-            greeting: Hallo %{name}
-            public_side: User-Ansicht
-            subject: Dir wurden neue Meldungen zugewiesen
+          show:
+            report: Report
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
@@ -339,9 +330,10 @@ de:
             success: Notiz erfolgreich aktualisiert.
         proposals:
           photo_form:
-            action: Bild hinzufügen
+            action: Save images
             add_images: Bilder hinzufügen
-            gallery_legend: Bilder hinzufügen
+            edit_images: Edit images
+            gallery_legend: Add an image gallery (Optional)
             title: Bilder
             upload_msg: Keine Dateien ausgewählt
           photo_gallery:
@@ -354,6 +346,14 @@ de:
             remove_assignment: Zuweisung entfernen
             remove_assignment_confirmation: Zuweisung wurde entfernt
             valuators: Expert/innen
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: admin panel
+            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
+            gratitude: Thanks for your help!
+            greeting: Hi %{name}
+            public_side: public side
+            subject: New proposals assigned to you for evaluation
         resolution_time: Bearbeitungszeit
         time_elapsed:
           datetime:
@@ -418,25 +418,3 @@ de:
           delete_image: Bild löschen
         form:
           image: Foto
-    templates:
-      admin:
-        proposal_answer_templates:
-          form:
-            answer_template: Standardantworten
-            hint: "<strong>Hinweis:</strong> Diese Platzhalter kannst du überall in den Standortantworten verwenden. Sie werden dann durch die entsprechenden Inhalte ersetzt"
-            hint1: "<strong>%{organization}</strong> wird durch den Namen der Organisation ersetzt"
-            hint2: "<strong>%{name}</strong> wird durch den Namen des Autors ersetzt"
-            hint3: "<strong>%{admin}</strong> wird durch den Namen der Person ersetzt, die den Vorschlag beantwortet"
-            save: Speichern
-            scope_for_availability_help: Beachte, dass nur Prozesse mit Komponenten des Typs "Vorschlag" aufgelistet werden.
-            template_title: Titel der Vorlage
-          index:
-            confirm_delete: Möchten Sie diese Vorlage wirklich löschen?
-            global_scope: Global (überall verfügbar)
-            internal_state: Interner Status
-            scope_for_availability: Bereich
-            title: Antworten für Vorschläge / Meldungen
-          template_chooser:
-            select_template: Wähle eine Vorlage
-      template_types:
-        proposal_answer_templates: Antworten für Vorschläge / Meldungen
