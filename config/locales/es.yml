@@ -40,8 +40,8 @@ es:
         name: Propuestas directas
         settings:
           global:
-            additional_button_for_show_proposal_link: Additional sidebar action button when visiting a particular proposal (link)
-            additional_button_for_show_proposal_text: Additional sidebar action button when visiting a particular proposal (text)
+            additional_button_for_show_proposal_link: Botón de acción adicional después del enlace "Volver a la lista" al visitar una propuesta en particular (enlace)
+            additional_button_for_show_proposal_text: Botón de acción adicional después del enlace "Volver a la lista" cuando visite una propuesta en particular (texto)
             additional_button_link: Botón de acción adicional junto a la nueva propuesta (enlace)
             additional_button_text: Botón de acción adicional junto a la nueva propuesta (texto)
             additional_buttons_for_show_proposal_show: Mostrar un botón adicional en la vista pública
@@ -172,13 +172,20 @@ es:
         admin_resource: Administrar este recurso
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Responder a la propuesta
+        comment: Comment
+        create: Create
         edit_proposal: Editar propuesta
+        endorse: Endorse
         import: Importar propuestas de otro componente
         new: Nueva propuesta
         participatory_texts: Textos participativos
         show: Ver propuesta
         title: Acciones
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Editar evaluadores
@@ -330,10 +337,10 @@ es:
             success: Nota de propuesta actualizada correctamente.
         proposals:
           photo_form:
-            action: Save images
+            action: Añadir imagen
             add_images: Añadir imágenes
             edit_images: Edit images
-            gallery_legend: Add an image gallery (Optional)
+            gallery_legend: Añadir imágenes
             title: Fotos
             upload_msg: No hay archivos seleccionados
           photo_gallery:
