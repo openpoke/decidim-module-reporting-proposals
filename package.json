@@ -1,6 +1,6 @@
 {
   "name": "decidim_module_reporting_proposals",
-  "version": "0.6",
+  "version": "0.6.1",
   "description": "A 3 steps proposals for Decidim",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -31,10 +31,10 @@
   },
   "prettier": "@decidim/prettier-config",
   "devDependencies": {
-    "@decidim/dev": "0.28.0",
-    "@decidim/eslint-config": "0.28.0",
-    "@decidim/prettier-config": "0.28.0",
-    "@decidim/stylelint-config": "0.28.0",
+    "@decidim/dev": "0.28.1",
+    "@decidim/eslint-config": "0.28.1",
+    "@decidim/prettier-config": "0.28.1",
+    "@decidim/stylelint-config": "0.28.1",
     "postcss-scss": "^4.0.9",
     "sass-embedded": "~1.57.1"
   }

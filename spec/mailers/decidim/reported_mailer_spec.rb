@@ -6,7 +6,8 @@ module Decidim
   describe ReportedMailer do
     let(:organization) { create(:organization, name: "Test Organization") }
     let(:user) { create(:user, :admin, organization:) }
-    let(:component) { create(:component, organization:) }
+    let(:participatory_space) { create(:participatory_process, title: Decidim::Faker::Localized.sentence, organization:) }
+    let(:component) { create(:component, participatory_space:) }
     let(:reportable) { create(:proposal, title: Decidim::Faker::Localized.sentence, body: Decidim::Faker::Localized.paragraph(sentence_count: 3)) }
     let(:moderation) { create(:moderation, reportable:, participatory_space: component.participatory_space, report_count: 1) }
     let(:author) { reportable.creator_identity }
