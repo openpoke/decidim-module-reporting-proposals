@@ -183,9 +183,9 @@ ca:
         participatory_texts: Textos participatius
         show: Veure proposta
         title: Accions
-        vote: Support
-        vote_comment: Vote comment
-        withdraw: Withdraw
+        vote: Donar suport
+        vote_comment: Votar el comentari
+        withdraw: Retirar
       admin:
         actions:
           edit_valuators: Edita les avaluadores
@@ -339,7 +339,7 @@ ca:
           photo_form:
             action: Afageix imatge
             add_images: Afegeix imatges
-            edit_images: Edit images
+            edit_images: Editar imatge
             gallery_legend: Afegeix imatges
             title: Fotografies
             upload_msg: Cap arxiu seleccionat
@@ -355,12 +355,12 @@ ca:
             valuators: Avaluadores
         proposals_valuator_mailer:
           notify_proposals_valuator:
-            admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
+            admin_panel: panell d'administració
+            email_body: Has estat assignat com a avaluador de les propostes llistades a sota. Això significa que s'ha confiat en tu per donar-hi resposta en els propoers dies.
+            gratitude: Gràcies per la teva ajuda!
+            greeting: Hola %{name},
+            public_side: lloc públic
+            subject: Nova proposta asignada per la teva avaluació
         resolution_time: Temps de resolució
         time_elapsed:
           datetime:
