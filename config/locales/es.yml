@@ -10,8 +10,8 @@ es:
   decidim:
     admin:
       actions:
-        manage: Manage
-        new: New
+        manage: Gestionar
+        new: Nuevo
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador eliminó su propuesta porque ha sido denunciada.
@@ -166,26 +166,26 @@ es:
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
           show:
-            report: Report
+            report: Denunciar
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
     reporting_proposals:
       actions:
-        amend: Amend
+        amend: Enmendar
         answer_proposal: Responder a la propuesta
-        comment: Comment
-        create: Create
+        comment: Comentar
+        create: Crear
         edit_proposal: Editar propuesta
-        endorse: Endorse
+        endorse: Adherirse
         import: Importar propuestas de otro componente
         new: Nueva propuesta
         participatory_texts: Textos participativos
         show: Ver propuesta
         title: Acciones
-        vote: Support
-        vote_comment: Vote comment
-        withdraw: Withdraw
+        vote: Apoyar
+        vote_comment: Votar comentario
+        withdraw: Retirar
       admin:
         actions:
           edit_valuators: Editar evaluadores
@@ -339,7 +339,7 @@ es:
           photo_form:
             action: Añadir imagen
             add_images: Añadir imágenes
-            edit_images: Edit images
+            edit_images: Añadir imágenes
             gallery_legend: Añadir imágenes
             title: Fotos
             upload_msg: No hay archivos seleccionados
@@ -355,12 +355,12 @@ es:
             valuators: Evaluadoras
         proposals_valuator_mailer:
           notify_proposals_valuator:
-            admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
+            admin_panel: panel de administración
+            email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
+            gratitude: '¡Gracias por tu ayuda!'
+            greeting: Hola %{name},
+            public_side: parte pública
+            subject: Nuevas propuestas asignadas para su evaluación
         resolution_time: Tiempo de resolución
         time_elapsed:
           datetime:
