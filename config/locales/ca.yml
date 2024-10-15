@@ -9,6 +9,9 @@ ca:
         has_no_image: Sense imatge
   decidim:
     admin:
+      actions:
+        manage: Gestiona
+        new: Nou
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador ha esborrat la vostra proposta perquè ha estat denunciada.
@@ -16,10 +19,6 @@ ca:
           hello: Hola,
           reason: 'Motiu: %{reason}'
           subject: La teva proposta ha estat amagada
-      templates:
-        fetch:
-          error: No s'ha trobat aquesta plantilla, potser ha estat esborrada?
-        missing_resource: "(recurs absent)"
     application:
       geocoding:
         unconfigured: La geocodificació no està configurada!
@@ -166,14 +165,8 @@ ca:
             geolocated_at: Geolocalització
           send_email_button:
             send_mail: Envia un correu electrònic a l'usuari
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: panell d'administració
-            email_body: Has estat assignat com a avaluador de les propostes llistades a sota. Això significa que s'ha confiat en tu per donar-hi resposta en els propoers dies.
-            gratitude: Gràcies per la teva ajuda!
-            greeting: Hola %{name},
-            public_side: lloc públic
-            subject: Nova proposta asignada per la teva avaluació
+          show:
+            report: Denuncia
     reported_mailer:
       report:
         admin_resource: Administra el recurs
@@ -346,6 +339,7 @@ ca:
           photo_form:
             action: Afageix imatge
             add_images: Afegeix imatges
+            edit_images: Editar imatge
             gallery_legend: Afegeix imatges
             title: Fotografies
             upload_msg: Cap arxiu seleccionat
@@ -359,6 +353,14 @@ ca:
             remove_assignment: desfer assignació
             remove_assignment_confirmation: eliminar la confirmació de l'assignació
             valuators: Avaluadores
+        proposals_valuator_mailer:
+          notify_proposals_valuator:
+            admin_panel: panell d'administració
+            email_body: Has estat assignat com a avaluador de les propostes llistades a sota. Això significa que s'ha confiat en tu per donar-hi resposta en els propoers dies.
+            gratitude: Gràcies per la teva ajuda!
+            greeting: Hola %{name},
+            public_side: lloc públic
+            subject: Nova proposta asignada per la teva avaluació
         resolution_time: Temps de resolució
         time_elapsed:
           datetime:
@@ -423,25 +425,3 @@ ca:
           delete_image: Esborra la imatge
         form:
           image: Imatge/fotografia
-    templates:
-      admin:
-        proposal_answer_templates:
-          form:
-            answer_template: Plantilla de resposta
-            hint: "<strong>Suggeriment:</strong> Pots fer servir aquestes variables a qualsevol lloc a la plantilla de resposta i seran substituïdes pels valors en actiu quan es faci servir"
-            hint1: "<strong>%{organization}</strong> se substituirà pel nom de l'organització"
-            hint2: "<strong>%{name}</strong> se substituirà pel nom de l'autor"
-            hint3: "<strong>%{admin}</strong> se substituirà pel nom de l'administrador (el que està responent a la proposta)"
-            save: Desa
-            scope_for_availability_help: Noteu que només es llistaran els espais participatius que tinguin components de tipus "propostes".
-            template_title: Informació de la plantilla
-          index:
-            confirm_delete: Està segur que vol suprimir aquesta plantilla?
-            global_scope: Global (disponible a tot arreu)
-            internal_state: Estat intern
-            scope_for_availability: Àmbit
-            title: Respostes a la proposta
-          template_chooser:
-            select_template: Selecciona una plantilla de resposta
-      template_types:
-        proposal_answer_templates: Respostes a la proposta
