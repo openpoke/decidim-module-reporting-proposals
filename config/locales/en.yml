@@ -235,13 +235,20 @@ en:
         admin_resource: Admin this resource
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Answer proposal
+        comment: Comment
+        create: Create
         edit_proposal: Edit proposal
+        endorse: Endorse
         import: Import proposals from another component
         new: New proposal
         participatory_texts: Participatory texts
         show: Show proposal
         title: Actions
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Edit valuators
