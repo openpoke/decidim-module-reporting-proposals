@@ -10,8 +10,8 @@ de:
   decidim:
     admin:
       actions:
-        manage: Manage
-        new: New
+        manage: Verwalten
+        new: Neu
       hidden_resource_mailer:
         notify_mail:
           body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
@@ -166,26 +166,26 @@ de:
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
           show:
-            report: Report
+            report: Bericht
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
       actions:
-        amend: Amend
+        amend: Änderungsvorschlag
         answer_proposal: Meldung beantworten
-        comment: Comment
-        create: Create
+        comment: Kommentieren
+        create: Erstellen
         edit_proposal: Meldung bearbeiten
-        endorse: Endorse
+        endorse: Unterstützung
         import: Meldungen aus einer anderen Komponente importieren
         new: Neue Meldung
         participatory_texts: Partizipative Texte
         show: Meldung anzeigen
         title: Aktionen
-        vote: Support
-        vote_comment: Vote comment
-        withdraw: Withdraw
+        vote: Abstimmung
+        vote_comment: Kommentar bewerten
+        withdraw: Zurückziehen
       admin:
         actions:
           edit_valuators: Experten ändern
@@ -339,7 +339,7 @@ de:
           photo_form:
             action: Bild hinzufügen
             add_images: Bilder hinzufügen
-            edit_images: Edit images
+            edit_images: Bilder hinzufügen
             gallery_legend: Bilder hinzufügen
             title: Bilder
             upload_msg: Keine Dateien ausgewählt
@@ -356,11 +356,11 @@ de:
         proposals_valuator_mailer:
           notify_proposals_valuator:
             admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed below. This means you've been trusted to give them feedback and a proper response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
+            email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
+            gratitude: Vielen Dank!
+            greeting: Hallo %{name}
+            public_side: User-Ansicht
+            subject: Dir wurden neue Meldungen zugewiesen
         resolution_time: Bearbeitungszeit
         time_elapsed:
           datetime:
