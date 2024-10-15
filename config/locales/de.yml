@@ -40,8 +40,8 @@ de:
         name: Meldungen
         settings:
           global:
-            additional_button_for_show_proposal_link: Additional sidebar action button when visiting a particular proposal (link)
-            additional_button_for_show_proposal_text: Additional sidebar action button when visiting a particular proposal (text)
+            additional_button_for_show_proposal_link: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Ziel-Link)
+            additional_button_for_show_proposal_text: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Button-Text)
             additional_button_link: Zusätzlicher Button neben dem Button "neue Meldung" (Ziel-Link)
             additional_button_text: Zusätzlicher Button neben dem Button "neue Meldung" (Button-Text)
             additional_buttons_for_show_proposal_show: Einen zusätzlichen Button in der öffentlichen Ansicht anzeigen
@@ -172,13 +172,20 @@ de:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Meldung beantworten
+        comment: Comment
+        create: Create
         edit_proposal: Meldung bearbeiten
+        endorse: Endorse
         import: Meldungen aus einer anderen Komponente importieren
         new: Neue Meldung
         participatory_texts: Partizipative Texte
         show: Meldung anzeigen
         title: Aktionen
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Experten ändern
@@ -330,10 +337,10 @@ de:
             success: Notiz erfolgreich aktualisiert.
         proposals:
           photo_form:
-            action: Save images
+            action: Bild hinzufügen
             add_images: Bilder hinzufügen
             edit_images: Edit images
-            gallery_legend: Add an image gallery (Optional)
+            gallery_legend: Bilder hinzufügen
             title: Bilder
             upload_msg: Keine Dateien ausgewählt
           photo_gallery:
