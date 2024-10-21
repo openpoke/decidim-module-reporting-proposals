@@ -37,6 +37,14 @@ ca:
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
       reporting_proposals:
+        actions:
+          amend: Esmena
+          comment: Comentar
+          create: Crear
+          endorse: Adherir-se
+          vote: Donar suport
+          vote_comment: Votar el comentari
+          withdraw: Retirar
         name: Propostes directes
         settings:
           global:
@@ -172,20 +180,13 @@ ca:
         admin_resource: Administra el recurs
     reporting_proposals:
       actions:
-        amend: Esmena
         answer_proposal: Resposta de la proposta
-        comment: Comentar
-        create: Crear
         edit_proposal: Edita la proposta
-        endorse: Adherir-se
         import: Importa propostes d'un altre component
         new: Nova proposta
         participatory_texts: Textos participatius
         show: Veure proposta
         title: Accions
-        vote: Donar suport
-        vote_comment: Votar el comentari
-        withdraw: Retirar
       admin:
         actions:
           edit_valuators: Edita les avaluadores

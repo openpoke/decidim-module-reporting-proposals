@@ -37,6 +37,14 @@ de:
             unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete Meldung als überfällig
             unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
       reporting_proposals:
+        actions:
+          amend: Änderungsvorschlag
+          comment: Kommentieren
+          create: Erstellen
+          endorse: Unterstützung
+          vote: Abstimmung
+          vote_comment: Kommentar bewerten
+          withdraw: Zurückziehen
         name: Meldungen
         settings:
           global:
@@ -172,20 +180,13 @@ de:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
       actions:
-        amend: Änderungsvorschlag
         answer_proposal: Meldung beantworten
-        comment: Kommentieren
-        create: Erstellen
         edit_proposal: Meldung bearbeiten
-        endorse: Unterstützung
         import: Meldungen aus einer anderen Komponente importieren
         new: Neue Meldung
         participatory_texts: Partizipative Texte
         show: Meldung anzeigen
         title: Aktionen
-        vote: Abstimmung
-        vote_comment: Kommentar bewerten
-        withdraw: Zurückziehen
       admin:
         actions:
           edit_valuators: Experten ändern
