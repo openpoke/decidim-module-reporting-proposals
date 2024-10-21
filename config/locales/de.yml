@@ -181,13 +181,20 @@ de:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Meldung beantworten
+        comment: Comment
+        create: Create
         edit_proposal: Meldung bearbeiten
+        endorse: Endorse
         import: Meldungen aus einer anderen Komponente importieren
         new: Neue Meldung
         participatory_texts: Partizipative Texte
         show: Meldung anzeigen
         title: Aktionen
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Experten ändern
