@@ -181,13 +181,20 @@ es:
         admin_resource: Administrar este recurso
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Responder a la propuesta
+        comment: Comment
+        create: Create
         edit_proposal: Editar propuesta
+        endorse: Endorse
         import: Importar propuestas de otro componente
         new: Nueva propuesta
         participatory_texts: Textos participativos
         show: Ver propuesta
         title: Acciones
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Editar evaluadores
