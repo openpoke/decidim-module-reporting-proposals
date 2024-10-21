@@ -181,13 +181,20 @@ ca:
         admin_resource: Administra el recurs
     reporting_proposals:
       actions:
+        amend: Amend
         answer_proposal: Resposta de la proposta
+        comment: Comment
+        create: Create
         edit_proposal: Edita la proposta
+        endorse: Endorse
         import: Importa propostes d'un altre component
         new: Nova proposta
         participatory_texts: Textos participatius
         show: Veure proposta
         title: Accions
+        vote: Support
+        vote_comment: Vote comment
+        withdraw: Withdraw
       admin:
         actions:
           edit_valuators: Edita les avaluadores
