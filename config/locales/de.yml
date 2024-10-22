@@ -38,13 +38,13 @@ de:
             unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
       reporting_proposals:
         actions:
-          amend: Änderungsvorschlag
-          comment: Kommentieren
-          create: Erstellen
-          endorse: Unterstützung
-          vote: Abstimmung
-          vote_comment: Kommentar bewerten
-          withdraw: Zurückziehen
+          amend: Amend
+          comment: Comment
+          create: Create
+          endorse: Endorse
+          vote: Support
+          vote_comment: Vote comment
+          withdraw: Withdraw
         name: Meldungen
         settings:
           global:
