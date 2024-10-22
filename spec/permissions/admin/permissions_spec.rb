@@ -37,11 +37,9 @@ module Decidim::ReportingProposals::Admin
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     before do
-      # rubocop:disable RSpec/ReceiveMessages
       allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
       allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
       allow(Decidim::ReportingProposals).to receive(:valuators_assign_other_valuators).and_return(valuators_assign_other_valuators)
-      # rubocop:enable RSpec/ReceiveMessages
     end
 
     shared_examples "can answer proposals" do

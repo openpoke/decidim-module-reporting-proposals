@@ -32,10 +32,10 @@ describe "Send email to user with link" do
     let!(:proposal) { create(:proposal, component:, address:, latitude:, longitude:) }
 
     it "does not show the address" do
-      expect(page).to have_no_css(".address")
-      expect(page).to have_no_css(".address__info")
-      expect(page).to have_no_css(".address__map")
-      expect(page).to have_no_content(address)
+      expect(page).not_to have_css(".address")
+      expect(page).not_to have_css(".address__info")
+      expect(page).not_to have_css(".address__map")
+      expect(page).not_to have_content(address)
     end
 
     context "when component has geocoding enabled" do

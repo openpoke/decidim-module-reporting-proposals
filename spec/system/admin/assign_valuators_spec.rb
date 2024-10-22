@@ -30,7 +30,7 @@ describe "Assign valuators" do
     it "assigns the proposals to the valuator" do
       click_link_or_button translated(proposal.title)
       within "#valuators" do
-        expect(page).to have_no_content(valuator.name)
+        expect(page).not_to have_content(valuator.name)
       end
 
       within "#js-form-assign-proposal-to-valuator" do
@@ -80,6 +80,7 @@ describe "Assign valuators" do
     before do
       switch_to_host(organization.host)
       login_as login_user, scope: :user
+      sleep 0.5
       visit current_path
     end
 
@@ -92,7 +93,7 @@ describe "Assign valuators" do
         expect(page).to have_css("a.red-icon", count: 1)
       end
       within "#valuators li", text: another_valuator.name do
-        expect(page).to have_no_css("a.red-icon", count: 1)
+        expect(page).not_to have_css("a.red-icon", count: 1)
       end
     end
 
@@ -102,12 +103,12 @@ describe "Assign valuators" do
       it "has permission to access assigned" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(proposal)
         expect(page).to have_content(proposal.title["en"])
-        expect(page).to have_no_content("You are not authorized to perform this action.")
+        expect(page).not_to have_content("You are not authorized to perform this action.")
       end
 
       it "has no permission to access" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(another_proposal)
-        expect(page).to have_no_content(another_proposal.title["en"])
+        expect(page).not_to have_content(another_proposal.title["en"])
         expect(page).to have_content("You are not authorized to perform this action.")
       end
     end
