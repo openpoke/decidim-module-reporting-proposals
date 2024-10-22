@@ -38,13 +38,13 @@ es:
             unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
       reporting_proposals:
         actions:
-          amend: Enmendar
-          comment: Comentar
-          create: Crear
-          endorse: Adherirse
-          vote: Apoyar
-          vote_comment: Votar comentario
-          withdraw: Retirar
+          amend: Amend
+          comment: Comment
+          create: Create
+          endorse: Endorse
+          vote: Support
+          vote_comment: Vote comment
+          withdraw: Withdraw
         name: Propuestas directas
         settings:
           global:
