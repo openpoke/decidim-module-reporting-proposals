@@ -31,7 +31,7 @@ shared_examples "reuses draft if exists" do
     visit_component
     click_link_or_button "New proposal"
 
-    expect(page).to have_content("Edit Proposal Draft")
+    expect(page).to have_content("Edit proposal draft")
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
@@ -135,7 +135,7 @@ shared_examples "creates reporting proposal" do
       expect(page).to have_content("Publish your proposal")
     end
 
-    expect(page).to have_content("Edit Proposal Draft")
+    expect(page).to have_content("Edit proposal draft")
 
     complete_proposal(attach: true)
 

@@ -80,6 +80,7 @@ describe "Assign valuators" do
     before do
       switch_to_host(organization.host)
       login_as login_user, scope: :user
+      sleep 0.5
       visit current_path
     end
 
