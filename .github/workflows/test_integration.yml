@@ -51,9 +51,13 @@ jobs:
 
       - name: Node packages
         run: npm ci
-
+      
       - name: Setup Database
         run: bundle exec rake test_app
+
+      - name: Fix autocomplete
+        run: npm i @tarekraafat/autocomplete.js@10.2.7
+        working-directory: ./spec/decidim_dummy_app
 
       - name: Precompile test app assets
         run: bundle exec rake assets:precompile
