@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-reporting_proposals (0.6.1)
+    decidim-reporting_proposals (0.6.2)
       decidim-admin (>= 0.28.1, < 0.29)
       decidim-core (>= 0.28.1, < 0.29)
       decidim-participatory_processes (>= 0.28.1, < 0.29)
@@ -383,7 +383,7 @@ GEM
       ruby2_keywords
     faraday_middleware (1.2.1)
       faraday (~> 1.0)
-    ffi (1.17.0)
+    ffi (1.17.0-x86_64-linux-gnu)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
