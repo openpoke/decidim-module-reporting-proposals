@@ -116,7 +116,7 @@ module Decidim
 
               it "does not have accepted proposals" do
                 get(:index, xhr: true, params:)
-                expect(response.body).to have_no_content('address\\":\\"Peny Lane 1\\"')
+                expect(response.body).not_to have_content('address\\":\\"Peny Lane 1\\"')
               end
             end
           end

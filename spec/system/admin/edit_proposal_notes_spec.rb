@@ -58,7 +58,7 @@ describe "Edit Proposal Notes" do
 
   it "does not display the edited status" do
     click_link_or_button "Private notes"
-    expect(page).to have_no_content("Edited")
+    expect(page).not_to have_content("Edited")
   end
 
   context "when the user is not the author of the proposal note" do
@@ -67,7 +67,7 @@ describe "Edit Proposal Notes" do
     it "shows proposal notes for the current proposal" do
       click_link_or_button "Private notes"
       proposal_notes.each do |proposal_note|
-        expect(page).to have_no_button("Edit note")
+        expect(page).not_to have_button("Edit note")
         expect(page).to have_content(proposal_note.author.name)
       end
     end

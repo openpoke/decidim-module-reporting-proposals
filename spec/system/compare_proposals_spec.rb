@@ -72,9 +72,9 @@ describe "Reporting proposals overrides" do
 
   shared_examples "compares using text" do
     it "shows comparison text" do
-      expect(page).to have_no_content("Nearby proposals")
+      expect(page).not_to have_content("Nearby proposals")
       expect(page).to have_content("Similar Proposals (1)")
-      expect(page).to have_no_content("These are proposals that are in a radius")
+      expect(page).not_to have_content("These are proposals that are in a radius")
     end
 
     it "shows proposals found by text" do
