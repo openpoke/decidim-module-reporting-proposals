@@ -83,7 +83,7 @@ describe "Admin find_resource_manifest" do
       click_link_or_button "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
-        expect(page).to have_no_content(translated(reporting_proposal.title))
+        expect(page).not_to have_content(translated(reporting_proposal.title))
       end
     end
   end
@@ -154,7 +154,7 @@ describe "Admin find_resource_manifest" do
       click_link_or_button "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
-        expect(page).to have_no_content(translated(reporting_proposal.title))
+        expect(page).not_to have_content(translated(reporting_proposal.title))
       end
     end
   end
@@ -202,7 +202,7 @@ describe "Admin find_resource_manifest" do
         click_link_or_button "Close meeting"
       end
       expect(page).to have_content(translated(proposal.title))
-      expect(page).to have_no_content(translated(reporting_proposal.title))
+      expect(page).not_to have_content(translated(reporting_proposal.title))
     end
 
     context "when admin" do
@@ -258,7 +258,7 @@ describe "Admin find_resource_manifest" do
         page.click_link_or_button "Close"
         within ".plugin-dropdown_input" do
           expect(page).to have_content(translated(proposal.title))
-          expect(page).to have_no_content(translated(reporting_proposal.title))
+          expect(page).not_to have_content(translated(reporting_proposal.title))
         end
       end
     end

@@ -13,8 +13,8 @@ shared_examples "proposals list has no due dates" do
     let(:evaluating_days_overdue) { 0 }
 
     it "proposals are not highlighted" do
-      expect(page).to have_no_css(".help-text-overdue.text-warning")
-      expect(page).to have_no_css(".help-text-overdue.text-alert")
+      expect(page).not_to have_css(".help-text-overdue.text-warning")
+      expect(page).not_to have_css(".help-text-overdue.text-alert")
     end
   end
 end
@@ -35,7 +35,7 @@ shared_examples "proposals list has overdue dates" do
       end
 
       it "proposal with :accepted does not have .help-text-overdue" do
-        expect(page).to have_no_css(".help-text-overdue", count: 1)
+        expect(page).not_to have_css(".help-text-overdue", count: 1)
       end
     end
 
@@ -43,7 +43,7 @@ shared_examples "proposals list has overdue dates" do
       let(:evaluating_days_overdue) { 7 }
 
       it "proposals don't have .text-alert" do
-        expect(page).to have_no_css(".help-text-overdue.text-alert")
+        expect(page).not_to have_css(".help-text-overdue.text-alert")
       end
 
       it "proposals with :evaluating and :not_answered have .text-warning" do
@@ -51,7 +51,7 @@ shared_examples "proposals list has overdue dates" do
       end
 
       it "proposal with :accepted does not have .help-text-overdue" do
-        expect(page).to have_no_css(".help-text-overdue", count: 1)
+        expect(page).not_to have_css(".help-text-overdue", count: 1)
       end
     end
   end
@@ -67,11 +67,11 @@ shared_examples "proposals list has overdue dates" do
       end
 
       it "proposals with :not_answered and :evaluating don't have .text-warning" do
-        expect(page).to have_no_css(".help-text-overdue.text-warning")
+        expect(page).not_to have_css(".help-text-overdue.text-warning")
       end
 
       it "proposal with :accepted does not have .help-text-overdue" do
-        expect(page).to have_no_css(".help-text-overdue", count: 1)
+        expect(page).not_to have_css(".help-text-overdue", count: 1)
       end
     end
 
@@ -87,7 +87,7 @@ shared_examples "proposals list has overdue dates" do
       end
 
       it "proposal with :accepted does not have .help-text-overdue" do
-        expect(page).to have_no_css(".help-text-overdue", count: 1)
+        expect(page).not_to have_css(".help-text-overdue", count: 1)
       end
     end
   end

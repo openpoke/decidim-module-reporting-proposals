@@ -30,7 +30,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).to have_no_button("Use my camera")
+        expect(page).not_to have_button("Use my camera")
       end
     end
   end
@@ -44,7 +44,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).to have_no_button("Use my camera")
+        expect(page).not_to have_button("Use my camera")
       end
     end
   end

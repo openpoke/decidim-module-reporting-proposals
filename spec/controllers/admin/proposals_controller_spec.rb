@@ -32,12 +32,10 @@ module Decidim::ReportingProposals
       let(:allow_admins_to_hide_proposals) { true }
 
       before do
-        # rubocop:disable RSpec/ReceiveMessages
         allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
         allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
         request.env["decidim.current_organization"] = organization
         sign_in user, scope: :user
-        # rubocop:enable RSpec/ReceiveMessages
       end
 
       shared_examples "hide success" do
