@@ -38,13 +38,13 @@ ca:
             unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
       reporting_proposals:
         actions:
-          amend: Esmena
-          comment: Comentar
-          create: Crear
-          endorse: Adherir-se
-          vote: Donar suport
-          vote_comment: Votar el comentari
-          withdraw: Retirar
+          amend: Amend
+          comment: Comment
+          create: Create
+          endorse: Endorse
+          vote: Support
+          vote_comment: Vote comment
+          withdraw: Withdraw
         name: Propostes directes
         settings:
           global:
