@@ -40,6 +40,14 @@ es:
             unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
             unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
       reporting_proposals:
+        actions:
+          amend: Enmendar
+          comment: Comentar
+          create: Crear
+          endorse: Adherirse
+          vote: Apoyar
+          vote_comment: Votar comentario
+          withdraw: Retirar
         name: Propuestas directas
         settings:
           global:

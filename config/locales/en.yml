@@ -53,6 +53,14 @@ en:
             unanswered_proposals_overdue_help: This adds a visual alert to the list
               of proposals. Leave it to zero to disable this feature.
       reporting_proposals:
+        actions:
+          amend: Amend
+          comment: Comment
+          create: Create
+          endorse: Endorse
+          vote: Support
+          vote_comment: Vote comment
+          withdraw: Withdraw
         name: Reporting proposals
         settings:
           global:
