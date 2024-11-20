@@ -40,6 +40,14 @@ ca:
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
       reporting_proposals:
+        actions:
+          amend: Amend
+          comment: Comment
+          create: Create
+          endorse: Endorse
+          vote: Support
+          vote_comment: Vote comment
+          withdraw: Withdraw
         name: Propostes directes
         settings:
           global:
