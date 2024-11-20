@@ -12,6 +12,10 @@ describe "Managing reporting proposals component", type: :system do
     Decidim::EngineRouter.admin_proxy(component.participatory_space).edit_component_path(component.id)
   end
 
+  def component_path
+    Decidim::EngineRouter.admin_proxy(component.participatory_space).components_path(component.id)
+  end
+
   before do
     switch_to_host(organization.host)
     login_as user, scope: :user
@@ -60,6 +64,22 @@ describe "Managing reporting proposals component", type: :system do
       expect(page).to have_field("component_settings_evaluating_proposals_overdue", with: 3)
       expect(page).to have_content("Allow admins and valuators to edit photos when answering proposals")
       expect(page).to have_unchecked_field("component_settings_proposal_photo_editing_enabled")
+    end
+  end
+
+  context "when managing proposals permissions" do
+    let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
+
+    before do
+      visit component_path
+      within ".component-#{component.id}" do
+        click_on "Permissions"
+      end
+    end
+
+    it "show permissions" do
+      expect(page).to have_content("Edit permissions")
+      expect(page).to have_content("Endorse")
     end
   end
 end
