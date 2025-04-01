@@ -120,6 +120,9 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
+      
+      - name: Install imagemagick
+        run: sudo apt install -y imagemagick
 
       - uses: actions/download-artifact@v4
         with:
