@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.1.1
+  RUBY_VERSION: 3.2.6
   NODE_VERSION: 18.17.1
 
 jobs:
@@ -37,6 +37,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
+      - name: Install additional tools
+        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
 
       - uses: nanasess/setup-chromedriver@v2
         with:

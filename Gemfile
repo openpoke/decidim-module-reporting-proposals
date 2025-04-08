@@ -24,7 +24,6 @@ group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
   gem "decidim-dev", DECIDIM_VERSION
-  gem "decidim-elections", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
 end
 
@@ -32,8 +31,6 @@ group :development do
   gem "letter_opener_web"
   gem "listen", "~> 3.1"
   gem "rubocop-faker", "~> 1.1"
-  gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
   gem "web-console"
 end
 
