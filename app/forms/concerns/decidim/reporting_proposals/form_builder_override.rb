@@ -13,8 +13,8 @@ module Decidim
         alias_method :original_file_field, :file_field
 
         def file_field(object_name, options = {})
-          return super(object_name, options) unless Decidim::ReportingProposals.use_camera_button
-          return original_file_field unless @template.respond_to?(:snippets)
+        return original_file_field(object_name, options) unless Decidim::ReportingProposals.use_camera_button
+        return original_file_field(object_name, options) unless @template.respond_to?(:snippets)
 
           unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
             @template.snippets.add(:reporting_proposals_camera_scripts, @template.prepend_javascript_pack_tag("decidim_reporting_proposals_camera"))
