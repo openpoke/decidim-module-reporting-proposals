@@ -42,7 +42,7 @@ describe "Time elapsed to answer" do
     let(:answered_at) { nil }
 
     it "proposal has time elapsed to answer" do
-      expect(page).not_to have_content("Resolution time:")
+      expect(page).to have_no_content("Resolution time:")
     end
   end
 end

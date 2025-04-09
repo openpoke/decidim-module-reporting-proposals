@@ -20,13 +20,13 @@ module Decidim
       end
 
       def has_address?
-        return if has_no_address
+        return false if has_no_address
 
         geocoding_enabled?
       end
 
       def has_camera?
-        return if has_no_image
+        return false if has_no_image
 
         current_component.settings.attachments_allowed?
       end

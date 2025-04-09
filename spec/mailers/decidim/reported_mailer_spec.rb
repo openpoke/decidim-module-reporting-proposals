@@ -42,7 +42,7 @@ module Decidim
           let(:moderation) { create(:moderation, reportable: meeting, participatory_space: meetings_component.participatory_space, report_count: 1) }
 
           it "doesn't have the admin url" do
-            expect(email_body(mail)).not_to have_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
+            expect(email_body(mail)).to have_no_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
           end
         end
 
@@ -106,7 +106,7 @@ module Decidim
           end
 
           it "includes the name of the author but no link to his profile" do
-            expect(mail).not_to have_link(author.name)
+            expect(mail).to have_no_link(author.name)
           end
         end
 

@@ -28,7 +28,7 @@ module Decidim
         end
 
         def reporting_proposals_component?
-          return unless current_component&.manifest_name
+          return false unless current_component&.manifest_name
 
           current_component.manifest_name == "reporting_proposals"
         end

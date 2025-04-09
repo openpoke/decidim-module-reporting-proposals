@@ -89,7 +89,7 @@ module Decidim
           end
 
           def can_add_valuators?
-            return unless permission_action.action == :assign_to_valuator && permission_action.subject == :proposals
+            return false unless permission_action.action == :assign_to_valuator && permission_action.subject == :proposals
 
             toggle_allow(Decidim::ReportingProposals.valuators_assign_other_valuators)
           end
