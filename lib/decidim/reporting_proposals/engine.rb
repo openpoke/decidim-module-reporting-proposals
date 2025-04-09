@@ -10,6 +10,9 @@ module Decidim
 
       routes do
         post :locate, to: "geolocation#locate"
+        namespace :proposals do
+          get :compare, to: "proposals#compare", as: :compare
+        end
       end
 
       # generic overrides

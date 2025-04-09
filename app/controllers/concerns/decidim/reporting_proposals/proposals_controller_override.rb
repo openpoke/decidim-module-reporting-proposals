@@ -58,18 +58,6 @@ module Decidim
           end
         end
 
-        # disable this step for reporting proposals
-        def complete
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP3
-
-          @form = form_proposal_model
-
-          @form.attachment = form_attachment_new
-
-          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
-        end
-
         def edit_draft
           @step = reporting_proposal? ? Proposals::ProposalsController::STEP1 : Proposals::ProposalsController::STEP3
           enforce_permission_to :edit, :proposal, proposal: @proposal
