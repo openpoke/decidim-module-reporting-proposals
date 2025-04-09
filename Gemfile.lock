@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-reporting_proposals (0.6.2)
+    decidim-reporting_proposals (0.7.0)
       decidim-admin (>= 0.29, < 0.30)
       decidim-core (>= 0.29, < 0.30)
       decidim-participatory_processes (>= 0.29, < 0.30)
@@ -471,9 +471,6 @@ GEM
       letter_opener (~> 1.9)
       railties (>= 6.1)
       rexml
-    listen (3.9.0)
-      rb-fsevent (~> 0.10, >= 0.10.3)
-      rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
     loofah (2.24.0)
       crass (~> 1.0.2)
@@ -646,9 +643,6 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rb-fsevent (0.11.2)
-    rb-inotify (0.11.1)
-      ffi (~> 1.0)
     redcarpet (3.6.1)
     redis (4.8.1)
     regexp_parser (2.10.0)
@@ -832,12 +826,8 @@ DEPENDENCIES
   decidim-dev (= 0.29.2)
   decidim-reporting_proposals!
   decidim-templates (= 0.29.2)
-  faker (~> 3.2)
   letter_opener_web
-  listen (~> 3.1)
   puma (>= 6.3.1)
-  rspec (~> 3.0)
-  rubocop-faker (~> 1.1)
   web-console
 
 RUBY VERSION

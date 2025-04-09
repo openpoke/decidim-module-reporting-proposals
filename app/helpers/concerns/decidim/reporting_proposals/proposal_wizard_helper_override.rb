@@ -9,8 +9,7 @@ module Decidim
       included do
         def proposal_wizard_steps
           steps = [Proposals::ProposalsController::STEP1, Proposals::ProposalsController::STEP2]
-          steps << Proposals::ProposalsController::STEP3 unless reporting_proposals_component?
-          steps << Proposals::ProposalsController::STEP4
+          # steps << Proposals::ProposalsController::STEP4
         end
 
         def distance(meters = nil)

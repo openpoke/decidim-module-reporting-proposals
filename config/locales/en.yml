@@ -80,7 +80,7 @@ en:
             amendments_wizard_help_text: Amendments Wizard help text
             announcement: Announcement
             attachments_allowed: Allow attachments
-            can_accumulate_supports_beyond_threshold: Can accumulate supports beyond
+            can_accumulate_votes_beyond_threshold: Can accumulate supports beyond
               threshold
             collaborative_drafts_enabled: Collaborative drafts enabled
             comments_enabled: Comments enabled
@@ -495,3 +495,5 @@ en:
           delete_image: Delete image
         form:
           image: Image/photo
+    statistics:
+      supports_count: Signatures
