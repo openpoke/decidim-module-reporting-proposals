@@ -16,7 +16,7 @@
       <% end %>
     <% end %>
     <div class="field">
-      <%= form.file_field :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form") %>
+      <%= form.upload :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form"), button_class: "button button__sm button__transparent-secondary" %>
 
       <div class="has_no_image">
         <%= form.check_box :has_no_image %>
