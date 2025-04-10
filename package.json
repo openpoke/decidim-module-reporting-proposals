@@ -34,6 +34,7 @@
     "@decidim/dev": "^0.29.2",
     "@decidim/eslint-config": "^0.29.2",
     "@decidim/stylelint-config": "^0.29.2",
+    "@tarekraafat/autocomplete.js": "^10.2.9",
     "postcss-scss": "^4.0.9",
     "sass-embedded": "~1.86.3"
   },
@@ -44,7 +45,6 @@
     "inline-attacher": "^0.0.8",
     "jsrender": "^1.0.15",
     "leaflet.featuregroup.subgroup": "^1.0.2",
-    "prettier": "^3.5.3",
     "tom-select": "2.4.3"
   }
 }
