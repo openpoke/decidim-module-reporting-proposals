@@ -44,6 +44,7 @@
     "inline-attacher": "^0.0.8",
     "jsrender": "^1.0.15",
     "leaflet.featuregroup.subgroup": "^1.0.2",
+    "prettier": "^3.5.3",
     "tom-select": "2.4.3"
   }
 }
