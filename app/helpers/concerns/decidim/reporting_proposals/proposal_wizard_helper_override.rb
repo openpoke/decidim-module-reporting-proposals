@@ -8,7 +8,7 @@ module Decidim
 
       included do
         def proposal_wizard_steps
-          steps = [Proposals::ProposalsController::STEP1, Proposals::ProposalsController::STEP2]
+          [Proposals::ProposalsController::STEP1, Proposals::ProposalsController::STEP2]
           # steps << Proposals::ProposalsController::STEP4
         end
 
