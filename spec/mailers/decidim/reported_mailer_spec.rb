@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   describe ReportedMailer do
-    let(:organization) { create(:organization, name: "Test Organization") }
+    let(:organization) { create(:organization, available_locales: [:en]) }
     let(:user) { create(:user, :admin, organization:) }
     let(:participatory_space) { create(:participatory_process, title: Decidim::Faker::Localized.sentence, organization:) }
     let(:component) { create(:component, participatory_space:) }

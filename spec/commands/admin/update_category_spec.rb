@@ -29,7 +29,7 @@ module Decidim::Admin
 
     let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user:, participatory_process: participatory_space) }
     let(:category) { create(:category, participatory_space:) }
-    let(:command) { described_class.new(category, form, admin) }
+    let(:command) { described_class.new(category, form) }
 
     it "adds the valuator roles" do
       command.call
