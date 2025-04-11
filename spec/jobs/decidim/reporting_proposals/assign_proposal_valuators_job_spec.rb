@@ -7,7 +7,7 @@ module Decidim::ReportingProposals
       Decidim::Proposals::PublishProposal.new(proposal, user)
     end
 
-    let(:organization) { create(:organization) }
+    let(:organization) { create(:organization, available_locales: [:en]) }
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:category) { create(:category, participatory_space: participatory_process) }
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
