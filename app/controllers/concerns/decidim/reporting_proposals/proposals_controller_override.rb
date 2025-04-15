@@ -29,7 +29,8 @@ module Decidim
             on(:ok) do |proposal|
               flash[:notice] = I18n.t("proposals.create.success", scope: "decidim")
 
-              redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/compare"
+              @proposal = proposal
+              redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
             end
 
             on(:invalid) do
@@ -37,42 +38,6 @@ module Decidim
               render :new
             end
           end
-        end
-
-        # change comparison class if geocoding comparison is enabled
-        def compare
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP2
-          klass = if geocoding_comparison?
-                    Decidim::ReportingProposals::NearbyProposals
-                  else
-                    Decidim::Proposals::SimilarProposals
-                  end
-          @similar_proposals ||= klass
-                                 .for(current_component, @proposal)
-                                 .all
-
-          if @similar_proposals.blank?
-            flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
-            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
-          end
-        end
-
-        # disable this step for reporting proposals
-        def complete
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP3
-
-          @form = form_proposal_model
-
-          @form.attachment = form_attachment_new
-
-          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
-        end
-
-        def edit_draft
-          @step = reporting_proposal? ? Proposals::ProposalsController::STEP1 : Proposals::ProposalsController::STEP3
-          enforce_permission_to :edit, :proposal, proposal: @proposal
         end
 
         def update_draft
@@ -125,7 +90,7 @@ module Decidim
         end
 
         def new_proposal_form
-          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
+          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalForm
         end
 
         def create_proposal_command
