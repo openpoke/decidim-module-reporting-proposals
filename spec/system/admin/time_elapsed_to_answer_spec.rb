@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Time elapsed to answer" do
+describe "Time elapsed to answer" do # rubocop:disable RSpec/DescribeClass
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }
@@ -42,7 +42,7 @@ describe "Time elapsed to answer" do
     let(:answered_at) { nil }
 
     it "proposal has time elapsed to answer" do
-      expect(page).not_to have_content("Resolution time:")
+      expect(page).to have_no_content("Resolution time:")
     end
   end
 end

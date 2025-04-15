@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User location button" do
+describe "User location button" do # rubocop:disable RSpec/DescribeClass
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
@@ -34,7 +34,7 @@ describe "User location button" do
       let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
 
       it "does not has the location button" do
-        expect(page).not_to have_button("Use my location")
+        expect(page).to have_no_button("Use my location")
       end
     end
   end
@@ -42,12 +42,12 @@ describe "User location button" do
   shared_examples "has no address" do
     context "when has_no_address is checked" do
       before do
-        find("#proposal_has_no_address").click
+        find_by_id("proposal_has_no_address").click
       end
 
       it "the button should be deactivated and the errors removed" do
         expect(page).to have_css(".user-device-location button[disabled]")
-        expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
+        expect(page).to have_no_css("label[for=proposal_address].is-invalid-label")
         expect(page).to have_css("input#proposal_address[disabled]")
       end
     end
@@ -56,7 +56,7 @@ describe "User location button" do
   describe "#reporting_proposals", :serves_geocoding_autocomplete do
     before do
       visit_component
-      click_link_or_button "New proposal"
+      click_on "New proposal"
     end
 
     it_behaves_like "uses device location"
@@ -66,7 +66,7 @@ describe "User location button" do
   context "when admin", :serves_geocoding_autocomplete do
     before do
       visit manage_component_path(component)
-      click_link_or_button "New proposal"
+      click_on "New proposal"
     end
 
     it_behaves_like "uses device location"
@@ -92,7 +92,7 @@ describe "User location button" do
     context "when admin", :serves_geocoding_autocomplete do
       before do
         visit manage_component_path(component)
-        click_link_or_button "New proposal"
+        click_on "New proposal"
       end
 
       it_behaves_like "uses device location"
@@ -109,7 +109,7 @@ describe "User location button" do
 
     before do
       visit_component
-      click_link_or_button "New meeting"
+      click_on "New meeting"
       select "In person", from: :meeting_type_of_meeting
     end
 
@@ -118,7 +118,7 @@ describe "User location button" do
     context "when admin", :serves_geocoding_autocomplete do
       before do
         visit manage_component_path(component)
-        click_link_or_button "New meeting"
+        click_on "New meeting"
         select "In person", from: :meeting_type_of_meeting
       end
 

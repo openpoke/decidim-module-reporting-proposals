@@ -6,7 +6,7 @@ require "decidim/meetings/test/factories"
 require "decidim/budgets/test/factories"
 require "decidim/elections/test/factories"
 
-describe "Admin find_resource_manifest" do
+describe "Admin find_resource_manifest" do # rubocop:disable RSpec/DescribeClass
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
@@ -27,7 +27,7 @@ describe "Admin find_resource_manifest" do
     it "admin can choose reporting proposals on creating" do
       visit manage_component_path(component)
       within ".item_show__header" do
-        click_link_or_button "New result"
+        click_on "New result"
       end
       within ".new_result" do
         fill_in_i18n(
@@ -47,7 +47,7 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       within "tr", text: "My result" do
-        click_link_or_button "Edit"
+        click_on "Edit"
       end
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
@@ -57,14 +57,14 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals" do
       visit manage_component_path(component)
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".edit_result" do
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_content(translated(reporting_proposal.title))
@@ -73,17 +73,17 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose normal proposals" do
       visit manage_component_path(component)
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".edit_result" do
         tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
-        expect(page).not_to have_content(translated(reporting_proposal.title))
+        expect(page).to have_no_content(translated(reporting_proposal.title))
       end
     end
   end
@@ -94,8 +94,8 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals when creating" do
       visit manage_component_path(component)
-      click_link_or_button "Manage projects"
-      click_link_or_button "New project"
+      click_on "Manage projects"
+      click_on "New project"
 
       within ".new_project" do
         fill_in_i18n(
@@ -116,7 +116,7 @@ describe "Admin find_resource_manifest" do
       expect(page).to have_admin_callout("successfully")
 
       within "tr", text: "My project" do
-        click_link_or_button "Edit"
+        click_on "Edit"
       end
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
@@ -126,15 +126,15 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals" do
       visit manage_component_path(component)
-      click_link_or_button "Manage projects"
-      click_link_or_button "Edit"
+      click_on "Manage projects"
+      click_on "Edit"
       within ".edit_project" do
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_content(translated(reporting_proposal.title))
@@ -143,18 +143,18 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose normal proposals" do
       visit manage_component_path(component)
-      click_link_or_button "Manage projects"
-      click_link_or_button "Edit"
+      click_on "Manage projects"
+      click_on "Edit"
       within ".edit_project" do
         tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_link_or_button "Edit"
+      click_on "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
-        expect(page).not_to have_content(translated(reporting_proposal.title))
+        expect(page).to have_no_content(translated(reporting_proposal.title))
       end
     end
   end
@@ -166,8 +166,8 @@ describe "Admin find_resource_manifest" do
     it "user can choose reporting_proposals" do
       visit main_component_path(component)
 
-      click_link_or_button translated(meeting.title)
-      click_link_or_button "Close meeting"
+      click_on translated(meeting.title)
+      click_on "Close meeting"
 
       expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
@@ -178,7 +178,7 @@ describe "Admin find_resource_manifest" do
 
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
 
-        click_link_or_button "Close meeting"
+        click_on "Close meeting"
       end
       expect(page).to have_content(translated(proposal.title))
       expect(page).to have_content(translated(reporting_proposal.title))
@@ -187,8 +187,8 @@ describe "Admin find_resource_manifest" do
     it "user can choose normal proposals" do
       visit main_component_path(component)
 
-      click_link_or_button translated(meeting.title)
-      click_link_or_button "Close meeting"
+      click_on translated(meeting.title)
+      click_on "Close meeting"
 
       expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
@@ -199,10 +199,10 @@ describe "Admin find_resource_manifest" do
 
         tom_select("#proposals_list", option_id: [proposal.id])
 
-        click_link_or_button "Close meeting"
+        click_on "Close meeting"
       end
       expect(page).to have_content(translated(proposal.title))
-      expect(page).not_to have_content(translated(reporting_proposal.title))
+      expect(page).to have_no_content(translated(reporting_proposal.title))
     end
 
     context "when admin" do
@@ -210,7 +210,7 @@ describe "Admin find_resource_manifest" do
 
       it "admin can choose reporting proposals" do
         visit manage_component_path(component)
-        page.click_link_or_button "Close"
+        page.click_on "Close"
 
         within ".edit_close_meeting" do
           expect(page).to have_content "Proposals"
@@ -222,13 +222,13 @@ describe "Admin find_resource_manifest" do
           )
           fill_in :close_meeting_attendees_count, with: 12
           tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
-          click_link_or_button "Close"
+          click_on "Close"
         end
 
         expect(page).to have_admin_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
-        page.click_link_or_button "Close"
+        page.click_on "Close"
         within ".plugin-dropdown_input" do
           expect(page).to have_content(translated(proposal.title))
           expect(page).to have_content(translated(reporting_proposal.title))
@@ -237,7 +237,7 @@ describe "Admin find_resource_manifest" do
 
       it "admin can choose normal proposals" do
         visit manage_component_path(component)
-        page.click_link_or_button "Close"
+        page.click_on "Close"
 
         within ".edit_close_meeting" do
           expect(page).to have_content "Proposals"
@@ -249,16 +249,16 @@ describe "Admin find_resource_manifest" do
           )
           fill_in :close_meeting_attendees_count, with: 12
           tom_select("#proposals_list", option_id: [proposal.id])
-          click_link_or_button "Close"
+          click_on "Close"
         end
 
         expect(page).to have_admin_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
-        page.click_link_or_button "Close"
+        page.click_on "Close"
         within ".plugin-dropdown_input" do
           expect(page).to have_content(translated(proposal.title))
-          expect(page).not_to have_content(translated(reporting_proposal.title))
+          expect(page).to have_no_content(translated(reporting_proposal.title))
         end
       end
     end
@@ -272,9 +272,9 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals" do
       visit manage_component_path(component)
-      click_link_or_button "Manage questions"
-      click_link_or_button "Manage answers"
-      click_link_or_button "Edit"
+      click_on "Manage questions"
+      click_on "Manage answers"
+      click_on "Edit"
 
       within ".edit_answer" do
         expect(page).to have_content "Proposals"
@@ -285,12 +285,12 @@ describe "Admin find_resource_manifest" do
           en: "A Question"
         )
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
-        click_link_or_button "Update answer"
+        click_on "Update answer"
       end
 
       expect(page).to have_admin_callout("Answer successfully updated")
 
-      page.click_link_or_button "Edit"
+      page.click_on "Edit"
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_content(translated(reporting_proposal.title))
@@ -299,9 +299,9 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals on create" do
       visit manage_component_path(component)
-      click_link_or_button "Manage questions"
-      click_link_or_button "Manage answers"
-      click_link_or_button "New answer"
+      click_on "Manage questions"
+      click_on "Manage answers"
+      click_on "New answer"
 
       within ".new_answer" do
         expect(page).to have_content "Proposals"
@@ -312,13 +312,13 @@ describe "Admin find_resource_manifest" do
           en: "A Question"
         )
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
-        click_link_or_button "Create answer"
+        click_on "Create answer"
       end
 
       expect(page).to have_admin_callout("Answer successfully created")
 
       within "tr", text: "A Question" do
-        page.click_link_or_button "Edit"
+        page.click_on "Edit"
       end
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Assign valuators after update category" do
+describe "Assign valuators after update category" do # rubocop:disable RSpec/DescribeClass
   let!(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
@@ -23,15 +23,15 @@ describe "Assign valuators after update category" do
 
   context "when an admin updates the category of the proposal" do
     before do
-      find("#proposal_ids_s_").set(true)
-      click_link_or_button "Actions"
-      click_link_or_button "Change category"
+      find_by_id("proposal_ids_s_").set(true)
+      click_on "Actions"
+      click_on "Change category"
       select category_new.name["en"], from: :category_id
-      perform_enqueued_jobs { click_link_or_button "Update" }
+      perform_enqueued_jobs { click_on "Update" }
     end
 
     it "has a valuator after updating" do
-      click_link_or_button proposal.title["en"]
+      click_on proposal.title["en"]
 
       expect(page).to have_content(valuator_role.user.name, count: 1)
     end

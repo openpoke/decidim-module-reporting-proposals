@@ -13,6 +13,7 @@ module Decidim
           steps << Proposals::ProposalsController::STEP4
         end
 
+        # rubocop:disable Rails/HelperInstanceVariable
         def distance(meters = nil)
           meters = @proposal.component.settings.geocoding_comparison_radius.to_f if meters.nil?
 
@@ -20,6 +21,7 @@ module Decidim
 
           "#{(meters / 1000).round}Km"
         end
+        # rubocop:enable Rails/HelperInstanceVariable
 
         private
 

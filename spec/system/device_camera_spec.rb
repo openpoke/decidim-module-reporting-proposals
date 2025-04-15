@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User camera button" do
+describe "User camera button" do # rubocop:disable RSpec/DescribeClass
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
@@ -30,7 +30,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -44,7 +44,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -52,7 +52,7 @@ describe "User camera button" do
   describe "#reporting_proposals" do
     before do
       visit_component
-      click_link_or_button "New proposal"
+      click_on "New proposal"
     end
 
     it_behaves_like "uses device camera"

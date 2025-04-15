@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Valuator manages proposals" do
+describe "Valuator manages proposals" do # rubocop:disable RSpec/DescribeClass
   let(:manifest_name) { "proposals" }
   let!(:assigned_proposal) { create(:proposal, component: current_component) }
   let!(:unassigned_proposal) { create(:proposal, component: current_component) }
@@ -31,7 +31,7 @@ describe "Valuator manages proposals" do
   context "when listing the proposals" do
     it "can only see the assigned proposals" do
       expect(page).to have_content(translated(assigned_proposal.title))
-      expect(page).not_to have_content(translated(unassigned_proposal.title))
+      expect(page).to have_no_content(translated(unassigned_proposal.title))
     end
   end
 
@@ -41,14 +41,14 @@ describe "Valuator manages proposals" do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_link_or_button "Actions"
-      click_link_or_button "Unassign from valuator"
+      click_on "Actions"
+      click_on "Unassign from valuator"
     end
 
     it "can unassign themselves" do
       within "#js-form-unassign-proposals-from-valuator" do
         select user.name, from: :valuator_role_id
-        click_link_or_button("Unassign")
+        click_on("Unassign")
       end
 
       expect(page).to have_content("Valuator unassigned from proposals successfully")
@@ -57,7 +57,7 @@ describe "Valuator manages proposals" do
     it "cannot unassign others" do
       within "#js-form-unassign-proposals-from-valuator" do
         select another_user.name, from: :valuator_role_id
-        click_link_or_button("Unassign")
+        click_on("Unassign")
       end
 
       expect(page).to have_content("You are not authorized to perform this action.")
@@ -67,7 +67,7 @@ describe "Valuator manages proposals" do
   context "when in the proposal page" do
     before do
       within "tr", text: translated(assigned_proposal.title) do
-        click_link_or_button "Answer proposal"
+        click_on "Answer proposal"
       end
     end
 
@@ -77,7 +77,7 @@ describe "Valuator manages proposals" do
         expect(page).to have_content(another_user.name)
 
         within "li", text: another_user.name do
-          expect(page).not_to have_selector("a.red-icon")
+          expect(page).to have_no_selector("a.red-icon")
         end
 
         within "li", text: user.name do
@@ -92,13 +92,13 @@ describe "Valuator manages proposals" do
     end
 
     it "can leave proposal notes" do
-      click_link_or_button("Private notes")
+      click_on("Private notes")
       within ".add-comment" do
         fill_in "Note", with: " This is my note"
-        click_link_or_button "Submit"
+        click_on "Submit"
       end
 
-      click_link_or_button("Private notes")
+      click_on("Private notes")
       within ".comment" do
         expect(page).to have_content("This is my note")
       end
@@ -112,7 +112,7 @@ describe "Valuator manages proposals" do
           "#proposal_answer-answer-tabs",
           en: "This is my answer"
         )
-        click_link_or_button "Answer"
+        click_on "Answer"
       end
       expect(page).to have_content("successfully")
     end

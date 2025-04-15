@@ -3,7 +3,7 @@
 require "spec_helper"
 require "system/shared/proposals_steps_examples"
 
-describe "Reporting proposals overrides" do
+describe "Reporting proposals overrides" do # rubocop:disable RSpec/DescribeClass
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:scope) { create(:scope, organization:) }
@@ -83,7 +83,7 @@ describe "Reporting proposals overrides" do
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
-      click_link_or_button "New proposal"
+      click_on "New proposal"
     end
 
     it_behaves_like "3 steps"
@@ -100,8 +100,8 @@ describe "Reporting proposals overrides" do
 
     before do
       visit_component
-      click_link_or_button translated(proposal.title), match: :first
-      click_link_or_button "Edit proposal"
+      click_on translated(proposal.title), match: :first
+      click_on "Edit proposal"
     end
 
     it_behaves_like "customized form"
@@ -129,7 +129,7 @@ describe "Reporting proposals overrides" do
     context "when creating" do
       before do
         visit_component
-        click_link_or_button "New proposal"
+        click_on "New proposal"
       end
 
       it_behaves_like "4 steps"
@@ -143,8 +143,8 @@ describe "Reporting proposals overrides" do
 
       before do
         visit_component
-        click_link_or_button translated(proposal.title)
-        click_link_or_button "Edit proposal"
+        click_on translated(proposal.title)
+        click_on "Edit proposal"
       end
 
       it_behaves_like "normal form"

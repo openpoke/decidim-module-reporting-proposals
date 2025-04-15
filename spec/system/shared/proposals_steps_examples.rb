@@ -8,7 +8,7 @@ shared_examples "map can be hidden" do
 
     check "proposal_has_no_address"
 
-    expect(page).not_to have_content("You can move the point on the map")
+    expect(page).to have_no_content("You can move the point on the map")
   end
 end
 
@@ -16,7 +16,7 @@ shared_examples "map can be shown" do |fill|
   it "checkbox shows the map" do
     fill_proposal(extra_fields: false) if fill
 
-    expect(page).not_to have_content("You can move the point on the map")
+    expect(page).to have_no_content("You can move the point on the map")
 
     fill_in_geocoding :proposal_address, with: address
 
@@ -29,13 +29,13 @@ shared_examples "reuses draft if exists" do
 
   it "redirects to complete" do
     visit_component
-    click_link_or_button "New proposal"
+    click_on "New proposal"
 
     expect(page).to have_content("Edit proposal draft")
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
-      expect(page).not_to have_content("Complete")
+      expect(page).to have_no_content("Complete")
       expect(page).to have_content("Publish your proposal")
     end
   end
@@ -46,7 +46,7 @@ shared_examples "3 steps" do
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
-      expect(page).not_to have_content("Complete")
+      expect(page).to have_no_content("Complete")
       expect(page).to have_content("Publish your proposal")
     end
   end
@@ -58,7 +58,7 @@ shared_examples "customized form" do
 
     it "does not show the attachments" do
       uncheck "proposal_has_no_image"
-      expect(page).not_to have_content("Add an attachment")
+      expect(page).to have_no_content("Add an attachment")
       expect(page).to have_content("Image/photo")
     end
 
@@ -66,9 +66,9 @@ shared_examples "customized form" do
       let(:attachments) { false }
 
       it "does not show the attachments or photos" do
-        expect(page).not_to have_checked_field("proposal_has_no_image")
-        expect(page).not_to have_content("Add an attachment")
-        expect(page).not_to have_content("Image/photo")
+        expect(page).to have_no_checked_field("proposal_has_no_image")
+        expect(page).to have_no_content("Add an attachment")
+        expect(page).to have_no_content("Image/photo")
       end
     end
   end
@@ -100,7 +100,7 @@ shared_examples "creates reporting proposal" do
   it "publishes the reporting proposal" do
     fill_proposal
 
-    click_link_or_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_content("successfully published")
 
@@ -114,7 +114,7 @@ shared_examples "creates reporting proposal" do
     expect(body).to have_content("HashtagAuto1")
     expect(body).to have_content("HashtagAuto2")
     expect(body).to have_content("HashtagSuggested1")
-    expect(body).not_to have_content("HashtagSuggested2")
+    expect(body).to have_no_content("HashtagSuggested2")
     expect(proposal.identities.first).to eq(user_group)
     expect(proposal.scope).to eq(scope)
   end
@@ -122,16 +122,16 @@ shared_examples "creates reporting proposal" do
   it "modifies the proposal" do
     fill_proposal
 
-    expect(page).not_to have_content("Images")
-    expect(page).not_to have_content("Documents")
+    expect(page).to have_no_content("Images")
+    expect(page).to have_no_content("Documents")
 
-    click_link_or_button "Modify the proposal"
-    find("#proposal_has_no_image").click
+    click_on "Modify the proposal"
+    find_by_id("proposal_has_no_image").click
 
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
-      expect(page).not_to have_content("Complete")
+      expect(page).to have_no_content("Complete")
       expect(page).to have_content("Publish your proposal")
     end
 
@@ -142,7 +142,7 @@ shared_examples "creates reporting proposal" do
     expect(page).to have_content("Images")
     expect(page).to have_content("Documents")
 
-    click_link_or_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_content(proposal_title)
     expect(translated(proposal.body)).to have_content(proposal_body)
@@ -152,7 +152,7 @@ shared_examples "creates reporting proposal" do
   it "remember has_no_address and has_no_image" do
     fill_proposal(skip_address: true, attach: false)
 
-    click_link_or_button "Modify the proposal"
+    click_on "Modify the proposal"
 
     expect(page).to have_css(".user-device-location button[disabled]")
     expect(page).to have_css("button.user-device-camera[disabled]")
@@ -161,7 +161,7 @@ shared_examples "creates reporting proposal" do
   it "stores no address if checked" do
     fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
 
-    click_link_or_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_content("successfully published")
 
@@ -183,7 +183,7 @@ shared_examples "maintains errors" do
     check "proposal_has_no_address"
     fill_in :proposal_title, with: ""
 
-    click_link_or_button "Send"
+    click_on "Send"
 
     expect(page).to have_checked_field("proposal_has_no_address")
     within "label[for=proposal_title]" do
@@ -194,18 +194,18 @@ shared_examples "maintains errors" do
   it "has errors in address field" do
     uncheck "proposal_has_no_address"
     fill_in :proposal_address, with: ""
-    click_link_or_button "Send"
+    click_on "Send"
 
     expect(page).to have_unchecked_field("proposal_has_no_address")
     expect(page).to have_css("label[for=proposal_address].is-invalid-label")
   end
 
   it "has errors in photo address field" do
-    expect(page).not_to have_css("label[for=proposal_add_photos].is-invalid-label")
+    expect(page).to have_no_css("label[for=proposal_add_photos].is-invalid-label")
 
     uncheck "proposal_has_no_image"
 
-    click_link_or_button "Send"
+    click_on "Send"
     expect(page).to have_css("label[for=proposal_add_photos].is-invalid-label")
   end
 end
@@ -223,8 +223,8 @@ end
 
 shared_examples "normal form" do
   it "does not have modified fields" do
-    expect(page).not_to have_field("proposal_has_no_address")
-    expect(page).not_to have_field("proposal_has_no_image")
+    expect(page).to have_no_field("proposal_has_no_address")
+    expect(page).to have_no_field("proposal_has_no_image")
   end
 end
 
@@ -245,7 +245,7 @@ shared_examples "creates normal proposal" do
 
     complete_proposal
 
-    click_link_or_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_content(proposal_title)
     expect(translated(proposal.body)).to eq(proposal_body)
@@ -258,16 +258,16 @@ shared_examples "remove errors" do |continue|
   it "remove errors when has_no_address is checked" do
     fill_in :proposal_address, with: ""
     if continue
-      click_link_or_button "Continue"
+      click_on "Continue"
     else
-      click_link_or_button "Send"
+      click_on "Send"
     end
 
     expect(page).to have_css("label[for=proposal_address].is-invalid-label")
 
     check "proposal_has_no_address"
 
-    expect(page).not_to have_css("label[for=proposal_address].is-invalid-label")
+    expect(page).to have_no_css("label[for=proposal_address].is-invalid-label")
   end
 end
 
@@ -279,14 +279,14 @@ shared_examples "prevents post if etiquette errors" do
       fill_proposal
 
       within ".new_proposal" do
-        expect(page).not_to have_content("Publish")
+        expect(page).to have_no_content("Publish")
         expect(page).to have_content("must start with a capital letter")
 
         fill_in :proposal_title, with: "I start with caps"
         find("*[type=submit]").click
       end
 
-      click_link_or_button "Publish"
+      click_on "Publish"
       expect(page).to have_content("successfully published")
     end
   end
@@ -298,14 +298,14 @@ shared_examples "prevents post if etiquette errors" do
       fill_proposal
 
       within ".new_proposal" do
-        expect(page).not_to have_content("Publish")
+        expect(page).to have_no_content("Publish")
         expect(page).to have_content("must start with a capital letter")
 
         fill_in :proposal_body, with: "I start with caps"
         find("*[type=submit]").click
       end
 
-      click_link_or_button "Publish"
+      click_on "Publish"
       expect(page).to have_content("successfully published")
     end
   end
@@ -317,14 +317,14 @@ shared_examples "prevents post if etiquette errors" do
       fill_proposal
 
       within ".new_proposal" do
-        expect(page).not_to have_content("Publish")
+        expect(page).to have_no_content("Publish")
         expect(page).to have_content("There is an error in this field")
 
         fill_in :proposal_body, with: "I am long enough to meet the requirements"
         find("*[type=submit]").click
       end
 
-      click_link_or_button "Publish"
+      click_on "Publish"
       expect(page).to have_content("successfully published")
     end
   end

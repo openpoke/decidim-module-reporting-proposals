@@ -16,25 +16,19 @@ gem "decidim", DECIDIM_VERSION
 gem "decidim-reporting_proposals", path: "."
 
 gem "bootsnap", "~> 1.7"
-gem "faker", "~> 3.2"
 gem "puma", ">= 6.3.1"
-gem "rspec", "~> 3.0"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
   gem "decidim-dev", DECIDIM_VERSION
-  gem "decidim-elections", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
 end
 
 group :development do
-  gem "letter_opener_web"
+  gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
-  gem "rubocop-faker", "~> 1.1"
-  gem "spring", "~> 2.0"
-  gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console"
+  gem "web-console", "~> 4.2"
 end
 
 group :test do

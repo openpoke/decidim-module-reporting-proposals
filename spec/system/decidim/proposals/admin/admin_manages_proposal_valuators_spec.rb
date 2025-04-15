@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin manages proposals valuators" do
+describe "Admin manages proposals valuators" do # rubocop:disable RSpec/DescribeClass
   let(:manifest_name) { "proposals" }
   let!(:proposal) { create(:proposal, component: current_component) }
   let!(:reportables) { create_list(:proposal, 3, component: current_component) }
@@ -28,8 +28,8 @@ describe "Admin manages proposals valuators" do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_link_or_button "Actions"
-      click_link_or_button "Assign to valuator"
+      click_on "Actions"
+      click_on "Assign to valuator"
     end
 
     it "shows the component select" do
@@ -45,7 +45,7 @@ describe "Admin manages proposals valuators" do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-valuator" do
             select valuator.name, from: :valuator_role_id
-            click_link_or_button("Assign")
+            click_on("Assign")
           end
         end
       end
@@ -103,7 +103,7 @@ describe "Admin manages proposals valuators" do
       end
 
       expect(page).to have_content(translated(assigned_proposal.title))
-      expect(page).not_to have_content(translated(unassigned_proposal.title))
+      expect(page).to have_no_content(translated(unassigned_proposal.title))
     end
   end
 
@@ -119,8 +119,8 @@ describe "Admin manages proposals valuators" do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_link_or_button "Actions"
-      click_link_or_button "Unassign from valuator"
+      click_on "Actions"
+      click_on "Unassign from valuator"
     end
 
     it "shows the component select" do
@@ -135,7 +135,7 @@ describe "Admin manages proposals valuators" do
       before do
         within "#js-form-unassign-proposals-from-valuator" do
           select valuator.name, from: :valuator_role_id
-          click_link_or_button("Unassign")
+          click_on("Unassign")
         end
       end
 
@@ -172,7 +172,7 @@ describe "Admin manages proposals valuators" do
       expect(page).to have_content("Valuator unassigned from proposals successfully")
 
       within "#valuators" do
-        expect(page).not_to have_css("a.red-icon")
+        expect(page).to have_no_css("a.red-icon")
       end
     end
   end
@@ -188,11 +188,11 @@ describe "Admin manages proposals valuators" do
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
       within "#js-form-assign-proposal-to-valuator" do
-        find("#valuator_role_id").click
+        find_by_id("valuator_role_id").click
         find("option", text: valuator.name).click
       end
 
-      click_link_or_button "Assign"
+      click_on "Assign"
 
       expect(current_url).to end_with(current_path)
       expect(page).to have_css(".red-icon")

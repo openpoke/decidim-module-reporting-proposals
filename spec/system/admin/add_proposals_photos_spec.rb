@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Add proposals photos" do
+describe "Add proposals photos" do # rubocop:disable RSpec/DescribeClass
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let!(:reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
@@ -24,17 +24,17 @@ describe "Add proposals photos" do
 
   shared_examples "can add photos" do
     it "has a photo section" do
-      click_link_or_button "Photos"
+      click_on "Photos"
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Save images"
-      click_link_or_button "Photos"
+      click_on "Save images"
+      click_on "Photos"
 
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
       attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Save images"
+      click_on "Save images"
 
-      click_link_or_button "Photos"
+      click_on "Photos"
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 2)
 
       expect(page).to have_css(".delete-proposal__button", count: 2)

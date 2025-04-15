@@ -136,14 +136,14 @@ module Decidim
 
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
-          Decidim::EventsManager.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
+          ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
         end
       end
 
       initializer "decidim_reporting_proposals.on_hiding_resource" do
-        Decidim::EventsManager.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
+        ActiveSupport::Notifications.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
           Decidim::ReportingProposals::Admin::HiddenResourceMailer.notify_mail(
             data[:resource], data[:affected_users], data[:extra][:report_reasons]
           ).deliver_later
