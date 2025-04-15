@@ -4,7 +4,6 @@ require "spec_helper"
 require "decidim/accountability/test/factories"
 require "decidim/meetings/test/factories"
 require "decidim/budgets/test/factories"
-require "decidim/elections/test/factories"
 
 describe "Admin find_resource_manifest" do # rubocop:disable RSpec/DescribeClass
   let(:organization) { create(:organization) }
