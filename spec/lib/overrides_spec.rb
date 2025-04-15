@@ -83,12 +83,6 @@ checksums = [
     }
   },
   {
-    package: "decidim-elections",
-    files: {
-      "/app/forms/decidim/elections/admin/answer_form.rb" => "98f398a4ff58e2464e199efc21b14ddd"
-    }
-  },
-  {
     package: "decidim-meetings",
     files: {
       "/app/forms/decidim/meetings/admin/close_meeting_form.rb" => "39d63699796109c2163e89f88218dc08",
