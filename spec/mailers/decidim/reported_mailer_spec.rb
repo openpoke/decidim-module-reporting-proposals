@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   describe ReportedMailer do
-    let(:organization) { create(:organization, name: "Test Organization") }
+    let(:organization) { create(:organization, name: { en: "Test Organization" }) }
     let(:user) { create(:user, :admin, organization:) }
     let(:participatory_space) { create(:participatory_process, title: Decidim::Faker::Localized.sentence, organization:) }
     let(:component) { create(:component, participatory_space:) }
@@ -122,7 +122,7 @@ module Decidim
           let(:reportable) { create(:proposal, :official) }
 
           it "includes the name of the organization" do
-            expect(email_body(mail)).to match(author.name)
+            expect(email_body(mail)).to match(decidim_escape_translated(author.name))
           end
         end
 
