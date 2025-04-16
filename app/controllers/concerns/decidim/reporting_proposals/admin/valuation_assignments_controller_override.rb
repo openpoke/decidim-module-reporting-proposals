@@ -28,7 +28,7 @@ module Decidim
           end
 
           def destroy
-            @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(destroy_params)
+            @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(params)
 
             @form.valuator_roles.each do |valuator_role|
               enforce_permission_to :unassign_from_valuator, :proposals, valuator: valuator_role.user
@@ -37,7 +37,7 @@ module Decidim
             Decidim::Proposals::Admin::UnassignProposalsFromValuator.call(@form) do
               on(:ok) do |_proposal|
                 flash.keep[:notice] = I18n.t("valuation_assignments.delete.success", scope: "decidim.proposals.admin")
-                if current_user == @form.valuator_user
+                if @form.valuator_roles.map(&:user).include?(current_user)
                   redirect_to EngineRouter.admin_proxy(current_component).root_path
                 else
                   redirect_back fallback_location: EngineRouter.admin_proxy(current_component).root_path
