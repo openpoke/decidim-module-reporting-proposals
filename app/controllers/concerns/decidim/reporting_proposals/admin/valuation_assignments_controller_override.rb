@@ -8,8 +8,12 @@ module Decidim
 
         included do
           def create
-            enforce_permission_to :assign_to_valuator, :proposals
             @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(params)
+
+            @form.proposals.each do |proposal|
+              enforce_permission_to :assign_to_valuator, :proposals, proposal:
+            end
+
             Decidim::Proposals::Admin::AssignProposalsToValuator.call(@form) do
               on(:ok) do |_proposal|
                 flash[:notice] = I18n.t("valuation_assignments.create.success", scope: "decidim.proposals.admin")
@@ -26,7 +30,9 @@ module Decidim
           def destroy
             @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(destroy_params)
 
-            enforce_permission_to :unassign_from_valuator, :proposals, valuator: @form.valuator_user
+            @form.valuator_roles.each do |valuator_role|
+              enforce_permission_to :unassign_from_valuator, :proposals, valuator: valuator_role.user
+            end
 
             Decidim::Proposals::Admin::UnassignProposalsFromValuator.call(@form) do
               on(:ok) do |_proposal|

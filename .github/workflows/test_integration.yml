@@ -129,7 +129,7 @@ jobs:
       - run: ls
       - run: tar -zxf /tmp/testapp-env.tar.gz
       - run: ls
-      - run: bundle exec rails db:create db:schema:load
+      - run: DISABLE_SPRING=1 bundle exec rails db:create db:schema:load
         working-directory: ./spec/decidim_dummy_app
 
       - name: Run RSpec
