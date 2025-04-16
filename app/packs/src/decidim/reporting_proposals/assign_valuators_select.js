@@ -3,7 +3,9 @@ import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 document.addEventListener("DOMContentLoaded", () => {
   const select = document.querySelector("#assign_valuator_role_ids");
 
-  if (!select) {return;}
+  if (!select) {
+    return;
+  }
 
   const { noResults } = select.dataset;
 
