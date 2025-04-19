@@ -1,6 +1,6 @@
-<!-- replace "erb[loud]:contains('proposal.valuation_assignments.size')" -->
+<!-- replace "erb[loud]:contains('proposal.valuation_assignments_count')" -->
 
-<% count = proposal.valuation_assignments.size %>
+<% count = proposal.valuation_assignments_count %>
 <% if count.zero? %>
   0
 <% else %>
