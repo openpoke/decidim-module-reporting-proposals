@@ -1,7 +1,7 @@
 <%= append_javascript_pack_tag "decidim_reporting_proposals", defer: true %>
 <%= append_stylesheet_pack_tag "decidim_proposals", media: "all" %>
 
-<% if allowed_to? :assign_to_valuator, :proposals %>
+<% if allowed_to?(:assign_to_valuator, :proposals, proposal:) %>
   <div id="js-assign-proposal-to-valuator-actions" class="js-bulk-action-form form-single-proposal" style="max-width:400px">
     <%= form_tag(valuation_assignment_path, method: :post, id: "js-form-assign-proposal-to-valuator", class: "form form-defaults") do %>
       <div class="form__wrapper">

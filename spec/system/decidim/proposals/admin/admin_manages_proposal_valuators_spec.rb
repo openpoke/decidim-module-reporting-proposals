@@ -44,7 +44,7 @@ describe "Admin manages proposals valuators" do # rubocop:disable RSpec/Describe
       before do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-valuator" do
-            select valuator.name, from: :valuator_role_id
+            tom_select("#assign_valuator_role_ids", option_id: valuator_role.id)
             click_on("Assign")
           end
         end
@@ -134,7 +134,7 @@ describe "Admin manages proposals valuators" do # rubocop:disable RSpec/Describe
     context "when submitting the form" do
       before do
         within "#js-form-unassign-proposals-from-valuator" do
-          select valuator.name, from: :valuator_role_id
+          tom_select("#unassign_valuator_role_ids", option_id: valuator_role.id)
           click_on("Unassign")
         end
       end
@@ -188,8 +188,7 @@ describe "Admin manages proposals valuators" do # rubocop:disable RSpec/Describe
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
       within "#js-form-assign-proposal-to-valuator" do
-        find_by_id("valuator_role_id").click
-        find("option", text: valuator.name).click
+        select valuator.name, from: :assign_valuator_role_ids
       end
 
       click_on "Assign"

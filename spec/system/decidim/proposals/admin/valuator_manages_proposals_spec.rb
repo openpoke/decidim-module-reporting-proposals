@@ -47,8 +47,8 @@ describe "Valuator manages proposals" do # rubocop:disable RSpec/DescribeClass
 
     it "can unassign themselves" do
       within "#js-form-unassign-proposals-from-valuator" do
-        select user.name, from: :valuator_role_id
-        click_on("Unassign")
+        tom_select("#unassign_valuator_role_ids", option_id: valuator_role.id)
+        click_on(id: "js-submit-unassign-proposals-from-valuator")
       end
 
       expect(page).to have_content("Valuator unassigned from proposals successfully")
@@ -56,8 +56,8 @@ describe "Valuator manages proposals" do # rubocop:disable RSpec/DescribeClass
 
     it "cannot unassign others" do
       within "#js-form-unassign-proposals-from-valuator" do
-        select another_user.name, from: :valuator_role_id
-        click_on("Unassign")
+        tom_select("#unassign_valuator_role_ids", option_id: another_valuator_role.id)
+        click_on(id: "js-submit-unassign-proposals-from-valuator")
       end
 
       expect(page).to have_content("You are not authorized to perform this action.")

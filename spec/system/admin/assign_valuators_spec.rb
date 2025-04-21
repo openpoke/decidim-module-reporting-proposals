@@ -34,8 +34,7 @@ describe "Assign valuators" do # rubocop:disable RSpec/DescribeClass
       end
 
       within "#js-form-assign-proposal-to-valuator" do
-        find_by_id("valuator_role_id").click
-        find("option", text: valuator.name).click
+        select valuator.name, from: :assign_valuator_role_ids
       end
 
       click_on "Assign"

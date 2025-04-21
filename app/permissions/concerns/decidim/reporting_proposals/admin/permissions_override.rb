@@ -17,12 +17,14 @@ module Decidim
               if valuator_assigned_to_proposal?
                 can_create_proposal_note?
                 can_create_proposal_answer?
+                can_assign_valuator_to_proposal? if can_add_valuators?
                 allow! if action_is_show_on_proposal?
               elsif action_is_show_on_proposal?
                 disallow!
               end
-              can_export_proposals?
+
               valuator_can_unassign_valuator_from_proposals?
+              can_export_proposals?
 
               return permission_action
             end
@@ -59,7 +61,7 @@ module Decidim
             allow! if permission_action.subject == :proposals && permission_action.action == :split
 
             # Every user allowed by the space can assign proposals to a valuator
-            allow! if permission_action.subject == :proposals && permission_action.action == :assign_to_valuator
+            can_assign_valuator_to_proposal?
 
             # Every user allowed by the space can unassign a valuator from proposals
             can_unassign_valuator_from_proposals?
@@ -92,8 +94,6 @@ module Decidim
 
           def valuator_can_unassign_valuator_from_proposals?
             can_unassign_valuator_from_proposals? if user == context.fetch(:valuator, nil)
-
-            can_add_valuators?
           end
 
           def can_add_valuators?

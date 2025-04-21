@@ -10,7 +10,6 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
   let!(:admin) { create(:user, :confirmed, :admin, organization:) }
   let!(:valuator) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
   let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user: valuator, participatory_process:) }
-  let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
 
   before do
     switch_to_host(organization.host)
@@ -22,6 +21,12 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
   end
 
   context "when an admin manages the component" do
+    let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
+
+    around do |example|
+      perform_enqueued_jobs { example.run }
+    end
+
     it "has a valuator after creating" do
       visit manage_component_path(component)
       click_on("New proposal")
@@ -30,8 +35,7 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
       fill_in_i18n_editor :proposal_body, "#proposal-body-tabs", en: "Test description for proposal"
 
       select category.name["en"], from: :proposal_category_id
-
-      perform_enqueued_jobs { click_on "Create" }
+      click_on "Create"
 
       within(".valuators-count") do
         expect(page).to have_content(valuator.name)
@@ -40,6 +44,12 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
   end
 
   context "when a proposal was published in public side" do
+    let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
+
+    around do |example|
+      perform_enqueued_jobs { example.run }
+    end
+
     it "has a valuator after creating" do
       visit public_component_path
 
@@ -50,8 +60,7 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
       fill_in("proposal_title", with: "Test title for proposal")
       fill_in("proposal_body", with: "Test description for proposal")
       click_on "Continue"
-
-      perform_enqueued_jobs { click_on "Publish" }
+      click_on "Publish"
 
       visit manage_component_path(component)
       click_on component.name["en"]

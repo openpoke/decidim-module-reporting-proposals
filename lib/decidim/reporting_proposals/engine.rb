@@ -98,6 +98,7 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalAnswersController.include(Decidim::ReportingProposals::Admin::ProposalAnswersControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
+          Decidim::Proposals::Admin::ProposalBulkActionsHelper.include(Decidim::ReportingProposals::Admin::ProposalBulkActionsHelperOverride)
 
           # port of https://github.com/openpoke/decidim/pull/24
           Decidim::Proposals::Admin::ValuationAssignmentsController.include(Decidim::ReportingProposals::Admin::ValuationAssignmentsControllerOverride)
