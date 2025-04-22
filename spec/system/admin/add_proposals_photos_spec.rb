@@ -25,13 +25,13 @@ describe "Add proposals photos" do # rubocop:disable RSpec/DescribeClass
   shared_examples "can add photos" do
     it "has a photo section" do
       click_on "Photos"
-      attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
       click_on "Save images"
       click_on "Photos"
 
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
-      attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
       click_on "Save images"
 
       click_on "Photos"
