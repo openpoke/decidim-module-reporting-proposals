@@ -38,6 +38,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Install additional tools
+        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
