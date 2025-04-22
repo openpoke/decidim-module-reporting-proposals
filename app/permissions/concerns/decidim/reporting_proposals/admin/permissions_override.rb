@@ -17,7 +17,7 @@ module Decidim
               if valuator_assigned_to_proposal?
                 can_create_proposal_note?
                 can_create_proposal_answer?
-                can_assign_valuator_to_proposal? if can_add_valuators?
+                can_assign_valuator_to_proposal?
                 allow! if action_is_show_on_proposal?
               elsif action_is_show_on_proposal?
                 disallow!

@@ -4,6 +4,6 @@
 <% if assignments.empty? %>
   0
 <% else %>
-  <%= assignments.first.valuator_role.user.name %>
+  <%= assignments.first&.valuator_role&.user&.name %>
   <%= "(+#{assignments.size - 1})" if assignments.size > 1 %>
 <% end %>
