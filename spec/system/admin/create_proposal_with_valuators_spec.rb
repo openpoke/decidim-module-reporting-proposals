@@ -23,10 +23,6 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
   context "when an admin manages the component" do
     let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
 
-    around do |example|
-      perform_enqueued_jobs { example.run }
-    end
-
     it "has a valuator after creating" do
       visit manage_component_path(component)
       click_on("New proposal")
@@ -35,7 +31,8 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
       fill_in_i18n_editor :proposal_body, "#proposal-body-tabs", en: "Test description for proposal"
 
       select category.name["en"], from: :proposal_category_id
-      click_on "Create"
+
+      perform_enqueued_jobs { click_on "Create" }
 
       within(".valuators-count") do
         expect(page).to have_content(valuator.name)
@@ -45,10 +42,6 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
 
   context "when a proposal was published in public side" do
     let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
-
-    around do |example|
-      perform_enqueued_jobs { example.run }
-    end
 
     it "has a valuator after creating" do
       visit public_component_path
@@ -60,7 +53,8 @@ describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeCla
       fill_in("proposal_title", with: "Test title for proposal")
       fill_in("proposal_body", with: "Test description for proposal")
       click_on "Continue"
-      click_on "Publish"
+
+      perform_enqueued_jobs { click_on "Publish" }
 
       visit manage_component_path(component)
       click_on component.name["en"]
