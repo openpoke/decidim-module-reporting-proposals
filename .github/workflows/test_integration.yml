@@ -22,7 +22,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -39,15 +39,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            imagemagick \
-            libmagickwand-dev \
-            libmagickcore-dev \
-            ghostscript \
-            libjpeg-dev \
-            libpng-dev
+        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -62,7 +54,7 @@ jobs:
 
       - name: Node packages
         run: npm ci
-      
+
       - name: Setup Database
         run: DISABLE_SPRING=1 bundle exec rake test_app
 
@@ -136,7 +128,7 @@ jobs:
         with:
           name: workspace
           path: /tmp
-      
+
       - run: ls
       - run: tar -zxf /tmp/testapp-env.tar.gz
       - run: ls

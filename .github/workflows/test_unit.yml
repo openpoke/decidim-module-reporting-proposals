@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -38,15 +38,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Install additional tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            imagemagick \
-            libmagickwand-dev \
-            libmagickcore-dev \
-            ghostscript \
-            libjpeg-dev \
-            libpng-dev
+        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
 
       - uses: nanasess/setup-chromedriver@v2
         with:
