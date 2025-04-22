@@ -7,8 +7,11 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 3.2.6
+  CI: "true"
+  SIMPLECOV: "true"
+  RUBY_VERSION: 3.2.2
   NODE_VERSION: 18.17.1
+  SHAKAPACKER_RUNTIME_COMPILE: "false"
 
 jobs:
   lint-report:
