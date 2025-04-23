@@ -10,6 +10,12 @@ module Decidim
 
       routes do
         post :locate, to: "geolocation#locate"
+
+        resources :proposals, controller: "/decidim/proposals/proposals", except: [:destroy] do
+          member do
+            get :compare
+          end
+        end
       end
 
       # generic overrides

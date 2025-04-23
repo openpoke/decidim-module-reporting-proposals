@@ -238,6 +238,9 @@ en:
             send_mail: Send an email to user
           show:
             report: Report
+      proposals:
+        wizard_steps:
+          step_compare: Compare
     reported_mailer:
       report:
         admin_resource: Admin this resource

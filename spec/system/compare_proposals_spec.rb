@@ -3,7 +3,7 @@
 require "spec_helper"
 require "system/shared/proposals_steps_examples"
 
-describe "Reporting proposals overrides" do
+describe "Reporting proposals overrides" do # rubocop:disable RSpec/DescribeClass
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
@@ -70,22 +70,6 @@ describe "Reporting proposals overrides" do
     end
   end
 
-  shared_examples "compares using text" do
-    it "shows comparison text" do
-      expect(page).not_to have_content("Nearby proposals")
-      expect(page).to have_content("Similar Proposals (1)")
-      expect(page).not_to have_content("These are proposals that are in a radius")
-    end
-
-    it "shows proposals found by text" do
-      expect(page).not_to have_i18n_content(proposal_near.title)
-      expect(page).not_to have_i18n_content("10m away")
-      expect(page).not_to have_i18n_content(proposal_far.title)
-      expect(page).not_to have_i18n_content("20m away")
-      expect(page).to have_i18n_content(proposal_missed.title)
-    end
-  end
-
   it_behaves_like "compares using geocoding"
 
   context "when no proposals are found" do
@@ -95,34 +79,6 @@ describe "Reporting proposals overrides" do
     it "shows no proposals found" do
       expect(page).to have_content("Publish your proposal")
       expect(page).to have_i18n_content(proposal_draft.title)
-    end
-  end
-
-  context "when is a normal proposal component" do
-    let!(:component) { create(:proposal_component, settings:, participatory_space: participatory_process) }
-    let(:settings) { {} }
-
-    it_behaves_like "compares using text"
-
-    context "when geocoding comparison is active" do
-      let(:settings) do
-        {
-          "geocoding_enabled" => true,
-          "geocoding_comparison_enabled" => true
-        }
-      end
-
-      it_behaves_like "compares using geocoding"
-
-      context "when no proposals are found" do
-        let(:latitude) { 41.1 }
-        let(:longitude) { 2.2 }
-
-        it "shows no proposals found" do
-          expect(page).to have_content("Complete your proposal")
-          expect(page).to have_i18n_content("Well done! No similar proposals found")
-        end
-      end
     end
   end
 end

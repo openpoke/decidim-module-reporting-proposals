@@ -13,7 +13,7 @@ module Decidim
         # rubocop:disable Naming/VariableNumber
         STEP1 = :step_1
         STEP2 = :step_2
-        STEP3 = :step_3
+        STEP_COMPARE = :step_compare
         # rubocop:enable Naming/VariableNumber
 
         def new
@@ -46,32 +46,9 @@ module Decidim
           end
         end
 
-        def preview
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP3
-          @form = form_proposal_params
-        end
-
-        def publish
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP3
-
-          PublishProposal.call(@proposal, current_user) do
-            on(:ok) do
-              flash[:notice] = I18n.t("proposals.publish.success", scope: "decidim")
-              redirect_to proposal_path(@proposal)
-            end
-
-            on(:invalid) do
-              flash.now[:alert] = I18n.t("proposals.publish.error", scope: "decidim")
-              render :edit_draft
-            end
-          end
-        end
-
         def compare
           enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = STEP2
+          @step = Proposals::ProposalsController::STEP_COMPARE
 
           unless geocoding_comparison?
             redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
