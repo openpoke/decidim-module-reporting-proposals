@@ -8,7 +8,9 @@ module Decidim
 
       included do
         def proposal_wizard_steps
-          [Proposals::ProposalsController::STEP1, Proposals::ProposalsController::STEP2]
+          steps = [Proposals::ProposalsController::STEP1]
+          steps << Proposals::ProposalsController::STEP2 if reporting_proposals_component?
+          steps << Proposals::ProposalsController::STEP3
         end
 
         # rubocop:disable Rails/HelperInstanceVariable
@@ -22,6 +24,17 @@ module Decidim
         # rubocop:enable Rails/HelperInstanceVariable
 
         private
+
+        def proposal_wizard_aside_link_to_back(step)
+          case step
+          when ProposalsController::STEP1
+            proposals_path
+          when ProposalsController::STEP2
+            compare_proposal_path
+          when ProposalsController::STEP3
+            complete_proposal_path
+          end
+        end
 
         def total_steps
           proposal_wizard_steps.count

@@ -10,6 +10,12 @@ module Decidim
       included do
         helper_method :reporting_proposal?, :geocoding_comparison?
 
+        # rubocop:disable Naming/VariableNumber
+        STEP1 = :step_1
+        STEP2 = :step_2
+        STEP3 = :step_3
+        # rubocop:enable Naming/VariableNumber
+
         def new
           enforce_permission_to :create, :proposal
           @step = Proposals::ProposalsController::STEP1
@@ -37,6 +43,46 @@ module Decidim
               flash.now[:alert] = I18n.t("proposals.create.error", scope: "decidim")
               render :new
             end
+          end
+        end
+
+        def preview
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+          @step = Proposals::ProposalsController::STEP3
+          @form = form_proposal_params
+        end
+
+        def publish
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+          @step = Proposals::ProposalsController::STEP3
+
+          PublishProposal.call(@proposal, current_user) do
+            on(:ok) do
+              flash[:notice] = I18n.t("proposals.publish.success", scope: "decidim")
+              redirect_to proposal_path(@proposal)
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("proposals.publish.error", scope: "decidim")
+              render :edit_draft
+            end
+          end
+        end
+
+        def compare
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+          @step = STEP2
+
+          unless geocoding_comparison?
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
+            return
+          end
+
+          @similar_proposals ||= Decidim::ReportingProposals::NearbyProposals.for(current_component, @proposal).all
+
+          if @similar_proposals.blank?
+            flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
           end
         end
 
