@@ -60,7 +60,7 @@ de:
             amendments_wizard_help_text: Hilfetext für die Änderungsfunktion
             announcement: Ankündigung
             attachments_allowed: Anhänge zulassen
-            can_accumulate_supports_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
+            can_accumulate_votes_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
             collaborative_drafts_enabled: Kollaborative Entwürfe aktivieren
             comments_enabled: Kommentare erlauben
             comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)

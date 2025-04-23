@@ -84,7 +84,7 @@ describe "User location button" do # rubocop:disable RSpec/DescribeClass
 
     before do
       visit_component
-      visit "#{Decidim::EngineRouter.main_proxy(component).proposal_path(proposal)}/complete"
+      visit "#{Decidim::EngineRouter.main_proxy(component).proposal_path(proposal)}/edit_draft"
     end
 
     it_behaves_like "uses device location"

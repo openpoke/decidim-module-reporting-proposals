@@ -36,7 +36,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: -> { %w(limited infinite) }
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
-    settings.attribute :can_accumulate_supports_beyond_threshold, type: :boolean, default: false
+    settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { REP_POSSIBLE_SORT_ORDERS }
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
