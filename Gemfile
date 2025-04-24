@@ -21,8 +21,10 @@ gem "puma", ">= 6.3.1"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
+  gem "brakeman", "~> 6.1"
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
+  gem "parallel_tests", "~> 4.2"
 end
 
 group :development do

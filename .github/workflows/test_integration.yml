@@ -15,6 +15,7 @@ env:
   DATABASE_USERNAME: postgres
   DATABASE_PASSWORD: postgres
   DATABASE_HOST: localhost
+  DISABLE_SPRING: "1"
 jobs:
   build:
     name: Build & Precompile
