@@ -53,7 +53,7 @@ describe "Reporting proposals overrides" do # rubocop:disable RSpec/DescribeClas
     end
 
     if attach
-      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
       check "proposal_has_no_image"

@@ -27,7 +27,7 @@ end
 shared_examples "reuses draft if exists" do
   let!(:proposal_draft) { create(:proposal, :draft, users: [user], component:, title: proposal_title, body: proposal_body) }
 
-  it "redirects to complete" do
+  it "redirects to publish" do
     visit_component
     click_on "New proposal"
 
@@ -35,18 +35,6 @@ shared_examples "reuses draft if exists" do
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
-      expect(page).to have_no_content("Complete")
-      expect(page).to have_content("Publish your proposal")
-    end
-  end
-end
-
-shared_examples "3 steps" do
-  it "sidebar does not have the complete step" do
-    within ".wizard-steps" do
-      expect(page).to have_content("Create your proposal")
-      expect(page).to have_content("Compare")
-      expect(page).to have_no_content("Complete")
       expect(page).to have_content("Publish your proposal")
     end
   end
@@ -131,13 +119,10 @@ shared_examples "creates reporting proposal" do
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
       expect(page).to have_content("Compare")
-      expect(page).to have_no_content("Complete")
       expect(page).to have_content("Publish your proposal")
     end
 
     expect(page).to have_content("Edit proposal draft")
-
-    complete_proposal(attach: true)
 
     expect(page).to have_content("Images")
     expect(page).to have_content("Documents")
@@ -155,7 +140,7 @@ shared_examples "creates reporting proposal" do
     click_on "Modify the proposal"
 
     expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("button.user-device-camera[disabled]")
+    expect(page).to have_css("#proposal_add_photos_button[disabled]")
   end
 
   it "stores no address if checked" do
@@ -210,17 +195,6 @@ shared_examples "maintains errors" do
   end
 end
 
-shared_examples "4 steps" do
-  it "sidebar has the complete step" do
-    within ".wizard-steps" do
-      expect(page).to have_content("Create your proposal")
-      expect(page).to have_content("Compare")
-      expect(page).to have_content("Complete")
-      expect(page).to have_content("Publish your proposal")
-    end
-  end
-end
-
 shared_examples "normal form" do
   it "does not have modified fields" do
     expect(page).to have_no_field("proposal_has_no_address")
@@ -229,11 +203,11 @@ shared_examples "normal form" do
 end
 
 shared_examples "creates normal proposal" do
-  it "redirects to the complete step" do
+  it "redirects to the publish step" do
     fill_proposal(extra_fields: false)
 
     within "#content" do
-      expect(page).to have_content("Complete your proposal")
+      expect(page).to have_content("Publish your proposal")
     end
 
     expect(page).to have_css(".edit_proposal")
@@ -242,8 +216,6 @@ shared_examples "creates normal proposal" do
   it "publishes the proposal" do
     fill_proposal(extra_fields: false)
     expect(proposal.identities.first).to eq(user)
-
-    complete_proposal
 
     click_on "Publish"
 
