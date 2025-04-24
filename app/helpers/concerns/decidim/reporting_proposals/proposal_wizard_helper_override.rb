@@ -26,13 +26,14 @@ module Decidim
         private
 
         def proposal_wizard_aside_link_to_back(step)
+          # byebug
           case step
           when Decidim::Proposals::ProposalsController::STEP1
             proposals_path
           when Decidim::Proposals::ProposalsController::STEP_COMPARE
             compare_proposal_path
           when Decidim::Proposals::ProposalsController::STEP2
-            complete_proposal_path
+            preview_proposal_path
           end
         end
 

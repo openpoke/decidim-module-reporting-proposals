@@ -26,7 +26,7 @@
   <% end %>
 
   <div class="form__wrapper-block flex-col-reverse md:flex-row justify-between">
-    <%= link_to complete_proposal_path(@proposal), class: "button button__sm md:button__lg button__secondary ml-auto" do %>
+    <%= link_to preview_proposal_path(@proposal), class: "button button__sm md:button__lg button__secondary ml-auto" do %>
       <span><%= t("continue", scope: "decidim.proposals.proposals.compare") %></span>
       <%= icon "arrow-right-line" %>
     <% end %>

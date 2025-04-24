@@ -10,12 +10,6 @@ module Decidim
 
       routes do
         post :locate, to: "geolocation#locate"
-
-        resources :proposals, controller: "/decidim/proposals/proposals", except: [:destroy] do
-          member do
-            get :compare
-          end
-        end
       end
 
       # generic overrides
@@ -89,6 +83,16 @@ module Decidim
           end
         rescue StandardError => e
           Rails.logger.error("Error while trying to include Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride: #{e.message}")
+        end
+      end
+
+      initializer "decidim_reporting_proposals.append_compare_route", after: :append_routes do
+        Decidim::Proposals::Engine.routes.append do
+          resources :proposals, only: [] do
+            member do
+              get :compare
+            end
+          end
         end
       end
 

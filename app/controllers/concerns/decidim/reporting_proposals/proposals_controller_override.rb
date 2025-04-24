@@ -36,7 +36,14 @@ module Decidim
               flash[:notice] = I18n.t("proposals.create.success", scope: "decidim")
 
               @proposal = proposal
-              redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
+
+              path = if geocoding_comparison?
+                       "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/compare"
+                     else
+                       "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
+                     end
+
+              redirect_to path
             end
 
             on(:invalid) do
@@ -47,19 +54,16 @@ module Decidim
         end
 
         def compare
-          enforce_permission_to :edit, :proposal, proposal: @proposal
           @step = Proposals::ProposalsController::STEP_COMPARE
+          @proposal = Decidim::Proposals::Proposal.find(params[:id])
 
-          unless geocoding_comparison?
-            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
-            return
-          end
+          enforce_permission_to :edit, :proposal, proposal: @proposal
 
           @similar_proposals ||= Decidim::ReportingProposals::NearbyProposals.for(current_component, @proposal).all
 
           if @similar_proposals.blank?
             flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
-            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview"
           end
         end
 
