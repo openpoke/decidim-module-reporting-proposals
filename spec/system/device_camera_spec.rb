@@ -53,6 +53,7 @@ describe "User camera button" do # rubocop:disable RSpec/DescribeClass
     before do
       visit_component
       click_on "New proposal"
+      click_on "Add file"
     end
 
     it_behaves_like "uses device camera"
