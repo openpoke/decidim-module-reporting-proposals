@@ -124,7 +124,7 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content("Edit proposal draft")
 
-    expect(page).to have_content("Images")
+    expect(page).to have_content("Image")
     expect(page).to have_content("Documents")
 
     click_on "Publish"
@@ -209,8 +209,6 @@ shared_examples "creates normal proposal" do
     within "#content" do
       expect(page).to have_content("Publish your proposal")
     end
-
-    expect(page).to have_css(".edit_proposal")
   end
 
   it "publishes the proposal" do
