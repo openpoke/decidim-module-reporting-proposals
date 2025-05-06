@@ -60,7 +60,7 @@ es:
             amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
             announcement: Anuncio
             attachments_allowed: Permitir los archivos adjuntos
-            can_accumulate_supports_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
+            can_accumulate_votes_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
             collaborative_drafts_enabled: Borradores colaborativos habilitados
             comments_enabled: Comentarios habilitados
             comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)

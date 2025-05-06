@@ -7,22 +7,19 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          def call
-            return broadcast(:invalid) if form.invalid?
-
-            transaction do
-              update_category
-              update_valuators
-            end
-            broadcast(:ok)
+          def run_after_hooks
+            super
+            update_valuators
           end
 
           private
 
           def update_valuators
-            category.category_valuators.destroy_all
-            category.participatory_space.user_roles.where(id: form.valuator_ids).each do |valuator|
-              Decidim::ReportingProposals::CategoryValuator.create!(category:, valuator_role: valuator)
+            resource.category_valuators.destroy_all
+            return unless form.valuator_ids.any?
+
+            resource.participatory_space.user_roles.where(id: form.valuator_ids).each do |valuator|
+              Decidim::ReportingProposals::CategoryValuator.create!(category: resource, valuator_role: valuator)
             end
           end
         end

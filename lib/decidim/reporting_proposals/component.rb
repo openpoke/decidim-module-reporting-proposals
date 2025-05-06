@@ -36,7 +36,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: -> { %w(limited infinite) }
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
-    settings.attribute :can_accumulate_supports_beyond_threshold, type: :boolean, default: false
+    settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { REP_POSSIBLE_SORT_ORDERS }
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
@@ -103,14 +103,14 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.register_stat :proposals_count, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
-    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.except_withdrawn.not_hidden.count
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_withdrawn.not_hidden.count
   end
 
   component.register_stat :proposals_accepted, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
     Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).accepted.not_hidden.count
   end
 
-  component.register_stat :supports_count, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
+  component.register_stat :votes_count, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden
     Decidim::Proposals::ProposalVote.where(proposal: proposals).count
   end
@@ -238,18 +238,11 @@ Decidim.register_component(:reporting_proposals) do |component|
       global = nil
     end
 
+    Decidim::Proposals.create_default_states!(component, admin_user)
+
     5.times do |n|
-      state, answer, state_published_at = if n > 3
-                                            ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), Time.current]
-                                          elsif n > 2
-                                            ["rejected", nil, Time.current]
-                                          elsif n > 1
-                                            ["evaluating", nil, Time.current]
-                                          elsif n.positive?
-                                            ["accepted", Decidim::Faker::Localized.sentence(word_count: 10), nil]
-                                          else
-                                            ["not_answered", nil, nil]
-                                          end
+      proposal_state, answer, state_published_at = random_state_answer
+      proposal_state = Decidim::Proposals::ProposalState.where(component:, token: proposal_state).first
 
       params = {
         component:,
@@ -257,9 +250,9 @@ Decidim.register_component(:reporting_proposals) do |component|
         scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
         title: { en: Faker::Lorem.sentence(word_count: 2) },
         body: { en: Faker::Lorem.paragraphs(number: 2).join("\n") },
-        state:,
+        proposal_state:,
         answer:,
-        answered_at: state.present? ? Time.current : nil,
+        answered_at: proposal_state.present? ? Time.current : nil,
         state_published_at:,
         published_at: Time.current
       }
@@ -323,7 +316,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: { en: "#{proposal.title["en"]} #{Faker::Lorem.sentence(word_count: 1)}" },
           body: { en: "#{proposal.body["en"]} #{Faker::Lorem.sentence(word_count: 3)}" },
-          state: "evaluating",
+          proposal_state: Decidim::Proposals::ProposalState.where(component: proposal.component, token: :evaluating).first,
           answer: nil,
           answered_at: Time.current,
           published_at: Time.current
@@ -477,5 +470,21 @@ Decidim.register_component(:reporting_proposals) do |component|
       title: Faker::Lorem.sentence(word_count: 2),
       body: Faker::Lorem.paragraphs(number: 2).join("\n")
     )
+  end
+
+  def random_state_answer
+    n = rand(5)
+
+    if n > 3
+      [:accepted, Decidim::Faker::Localized.sentence(word_count: 10), Time.current]
+    elsif n > 2
+      [:rejected, nil, Time.current]
+    elsif n > 1
+      [:evaluating, nil, Time.current]
+    elsif n.positive?
+      [:accepted, Decidim::Faker::Localized.sentence(word_count: 10), nil]
+    else
+      [:not_answered, nil, nil]
+    end
   end
 end

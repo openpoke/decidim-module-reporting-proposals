@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     module Admin
-      module UpdateResultOverride
+      module UpdateImportedResultOverride
         extend ActiveSupport::Concern
 
         included do

@@ -37,9 +37,7 @@ module Decidim
       # we won't return directly this query due a problem with the method "count" in the geocoder gem
       # see https://github.com/alexreisner/geocoder#note-on-rails-41-and-greater
       def query_ids
-        base_query
-          .near([@proposal.latitude, @proposal.longitude], @radius.to_f / 1000, units: :km)
-          .limit(Decidim::Proposals.similarity_limit).map(&:id)
+        base_query.near([@proposal.latitude, @proposal.longitude], @radius.to_f / 1000, units: :km).map(&:id)
       end
 
       def base_query

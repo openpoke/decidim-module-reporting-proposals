@@ -11,6 +11,24 @@ module Decidim
           # Helpers for overdue proposals
           include ActionView::Helpers::DateHelper
 
+          def available_valuators_for_proposal(proposal, current_user)
+            participatory_space = proposal.component.participatory_space
+
+            all_roles = participatory_space.user_roles(:valuator).order_by_name
+            assigned_ids = proposal.valuation_assignments.pluck(:valuator_role_id)
+
+            available_roles = all_roles.reject do |role|
+              role.decidim_user_id == current_user.id || assigned_ids.include?(role.id)
+            end
+
+            users_by_id = Decidim::User.where(id: available_roles.map(&:decidim_user_id)).index_by(&:id)
+
+            available_roles.map do |role|
+              user = users_by_id[role.decidim_user_id]
+              [user.name, role.id]
+            end
+          end
+
           def unanswered_proposals_overdue?(proposal)
             grace_period = days_unanswered(proposal)
             !grace_period.zero? &&

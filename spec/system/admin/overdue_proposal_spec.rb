@@ -3,7 +3,7 @@
 require "spec_helper"
 require "system/shared/admin_proposals_overdue_examples"
 
-describe "Highlighted proposal" do
+describe "Highlighted proposal" do # rubocop:disable RSpec/DescribeClass
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }

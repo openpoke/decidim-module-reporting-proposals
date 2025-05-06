@@ -7,7 +7,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          attribute :valuator_ids, Array[Integer]
+          attribute :valuator_ids, [Integer]
 
           def map_model(model)
             self.valuator_ids = model.category_valuators.pluck(:valuator_role_id)

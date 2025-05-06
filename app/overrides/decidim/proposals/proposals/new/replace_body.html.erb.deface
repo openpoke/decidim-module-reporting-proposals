@@ -1,3 +1,0 @@
-<!-- replace "erb[loud]:contains('text_editor_for_proposal_body(form)')" -->
-
-<%= render "decidim/reporting_proposals/proposals/#{reporting_proposal? ? 'reporting_proposal_fields' : 'new_proposal_fields'}", form: form %>

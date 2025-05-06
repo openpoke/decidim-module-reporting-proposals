@@ -12,8 +12,8 @@
           <% end %>
         </div>
       <% end %>
-      <div class="row column">
-        <%= f.file_field :add_photos, multiple: true %>
+      <div class="row column mb-2">
+        <%= f.upload :add_photos, multiple: true, button_class: "button button__sm button__transparent-secondary" %>
       </div>
       <div class="actions">
         <%= f.submit t(".action"), class: "button button__sm button__secondary" %>

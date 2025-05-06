@@ -1,7 +1,7 @@
 
 <div class="row column">
   <%= form.select :valuator_ids,
-                  find_valuators_for_select(current_participatory_space),
+                  find_valuators_for_select(current_participatory_space, current_user),
                   { help_text: t("form.valuators_help", scope: "decidim.reporting_proposals.admin.categories") },
                   { multiple: true } %>
 </div>

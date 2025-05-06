@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Report and hide proposal" do
+describe "Report and hide proposal" do # rubocop:disable RSpec/DescribeClass
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }
@@ -31,22 +31,22 @@ describe "Report and hide proposal" do
     expect(proposal).not_to be_reported
     expect(page).to have_content(proposal.title["en"])
 
-    click_link_or_button("Report")
+    click_on("Report")
     within ".modal__report" do
-      click_link_or_button("Report")
+      click_on("Report")
     end
 
     expect(proposal.reload).not_to be_hidden
     expect(proposal).to be_reported
     expect(page).to have_content(proposal.title["en"])
-    expect(page).not_to have_button("Report")
+    expect(page).to have_no_button("Report")
     expect(page).to have_link("Hide")
 
-    click_link_or_button "Hide"
+    click_on "Hide"
 
-    expect(page).not_to have_link("Hide")
-    expect(page).not_to have_button("Report")
-    expect(page).not_to have_content(proposal.title["en"])
+    expect(page).to have_no_link("Hide")
+    expect(page).to have_no_button("Report")
+    expect(page).to have_no_content(proposal.title["en"])
     expect(proposal.reload).to be_hidden
     expect(proposal).to be_reported
   end
@@ -55,9 +55,9 @@ describe "Report and hide proposal" do
     let(:enabled) { false }
     let(:reportable) { proposal }
 
-    it "dows not allow to report proposals but allows to hide it if reported" do
-      expect(page).not_to have_button("Report")
-      expect(page).not_to have_link("Hide")
+    it "does not allow to report proposals but allows to hide it if reported" do
+      expect(page).to have_no_button("Report")
+      expect(page).to have_no_link("Hide")
     end
   end
 end

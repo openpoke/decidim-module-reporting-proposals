@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Managing reporting proposals component" do
+describe "Managing reporting proposals component" do # rubocop:disable RSpec/DescribeClass
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
@@ -24,8 +24,8 @@ describe "Managing reporting proposals component" do
   end
 
   it "hides readonly attributes" do
-    expect(page).not_to have_content("Collaborative drafts enabled")
-    expect(page).not_to have_content("Participatory texts enabled")
+    expect(page).to have_no_content("Collaborative drafts enabled")
+    expect(page).to have_no_content("Participatory texts enabled")
   end
 
   it "has default values for settings" do

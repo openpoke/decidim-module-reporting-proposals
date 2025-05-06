@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Send email to user with link" do
+describe "Send email to user with link" do # rubocop:disable RSpec/DescribeClass
   let(:component) { create(:proposal_component) }
   let(:organization) { component.organization }
   let(:manifest_name) { "proposals" }
@@ -16,7 +16,7 @@ describe "Send email to user with link" do
 
   before do
     within "tr", text: translated(proposal.title) do
-      click_link_or_button "Answer proposal"
+      click_on "Answer proposal"
     end
   end
 
@@ -32,10 +32,10 @@ describe "Send email to user with link" do
     let!(:proposal) { create(:proposal, component:, address:, latitude:, longitude:) }
 
     it "does not show the address" do
-      expect(page).not_to have_css(".address")
-      expect(page).not_to have_css(".address__info")
-      expect(page).not_to have_css(".address__map")
-      expect(page).not_to have_content(address)
+      expect(page).to have_no_css(".address")
+      expect(page).to have_no_css(".address__info")
+      expect(page).to have_no_css(".address__map")
+      expect(page).to have_no_content(address)
     end
 
     context "when component has geocoding enabled" do

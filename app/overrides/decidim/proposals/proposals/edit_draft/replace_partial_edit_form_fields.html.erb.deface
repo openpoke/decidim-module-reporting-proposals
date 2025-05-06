@@ -2,7 +2,6 @@
 
 <% if reporting_proposal? %>
   <%= render "decidim/reporting_proposals/proposals/reporting_proposal_fields", form: form %>
-  <%= render "decidim/reporting_proposals/proposals/user_group", form: form %>
 <% else %>
   <%= render "decidim/proposals/proposals/edit_form_fields", form: form %>
 <% end %>

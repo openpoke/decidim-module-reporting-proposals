@@ -15,10 +15,11 @@ module Decidim::ReportingProposals
       let(:moderation) { create(:moderation, reportable:, report_count: 1, participatory_space: component.participatory_space) }
       let!(:report) { create(:report, moderation:) }
       let(:image) do
-        Rack::Test::UploadedFile.new(
-          Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
-          "image/jpeg"
-        )
+        ActiveStorage::Blob.create_and_upload!(
+          io: File.open(Decidim::Dev.test_file("city.jpeg", "image/jpeg"), "rb"),
+          filename: "city.jpeg",
+          content_type: "image/jpeg"
+        ).signed_id
       end
 
       let(:params) do
