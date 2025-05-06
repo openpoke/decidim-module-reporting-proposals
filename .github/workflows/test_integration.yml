@@ -65,7 +65,7 @@ jobs:
 
       - run: tar -zcf /tmp/testapp-env.tar.gz ./spec/decidim_dummy_app
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: workspace
           path: /tmp/testapp-env.tar.gz
@@ -120,8 +120,11 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
+      
+      - name: Install imagemagick
+        run: sudo apt install -y imagemagick
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: workspace
           path: /tmp
@@ -140,7 +143,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots-${{ matrix.name }}
