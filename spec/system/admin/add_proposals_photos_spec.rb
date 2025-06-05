@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Add proposals photos" do # rubocop:disable RSpec/DescribeClass
+describe "Add proposals photos" do
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let!(:reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }

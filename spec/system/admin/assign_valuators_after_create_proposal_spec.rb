@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Automatic assign valuators after create proposals" do # rubocop:disable RSpec/DescribeClass
+describe "Automatic assign valuators after create proposals" do
   let!(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }

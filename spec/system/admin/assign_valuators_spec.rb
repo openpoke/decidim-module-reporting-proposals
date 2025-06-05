@@ -3,7 +3,7 @@
 require "spec_helper"
 require "system/shared/admin_proposals_overdue_examples"
 
-describe "Assign valuators" do # rubocop:disable RSpec/DescribeClass
+describe "Assign valuators" do
   let(:manifest_name) { "reporting_proposals" }
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }

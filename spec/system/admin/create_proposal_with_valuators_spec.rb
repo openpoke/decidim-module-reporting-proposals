@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Create proposal with valuators" do # rubocop:disable RSpec/DescribeClass
+describe "Create proposal with valuators" do
   let!(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }

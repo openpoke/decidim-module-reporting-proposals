@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Time elapsed to answer" do # rubocop:disable RSpec/DescribeClass
+describe "Time elapsed to answer" do
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Report and hide proposal" do # rubocop:disable RSpec/DescribeClass
+describe "Report and hide proposal" do
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }

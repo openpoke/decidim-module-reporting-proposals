@@ -3,7 +3,7 @@
 require "spec_helper"
 require "decidim/templates/test/factories"
 
-describe "Valuator answers with templates" do # rubocop:disable RSpec/DescribeClass
+describe "Valuator answers with templates" do
   let!(:organization) { create(:organization) }
   let(:user) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
   let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }

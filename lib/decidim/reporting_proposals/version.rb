@@ -2,8 +2,8 @@
 
 module Decidim
   module ReportingProposals
-    VERSION = "0.7.0"
-    DECIDIM_VERSION = "0.29.2"
-    COMPAT_DECIDIM_VERSION = [">= 0.29.2", "< 0.30"].freeze
+    VERSION = "0.7.1"
+    DECIDIM_VERSION = "0.29.3"
+    COMPAT_DECIDIM_VERSION = [">= 0.29.3", "< 0.30"].freeze
   end
 end

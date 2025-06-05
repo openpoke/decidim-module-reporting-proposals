@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Assign valuators after update category" do # rubocop:disable RSpec/DescribeClass
+describe "Assign valuators after update category" do
   let!(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }

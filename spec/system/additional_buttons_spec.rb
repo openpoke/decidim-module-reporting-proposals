@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Additional button" do # rubocop:disable RSpec/DescribeClass
+describe "Additional button" do
   include_context "with a component"
 
   let(:manifest_name) { "reporting_proposals" }

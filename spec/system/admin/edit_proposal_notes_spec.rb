@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Edit Proposal Notes" do # rubocop:disable RSpec/DescribeClass
+describe "Edit Proposal Notes" do
   let(:component) { create(:proposal_component) }
   let(:organization) { component.organization }
   let(:manifest_name) { "proposals" }

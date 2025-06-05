@@ -5,7 +5,7 @@ require "decidim/accountability/test/factories"
 require "decidim/meetings/test/factories"
 require "decidim/budgets/test/factories"
 
-describe "Admin find_resource_manifest" do # rubocop:disable RSpec/DescribeClass
+describe "Admin find_resource_manifest" do
   let(:organization) { create(:organization) }
   let(:participatory_process) { create(:participatory_process, organization:) }
   let(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }

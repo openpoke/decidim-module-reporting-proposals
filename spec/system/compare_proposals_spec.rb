@@ -3,7 +3,7 @@
 require "spec_helper"
 require "system/shared/proposals_steps_examples"
 
-describe "Reporting proposals overrides" do # rubocop:disable RSpec/DescribeClass
+describe "Reporting proposals overrides" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }

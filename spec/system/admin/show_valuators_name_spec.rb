@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Show valuators name" do # rubocop:disable RSpec/DescribeClass
+describe "Show valuators name" do
   let(:admin) { create(:user, :admin, :confirmed) }
   let(:organization) { admin.organization }
   let!(:participatory_process) { create(:participatory_process, organization:) }

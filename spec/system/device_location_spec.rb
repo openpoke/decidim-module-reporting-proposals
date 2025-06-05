@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "User location button" do # rubocop:disable RSpec/DescribeClass
+describe "User location button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do

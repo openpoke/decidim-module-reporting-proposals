@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Send email to user with link" do # rubocop:disable RSpec/DescribeClass
+describe "Send email to user with link" do
   let(:component) { create(:proposal_component) }
   let(:organization) { component.organization }
   let(:manifest_name) { "proposals" }
