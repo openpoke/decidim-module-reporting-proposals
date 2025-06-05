@@ -32,14 +32,15 @@ describe "Report and hide proposal" do
     expect(page).to have_content(proposal.title["en"])
 
     click_on("Report")
-    within ".modal__report" do
+    within ".flag-modal" do
       click_on("Report")
     end
 
+    expect(page).to have_content(proposal.title["en"])
+    expect(page).to have_content("The report has been created successfully and it will be reviewed by an admin.")
     expect(proposal.reload).not_to be_hidden
     expect(proposal).to be_reported
-    expect(page).to have_content(proposal.title["en"])
-    expect(page).to have_no_button("Report")
+    visit component_path
     expect(page).to have_link("Hide")
 
     click_on "Hide"

@@ -36,7 +36,7 @@ describe "Reporting proposals overrides" do
     login_as user, scope: :user
   end
 
-  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false)
+  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false, submit: true)
     within "#content" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
@@ -51,7 +51,6 @@ describe "Reporting proposals overrides" do
 
       check "proposal_has_no_address" if skip_address
     end
-
     if attach
       dynamically_attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
@@ -59,8 +58,10 @@ describe "Reporting proposals overrides" do
       check "proposal_has_no_image"
     end
 
-    within "#content" do
-      find("*[type=submit]").click
+    if submit
+      within "#content" do
+        find("*[type=submit]").click
+      end
     end
   end
 

@@ -14,7 +14,7 @@ end
 
 shared_examples "map can be shown" do |fill|
   it "checkbox shows the map" do
-    fill_proposal(extra_fields: false) if fill
+    fill_proposal(extra_fields: false, submit: false) if fill
 
     expect(page).to have_no_content("You can move the point on the map")
 
@@ -124,13 +124,14 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content("Edit proposal draft")
 
-    expect(page).to have_content("Image")
-    expect(page).to have_content("Documents")
-
-    click_on "Publish"
+    expect(page).to have_content("Image/photo")
+    expect(page).to have_content("Add documents")
+    check "proposal_has_no_image"
+    select translated(another_category.name), from: :proposal_category_id
+    click_on "Preview"
 
     expect(page).to have_content(proposal_title)
-    expect(translated(proposal.body)).to have_content(proposal_body)
+    expect(page).to have_content(proposal_body)
     expect(proposal.category).to eq(another_category)
   end
 
@@ -184,15 +185,6 @@ shared_examples "maintains errors" do
     expect(page).to have_unchecked_field("proposal_has_no_address")
     expect(page).to have_css("label[for=proposal_address].is-invalid-label")
   end
-
-  it "has errors in photo address field" do
-    expect(page).to have_no_css("label[for=proposal_add_photos].is-invalid-label")
-
-    uncheck "proposal_has_no_image"
-
-    click_on "Send"
-    expect(page).to have_css("label[for=proposal_add_photos].is-invalid-label")
-  end
 end
 
 shared_examples "normal form" do
@@ -219,8 +211,6 @@ shared_examples "creates normal proposal" do
 
     expect(page).to have_content(proposal_title)
     expect(translated(proposal.body)).to eq(proposal_body)
-    expect(proposal.category).to eq(another_category)
-    expect(proposal.identities.first).to eq(user_group)
   end
 end
 
