@@ -497,6 +497,7 @@ en:
               same situation, you can choose to support it instead of creating a new
               one.
             title: Nearby proposals
+          no_similars_found: No similar proposals found
         edit:
           delete_image: Delete image
         form:

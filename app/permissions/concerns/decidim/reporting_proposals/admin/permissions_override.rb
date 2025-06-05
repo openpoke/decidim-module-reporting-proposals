@@ -94,6 +94,8 @@ module Decidim
 
           def valuator_can_unassign_valuator_from_proposals?
             can_unassign_valuator_from_proposals? if user == context.fetch(:valuator, nil)
+
+            can_add_valuators?
           end
 
           def can_add_valuators?

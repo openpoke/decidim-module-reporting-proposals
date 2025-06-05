@@ -14,7 +14,9 @@ module Decidim::Admin
         event: "decidim.events.reports.resource_hidden",
         event_class: Decidim::ResourceHiddenEvent,
         resource: reportable,
+        force_send: true,
         extra: {
+          force_email: true,
           report_reasons: [report.reason]
         },
         affected_users: reportable.try(:authors) || [reportable.try(:author)]
@@ -45,6 +47,7 @@ module Decidim::Admin
       end
 
       it "sends a notification to the reportable's author" do
+        expect(Decidim::EventsManager).to receive(:publish).with(author_notification)
         expect(Decidim::EventsManager).to receive(:publish).with(author_notification)
         command.call
       end

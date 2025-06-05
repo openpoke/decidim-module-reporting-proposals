@@ -62,7 +62,7 @@ module Decidim
           @similar_proposals ||= Decidim::ReportingProposals::NearbyProposals.for(current_component, @proposal).all
 
           if @similar_proposals.blank?
-            flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
+            flash[:notice] = I18n.t("reporting_proposals.proposals.compare.no_similars_found", scope: "decidim")
             redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview"
           end
         end
