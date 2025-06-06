@@ -60,7 +60,7 @@ ca:
             amendments_wizard_help_text: Text d'ajuda en crear una nova esmena
             announcement: Anunci
             attachments_allowed: Permetre arxius adjunts
-            can_accumulate_votes_beyond_threshold: Pot acumular suports més enllà del llindar
+            can_accumulate_supports_beyond_threshold: Pot acumular suports més enllà del llindar
             collaborative_drafts_enabled: Esborranys col·laboratius habilitats
             comments_enabled: Comentaris habilitats
             comments_max_length: Longitud màxima dels comentaris (deixa 0 si vols mantenir la configuració per defecte)
