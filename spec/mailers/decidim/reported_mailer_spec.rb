@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   describe ReportedMailer do
-    let(:organization) { create(:organization, name: "Test Organization") }
+    let(:organization) { create(:organization, name: { en: "Test Organization" }) }
     let(:user) { create(:user, :admin, organization:) }
     let(:participatory_space) { create(:participatory_process, title: Decidim::Faker::Localized.sentence, organization:) }
     let(:component) { create(:component, participatory_space:) }
@@ -42,7 +42,7 @@ module Decidim
           let(:moderation) { create(:moderation, reportable: meeting, participatory_space: meetings_component.participatory_space, report_count: 1) }
 
           it "doesn't have the admin url" do
-            expect(email_body(mail)).not_to have_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
+            expect(email_body(mail)).to have_no_link(href: Decidim::ResourceLocatorPresenter.new(meeting).admin_url)
           end
         end
 
@@ -106,7 +106,7 @@ module Decidim
           end
 
           it "includes the name of the author but no link to his profile" do
-            expect(mail).not_to have_link(author.name)
+            expect(mail).to have_no_link(author.name)
           end
         end
 
@@ -122,7 +122,7 @@ module Decidim
           let(:reportable) { create(:proposal, :official) }
 
           it "includes the name of the organization" do
-            expect(email_body(mail)).to match(author.name)
+            expect(email_body(mail)).to match(decidim_escape_translated(author.name))
           end
         end
 

@@ -43,15 +43,15 @@ module Decidim
           end
 
           it "sets two different collections" do
-            geocoded_proposals = create_list(:proposal, 8, component:, latitude: 1.1, longitude: 2.2)
-            _non_geocoded_proposals = create_list(:proposal, 2, component:, latitude: nil, longitude: nil)
+            geocoded_proposals = create_list(:proposal, 10, component:, latitude: 1.1, longitude: 2.2)
+            non_geocoded_proposals = create_list(:proposal, 2, component:, latitude: nil, longitude: nil)
 
             get :index
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:index)
 
-            expect(assigns(:proposals).count).to eq 10
-            expect(assigns(:all_geocoded_proposals)).to match_array(geocoded_proposals)
+            expect(assigns(:proposals).count).to eq 12
+            expect(assigns(:proposals)).to match_array(geocoded_proposals + non_geocoded_proposals)
           end
         end
 
@@ -116,7 +116,7 @@ module Decidim
 
               it "does not have accepted proposals" do
                 get(:index, xhr: true, params:)
-                expect(response.body).not_to have_content('address\\":\\"Peny Lane 1\\"')
+                expect(response.body).to have_no_content('address\\":\\"Peny Lane 1\\"')
               end
             end
           end
@@ -249,20 +249,6 @@ module Decidim
           end
         end
 
-        context "when you try to complete a proposal created by another user" do
-          it "does not render the complete page" do
-            get(:complete, params:)
-            expect(subject).not_to render_template(:complete)
-          end
-        end
-
-        context "when you try to compare a proposal created by another user" do
-          it "does not render the compare page" do
-            get(:compare, params:)
-            expect(subject).not_to render_template(:compare)
-          end
-        end
-
         context "when you try to publish a proposal created by another user" do
           it "does not render the publish page" do
             post(:publish, params:)
@@ -288,13 +274,13 @@ module Decidim
             expect(proposal.withdrawn?).to be true
           end
 
-          context "and the proposal already has supports" do
+          context "and the proposal already has votes" do
             let(:proposal) { create(:proposal, :with_votes, component:, users: [user]) }
 
             it "is not able to withdraw the proposal" do
               put :withdraw, params: params.merge(id: proposal.id)
 
-              expect(flash[:alert]).to eq("This proposal cannot be withdrawn because it already has supports.")
+              expect(flash[:alert]).to eq("This proposal cannot be withdrawn because it already has votes.")
               expect(response).to have_http_status(:found)
               proposal.reload
               expect(proposal.withdrawn?).to be false
@@ -306,7 +292,7 @@ module Decidim
           let(:current_user) { create(:user, :confirmed, organization: component.organization) }
           let(:proposal) { create(:proposal, component:, users: [current_user]) }
 
-          context "and the proposal has no supports" do
+          context "and the proposal has no votes" do
             it "is not able to withdraw the proposal" do
               expect(WithdrawProposal).not_to receive(:call)
 

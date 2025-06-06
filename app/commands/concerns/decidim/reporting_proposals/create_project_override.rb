@@ -7,7 +7,7 @@ module Decidim
 
       included do
         def proposals
-          @proposals ||= project.sibling_scope(:proposals).where(id: @form.proposal_ids) + project.sibling_scope(:reporting_proposals).where(id: form.proposal_ids)
+          @proposals ||= resource.sibling_scope(:proposals).where(id: @form.proposal_ids) + resource.sibling_scope(:reporting_proposals).where(id: form.proposal_ids)
         end
       end
     end

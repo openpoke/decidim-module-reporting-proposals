@@ -17,12 +17,14 @@ module Decidim
               if valuator_assigned_to_proposal?
                 can_create_proposal_note?
                 can_create_proposal_answer?
+                can_assign_valuator_to_proposal?
                 allow! if action_is_show_on_proposal?
               elsif action_is_show_on_proposal?
                 disallow!
               end
-              can_export_proposals?
+
               valuator_can_unassign_valuator_from_proposals?
+              can_export_proposals?
 
               return permission_action
             end
@@ -59,7 +61,7 @@ module Decidim
             allow! if permission_action.subject == :proposals && permission_action.action == :split
 
             # Every user allowed by the space can assign proposals to a valuator
-            allow! if permission_action.subject == :proposals && permission_action.action == :assign_to_valuator
+            can_assign_valuator_to_proposal?
 
             # Every user allowed by the space can unassign a valuator from proposals
             can_unassign_valuator_from_proposals?
@@ -70,6 +72,14 @@ module Decidim
             if permission_action.subject == :participatory_texts && participatory_texts_are_enabled? && permission_action.action == :manage
               # Every user allowed by the space can manage (import, update and publish) participatory texts to proposals
               allow!
+            end
+
+            if permission_action.subject == :proposal_state
+              if permission_action.action == :destroy
+                toggle_allow(proposal_state.proposals.empty?)
+              else
+                allow!
+              end
             end
 
             permission_action

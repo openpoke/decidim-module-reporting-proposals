@@ -25,3 +25,9 @@
   font-size: 0.8125rem;
   text-align: start;
 }
+
+button[data-dialog-open^="flagModal"] {
+  > span {
+    display: none;
+  }
+}

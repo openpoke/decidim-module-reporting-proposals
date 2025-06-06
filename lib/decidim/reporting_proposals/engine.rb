@@ -20,16 +20,14 @@ module Decidim
         Decidim::ResourceHelper.include(Decidim::ReportingProposals::ResourceHelperOverride)
         Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
         Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
-        Decidim::GalleryMethods.include(Decidim::ReportingProposals::GalleryMethodsOverride)
         Decidim::LinkedResourcesForCell.include(Decidim::ReportingProposals::LinkedResourcesForCellOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
         Decidim::Proposals::ProposalsPickerCell.include(Decidim::ReportingProposals::ProposalsPickerCellOverride)
         Decidim::Proposals::PublishProposal.include(Decidim::ReportingProposals::PublishProposalOverride)
-        Decidim::Proposals::Admin::AnswerProposal.include(Decidim::ReportingProposals::Admin::AnswerProposalOverride)
         Decidim::Accountability::Admin::ResultForm.include(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
-        Decidim::Accountability::Admin::CreateResult.include(Decidim::ReportingProposals::Admin::CreateResultOverride)
+        Decidim::Accountability::Admin::HasResultCommand.include(Decidim::ReportingProposals::Admin::HasResultCommandOverride)
         Decidim::Accountability::Admin::UpdateResult.include(Decidim::ReportingProposals::Admin::UpdateResultOverride)
-        Decidim::Accountability::Admin::UpdateImportedResult.include(Decidim::ReportingProposals::Admin::UpdateResultOverride)
+        Decidim::Accountability::Admin::UpdateImportedResult.include(Decidim::ReportingProposals::Admin::UpdateImportedResultOverride)
         Decidim::Meetings::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
         Decidim::Meetings::Admin::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
         Decidim::Meetings::Admin::CloseMeeting.include(Decidim::ReportingProposals::CloseMeetingOverride)
@@ -38,16 +36,12 @@ module Decidim
         Decidim::Budgets::Admin::CreateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Budgets::Admin::UpdateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::UpdateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
-        if defined?(Decidim::Elections::Admin::AnswerForm)
-          Decidim::Elections::Admin::AnswerForm.include(Decidim::ReportingProposals::MapRelatedProposalsForFormOverride)
-          Decidim::Elections::Admin::CreateAnswer.include(Decidim::ReportingProposals::Admin::CreateAnswerOverride)
-          Decidim::Elections::Admin::UpdateAnswer.include(Decidim::ReportingProposals::Admin::CreateAnswerOverride)
-        end
         Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
         Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
         Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
+        Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::CreateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
         # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
         Decidim::ReportedMailer.include(Decidim::ReportingProposals::ReportedMailerOverride)
@@ -92,6 +86,16 @@ module Decidim
         end
       end
 
+      initializer "decidim_reporting_proposals.append_compare_route", after: :append_routes do
+        Decidim::Proposals::Engine.routes.append do
+          resources :proposals, only: [] do
+            member do
+              get :compare
+            end
+          end
+        end
+      end
+
       # controllers and helpers overrides
       initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
         config.to_prepare do
@@ -103,6 +107,7 @@ module Decidim
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::ProposalsControllerOverride)
           Decidim::Proposals::Admin::ProposalAnswersController.include(Decidim::ReportingProposals::Admin::ProposalAnswersControllerOverride)
           Decidim::Proposals::Admin::ProposalsHelper.include(Decidim::ReportingProposals::Admin::ProposalsHelperOverride)
+          Decidim::Proposals::Admin::ProposalBulkActionsHelper.include(Decidim::ReportingProposals::Admin::ProposalBulkActionsHelperOverride)
 
           # port of https://github.com/openpoke/decidim/pull/24
           Decidim::Proposals::Admin::ValuationAssignmentsController.include(Decidim::ReportingProposals::Admin::ValuationAssignmentsControllerOverride)
@@ -136,14 +141,14 @@ module Decidim
 
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
-          Decidim::EventsManager.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
+          ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
           end
         end
       end
 
       initializer "decidim_reporting_proposals.on_hiding_resource" do
-        Decidim::EventsManager.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
+        ActiveSupport::Notifications.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
           Decidim::ReportingProposals::Admin::HiddenResourceMailer.notify_mail(
             data[:resource], data[:affected_users], data[:extra][:report_reasons]
           ).deliver_later

@@ -10,7 +10,7 @@ module Decidim
           participatory_space_moderators.each do |moderator|
             next unless moderator.email_on_moderations
 
-            ReportedMailer.hide(moderator, @report).deliver_later unless @current_user == moderator
+            ReportedMailer.hide(moderator, @report).deliver_later unless form.current_user == moderator
           end
         end
       end

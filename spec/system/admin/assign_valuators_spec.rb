@@ -28,17 +28,16 @@ describe "Assign valuators" do
 
   shared_examples "assigns a valuator" do
     it "assigns the proposals to the valuator" do
-      click_link_or_button translated(proposal.title)
+      click_on translated(proposal.title)
       within "#valuators" do
-        expect(page).not_to have_content(valuator.name)
+        expect(page).to have_no_content(valuator.name)
       end
 
       within "#js-form-assign-proposal-to-valuator" do
-        find("#valuator_role_id").click
-        find("option", text: valuator.name).click
+        select valuator.name, from: :assign_valuator_role_ids
       end
 
-      click_link_or_button "Assign"
+      click_on "Assign"
 
       expect(page).to have_content("Proposals assigned to a valuator successfully")
 
@@ -52,7 +51,7 @@ describe "Assign valuators" do
     let!(:valuation_assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
 
     it "unassigns the proposals from the valuator" do
-      click_link_or_button translated(proposal.title)
+      click_on translated(proposal.title)
       expect(page).to have_css("a.red-icon", count: 1)
       expect(page).to have_content(logged_valuator.name)
       expect(page).to have_content(another_valuator.name)
@@ -88,12 +87,12 @@ describe "Assign valuators" do
 
     it "cannot unnassign other valuators" do
       create(:valuation_assignment, proposal:, valuator_role: another_valuator_role)
-      click_link_or_button translated(proposal.title)
+      click_on translated(proposal.title)
       within "#valuators li", text: logged_valuator.name do
         expect(page).to have_css("a.red-icon", count: 1)
       end
       within "#valuators li", text: another_valuator.name do
-        expect(page).not_to have_css("a.red-icon", count: 1)
+        expect(page).to have_no_css("a.red-icon", count: 1)
       end
     end
 
@@ -103,12 +102,12 @@ describe "Assign valuators" do
       it "has permission to access assigned" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(proposal)
         expect(page).to have_content(proposal.title["en"])
-        expect(page).not_to have_content("You are not authorized to perform this action.")
+        expect(page).to have_no_content("You are not authorized to perform this action.")
       end
 
       it "has no permission to access" do
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(another_proposal)
-        expect(page).not_to have_content(another_proposal.title["en"])
+        expect(page).to have_no_content(another_proposal.title["en"])
         expect(page).to have_content("You are not authorized to perform this action.")
       end
     end

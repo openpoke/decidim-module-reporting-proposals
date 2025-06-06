@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.1.1
+  RUBY_VERSION: 3.2.6
   NODE_VERSION: 18.17.1
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:14
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -32,15 +32,19 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      DISABLE_SPRING: "1"
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
+      - name: Install additional tools
+        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
+
       - uses: nanasess/setup-chromedriver@v2
         with:
-          chromedriver-version: 119.0.6045.105
+          chromedriver-version: 126.0.6478.182
 
       - name: List Chrome
         run: apt list --installed | grep chrome
@@ -50,7 +54,7 @@ jobs:
 
       - uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 119.0.6045.105
+          chrome-version: 126.0.6478.182
 
       - uses: ruby/setup-ruby@v1
         with:

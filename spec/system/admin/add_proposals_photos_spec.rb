@@ -24,17 +24,17 @@ describe "Add proposals photos" do
 
   shared_examples "can add photos" do
     it "has a photo section" do
-      click_link_or_button "Photos"
-      attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Save images"
-      click_link_or_button "Photos"
+      click_on "Photos"
+      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      click_on "Save images"
+      click_on "Photos"
 
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
-      attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
-      click_link_or_button "Save images"
+      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      click_on "Save images"
 
-      click_link_or_button "Photos"
+      click_on "Photos"
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 2)
 
       expect(page).to have_css(".delete-proposal__button", count: 2)

@@ -36,7 +36,8 @@ describe "Reporting proposals overrides" do
     login_as user, scope: :user
   end
 
-  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false)
+  # rubocop:disable Metrics/ParameterLists
+  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false, submit: true)
     within "#content" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
@@ -51,42 +52,27 @@ describe "Reporting proposals overrides" do
 
       check "proposal_has_no_address" if skip_address
     end
-
     if attach
-      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
       check "proposal_has_no_image"
     end
 
-    within "#content" do
-      find("*[type=submit]").click
+    if submit
+      within "#content" do
+        find("*[type=submit]").click
+      end
     end
   end
-
-  def complete_proposal(attach: false)
-    within ".edit_proposal" do
-      select translated(another_category.name), from: :proposal_category_id
-      select user_group.name, from: :proposal_user_group_id
-    end
-
-    if attach
-      attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
-      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
-    end
-
-    within ".edit_proposal" do
-      find("*[type=submit]").click
-    end
-  end
+  # rubocop:enable Metrics/ParameterLists
 
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
-      click_link_or_button "New proposal"
+      click_on "New proposal"
     end
 
-    it_behaves_like "3 steps"
     it_behaves_like "prevents post if etiquette errors"
     it_behaves_like "customized form"
     it_behaves_like "map can be hidden"
@@ -100,8 +86,8 @@ describe "Reporting proposals overrides" do
 
     before do
       visit_component
-      click_link_or_button translated(proposal.title), match: :first
-      click_link_or_button "Edit proposal"
+      click_on translated(proposal.title), match: :first
+      click_on "Edit proposal"
     end
 
     it_behaves_like "customized form"
@@ -129,10 +115,9 @@ describe "Reporting proposals overrides" do
     context "when creating" do
       before do
         visit_component
-        click_link_or_button "New proposal"
+        click_on "New proposal"
       end
 
-      it_behaves_like "4 steps"
       it_behaves_like "normal form"
       it_behaves_like "map can be shown", fill: true
       it_behaves_like "creates normal proposal"
@@ -143,8 +128,8 @@ describe "Reporting proposals overrides" do
 
       before do
         visit_component
-        click_link_or_button translated(proposal.title)
-        click_link_or_button "Edit proposal"
+        click_on translated(proposal.title)
+        click_on "Edit proposal"
       end
 
       it_behaves_like "normal form"
