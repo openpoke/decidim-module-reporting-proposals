@@ -36,6 +36,7 @@ describe "Reporting proposals overrides" do
     login_as user, scope: :user
   end
 
+  # rubocop:disable Metrics/ParameterLists
   def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false, submit: true)
     within "#content" do
       fill_in :proposal_title, with: proposal_title
@@ -64,6 +65,7 @@ describe "Reporting proposals overrides" do
       end
     end
   end
+  # rubocop:enable Metrics/ParameterLists
 
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
