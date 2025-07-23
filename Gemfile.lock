@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     decidim-reporting_proposals (0.7.2)
-      decidim-admin (>= 0.29.4, < 0.30)
-      decidim-core (>= 0.29.4, < 0.30)
-      decidim-participatory_processes (>= 0.29.4, < 0.30)
-      decidim-proposals (>= 0.29.4, < 0.30)
+      decidim-admin (>= 0.29.3, < 0.30)
+      decidim-core (>= 0.29.3, < 0.30)
+      decidim-participatory_processes (>= 0.29.3, < 0.30)
+      decidim-proposals (>= 0.29.3, < 0.30)
       deface (>= 1.9)
 
 GEM
