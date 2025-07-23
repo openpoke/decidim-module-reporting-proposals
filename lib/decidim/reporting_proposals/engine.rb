@@ -19,7 +19,6 @@ module Decidim
         Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
         Decidim::ResourceHelper.include(Decidim::ReportingProposals::ResourceHelperOverride)
         Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
-        Decidim::CreateReport.include(Decidim::ReportingProposals::CreateReportOverride)
         Decidim::LinkedResourcesForCell.include(Decidim::ReportingProposals::LinkedResourcesForCellOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
         Decidim::Proposals::ProposalsPickerCell.include(Decidim::ReportingProposals::ProposalsPickerCellOverride)
