@@ -4,13 +4,20 @@ on:
   push:
     branches:
       - main
+      - release/*
   pull_request:
 
 env:
-  CI: "true"
-  SIMPLECOV: "true"
-  RUBY_VERSION: 3.2.6
+  CI: 1
+  SIMPLECOV: 1
   NODE_VERSION: 18.17.1
+  RUBY_VERSION: 3.2.6
+  DISPLAY: ":99"
+  RUBYOPT: '-W:no-deprecated'
+  RAILS_ENV: test
+  NODE_ENV: test
+  DISABLE_SPRING: 1
+
 
 jobs:
   test-unit:
@@ -68,6 +75,22 @@ jobs:
         run: bundle exec rspec --exclude-pattern 'spec/system/**/*_spec.rb'
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: openpoke/decidim-module-reporting-proposals
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots-unit
+          path: ./spec/decidim_dummy_app/tmp/screenshots
+          if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-logs-unit
+          path: ./spec/decidim_dummy_app/log/test.log
+          if-no-files-found: ignore
+

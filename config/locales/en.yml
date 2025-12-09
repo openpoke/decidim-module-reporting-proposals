@@ -232,11 +232,11 @@ en:
     proposals:
       admin:
         proposals:
-          index:
-            id: ID
-            categories: Categories
           address:
             geolocated_at: Geolocated at
+          index:
+            categories: Categories
+            id: ID
           send_email_button:
             send_mail: Send an email to user
           show:

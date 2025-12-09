@@ -157,7 +157,9 @@ describe "Admin manages proposals valuators" do
 
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "can unassign a valuator" do
@@ -183,7 +185,9 @@ describe "Admin manages proposals valuators" do
     before do
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
