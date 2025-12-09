@@ -1,0 +1,3 @@
+<!-- insert_after 'th:contains(":published_at")' -->
+
+<th><%= t(".categories") %></th>
