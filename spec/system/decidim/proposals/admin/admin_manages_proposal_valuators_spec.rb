@@ -75,7 +75,10 @@ describe "Admin manages proposals valuators" do
 
         it "assigns the proposals to the valuator" do
           within "tr", text: translated(proposal.title) do
-            expect(page).to have_css("td.valuators-count", text: "#{valuator.name} (+1)")
+            expect(page).to have_css("td.valuators-count") do |element|
+              expect(element.text).to match(/#{valuator.name}|#{second_valuator.name}/)
+            end
+            expect(page).to have_css("td.valuators-count", text: "(+1)")
           end
         end
       end

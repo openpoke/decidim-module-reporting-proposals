@@ -27,7 +27,7 @@ describe "Edit Proposal Notes" do
 
   before do
     within "tr", text: translated(proposal.title) do
-      click_on translated(proposal.title)
+      click_on "Answer proposal"
     end
   end
 

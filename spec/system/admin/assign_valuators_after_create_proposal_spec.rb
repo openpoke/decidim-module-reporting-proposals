@@ -32,7 +32,7 @@ describe "Automatic assign valuators after create proposals" do
       select category.name["en"], from: :proposal_category_id
 
       perform_enqueued_jobs { click_on "Create" }
-
+      visit manage_component_path(component)
       within(".valuators-count") do
         expect(page).to have_content(valuator.name)
       end
@@ -54,7 +54,6 @@ describe "Automatic assign valuators after create proposals" do
       perform_enqueued_jobs { click_on "Publish" }
 
       visit manage_component_path(component)
-      click_on component.name["en"]
 
       within(".valuators-count") do
         expect(page).to have_content(valuator.name)
