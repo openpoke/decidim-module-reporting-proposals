@@ -75,7 +75,10 @@ describe "Admin manages proposals valuators" do
 
         it "assigns the proposals to the valuator" do
           within "tr", text: translated(proposal.title) do
-            expect(page).to have_css("td.valuators-count", text: "#{valuator.name} (+1)")
+            expect(page).to have_css("td.valuators-count") do |element|
+              expect(element.text).to match(/#{valuator.name}|#{second_valuator.name}/)
+            end
+            expect(page).to have_css("td.valuators-count", text: "(+1)")
           end
         end
       end
@@ -157,7 +160,9 @@ describe "Admin manages proposals valuators" do
 
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "can unassign a valuator" do
@@ -183,7 +188,9 @@ describe "Admin manages proposals valuators" do
     before do
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do

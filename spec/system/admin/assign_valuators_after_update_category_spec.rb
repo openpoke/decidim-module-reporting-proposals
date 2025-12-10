@@ -31,7 +31,7 @@ describe "Assign valuators after update category" do
     end
 
     it "has a valuator after updating" do
-      click_on proposal.title["en"]
+      click_on "Answer proposal"
 
       expect(page).to have_content(valuator_role.user.name, count: 1)
     end

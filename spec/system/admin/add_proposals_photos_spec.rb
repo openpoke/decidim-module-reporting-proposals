@@ -19,7 +19,7 @@ describe "Add proposals photos" do
     )
 
     visit manage_component_path(component)
-    page.find(".table__list-title a").click
+    click_on "Answer proposal"
   end
 
   shared_examples "can add photos" do

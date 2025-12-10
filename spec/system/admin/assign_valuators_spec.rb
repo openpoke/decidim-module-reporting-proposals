@@ -28,7 +28,7 @@ describe "Assign valuators" do
 
   shared_examples "assigns a valuator" do
     it "assigns the proposals to the valuator" do
-      click_on translated(proposal.title)
+      click_on "Answer proposal"
       within "#valuators" do
         expect(page).to have_no_content(valuator.name)
       end
@@ -47,11 +47,11 @@ describe "Assign valuators" do
     end
   end
 
-  shared_examples "unassigns a valuator" do
+  shared_examples "removes a valuator" do
     let!(:valuation_assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
 
-    it "unassigns the proposals from the valuator" do
-      click_on translated(proposal.title)
+    it "removes the proposals from the valuator" do
+      click_on "Answer proposal"
       expect(page).to have_css("a.red-icon", count: 1)
       expect(page).to have_content(logged_valuator.name)
       expect(page).to have_content(another_valuator.name)
@@ -68,7 +68,7 @@ describe "Assign valuators" do
 
   context "when admin assigns a validator" do
     it_behaves_like "assigns a valuator"
-    it_behaves_like "unassigns a valuator"
+    it_behaves_like "removes a valuator"
   end
 
   context "when a valuator manages assignments" do
@@ -85,9 +85,9 @@ describe "Assign valuators" do
 
     it_behaves_like "assigns a valuator"
 
-    it "cannot unnassign other valuators" do
+    it "cannot unassign other valuators" do
       create(:valuation_assignment, proposal:, valuator_role: another_valuator_role)
-      click_on translated(proposal.title)
+      click_on "Answer proposal"
       within "#valuators li", text: logged_valuator.name do
         expect(page).to have_css("a.red-icon", count: 1)
       end
@@ -117,6 +117,6 @@ describe "Assign valuators" do
     let(:login_user) { logged_valuator }
     let(:valuator_role) { logged_valuator_role }
 
-    it_behaves_like "unassigns a valuator"
+    it_behaves_like "removes a valuator"
   end
 end
