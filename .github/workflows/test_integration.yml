@@ -156,10 +156,10 @@ jobs:
           name: screenshots-${{ matrix.name }}
           path: ./spec/decidim_dummy_app/tmp/screenshots
 
-          - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-logs-unit
+          name: test-logs-${{ matrix.name }}
           path: ./spec/decidim_dummy_app/log/test.log
           if-no-files-found: ignore
 
