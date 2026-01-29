@@ -15,7 +15,6 @@ module Decidim
       # generic overrides
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
-        Decidim::Category.include(Decidim::ReportingProposals::CategoryOverride)
         Decidim::FormBuilder.include(Decidim::ReportingProposals::FormBuilderOverride)
         Decidim::ResourceHelper.include(Decidim::ReportingProposals::ResourceHelperOverride)
         Decidim::Map::Autocomplete::Builder.include(Decidim::ReportingProposals::MapBuilderOverride)
