@@ -25,6 +25,7 @@ group :development, :test do
 
   gem "brakeman", "~> 6.1"
   gem "decidim-dev", DECIDIM_VERSION
+  gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
   gem "parallel_tests", "~> 4.2"
 end
