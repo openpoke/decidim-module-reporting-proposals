@@ -11,7 +11,7 @@ module Decidim
           @proposals ||= begin
             proposals_query = Decidim.find_resource_manifest(:proposals).try(:resource_scope, component)
             reporting_proposals_query = Decidim.find_resource_manifest(:reporting_proposals).try(:resource_scope, component)
-            (reporting_proposals_query ? proposals_query.or(reporting_proposals_query) : proposals_query)
+            (reporting_proposals_query ? proposals_query.or(reporting_proposals_query) : proposals_query) # rubocop:disable Style/SafeNavigationChainLength
               &.includes(:component)
               &.published
               &.not_hidden

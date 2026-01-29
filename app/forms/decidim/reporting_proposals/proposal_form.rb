@@ -13,20 +13,20 @@ module Decidim
 
       # Set the has no address
       def map_model(model)
-        super(model)
+        super
 
         self.has_no_address = true if model.address.blank?
         self.has_no_image = true if model.photo.blank?
       end
 
       def has_address?
-        return if has_no_address
+        return false if has_no_address
 
         geocoding_enabled?
       end
 
       def has_camera?
-        return if has_no_image
+        return false if has_no_image
 
         current_component.settings.attachments_allowed?
       end

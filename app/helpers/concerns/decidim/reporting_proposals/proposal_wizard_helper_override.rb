@@ -13,7 +13,6 @@ module Decidim
           steps << Proposals::ProposalsController::STEP2
         end
 
-        # rubocop:disable Rails/HelperInstanceVariable
         def distance(meters = nil)
           meters = @proposal.component.settings.geocoding_comparison_radius.to_f if meters.nil?
 
@@ -42,7 +41,7 @@ module Decidim
         end
 
         def reporting_proposals_component?
-          return unless current_component&.manifest_name
+          return false unless current_component&.manifest_name
 
           current_component.manifest_name == "reporting_proposals"
         end

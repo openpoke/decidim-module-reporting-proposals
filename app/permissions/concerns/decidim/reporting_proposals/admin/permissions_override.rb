@@ -98,7 +98,7 @@ module Decidim
           end
 
           def can_add_evaluators?
-            return unless permission_action.action == :assign_to_evaluator && permission_action.subject == :proposals
+            return false unless permission_action.action == :assign_to_evaluator && permission_action.subject == :proposals
 
             toggle_allow(Decidim::ReportingProposals.evaluators_assign_other_evaluators)
           end

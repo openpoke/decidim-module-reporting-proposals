@@ -53,7 +53,7 @@ module Decidim
         private
 
         def show_my_location_button?
-          return unless template.respond_to?(:current_component)
+          return false unless template.respond_to?(:current_component)
 
           Decidim::ReportingProposals.show_my_location_button.include?(template.current_component.manifest_name.to_sym)
         end
