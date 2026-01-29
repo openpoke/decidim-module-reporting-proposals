@@ -1,3 +1,0 @@
-<!-- insert_before ".actions" -->
-
-<%= render "decidim/reporting_proposals/admin/categories/column_valuators" %>

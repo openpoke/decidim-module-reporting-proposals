@@ -1,3 +1,0 @@
-<!-- insert_after 'th:contains(":published_at")' -->
-
-<th><%= t("decidim.proposals.admin.proposals.index.categories") %></th>

@@ -11,7 +11,7 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 22.14.0
-  RUBY_VERSION: 3.3
+  RUBY_VERSION: 3.3.10
   DISPLAY: ":99"
   RUBYOPT: '-W:no-deprecated'
   RAILS_ENV: test

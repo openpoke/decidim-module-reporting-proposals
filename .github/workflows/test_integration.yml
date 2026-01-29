@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.3
+  RUBY_VERSION: 3.3.10
   NODE_VERSION: 22.14.0
   RAILS_ENV: test
   DATABASE_USERNAME: postgres

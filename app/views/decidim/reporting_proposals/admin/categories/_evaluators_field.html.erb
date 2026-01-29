@@ -1,7 +1,0 @@
-
-<div class="row column">
-  <%= form.select :evaluator_ids,
-                  find_evaluators_for_select(current_participatory_space, current_user),
-                  { help_text: t("form.evaluators_help", scope: "decidim.reporting_proposals.admin.categories") },
-                  { multiple: true } %>
-</div>
