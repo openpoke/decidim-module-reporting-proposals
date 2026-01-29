@@ -3,13 +3,13 @@
 require "spec_helper"
 
 module Decidim::ReportingProposals::Admin
-  describe ProposalsValuatorMailer do
+  describe ProposalsEvaluatorMailer do
     include ActionView::Helpers::SanitizeHelper
 
     let(:organization) { create(:organization) }
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
-    let(:user) { create(:user, organization:, name: "Tamilla", email: "valuator@example.org") }
+    let(:user) { create(:user, organization:, name: "Tamilla", email: "evaluator@example.org") }
     let(:admin) { create(:user, :admin, organization:, name: "Mark") }
     let(:proposals) { create_list(:proposal, 3, component: proposals_component) }
 
@@ -17,8 +17,8 @@ module Decidim::ReportingProposals::Admin
       Decidim::ResourceLocatorPresenter.new(proposal).url
     end
 
-    context "when valuator assigned" do
-      let(:mail) { described_class.notify_proposals_valuator(user, admin, proposals) }
+    context "when evaluator assigned" do
+      let(:mail) { described_class.notify_proposals_evaluator(user, admin, proposals) }
 
       it "set subject email" do
         expect(mail.subject).to eq("New proposals assigned to you for evaluation")
@@ -29,10 +29,10 @@ module Decidim::ReportingProposals::Admin
       end
 
       it "set email to" do
-        expect(mail.to).to eq(["valuator@example.org"])
+        expect(mail.to).to eq(["evaluator@example.org"])
       end
 
-      it "body email has valuator name" do
+      it "body email has evaluator name" do
         expect(email_body(mail)).to include("Tamilla")
       end
 

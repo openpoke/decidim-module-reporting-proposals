@@ -32,14 +32,14 @@ module Decidim::ReportingProposals::Admin
     let(:proposal_photo_editing_enabled?) { true }
     let(:allow_proposal_photo_editing) { true }
     let(:allow_admins_to_hide_proposals) { true }
-    let(:valuators_assign_other_valuators) { true }
+    let(:evaluators_assign_other_evaluators) { true }
     let(:edit_proposal_note?) { true }
     let(:permission_action) { Decidim::PermissionAction.new(**action) }
 
     before do
       allow(Decidim::ReportingProposals).to receive(:allow_proposal_photo_editing).and_return(allow_proposal_photo_editing)
       allow(Decidim::ReportingProposals).to receive(:allow_admins_to_hide_proposals).and_return(allow_admins_to_hide_proposals)
-      allow(Decidim::ReportingProposals).to receive(:valuators_assign_other_valuators).and_return(valuators_assign_other_valuators)
+      allow(Decidim::ReportingProposals).to receive(:evaluators_assign_other_evaluators).and_return(evaluators_assign_other_evaluators)
     end
 
     shared_examples "can answer proposals" do
@@ -122,22 +122,22 @@ module Decidim::ReportingProposals::Admin
       end
     end
 
-    shared_examples "can add valuators to the proposal" do
-      describe "add other valuators" do
+    shared_examples "can add evaluators to the proposal" do
+      describe "add other evaluators" do
         let(:action) do
-          { scope: :admin, action: :assign_to_valuator, subject: :proposals }
+          { scope: :admin, action: :assign_to_evaluator, subject: :proposals }
         end
 
         it { is_expected.to be true }
       end
     end
 
-    shared_examples "cannot add valuators to the proposal" do
-      describe "add other valuators" do
-        let!(:valuators_assign_other_valuators) { false }
+    shared_examples "cannot add evaluators to the proposal" do
+      describe "add other evaluators" do
+        let!(:evaluators_assign_other_evaluators) { false }
 
         let(:action) do
-          { scope: :admin, action: :assign_to_valuator, subject: :proposals }
+          { scope: :admin, action: :assign_to_evaluator, subject: :proposals }
         end
 
         it { is_expected.to be false }
@@ -171,17 +171,17 @@ module Decidim::ReportingProposals::Admin
     it_behaves_like "can hide proposals"
     it_behaves_like "edit proposal note"
 
-    context "when user is a valuator" do
-      let!(:valuator_role) { create(:participatory_process_user_role, user:, role: :valuator, participatory_process: space) }
+    context "when user is a evaluator" do
+      let!(:evaluator_role) { create(:participatory_process_user_role, user:, role: :evaluator, participatory_process: space) }
       let!(:user) { create(:user, organization:) }
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
-      it_behaves_like "can add valuators to the proposal"
-      it_behaves_like "cannot add valuators to the proposal"
+      it_behaves_like "can add evaluators to the proposal"
+      it_behaves_like "cannot add evaluators to the proposal"
 
-      context "and can valuate the current proposal" do
-        let!(:assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
+      context "and can evaluate the current proposal" do
+        let!(:assignment) { create(:evaluation_assignment, proposal:, evaluator_role:) }
 
         it_behaves_like "can answer proposals"
         it_behaves_like "can edit photos"

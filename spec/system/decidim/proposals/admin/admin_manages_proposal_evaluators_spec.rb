@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin manages proposals valuators" do
+describe "Admin manages proposals evaluators" do
   let(:manifest_name) { "proposals" }
   let!(:proposal) { create(:proposal, component: current_component) }
   let!(:reportables) { create_list(:proposal, 3, component: current_component) }
@@ -10,17 +10,17 @@ describe "Admin manages proposals valuators" do
   let(:participatory_space_path) do
     decidim_admin_participatory_processes.edit_participatory_process_path(participatory_process)
   end
-  let!(:valuator) { create(:user, organization:) }
-  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user: valuator, participatory_process:) }
-  let(:second_valuator) { create(:user, organization:) }
-  let(:second_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: second_valuator, participatory_process:) }
+  let!(:evaluator) { create(:user, organization:) }
+  let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: evaluator, participatory_process:) }
+  let(:second_evaluator) { create(:user, organization:) }
+  let(:second_evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: second_evaluator, participatory_process:) }
   let!(:admin) { create(:user, :admin, organization:) }
 
   include Decidim::ComponentPathHelper
 
   include_context "when managing a component as an admin"
 
-  context "when assigning to a valuator" do
+  context "when assigning to a evaluator" do
     before do
       visit current_path
 
@@ -29,11 +29,11 @@ describe "Admin manages proposals valuators" do
       end
 
       click_on "Actions"
-      click_on "Assign to valuator"
+      click_on "Assign to evaluator"
     end
 
     it "shows the component select" do
-      expect(page).to have_css("#js-form-assign-proposals-to-valuator select", count: 1)
+      expect(page).to have_css("#js-form-assign-proposals-to-evaluator select", count: 1)
     end
 
     it "shows an update button" do
@@ -43,66 +43,66 @@ describe "Admin manages proposals valuators" do
     context "when submitting the form" do
       before do
         perform_enqueued_jobs do
-          within "#js-form-assign-proposals-to-valuator" do
-            tom_select("#assign_valuator_role_ids", option_id: valuator_role.id)
+          within "#js-form-assign-proposals-to-evaluator" do
+            tom_select("#assign_evaluator_role_ids", option_id: evaluator_role.id)
             click_on("Assign")
           end
         end
       end
 
-      it "assigns the proposals to the valuator" do
-        expect(page).to have_content("Proposals assigned to a valuator successfully")
+      it "assigns the proposals to the evaluator" do
+        expect(page).to have_content("Proposals assigned to an evaluator successfully")
 
         within "tr", text: translated(proposal.title) do
-          expect(page).to have_css("td.valuators-count", text: valuator.name)
+          expect(page).to have_css("td.evaluators-count", text: evaluator.name)
         end
       end
 
       it "sends notification with email" do
         expect(last_email.subject).to include("New proposals assigned to you for evaluation")
         expect(last_email.from).to eq([Decidim::Organization.first.smtp_settings["from"]])
-        expect(last_email.to).to eq([valuator.email])
-        expect(last_email.body.encoded).to include("You've been assigned as a valuator")
+        expect(last_email.to).to eq([evaluator.email])
+        expect(last_email.body.encoded).to include("You've been assigned as a evaluator")
         expect(last_email.body.encoded).to include(Decidim::ResourceLocatorPresenter.new(proposal).admin_url)
       end
 
-      context "when a valuator already exists" do
+      context "when a evaluator already exists" do
         before do
-          create(:valuation_assignment, proposal:, valuator_role: second_valuator_role)
+          create(:evaluation_assignment, proposal:, evaluator_role: second_evaluator_role)
 
           visit current_path
         end
 
-        it "assigns the proposals to the valuator" do
+        it "assigns the proposals to the evaluator" do
           within "tr", text: translated(proposal.title) do
-            expect(page).to have_css("td.valuators-count") do |element|
-              expect(element.text).to match(/#{valuator.name}|#{second_valuator.name}/)
+            expect(page).to have_css("td.evaluators-count") do |element|
+              expect(element.text).to match(/#{valuator.name}|#{second_evaluator.name}/)
             end
-            expect(page).to have_css("td.valuators-count", text: "(+1)")
+            expect(page).to have_css("td.evaluators-count", text: "(+1)")
           end
         end
       end
     end
   end
 
-  context "when filtering proposals by assigned valuator" do
+  context "when filtering proposals by assigned evaluator" do
     let!(:unassigned_proposal) { create(:proposal, component:) }
     let(:assigned_proposal) { proposal }
 
     before do
-      create(:valuation_assignment, proposal:, valuator_role:)
+      create(:evaluation_assignment, proposal:, evaluator_role:)
 
       visit current_path
     end
 
-    it "only shows the proposals assigned to the selected valuator" do
+    it "only shows the proposals assigned to the selected evaluator" do
       expect(page).to have_content(translated(assigned_proposal.title))
       expect(page).to have_content(translated(unassigned_proposal.title))
 
       within ".filters__section" do
         find("a.dropdown", text: "Filter").hover
-        find("a", text: "Assigned to valuator").hover
-        find("a", text: valuator.name).click
+        find("a", text: "Assigned to evaluator").hover
+        find("a", text: evaluator.name).click
       end
 
       expect(page).to have_content(translated(assigned_proposal.title))
@@ -110,11 +110,11 @@ describe "Admin manages proposals valuators" do
     end
   end
 
-  context "when unassigning valuators from a proposal from the proposals index page" do
+  context "when unassigning evaluators from a proposal from the proposals index page" do
     let(:assigned_proposal) { proposal }
 
     before do
-      create(:valuation_assignment, proposal:, valuator_role:)
+      create(:evaluation_assignment, proposal:, evaluator_role:)
 
       visit current_path
 
@@ -123,11 +123,11 @@ describe "Admin manages proposals valuators" do
       end
 
       click_on "Actions"
-      click_on "Unassign from valuator"
+      click_on "Unassign from evaluator"
     end
 
     it "shows the component select" do
-      expect(page).to have_css("#js-form-unassign-proposals-from-valuator select", count: 1)
+      expect(page).to have_css("#js-form-unassign-proposals-from-evaluator select", count: 1)
     end
 
     it "shows an update button" do
@@ -136,27 +136,27 @@ describe "Admin manages proposals valuators" do
 
     context "when submitting the form" do
       before do
-        within "#js-form-unassign-proposals-from-valuator" do
-          tom_select("#unassign_valuator_role_ids", option_id: valuator_role.id)
+        within "#js-form-unassign-proposals-from-evaluator" do
+          tom_select("#unassign_evaluator_role_ids", option_id: evaluator_role.id)
           click_on("Unassign")
         end
       end
 
-      it "unassigns the proposals to the valuator" do
-        expect(page).to have_content("Valuator unassigned from proposals successfully")
+      it "unassigns the proposals to the evaluator" do
+        expect(page).to have_content("Evaluator unassigned from proposals successfully")
 
         within "tr", text: translated(proposal.title) do
-          expect(page).to have_css("td.valuators-count", text: 0)
+          expect(page).to have_css("td.evaluators-count", text: 0)
         end
       end
     end
   end
 
-  context "when unassigning valuators from a proposal from the proposal show page" do
+  context "when unassigning evaluators from a proposal from the proposal show page" do
     let(:assigned_proposal) { proposal }
 
     before do
-      create(:valuation_assignment, proposal:, valuator_role:)
+      create(:evaluation_assignment, proposal:, evaluator_role:)
 
       visit current_path
 
@@ -195,7 +195,7 @@ describe "Admin manages proposals valuators" do
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
       within "#js-form-assign-proposal-to-valuator" do
-        select valuator.name, from: :assign_valuator_role_ids
+        select valuator.name, from: :assign_evaluator_role_ids
       end
 
       click_on "Assign"
