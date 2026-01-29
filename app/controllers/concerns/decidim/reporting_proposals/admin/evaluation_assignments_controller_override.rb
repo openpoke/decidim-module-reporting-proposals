@@ -3,35 +3,35 @@
 module Decidim
   module ReportingProposals
     module Admin
-      module ValuationAssignmentsControllerOverride
+      module EvaluationAssignmentsControllerOverride
         extend ActiveSupport::Concern
 
         included do
           def create
-            @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(params)
+            @form = form(Decidim::Proposals::Admin::EvaluationAssignmentForm).from_params(params)
 
             @form.proposals.each do |proposal|
-              enforce_permission_to :assign_to_valuator, :proposals, proposal:
+              enforce_permission_to :assign_to_evaluator, :proposals, proposal:
             end
 
-            Decidim::Proposals::Admin::AssignProposalsToValuator.call(@form) do
+            Decidim::Proposals::Admin::AssignProposalsToEvaluator.call(@form) do
               on(:ok) do |_proposal|
-                flash[:notice] = I18n.t("valuation_assignments.create.success", scope: "decidim.proposals.admin")
+                flash[:notice] = I18n.t("evaluation_assignments.create.success", scope: "decidim.proposals.admin")
                 redirect_to after_add_evaluator_url
               end
 
               on(:invalid) do
-                flash.now[:alert] = I18n.t("valuation_assignments.create.invalid", scope: "decidim.proposals.admin")
+                flash.now[:alert] = I18n.t("evaluation_assignments.create.invalid", scope: "decidim.proposals.admin")
                 redirect_to after_add_evaluator_url
               end
             end
           end
 
           def destroy
-            @form = form(Decidim::Proposals::Admin::ValuationAssignmentForm).from_params(params)
+            @form = form(Decidim::Proposals::Admin::EvaluationAssignmentForm).from_params(params)
 
-            @form.valuator_roles.each do |valuator_role|
-              enforce_permission_to :unassign_from_valuator, :proposals, valuator: valuator_role.user
+            @form.evaluator_roles.each do |evaluator_role|
+              enforce_permission_to :unassign_from_evaluator, :proposals, evaluator: evaluator_role.user
             end
 
             Decidim::Proposals::Admin::UnassignProposalsFromValuator.call(@form) do

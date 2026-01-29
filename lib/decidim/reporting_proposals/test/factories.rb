@@ -6,8 +6,8 @@ FactoryBot.define do
     manifest_name { :reporting_proposals }
   end
 
-  factory :category_valuator, class: "Decidim::ReportingProposals::CategoryValuator" do
-    category { association :category, participatory_space: valuator_role.participatory_space }
-    valuator_role { association :participatory_process_user_role, role: "valuator" }
+  factory :category_evaluator, class: "Decidim::ReportingProposals::CategoryEvaluator" do
+    category { association :category, participatory_space: evaluator_role.participatory_space }
+    evaluator_role { association :participatory_process_user_role, role: "evaluator" }
   end
 end

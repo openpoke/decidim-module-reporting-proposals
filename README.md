@@ -73,6 +73,8 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
+| 0.9.x   | 0.31.x                      |
+| 0.8.x   | 0.30.x                      |
 | 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |
 | 0.5.x   | 0.27.x                      |
@@ -187,9 +189,9 @@ can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
 
-#### Webpacker notes
+#### Shakapacker notes
 
-As latests versions of Decidim, this repository uses Webpacker for Rails. This means that compilation
+As latests versions of Decidim, this repository uses Shakapacker for Rails. This means that compilation
 of assets is required everytime a Javascript or CSS file is modified. Usually, this happens
 automatically, but in some cases (specially when actively changes that type of files) you want to 
 speed up the process. 
@@ -197,7 +199,7 @@ speed up the process.
 To do that, start in a separate terminal than the one with `bin/rails s`, and BEFORE it, the following command:
 
 ```bash
-bin/webpack-dev-server
+bin/shakapacker-dev-server
 ```
 
 #### Code Styling

@@ -3,7 +3,7 @@ ca:
   activemodel:
     attributes:
       category:
-        valuator_ids: Avaluadores assignades
+        evaluator_ids: Avaluadores assignades
       proposal:
         has_no_address: No té adreça
         has_no_image: Sense imatge
@@ -189,7 +189,7 @@ ca:
         title: Accions
       admin:
         actions:
-          edit_valuators: Edita les avaluadores
+          edit_evaluators: Edita les avaluadores
           preview: Vista prèvia
         answer_overdue:
           datetime:
@@ -273,9 +273,9 @@ ca:
                 other: "%{count} anys per respondre"
         categories:
           form:
-            valuators_help: Seleccioneu les avaluadores que s'assignaran automàticament quan es publiqui una proposta en aquesta categoria (rebran una notificació).
+            evaluators_help: Seleccioneu les avaluadores que s'assignaran automàticament quan es publiqui una proposta en aquesta categoria (rebran una notificació).
           index:
-            valuators_column: Avaluadores assignades
+            evaluators_column: Avaluadores assignades
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -349,13 +349,13 @@ ca:
             photos: Fotografies
           photos:
             title: Fotografies
-          valuators_list:
-            assigned_valuators: Avaluadores assignades
+          evaluators_list:
+            assigned_evaluators: Avaluadores assignades
             remove_assignment: desfer assignació
             remove_assignment_confirmation: eliminar la confirmació de l'assignació
-            valuators: Avaluadores
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
+            evaluators: Avaluadores
+        proposals_evaluator_mailer:
+          notify_proposals_evaluator:
             admin_panel: panell d'administració
             email_body: Has estat assignat com a avaluador de les propostes llistades a sota. Això significa que s'ha confiat en tu per donar-hi resposta en els propoers dies.
             gratitude: Gràcies per la teva ajuda!

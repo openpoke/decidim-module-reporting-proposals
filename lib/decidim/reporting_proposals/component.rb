@@ -144,7 +144,7 @@ Decidim.register_component(:reporting_proposals) do |component|
                    .where(component: component_instance)
                    .includes(:scope, :category, :component)
 
-      if space.user_roles(:valuator).where(user:).any?
+      if space.user_roles(:evaluator).where(user:).any?
         collection.with_valuation_assigned_to(user, space)
       else
         collection

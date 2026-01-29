@@ -3,7 +3,7 @@ en:
   activemodel:
     attributes:
       category:
-        valuator_ids: Automatic valuators
+        evaluator_ids: Automatic evaluators
       proposal:
         has_no_address: Has no address
         has_no_image: Has no image
@@ -43,7 +43,7 @@ en:
               number of days will be ignored. Leave at zero to compare all proposals.
             geocoding_comparison_radius: Maximum radius (in meters) for considering
               proposals similar (will be ordered by proximity) by distance proximity
-            proposal_photo_editing_enabled: Allow admins and valuators to edit photos
+            proposal_photo_editing_enabled: Allow admins and evaluators to edit photos
               when answering proposals
             unanswered_proposals_overdue: After how many days a not-answered proposal
               is considered overdue
@@ -136,7 +136,7 @@ en:
               limited: Allow editing of proposals within a specific timeframe
             proposal_length: Maximum proposal body length
             proposal_limit: Proposal limit per participant
-            proposal_photo_editing_enabled: Allow admins and valuators to edit photos
+            proposal_photo_editing_enabled: Allow admins and evaluators to edit photos
               when answering proposals
             proposal_wizard_step_1_help_text: Proposal wizard "Create" step help text
             proposal_wizard_step_2_help_text: Proposal wizard "Compare" step help
@@ -261,7 +261,7 @@ en:
         title: Actions
       admin:
         actions:
-          edit_valuators: Edit valuators
+          edit_evaluators: Edit evaluators
           preview: Preview
         answer_overdue:
           datetime:
@@ -345,10 +345,10 @@ en:
                 other: "%{count} years to answer"
         categories:
           form:
-            valuators_help: Select valuators that will be assigned automatically when
+            evaluators_help: Select evaluators that will be assigned automatically when
               a proposal is published in this category (they will receive a notification).
           index:
-            valuators_column: Automatic valuators
+            evaluators_column: Automatic evaluators
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -423,15 +423,15 @@ en:
             photos: Photos
           photos:
             title: Photos
-          valuators_list:
-            assigned_valuators: Assigned valuators
+          evaluators_list:
+            assigned_evaluators: Assigned evaluators
             remove_assignment: remove assignment
             remove_assignment_confirmation: remove assignment confirmation
-            valuators: Valuators
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
+            evaluators: Evaluators
+        proposals_evaluator_mailer:
+          notify_proposals_evaluator:
             admin_panel: admin panel
-            email_body: You've been assigned as a valuator for the proposals listed
+            email_body: You've been assigned as an evaluator for the proposals listed
               below. This means you've been trusted to give them feedback and a proper
               response in the next coming days.
             gratitude: Thanks for your help!

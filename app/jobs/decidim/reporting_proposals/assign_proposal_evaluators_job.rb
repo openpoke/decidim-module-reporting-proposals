@@ -2,35 +2,35 @@
 
 module Decidim
   module ReportingProposals
-    class AssignProposalValuatorsJob < ApplicationJob
+    class AssignProposalEvaluatorsJob < ApplicationJob
       queue_as :default
       attr_reader :resource
 
       def perform(data)
         @resource = data[:resource]
 
-        return if valuator_roles.blank?
+        return if evaluator_roles.blank?
 
         unless data[:event_class] == "Decidim::Proposals::Admin::UpdateProposalCategoryEvent"
           return unless data[:extra][:participatory_space]
           return if data[:extra][:type] == "admin"
         end
 
-        valuator_roles.each do |valuator_role|
-          Decidim::Proposals::Admin::AssignProposalsToValuator.call(form(valuator_role)) do
+        evaluator_roles.each do |evaluator_role|
+          Decidim::Proposals::Admin::AssignProposalsToEvaluator.call(form(evaluator_role)) do
             on(:ok) do
-              Rails.logger.info("Automatically assigned valuator #{valuator_role.user.name} to proposal ##{resource.id}")
+              Rails.logger.info("Automatically assigned evaluator #{evaluator_role.user.name} to proposal ##{resource.id}")
             end
             on(:invalid) do
-              Rails.logger.warn("Couldn't automatically assign valuator #{valuator_role.user.name} to proposal ##{resource.id}")
+              Rails.logger.warn("Couldn't automatically assign evaluator #{evaluator_role.user.name} to proposal ##{resource.id}")
             end
           end
         end
       end
 
-      def form(valuator_role)
-        Decidim::Proposals::Admin::ValuationAssignmentForm.from_params(
-          valuator_role_ids: valuator_role.id,
+      def form(evaluator_role)
+        Decidim::Proposals::Admin::EvaluationAssignmentForm.from_params(
+          evaluator_role_ids: evaluator_role.id,
           proposal_ids: [resource.id]
         ).with_context(
           current_component: resource.component,
@@ -38,9 +38,9 @@ module Decidim
         )
       end
 
-      # get valuators from categories
-      def valuator_roles
-        @valuator_roles ||= category.valuator_roles
+      # get evaluators from categories
+      def evaluator_roles
+        @evaluator_roles ||= category.evaluator_roles
       end
 
       def category

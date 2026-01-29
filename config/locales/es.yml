@@ -3,7 +3,7 @@ es:
   activemodel:
     attributes:
       category:
-        valuator_ids: Evaluadores automáticos
+        evaluator_ids: Evaluadores automáticos
       proposal:
         has_no_address: No tiene dirección
         has_no_image: No tiene imagen
@@ -189,7 +189,7 @@ es:
         title: Acciones
       admin:
         actions:
-          edit_valuators: Editar evaluadores
+          edit_evaluators: Editar evaluadores
           preview: Previsualizar
         answer_overdue:
           datetime:
@@ -273,9 +273,9 @@ es:
                 other: "%{count} años para responder"
         categories:
           form:
-            valuators_help: Seleccione los evaluadores que serán asignados automáticamente cuando una propuesta se publique en esta categoría (recibirán una notificación).
+            evaluators_help: Seleccione los evaluadores que serán asignados automáticamente cuando una propuesta se publique en esta categoría (recibirán una notificación).
           index:
-            valuators_column: Evaluadores automáticos
+            evaluators_column: Evaluadores automáticos
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -349,13 +349,13 @@ es:
             photos: Fotos
           photos:
             title: Fotos
-          valuators_list:
-            assigned_valuators: Asignar evaluadoras
+          evaluators_list:
+            assigned_evaluators: Asignar evaluadoras
             remove_assignment: eliminar asignación
             remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
-            valuators: Evaluadoras
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
+            evaluators: Evaluadoras
+        proposals_evaluator_mailer:
+          notify_proposals_evaluator:
             admin_panel: panel de administración
             email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
             gratitude: '¡Gracias por tu ayuda!'

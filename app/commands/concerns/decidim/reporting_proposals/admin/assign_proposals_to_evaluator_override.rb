@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     module Admin
-      module AssignProposalsToValuatorOverride
+      module AssignProposalsToEvaluatorOverride
         extend ActiveSupport::Concern
 
         included do
@@ -21,8 +21,8 @@ module Decidim
           private
 
           def send_email
-            form.valuator_roles.each do |role|
-              ProposalsValuatorMailer.notify_proposals_valuator(role.user, form.current_user, form.proposals).deliver_later
+            form.evaluator_roles.each do |role|
+              ProposalsEvaluatorMailer.notify_proposals_evaluator(role.user, form.current_user, form.proposals).deliver_later
             end
           end
         end

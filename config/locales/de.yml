@@ -3,7 +3,7 @@ de:
   activemodel:
     attributes:
       category:
-        valuator_ids: Automatisch zugewiesen an
+        evaluator_ids: Automatisch zugewiesen an
       proposal:
         has_no_address: Adresse unbekannt
         has_no_image: Kein Foto vorhanden
@@ -189,7 +189,7 @@ de:
         title: Aktionen
       admin:
         actions:
-          edit_valuators: Experten ändern
+          edit_evaluators: Experten ändern
           preview: Vorschau
         answer_overdue:
           datetime:
@@ -273,9 +273,9 @@ de:
                 other: "%{count} Jahre zur Beantwortung"
         categories:
           form:
-            valuators_help: Wählen Sie Experten aus, die automatisch zugewiesen werden, wenn eine Meldung in dieser Kategorie veröffentlicht wird (diese erhalten eine Benachrichtigung).
+            evaluators_help: Wählen Sie Experten aus, die automatisch zugewiesen werden, wenn eine Meldung in dieser Kategorie veröffentlicht wird (diese erhalten eine Benachrichtigung).
           index:
-            valuators_column: Automatisch zugewiesen an
+            evaluators_column: Automatisch zugewiesen an
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -349,13 +349,13 @@ de:
             photos: Bilder
           photos:
             title: Bilder
-          valuators_list:
-            assigned_valuators: Zugewiesene Experten
+          evaluators_list:
+            assigned_evaluators: Zugewiesene Experten
             remove_assignment: Zuweisung entfernen
             remove_assignment_confirmation: Zuweisung wurde entfernt
-            valuators: Expert/innen
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
+            evaluators: Expert/innen
+        proposals_evaluator_mailer:
+          notify_proposals_evaluator:
             admin_panel: admin panel
             email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
             gratitude: Vielen Dank!

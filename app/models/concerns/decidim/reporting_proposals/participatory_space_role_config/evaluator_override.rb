@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     module ParticipatorySpaceRoleConfig
-      module ValuatorOverride
+      module EvaluatorOverride
         extend ActiveSupport::Concern
 
         included do

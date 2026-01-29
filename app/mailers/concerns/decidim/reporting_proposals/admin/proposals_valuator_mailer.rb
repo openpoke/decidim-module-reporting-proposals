@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     module Admin
-      class ProposalsValuatorMailer < Decidim::ApplicationMailer
+      class ProposalsEvaluatorMailer < Decidim::ApplicationMailer
         include Decidim::TranslationsHelper
         include Decidim::SanitizeHelper
         include Decidim::ApplicationHelper
@@ -13,15 +13,15 @@ module Decidim
         helper Decidim::TranslationsHelper
         helper Decidim::ApplicationHelper
 
-        def notify_proposals_valuator(user, admin, proposals)
-          @valuator_user = user
+        def notify_proposals_evaluator(user, admin, proposals)
+          @evaluator_user = user
           @admin = admin
           @proposals = proposals
           @organization = user.organization
 
           with_user(user) do
             mail to: "#{user.name} <#{user.email}>",
-                 subject: t("subject", scope: "decidim.reporting_proposals.admin.proposals_valuator_mailer.notify_proposals_valuator")
+                 subject: t("subject", scope: "decidim.reporting_proposals.admin.proposals_evaluator_mailer.notify_proposals_evaluator")
           end
         end
       end

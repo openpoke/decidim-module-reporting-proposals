@@ -34,14 +34,14 @@ module Decidim
       [:proposals, :reporting_proposals]
     end
 
-    # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+    # Public setting to prevent evaluators or admins to modify the photos attached to a proposal
     # otherwise can be configured at the component level
     config_accessor :allow_proposal_photo_editing do
       true
     end
 
-    # Public setting to allow to assign other valuators
-    config_accessor :valuators_assign_other_valuators do
+    # Public setting to allow to assign other evaluators
+    config_accessor :evaluators_assign_other_evaluators do
       true
     end
 

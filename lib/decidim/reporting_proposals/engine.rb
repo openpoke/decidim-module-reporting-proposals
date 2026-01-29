@@ -35,11 +35,11 @@ module Decidim
         Decidim::Budgets::Admin::CreateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Budgets::Admin::UpdateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::UpdateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
-        Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
-        Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
-        Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
+        # Decidim::Admin::CategoryForm.include(Decidim::ReportingProposals::Admin::CategoryFormOverride)
+        # Decidim::Admin::CreateCategory.include(Decidim::ReportingProposals::Admin::CreateCategoryOverride)
+        # Decidim::Admin::UpdateCategory.include(Decidim::ReportingProposals::Admin::UpdateCategoryOverride)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
-        Decidim::ParticipatorySpaceRoleConfig::Valuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
+        Decidim::ParticipatorySpaceRoleConfig::Evaluator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
         Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::CreateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
         # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
@@ -72,7 +72,7 @@ module Decidim
         end
         Decidim::ResourceLocatorPresenter.include(Decidim::ReportingProposals::ResourceLocatorPresenterOverride)
         Decidim::Proposals::PublishProposalEvent.include(Decidim::ReportingProposals::PublishProposalEventOverride)
-        Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::ReportingProposals::Admin::AssignProposalsToValuatorOverride)
+        Decidim::Proposals::Admin::AssignProposalsToEvaluator.include(Decidim::ReportingProposals::Admin::AssignProposalsToEvaluatorOverride)
 
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
@@ -99,7 +99,7 @@ module Decidim
       initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
         config.to_prepare do
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
-          Decidim::Admin::CategoriesController.include(Decidim::ReportingProposals::Admin::CategoriesControllerOverride)
+          # Decidim::Admin::CategoriesController.include(Decidim::ReportingProposals::Admin::CategoriesControllerOverride)
           Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
           Decidim::Proposals::ProposalWizardHelper.include(Decidim::ReportingProposals::ProposalWizardHelperOverride)
           Decidim::Proposals::Admin::ProposalsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
@@ -109,7 +109,7 @@ module Decidim
           Decidim::Proposals::Admin::ProposalBulkActionsHelper.include(Decidim::ReportingProposals::Admin::ProposalBulkActionsHelperOverride)
 
           # port of https://github.com/openpoke/decidim/pull/24
-          Decidim::Proposals::Admin::ValuationAssignmentsController.include(Decidim::ReportingProposals::Admin::ValuationAssignmentsControllerOverride)
+          Decidim::Proposals::Admin::EvaluationAssignmentsController.include(Decidim::ReportingProposals::Admin::EvaluationAssignmentsControllerOverride)
 
           begin
             Decidim::Templates::Admin::ProposalAnswerTemplatesController.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplatesControllerOverride)
@@ -141,7 +141,7 @@ module Decidim
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
           ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
-            Decidim::ReportingProposals::AssignProposalValuatorsJob.perform_later(data)
+            Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(data)
           end
         end
       end

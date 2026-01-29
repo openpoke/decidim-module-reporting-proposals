@@ -61,7 +61,7 @@ module Decidim
         end
 
         def user_allowed_or_assigned?
-          user.admin? || (user_is_valuator? && valuator_assigned_to_proposal?)
+          user.admin? || (user_is_evaluator? && evaluator_assigned_to_proposal?)
         end
 
         def user_administrator?

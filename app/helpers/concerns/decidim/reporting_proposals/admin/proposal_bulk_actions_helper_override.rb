@@ -7,13 +7,13 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          def find_valuators_for_select(participatory_space, _current_user)
-            valuator_roles = participatory_space.user_roles(:valuator).order_by_name
-            valuators = Decidim::User.where(id: valuator_roles.pluck(:decidim_user_id)).to_a
+          def find_evaluators_for_select(participatory_space, _current_user)
+            evaluator_roles = participatory_space.user_roles(:evaluator).order_by_name
+            evaluators = Decidim::User.where(id: evaluator_roles.pluck(:decidim_user_id)).to_a
 
-            valuator_roles.map do |role|
-              valuator = valuators.find { |user| user.id == role.decidim_user_id }
-              [valuator.name, role.id]
+            evaluator_roles.map do |role|
+              evaluator = evaluators.find { |user| user.id == role.decidim_user_id }
+              [evaluator.name, role.id]
             end
           end
         end

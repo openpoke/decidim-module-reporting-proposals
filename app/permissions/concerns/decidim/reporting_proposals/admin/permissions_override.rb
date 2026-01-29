@@ -12,18 +12,18 @@ module Decidim
             # The public part needs to be implemented yet
             return permission_action if permission_action.scope != :admin
 
-            # Valuators can only perform these actions
-            if user_is_valuator?
-              if valuator_assigned_to_proposal?
+            # Evaluators can only perform these actions
+            if user_is_evaluator?
+              if evaluator_assigned_to_proposal?
                 can_create_proposal_note?
                 can_create_proposal_answer?
-                can_assign_valuator_to_proposal?
+                can_assign_evaluator_to_proposal?
                 allow! if action_is_show_on_proposal?
               elsif action_is_show_on_proposal?
                 disallow!
               end
 
-              valuator_can_unassign_valuator_from_proposals?
+              evaluator_can_unassign_evaluator_from_proposals?
               can_export_proposals?
 
               return permission_action
@@ -60,12 +60,11 @@ module Decidim
             # Every user allowed by the space can split proposals to another component
             allow! if permission_action.subject == :proposals && permission_action.action == :split
 
-            # Every user allowed by the space can assign proposals to a valuator
-            can_assign_valuator_to_proposal?
+            # Every user allowed by the space can assign proposals to a evaluator
+            can_assign_evaluator_to_proposal?
 
-            # Every user allowed by the space can unassign a valuator from proposals
-            can_unassign_valuator_from_proposals?
-
+            # Every user allowed by the space can unassign a evaluator from proposals
+            can_unassign_evaluator_from_proposals?
             # Only admin users can publish many answers at once
             toggle_allow(user.admin?) if permission_action.subject == :proposals && permission_action.action == :publish_answers
 
@@ -92,16 +91,16 @@ module Decidim
             permission_action.subject == :proposal && permission_action.action == :show
           end
 
-          def valuator_can_unassign_valuator_from_proposals?
-            can_unassign_valuator_from_proposals? if user == context.fetch(:valuator, nil)
+          def evaluator_can_unassign_evaluator_from_proposals?
+            can_unassign_evaluator_from_proposals? if user == context.fetch(:evaluator, nil)
 
-            can_add_valuators?
+            can_add_evaluators?
           end
 
-          def can_add_valuators?
-            return unless permission_action.action == :assign_to_valuator && permission_action.subject == :proposals
+          def can_add_evaluators?
+            return unless permission_action.action == :assign_to_evaluator && permission_action.subject == :proposals
 
-            toggle_allow(Decidim::ReportingProposals.valuators_assign_other_valuators)
+            toggle_allow(Decidim::ReportingProposals.evaluators_assign_other_evaluators)
           end
         end
       end
