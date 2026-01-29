@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-describe "Create proposal with valuators" do
+describe "Create proposal with evaluators" do
   let!(:organization) { create(:organization) }
   let!(:participatory_process) { create(:participatory_process, organization:) }
   let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
   let!(:category) { create(:category, participatory_space: participatory_process) }
   let!(:admin) { create(:user, :confirmed, :admin, organization:) }
-  let!(:valuator) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
-  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user: valuator, participatory_process:) }
+  let!(:evaluator) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
+  let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: evaluator, participatory_process:) }
 
   before do
     switch_to_host(organization.host)
@@ -21,9 +21,9 @@ describe "Create proposal with valuators" do
   end
 
   context "when an admin manages the component" do
-    let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
+    let!(:category_evaluator) { create(:category_evaluator, evaluator_role:, category:) }
 
-    it "has a valuator after creating" do
+    it "has a evaluator after creating" do
       visit manage_component_path(component)
       click_on("New proposal")
 
@@ -34,16 +34,16 @@ describe "Create proposal with valuators" do
 
       perform_enqueued_jobs { click_on "Create" }
 
-      within(".valuators-count") do
-        expect(page).to have_content(valuator.name)
+      within(".evaluators-count") do
+        expect(page).to have_content(evaluator.name)
       end
     end
   end
 
   context "when a proposal was published in public side" do
-    let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
+    let!(:category_evaluator) { create(:category_evaluator, evaluator_role:, category:) }
 
-    it "has a valuator after creating" do
+    it "has a evaluator after creating" do
       visit public_component_path
 
       click_on "New proposal"
@@ -59,8 +59,8 @@ describe "Create proposal with valuators" do
       visit manage_component_path(component)
       click_on component.name["en"]
 
-      within(".valuators-count") do
-        expect(page).to have_content(valuator.name)
+      within(".evaluators-count") do
+        expect(page).to have_content(evaluator.name)
       end
     end
   end

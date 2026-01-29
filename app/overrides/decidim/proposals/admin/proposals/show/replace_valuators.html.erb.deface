@@ -1,3 +1,0 @@
-<!-- replace "erb[silent]:contains('if proposal.valuators.any?')" -->
-
-<% if true %>

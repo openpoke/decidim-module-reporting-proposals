@@ -3,16 +3,16 @@
 require "spec_helper"
 
 module Decidim::ParticipatorySpaceRoleConfig
-  describe Valuator do
+  describe Evaluator do
     subject { described_class.new(nil) }
 
-    class TestValuator < Base
+    class TestEvaluator < Base
       def accepted_components
         [:proposals, :test]
       end
     end
 
-    module TestValuatorOverride
+    module TestEvaluatorOverride
       extend ActiveSupport::Concern
       included do
         alias_method :test_original_accepted_components, :accepted_components
@@ -28,15 +28,15 @@ module Decidim::ParticipatorySpaceRoleConfig
     end
 
     context "when non default accepted components are added" do
-      let(:alt_valuator) { TestValuator.new(nil) }
+      let(:alt_evaluator) { TestEvaluator.new(nil) }
 
-      TestValuator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::ValuatorOverride)
+      TestEvaluator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
 
       it "has default accepted components" do
-        expect(alt_valuator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals)
-        TestValuator.include(TestValuatorOverride)
+        expect(alt_evaluator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals)
+        TestEvaluator.include(TestEvaluatorOverride)
 
-        expect(alt_valuator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals, :another_component)
+        expect(alt_evaluator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals, :another_component)
       end
 
       it "original class has default accepted components" do

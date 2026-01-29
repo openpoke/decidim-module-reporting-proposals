@@ -2,7 +2,7 @@
 
 module Decidim::ReportingProposals
   # rubocop:disable RSpec/AnyInstance
-  describe AssignProposalValuatorsJob do
+  describe AssignProposalEvaluatorsJob do
     subject do
       Decidim::Proposals::PublishProposal.new(proposal, user)
     end
@@ -15,21 +15,21 @@ module Decidim::ReportingProposals
     let(:user) { create(:user, :confirmed, organization:) }
     let(:admin_follower) { create(:user, :admin, organization:) }
 
-    shared_examples "assigns valuator once" do |use_last_email: true|
+    shared_examples "assigns evaluator once" do |use_last_email: true|
       context "when there's admin followers" do
         let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
         before do
           # simulate a race condition when checking for the assignment already done is not yet in the database
-          allow_any_instance_of(Decidim::Proposals::Admin::AssignProposalsToValuator).to receive(:find_assignment).and_return(false)
+          allow_any_instance_of(Decidim::Proposals::Admin::AssignProposalsToEvaluator).to receive(:find_assignment).and_return(false)
         end
 
-        it "Assigns the valuator" do
+        it "Assigns the evaluator" do
           expect do
             perform_enqueued_jobs do
               subject.call
             end
-          end.to change(Decidim::Proposals::ValuationAssignment, :count).by(1)
+          end.to change(Decidim::Proposals::EvaluationAssignment, :count).by(1)
         end
       end
 
@@ -37,7 +37,7 @@ module Decidim::ReportingProposals
         perform_enqueued_jobs do
           subject.call
         end
-        expect(Rails.logger).to have_received(:info).with(/Automatically assigned valuator #{valuator_user.name}/).once
+        expect(Rails.logger).to have_received(:info).with(/Automatically assigned evaluator #{evaluator_user.name}/).once
 
         email = use_last_email ? last_email : emails.first
         expect(email.subject).to include("New proposals assigned to you for evaluation")
@@ -47,14 +47,14 @@ module Decidim::ReportingProposals
       context "and something wrong happened" do
         before do
           allow(Rails.logger).to receive(:warn).at_least(:once)
-          allow_any_instance_of(Decidim::Proposals::Admin::ValuationAssignmentForm).to receive(:valid?).and_return(false)
+          allow_any_instance_of(Decidim::Proposals::Admin::EvaluationAssignmentForm).to receive(:valid?).and_return(false)
         end
 
         it "logs the error and does not send any email" do
           perform_enqueued_jobs do
             subject.call
           end
-          expect(Rails.logger).to have_received(:warn).with(/Couldn't automatically assign valuator #{valuator_user.name}/).once
+          expect(Rails.logger).to have_received(:warn).with(/Couldn't automatically assign evaluator #{evaluator_user.name}/).once
 
           email = use_last_email ? last_email : emails.first
           expect(email.subject).not_to include("New proposals assigned to you for evaluation")
@@ -80,15 +80,15 @@ module Decidim::ReportingProposals
       end
 
       it "enqueues the job 3 times" do
-        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+        expect(Decidim::ReportingProposals::AssignProposalEvaluatorsJob).to receive(:perform_later)
           .with(data)
-        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+        expect(Decidim::ReportingProposals::AssignProposalEvaluatorsJob).to receive(:perform_later)
           .with(data.merge(
                   extra: {
                     participatory_space: true
                   }
                 ))
-        expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
+        expect(Decidim::ReportingProposals::AssignProposalEvaluatorsJob).to receive(:perform_later)
           .with(data.merge(
                   extra: {
                     participatory_space: true,
@@ -101,59 +101,15 @@ module Decidim::ReportingProposals
     end
 
     context "when executing the job" do
-      let(:valuator_user) { create(:user, :confirmed, organization:) }
-      let!(:category_valuator) { create(:category_valuator, valuator_role:, category:) }
-      let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process:) }
+      let(:evaluator_user) { create(:user, :confirmed, organization:) }
+      let!(:category_evaluator) { create(:category_evaluator, evaluator_role:, category:) }
+      let(:evaluator_role) { create(:participatory_process_user_role, role: "evaluator", user: evaluator_user, participatory_process:) }
 
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)
       end
 
-      it_behaves_like "assigns valuator once"
-    end
-
-    describe "update categories" do
-      subject do
-        Decidim::Proposals::Admin::UpdateProposalCategory.new(new_category.id, [proposal.id])
-      end
-
-      let(:new_category) { create(:category, participatory_space: participatory_process) }
-
-      context "when changing a category" do
-        let(:data) do
-          {
-            affected_users: [user],
-            event_class: "Decidim::Proposals::Admin::UpdateProposalCategoryEvent",
-            extra: {},
-            followers: [],
-            force_send: false,
-            resource: proposal
-          }
-        end
-        let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
-
-        it "broadcasts ok" do
-          expect(subject.call).to broadcast(:update_proposals_category)
-        end
-
-        it "enqueues the job 1 times" do
-          expect(Decidim::ReportingProposals::AssignProposalValuatorsJob).to receive(:perform_later)
-            .with(data)
-          subject.call
-        end
-      end
-
-      context "when executing the job" do
-        let(:valuator_user) { create(:user, :confirmed, organization:) }
-        let!(:category_valuator) { create(:category_valuator, valuator_role:, category: new_category) }
-        let(:valuator_role) { create(:participatory_process_user_role, role: "valuator", user: valuator_user, participatory_process:) }
-
-        before do
-          allow(Rails.logger).to receive(:info).at_least(:once)
-        end
-
-        it_behaves_like "assigns valuator once", use_last_email: false
-      end
+      it_behaves_like "assigns evaluator once"
     end
   end
   # rubocop:enable RSpec/AnyInstance

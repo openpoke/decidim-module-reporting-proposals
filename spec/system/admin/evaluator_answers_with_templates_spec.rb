@@ -3,15 +3,15 @@
 require "spec_helper"
 require "decidim/templates/test/factories"
 
-describe "Valuator answers with templates" do
+describe "Evaluator answers with templates" do
   let!(:organization) { create(:organization) }
   let(:user) { create(:user, :confirmed, :admin_terms_accepted, organization:) }
-  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
+  let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user:, participatory_process:) }
   let(:participatory_process) { create(:participatory_process, title: { en: "A participatory process" }, organization:) }
   let!(:reporting_component) { create(:component, manifest_name: :reporting_proposals, name: { en: "A reporting component" }, participatory_space: participatory_process) }
   let(:component) { reporting_component }
   let!(:proposal) { create(:proposal, component:) }
-  let!(:valuation_assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
+  let!(:evaluation_assignment) { create(:valuation_assignment, proposal:, evaluator_role:) }
   let!(:template) { create(:template, target: :proposal_answer, description: { en: description }, field_values:, organization:, templatable: component) }
   let(:description) { "Some meaningful answer" }
   let(:field_values) { { proposal_state_id: Decidim::Proposals::ProposalState.find_by(component:, token: "rejected").id } }
