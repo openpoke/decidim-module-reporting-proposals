@@ -214,6 +214,8 @@ en:
               will hide the number of supports)
     events:
       proposals:
+        proposal_published:
+          admin_panel: Admin panel
         proposal_published_for_admin:
           admin_panel: admin panel
           email_intro: The proposal <a href="%{resource_path}">%{resource_title}</a>
@@ -227,6 +229,8 @@ en:
             out of the %{admin_url}
           notification_title_official: The official proposal <a href="%{resource_path}">%{resource_title}</a>
             has been added to %{participatory_space_title}. Check it out of the %{admin_url}
+        proposal_published_for_space:
+          admin_panel: Admin panel
     moderations:
       actions:
         hide: Hide
