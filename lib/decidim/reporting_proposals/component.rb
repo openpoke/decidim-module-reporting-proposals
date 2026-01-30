@@ -32,18 +32,17 @@ Decidim.register_component(:reporting_proposals) do |component|
   REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_endorsed most_voted most_commented most_followed with_more_authors).freeze
 
   component.settings(:global) do |settings|
-    settings.attribute :scopes_enabled, type: :boolean, default: false
-    settings.attribute :scope_id, type: :scope
+    settings.attribute :taxonomy_filters, type: :taxonomy_filters
     settings.attribute :vote_limit, type: :integer, default: 0
     settings.attribute :minimum_votes_per_user, type: :integer, default: 0
     settings.attribute :proposal_limit, type: :integer, default: 0
     settings.attribute :proposal_length, type: :integer, default: 500
-    settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: -> { %w(limited infinite) }
+    settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: %w(limited infinite)
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
     settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
-    settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { REP_POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, default: "default", choices: REP_POSSIBLE_SORT_ORDERS
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
     settings.attribute :comments_enabled, type: :boolean, default: true
     settings.attribute :comments_max_length, type: :integer, required: false
@@ -55,9 +54,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :only_photo_attachments, type: :boolean, default: true
     settings.attribute :resources_permissions_enabled, type: :boolean, default: true
     settings.attribute :collaborative_drafts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
-    settings.attribute :participatory_texts_enabled,
-                       type: :boolean, default: false,
-                       readonly: ->(_) { true }
+    settings.attribute :participatory_texts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
     settings.attribute :amendments_enabled, type: :boolean, default: false
     settings.attribute :amendments_wizard_help_text, type: :text, translated: true, editor: true, required: false
     settings.attribute :announcement, type: :text, translated: true, editor: true
@@ -80,22 +77,20 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.settings(:step) do |settings|
     settings.attribute :endorsements_enabled, type: :boolean, default: true
-    settings.attribute :endorsements_blocked, type: :boolean
-    settings.attribute :votes_enabled, type: :boolean
-    settings.attribute :votes_blocked, type: :boolean
+    settings.attribute :endorsements_blocked, type: :boolean, default: false
+    settings.attribute :votes_enabled, type: :boolean, default: false
+    settings.attribute :votes_blocked, type: :boolean, default: false
     settings.attribute :votes_hidden, type: :boolean, default: false
     settings.attribute :comments_blocked, type: :boolean, default: false
     settings.attribute :creation_enabled, type: :boolean, default: true
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :publish_answers_immediately, type: :boolean, default: true
     settings.attribute :answers_with_costs, type: :boolean, default: false
-    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { REP_POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: REP_POSSIBLE_SORT_ORDERS
     settings.attribute :amendment_creation_enabled, type: :boolean, default: true
     settings.attribute :amendment_reaction_enabled, type: :boolean, default: true
     settings.attribute :amendment_promotion_enabled, type: :boolean, default: true
-    settings.attribute :amendments_visibility,
-                       type: :enum, default: "all",
-                       choices: -> { Decidim.config.amendments_visibility_options }
+    settings.attribute :amendments_visibility, type: :enum, default: "all", choices: Decidim.config.amendments_visibility_options
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :automatic_hashtags, type: :text, editor: false, required: false
     settings.attribute :suggested_hashtags, type: :text, editor: false, required: false

@@ -149,6 +149,12 @@ en:
               proposal
             scope_id: Scope
             scopes_enabled: Scopes enabled
+            default_taxonomy: Default taxonomy
+            default_taxonomy_help: Select which taxonomy you want to show by default. If no taxonomy is selected, the results will be shown in a list format.
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
+            no_taxonomy_filters_found: No taxonomy filters found.
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
             threshold_per_proposal: Threshold per proposal
             unanswered_proposals_overdue: After how many days a not-answered proposal
               is considered overdue
