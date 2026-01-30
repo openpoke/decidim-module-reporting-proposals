@@ -140,8 +140,8 @@ de:
               random: Zufällig
               recent: Neueste
               with_more_authors: Mit mehreren Autoren
-            endorsements_blocked: Unterstützung blockieren
-            endorsements_enabled: Unterstützung aktivieren
+            likes_blocked: Unterstützung blockieren
+            likes_enabled: Unterstützung aktivieren
             proposal_answering_enabled: Antworten auf Meldungen zulassen
             publish_answers_immediately: Antworten sofort veröffentlichten
             publish_answers_immediately_help_html: 'Beachten Sie, dass, wenn Sie eine Meldung ohne diese Option beantworten, Sie diese manuell veröffentlichen müssen, indem Sie ihn auswählen und die Aktion für die Veröffentlichung verwenden. Weitere Informationen darüber, wie das funktioniert, finden Sie unter <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">Antworten Dokumentationsseite</a>.'

@@ -38,6 +38,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_limit, type: :integer, default: 0
     settings.attribute :proposal_length, type: :integer, default: 500
     settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: %w(limited infinite)
+    settings.attribute :edit_time, type: :integer_with_units, default: [5, "minutes"], required: true, units: %w(minutes hours days)
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
     settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
@@ -76,8 +77,8 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.settings(:step) do |settings|
-    settings.attribute :endorsements_enabled, type: :boolean, default: true
-    settings.attribute :endorsements_blocked, type: :boolean, default: false
+    settings.attribute :likes_enabled, type: :boolean, default: true
+    settings.attribute :likes_blocked, type: :boolean, default: false
     settings.attribute :votes_enabled, type: :boolean, default: false
     settings.attribute :votes_blocked, type: :boolean, default: false
     settings.attribute :votes_hidden, type: :boolean, default: false
@@ -115,9 +116,9 @@ Decidim.register_component(:reporting_proposals) do |component|
     Decidim::Proposals::ProposalVote.where(proposal: proposals).count
   end
 
-  component.register_stat :endorsements_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
+  component.register_stat :likes_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).not_hidden
-    proposals.sum(:endorsements_count)
+    proposals.sum(:likes_count)
   end
 
   component.register_stat :comments_count, tag: :comments do |components, start_at, end_at|

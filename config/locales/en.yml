@@ -7,6 +7,8 @@ en:
       proposal:
         has_no_address: Has no address
         has_no_image: Has no image
+      proposal_photo:
+        add_photos: Add photos
   decidim:
     admin:
       actions:
@@ -98,6 +100,11 @@ en:
               random: Random
               recent: Recent
               with_more_authors: With more authors
+            default_taxonomy: Default taxonomy
+            default_taxonomy_help: Select which taxonomy you want to show by default.
+              If no taxonomy is selected, the results will be shown in a list format.
+            define_taxonomy_filters: Please define some filters for this participatory
+              space before using this setting.
             evaluating_proposals_overdue: After how many days a proposal in its evaluating
               state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list
@@ -120,6 +127,7 @@ en:
             new_proposal_body_template_help: You can define prefilled text that the
               new Proposals will have
             new_proposal_help_text: New proposal help text
+            no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Official proposals enabled
             only_photo_attachments: Use only photo attachments
             participatory_texts_enabled: Participatory texts enabled
@@ -149,10 +157,6 @@ en:
               proposal
             scope_id: Scope
             scopes_enabled: Scopes enabled
-            default_taxonomy: Default taxonomy
-            default_taxonomy_help: Select which taxonomy you want to show by default. If no taxonomy is selected, the results will be shown in a list format.
-            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
-            no_taxonomy_filters_found: No taxonomy filters found.
             taxonomy_filters: Select filters for the component
             taxonomy_filters_add: Add filter
             threshold_per_proposal: Threshold per proposal
@@ -198,8 +202,8 @@ en:
               random: Random
               recent: Recent
               with_more_authors: With more authors
-            endorsements_blocked: Endorsements blocked
-            endorsements_enabled: Endorsements enabled
+            likes_blocked: Likes blocked
+            likes_enabled: Likes enabled
             proposal_answering_enabled: Proposal answering enabled
             publish_answers_immediately: Publish proposal answers immediately
             publish_answers_immediately_help_html: Mind that if you answer any proposal
@@ -355,8 +359,8 @@ en:
                 other: "%{count} years to answer"
         categories:
           form:
-            evaluators_help: Select evaluators that will be assigned automatically when
-              a proposal is published in this category (they will receive a notification).
+            evaluators_help: Select evaluators that will be assigned automatically
+              when a proposal is published in this category (they will receive a notification).
           index:
             evaluators_column: Automatic evaluators
         evaluate_pending:
@@ -420,6 +424,11 @@ en:
             invalid: There was a problem updating the proposal note.
             success: Proposal note successfully updated.
         proposals:
+          evaluators_list:
+            assigned_evaluators: Assigned evaluators
+            evaluators: Evaluators
+            remove_assignment: remove assignment
+            remove_assignment_confirmation: remove assignment confirmation
           photo_form:
             action: Save images
             add_images: Add images
@@ -433,11 +442,6 @@ en:
             photos: Photos
           photos:
             title: Photos
-          evaluators_list:
-            assigned_evaluators: Assigned evaluators
-            remove_assignment: remove assignment
-            remove_assignment_confirmation: remove assignment confirmation
-            evaluators: Evaluators
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
             admin_panel: admin panel

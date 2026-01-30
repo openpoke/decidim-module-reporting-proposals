@@ -140,8 +140,8 @@ ca:
               random: Aleatori
               recent: Recent
               with_more_authors: Amb més autores
-            endorsements_blocked: Adhesions bloquejades
-            endorsements_enabled: Adhesions habilitades
+            likes_blocked: Adhesions bloquejades
+            likes_enabled: Adhesions habilitades
             proposal_answering_enabled: Resposta a les propostes habilitada
             publish_answers_immediately: Publica la resposta de la proposta immediatament
             publish_answers_immediately_help_html: 'Tingues present que si respons alguna proposta sense que això estigui habilitat, l''hauràs de publicar manualment seleccionant i fent servir l''acció de publicar. Per a més informació sobre el funcionament, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">pàgina de documentació de les respostes a les propostes</a>.'
