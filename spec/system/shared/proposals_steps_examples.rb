@@ -47,7 +47,6 @@ shared_examples "customized form" do
     it "does not show the attachments" do
       uncheck "proposal_has_no_image"
       expect(page).to have_no_content("Add an attachment")
-      expect(page).to have_content("Image/photo")
     end
 
     context "and attachment are not active" do
@@ -66,19 +65,17 @@ shared_examples "customized form" do
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
-    expect(page).to have_button("Images")
-    expect(page).to have_button("Documents")
+    expect(page).to have_button("Add attachments")
   end
 end
 
 shared_examples "creates reporting proposal" do
   it "redirects to the publish step" do
-    fill_proposal(skip_group: true)
+    fill_proposal()
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(user.name)
     expect(page).to have_content(proposal_body)
-    expect(page).to have_content(translated(proposal_category.name))
 
     expect(page).to have_button("Publish")
 
@@ -95,16 +92,9 @@ shared_examples "creates reporting proposal" do
     expect(page).to have_content(proposal_title)
     body = translated(proposal.body)
     expect(body).to have_content(proposal_body)
-    expect(proposal.category).to eq(category)
     expect(proposal.address).to eq(address)
     expect(proposal.latitude).to eq(latitude)
     expect(proposal.longitude).to eq(longitude)
-    expect(body).to have_content("HashtagAuto1")
-    expect(body).to have_content("HashtagAuto2")
-    expect(body).to have_content("HashtagSuggested1")
-    expect(body).to have_no_content("HashtagSuggested2")
-    expect(proposal.identities.first).to eq(user_group)
-    expect(proposal.scope).to eq(scope)
   end
 
   it "modifies the proposal" do
@@ -124,15 +114,12 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content("Edit proposal draft")
 
-    expect(page).to have_content("Image/photo")
-    expect(page).to have_content("Add documents")
+    expect(page).to have_content("Add attachments")
     check "proposal_has_no_image"
-    select translated(another_category.name), from: :proposal_category_id
     click_on "Preview"
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(proposal_body)
-    expect(proposal.category).to eq(another_category)
   end
 
   it "remember has_no_address and has_no_image" do
@@ -141,11 +128,11 @@ shared_examples "creates reporting proposal" do
     click_on "Modify the proposal"
 
     expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("#proposal_add_photos_button[disabled]")
+    expect(page).to have_css("#proposal_documents_button[disabled]")
   end
 
   it "stores no address if checked" do
-    fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
+    fill_proposal(skip_address: true)
 
     click_on "Publish"
 
@@ -153,9 +140,7 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content(proposal_title)
     expect(translated(proposal.body)).to have_content(proposal_body)
-    expect(proposal.category).to eq(category)
     expect(proposal.identities.first).to eq(user)
-    expect(proposal.scope).to be_nil
     expect(proposal.address).to be_nil
     expect(proposal.latitude).to be_nil
     expect(proposal.longitude).to be_nil
@@ -196,7 +181,7 @@ end
 
 shared_examples "creates normal proposal" do
   it "redirects to the publish step" do
-    fill_proposal(extra_fields: false)
+    fill_proposal()
 
     within "#content" do
       expect(page).to have_content("Publish your proposal")

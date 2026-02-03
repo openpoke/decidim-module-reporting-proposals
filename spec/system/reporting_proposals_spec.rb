@@ -9,18 +9,16 @@ describe "Reporting proposals overrides" do
   let!(:scope) { create(:scope, organization:) }
   let(:only_photos) { false }
   let(:attachments) { true }
+  let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [participatory_space.manifest.name]) }
+    let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
   let!(:component) do
     create(:reporting_proposals_component,
-           :with_extra_hashtags,
            participatory_space: participatory_process,
-           suggested_hashtags:,
-           automatic_hashtags:,
-           settings: { scopes_enabled: true, attachments_allowed: attachments, only_photo_attachments: only_photos })
+           settings: { taxonomy_filters: [taxonomy_filter.id], attachments_allowed: attachments, only_photo_attachments: only_photos })
   end
   let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
   let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
   let!(:user) { create(:user, :confirmed, organization:) }
-  let!(:user_group) { create(:user_group, :verified, users: [user], organization:) }
   let(:proposal_title) { "More sidewalks and less roads" }
   let(:proposal_body) { "Cities need more people, not more cars" }
   let(:proposal_category) { category }
@@ -37,23 +35,19 @@ describe "Reporting proposals overrides" do
   end
 
   # rubocop:disable Metrics/ParameterLists
-  def fill_proposal(extra_fields: true, skip_address: false, skip_group: false, skip_scope: false, attach: false, submit: true)
+  def fill_proposal(extra_fields: true, skip_address: false, attach: false, submit: true)
     within "#content" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
 
       if extra_fields
-        select translated(proposal_category.name), from: :proposal_category_id
         fill_in :proposal_address, with: address
-        check "#HashtagSuggested1"
-        select user_group.name, from: :proposal_user_group_id unless skip_group
-        select translated(scope.name), from: :proposal_scope_id unless skip_scope
       end
 
       check "proposal_has_no_address" if skip_address
     end
     if attach
-      dynamically_attach_file(:proposal_add_photos, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
       check "proposal_has_no_image"

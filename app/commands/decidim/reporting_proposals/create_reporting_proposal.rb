@@ -47,19 +47,19 @@ module Decidim
           ) do
             proposal = Decidim::Proposals::Proposal.new(
               title: {
-                I18n.locale => title_with_hashtags
+                I18n.locale => Decidim::ContentProcessor.parse(form.title, current_organization: form.current_organization).rewrite
               },
               body: {
-                I18n.locale => body_with_hashtags
+                I18n.locale => Decidim::ContentProcessor.parse_with_processor(:inline_images, form.body, current_organization: form.current_organization).rewrite
               },
-              category: form.category,
-              scope: form.scope,
               address: form.address,
               latitude: form.latitude,
               longitude: form.longitude,
               component: form.component
             )
-            proposal.add_coauthor(@current_user, user_group:)
+            proposal.taxonomizations = form.taxonomizations if form.taxonomizations.present?
+            proposal.documents = form.documents if form.documents.present?
+            proposal.add_coauthor(@current_user)
             proposal.save!
             proposal
           end
