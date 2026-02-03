@@ -47,7 +47,7 @@ describe "Reporting proposals overrides" do
       check "proposal_has_no_address" if skip_address
     end
     if attach
-      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file(:proposal_photos, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
       check "proposal_has_no_image"
@@ -81,7 +81,8 @@ describe "Reporting proposals overrides" do
     before do
       visit_component
       click_on translated(proposal.title), match: :first
-      click_on "Edit proposal"
+      find("#dropdown-trigger-resource-#{proposal.id}").click
+      click_on "Edit"
     end
 
     it_behaves_like "customized form"
@@ -123,7 +124,8 @@ describe "Reporting proposals overrides" do
       before do
         visit_component
         click_on translated(proposal.title)
-        click_on "Edit proposal"
+        find("#dropdown-trigger-resource-#{proposal.id}").click
+        click_on "Edit"
       end
 
       it_behaves_like "normal form"

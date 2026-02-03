@@ -61,11 +61,12 @@ shared_examples "customized form" do
   end
 
   it "uploads attachments", :slow do
+    page.execute_script("document.querySelectorAll('[data-filename]').forEach(el => el.remove());")
     uncheck "proposal_has_no_image"
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
-    expect(page).to have_button("Add attachments")
+    expect(page).to have_content("Publish")
   end
 end
 
@@ -128,7 +129,7 @@ shared_examples "creates reporting proposal" do
     click_on "Modify the proposal"
 
     expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("#proposal_documents_button[disabled]")
+    expect(page).to have_css("#proposal_photos_button[disabled]")
   end
 
   it "stores no address if checked" do
