@@ -105,6 +105,11 @@ en:
               If no taxonomy is selected, the results will be shown in a list format.
             define_taxonomy_filters: Please define some filters for this participatory
               space before using this setting.
+            edit_time: Proposals can be edited by authors before this much time passes
+            edit_time_units:
+              days: Days
+              hours: Hours
+              minutes: Minutes
             evaluating_proposals_overdue: After how many days a proposal in its evaluating
               state is considered overdue
             evaluating_proposals_overdue_help: This adds a visual alert to the list

@@ -6,8 +6,7 @@ $orderFilterInput.val('<%= order %>');
 var $dropdownMenu = $('.dropdown.menu', $proposals);
 $dropdownMenu.foundation();
 
-var markerData = JSON.parse('<%= escape_javascript proposals_data_for_map(search.result.select(&:geocoded_and_valid?))
-.to_json.html_safe %>');
+var markerData = JSON.parse('<%= escape_javascript cell("decidim/map",search.result.select(&:geocoded_and_valid?), metadata_card: "decidim/proposals/proposal_metadata").geocoded_data.to_json.html_safe %>');
 
 var $map = $("#map");
 var controller = $map.data("map-controller");
