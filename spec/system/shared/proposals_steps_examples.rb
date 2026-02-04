@@ -72,7 +72,7 @@ end
 
 shared_examples "creates reporting proposal" do
   it "redirects to the publish step" do
-    fill_proposal()
+    fill_proposal
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(user.name)
@@ -182,7 +182,7 @@ end
 
 shared_examples "creates normal proposal" do
   it "redirects to the publish step" do
-    fill_proposal()
+    fill_proposal
 
     within "#content" do
       expect(page).to have_content("Publish your proposal")

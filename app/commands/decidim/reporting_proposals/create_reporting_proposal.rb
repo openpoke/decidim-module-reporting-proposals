@@ -58,7 +58,6 @@ module Decidim
               component: form.component
             )
             proposal.taxonomizations = form.taxonomizations if form.taxonomizations.present?
-            proposal.documents = form.documents if form.documents.present?
             proposal.add_coauthor(@current_user)
             proposal.save!
             proposal

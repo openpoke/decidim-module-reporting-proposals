@@ -11,8 +11,6 @@ module Decidim::Accountability
     let(:user) { create(:user, organization:) }
     let(:participatory_process) { create(:participatory_process, organization:) }
     let(:current_component) { create(:accountability_component, participatory_space: participatory_process) }
-    let(:scope) { create(:scope, organization:) }
-    let(:category) { create(:category, participatory_space: participatory_process) }
 
     let(:start_date) { Date.yesterday }
     let(:end_date) { Date.tomorrow }
@@ -20,7 +18,12 @@ module Decidim::Accountability
     let(:progress) { 89 }
     let(:external_id) { "external-id" }
     let(:weight) { 0.3 }
-
+    let(:address) { "Carrer de Sant Joan, 123, 08001 Barcelona" }
+    let(:latitude) { 41.38879 }
+    let(:longitude) { 2.15899 }
+    let(:taxonomizations) do
+      2.times.map { build(:taxonomization, taxonomy: create(:taxonomy, :with_parent, organization:), taxonomizable: nil) }
+    end
     let(:proposal_component) do
       create(:component, manifest_name: :proposals, participatory_space: participatory_process)
     end
@@ -38,8 +41,7 @@ module Decidim::Accountability
         description: { en: "description" },
         proposal_ids: [proposal.id, reporting_proposal.id],
         project_ids: [],
-        scope:,
-        category:,
+        taxonomizations:,
         start_date:,
         end_date:,
         decidim_accountability_status_id: status.id,
@@ -47,7 +49,10 @@ module Decidim::Accountability
         current_user: user,
         parent_id: nil,
         external_id:,
-        weight:
+        weight:,
+        address:,
+        latitude:,
+        longitude:
       )
     end
     let(:invalid) { false }

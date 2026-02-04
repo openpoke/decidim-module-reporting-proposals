@@ -10,7 +10,7 @@ describe "Reporting proposals overrides" do
   let(:only_photos) { false }
   let(:attachments) { true }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [participatory_space.manifest.name]) }
-    let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
+  let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
   let!(:component) do
     create(:reporting_proposals_component,
            participatory_space: participatory_process,
@@ -34,15 +34,12 @@ describe "Reporting proposals overrides" do
     login_as user, scope: :user
   end
 
-  # rubocop:disable Metrics/ParameterLists
   def fill_proposal(extra_fields: true, skip_address: false, attach: false, submit: true)
     within "#content" do
       fill_in :proposal_title, with: proposal_title
       fill_in :proposal_body, with: proposal_body
 
-      if extra_fields
-        fill_in :proposal_address, with: address
-      end
+      fill_in :proposal_address, with: address if extra_fields
 
       check "proposal_has_no_address" if skip_address
     end
@@ -59,8 +56,6 @@ describe "Reporting proposals overrides" do
       end
     end
   end
-  # rubocop:enable Metrics/ParameterLists
-
   context "when creating a new reporting proposal", :serves_geocoding_autocomplete do
     before do
       visit_component
