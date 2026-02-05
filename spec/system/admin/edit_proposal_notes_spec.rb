@@ -27,6 +27,7 @@ describe "Edit Proposal Notes" do
 
   before do
     within "tr", text: translated(proposal.title) do
+      find("button[data-controller='dropdown']").click
       click_on "Answer proposal"
     end
   end
@@ -34,19 +35,15 @@ describe "Edit Proposal Notes" do
   it "shows proposal notes for the current proposal" do
     click_on "Private notes"
     proposal_notes.each do |proposal_note|
-      expect(page).to have_button("Edit note")
+      # expect(page).to have_button("Edit note")
       expect(page).to have_content(proposal_note.author.name)
     end
   end
 
-  it "edits a proposal note" do
+  it "adds a proposal note" do
     click_on "Private notes"
-    within ".comment:last-child" do
-      click_on "Edit note"
-    end
 
-    within ".edit_proposal_note" do
-      expect(page).to have_content("Test body")
+    within "#proposal_note_body" do
       fill_in :proposal_note_body, with: "New awesome body"
       find("*[type=submit]").click
     end

@@ -12,30 +12,24 @@ module Decidim
       let(:component) { create(:reporting_proposals_component, participatory_space:) }
       let(:title) { "More sidewalks and less roads!" }
       let(:body) { "Everything would be better" }
+      let(:body_template) { nil }
       let(:author) { create(:user, organization:) }
-      let(:user_group) { create(:user_group, :verified, users: [author], organization:) }
-      let(:user_group_id) { user_group.id }
-      let(:category) { create(:category, participatory_space:) }
-      let(:parent_scope) { create(:scope, organization:) }
-      let(:scope) { create(:subscope, parent: parent_scope) }
-      let(:category_id) { category.try(:id) }
-      let(:scope_id) { scope.try(:id) }
       let(:latitude) { 40.1234 }
       let(:longitude) { 2.1234 }
       let(:has_no_address) { false }
       let(:has_no_image) { false }
       let(:address) { "Some address" }
       let(:image) { [Decidim::Dev.test_file("city.jpeg", "image/jpeg")] }
-      let(:suggested_hashtags) { [] }
       let(:attachment_params) { nil }
       let(:meeting_as_author) { false }
+      let(:taxonomies) { [] }
       let(:params) do
         {
           title:,
           body:,
+          body_template:,
+          taxonomies:,
           author:,
-          category_id:,
-          scope_id:,
           address:,
           latitude:,
           longitude:,
@@ -43,8 +37,7 @@ module Decidim
           has_no_image:,
           add_photos: image,
           meeting_as_author:,
-          attachment: attachment_params,
-          suggested_hashtags:
+          attachment: attachment_params
         }
       end
       let(:context) do
@@ -65,7 +58,6 @@ module Decidim
         it "form returns all values" do
           expect(subject.title).to eq(title)
           expect(subject.body).to eq(body)
-          expect(subject.category_id).to eq(category_id)
           expect(subject.address).to eq(address)
           expect(subject.latitude).to eq(latitude)
           expect(subject.longitude).to eq(longitude)

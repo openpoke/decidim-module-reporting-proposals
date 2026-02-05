@@ -7,8 +7,9 @@ describe "User location button" do
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
     create(:reporting_proposals_component,
-           :with_extra_hashtags,
-           participatory_space: participatory_process)
+           :with_creation_enabled,
+           participatory_space: participatory_process,
+           settings: { geocoding_enabled: })
   end
   let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
@@ -26,15 +27,20 @@ describe "User location button" do
   end
 
   shared_examples "uses device location" do
-    it "has my location button" do
-      expect(page).to have_button("Use my location")
-    end
+    context "when geocoding_enabled" do
+      let(:geocoding_enabled) { true }
 
-    context "when option disabled" do
-      let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+      it "has my location button" do
+        expect(page).to have_button("Use my location")
+      end
 
-      it "does not has the location button" do
-        expect(page).to have_no_button("Use my location")
+      context "when option disabled" do
+        let(:geocoding_enabled) { false }
+        let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+
+        it "does not has the location button" do
+          expect(page).to have_no_button("Use my location")
+        end
       end
     end
   end

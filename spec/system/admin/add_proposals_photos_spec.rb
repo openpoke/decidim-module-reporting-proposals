@@ -19,7 +19,10 @@ describe "Add proposals photos" do
     )
 
     visit manage_component_path(component)
-    click_on "Answer proposal"
+    within "tr", text: translated(proposal.title) do
+      find("button[data-controller='dropdown']").click
+      click_on "Answer proposal"
+    end
   end
 
   shared_examples "can add photos" do
