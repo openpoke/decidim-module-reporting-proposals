@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   module ReportingProposals
     class AssignProposalEvaluatorsJob < ApplicationJob
@@ -36,7 +38,6 @@ module Decidim
         )
       end
 
-      # Obtener evaluadores del espacio participativo (sin usar category)
       def evaluator_roles
         @evaluator_roles ||= participatory_space
                              .user_roles(:evaluator)
