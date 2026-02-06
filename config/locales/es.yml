@@ -403,6 +403,10 @@ es:
               x_years:
                 one: 1 año
                 other: "%{count} años"
+      form:
+        add_image: Añadir imagen
+        edit_image: Editar imagen
+        image_legend: "(Opcional) Añadir una imagen"
       forms:
         errors:
           device_not_supported: Este navegador no admite geolocalización.

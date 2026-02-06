@@ -39,7 +39,7 @@ describe "Managing reporting proposals component" do
     expect(page).to have_field("component_settings_unanswered_proposals_overdue", with: 7)
     expect(page).to have_content("After how many days a proposal in its evaluating state is considered overdue")
     expect(page).to have_field("component_settings_evaluating_proposals_overdue", with: 3)
-    expect(page).to have_content("Allow admins and valuators to edit photos when answering proposals")
+    expect(page).to have_content("Allow admins and evaluators to edit photos when answering proposals")
     expect(page).to have_checked_field("component_settings_proposal_photo_editing_enabled")
   end
 
@@ -62,7 +62,7 @@ describe "Managing reporting proposals component" do
       expect(page).to have_field("component_settings_unanswered_proposals_overdue", with: 7)
       expect(page).to have_content("After how many days a proposal in its evaluating state is considered overdue")
       expect(page).to have_field("component_settings_evaluating_proposals_overdue", with: 3)
-      expect(page).to have_content("Allow admins and valuators to edit photos when answering proposals")
+      expect(page).to have_content("Allow admins and evaluators to edit photos when answering proposals")
       expect(page).to have_unchecked_field("component_settings_proposal_photo_editing_enabled")
     end
   end
@@ -73,13 +73,14 @@ describe "Managing reporting proposals component" do
     before do
       visit component_path
       within ".component-#{component.id}" do
-        click_on "Permissions"
+        find("button[data-controller='dropdown']").click
+        click_on "Manage permissions"
       end
     end
 
     it "show permissions" do
       expect(page).to have_content("Edit permissions")
-      expect(page).to have_content("Endorse")
+      expect(page).to have_content("Like")
     end
   end
 end

@@ -7,7 +7,6 @@ describe "User camera button" do
   let(:manifest_name) { "reporting_proposals" }
   let!(:component) do
     create(:reporting_proposals_component,
-           :with_extra_hashtags,
            participatory_space: participatory_process,
            settings: { only_photo_attachments: false })
   end
@@ -53,7 +52,7 @@ describe "User camera button" do
     before do
       visit_component
       click_on "New proposal"
-      click_on "Add file"
+      click_on "Add image"
     end
 
     it_behaves_like "uses device camera"

@@ -5,6 +5,7 @@ require "spec_helper"
 describe "User location button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
+  let(:geocoding_enabled) { true }
   let!(:component) do
     create(:reporting_proposals_component,
            :with_creation_enabled,

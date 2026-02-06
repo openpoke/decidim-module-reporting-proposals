@@ -498,6 +498,10 @@ en:
               x_years:
                 one: 1 year
                 other: "%{count} years"
+      form:
+        add_image: Add image
+        edit_image: Edit image
+        image_legend: "(Optional) Add an image"
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.

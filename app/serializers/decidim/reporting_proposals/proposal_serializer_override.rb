@@ -35,9 +35,9 @@ module Decidim
             answer: ensure_translatable(proposal.answer),
             answer_time:,
             supports: proposal.proposal_votes_count,
-            endorsements: {
-              total_count: proposal.endorsements.size,
-              user_endorsements:
+            likes: {
+              total_count: proposal.likes.size,
+              user_likes:
             },
             comments: proposal.comments_count,
             attachments: proposal.attachments.size,

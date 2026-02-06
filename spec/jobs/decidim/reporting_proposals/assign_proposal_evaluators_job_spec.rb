@@ -9,9 +9,8 @@ module Decidim::ReportingProposals
 
     let(:organization) { create(:organization) }
     let(:participatory_process) { create(:participatory_process, organization:) }
-    let(:category) { create(:category, participatory_space: participatory_process) }
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
-    let!(:proposal) { create(:proposal, :unpublished, users: [user], component:, category:) }
+    let!(:proposal) { create(:proposal, :unpublished, users: [user], component:) }
     let(:user) { create(:user, :confirmed, organization:) }
     let(:admin_follower) { create(:user, :admin, organization:) }
 
@@ -102,7 +101,6 @@ module Decidim::ReportingProposals
 
     context "when executing the job" do
       let(:evaluator_user) { create(:user, :confirmed, organization:) }
-      let!(:category_evaluator) { create(:category_evaluator, evaluator_role:, category:) }
       let(:evaluator_role) { create(:participatory_process_user_role, role: "evaluator", user: evaluator_user, participatory_process:) }
 
       before do

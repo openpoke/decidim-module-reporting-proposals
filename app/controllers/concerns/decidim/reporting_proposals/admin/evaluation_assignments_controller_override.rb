@@ -34,9 +34,9 @@ module Decidim
               enforce_permission_to :unassign_from_evaluator, :proposals, evaluator: evaluator_role.user
             end
 
-            Decidim::Proposals::Admin::UnassignProposalsFromValuator.call(@form) do
+            Decidim::Proposals::Admin::UnassignProposalsFromEvaluator.call(@form) do
               on(:ok) do |_proposal|
-                flash.keep[:notice] = I18n.t("valuation_assignments.delete.success", scope: "decidim.proposals.admin")
+                flash.keep[:notice] = I18n.t("evaluation_assignments.delete.success", scope: "decidim.proposals.admin")
                 if @form.valuator_roles.map(&:user).include?(current_user)
                   redirect_to EngineRouter.admin_proxy(current_component).root_path
                 else
@@ -45,7 +45,7 @@ module Decidim
               end
 
               on(:invalid) do
-                flash.keep[:alert] = I18n.t("valuation_assignments.delete.invalid", scope: "decidim.proposals.admin")
+                flash.keep[:alert] = I18n.t("evaluation_assignments.delete.invalid", scope: "decidim.proposals.admin")
                 redirect_back fallback_location: EngineRouter.admin_proxy(current_component).root_path
               end
             end
