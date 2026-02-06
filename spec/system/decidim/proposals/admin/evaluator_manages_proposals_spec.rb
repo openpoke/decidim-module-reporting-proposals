@@ -22,8 +22,8 @@ describe "Evaluator manages proposals" do
   before do
     user.update(admin: false)
 
-    create(:valuation_assignment, proposal: assigned_proposal, evaluator_role:)
-    create(:valuation_assignment, proposal: assigned_proposal, evaluator_role: another_evaluator_role)
+    create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:)
+    create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role: another_evaluator_role)
 
     visit current_path
   end
@@ -67,6 +67,7 @@ describe "Evaluator manages proposals" do
   context "when in the proposal page" do
     before do
       within "tr", text: translated(assigned_proposal.title) do
+        find("button[data-controller='dropdown']").click
         click_on "Answer proposal"
       end
     end
@@ -93,7 +94,7 @@ describe "Evaluator manages proposals" do
 
     it "can leave proposal notes" do
       click_on("Private notes")
-      within ".add-comment" do
+      within ".new_proposal_note" do
         fill_in "Note", with: " This is my note"
         click_on "Submit"
       end

@@ -13,12 +13,21 @@ module Decidim::ReportingProposals
     let!(:proposal) { create(:proposal, :unpublished, users: [user], component:) }
     let(:user) { create(:user, :confirmed, organization:) }
     let(:admin_follower) { create(:user, :admin, organization:) }
+    let!(:evaluator_user) { create(:user, :confirmed, organization:) }
+    let!(:evaluator_role) do
+      create(:participatory_process_user_role,
+             user: evaluator_user,
+             participatory_process: participatory_process,
+             role: :evaluator)
+    end
 
     shared_examples "assigns evaluator once" do |use_last_email: true|
       context "when there's admin followers" do
         let!(:follow) { create(:follow, followable: proposal, user: admin_follower) }
 
         before do
+          allow(Rails.logger).to receive(:info)
+          allow(Rails.logger).to receive(:warn)
           # simulate a race condition when checking for the assignment already done is not yet in the database
           allow_any_instance_of(Decidim::Proposals::Admin::AssignProposalsToEvaluator).to receive(:find_assignment).and_return(false)
         end
@@ -33,6 +42,8 @@ module Decidim::ReportingProposals
       end
 
       it "logs the action and sends an email" do
+        allow(Rails.logger).to receive(:info)
+        allow(Rails.logger).to receive(:warn)
         perform_enqueued_jobs do
           subject.call
         end

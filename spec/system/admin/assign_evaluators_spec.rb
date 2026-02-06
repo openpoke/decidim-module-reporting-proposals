@@ -28,7 +28,10 @@ describe "Assign evaluators" do
 
   shared_examples "assigns a evaluator" do
     it "assigns the proposals to the evaluator" do
-      click_on "Answer proposal"
+      within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Answer proposal"
+      end
       within "#evaluators" do
         expect(page).to have_no_content(evaluator.name)
       end
@@ -39,7 +42,7 @@ describe "Assign evaluators" do
 
       click_on "Assign"
 
-      expect(page).to have_content("Proposals assigned to an evaluator successfully")
+      expect(page).to have_content("Proposals assigned to a evaluator successfully")
       within "#evaluators" do
         expect(page).to have_content(evaluator.name)
       end
@@ -47,10 +50,13 @@ describe "Assign evaluators" do
   end
 
   shared_examples "removes a evaluator" do
-    let!(:valuation_assignment) { create(:valuation_assignment, proposal:, evaluator_role:) }
+    let!(:evaluation_assignment) { create(:evaluation_assignment, proposal:, evaluator_role:) }
 
     it "removes the proposals from the evaluator" do
-      click_on "Answer proposal"
+      within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Answer proposal"
+      end
       expect(page).to have_css("a.red-icon", count: 1)
       expect(page).to have_content(logged_evaluator.name)
       expect(page).to have_content(another_evaluator.name)
@@ -73,7 +79,7 @@ describe "Assign evaluators" do
   context "when a evaluator manages assignments" do
     let(:login_user) { logged_evaluator }
     let(:evaluator_role) { another_evaluator_role }
-    let!(:my_assignement) { create(:valuation_assignment, proposal:, evaluator_role: logged_evaluator_role) }
+    let!(:my_assignement) { create(:evaluation_assignment, proposal:, evaluator_role: logged_evaluator_role) }
 
     before do
       switch_to_host(organization.host)
@@ -84,8 +90,11 @@ describe "Assign evaluators" do
 
     it_behaves_like "assigns a evaluator"
     it "cannot unassign other evaluators" do
-      create(:valuation_assignment, proposal:, evaluator_role: another_evaluator_role)
-      click_on "Answer proposal"
+      create(:evaluation_assignment, proposal:, evaluator_role: another_evaluator_role)
+      within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Answer proposal"
+      end
       within "#evaluators li", text: logged_evaluator.name do
         expect(page).to have_css("a.red-icon", count: 1)
       end

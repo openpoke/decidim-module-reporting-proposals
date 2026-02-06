@@ -51,7 +51,7 @@ describe "Admin manages proposals evaluators" do
       end
 
       it "assigns the proposals to the evaluator" do
-        expect(page).to have_content("Proposals assigned to an evaluator successfully")
+        expect(page).to have_content("Proposals assigned to a evaluator successfully")
 
         within "tr", text: translated(proposal.title) do
           expect(page).to have_css("td.evaluators-count", text: evaluator.name)
@@ -161,28 +161,29 @@ describe "Admin manages proposals evaluators" do
       visit current_path
 
       within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
         click_on "Answer proposal"
       end
     end
 
-    it "can unassign a valuator" do
-      within "#valuators" do
-        expect(page).to have_content(valuator.name)
+    it "can unassign a evaluator" do
+      within "#evaluators" do
+        expect(page).to have_content(evaluator.name)
 
         accept_confirm do
           find("a.red-icon").click
         end
       end
 
-      expect(page).to have_content("Valuator unassigned from proposals successfully")
+      expect(page).to have_content("Evaluator unassigned from proposals successfully")
 
-      within "#valuators" do
+      within "#evaluators" do
         expect(page).to have_no_css("a.red-icon")
       end
     end
   end
 
-  context "when assigning valuators to proposal from the proposal show page" do
+  context "when assigning evaluators to proposal from the proposal show page" do
     let(:unassigned_proposal) { proposal }
 
     before do
@@ -195,15 +196,15 @@ describe "Admin manages proposals evaluators" do
     end
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
-      within "#js-form-assign-proposal-to-valuator" do
-        select valuator.name, from: :assign_evaluator_role_ids
+      within "#js-form-assign-proposal-to-evaluator" do
+        select evaluator.name, from: :assign_evaluator_role_ids
       end
 
       click_on "Assign"
 
       expect(current_url).to end_with(current_path)
       expect(page).to have_css(".red-icon")
-      expect(page).to have_content(valuator.name)
+      expect(page).to have_content(evaluator.name)
     end
   end
 end
