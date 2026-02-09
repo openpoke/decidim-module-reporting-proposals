@@ -50,9 +50,7 @@ describe "Automatic assign evaluators after create proposals" do
 
       visit manage_component_path(component)
 
-      # within(".evaluators-count") do
       expect(page).to have_content(evaluator.name)
-      # end
     end
   end
 end
