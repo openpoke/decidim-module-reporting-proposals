@@ -6,10 +6,10 @@ module Decidim
       include ActionView::Helpers::FormOptionsHelper
 
       def show
-        render if note
+        render if proposal_note
       end
 
-      def note
+      def proposal_note
         model
       end
 
@@ -26,11 +26,11 @@ module Decidim
       end
 
       def notes_form
-        @notes_form = Decidim::Proposals::Admin::ProposalNoteForm.from_model(note)
+        @notes_form = Decidim::Proposals::Admin::ProposalNoteForm.from_model(proposal_note)
       end
 
       def note_path
-        Decidim::ReportingProposals::AdminEngine.routes.url_helpers.proposal_note_path(proposal_id: proposal.id, id: note)
+        Decidim::ReportingProposals::AdminEngine.routes.url_helpers.proposal_note_path(proposal_id: proposal.id, id: proposal_note)
       end
     end
   end

@@ -1,18 +1,18 @@
-<% if note.author == current_user %>
-  <%= cell("decidim/reporting_proposals/edit_note_modal", note, modal_id: "editNoteModal#{note.id}", note: note, proposal: proposal) %>
+<% if proposal_note.author == current_user %>
+  <%= cell("decidim/reporting_proposals/edit_note_modal", proposal_note, modal_id: "editNoteModal#{proposal_note.id}", note: proposal_note, proposal: proposal) %>
   <button type="button" class="link-alt m-xs"
-          data-dialog-open="editNoteModal<%= note.id %>"
+          data-dialog-open="editNoteModal<%= proposal_note.id %>"
           title="<%= t("modal.title", scope: "decidim.reporting_proposals.admin.proposal_notes") %>"
-          aria-controls="editNoteModal<%= note.id %>"
+          aria-controls="editNoteModal<%= proposal_note.id %>"
           aria-haspopup="true"
           tabindex="0"
           style="color:#97a2b2; cursor: pointer">
     <%= icon "pencil-line", aria_hidden: true, class: "action-icon--preview", role: "img", "aria-hidden": true %>
   </button>
 <% end %>
-<% if note.created_at != note.updated_at %>
+<% if proposal_note.created_at != proposal_note.updated_at %>
   <span class="text-muted">
     <%= t("update.edited", scope: "decidim.reporting_proposals.admin.proposal_notes") %>
-    <%= l note.updated_at, format: :short %>
+    <%= l proposal_note.updated_at, format: :short %>
   </span>
 <% end %>

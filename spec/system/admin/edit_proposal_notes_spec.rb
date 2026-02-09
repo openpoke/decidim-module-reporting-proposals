@@ -35,15 +35,17 @@ describe "Edit Proposal Notes" do
   it "shows proposal notes for the current proposal" do
     click_on "Private notes"
     proposal_notes.each do |proposal_note|
-      # expect(page).to have_button("Edit note")
+      expect(page).to have_button("Edit note")
       expect(page).to have_content(proposal_note.author.name)
     end
   end
 
-  it "adds a proposal note" do
+  it "edits a proposal note" do
     click_on "Private notes"
+    first(:button, "Edit note").click
 
-    within "#proposal_note_body" do
+    within ".edit_proposal_note" do
+      expect(page).to have_content("Test body")
       fill_in :proposal_note_body, with: "New awesome body"
       find("*[type=submit]").click
     end

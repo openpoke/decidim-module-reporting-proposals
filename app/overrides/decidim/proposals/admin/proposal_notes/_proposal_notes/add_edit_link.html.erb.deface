@@ -1,3 +1,0 @@
-<!-- insert_after "erb[loud]:contains('l note.created_at, format: :decidim_short')" -->
-
-<%= render "decidim/proposals/admin/proposal_notes/editing_note", note: note %>
