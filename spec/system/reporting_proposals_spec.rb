@@ -21,9 +21,7 @@ describe "Reporting proposals overrides" do
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:proposal_title) { "More sidewalks and less roads" }
   let(:proposal_body) { "Cities need more people, not more cars" }
-  let(:proposal_category) { category }
   let(:proposal) { Decidim::Proposals::Proposal.last }
-  let!(:another_category) { create(:category, participatory_space: participatory_process) }
   let(:address) { "Plaça Santa Jaume, 1, 08002 Barcelona" }
   let(:latitude) { 41.3825 }
   let(:longitude) { 2.1772 }
@@ -44,6 +42,7 @@ describe "Reporting proposals overrides" do
       check "proposal_has_no_address" if skip_address
     end
     if attach
+      page.execute_script("document.querySelectorAll('[data-filename]').forEach(el => el.remove());")
       dynamically_attach_file(:proposal_photos, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"

@@ -22,7 +22,7 @@ gem "rexml", "3.4.1"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
-
+  gem "faker", "~> 3.3.1"
   gem "brakeman", "~> 6.1"
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-initiatives", DECIDIM_VERSION

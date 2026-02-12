@@ -61,7 +61,6 @@ shared_examples "customized form" do
   end
 
   it "uploads attachments", :slow do
-    page.execute_script("document.querySelectorAll('[data-filename]').forEach(el => el.remove());")
     uncheck "proposal_has_no_image"
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
@@ -191,7 +190,6 @@ shared_examples "creates normal proposal" do
 
   it "publishes the proposal" do
     fill_proposal(extra_fields: false)
-    expect(proposal.identities.first).to eq(user)
 
     click_on "Publish"
 

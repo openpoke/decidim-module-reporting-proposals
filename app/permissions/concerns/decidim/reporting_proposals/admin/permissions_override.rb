@@ -43,7 +43,7 @@ module Decidim
             allow! if permission_action.subject == :proposal && permission_action.action == :edit && admin_edition_is_available?
 
             # Every user allowed by the space can update the category of the proposal
-            allow! if permission_action.subject == :proposal_category && permission_action.action == :update
+            # allow! if permission_action.subject == :proposal_category && permission_action.action == :update
 
             # Every user allowed by the space can update the scope of the proposal
             allow! if permission_action.subject == :proposal_scope && permission_action.action == :update

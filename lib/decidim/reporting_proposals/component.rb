@@ -137,8 +137,9 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       collection = Decidim::Proposals::Proposal
                    .published
+                   .not_hidden
                    .where(component: component_instance)
-                   .includes(:scope, :category, :component)
+                   .includes(:taxonomies, :component)
 
       if space.user_roles(:evaluator).where(user:).any?
         collection.with_valuation_assigned_to(user, space)
@@ -156,7 +157,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     exports.collection do |component_instance|
       Decidim::Comments::Export.comments_for_resource(
         Decidim::Proposals::Proposal, component_instance
-      ).includes(:author, :user_group, root_commentable: { component: { participatory_space: :organization } })
+      ).includes(:author, root_commentable: { component: { participatory_space: :organization } })
     end
 
     exports.include_in_open_data = true
@@ -247,8 +248,6 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       params = {
         component:,
-        category: participatory_space.categories.sample,
-        scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
         title: { en: Faker::Lorem.sentence(word_count: 2) },
         body: { en: Faker::Lorem.paragraphs(number: 2).join("\n") },
         proposal_state:,
@@ -272,8 +271,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       if n.positive?
         Decidim::User.where(decidim_organization_id: participatory_space.decidim_organization_id).all.sample(n).each do |author|
-          user_group = [true, false].sample ? Decidim::UserGroups::ManageableUserGroups.for(author).verified.sample : nil
-          proposal.add_coauthor(author, user_group:)
+          proposal.add_coauthor(author)
         end
       end
 
@@ -292,29 +290,8 @@ Decidim.register_component(:reporting_proposals) do |component|
           confirmed_at: Time.current
         )
 
-        group = Decidim::UserGroup.create!(
-          name: Faker::Name.name,
-          nickname: Faker::Twitter.unique.screen_name,
-          email: Faker::Internet.email,
-          extended_data: {
-            document_number: Faker::Code.isbn,
-            phone: Faker::PhoneNumber.phone_number,
-            verified_at: Time.current
-          },
-          decidim_organization_id: component.organization.id,
-          confirmed_at: Time.current
-        )
-
-        Decidim::UserGroupMembership.create!(
-          user: author,
-          role: "creator",
-          user_group: group
-        )
-
         params = {
           component:,
-          category: participatory_space.categories.sample,
-          scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: { en: "#{proposal.title["en"]} #{Faker::Lorem.sentence(word_count: 1)}" },
           body: { en: "#{proposal.body["en"]} #{Faker::Lorem.sentence(word_count: 3)}" },
           proposal_state: Decidim::Proposals::ProposalState.where(component: proposal.component, token: :evaluating).first,
@@ -330,7 +307,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           visibility: "public-only"
         ) do
           emendation = Decidim::Proposals::Proposal.new(params)
-          emendation.add_coauthor(author, user_group: author.user_groups.first)
+          emendation.add_coauthor(author)
           emendation.save!
           emendation
         end
@@ -366,7 +343,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       unless proposal.published_state? && proposal.rejected?
         (n * 2).times do |index|
-          email = "endorsement-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-endr#{index}@example.org"
+          email = "like-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-endr#{index}@example.org"
           name = "#{Faker::Name.name} #{participatory_space.id} #{n} endr#{index}"
 
           author = Decidim::User.find_or_initialize_by(email:)
@@ -379,27 +356,7 @@ Decidim.register_component(:reporting_proposals) do |component|
             tos_agreement: "1",
             confirmed_at: Time.current
           )
-          if index.even?
-            group = Decidim::UserGroup.create!(
-              name: Faker::Name.name,
-              nickname: Faker::Twitter.unique.screen_name,
-              email: Faker::Internet.email,
-              extended_data: {
-                document_number: Faker::Code.isbn,
-                phone: Faker::PhoneNumber.phone_number,
-                verified_at: Time.current
-              },
-              decidim_organization_id: component.organization.id,
-              confirmed_at: Time.current
-            )
-
-            Decidim::UserGroupMembership.create!(
-              user: author,
-              role: "creator",
-              user_group: group
-            )
-          end
-          Decidim::Endorsement.create!(resource: proposal, author:, user_group: author.user_groups.first)
+          Decidim::Like.create!(resource: proposal, author:)
         end
       end
 
@@ -430,8 +387,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       draft = Decidim.traceability.perform_action!("create", Decidim::Proposals::CollaborativeDraft, author) do
         draft = Decidim::Proposals::CollaborativeDraft.new(
           component:,
-          category: participatory_space.categories.sample,
-          scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: Faker::Lorem.sentence(word_count: 2),
           body: Faker::Lorem.paragraphs(number: 2).join("\n"),
           state:,
@@ -466,8 +421,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       Decidim::Proposals::CollaborativeDraft.all.sample,
       Decidim::User.where(organization: component.organization).all.sample,
       component:,
-      category: participatory_space.categories.sample,
-      scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
       title: Faker::Lorem.sentence(word_count: 2),
       body: Faker::Lorem.paragraphs(number: 2).join("\n")
     )

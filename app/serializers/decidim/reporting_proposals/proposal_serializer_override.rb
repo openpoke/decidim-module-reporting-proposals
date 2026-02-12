@@ -12,14 +12,7 @@ module Decidim
         def serialize
           {
             id: proposal.id,
-            category: {
-              id: proposal.category.try(:id),
-              name: proposal.category.try(:name) || empty_translatable
-            },
-            scope: {
-              id: proposal.scope.try(:id),
-              name: proposal.scope.try(:name) || empty_translatable
-            },
+            taxonomies:,
             participatory_space: {
               id: proposal.participatory_space.id,
               url: Decidim::ResourceLocatorPresenter.new(proposal.participatory_space).url
@@ -31,17 +24,18 @@ module Decidim
             latitude: proposal.latitude,
             longitude: proposal.longitude,
             state: proposal.state.to_s,
+            state_published_at: proposal.state_published_at,
             reference: proposal.reference,
             answer: ensure_translatable(proposal.answer),
             answer_time:,
-            supports: proposal.proposal_votes_count,
+            votes: proposal.proposal_votes_count,
             likes: {
               total_count: proposal.likes.size,
               user_likes:
             },
             comments: proposal.comments_count,
             attachments: proposal.attachments.size,
-            followers: proposal.follows.size,
+            follows_count: proposal.follows_count,
             published_at: proposal.published_at,
             url:,
             meeting_urls: meetings,

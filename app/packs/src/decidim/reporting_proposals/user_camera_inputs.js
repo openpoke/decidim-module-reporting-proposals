@@ -1,9 +1,9 @@
 $(() => {
-  const $input = $("#proposal_photos_button");
+  const $input = $("#proposal_add_photos_button");
   const $button = $(".camera-container .user-device-camera");
   const $checkbox = $("#proposal_has_no_image");
   const $formError = $(".camera-container .form-error")
-  const $labelInput = $("label[for='proposal_photos']")
+  const $labelInput = $("label[for='proposal_add_photos']")
   const removeErrors = () => {
     $input.removeClass("is-invalid-input");
     $formError.removeClass("is-visible");

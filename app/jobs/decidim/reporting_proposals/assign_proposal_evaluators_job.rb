@@ -11,10 +11,10 @@ module Decidim
 
         return if evaluator_roles.blank?
 
-        unless data[:event_class] == "Decidim::Proposals::Admin::UpdateProposalCategoryEvent"
-          return unless data[:extra][:participatory_space]
-          return if data[:extra][:type] == "admin"
-        end
+        # unless data[:event_class] == "Decidim::Proposals::Admin::UpdateProposalCategoryEvent"
+        #   return unless data[:extra][:participatory_space]
+        #   return if data[:extra][:type] == "admin"
+        # end
 
         evaluator_roles.each do |evaluator_role|
           Decidim::Proposals::Admin::AssignProposalsToEvaluator.call(form(evaluator_role)) do
