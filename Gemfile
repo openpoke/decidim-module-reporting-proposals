@@ -21,12 +21,12 @@ gem "puma", ">= 6.3.1"
 gem "rexml", "3.4.1"
 
 group :development, :test do
-  gem "byebug", "~> 11.0", platform: :mri
-  gem "faker", "~> 3.3.1"
   gem "brakeman", "~> 6.1"
+  gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
+  gem "faker", "~> 3.3.1"
   gem "parallel_tests", "~> 4.2"
 end
 

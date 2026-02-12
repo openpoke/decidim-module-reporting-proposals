@@ -232,14 +232,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       Decidim::Component.create!(params)
     end
 
-    if participatory_space.scope
-      scopes = participatory_space.scope.descendants
-      global = participatory_space.scope
-    else
-      scopes = participatory_space.organization.scopes
-      global = nil
-    end
-
     Decidim::Proposals.create_default_states!(component, admin_user)
 
     5.times do |n|

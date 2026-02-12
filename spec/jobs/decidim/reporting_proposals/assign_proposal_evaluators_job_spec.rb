@@ -65,9 +65,7 @@ module Decidim::ReportingProposals
             subject.call
           end
           expect(Rails.logger).to have_received(:warn).with(/Couldn't automatically assign evaluator #{evaluator_user.name}/).once
-
-          email = use_last_email ? last_email : emails.first
-          expect(email.subject).not_to include("New proposals assigned to you for evaluation")
+          expect(emails).to be_empty
         end
       end
     end
@@ -111,8 +109,20 @@ module Decidim::ReportingProposals
     end
 
     context "when executing the job" do
+      let(:data) do
+        {
+          affected_users: [],
+          event_class: "Decidim::Proposals::PublishProposalEvent",
+          extra: {},
+          followers: [],
+          force_send: false,
+          resource: proposal
+        }
+      end
       let(:evaluator_user) { create(:user, :confirmed, organization:) }
       let(:evaluator_role) { create(:participatory_process_user_role, role: "evaluator", user: evaluator_user, participatory_process:) }
+
+      subject { -> { Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(**data) } }
 
       before do
         allow(Rails.logger).to receive(:info).at_least(:once)

@@ -219,9 +219,10 @@ describe "Admin find_resource_manifest" do
       visit main_component_path(component)
 
       click_on translated(meeting.title)
-      find("#dropdown-trigger-resource-#{meeting.id}").click
-      click_on "Close"
-
+      within ".layout-author" do
+        find("#dropdown-trigger-resource-#{meeting.id}").click
+        click_on "Close"
+      end
       expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
         expect(page).to have_content "Proposals"
