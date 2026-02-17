@@ -33,6 +33,17 @@ bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
+> ** MIGRATION TO v0.31:**
+> Deciim v0.31 has made a refactor to the **valuator** terminology and has concluded that **evaluator** is better.
+> You can check the arguments [here](https://github.com/decidim/decidim/releases/tag/v0.31.0). 
+>
+> You have to take into account that you might have to change a function in your initializer. The `config.valuators_assign_other_valuators` has been changed to `config.evaluators_assign_other_valuators`
+>
+> ```ruby
+>  config.evaluators_assign_other_valuators = true
+>  ```
+> 
+
 > **MIGRATION FROM v0.28:**
 > Decidim version 0.29 introduced custom proposal states. 
 > In order to apply them to the existing reporting proposals,
@@ -73,12 +84,13 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
-| 0.9.x   | 0.31.x                      |
-| 0.8.x   | 0.30.x                      |
+| 0.8.x   | 0.31.x                      |
 | 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |
 | 0.5.x   | 0.27.x                      |
 | 0.4.x   | 0.26.x                      |
+
+There is not a version compatible for Decidim 0.30.x
 
 ## Usage
 
@@ -96,16 +108,16 @@ This module provides the following features:
 2. **Comparison by proximity**: By default, reporting proposals are compared by proximity before publishing (as they are geolocated by default). This can be disabled in the component's settings.
   ![Compare by proximity](features/proximity.png)
 
-<!-- 3. **Automatic assignation of valuators**: When a proposal is created, admins usually have to assign valuators manually to it. This module allows admins to assign valuators to a category directly. This will automatically assign all valuators in that category to any proposal/reporting proposal created under it (and also existing proposals). This avoids the need of manually assign proposals to valuators. This behavior can be disabled in the component's settings.
-  ![Valuators in categories](features/categories.png) -->
+<!-- 3. **Automatic assignation of evaluators**: When a proposal is created, admins usually have to assign evaluators manually to it. This module allows admins to assign evaluators to a category directly. This will automatically assign all evaluators in that category to any proposal/reporting proposal created under it (and also existing proposals). This avoids the need of manually assign proposals to evaluators. This behavior can be disabled in the component's settings.
+  ![Evaluators in categories](features/categories.png) -->
 
-4. **Valuators empowerment**: A number of features allow valuators to have more control over the proposals they are evaluating. They can assign other valuators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, valuators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
-  ![Valuators empowerment](features/answering1.png)
+4. **Evaluators empowerment**: A number of features allow evaluators to have more control over the proposals they are evaluating. They can assign other evaluators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, evaluators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
+  ![Evaluators empowerment](features/answering1.png)
 
 5. **Overdue proposals**: This module allows to set a number of days after which a proposal is considered overdue. This is configurable and can be disabled. This feature affects the admin list of proposals, adding visual notes, color coded, to facilitate the identification of overdue proposals and preventing admins to leave unanswered proposals for a long time.
   ![Overdue proposals](features/overdues.png)
 
-6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, valuators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
+6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, evaluators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
 
 7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
 
@@ -138,12 +150,12 @@ Decidim::ReportingProposals.configure do |config|
   # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
   config.use_camera_button = true
 
-  # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+  # Public setting to prevent evaluators or admins to modify the photos attached to a proposal
   # otherwise can be configured at the component level
   config.allow_proposal_photo_editing = true
 
-  # Public setting to allow to assign other valuators
-  config.valuators_assign_other_valuators = true
+  # Public setting to allow to assign other evaluators
+  config.evaluators_assign_other_valuators = true
 end
 ```
 
