@@ -1,0 +1,4 @@
+<!-- insert_after "th:first-child" -->
+
+<th><%= t("decidim.proposals.admin.proposals.index.id") %></th>
+
