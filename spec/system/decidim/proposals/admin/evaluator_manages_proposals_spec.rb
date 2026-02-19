@@ -117,11 +117,5 @@ describe "Evaluator manages proposals" do
       end
       expect(page).to have_content("successfully")
     end
-
-    # This comes from https://github.com/openpoke/decidim/pull/24
-    # However it is overriden by this module with the var valuators_assign_other_valuators
-    # it "don't have assign button" do
-    #   expect(page).not_to have_selector("button#js-submit-assign-proposal-to-valuator")
-    # end
   end
 end
