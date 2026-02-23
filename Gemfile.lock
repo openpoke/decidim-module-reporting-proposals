@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-reporting_proposals (0.6.4)
+    decidim-reporting_proposals (0.6.3)
       decidim-admin (>= 0.28.1, < 0.29)
       decidim-core (>= 0.28.1, < 0.29)
       decidim-participatory_processes (>= 0.28.1, < 0.29)
