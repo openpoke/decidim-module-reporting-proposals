@@ -427,9 +427,9 @@ es:
         form:
           image: Imágen/foto
     statistics:
-      reporting_proposals_count: Número de propuestas directas
       reporting_proposals_accepted: Número de propuestas directas aceptadas
-      reporting_proposals_supports_count: Número de apoyos en propuestas directas
-      reporting_proposals_endorsements_count: Número de adhesiones en propuestas directas
       reporting_proposals_comments_count: Número de comentarios en propuestas directas
+      reporting_proposals_count: Número de propuestas directas
+      reporting_proposals_endorsements_count: Número de adhesiones en propuestas directas
       reporting_proposals_followers_count: Número de seguidores en propuestas directas
+      reporting_proposals_supports_count: Número de apoyos en propuestas directas
