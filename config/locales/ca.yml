@@ -426,3 +426,10 @@ ca:
           delete_image: Esborra la imatge
         form:
           image: Imatge/fotografia
+    statistics:
+      reporting_proposals_count: Número de propuestas directas
+      reporting_proposals_accepted: Número de propuestas directas aceptadas
+      reporting_proposals_supports_count: Número de apoyos a propuestas directas
+      reporting_proposals_endorsements_count: Número de adhesiones a propuestas directas
+      reporting_proposals_comments_count: Número de comentarios a propuestas directas
+      reporting_proposals_followers_count: Número de seguidores de propuestas directas
