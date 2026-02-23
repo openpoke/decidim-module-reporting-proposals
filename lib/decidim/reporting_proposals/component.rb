@@ -108,14 +108,14 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.register_stat :reporting_proposals_count, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
-    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.except_withdrawn.not_hidden.count
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_withdrawn.not_hidden.count
   end
 
   component.register_stat :reporting_proposals_accepted, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
     Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).accepted.not_hidden.count
   end
 
-  component.register_stat :reporting_proposals_supports_count, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
+  component.register_stat :reporting_proposals_votes_count, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden
     Decidim::Proposals::ProposalVote.where(proposal: proposals).count
   end
