@@ -7,10 +7,6 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          def proposals
-            @proposals ||= result.sibling_scope(:proposals).where(id: form.proposal_ids) + result.sibling_scope(:reporting_proposals).where(id: form.proposal_ids)
-          end
-
           def send_notifications
             all = result.linked_resources(:proposals, "included_proposals") + result.linked_resources(:reporting_proposals, "included_proposals")
             all.each do |proposal|

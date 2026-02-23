@@ -20,8 +20,8 @@ describe "Show valuators name" do
 
   it "shows the valuator name in the list" do
     visit manage_component_path(proposal_component)
-    expect(page).not_to have_content(valuator.name)
-    expect(page).not_to have_content("(+1)")
+    expect(page).to have_no_content(valuator.name)
+    expect(page).to have_no_content("(+1)")
   end
 
   context "when one valuator" do
@@ -30,7 +30,7 @@ describe "Show valuators name" do
     it "shows the valuator name in the list" do
       visit manage_component_path(proposal_component)
       expect(page).to have_content(valuator.name)
-      expect(page).not_to have_content("(+1)")
+      expect(page).to have_no_content("(+1)")
     end
 
     context "and more than one valuator" do
@@ -49,7 +49,7 @@ describe "Show valuators name" do
 
         it "shows the valuator name in the list" do
           visit manage_component_path(proposal_component)
-          expect(page).not_to have_content(valuator.name)
+          expect(page).to have_no_content(valuator.name)
           expect(page).to have_content("(+1)")
         end
       end

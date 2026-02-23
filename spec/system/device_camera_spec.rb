@@ -30,7 +30,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -44,7 +44,7 @@ describe "User camera button" do
       let(:use_camera_button) { false }
 
       it "does not has the camera button" do
-        expect(page).not_to have_button("Use my camera")
+        expect(page).to have_no_button("Use my camera")
       end
     end
   end
@@ -52,7 +52,8 @@ describe "User camera button" do
   describe "#reporting_proposals" do
     before do
       visit_component
-      click_link_or_button "New proposal"
+      click_on "New proposal"
+      click_on "Add file"
     end
 
     it_behaves_like "uses device camera"

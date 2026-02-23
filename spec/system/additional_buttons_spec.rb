@@ -33,12 +33,12 @@ describe "Additional button" do
       let(:additional_buttons_show) { false }
 
       it "does not have an additional button" do
-        expect(page).not_to have_content("My button")
+        expect(page).to have_no_content("My button")
       end
 
       it "does not have an additional button on show proposal page" do
-        click_link_or_button reporting_proposal.title["en"]
-        expect(page).not_to have_content("My button 2")
+        click_on reporting_proposal.title["en"]
+        expect(page).to have_no_content("My button 2")
       end
     end
 
@@ -51,7 +51,7 @@ describe "Additional button" do
       end
 
       it "has an additional button on show proposal page" do
-        click_link_or_button reporting_proposal.title["en"]
+        click_on reporting_proposal.title["en"]
         expect(page).to have_content("My button 2")
         expect(page).to have_css("a[href='https://#{organization.host}/processes/onion-dynamic/f/22/']")
       end
@@ -70,12 +70,12 @@ describe "Additional button" do
       end
 
       it "does not have an additional button" do
-        expect(page).not_to have_content("My button")
+        expect(page).to have_no_content("My button")
       end
 
       it "does not have an additional button on show proposal page" do
-        click_link_or_button proposal.title["en"]
-        expect(page).not_to have_content("My button 2")
+        click_on proposal.title["en"]
+        expect(page).to have_no_content("My button 2")
       end
     end
   end

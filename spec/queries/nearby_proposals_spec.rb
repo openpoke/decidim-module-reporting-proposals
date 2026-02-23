@@ -133,17 +133,5 @@ module Decidim::ReportingProposals
         expect(result).to eq([proposal.id, proposal_near.id])
       end
     end
-
-    context "when the similarity limit is reached" do
-      let(:radius) { 40 }
-
-      before do
-        allow(Decidim::Proposals).to receive(:similarity_limit).and_return(2)
-      end
-
-      it "only shows the number allowed" do
-        expect(result).to eq([proposal.id, proposal_near.id])
-      end
-    end
   end
 end

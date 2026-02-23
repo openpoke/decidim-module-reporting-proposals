@@ -24,8 +24,8 @@ describe "Managing reporting proposals component" do
   end
 
   it "hides readonly attributes" do
-    expect(page).not_to have_content("Collaborative drafts enabled")
-    expect(page).not_to have_content("Participatory texts enabled")
+    expect(page).to have_no_content("Collaborative drafts enabled")
+    expect(page).to have_no_content("Participatory texts enabled")
   end
 
   it "has default values for settings" do

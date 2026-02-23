@@ -1,0 +1,3 @@
+<!-- insert_after 'td:first-child' -->
+
+<td><%= proposal.id %></td>

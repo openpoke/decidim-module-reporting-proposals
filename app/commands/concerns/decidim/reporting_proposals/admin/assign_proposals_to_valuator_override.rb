@@ -21,7 +21,9 @@ module Decidim
           private
 
           def send_email
-            ProposalsValuatorMailer.notify_proposals_valuator(form.valuator_role.user, form.current_user, form.proposals).deliver_later
+            form.valuator_roles.each do |role|
+              ProposalsValuatorMailer.notify_proposals_valuator(role.user, form.current_user, form.proposals).deliver_later
+            end
           end
         end
       end

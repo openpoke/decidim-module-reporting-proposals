@@ -30,7 +30,7 @@ module Decidim
 
       def form(valuator_role)
         Decidim::Proposals::Admin::ValuationAssignmentForm.from_params(
-          id: valuator_role.id,
+          valuator_role_ids: valuator_role.id,
           proposal_ids: [resource.id]
         ).with_context(
           current_component: resource.component,

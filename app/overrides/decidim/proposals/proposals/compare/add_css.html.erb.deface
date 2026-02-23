@@ -1,5 +1,0 @@
-<!-- insert_after "erb[silent]:contains('append_stylesheet_pack_tag')" -->
-
-<% if reporting_proposal? %>
-  <% append_stylesheet_pack_tag "decidim_reporting_proposals" %>
-<% end %>

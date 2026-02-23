@@ -28,8 +28,8 @@ describe "Admin manages proposals valuators" do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_link_or_button "Actions"
-      click_link_or_button "Assign to valuator"
+      click_on "Actions"
+      click_on "Assign to valuator"
     end
 
     it "shows the component select" do
@@ -44,8 +44,8 @@ describe "Admin manages proposals valuators" do
       before do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-valuator" do
-            select valuator.name, from: :valuator_role_id
-            click_link_or_button("Assign")
+            tom_select("#assign_valuator_role_ids", option_id: valuator_role.id)
+            click_on("Assign")
           end
         end
       end
@@ -75,7 +75,10 @@ describe "Admin manages proposals valuators" do
 
         it "assigns the proposals to the valuator" do
           within "tr", text: translated(proposal.title) do
-            expect(page).to have_css("td.valuators-count", text: "#{valuator.name} (+1)")
+            expect(page).to have_css("td.valuators-count") do |element|
+              expect(element.text).to match(/#{valuator.name}|#{second_valuator.name}/)
+            end
+            expect(page).to have_css("td.valuators-count", text: "(+1)")
           end
         end
       end
@@ -103,7 +106,7 @@ describe "Admin manages proposals valuators" do
       end
 
       expect(page).to have_content(translated(assigned_proposal.title))
-      expect(page).not_to have_content(translated(unassigned_proposal.title))
+      expect(page).to have_no_content(translated(unassigned_proposal.title))
     end
   end
 
@@ -119,8 +122,8 @@ describe "Admin manages proposals valuators" do
         page.first(".js-proposal-list-check").set(true)
       end
 
-      click_link_or_button "Actions"
-      click_link_or_button "Unassign from valuator"
+      click_on "Actions"
+      click_on "Unassign from valuator"
     end
 
     it "shows the component select" do
@@ -134,8 +137,8 @@ describe "Admin manages proposals valuators" do
     context "when submitting the form" do
       before do
         within "#js-form-unassign-proposals-from-valuator" do
-          select valuator.name, from: :valuator_role_id
-          click_link_or_button("Unassign")
+          tom_select("#unassign_valuator_role_ids", option_id: valuator_role.id)
+          click_on("Unassign")
         end
       end
 
@@ -157,7 +160,9 @@ describe "Admin manages proposals valuators" do
 
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "can unassign a valuator" do
@@ -172,7 +177,7 @@ describe "Admin manages proposals valuators" do
       expect(page).to have_content("Valuator unassigned from proposals successfully")
 
       within "#valuators" do
-        expect(page).not_to have_css("a.red-icon")
+        expect(page).to have_no_css("a.red-icon")
       end
     end
   end
@@ -183,16 +188,17 @@ describe "Admin manages proposals valuators" do
     before do
       visit current_path
 
-      find("a", text: translated(proposal.title)).click
+      within "tr", text: translated(proposal.title) do
+        click_on "Answer proposal"
+      end
     end
 
     it "stay in the same url and add valuator user to list after assignment evaluator" do
       within "#js-form-assign-proposal-to-valuator" do
-        find("#valuator_role_id").click
-        find("option", text: valuator.name).click
+        select valuator.name, from: :assign_valuator_role_ids
       end
 
-      click_link_or_button "Assign"
+      click_on "Assign"
 
       expect(current_url).to end_with(current_path)
       expect(page).to have_css(".red-icon")

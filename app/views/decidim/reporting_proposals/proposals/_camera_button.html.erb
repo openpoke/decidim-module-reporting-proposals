@@ -16,8 +16,10 @@
       <% end %>
     <% end %>
     <div class="field">
-      <%= form.file_field :add_photos, multiple: false, label: t("image", scope: "decidim.reporting_proposals.proposals.form") %>
-
+      <%= form.attachment :add_photos,
+                          multiple: false,
+                          label: t("image", scope: "decidim.reporting_proposals.proposals.form"),
+                          button_class: "button button__lg button__transparent-secondary w-full" %>
       <div class="has_no_image">
         <%= form.check_box :has_no_image %>
       </div>

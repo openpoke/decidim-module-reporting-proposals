@@ -10,6 +10,12 @@ module Decidim
       included do
         helper_method :reporting_proposal?, :geocoding_comparison?
 
+        # rubocop:disable Naming/VariableNumber
+        STEP1 = :step_1
+        STEP2 = :step_2
+        STEP_COMPARE = :step_compare
+        # rubocop:enable Naming/VariableNumber
+
         def new
           enforce_permission_to :create, :proposal
           @step = Proposals::ProposalsController::STEP1
@@ -29,7 +35,15 @@ module Decidim
             on(:ok) do |proposal|
               flash[:notice] = I18n.t("proposals.create.success", scope: "decidim")
 
-              redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/compare"
+              @proposal = proposal
+
+              path = if geocoding_comparison?
+                       "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/compare"
+                     else
+                       "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
+                     end
+
+              redirect_to path
             end
 
             on(:invalid) do
@@ -39,40 +53,18 @@ module Decidim
           end
         end
 
-        # change comparison class if geocoding comparison is enabled
         def compare
+          @step = Proposals::ProposalsController::STEP_COMPARE
+          @proposal = Decidim::Proposals::Proposal.find(params[:id])
+
           enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP2
-          klass = if geocoding_comparison?
-                    Decidim::ReportingProposals::NearbyProposals
-                  else
-                    Decidim::Proposals::SimilarProposals
-                  end
-          @similar_proposals ||= klass
-                                 .for(current_component, @proposal)
-                                 .all
+
+          @similar_proposals ||= Decidim::ReportingProposals::NearbyProposals.for(current_component, @proposal).all
 
           if @similar_proposals.blank?
-            flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
-            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/complete"
+            flash[:notice] = I18n.t("reporting_proposals.proposals.compare.no_similars_found", scope: "decidim")
+            redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview"
           end
-        end
-
-        # disable this step for reporting proposals
-        def complete
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-          @step = Proposals::ProposalsController::STEP3
-
-          @form = form_proposal_model
-
-          @form.attachment = form_attachment_new
-
-          redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview" if reporting_proposal?
-        end
-
-        def edit_draft
-          @step = reporting_proposal? ? Proposals::ProposalsController::STEP1 : Proposals::ProposalsController::STEP3
-          enforce_permission_to :edit, :proposal, proposal: @proposal
         end
 
         def update_draft
@@ -125,7 +117,7 @@ module Decidim
         end
 
         def new_proposal_form
-          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalWizardCreateStepForm
+          reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalForm
         end
 
         def create_proposal_command

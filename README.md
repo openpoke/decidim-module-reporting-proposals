@@ -33,6 +33,15 @@ bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
+> **MIGRATION FROM v0.28:**
+> Decidim version 0.29 introduced custom proposal states. 
+> In order to apply them to the existing reporting proposals,
+> you must also run the following task to migrate proposal statuses:
+>
+> ```bash
+> bin/rails reporting_proposals:migrate_statuses
+> ```
+
 > **IMPORTANT:**
 >
 > This module makes use of the [Deface](https://github.com/spree/deface) gem.
@@ -64,6 +73,7 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
+| 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |
 | 0.5.x   | 0.27.x                      |
 | 0.4.x   | 0.26.x                      |

@@ -12,9 +12,9 @@ describe "Valuator answers with templates" do
   let(:component) { reporting_component }
   let!(:proposal) { create(:proposal, component:) }
   let!(:valuation_assignment) { create(:valuation_assignment, proposal:, valuator_role:) }
-  let!(:template) { create(:template, :proposal_answer, description: { en: description }, field_values:, organization:, templatable: component) }
+  let!(:template) { create(:template, target: :proposal_answer, description: { en: description }, field_values:, organization:, templatable: component) }
   let(:description) { "Some meaningful answer" }
-  let(:field_values) { { internal_state: "rejected" } }
+  let(:field_values) { { proposal_state_id: Decidim::Proposals::ProposalState.find_by(component:, token: "rejected").id } }
 
   before do
     switch_to_host(organization.host)

@@ -1,0 +1,5 @@
+<!-- insert_after "erb[loud]:contains('append_javascript_pack_tag')" -->
+
+<script>
+document.body.classList.add("form-defaults");
+</script>

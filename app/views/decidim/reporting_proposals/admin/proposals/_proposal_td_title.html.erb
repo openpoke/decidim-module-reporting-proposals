@@ -7,10 +7,11 @@
     <% end %>
   </span>
   <div class="table__list-title">
-    <%= link_to(
-          decidim_html_escape(present(proposal).title).html_safe,
-          proposal_path(proposal)
-        ) %>
+    <% if allowed_to? :edit, :proposal, proposal: proposal %>
+      <%= link_to present(proposal).title(html_escape: true), proposal_path(proposal) %><br>
+    <% else %>
+      <%= present(proposal).title(html_escape: true) %><br>
+    <% end %>
     <% if unanswered_proposals_overdue?(proposal) %>
       <div class="help-text-overdue text-alert">
         <%= time_ago_in_words(last_day_to_answer(proposal),
