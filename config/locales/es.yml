@@ -437,3 +437,10 @@ es:
           delete_image: Eliminar imagen
         form:
           image: Imágen/foto
+    statistics:
+      reporting_proposals_accepted: Number of accepted direct proposals
+      reporting_proposals_comments_count: Number of comments on direct proposals
+      reporting_proposals_count: Number of direct proposals
+      reporting_proposals_endorsements_count: Number of endorsements for direct proposals
+      reporting_proposals_followers_count: Number of followers of direct proposals
+      reporting_proposals_votes_count: Number of supports for direct proposals
