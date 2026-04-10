@@ -426,3 +426,10 @@ de:
           delete_image: Bild löschen
         form:
           image: Foto
+    statistics:
+      reporting_proposals_accepted: Anzahl der akzeptierten direkten Meldungen
+      reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen
+      reporting_proposals_count: Anzahl der direkten Meldungen
+      reporting_proposals_endorsements_count: Anzahl der Befürwortungen für direkte Meldungen
+      reporting_proposals_followers_count: Anzahl der Follower von direkten Meldungen
+      reporting_proposals_votes_count: Anzahl der Unterstützungen für direkte Meldungen
