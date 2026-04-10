@@ -11,12 +11,12 @@ module Decidim::Proposals
     let(:reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
     let(:another_reporting_component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
 
-    let(:proposals) { create_list(:proposal, 2, component:) }
-    let(:old_proposals) { create_list(:proposal, 3, component:, created_at: 10.days.ago) }
-    let(:another_proposals) { create_list(:proposal, 4, component: another_component) }
-    let(:reporting_proposals) { create_list(:proposal, 5, component: reporting_component) }
-    let(:old_reporting_proposals) { create_list(:proposal, 6, component: reporting_component, created_at: 10.days.ago) }
-    let(:another_reporting_proposals) { create_list(:proposal, 6, component: another_reporting_component) }
+    let!(:proposals) { create_list(:proposal, 2, component:) }
+    let!(:old_proposals) { create_list(:proposal, 3, component:, created_at: 10.days.ago) }
+    let!(:another_proposals) { create_list(:proposal, 4, component: another_component) }
+    let!(:reporting_proposals) { create_list(:proposal, 5, component: reporting_component) }
+    let!(:old_reporting_proposals) { create_list(:proposal, 6, component: reporting_component, created_at: 10.days.ago) }
+    let!(:another_reporting_proposals) { create_list(:proposal, 6, component: another_reporting_component) }
 
     it "returns proposals included in a collection of components" do
       expect(described_class.for([component, another_component])).to match_array proposals.concat(old_proposals, another_proposals)
