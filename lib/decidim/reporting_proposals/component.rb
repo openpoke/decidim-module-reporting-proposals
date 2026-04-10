@@ -108,30 +108,30 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.register_stat :reporting_proposals_count, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
-    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_withdrawn.not_hidden.count
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_withdrawn.not_hidden.count
   end
 
   component.register_stat :reporting_proposals_accepted, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
-    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).accepted.not_hidden.count
+    Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).accepted.not_hidden.count
   end
 
   component.register_stat :reporting_proposals_votes_count, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
-    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden
+    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_hidden
     Decidim::Proposals::ProposalVote.where(proposal: proposals).count
   end
 
   component.register_stat :reporting_proposals_endorsements_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
-    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).not_hidden
+    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).not_hidden
     proposals.sum(:endorsements_count)
   end
 
   component.register_stat :reporting_proposals_comments_count, tag: :comments do |components, start_at, end_at|
-    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden
+    proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_hidden
     proposals.sum(:comments_count)
   end
 
   component.register_stat :reporting_proposals_followers_count, tag: :followers, priority: Decidim::StatsRegistry::LOW_PRIORITY do |components, start_at, end_at|
-    proposals_ids = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at).published.not_hidden.pluck(:id)
+    proposals_ids = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_hidden.pluck(:id)
     Decidim::Follow.where(decidim_followable_type: "Decidim::Proposals::Proposal", decidim_followable_id: proposals_ids).count
   end
 
