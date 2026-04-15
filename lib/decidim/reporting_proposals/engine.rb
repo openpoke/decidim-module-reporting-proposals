@@ -80,6 +80,8 @@ module Decidim
         Decidim::ResourceLocatorPresenter.include(Decidim::ReportingProposals::ResourceLocatorPresenterOverride)
         Decidim::Proposals::PublishProposalEvent.include(Decidim::ReportingProposals::PublishProposalEventOverride)
         Decidim::Proposals::Admin::AssignProposalsToValuator.include(Decidim::ReportingProposals::Admin::AssignProposalsToValuatorOverride)
+        # fix proposal filtering by type of component
+        Decidim::Proposals::FilteredProposals.include(Decidim::ReportingProposals::FilteredProposalsOverride)
 
         # Search user roles for different participatory spaces and apply override to all of them
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
