@@ -60,7 +60,7 @@ es:
             amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
             announcement: Anuncio
             attachments_allowed: Permitir los archivos adjuntos
-            can_accumulate_supports_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
+            can_accumulate_votes_beyond_threshold: Can accumulate supports beyond threshold
             collaborative_drafts_enabled: Borradores colaborativos habilitados
             comments_enabled: Comentarios habilitados
             comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)
@@ -171,10 +171,19 @@ es:
         proposals:
           address:
             geolocated_at: Geolocalizada en
+          index:
+            categories: Categories
+            id: ID
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
           show:
             report: Denunciar
+      proposals:
+        compare:
+          continue: Continue
+          title: Compare proposals
+        wizard_steps:
+          step_compare: Compare
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
@@ -345,6 +354,7 @@ es:
             title: Fotos
             upload_msg: No hay archivos seleccionados
           photo_gallery:
+            are_you_sure: Are you sure you want to delete this image?
             delete_image: Eliminar imagen
             photos: Fotos
           photos:
@@ -422,6 +432,7 @@ es:
             away: "A %{meters} de distancia"
             description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
+          no_similars_found: No similar proposals found
         edit:
           delete_image: Eliminar imagen
         form:
