@@ -54,7 +54,8 @@ checksums = [
       "/app/views/decidim/proposals/proposals/show.html.erb" => "e2c0adf5c283f7396d93207e1b7ab740",
       "/app/views/decidim/proposals/proposals/_wizard_header.html.erb" => "60700214b35bbca30979a1ca4d0b0bb6",
       "/app/views/decidim/proposals/admin/proposal_notes/_proposal_notes.html.erb" => "37284cb43b9f3e6928ad7637e45d4e54",
-      "/app/cells/decidim/proposals/proposals_picker_cell.rb" => "cf40967e6846216ed73f7eaa1ae3d09e"
+      "/app/cells/decidim/proposals/proposals_picker_cell.rb" => "cf40967e6846216ed73f7eaa1ae3d09e",
+      "/app/queries/decidim/proposals/filtered_proposals.rb" => "a504ffdd2805f41d7bc9e97780bc1417"
     }
   },
   {
