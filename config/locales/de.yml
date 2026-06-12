@@ -60,7 +60,7 @@ de:
             amendments_wizard_help_text: Hilfetext für die Änderungsfunktion
             announcement: Ankündigung
             attachments_allowed: Anhänge zulassen
-            can_accumulate_supports_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
+            can_accumulate_votes_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
             collaborative_drafts_enabled: Kollaborative Entwürfe aktivieren
             comments_enabled: Kommentare erlauben
             comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)
@@ -171,10 +171,19 @@ de:
         proposals:
           address:
             geolocated_at: Hier geolokalisiert
+          index:
+            categories: Kategorien
+            id: ID
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
           show:
             report: Bericht
+      proposals:
+        compare:
+          continue: Fortfahren
+          title: Vorschläge vergleichen
+        wizard_steps:
+          step_compare: Vergleichen
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
@@ -345,6 +354,7 @@ de:
             title: Bilder
             upload_msg: Keine Dateien ausgewählt
           photo_gallery:
+            are_you_sure: Möchten Sie dieses Bild wirklich löschen?
             delete_image: Bild löschen
             photos: Bilder
           photos:
@@ -422,6 +432,7 @@ de:
             away: "%{meters} entfernt"
             description: Dies sind Vorschläge, die in einem Radius von %{meters} zu dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende Meldung Unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
+          no_similars_found: Keine ähnliche Vorschläge gefunden
         edit:
           delete_image: Bild löschen
         form:
