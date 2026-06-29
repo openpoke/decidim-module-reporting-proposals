@@ -7,6 +7,8 @@ es:
       proposal:
         has_no_address: No tiene dirección
         has_no_image: No tiene imagen
+      proposal_photo:
+        add_photos: Add photos
   decidim:
     admin:
       actions:
@@ -60,7 +62,7 @@ es:
             amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
             announcement: Anuncio
             attachments_allowed: Permitir los archivos adjuntos
-            can_accumulate_supports_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
+            can_accumulate_votes_beyond_threshold: Can accumulate supports beyond threshold
             collaborative_drafts_enabled: Borradores colaborativos habilitados
             comments_enabled: Comentarios habilitados
             comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)
@@ -75,6 +77,14 @@ es:
               random: Aleatorio
               recent: Recientes
               with_more_authors: Con más autores
+            default_taxonomy: Default taxonomy
+            default_taxonomy_help: Select which taxonomy you want to show by default. If no taxonomy is selected, the results will be shown in a list format.
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
+            edit_time: Proposals can be edited by authors before this much time passes
+            edit_time_units:
+              days: Days
+              hours: Hours
+              minutes: Minutes
             evaluating_proposals_overdue: Después de cuántos días una propuesta en su estado de evaluación es considerada atrasada
             evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
             geocoding_comparison_enabled: Comparar propuestas por proximidad
@@ -87,6 +97,7 @@ es:
             new_proposal_body_template: Plantilla para el texto de nueva propuesta
             new_proposal_body_template_help: Puede definir el texto predefinido que tendrán las nuevas propuestas
             new_proposal_help_text: Texto de ayuda al crear una propuesta
+            no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Propuestas oficiales habilitadas
             only_photo_attachments: Permitir solo fotos en los archivos adjuntos
             participatory_texts_enabled: Textos participativos habilitados
@@ -107,6 +118,8 @@ es:
             resources_permissions_enabled: Se pueden establecer permisos de acciones para cada propuesta
             scope_id: Ámbito
             scopes_enabled: Ámbitos habilitados
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
             threshold_per_proposal: Umbral por propuesta
             unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
             unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
@@ -151,6 +164,8 @@ es:
             votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando esta opción ocultarás el número de apoyos)
     events:
       proposals:
+        proposal_published:
+          admin_panel: Admin panel
         proposal_published_for_admin:
           admin_panel: panel de administración
           email_intro: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
@@ -158,6 +173,8 @@ es:
           email_subject: Nueva propuesta «%{resource_title}» añadida a %{participatory_space_title}
           notification_title: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
           notification_title_official: La propuesta oficial <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}
+        proposal_published_for_space:
+          admin_panel: Admin panel
     moderations:
       actions:
         hide: Ocultar
@@ -171,10 +188,19 @@ es:
         proposals:
           address:
             geolocated_at: Geolocalizada en
+          index:
+            categories: Categories
+            id: ID
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
           show:
             report: Denunciar
+      proposals:
+        compare:
+          continue: Continue
+          title: Compare proposals
+        wizard_steps:
+          step_compare: Compare
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
@@ -337,6 +363,11 @@ es:
             invalid: Hubo un problema al actualizar la nota de la propuesta.
             success: Nota de propuesta actualizada correctamente.
         proposals:
+          evaluators_list:
+            assigned_evaluators: Asignar evaluadoras
+            evaluators: Evaluadoras
+            remove_assignment: eliminar asignación
+            remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
           photo_form:
             action: Añadir imagen
             add_images: Añadir imágenes
@@ -345,15 +376,11 @@ es:
             title: Fotos
             upload_msg: No hay archivos seleccionados
           photo_gallery:
+            are_you_sure: Are you sure you want to delete this image?
             delete_image: Eliminar imagen
             photos: Fotos
           photos:
             title: Fotos
-          evaluators_list:
-            assigned_evaluators: Asignar evaluadoras
-            remove_assignment: eliminar asignación
-            remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
-            evaluators: Evaluadoras
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
             admin_panel: panel de administración
@@ -426,6 +453,7 @@ es:
             away: "A %{meters} de distancia"
             description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
+          no_similars_found: No similar proposals found
         edit:
           delete_image: Eliminar imagen
         form:

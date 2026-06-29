@@ -7,6 +7,8 @@ de:
       proposal:
         has_no_address: Adresse unbekannt
         has_no_image: Kein Foto vorhanden
+      proposal_photo:
+        add_photos: Fotos hinzufügen
   decidim:
     admin:
       actions:
@@ -60,7 +62,7 @@ de:
             amendments_wizard_help_text: Hilfetext für die Änderungsfunktion
             announcement: Ankündigung
             attachments_allowed: Anhänge zulassen
-            can_accumulate_supports_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
+            can_accumulate_votes_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
             collaborative_drafts_enabled: Kollaborative Entwürfe aktivieren
             comments_enabled: Kommentare erlauben
             comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)
@@ -75,6 +77,14 @@ de:
               random: Zufällig
               recent: Neueste
               with_more_authors: Mit mehreren Autoren
+            default_taxonomy: Standard Klassifizierung
+            default_taxonomy_help: Wählen Sie, welche Klassifizierung standardmäßig angezeigt werden soll. Wenn keine Klassifizierung ausgewählt ist, werden die Ergebnisse in einem Listenformat angezeigt.
+            define_taxonomy_filters: Bitte definieren Sie einige Filter für diesen partizipativen Bereich, bevor Sie diese Einstellung verwenden.
+            edit_time: Zeit, während der Meldungen nach der Veröffentlichung von ihren Autor"innen bearbeitet werden können.
+            edit_time_units:
+              days: Tage
+              hours: Stunden
+              minutes: Minuten
             evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
             evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
@@ -87,6 +97,7 @@ de:
             new_proposal_body_template: Vorausgefüllter Text in einer neuen Meldung
             new_proposal_body_template_help: Sie können einen vorausgefüllten Text in neuen Meldungen bestimmen
             new_proposal_help_text: Hilfetext für neue Meldungen
+            no_taxonomy_filters_found: Keine Klassifizierungsfilter gefunden.
             official_proposals_enabled: Offizielle Meldungen aktivieren
             only_photo_attachments: Nur Foto-Anhänge zulassen
             participatory_texts_enabled: Partizipative Texte aktivieren
@@ -107,6 +118,8 @@ de:
             resources_permissions_enabled: Berechtigungen können für jede Meldung festgelegt werden
             scope_id: Themenfeld
             scopes_enabled: Themenbereiche aktiviert
+            taxonomy_filters: Filter für die Komponente suchen
+            taxonomy_filters_add: Filter hinzufügen
             threshold_per_proposal: Schwellenwert pro Meldung
             unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete Meldung als überfällig
             unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
@@ -151,6 +164,8 @@ de:
             votes_hidden: Gefällt-mir Anhaben nicht öffentlich anzeigen
     events:
       proposals:
+        proposal_published:
+          admin_panel: Admin-Konsole
         proposal_published_for_admin:
           admin_panel: Admin Panel
           email_intro: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
@@ -158,6 +173,8 @@ de:
           email_subject: Eine neue Meldung "%{resource_title}" wurde zu %{participatory_space_title} hinzugefügt
           notification_title: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
           notification_title_official: 'Die offizielle Meldung <a href="%{resource_path}">%{resource_title}</a> wurde in %{participatory_space_title} hinzugefügt. Link: %{admin_url}'
+        proposal_published_for_space:
+          admin_panel: Admin-Konsole
     moderations:
       actions:
         hide: Verbergen
@@ -171,10 +188,19 @@ de:
         proposals:
           address:
             geolocated_at: Hier geolokalisiert
+          index:
+            categories: Kategorien
+            id: ID
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
           show:
             report: Bericht
+      proposals:
+        compare:
+          continue: Fortfahren
+          title: Meldungen vergleichen
+        wizard_steps:
+          step_compare: Vergleichen
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
@@ -337,6 +363,11 @@ de:
             invalid: Es gab ein Problem beim Aktualisieren der Notiz.
             success: Notiz erfolgreich aktualisiert.
         proposals:
+          evaluators_list:
+            assigned_evaluators: Zugewiesene Experten
+            evaluators: Expert/innen
+            remove_assignment: Zuweisung entfernen
+            remove_assignment_confirmation: Zuweisung wurde entfernt
           photo_form:
             action: Bild hinzufügen
             add_images: Bilder hinzufügen
@@ -345,18 +376,14 @@ de:
             title: Bilder
             upload_msg: Keine Dateien ausgewählt
           photo_gallery:
+            are_you_sure: Möchten Sie dieses Bild wirklich löschen?
             delete_image: Bild löschen
             photos: Bilder
           photos:
             title: Bilder
-          evaluators_list:
-            assigned_evaluators: Zugewiesene Experten
-            remove_assignment: Zuweisung entfernen
-            remove_assignment_confirmation: Zuweisung wurde entfernt
-            evaluators: Expert/innen
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
-            admin_panel: admin panel
+            admin_panel: Admin-Konsole
             email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
             gratitude: Vielen Dank!
             greeting: Hallo %{name}
@@ -403,6 +430,10 @@ de:
               x_years:
                 one: 1 Jahr
                 other: "%{count} Jahre"
+      form:
+        add_image: Bild hinzufügen
+        edit_image: Bild bearbeiten
+        image_legend: "(Optional) Bild hinzufügen"
       forms:
         errors:
           device_not_supported: Diese Funktion wird von deinem Browser nicht unterstützt.
@@ -422,6 +453,7 @@ de:
             away: "%{meters} entfernt"
             description: Dies sind Vorschläge, die in einem Radius von %{meters} zu dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende Meldung Unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
+          no_similars_found: Keine ähnliche Meldungen gefunden
         edit:
           delete_image: Bild löschen
         form:

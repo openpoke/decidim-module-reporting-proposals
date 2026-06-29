@@ -7,6 +7,8 @@ ca:
       proposal:
         has_no_address: No té adreça
         has_no_image: Sense imatge
+      proposal_photo:
+        add_photos: Add photos
   decidim:
     admin:
       actions:
@@ -60,7 +62,7 @@ ca:
             amendments_wizard_help_text: Text d'ajuda en crear una nova esmena
             announcement: Anunci
             attachments_allowed: Permetre arxius adjunts
-            can_accumulate_supports_beyond_threshold: Pot acumular suports més enllà del llindar
+            can_accumulate_votes_beyond_threshold: Can accumulate supports beyond threshold
             collaborative_drafts_enabled: Esborranys col·laboratius habilitats
             comments_enabled: Comentaris habilitats
             comments_max_length: Longitud màxima dels comentaris (deixa 0 si vols mantenir la configuració per defecte)
@@ -75,6 +77,14 @@ ca:
               random: Aleatori
               recent: Recent
               with_more_authors: Amb més autores
+            default_taxonomy: Default taxonomy
+            default_taxonomy_help: Select which taxonomy you want to show by default. If no taxonomy is selected, the results will be shown in a list format.
+            define_taxonomy_filters: Please define some filters for this participatory space before using this setting.
+            edit_time: Proposals can be edited by authors before this much time passes
+            edit_time_units:
+              days: Days
+              hours: Hours
+              minutes: Minutes
             evaluating_proposals_overdue: Quants dies després una proposta amb estat avaluació es considera vençuda
             evaluating_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
             geocoding_comparison_enabled: Compara propostes per proximitat de distància
@@ -87,6 +97,7 @@ ca:
             new_proposal_body_template: Plantilla pel text de nova proposta
             new_proposal_body_template_help: Pots definir el text predefinit que hauria de tenir una nova proposta
             new_proposal_help_text: Text d'ajuda per la creació d'una nova proposta
+            no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Propostes d'administradora (oficials) habilitades
             only_photo_attachments: Utilitza només fitxers de fotos
             participatory_texts_enabled: Textos participatius habilitats
@@ -107,6 +118,8 @@ ca:
             resources_permissions_enabled: Es poden establir permisos d'accions per a cada proposta
             scope_id: Àmbit
             scopes_enabled: Àmbits habilitats
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
             threshold_per_proposal: Llindar per proposta
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
@@ -151,6 +164,8 @@ ca:
             votes_hidden: Suports ocults (si els suports estan habilitats, marcant aquesta opció s'amagarà el nombre de suports)
     events:
       proposals:
+        proposal_published:
+          admin_panel: Admin panel
         proposal_published_for_admin:
           admin_panel: panell d'administració
           email_intro: '%{author} ha afegit la proposta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Podeu administrar-la a %{admin_url}'
@@ -158,6 +173,8 @@ ca:
           email_subject: Nova proposta "%{resource_title}" afegida a %{participatory_space_title}
           notification_title: '%{author} ha afegit la proposta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Podeu administrar-la a %{admin_url}'
           notification_title_official: La proposta oficial <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Podeu administrar-la a %{admin_url}
+        proposal_published_for_space:
+          admin_panel: Admin panel
     moderations:
       actions:
         hide: Amagar
@@ -171,10 +188,19 @@ ca:
         proposals:
           address:
             geolocated_at: Geolocalització
+          index:
+            categories: Categories
+            id: ID
           send_email_button:
             send_mail: Envia un correu electrònic a l'usuari
           show:
             report: Denuncia
+      proposals:
+        compare:
+          continue: Continue
+          title: Compare proposals
+        wizard_steps:
+          step_compare: Compare
     reported_mailer:
       report:
         admin_resource: Administra el recurs
@@ -337,6 +363,11 @@ ca:
             invalid: Hi ha hagut un problema en actualitzar la nota.
             success: Nota creada correctament.
         proposals:
+          evaluators_list:
+            assigned_evaluators: Avaluadores assignades
+            evaluators: Avaluadores
+            remove_assignment: desfer assignació
+            remove_assignment_confirmation: eliminar la confirmació de l'assignació
           photo_form:
             action: Afageix imatge
             add_images: Afegeix imatges
@@ -345,15 +376,11 @@ ca:
             title: Fotografies
             upload_msg: Cap arxiu seleccionat
           photo_gallery:
+            are_you_sure: Are you sure you want to delete this image?
             delete_image: Esborrar imatge
             photos: Fotografies
           photos:
             title: Fotografies
-          evaluators_list:
-            assigned_evaluators: Avaluadores assignades
-            remove_assignment: desfer assignació
-            remove_assignment_confirmation: eliminar la confirmació de l'assignació
-            evaluators: Avaluadores
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
             admin_panel: panell d'administració
@@ -403,6 +430,10 @@ ca:
               x_years:
                 one: 1 any
                 other: "%{count} anys"
+      form:
+        add_image: Add image
+        edit_image: Edit image
+        image_legend: "(Optional) Add an image"
       forms:
         errors:
           device_not_supported: La geolocalització no és compatible amb el vostre navegador.
@@ -422,6 +453,7 @@ ca:
             away: "%{meters} de distància"
             description: Aquestes són propostes que es troben en un radi de %{meters} respecte a la que esteu creant. En cas que trobeu un altra proposta d'informe en la mateixa situació, podeu optar per donar-li una adhesió en comptes de crear-ne un de nou.
             title: Propostes properes
+          no_similars_found: No similar proposals found
         edit:
           delete_image: Esborra la imatge
         form:
