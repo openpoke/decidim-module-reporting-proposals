@@ -26,7 +26,6 @@ group :development, :test do
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
-  gem "faker", "~> 3.3.1"
   gem "parallel_tests", "~> 4.2"
 end
 

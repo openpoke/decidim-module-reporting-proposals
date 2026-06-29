@@ -276,7 +276,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           password: "decidim123456",
           password_confirmation: "decidim123456",
           name:,
-          nickname: Faker::Twitter.unique.screen_name,
+          nickname: Faker::X.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
           confirmed_at: Time.current
@@ -321,7 +321,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           password: "decidim123456",
           password_confirmation: "decidim123456",
           name:,
-          nickname: Faker::Twitter.unique.screen_name,
+          nickname: Faker::X.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
           confirmed_at: Time.current,
@@ -343,7 +343,7 @@ Decidim.register_component(:reporting_proposals) do |component|
             password: "decidim123456",
             password_confirmation: "decidim123456",
             name:,
-            nickname: Faker::Twitter.unique.screen_name,
+            nickname: Faker::X.unique.screen_name,
             organization: component.organization,
             tos_agreement: "1",
             confirmed_at: Time.current
