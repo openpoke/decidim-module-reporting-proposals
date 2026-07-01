@@ -11,9 +11,6 @@ ca:
         add_photos: Add photos
   decidim:
     admin:
-      actions:
-        manage: Gestiona
-        new: Nou
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador ha esborrat la vostra proposta perquè ha estat denunciada.
@@ -71,8 +68,8 @@ ca:
             default_sort_order_options:
               default: Per defecte
               most_commented: Més comentada
-              most_endorsed: Més adhesions
               most_followed: Més seguida
+              most_liked: Most liked
               most_voted: Més suports
               random: Aleatori
               recent: Recent
@@ -147,8 +144,8 @@ ca:
             default_sort_order_options:
               default: Per defecte
               most_commented: Més comentada
-              most_endorsed: Més adhesions
               most_followed: Més seguida
+              most_liked: Most liked
               most_voted: Més suports
               random: Aleatori
               recent: Recent
@@ -189,12 +186,9 @@ ca:
           address:
             geolocated_at: Geolocalització
           index:
-            categories: Categories
             id: ID
           send_email_button:
             send_mail: Envia un correu electrònic a l'usuari
-          show:
-            report: Denuncia
       proposals:
         compare:
           continue: Continue
@@ -205,18 +199,7 @@ ca:
       report:
         admin_resource: Administra el recurs
     reporting_proposals:
-      actions:
-        answer_proposal: Resposta de la proposta
-        edit_proposal: Edita la proposta
-        import: Importa propostes d'un altre component
-        new: Nova proposta
-        participatory_texts: Textos participatius
-        show: Veure proposta
-        title: Accions
       admin:
-        actions:
-          edit_evaluators: Edita les avaluadores
-          preview: Vista prèvia
         answer_overdue:
           datetime:
             distance_in_words:
@@ -297,11 +280,6 @@ ca:
               x_years:
                 one: 1 any per respondre
                 other: "%{count} anys per respondre"
-        categories:
-          form:
-            evaluators_help: Seleccioneu les avaluadores que s'assignaran automàticament quan es publiqui una proposta en aquesta categoria (rebran una notificació).
-          index:
-            evaluators_column: Avaluadores assignades
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -363,22 +341,11 @@ ca:
             invalid: Hi ha hagut un problema en actualitzar la nota.
             success: Nota creada correctament.
         proposals:
-          evaluators_list:
-            assigned_evaluators: Avaluadores assignades
-            evaluators: Avaluadores
-            remove_assignment: desfer assignació
-            remove_assignment_confirmation: eliminar la confirmació de l'assignació
           photo_form:
             action: Afageix imatge
-            add_images: Afegeix imatges
-            edit_images: Editar imatge
-            gallery_legend: Afegeix imatges
-            title: Fotografies
-            upload_msg: Cap arxiu seleccionat
           photo_gallery:
             are_you_sure: Are you sure you want to delete this image?
             delete_image: Esborrar imatge
-            photos: Fotografies
           photos:
             title: Fotografies
         proposals_evaluator_mailer:
@@ -456,8 +423,6 @@ ca:
           no_similars_found: No similar proposals found
         edit:
           delete_image: Esborra la imatge
-        form:
-          image: Imatge/fotografia
     statistics:
       reporting_proposals_accepted: Nombre de propostes directes acceptades
       reporting_proposals_comments_count: Nombre de comentaris a propostes directes
