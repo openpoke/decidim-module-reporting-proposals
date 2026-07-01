@@ -26,7 +26,7 @@
   text-align: start;
 }
 
-button[data-dialog-open^="flagModal"] {
+button[data-dialog-open^="flagModal"]:not(.dropdown__button) {
   > span {
     display: none;
   }

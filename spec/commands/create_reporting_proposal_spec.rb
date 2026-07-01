@@ -55,7 +55,7 @@ module Decidim
           address:,
           has_no_address:,
           add_photos: uploaded_photos,
-          add_documents: uploaded_files
+          add_attachments: uploaded_files
         }
       end
 

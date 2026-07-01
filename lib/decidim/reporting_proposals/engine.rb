@@ -52,7 +52,7 @@ module Decidim
           resource.template = "decidim/proposals/proposals/linked_proposals"
           resource.card = "decidim/proposals/proposal"
           resource.reported_content_cell = "decidim/proposals/reported_content"
-          resource.actions = %w(endorse vote amend comment vote_comment)
+          resource.actions = %w(like vote amend comment vote_comment)
           resource.searchable = true
           resource.admin_route_name = "proposal"
         end
@@ -62,7 +62,7 @@ module Decidim
           resource.template = "decidim/proposals/proposals/linked_proposals"
           resource.card = "decidim/proposals/proposal"
           resource.reported_content_cell = "decidim/proposals/reported_content"
-          resource.actions = %w(endorse vote amend comment vote_comment)
+          resource.actions = %w(like vote amend comment vote_comment)
           resource.searchable = true
           resource.admin_route_name = "proposal"
         end

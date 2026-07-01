@@ -23,13 +23,13 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.newsletter_participant_entities = ["Decidim::Proposals::Proposal"]
 
-  component.actions = %w(endorse vote create withdraw amend comment vote_comment)
+  component.actions = %w(like vote create withdraw amend comment vote_comment)
 
   component.query_type = "Decidim::ReportingProposals::ReportingProposalsType"
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
-  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_endorsed most_voted most_commented most_followed with_more_authors).freeze
+  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_liked most_voted most_commented most_followed with_more_authors).freeze
 
   component.settings(:global) do |settings|
     settings.attribute :taxonomy_filters, type: :taxonomy_filters
@@ -118,7 +118,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.register_stat :reporting_proposals_likes_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).not_hidden
-    proposals.sum(:endorsements_count)
+    proposals.sum(:likes_count)
   end
 
   component.register_stat :reporting_proposals_comments_count, tag: :comments do |components, start_at, end_at|
@@ -142,7 +142,7 @@ Decidim.register_component(:reporting_proposals) do |component|
                    .includes(:taxonomies, :component)
 
       if space.user_roles(:evaluator).where(user:).any?
-        collection.with_valuation_assigned_to(user, space)
+        collection.with_evaluation_assigned_to(user, space)
       else
         collection
       end

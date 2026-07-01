@@ -11,9 +11,6 @@ en:
         add_photos: Add photos
   decidim:
     admin:
-      actions:
-        manage: Manage
-        new: New
       hidden_resource_mailer:
         notify_mail:
           body_1: An administrator removed your proposal because it has been reported.
@@ -94,8 +91,8 @@ en:
             default_sort_order_options:
               default: Default
               most_commented: Most commented
-              most_endorsed: Most endorsed
               most_followed: Most followed
+              most_liked: Most liked
               most_voted: Most supported
               random: Random
               recent: Recent
@@ -201,8 +198,8 @@ en:
             default_sort_order_options:
               default: Default
               most_commented: Most commented
-              most_endorsed: Most endorsed
               most_followed: Most followed
+              most_liked: Most liked
               most_voted: Most supported
               random: Random
               recent: Recent
@@ -254,12 +251,9 @@ en:
           address:
             geolocated_at: Geolocated at
           index:
-            categories: Categories
             id: ID
           send_email_button:
             send_mail: Send an email to user
-          show:
-            report: Report
       proposals:
         compare:
           continue: Continue
@@ -270,18 +264,7 @@ en:
       report:
         admin_resource: Admin this resource
     reporting_proposals:
-      actions:
-        answer_proposal: Answer proposal
-        edit_proposal: Edit proposal
-        import: Import proposals from another component
-        new: New proposal
-        participatory_texts: Participatory texts
-        show: Show proposal
-        title: Actions
       admin:
-        actions:
-          edit_evaluators: Edit evaluators
-          preview: Preview
         answer_overdue:
           datetime:
             distance_in_words:
@@ -362,12 +345,6 @@ en:
               x_years:
                 one: 1 year to answer
                 other: "%{count} years to answer"
-        categories:
-          form:
-            evaluators_help: Select evaluators that will be assigned automatically
-              when a proposal is published in this category (they will receive a notification).
-          index:
-            evaluators_column: Automatic evaluators
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -429,22 +406,11 @@ en:
             invalid: There was a problem updating the proposal note.
             success: Proposal note successfully updated.
         proposals:
-          evaluators_list:
-            assigned_evaluators: Assigned evaluators
-            evaluators: Evaluators
-            remove_assignment: remove assignment
-            remove_assignment_confirmation: remove assignment confirmation
           photo_form:
             action: Save images
-            add_images: Add images
-            edit_images: Edit images
-            gallery_legend: Add an image gallery (Optional)
-            title: Photos
-            upload_msg: No files selected
           photo_gallery:
             are_you_sure: Are you sure you want to delete this image?
             delete_image: Delete image
-            photos: Photos
           photos:
             title: Photos
         proposals_evaluator_mailer:
@@ -527,8 +493,6 @@ en:
           no_similars_found: No similar proposals found
         edit:
           delete_image: Delete image
-        form:
-          image: Image/photo
     statistics:
       reporting_proposals_accepted: Number of accepted direct proposals
       reporting_proposals_comments_count: Number of comments on direct proposals

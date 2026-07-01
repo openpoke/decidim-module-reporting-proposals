@@ -5,7 +5,7 @@ module Decidim
     module Admin
       # A command with all the business logic when a user updates a proposal.
       class UpdateProposal < Decidim::Proposals::Admin::UpdateProposal
-        include Decidim::GalleryMethods
+        include Decidim::ReportingProposals::PhotoMethods
 
         # Public: Initializes the command.
         #
@@ -26,13 +26,13 @@ module Decidim
         def call
           return broadcast(:invalid) if form.invalid?
 
-          if process_gallery?
-            build_gallery
-            return broadcast(:invalid) if gallery_invalid?
+          if process_photos?
+            build_photos
+            return broadcast(:invalid) if photos_invalid?
           end
 
           transaction do
-            create_gallery if process_gallery?
+            create_photos if process_photos?
             photo_cleanup!
           end
 
@@ -42,6 +42,11 @@ module Decidim
         private
 
         attr_reader :form, :proposal, :gallery
+
+        # Admin photo management is not gated by the component attachments setting.
+        def photos_allowed?
+          true
+        end
       end
     end
   end

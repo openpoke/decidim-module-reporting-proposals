@@ -25,7 +25,7 @@
   </div>
 <% end %>
 
-<%= form.text_field :title, class: "js-hashtags", value: form_presenter.title %>
+<%= form.text_field :title, class: "js-hashtags", value: form_presenter.title, data: { controller: "character-counter" } %>
 
 <%= text_editor_for_proposal_body(form) %>
 
@@ -36,7 +36,7 @@
 <% end %>
 
 <% if component_settings.attachments_allowed? && !component_settings.only_photo_attachments? %>
-    <%= form.attachment :documents,
+    <%= form.attachment :attachments,
                         multiple: true,
                         label: t("decidim.proposals.proposals.edit.add_attachments"),
                         button_label: t("decidim.proposals.proposals.edit.add_attachments"),

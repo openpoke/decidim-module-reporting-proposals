@@ -9,9 +9,6 @@ de:
         has_no_image: Kein Foto vorhanden
   decidim:
     admin:
-      actions:
-        manage: Verwalten
-        new: Neu
       hidden_resource_mailer:
         notify_mail:
           body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
@@ -69,7 +66,7 @@ de:
             default_sort_order_options:
               default: Standard
               most_commented: Meiste Kommentare
-              most_endorsed: Am meisten befürwortet
+              most_liked: Am häufigsten unterstützt
               most_followed: Am meisten gefolgt
               most_voted: Am meisten unterstützt
               random: Zufällig
@@ -134,7 +131,7 @@ de:
             default_sort_order_options:
               default: Standard
               most_commented: Meiste Kommentare
-              most_endorsed: Am meisten befürwortet
+              most_liked: Am häufigsten unterstützt
               most_followed: Am meisten gefolgt
               most_voted: Am meisten unterstützt
               random: Zufällig
@@ -173,24 +170,11 @@ de:
             geolocated_at: Hier geolokalisiert
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
-          show:
-            report: Bericht
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
-      actions:
-        answer_proposal: Meldung beantworten
-        edit_proposal: Meldung bearbeiten
-        import: Meldungen aus einer anderen Komponente importieren
-        new: Neue Meldung
-        participatory_texts: Partizipative Texte
-        show: Meldung anzeigen
-        title: Aktionen
       admin:
-        actions:
-          edit_evaluators: Experten ändern
-          preview: Vorschau
         answer_overdue:
           datetime:
             distance_in_words:
@@ -271,11 +255,6 @@ de:
               x_years:
                 one: 1 Jahr zur Beantwortung
                 other: "%{count} Jahre zur Beantwortung"
-        categories:
-          form:
-            evaluators_help: Wählen Sie Experten aus, die automatisch zugewiesen werden, wenn eine Meldung in dieser Kategorie veröffentlicht wird (diese erhalten eine Benachrichtigung).
-          index:
-            evaluators_column: Automatisch zugewiesen an
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -339,21 +318,10 @@ de:
         proposals:
           photo_form:
             action: Bild hinzufügen
-            add_images: Bilder hinzufügen
-            edit_images: Bilder hinzufügen
-            gallery_legend: Bilder hinzufügen
-            title: Bilder
-            upload_msg: Keine Dateien ausgewählt
           photo_gallery:
             delete_image: Bild löschen
-            photos: Bilder
           photos:
             title: Bilder
-          evaluators_list:
-            assigned_evaluators: Zugewiesene Experten
-            remove_assignment: Zuweisung entfernen
-            remove_assignment_confirmation: Zuweisung wurde entfernt
-            evaluators: Expert/innen
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
             admin_panel: admin panel
@@ -424,8 +392,6 @@ de:
             title: Bestehende Meldungen in der Umgebung
         edit:
           delete_image: Bild löschen
-        form:
-          image: Foto
     statistics:
       reporting_proposals_accepted: Anzahl der akzeptierten direkten Meldungen
       reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen

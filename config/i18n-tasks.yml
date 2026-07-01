@@ -12,5 +12,21 @@ data:
     - "<%= %x[bundle info decidim-templates --path].chomp %>/config/locales/%{locale}.yml"
 
 ignore_unused:
+  - activemodel.attributes.*
+  - activemodel.errors.*
+  - activerecord.attributes.*
+  - activerecord.errors.*
+  - decidim.components.*
+  - decidim.statistics.*
+  - decidim.events.*
+  # Resolved at runtime via distance_of_time_in_words(scope:) — not literal t()
+  - decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words.*
+  - decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words.*
+  - decidim.reporting_proposals.admin.evaluate_pending.datetime.distance_in_words.*
+  - decidim.reporting_proposals.admin.time_elapsed.datetime.distance_in_words.*
+  # Resolved by export-manifest name / wizard step name (interpolated keys)
+  - decidim.reporting_proposals.admin.exports.*
+  - decidim.proposals.proposals.compare.title
+  - decidim.proposals.proposals.wizard_steps.step_compare
 
 ignore_missing:

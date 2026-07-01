@@ -9,9 +9,6 @@ es:
         has_no_image: No tiene imagen
   decidim:
     admin:
-      actions:
-        manage: Gestionar
-        new: Nuevo
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador eliminó su propuesta porque ha sido denunciada.
@@ -69,7 +66,7 @@ es:
             default_sort_order_options:
               default: Predeterminado
               most_commented: Más comentadas
-              most_endorsed: Con más adhesiones
+              most_liked: Con más "Me gusta"
               most_followed: Más seguidas
               most_voted: Con más apoyos
               random: Aleatorio
@@ -134,7 +131,7 @@ es:
             default_sort_order_options:
               default: Predeterminado
               most_commented: Más comentadas
-              most_endorsed: Con más adhesiones
+              most_liked: Con más "Me gusta"
               most_followed: Más seguidas
               most_voted: Con más apoyos
               random: Aleatorio
@@ -173,24 +170,11 @@ es:
             geolocated_at: Geolocalizada en
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
-          show:
-            report: Denunciar
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
     reporting_proposals:
-      actions:
-        answer_proposal: Responder a la propuesta
-        edit_proposal: Editar propuesta
-        import: Importar propuestas de otro componente
-        new: Nueva propuesta
-        participatory_texts: Textos participativos
-        show: Ver propuesta
-        title: Acciones
       admin:
-        actions:
-          edit_evaluators: Editar evaluadores
-          preview: Previsualizar
         answer_overdue:
           datetime:
             distance_in_words:
@@ -271,11 +255,6 @@ es:
               x_years:
                 one: 1 año para responder
                 other: "%{count} años para responder"
-        categories:
-          form:
-            evaluators_help: Seleccione los evaluadores que serán asignados automáticamente cuando una propuesta se publique en esta categoría (recibirán una notificación).
-          index:
-            evaluators_column: Evaluadores automáticos
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -339,21 +318,10 @@ es:
         proposals:
           photo_form:
             action: Añadir imagen
-            add_images: Añadir imágenes
-            edit_images: Añadir imágenes
-            gallery_legend: Añadir imágenes
-            title: Fotos
-            upload_msg: No hay archivos seleccionados
           photo_gallery:
             delete_image: Eliminar imagen
-            photos: Fotos
           photos:
             title: Fotos
-          evaluators_list:
-            assigned_evaluators: Asignar evaluadoras
-            remove_assignment: eliminar asignación
-            remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
-            evaluators: Evaluadoras
         proposals_evaluator_mailer:
           notify_proposals_evaluator:
             admin_panel: panel de administración
@@ -428,8 +396,6 @@ es:
             title: Propuestas cercanas
         edit:
           delete_image: Eliminar imagen
-        form:
-          image: Imágen/foto
     statistics:
       reporting_proposals_accepted: Número de propuestas directas aceptadas
       reporting_proposals_comments_count: Número de comentarios en propuestas directas

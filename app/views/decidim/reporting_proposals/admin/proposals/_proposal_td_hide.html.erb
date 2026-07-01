@@ -1,8 +1,13 @@
 <% if admin_allowed_to?(:hide_proposal, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions]) %>
-  <% if proposal.reported? %>
-    <%= icon_link_to "delete-bin-line", decidim_admin_reporting_proposals.hide_proposal_path(id: proposal),
-                     t("actions.hide", scope: "decidim.moderations"), method: :put, class: "action-icon" %>
-  <% else %>
-   <%= cell "decidim/report_button", proposal, button_classes: "button__text-secondary", modal_id: "flagModal-#{proposal.id}" %>
-  <% end %>
+  <hr>
+  <li class="dropdown__item">
+    <% if proposal.reported? %>
+      <%= link_to decidim_admin_reporting_proposals.hide_proposal_path(id: proposal), method: :put, class: "dropdown__button" do %>
+        <%= icon "delete-bin-line" %>
+        <%= t("actions.hide", scope: "decidim.moderations") %>
+      <% end %>
+    <% else %>
+      <%= cell "decidim/report_button", proposal, button_classes: "dropdown__button", modal_id: "flagModal-#{proposal.id}" %>
+    <% end %>
+  </li>
 <% end %>

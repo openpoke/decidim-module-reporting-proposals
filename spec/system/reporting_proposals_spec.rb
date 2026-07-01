@@ -44,7 +44,7 @@ describe "Reporting proposals overrides" do
     if attach
       page.execute_script("document.querySelectorAll('[data-filename]').forEach(el => el.remove());")
       dynamically_attach_file(:proposal_photos, Decidim::Dev.asset("city.jpeg"))
-      dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("Exampledocument.pdf"))
+      dynamically_attach_file(:proposal_attachments, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
       check "proposal_has_no_image"
     end
