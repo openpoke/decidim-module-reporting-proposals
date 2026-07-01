@@ -7,11 +7,8 @@ $(() => {
       return;
     }
 
-    // FormBuilderOverride wraps every file field in .camera-container, but the
-    // camera capture and has_no_image wiring must apply to the photo field only.
-    // The button's data-input is "add_photos" for photos and "add_attachments"/
-    // "add_documents" otherwise; skip non-photo fields. Allowed file types are
-    // server-driven (upload validations), so we never set "accept" here.
+    // FormBuilderOverride wraps every file field; camera + has_no_image wiring
+    // is photo-only, so skip inputs whose data-input has no "photo".
     const cameraInput = $button.attr("data-input") || "";
     if (!cameraInput.includes("photo")) {
       return;
@@ -20,12 +17,16 @@ $(() => {
     const inputId = $input.attr("id");
     const $checkbox = $("#proposal_has_no_image");
     const $formError = $container.find(".form-error");
-    const $labelInput = inputId ? $(`label[for='${inputId}']`) : $();
+    const $labelInput = inputId
+      ? $(`label[for='${inputId}']`)
+      : $();
 
-    // The upload-modal trigger button (e.g. #proposal_photos_button) sits outside
-    // the camera-container; link it back through the dialog id so it is greyed out too.
+    // The upload-modal trigger button sits outside the camera-container;
+    // link it back through the dialog id so it is greyed out too.
     const modalId = $container.closest("[data-dialog]").attr("data-dialog");
-    const $trigger = modalId ? $(`[data-dialog-open='${modalId}']`) : $();
+    const $trigger = modalId
+      ? $(`[data-dialog-open='${modalId}']`)
+      : $();
 
     const removeErrors = () => {
       $input.removeClass("is-invalid-input");
@@ -61,9 +62,9 @@ $(() => {
 
   // Foundation's data-close only hides the thumbnail; remove the node so its
   // hidden photos[] field stops being submitted and the photo is deleted.
-  $(document)
-    .off("click.reportingProposalsPhoto")
-    .on("click.reportingProposalsPhoto", ".photos_container .gallery__item .close-button[data-close]", (event) => {
+  $(document).
+    off("click.reportingProposalsPhoto").
+    on("click.reportingProposalsPhoto", ".photos_container .gallery__item .close-button[data-close]", (event) => {
       event.preventDefault();
       $(event.currentTarget).closest(".gallery__item").remove();
     });
