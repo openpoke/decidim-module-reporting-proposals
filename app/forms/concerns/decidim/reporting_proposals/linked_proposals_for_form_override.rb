@@ -2,7 +2,9 @@
 
 module Decidim
   module ReportingProposals
-    module MapRelatedProposalsForFormOverride
+    # Makes forms linking proposals aware of reporting proposals components:
+    # includers define +proposals_link_name+ with the resource link name.
+    module LinkedProposalsForFormOverride
       extend ActiveSupport::Concern
 
       included do
@@ -10,7 +12,7 @@ module Decidim
 
         def map_model(model)
           map_model_original(model)
-          self.proposal_ids += model.linked_resources(:reporting_proposals, "related_proposals").pluck(:id)
+          self.proposal_ids += model.linked_resources(:reporting_proposals, proposals_link_name).pluck(:id)
         end
 
         def proposals

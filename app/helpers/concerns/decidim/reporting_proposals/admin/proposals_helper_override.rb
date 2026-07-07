@@ -14,7 +14,8 @@ module Decidim
           def available_evaluators_for_proposal(proposal, current_user)
             participatory_space = proposal.component.participatory_space
 
-            all_roles = participatory_space.user_roles(:evaluator).order_by_name
+            # assembly user roles include the ancestor assemblies ones, so a strict space check is needed
+            all_roles = participatory_space.user_roles(:evaluator).for_space(participatory_space).order_by_name
             assigned_ids = proposal.evaluation_assignments.pluck(:evaluator_role_id)
 
             available_roles = all_roles.reject do |role|

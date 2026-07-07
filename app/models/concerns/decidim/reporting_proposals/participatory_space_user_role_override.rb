@@ -6,18 +6,17 @@ module Decidim
       extend ActiveSupport::Concern
 
       included do
-        # has_many :category_evaluators,
-        #          class_name: "Decidim::ReportingProposals::CategoryEvaluator",
-        #          foreign_key: :evaluator_role_id,
-        #          dependent: :destroy
+        has_many :taxonomy_evaluators,
+                 class_name: "Decidim::ReportingProposals::TaxonomyEvaluator",
+                 as: :evaluator_role,
+                 dependent: :destroy
 
-        # there is a bug in decidim that does not clean records from ValuationAssignment when removing Space roles
-        # This is a workaround to clean them manually
-        # It might be possible that we need to change this when this is solved:
-        # https://github.com/decidim/decidim/issues/10353
+        # Decidim does not clean EvaluationAssignment records when a space role
+        # is removed (https://github.com/decidim/decidim/issues/10353 is closed,
+        # but 0.31 still has no dependent cleanup), so they are removed here.
         has_many :proposal_evaluation_assignments,
                  class_name: "Decidim::Proposals::EvaluationAssignment",
-                 foreign_key: :evaluator_role_id,
+                 as: :evaluator_role,
                  dependent: :destroy
       end
     end

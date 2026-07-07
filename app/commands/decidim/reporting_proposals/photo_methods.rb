@@ -3,7 +3,7 @@
 module Decidim
   module ReportingProposals
     # Builds and persists the proposal `photos` attachments (camera button).
-    # TODO (hotfix): vendored concern — long-term route photos through core `attachments` and drop this.
+    # TODO (hotfix): vendored concern – long-term route photos through core `attachments` and drop this.
     module PhotoMethods
       private
 

@@ -1,4 +1,4 @@
-<%= append_javascript_pack_tag "decidim_reporting_proposals", defer: true %>
+<%= append_javascript_pack_tag "decidim_reporting_proposals_evaluators_admin", defer: true %>
 <%= append_stylesheet_pack_tag "decidim_proposals", media: "all" %>
 <% if allowed_to?(:assign_to_evaluator, :proposals, proposal:) %>
   <div id="js-assign-proposal-to-evaluator-actions" class="js-bulk-action-form form-single-proposal" style="max-width:400px; display:block">

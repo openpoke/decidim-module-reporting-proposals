@@ -2,13 +2,16 @@
 en:
   activemodel:
     attributes:
-      category:
-        evaluator_ids: Automatic evaluators
       proposal:
         has_no_address: Has no address
         has_no_image: Has no image
       proposal_photo:
         add_photos: Add photos
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Evaluator name
+      taxonomy_evaluators:
+        evaluator_role_ids: Evaluators
   decidim:
     admin:
       hidden_resource_mailer:
@@ -53,7 +56,7 @@ en:
           amend: Amend
           comment: Comment
           create: Create
-          endorse: Endorse
+          like: Like
           vote: Support
           vote_comment: Vote comment
           withdraw: Withdraw
@@ -388,6 +391,8 @@ en:
         exports:
           proposal_comments: Comments
           proposals: Reporting proposals
+        menu:
+          taxonomy_evaluators: Taxonomy evaluators
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -413,17 +418,25 @@ en:
             delete_image: Delete image
           photos:
             title: Photos
-        proposals_evaluator_mailer:
-          notify_proposals_evaluator:
-            admin_panel: admin panel
-            email_body: You've been assigned as an evaluator for the proposals listed
-              below. This means you've been trusted to give them feedback and a proper
-              response in the next coming days.
-            gratitude: Thanks for your help!
-            greeting: Hi %{name}
-            public_side: public side
-            subject: New proposals assigned to you for evaluation
         resolution_time: Resolution time
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Select evaluators
+            title: Edit evaluators for %{taxonomy}
+            update: Update
+          index:
+            actions: Actions
+            description: Evaluators will be automatically assigned to the new proposals
+              classified under these taxonomies.
+            empty: There are no taxonomies available. Please add some taxonomy filters
+              to the proposals components of this space first.
+            evaluators: Evaluators
+            taxonomy: Taxonomy
+            title: Automatic taxonomy evaluators
+            unassigned: Unassigned
+          update:
+            invalid: There was a problem updating the evaluators for this taxonomy.
+            success: Evaluators successfully updated for this taxonomy.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -464,6 +477,11 @@ en:
               x_years:
                 one: 1 year
                 other: "%{count} years"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} assigned an evaluator to the %{resource_name} taxonomy"
+          delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name}
+            taxonomy"
       form:
         add_image: Add image
         edit_image: Edit image
@@ -497,6 +515,6 @@ en:
       reporting_proposals_accepted: Number of accepted direct proposals
       reporting_proposals_comments_count: Number of comments on direct proposals
       reporting_proposals_count: Number of direct proposals
-      reporting_proposals_endorsements_count: Number of endorsements for direct proposals
       reporting_proposals_followers_count: Number of followers of direct proposals
+      reporting_proposals_likes_count: Number of likes for direct proposals
       reporting_proposals_votes_count: Number of supports for direct proposals

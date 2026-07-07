@@ -20,12 +20,10 @@ module Decidim
 
           "#{(meters / 1000).round}Km"
         end
-        # rubocop:enable Rails/HelperInstanceVariable
 
         private
 
         def proposal_wizard_aside_link_to_back(step)
-          # byebug
           case step
           when Decidim::Proposals::ProposalsController::STEP1
             proposals_path

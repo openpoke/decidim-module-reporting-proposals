@@ -38,8 +38,53 @@ module Decidim
         end
       end
 
+      initializer "decidim_reporting_proposals.taxonomy_evaluators_routes" do
+        Decidim::ParticipatoryProcesses::AdminEngine.routes.append do
+          scope "/participatory_processes/:participatory_process_slug" do
+            resources :taxonomy_evaluators, only: [:index, :edit, :update],
+                                            controller: "/decidim/reporting_proposals/admin/participatory_process_taxonomy_evaluators"
+          end
+        end
+
+        if defined?(Decidim::Assemblies::AdminEngine)
+          Decidim::Assemblies::AdminEngine.routes.append do
+            scope "/assemblies/:assembly_slug" do
+              resources :taxonomy_evaluators, only: [:index, :edit, :update],
+                                              controller: "/decidim/reporting_proposals/admin/assembly_taxonomy_evaluators"
+            end
+          end
+        end
+      end
+
+      initializer "decidim_reporting_proposals.taxonomy_evaluators_menus" do
+        Decidim.menu :admin_participatory_process_menu do |menu|
+          menu.add_item :taxonomy_evaluators,
+                        I18n.t("menu.taxonomy_evaluators", scope: "decidim.reporting_proposals.admin"),
+                        decidim_admin_participatory_processes.taxonomy_evaluators_path(current_participatory_space),
+                        active: is_active_link?(decidim_admin_participatory_processes.taxonomy_evaluators_path(current_participatory_space)),
+                        icon_name: "price-tag-3-line",
+                        if: allowed_to?(:update, :taxonomy_evaluator)
+
+          menu.move :taxonomy_evaluators, after: :components
+        end
+
+        if defined?(Decidim::Assemblies::AdminEngine)
+          Decidim.menu :admin_assembly_menu do |menu|
+            menu.add_item :taxonomy_evaluators,
+                          I18n.t("menu.taxonomy_evaluators", scope: "decidim.reporting_proposals.admin"),
+                          decidim_admin_assemblies.taxonomy_evaluators_path(current_participatory_space),
+                          active: is_active_link?(decidim_admin_assemblies.taxonomy_evaluators_path(current_participatory_space)),
+                          icon_name: "price-tag-3-line",
+                          if: allowed_to?(:update, :taxonomy_evaluator)
+
+            menu.move :taxonomy_evaluators, after: :components
+          end
+        end
+      end
+
       initializer "decidim_reporting_proposals.register_icons" do
         Decidim.icons.register(name: "camera-line", icon: "camera-line", category: "system", description: "", engine: :decidim_reporting_proposals)
+        Decidim.icons.register(name: "corner-down-right-line", icon: "corner-down-right-line", category: "system", description: "", engine: :decidim_reporting_proposals)
       end
 
       def load_seed

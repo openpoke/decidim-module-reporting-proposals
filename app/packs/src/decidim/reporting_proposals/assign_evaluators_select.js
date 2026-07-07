@@ -1,6 +1,6 @@
 import TomSelect from "tom-select/dist/cjs/tom-select.popular";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const select = document.querySelector("#assign_evaluator_role_ids");
 
   if (!select) {

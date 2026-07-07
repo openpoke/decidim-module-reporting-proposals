@@ -171,9 +171,19 @@ module Decidim::ReportingProposals::Admin
     it_behaves_like "can hide proposals"
     it_behaves_like "edit proposal note"
 
+    context "when user is a space admin" do
+      let!(:user) { create(:user, organization:) }
+      let!(:admin_role) { create(:participatory_process_user_role, user:, role: :admin, participatory_process: space) }
+
+      it_behaves_like "can edit photos"
+      it_behaves_like "can hide proposals"
+    end
+
     context "when user is a evaluator" do
       let!(:evaluator_role) { create(:participatory_process_user_role, user:, role: :evaluator, participatory_process: space) }
       let!(:user) { create(:user, organization:) }
+      # regression: another user's admin role must not open the actions to everyone
+      let!(:other_admin_role) { create(:participatory_process_user_role, user: create(:user, organization:), role: :admin, participatory_process: space) }
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
@@ -191,6 +201,7 @@ module Decidim::ReportingProposals::Admin
 
     context "when the user has no role" do
       let!(:user) { create(:user, organization:) }
+      let!(:other_admin_role) { create(:participatory_process_user_role, user: create(:user, organization:), role: :admin, participatory_process: space) }
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"

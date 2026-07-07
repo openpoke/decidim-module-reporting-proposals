@@ -24,8 +24,8 @@ module Decidim
         Decidim::Proposals::PublishProposal.include(Decidim::ReportingProposals::PublishProposalOverride)
         Decidim::Accountability::Admin::ResultForm.include(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
         Decidim::Accountability::Admin::HasResultCommand.include(Decidim::ReportingProposals::Admin::HasResultCommandOverride)
-        Decidim::Accountability::Admin::UpdateResult.include(Decidim::ReportingProposals::Admin::UpdateResultOverride)
-        Decidim::Accountability::Admin::UpdateImportedResult.include(Decidim::ReportingProposals::Admin::UpdateImportedResultOverride)
+        Decidim::Accountability::Admin::UpdateResult.include(Decidim::ReportingProposals::Admin::ResultNotificationsOverride)
+        Decidim::Accountability::Admin::UpdateImportedResult.include(Decidim::ReportingProposals::Admin::ResultNotificationsOverride)
         Decidim::Meetings::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
         Decidim::Meetings::Admin::CloseMeetingForm.include(Decidim::ReportingProposals::CloseMeetingFormOverride)
         Decidim::Meetings::Admin::CloseMeeting.include(Decidim::ReportingProposals::CloseMeetingOverride)
@@ -33,17 +33,19 @@ module Decidim
         Decidim::Budgets::Admin::ProjectForm.include(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
         Decidim::Budgets::Admin::CreateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Budgets::Admin::UpdateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
-        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::UpdateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
+        Decidim::ParticipatoryProcesses::Permissions.include(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride)
+        Decidim::Assemblies::Permissions.include(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride) if defined?(Decidim::Assemblies::AdminEngine)
         Decidim::ParticipatorySpaceRoleConfig::Evaluator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
-        Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::CreateProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
         # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
         Decidim::ReportedMailer.include(Decidim::ReportingProposals::ReportedMailerOverride)
 
-        # since version 0.27 Decidim uses its own version of attribute validation (used to be Rectify::Forms)
-        # To patch the ResourceManifest directly does not work now as the class is initialized by the proposals module on requiring the file component.rb
-        # So we remove the manifest and create it again after patching the class ResourceManifest
+        # The :proposal resource manifest is built eagerly when decidim-proposals is required (its component.rb),
+        # before this to_prepare runs, so including the override into ResourceManifest does not affect the
+        # already-registered manifest. We delete it and register it again so it is rebuilt with the patched class.
         Decidim::ResourceManifest.include(Decidim::ReportingProposals::ResourceManifestOverride)
         Decidim.resource_manifests.delete(Decidim.find_resource_manifest(:proposal))
         component = Decidim.find_component_manifest(:proposals)
@@ -68,7 +70,6 @@ module Decidim
         end
         Decidim::ResourceLocatorPresenter.include(Decidim::ReportingProposals::ResourceLocatorPresenterOverride)
         Decidim::Proposals::PublishProposalEvent.include(Decidim::ReportingProposals::PublishProposalEventOverride)
-        Decidim::Proposals::Admin::AssignProposalsToEvaluator.include(Decidim::ReportingProposals::Admin::AssignProposalsToEvaluatorOverride)
         # fix proposal filtering by type of component
         Decidim::Proposals::FilteredProposals.include(Decidim::ReportingProposals::FilteredProposalsOverride)
 
@@ -137,7 +138,7 @@ module Decidim
 
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         config.to_prepare do
-          ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_category)/) do |_event_name, data|
+          ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_taxonomies)/) do |_event_name, data|
             Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(data)
           end
         end

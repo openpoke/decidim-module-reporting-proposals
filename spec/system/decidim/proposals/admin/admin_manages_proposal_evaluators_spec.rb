@@ -58,15 +58,6 @@ describe "Admin manages proposals evaluators" do
         end
       end
 
-      # it "sends notification with email" do
-      #   perform_enqueued_jobs
-      #   expect(emails.first.subject).to include("New proposals assigned to you for evaluation")
-      #   expect(last_email.from).to eq([Decidim::Organization.first.smtp_settings["from"]])
-      #   expect(last_email.to).to eq([evaluator.email])
-      #   expect(last_email.body.encoded).to include("You've been assigned as an evaluator")
-      #   expect(last_email.body.encoded).to include(Decidim::ResourceLocatorPresenter.new(proposal).admin_url)
-      # end
-
       context "when a evaluator already exists" do
         before do
           create(:evaluation_assignment, proposal:, evaluator_role: second_evaluator_role)

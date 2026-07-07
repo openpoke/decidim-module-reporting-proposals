@@ -36,7 +36,7 @@ module Decidim
         def hide_content_action?
           return false unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
 
-          toggle_allow((admin_hide_proposals_enabled? && user_allowed_or_assigned?) || user_administrator?)
+          toggle_allow(admin_hide_proposals_enabled? && (user_allowed_or_assigned? || user_administrator?))
         end
 
         def edit_photos_action?
@@ -64,14 +64,12 @@ module Decidim
           user.admin? || (user_is_evaluator? && evaluator_assigned_to_proposal?)
         end
 
+        # space admins are not covered by user.admin? (organization admins only)
         def user_administrator?
-          process = Decidim::ParticipatoryProcess.where(organization: context[:proposal].try(:organization))
+          participatory_space = component.try(:participatory_space)
+          return false unless participatory_space.respond_to?(:user_roles)
 
-          admin = Decidim::User.where(id: Decidim::ParticipatoryProcessUserRole
-                                            .where(participatory_process: process, role: :admin)
-                                            .select(user.id))
-
-          admin.exists? ? user : false
+          participatory_space.user_roles(:admin).exists?(user:)
         end
       end
     end

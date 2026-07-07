@@ -1,3 +1,5 @@
 <!-- insert_bottom "ul.dropdown__action" -->
 
-<%= render "decidim/reporting_proposals/admin/proposals/proposal_td_hide", proposal: proposal %>
+<% if view != :deleted %>
+  <%= render "decidim/reporting_proposals/admin/proposals/proposal_td_hide", proposal: proposal %>
+<% end %>

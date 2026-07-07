@@ -12,13 +12,20 @@ data:
     - "<%= %x[bundle info decidim-templates --path].chomp %>/config/locales/%{locale}.yml"
 
 ignore_unused:
-  - activemodel.attributes.*
-  - activemodel.errors.*
-  - activerecord.attributes.*
-  - activerecord.errors.*
-  - decidim.components.*
-  - decidim.statistics.*
-  - decidim.events.*
+  # Form attribute / admin-log field labels resolved by human_attribute_name
+  - activemodel.attributes.proposal.*
+  - activemodel.attributes.proposal_photo.*
+  - activemodel.attributes.taxonomy_evaluator.*
+  - activemodel.attributes.taxonomy_evaluators.*
+  # Component manifest actions/name/settings resolved dynamically by the components UI
+  - decidim.components.proposals.settings.*
+  - decidim.components.reporting_proposals.*
+  # Stats resolved by name from the stats registry
+  - decidim.statistics.reporting_proposals_*
+  # Event classes resolve their i18n scope from the class name
+  - decidim.events.proposals.proposal_published.*
+  - decidim.events.proposals.proposal_published_for_admin.*
+  - decidim.events.proposals.proposal_published_for_space.*
   # Resolved at runtime via distance_of_time_in_words(scope:) — not literal t()
   - decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words.*
   - decidim.reporting_proposals.admin.answer_pending.datetime.distance_in_words.*
@@ -28,5 +35,9 @@ ignore_unused:
   - decidim.reporting_proposals.admin.exports.*
   - decidim.proposals.proposals.compare.title
   - decidim.proposals.proposals.wizard_steps.step_compare
+  # Referenced from lib/decidim/reporting_proposals/admin_engine.rb (outside the default search paths)
+  - decidim.reporting_proposals.admin.menu.*
+  # Resolved at runtime by AdminLog::TaxonomyEvaluatorPresenter#action_string (interpolated keys)
+  - decidim.reporting_proposals.admin_log.taxonomy_evaluator.*
 
 ignore_missing:

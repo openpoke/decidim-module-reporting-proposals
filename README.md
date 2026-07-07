@@ -34,15 +34,17 @@ bin/rails db:migrate
 ```
 
 > ** MIGRATION TO v0.31:**
-> Deciim v0.31 has made a refactor to the **valuator** terminology and has concluded that **evaluator** is better.
+> Decidim v0.31 has made a refactor to the **valuator** terminology and has concluded that **evaluator** is better.
 > You can check the arguments [here](https://github.com/decidim/decidim/releases/tag/v0.31.0). 
 >
-> You have to take into account that you might have to change a function in your initializer. The `config.valuators_assign_other_valuators` has been changed to `config.evaluators_assign_other_valuators`
+> You have to take into account that you might have to change a function in your initializer. The `config.valuators_assign_other_valuators` has been changed to `config.evaluators_assign_other_evaluators`
 >
 > ```ruby
->  config.evaluators_assign_other_valuators = true
+>  config.evaluators_assign_other_evaluators = true
 >  ```
-> 
+>
+> Automatic evaluator assignment is now configured per taxonomy instead of per category.
+> Existing category-valuator assignments are not migrated automatically (the category-to-taxonomy conversion happens through the `decidim:taxonomies:import_plan` task, after this module's migrations have already removed the old table), so after importing taxonomies you must reconfigure the evaluators for each taxonomy in the admin panel.
 
 > **MIGRATION FROM v0.28:**
 > Decidim version 0.29 introduced custom proposal states. 
@@ -108,8 +110,7 @@ This module provides the following features:
 2. **Comparison by proximity**: By default, reporting proposals are compared by proximity before publishing (as they are geolocated by default). This can be disabled in the component's settings.
   ![Compare by proximity](features/proximity.png)
 
-<!-- 3. **Automatic assignation of evaluators**: When a proposal is created, admins usually have to assign evaluators manually to it. This module allows admins to assign evaluators to a category directly. This will automatically assign all evaluators in that category to any proposal/reporting proposal created under it (and also existing proposals). This avoids the need of manually assign proposals to evaluators. This behavior can be disabled in the component's settings.
-  ![Evaluators in categories](features/categories.png) -->
+3. **Automatic assignment of evaluators per taxonomy**: When a proposal is created, admins usually have to assign evaluators manually to it. This module adds a "Taxonomy evaluators" sub-menu to the participatory process and assembly admin (right after "Components"). It lists, as a tree, the taxonomies used by the proposals and reporting proposals components of the space, and editing a taxonomy allows to assign one or more evaluators to it. Those evaluators are then automatically assigned to any proposal published under that taxonomy (or re-classified to it later). Evaluators can be assigned at any level of the tree, root taxonomies included: a taxonomy without its own evaluators inherits them from the nearest ancestor that has some, while a taxonomy with its own list overrides the inherited one. This avoids the need of manually assigning proposals to evaluators.
 
 4. **Evaluators empowerment**: A number of features allow evaluators to have more control over the proposals they are evaluating. They can assign other evaluators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, evaluators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
   ![Evaluators empowerment](features/answering1.png)
@@ -155,7 +156,11 @@ Decidim::ReportingProposals.configure do |config|
   config.allow_proposal_photo_editing = true
 
   # Public setting to allow to assign other evaluators
-  config.evaluators_assign_other_valuators = true
+  config.evaluators_assign_other_evaluators = true
+
+  # Public setting that defines the email of the bot user ("Automatic assignment")
+  # used as the author of automatic evaluator assignments in the admin log
+  config.automation_user_email = "reporting-proposals-automation@example.org"
 end
 ```
 

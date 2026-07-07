@@ -3,10 +3,14 @@
 module Decidim
   module ReportingProposals
     module Admin
-      module UpdateResultOverride
+      # Notifies also the proposals linked from reporting proposals components
+      # when a result progress is updated.
+      module ResultNotificationsOverride
         extend ActiveSupport::Concern
 
         included do
+          private
+
           def send_notifications
             all = result.linked_resources(:proposals, "included_proposals") + result.linked_resources(:reporting_proposals, "included_proposals")
             all.each do |proposal|
