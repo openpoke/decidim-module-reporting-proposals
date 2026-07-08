@@ -210,7 +210,7 @@ module Decidim
                 title: "Short",
                 # When the proposal has existing photos or documents, their IDs
                 # will be sent as Strings in the form payload.
-                photos: proposal.photos.map { |a| a.id.to_s },
+                attachments: proposal.photos.map { |a| a.id.to_s },
                 documents: proposal.documents.map { |a| a.id.to_s }
               }
             end

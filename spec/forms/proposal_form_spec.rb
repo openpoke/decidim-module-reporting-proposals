@@ -17,7 +17,7 @@ module Decidim
       let(:latitude) { 40.1234 }
       let(:longitude) { 2.1234 }
       let(:has_no_address) { false }
-      let(:has_no_image) { false }
+      let(:has_no_attachments) { false }
       let(:address) { "Some address" }
       let(:image) { [Decidim::Dev.test_file("city.jpeg", "image/jpeg")] }
       let(:attachment_params) { nil }
@@ -34,8 +34,8 @@ module Decidim
           latitude:,
           longitude:,
           has_no_address:,
-          has_no_image:,
-          add_photos: image,
+          has_no_attachments:,
+          add_attachments: image,
           meeting_as_author:,
           attachment: attachment_params
         }
@@ -78,13 +78,13 @@ module Decidim
         end
       end
 
-      context "when there's no image" do
+      context "when there are no attachments" do
         let(:image) { nil }
 
         it { is_expected.not_to be_valid }
 
-        context "and image is not required" do
-          let(:has_no_image) { true }
+        context "and attachments are not required" do
+          let(:has_no_attachments) { true }
 
           it { is_expected.to be_valid }
         end

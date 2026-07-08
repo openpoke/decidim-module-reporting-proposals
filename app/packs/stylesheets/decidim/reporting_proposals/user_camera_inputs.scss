@@ -17,11 +17,11 @@
     @apply truncate mr-2;
   }
 
-  #proposal_add_photos {
+  #proposal_add_attachments {
     @apply mt-2 block;
   }
 }
 
-.has_no_image {
+.has_no_attachments {
   @apply md:text-right -mt-1;
 }

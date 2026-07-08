@@ -41,27 +41,17 @@ shared_examples "reuses draft if exists" do
 end
 
 shared_examples "customized form" do
-  context "when only_photo_attachments is enabled" do
-    let(:only_photos) { true }
+  context "when attachments are not active" do
+    let(:attachments) { false }
 
-    it "does not show the attachments" do
-      uncheck "proposal_has_no_image"
-      expect(page).to have_no_content("Add an attachment")
-    end
-
-    context "and attachment are not active" do
-      let(:attachments) { false }
-
-      it "does not show the attachments or photos" do
-        expect(page).to have_no_checked_field("proposal_has_no_image")
-        expect(page).to have_no_content("Add an attachment")
-        expect(page).to have_no_content("Image/photo")
-      end
+    it "does not show the attachments upload" do
+      expect(page).to have_no_field("proposal_has_no_attachments")
+      expect(page).to have_no_content("Add image or documents")
     end
   end
 
   it "uploads attachments", :slow do
-    uncheck "proposal_has_no_image"
+    uncheck "proposal_has_no_attachments"
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
@@ -104,7 +94,7 @@ shared_examples "creates reporting proposal" do
     expect(page).to have_no_content("Documents")
 
     click_on "Modify the proposal"
-    find_by_id("proposal_has_no_image").click
+    find_by_id("proposal_has_no_attachments").click
 
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
@@ -114,21 +104,21 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content("Edit proposal draft")
 
-    expect(page).to have_content("Add attachments")
-    check "proposal_has_no_image"
+    expect(page).to have_content("Add image or documents")
+    check "proposal_has_no_attachments"
     click_on "Preview"
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(proposal_body)
   end
 
-  it "remember has_no_address and has_no_image" do
+  it "remember has_no_address and has_no_attachments" do
     fill_proposal(skip_address: true, attach: false)
 
     click_on "Modify the proposal"
 
     expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("#proposal_photos_button[disabled]")
+    expect(page).to have_css("#proposal_attachments_button[disabled]")
   end
 
   it "stores no address if checked" do
@@ -175,7 +165,7 @@ end
 shared_examples "normal form" do
   it "does not have modified fields" do
     expect(page).to have_no_field("proposal_has_no_address")
-    expect(page).to have_no_field("proposal_has_no_image")
+    expect(page).to have_no_field("proposal_has_no_attachments")
   end
 end
 

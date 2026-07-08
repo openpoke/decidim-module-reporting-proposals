@@ -4,14 +4,20 @@ ca:
     attributes:
       proposal:
         has_no_address: No té adreça
-        has_no_image: Sense imatge
+        has_no_attachments: No té fitxers adjunts
       proposal_photo:
-        add_photos: Afegir fotos
+        add_attachments: Afegir fotos
       taxonomy_evaluator:
         admin_log:
           evaluator_role_id: Nom de l'avaluadora
       taxonomy_evaluators:
         evaluator_role_ids: Avaluadores
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: només pot contenir imatges
   decidim:
     admin:
       hidden_resource_mailer:
@@ -147,7 +153,6 @@ ca:
             new_proposal_help_text: Text d'ajuda per la creació d'una nova proposta
             no_taxonomy_filters_found: No s'han trobat filtres de taxonomia.
             official_proposals_enabled: Propostes d'administradora (oficials) habilitades
-            only_photo_attachments: Utilitza només fitxers de fotos
             participatory_texts_enabled: Textos participatius habilitats
             participatory_texts_enabled_readonly: No es pot interactuar amb aquesta
               configuració si hi ha propostes existents. Si us plau, crea un nou 'component
@@ -498,9 +503,8 @@ ca:
           create: "%{user_name} ha assignat una avaluadora a la taxonomia %{resource_name}"
           delete: "%{user_name} ha desassignat una avaluadora de la taxonomia %{taxonomy_name}"
       form:
-        add_image: Afegir imatge
-        edit_image: Editar imatge
-        image_legend: "(Opcional) Afegir una imatge"
+        add_attachments: Afegir imatge o documents
+        edit_attachments: Editar imatge o documents
       forms:
         errors:
           device_not_supported: La geolocalització no és compatible amb el vostre
@@ -525,8 +529,6 @@ ca:
               en comptes de crear-ne un de nou.
             title: Propostes properes
           no_similars_found: No s'han trobat propostes similars
-        edit:
-          delete_image: Esborra la imatge
     statistics:
       reporting_proposals_accepted: Nombre de propostes directes acceptades
       reporting_proposals_comments_count: Nombre de comentaris a propostes directes

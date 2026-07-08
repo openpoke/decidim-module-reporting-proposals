@@ -5,11 +5,7 @@ require "spec_helper"
 describe "User camera button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
-  let!(:component) do
-    create(:reporting_proposals_component,
-           participatory_space: participatory_process,
-           settings: { only_photo_attachments: false })
-  end
+  let!(:component) { create(:reporting_proposals_component, participatory_space: participatory_process) }
   let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
   let(:use_camera_button) { true }
@@ -52,7 +48,7 @@ describe "User camera button" do
     before do
       visit_component
       click_on "New proposal"
-      click_on "Add image"
+      click_on "Add image or documents"
     end
 
     it_behaves_like "uses device camera"

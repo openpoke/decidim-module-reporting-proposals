@@ -7,15 +7,8 @@ $(() => {
       return;
     }
 
-    // FormBuilderOverride wraps every file field; camera + has_no_image wiring
-    // is photo-only, so skip inputs whose data-input has no "photo".
-    const cameraInput = $button.attr("data-input") || "";
-    if (!cameraInput.includes("photo")) {
-      return;
-    }
-
     const inputId = $input.attr("id");
-    const $checkbox = $("#proposal_has_no_image");
+    const $checkbox = $("#proposal_has_no_attachments");
     const $formError = $container.find(".form-error");
     const $labelInput = inputId
       ? $(`label[for='${inputId}']`)
@@ -59,13 +52,4 @@ $(() => {
       toggleInput();
     }
   });
-
-  // Foundation's data-close only hides the thumbnail; remove the node so its
-  // hidden photos[] field stops being submitted and the photo is deleted.
-  $(document).
-    off("click.reportingProposalsPhoto").
-    on("click.reportingProposalsPhoto", ".photos_container .gallery__item .close-button[data-close]", (event) => {
-      event.preventDefault();
-      $(event.currentTarget).closest(".gallery__item").remove();
-    });
 });

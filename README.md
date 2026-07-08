@@ -148,7 +148,8 @@ Decidim::ReportingProposals.configure do |config|
   # in a geocoded address field. Accepts an array of component manifest names
   config.show_my_location_button = [:proposals, :meetings, :reporting_proposals]
 
-  # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
+  # Public setting that adds a button to open the camera directly next to the attachments upload
+  # of reporting proposals (and the admin photo form of both proposals components)
   config.use_camera_button = true
 
   # Public setting to prevent evaluators or admins to modify the photos attached to a proposal

@@ -72,7 +72,7 @@ module Decidim
           enforce_permission_to :edit, :proposal, proposal: @proposal
 
           @form = form_proposal_params
-          update_proposal_command.call(@form, current_user, @proposal) do
+          Decidim::Proposals::UpdateProposal.call(@form, current_user, @proposal) do
             on(:ok) do |proposal|
               flash[:notice] = I18n.t("proposals.update_draft.success", scope: "decidim")
               redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
@@ -89,7 +89,7 @@ module Decidim
           enforce_permission_to :edit, :proposal, proposal: @proposal
 
           @form = form_proposal_params
-          update_proposal_command.call(@form, current_user, @proposal) do
+          Decidim::Proposals::UpdateProposal.call(@form, current_user, @proposal) do
             on(:ok) do |proposal|
               flash[:notice] = I18n.t("proposals.update.success", scope: "decidim")
               redirect_to Decidim::ResourceLocatorPresenter.new(proposal).path
@@ -122,10 +122,6 @@ module Decidim
 
         def create_proposal_command
           reporting_proposal? ? CreateReportingProposal : Decidim::Proposals::CreateProposal
-        end
-
-        def update_proposal_command
-          reporting_proposal? ? Decidim::ReportingProposals::UpdateReportingProposal : Decidim::Proposals::UpdateProposal
         end
 
         def reporting_proposal?

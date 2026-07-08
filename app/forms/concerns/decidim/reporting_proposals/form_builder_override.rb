@@ -18,7 +18,7 @@ module Decidim
           # Callers can still pass an explicit `accept` to override this.
           options[:accept] ||= reporting_proposals_picker_accept(object_name)
 
-          return original_file_field(object_name, options) unless Decidim::ReportingProposals.use_camera_button
+          return original_file_field(object_name, options) unless reporting_proposals_camera_field?(object_name)
           return original_file_field(object_name, options) unless @template.respond_to?(:snippets)
 
           unless @template.snippets.any?(:reporting_proposals_camera_scripts) || @template.snippets.any?(:reporting_proposals_camera_styles)
@@ -45,13 +45,21 @@ module Decidim
 
         private
 
-        # Builds the `accept` value for a file input from the server-side allowlist.
-        # Photo fields use the image-only extension set; every other field uses the
-        # per-context (admin vs participant) allowlist resolved by FileValidatorHumanizer.
-        # Returns nil for any field without a resolvable allowlist so it stays a no-op.
+        # The camera button is a reporting-proposals feature: the attachments
+        # upload of the public reporting-proposal form and the admin photo form
+        def reporting_proposals_camera_field?(object_name)
+          return false unless Decidim::ReportingProposals.use_camera_button
+          return true if reporting_proposals_photo_form?
+
+          object_name.to_s.include?("attachment") &&
+            @template.try(:reporting_proposal?) == true &&
+            @template.controller.class.name.exclude?("::Admin::")
+        end
+
+        # `accept` from the server-side allowlist; nil (no-op) when not resolvable
         def reporting_proposals_picker_accept(object_name)
           extensions =
-            if object_name.to_s.include?("photo")
+            if reporting_proposals_photo_form?
               Decidim.organization_settings(@template.current_organization).upload_allowed_file_extensions_image
             else
               Decidim::FileValidatorHumanizer.new(object, object_name.to_s.sub(/\Aadd_/, "").to_sym).extension_allowlist
@@ -60,6 +68,10 @@ module Decidim
           extensions.presence&.map { |ext| ".#{ext}" }&.join(",")
         rescue StandardError
           nil
+        end
+
+        def reporting_proposals_photo_form?
+          @object_name.to_s.include?("proposal_photo")
         end
       end
     end

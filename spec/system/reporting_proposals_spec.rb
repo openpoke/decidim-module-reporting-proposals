@@ -7,14 +7,13 @@ describe "Reporting proposals overrides" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
   let!(:scope) { create(:scope, organization:) }
-  let(:only_photos) { false }
   let(:attachments) { true }
   let(:taxonomy_filter) { create(:taxonomy_filter, root_taxonomy:, participatory_space_manifests: [participatory_space.manifest.name]) }
   let!(:taxonomy_filter_item) { create(:taxonomy_filter_item, taxonomy_filter:, taxonomy_item: taxonomy) }
   let!(:component) do
     create(:reporting_proposals_component,
            participatory_space: participatory_process,
-           settings: { taxonomy_filters: [taxonomy_filter.id], attachments_allowed: attachments, only_photo_attachments: only_photos })
+           settings: { taxonomy_filters: [taxonomy_filter.id], attachments_allowed: attachments })
   end
   let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
   let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
@@ -43,10 +42,11 @@ describe "Reporting proposals overrides" do
     end
     if attach
       page.execute_script("document.querySelectorAll('[data-filename]').forEach(el => el.remove());")
-      dynamically_attach_file(:proposal_photos, Decidim::Dev.asset("city.jpeg"))
+      # Single unified attachments upload now takes both the image and the document.
+      dynamically_attach_file(:proposal_attachments, Decidim::Dev.asset("city.jpeg"))
       dynamically_attach_file(:proposal_attachments, Decidim::Dev.asset("Exampledocument.pdf"))
     elsif manifest_name == "reporting_proposals"
-      check "proposal_has_no_image"
+      check "proposal_has_no_attachments"
     end
 
     if submit

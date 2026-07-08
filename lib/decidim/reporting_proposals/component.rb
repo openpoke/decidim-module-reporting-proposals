@@ -52,7 +52,6 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
     settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
     settings.attribute :attachments_allowed, type: :boolean, default: true
-    settings.attribute :only_photo_attachments, type: :boolean, default: true
     settings.attribute :resources_permissions_enabled, type: :boolean, default: true
     settings.attribute :collaborative_drafts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
     settings.attribute :participatory_texts_enabled, type: :boolean, default: false, readonly: ->(_) { true }

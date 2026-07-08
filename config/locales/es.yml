@@ -4,14 +4,20 @@ es:
     attributes:
       proposal:
         has_no_address: No tiene dirección
-        has_no_image: No tiene imagen
+        has_no_attachments: No tiene archivos adjuntos
       proposal_photo:
-        add_photos: Añadir fotos
+        add_attachments: Añadir fotos
       taxonomy_evaluator:
         admin_log:
           evaluator_role_id: Nombre de la evaluadora
       taxonomy_evaluators:
         evaluator_role_ids: Evaluadores
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: solo puede contener imágenes
   decidim:
     admin:
       hidden_resource_mailer:
@@ -143,7 +149,6 @@ es:
             new_proposal_help_text: Texto de ayuda al crear una propuesta
             no_taxonomy_filters_found: No se han encontrado filtros de taxonomía.
             official_proposals_enabled: Propuestas oficiales habilitadas
-            only_photo_attachments: Permitir solo fotos en los archivos adjuntos
             participatory_texts_enabled: Textos participativos habilitados
             participatory_texts_enabled_readonly: No se puede interactuar con esta
               configuración si hay propuestas existentes. Por favor, crea un nuevo
@@ -493,9 +498,8 @@ es:
           create: "%{user_name} asignó una evaluadora a la taxonomía %{resource_name}"
           delete: "%{user_name} desasignó una evaluadora de la taxonomía %{taxonomy_name}"
       form:
-        add_image: Añadir imagen
-        edit_image: Editar imagen
-        image_legend: "(Opcional) Añadir una imagen"
+        add_attachments: Añadir imagen o documentos
+        edit_attachments: Editar imagen o documentos
       forms:
         errors:
           device_not_supported: Este navegador no admite geolocalización.
@@ -518,8 +522,6 @@ es:
               situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
           no_similars_found: No se han encontrado propuestas similares
-        edit:
-          delete_image: Eliminar imagen
     statistics:
       reporting_proposals_accepted: Número de propuestas directas aceptadas
       reporting_proposals_comments_count: Número de comentarios en propuestas directas

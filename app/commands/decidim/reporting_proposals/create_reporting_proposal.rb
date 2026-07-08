@@ -4,7 +4,6 @@ module Decidim
   module ReportingProposals
     class CreateReportingProposal < Decidim::Proposals::CreateProposal
       include ::Decidim::MultipleAttachmentsMethods
-      include Decidim::ReportingProposals::PhotoMethods
 
       def call
         return broadcast(:invalid) if form.invalid?
@@ -12,11 +11,6 @@ module Decidim
         if process_attachments?
           build_attachments
           return broadcast(:invalid) if attachments_invalid?
-        end
-
-        if process_photos?
-          build_photos
-          return broadcast(:invalid) if photos_invalid?
         end
 
         if proposal_limit_reached?
@@ -28,8 +22,7 @@ module Decidim
           create_reporting_proposal
 
           @attached_to = @proposal
-          create_photos if process_photos?
-          create_attachments if process_attachments?
+          create_attachments(first_weight: first_attachment_weight) if process_attachments?
         end
 
         broadcast(:ok, proposal)

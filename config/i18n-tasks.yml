@@ -17,6 +17,8 @@ ignore_unused:
   - activemodel.attributes.proposal_photo.*
   - activemodel.attributes.taxonomy_evaluator.*
   - activemodel.attributes.taxonomy_evaluators.*
+  # Error messages resolved by errors.add(:attribute, :symbol) - not literal t()
+  - activemodel.errors.models.proposal_photo.*
   # Component manifest actions/name/settings resolved dynamically by the components UI
   - decidim.components.proposals.settings.*
   - decidim.components.reporting_proposals.*

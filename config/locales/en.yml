@@ -4,14 +4,20 @@ en:
     attributes:
       proposal:
         has_no_address: Has no address
-        has_no_image: Has no image
+        has_no_attachments: Has no attachments
       proposal_photo:
-        add_photos: Add photos
+        add_attachments: Add photos
       taxonomy_evaluator:
         admin_log:
           evaluator_role_id: Evaluator name
       taxonomy_evaluators:
         evaluator_role_ids: Evaluators
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: must contain only images
   decidim:
     admin:
       hidden_resource_mailer:
@@ -134,7 +140,6 @@ en:
             new_proposal_help_text: New proposal help text
             no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Official proposals enabled
-            only_photo_attachments: Use only photo attachments
             participatory_texts_enabled: Participatory texts enabled
             participatory_texts_enabled_readonly: Cannot interact with this setting
               if there are existing proposals. Please, create a new `Proposals component`
@@ -483,9 +488,8 @@ en:
           delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name}
             taxonomy"
       form:
-        add_image: Add image
-        edit_image: Edit image
-        image_legend: "(Optional) Add an image"
+        add_attachments: Add image or documents
+        edit_attachments: Edit image or documents
       forms:
         errors:
           device_not_supported: Geolocation is not supported by your browser.
@@ -509,8 +513,6 @@ en:
               one.
             title: Nearby proposals
           no_similars_found: No similar proposals found
-        edit:
-          delete_image: Delete image
     statistics:
       reporting_proposals_accepted: Number of accepted direct proposals
       reporting_proposals_comments_count: Number of comments on direct proposals

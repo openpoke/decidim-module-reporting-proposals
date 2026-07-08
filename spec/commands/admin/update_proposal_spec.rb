@@ -23,15 +23,9 @@ module Decidim::ReportingProposals::Admin
     let!(:proposal) { create(:proposal, :official, component:) }
 
     let(:uploaded_photos) { [] }
-    let(:current_photos) { [] }
 
     describe "call" do
-      let(:form_params) do
-        {
-          photos: current_photos,
-          add_photos: uploaded_photos
-        }
-      end
+      let(:form_params) { { add_attachments: uploaded_photos } }
 
       let(:command) do
         described_class.new(form, proposal)
@@ -55,23 +49,23 @@ module Decidim::ReportingProposals::Admin
 
       describe "admin manages resource gallery" do
         context "when managing images" do
-          let(:uploaded_photos) do
-            [
-              Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
-              Decidim::Dev.test_file("city2.jpeg", "image/jpeg")
-            ]
+          let(:uploaded_photos) { [Decidim::Dev.test_file("city.jpeg", "image/jpeg"), Decidim::Dev.test_file("city2.jpeg", "image/jpeg")] }
+
+          it "adds photos to the proposal" do
+            command.call
+
+            expect(proposal.photos.count).to eq(2)
+            last_attachment = Decidim::Attachment.last
+            expect(last_attachment.attached_to).to eq(proposal)
           end
-          let(:current_photos) { [] }
 
-          # it "add photos to proposal" do
-          #   command.call
-          #
-          #   expect(proposal.photos.count).to eq(2)
-          #   last_attachment = Decidim::Attachment.last
-          #   expect(last_attachment.attached_to).to eq(proposal)
-          # end
+          it "appends after the existing photos without weight collisions" do
+            command.call
 
-          context "when file_field :add_photos is left blank" do
+            expect(proposal.reload.attachments.pluck(:weight).uniq.count).to eq(2)
+          end
+
+          context "when file_field :add_attachments is left blank" do
             let(:uploaded_photos) { [] }
 
             it "broadcasts invalid" do

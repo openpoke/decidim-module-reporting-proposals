@@ -4,14 +4,20 @@ de:
     attributes:
       proposal:
         has_no_address: Adresse unbekannt
-        has_no_image: Kein Foto vorhanden
+        has_no_attachments: Keine Anhänge vorhanden
       proposal_photo:
-        add_photos: Fotos hinzufügen
+        add_attachments: Fotos hinzufügen
       taxonomy_evaluator:
         admin_log:
           evaluator_role_id: Name der bewertenden Person
       taxonomy_evaluators:
         evaluator_role_ids: Bewertende Personen
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: darf nur Bilder enthalten
   decidim:
     admin:
       hidden_resource_mailer:
@@ -139,7 +145,6 @@ de:
             new_proposal_help_text: Hilfetext für neue Meldungen
             no_taxonomy_filters_found: Keine Klassifizierungsfilter gefunden.
             official_proposals_enabled: Offizielle Meldungen aktivieren
-            only_photo_attachments: Nur Foto-Anhänge zulassen
             participatory_texts_enabled: Partizipative Texte aktivieren
             participatory_texts_enabled_readonly: Die Interaktion mit dieser Einstellung
               ist nicht möglich, wenn Meldungen bestehen. Bitte erstellen Sie eine
@@ -498,9 +503,8 @@ de:
           delete: "%{user_name} hat die Zuweisung einer bewertenden Person zur Taxonomie
             %{taxonomy_name} entfernt"
       form:
-        add_image: Bild hinzufügen
-        edit_image: Bild bearbeiten
-        image_legend: "(Optional) Ein Bild hinzufügen"
+        add_attachments: Bild oder Dokumente hinzufügen
+        edit_attachments: Bild oder Dokumente bearbeiten
       forms:
         errors:
           device_not_supported: Diese Funktion wird von deinem Browser nicht unterstützt.
@@ -524,8 +528,6 @@ de:
               Meldung Unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
           no_similars_found: Keine ähnlichen Meldungen gefunden
-        edit:
-          delete_image: Bild löschen
     statistics:
       reporting_proposals_accepted: Anzahl der akzeptierten direkten Meldungen
       reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen
