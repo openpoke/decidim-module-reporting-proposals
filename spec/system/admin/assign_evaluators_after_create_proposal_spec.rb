@@ -47,7 +47,7 @@ describe "Automatic assign evaluators after create proposals" do
 
       click_on "New proposal"
       check "Has no address"
-      check "Has no image"
+      check "Has no attachments"
       fill_in("proposal_title", with: "Test title for proposal")
       fill_in("proposal_body", with: "Test description for proposal")
       select decidim_sanitize_translated(taxonomy.name), from: "taxonomies-#{taxonomy_filter.id}"

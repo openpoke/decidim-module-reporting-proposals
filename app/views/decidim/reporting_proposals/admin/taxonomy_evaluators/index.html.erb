@@ -15,22 +15,21 @@
 
   <div class="card-section p-4">
     <% if collection.any? %>
-      <div class="table-stacked" aria-labelledby="taxonomy_evaluators-title">
+      <div class="table-stacked" role="table" aria-labelledby="taxonomy_evaluators-title">
         <table class="table-list">
           <thead>
-            <tr>
-              <th><%= t(".taxonomy") %></th>
-              <th><%= t(".evaluators") %></th>
-              <th class="w-16"><%= t(".actions") %></th>
+            <tr role="row">
+              <th scope="col" role="columnheader"><%= t(".taxonomy") %></th>
+              <th scope="col" role="columnheader"><%= t(".evaluators") %></th>
+              <th scope="col" role="columnheader" class="w-16"><%= t(".actions") %></th>
             </tr>
           </thead>
           <tbody>
             <% can_edit_taxonomies = allowed_to?(:update, :taxonomy) %>
             <% tree_collection.each do |taxonomy| %>
-              <% depth = taxonomy_depth(taxonomy) %>
-              <tr>
+              <tr role="row">
                 <td data-label="<%= t(".taxonomy") %>">
-                  <div style="<%= "padding-left: #{depth * 1.5}rem;" if depth.positive? %>">
+                  <div class="<%= taxonomy_indent_class(taxonomy) %>">
                     <% if taxonomy.root? %>
                       <% if can_edit_taxonomies %>
                         <%= link_to translated_attribute(taxonomy.name), decidim_admin.edit_taxonomy_path(taxonomy) %>

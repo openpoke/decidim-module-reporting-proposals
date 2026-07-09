@@ -10,7 +10,9 @@ module Decidim
       class TaxonomyEvaluatorsController < Decidim::Admin::ApplicationController
         include Decidim::TranslatableAttributes
 
-        helper_method :collection, :tree_collection, :taxonomy, :taxonomy_depth,
+        helper TaxonomyEvaluatorsHelper
+
+        helper_method :collection, :tree_collection, :taxonomy,
                       :evaluators_for, :evaluators_for_select, :taxonomy_evaluators_router
 
         def index
@@ -19,8 +21,7 @@ module Decidim
 
         def edit
           enforce_permission_to :update, :taxonomy_evaluator
-          # prefilled with the evaluators in force (own or inherited);
-          # saving the form always writes the taxonomy's own assignments
+          # prefilled with own or inherited evaluators; saving always writes the taxonomy's own
           @form = form(TaxonomyEvaluatorsForm).from_params(
             evaluator_role_ids: assignments_by_taxonomy[taxonomy].map(&:evaluator_role_id)
           )
@@ -66,17 +67,13 @@ module Decidim
           end
         end
 
-        def taxonomy_depth(taxonomy)
-          taxonomy.parent_ids.count
-        end
-
         # assignments in force per taxonomy (own or nearest ancestor's) —
         # the same resolution the assignment job uses
         def assignments_by_taxonomy
           @assignments_by_taxonomy ||= TaxonomyEvaluator.assignments_for(collection, space_evaluator_roles)
         end
 
-        # part_of lists the taxonomy itself plus all its ancestors up to the root
+        # part_of expands each taxonomy with all its ancestors
         def available_taxonomy_ids
           taxonomy_ids = proposals_components.flat_map(&:available_taxonomy_ids).uniq
           Decidim::Taxonomy.where(id: taxonomy_ids).pluck(:part_of).flatten.uniq

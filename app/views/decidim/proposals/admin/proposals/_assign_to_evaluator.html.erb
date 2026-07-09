@@ -1,14 +1,12 @@
 <%= append_javascript_pack_tag "decidim_reporting_proposals_evaluators_admin", defer: true %>
 <%= append_stylesheet_pack_tag "decidim_proposals", media: "all" %>
 <% if allowed_to?(:assign_to_evaluator, :proposals, proposal:) %>
-  <div id="js-assign-proposal-to-evaluator-actions" class="js-bulk-action-form form-single-proposal" style="max-width:400px; display:block">
+  <div id="js-assign-proposal-to-evaluator-actions" class="max-w-md">
     <%= form_tag(evaluation_assignment_path, method: :post, id: "js-form-assign-proposal-to-evaluator", class: "form form-defaults") do %>
       <div class="form__wrapper">
         <div class="card">
           <div class="flex items-center">
-            <div class="checkboxes hide">
-              <%= check_box_tag "proposal_ids[]", proposal.id, true, class: "js-check-all-proposal js-proposal-id-#{proposal.id}" %>
-            </div>
+            <%= hidden_field_tag "proposal_ids[]", proposal.id %>
 
             <select
               id="assign_evaluator_role_ids"

@@ -3,8 +3,6 @@
 module Decidim
   module ReportingProposals
     module Admin
-      # Notifies also the proposals linked from reporting proposals components
-      # when a result progress is updated.
       module ResultNotificationsOverride
         extend ActiveSupport::Concern
 

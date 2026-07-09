@@ -1,4 +1,4 @@
-<% if admin_allowed_to?(:hide_proposal, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions]) %>
+<% if admin_allowed_to?(:hide_proposal, :proposals, { proposal: }, [::Decidim::ReportingProposals::Admin::Permissions]) %>
   <hr>
   <li class="dropdown__item">
     <% if proposal.reported? %>

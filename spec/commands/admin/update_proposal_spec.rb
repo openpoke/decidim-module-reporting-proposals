@@ -49,7 +49,7 @@ module Decidim::ReportingProposals::Admin
 
       describe "admin manages resource gallery" do
         context "when managing images" do
-          let(:uploaded_photos) { [Decidim::Dev.test_file("city.jpeg", "image/jpeg"), Decidim::Dev.test_file("city2.jpeg", "image/jpeg")] }
+          let(:uploaded_photos) { [upload_test_file(Decidim::Dev.asset("city.jpeg"), content_type: "image/jpeg"), upload_test_file(Decidim::Dev.asset("city2.jpeg"), content_type: "image/jpeg")] }
 
           it "adds photos to the proposal" do
             command.call

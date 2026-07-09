@@ -3,8 +3,6 @@
 module Decidim
   module ReportingProposals
     module Admin
-      # Allows proposal answer templates to be constrained to reporting
-      # proposals components too.
       module ProposalAnswerTemplateOverride
         extend ActiveSupport::Concern
 
