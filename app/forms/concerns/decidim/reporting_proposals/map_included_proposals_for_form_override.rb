@@ -3,7 +3,6 @@
 module Decidim
   module ReportingProposals
     module MapIncludedProposalsForFormOverride
-      extend ActiveSupport::Concern
       include Decidim::ReportingProposals::LinkedProposalsForFormOverride
 
       def proposals_link_name

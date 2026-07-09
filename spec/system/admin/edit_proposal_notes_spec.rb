@@ -42,7 +42,9 @@ describe "Edit Proposal Notes" do
 
   it "edits a proposal note" do
     click_on "Private notes"
-    first(:button, "Edit note").click
+    within ".comment", match: :first do
+      click_on "Edit note"
+    end
 
     within ".edit_proposal_note" do
       expect(page).to have_content("Test body")

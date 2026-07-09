@@ -82,9 +82,7 @@ describe "Assign evaluators" do
     let!(:my_assignement) { create(:evaluation_assignment, proposal:, evaluator_role: logged_evaluator_role) }
 
     before do
-      switch_to_host(organization.host)
-      login_as login_user, scope: :user
-      sleep 0.5
+      relogin_as login_user, scope: :user
       visit current_path
     end
 

@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update; sudo apt-get -f install imagemagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -102,7 +102,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update; sudo apt-get -f install imagemagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - uses: nanasess/setup-chromedriver@v2
         with:

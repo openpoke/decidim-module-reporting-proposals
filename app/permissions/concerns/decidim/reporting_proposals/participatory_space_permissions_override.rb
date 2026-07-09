@@ -2,42 +2,36 @@
 
 module Decidim
   module ReportingProposals
-    # Included into the participatory space admin permission classes
+    # Prepended to the participatory space admin permission classes
     # (Decidim::ParticipatoryProcesses::Permissions, Decidim::Assemblies::Permissions)
     # to grant space admins access to the taxonomy evaluators management pages
     # (index/edit/update share the :update action).
     module ParticipatorySpacePermissionsOverride
-      extend ActiveSupport::Concern
+      def permissions
+        super
 
-      included do
-        alias_method :reporting_proposals_original_permissions, :permissions
+        allow! if taxonomy_evaluator_action? && can_manage_taxonomy_evaluators?
 
-        def permissions
-          reporting_proposals_original_permissions
+        permission_action
+      end
 
-          allow! if taxonomy_evaluator_action? && can_manage_taxonomy_evaluators?
+      private
 
-          permission_action
-        end
+      def taxonomy_evaluator_action?
+        permission_action.scope == :admin &&
+          permission_action.subject == :taxonomy_evaluator &&
+          permission_action.action == :update
+      end
 
-        private
+      def can_manage_taxonomy_evaluators?
+        space = context[:current_participatory_space]
+        return false unless user && space
 
-        def taxonomy_evaluator_action?
-          permission_action.scope == :admin &&
-            permission_action.subject == :taxonomy_evaluator &&
-            permission_action.action == :update
-        end
+        return true if user.admin? && user.organization == space.organization
 
-        def can_manage_taxonomy_evaluators?
-          space = context[:current_participatory_space]
-          return false unless user && space
-
-          return true if user.admin? && user.organization == space.organization
-
-          # assembly user_roles include the ancestor assemblies ones on purpose:
-          # upstream grants parent assembly admins access to child assemblies
-          space.user_roles(:admin).exists?(user:)
-        end
+        # assembly user_roles include the ancestor assemblies ones on purpose:
+        # upstream grants parent assembly admins access to child assemblies
+        space.user_roles(:admin).exists?(user:)
       end
     end
   end

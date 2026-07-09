@@ -1,12 +1,11 @@
 <% if proposal_note.author == current_user %>
   <%= cell("decidim/reporting_proposals/edit_note_modal", proposal_note, modal_id: "editNoteModal#{proposal_note.id}", note: proposal_note, proposal: proposal) %>
-  <button type="button" class="link-alt m-xs"
+  <button type="button" class="link-alt m-xs text-gray cursor-pointer"
           data-dialog-open="editNoteModal<%= proposal_note.id %>"
           title="<%= t("modal.title", scope: "decidim.reporting_proposals.admin.proposal_notes") %>"
           aria-controls="editNoteModal<%= proposal_note.id %>"
           aria-haspopup="true"
-          tabindex="0"
-          style="color:#97a2b2; cursor: pointer">
+          tabindex="0">
     <%= icon "pencil-line", aria_hidden: true, class: "action-icon--preview", role: "img", "aria-hidden": true %>
   </button>
 <% end %>
