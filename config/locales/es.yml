@@ -2,13 +2,22 @@
 es:
   activemodel:
     attributes:
-      category:
-        evaluator_ids: Evaluadores automáticos
       proposal:
         has_no_address: No tiene dirección
-        has_no_image: No tiene imagen
+        has_no_attachments: Has no attachments
       proposal_photo:
-        add_photos: Add photos
+        add_attachments: Add photos
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Evaluator name
+      taxonomy_evaluators:
+        evaluator_role_ids: Evaluators
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: must contain only images
   decidim:
     admin:
       hidden_resource_mailer:
@@ -40,7 +49,7 @@ es:
           amend: Enmendar
           comment: Comentar
           create: Crear
-          endorse: Adherirse
+          like: Like
           vote: Apoyar
           vote_comment: Votar comentario
           withdraw: Retirar
@@ -96,7 +105,6 @@ es:
             new_proposal_help_text: Texto de ayuda al crear una propuesta
             no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Propuestas oficiales habilitadas
-            only_photo_attachments: Permitir solo fotos en los archivos adjuntos
             participatory_texts_enabled: Textos participativos habilitados
             participatory_texts_enabled_readonly: No se puede interactuar con esta configuración si hay propuestas existentes. Por favor, crea un nuevo componente de propuesta si quieres activar esta característica o descartar todas las propuestas importadas en el menú "Textos Participativos" si quieres desactivarla.
             proposal_answering_enabled: Respuesta a las propuestas habilitada
@@ -323,6 +331,8 @@ es:
         exports:
           proposal_comments: Comentarios
           proposals: Propuestas directas
+        menu:
+          taxonomy_evaluators: Taxonomy evaluators
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -348,15 +358,23 @@ es:
             delete_image: Eliminar imagen
           photos:
             title: Fotos
-        proposals_evaluator_mailer:
-          notify_proposals_evaluator:
-            admin_panel: panel de administración
-            email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
-            gratitude: '¡Gracias por tu ayuda!'
-            greeting: Hola %{name},
-            public_side: parte pública
-            subject: Nuevas propuestas asignadas para su evaluación
         resolution_time: Tiempo de resolución
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Select evaluators
+            title: Edit evaluators for %{taxonomy}
+            update: Update
+          index:
+            actions: Actions
+            description: Evaluators will be automatically assigned to the new proposals classified under these taxonomies.
+            empty: There are no taxonomies available. Please add some taxonomy filters to the proposals components of this space first.
+            evaluators: Evaluators
+            taxonomy: Taxonomy
+            title: Automatic taxonomy evaluators
+            unassigned: Unassigned
+          update:
+            invalid: There was a problem updating the evaluators for this taxonomy.
+            success: Evaluators successfully updated for this taxonomy.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -397,10 +415,13 @@ es:
               x_years:
                 one: 1 año
                 other: "%{count} años"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} assigned an evaluator to the %{resource_name} taxonomy"
+          delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name} taxonomy"
       form:
-        add_image: Añadir imagen
-        edit_image: Editar imagen
-        image_legend: "(Opcional) Añadir una imagen"
+        add_attachments: Add image or documents
+        edit_attachments: Edit image or documents
       forms:
         errors:
           device_not_supported: Este navegador no admite geolocalización.
@@ -421,12 +442,10 @@ es:
             description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
           no_similars_found: No similar proposals found
-        edit:
-          delete_image: Eliminar imagen
     statistics:
       reporting_proposals_accepted: Número de propuestas directas aceptadas
       reporting_proposals_comments_count: Número de comentarios en propuestas directas
       reporting_proposals_count: Número de propuestas directas
-      reporting_proposals_endorsements_count: Número de adhesiones en propuestas directas
       reporting_proposals_followers_count: Número de seguidores en propuestas directas
+      reporting_proposals_likes_count: Number of likes for direct proposals
       reporting_proposals_votes_count: Número de votos en propuestas directas
