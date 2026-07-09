@@ -25,14 +25,12 @@
             </tr>
           </thead>
           <tbody>
-            <%# the permission depends only on the user, so it is checked once %>
             <% can_edit_taxonomies = allowed_to?(:update, :taxonomy) %>
             <% tree_collection.each do |taxonomy| %>
               <% depth = taxonomy_depth(taxonomy) %>
               <tr>
                 <td data-label="<%= t(".taxonomy") %>">
-                  <%# ml-18 is not in the Tailwind scale, so nested rows are indented inline %>
-                  <div <% if depth.positive? %>style="padding-left: <%= depth * 1.5 %>rem;"<% end %>>
+                  <div style="<%= "padding-left: #{depth * 1.5}rem;" if depth.positive? %>">
                     <% if taxonomy.root? %>
                       <% if can_edit_taxonomies %>
                         <%= link_to translated_attribute(taxonomy.name), decidim_admin.edit_taxonomy_path(taxonomy) %>
