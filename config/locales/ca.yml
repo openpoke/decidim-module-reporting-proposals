@@ -24,7 +24,7 @@ ca:
         notify_mail:
           body_1: Un administrador ha esborrat la vostra proposta perquè ha estat
             denunciada.
-          body_2: Si penseu que ha estat un error, si us plau, contacteu els adminstradors
+          body_2: Si penseu que ha estat un error, si us plau, contacteu els administradors
             de
           hello: Hola,
           reason: 'Motiu: %{reason}'
@@ -375,7 +375,7 @@ ca:
                 one: aproximadament 1 hora per avaluar
                 other: aproximadament %{count} hores per avaluar
               about_x_months:
-                one: aproximadament 1 hora per avaluar
+                one: aproximadament 1 mes per avaluar
                 other: aproximadament %{count} mesos per avaluar
               about_x_years:
                 one: aproximadament 1 any per avaluar
@@ -383,7 +383,7 @@ ca:
               almost_x_years:
                 one: gairebé 1 any per avaluar
                 other: gairebé %{count} anys per avaluar
-              half_a_minute: half a minute to evaluate
+              half_a_minute: mig minut per avaluar
               less_than_x_minutes:
                 one: menys d'un minut per avaluar
                 other: menys de %{count} minuts per avaluar

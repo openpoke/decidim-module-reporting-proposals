@@ -235,9 +235,10 @@ de:
               target="_blank">Antworten Dokumentationsseite</a>.
             suggested_hashtags: Hashtags, die den Teilnehmern für neue Meldungen vorgeschlagen
               werden
-            votes_blocked: Gefällt mir-Angaben blockieren
-            votes_enabled: Gefällt mir-Angaben erlauben
-            votes_hidden: Gefällt-mir Anhaben nicht öffentlich anzeigen
+            votes_blocked: Stimmensammlung deaktiviert
+            votes_enabled: Stimmensammlung aktiviert
+            votes_hidden: Stimmenanzahl ausgeblendet (falls die Stimmensammlung aktiviert
+              ist, wird die Anzahl Stimmen nicht angezeigt)
     events:
       proposals:
         proposal_published:
@@ -524,8 +525,8 @@ de:
             away: "%{meters} entfernt"
             description: Dies sind Vorschläge, die in einem Radius von %{meters} zu
               dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die
-              die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende
-              Meldung Unterstützen, anstatt eine neue zu erstellen.
+              gleiche Situation gemeldet. In diesem Fall können Sie die bestehende
+              Meldung unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
           no_similars_found: Keine ähnlichen Meldungen gefunden
     statistics:
