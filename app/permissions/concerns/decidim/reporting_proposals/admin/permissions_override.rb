@@ -57,10 +57,10 @@ module Decidim
             # Every user allowed by the space can split proposals to another component
             allow! if permission_action.subject == :proposals && permission_action.action == :split
 
-            # Every user allowed by the space can assign proposals to a evaluator
+            # Every user allowed by the space can assign proposals to an evaluator
             can_assign_evaluator_to_proposal?
 
-            # Every user allowed by the space can unassign a evaluator from proposals
+            # Every user allowed by the space can unassign an evaluator from proposals
             can_unassign_evaluator_from_proposals?
             # Only admin users can publish many answers at once
             toggle_allow(user.admin?) if permission_action.subject == :proposals && permission_action.action == :publish_answers

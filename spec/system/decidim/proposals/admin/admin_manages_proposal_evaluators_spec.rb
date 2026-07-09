@@ -51,7 +51,7 @@ describe "Admin manages proposals evaluators" do
       end
 
       it "assigns the proposals to the evaluator" do
-        expect(page).to have_content("Proposals assigned to an evaluator successfully")
+        expect(page).to have_content("Proposals assigned to a evaluator successfully")
 
         within "tr", text: translated(proposal.title) do
           expect(page).to have_css("td.evaluators-count", text: evaluator.name)
@@ -158,7 +158,7 @@ describe "Admin manages proposals evaluators" do
       end
     end
 
-    it "can unassign a evaluator" do
+    it "can unassign an evaluator" do
       within "#evaluators" do
         expect(page).to have_content(evaluator.name)
 

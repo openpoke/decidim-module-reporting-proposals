@@ -25,7 +25,7 @@ describe "Automatic assign evaluators after create proposals" do
   end
 
   context "when an admin create the proposal" do
-    it "has a evaluator after creating" do
+    it "has an evaluator after creating" do
       visit manage_component_path(component)
       click_on("New proposal")
 
@@ -42,7 +42,7 @@ describe "Automatic assign evaluators after create proposals" do
   end
 
   context "when a proposal was published in public side" do
-    it "has a evaluator after creating" do
+    it "has an evaluator after creating" do
       visit public_component_path
 
       click_on "New proposal"

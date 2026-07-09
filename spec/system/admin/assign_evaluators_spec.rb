@@ -26,7 +26,7 @@ describe "Assign evaluators" do
     visit current_path
   end
 
-  shared_examples "assigns a evaluator" do
+  shared_examples "assigns an evaluator" do
     it "assigns the proposals to the evaluator" do
       within "tr", text: translated(proposal.title) do
         find("button[data-controller='dropdown']").click
@@ -49,7 +49,7 @@ describe "Assign evaluators" do
     end
   end
 
-  shared_examples "removes a evaluator" do
+  shared_examples "removes an evaluator" do
     let!(:evaluation_assignment) { create(:evaluation_assignment, proposal:, evaluator_role:) }
 
     it "removes the proposals from the evaluator" do
@@ -71,12 +71,12 @@ describe "Assign evaluators" do
     end
   end
 
-  context "when admin assigns a evaluator" do
-    it_behaves_like "assigns a evaluator"
-    it_behaves_like "removes a evaluator"
+  context "when admin assigns an evaluator" do
+    it_behaves_like "assigns an evaluator"
+    it_behaves_like "removes an evaluator"
   end
 
-  context "when a evaluator manages assignments" do
+  context "when an evaluator manages assignments" do
     let(:login_user) { logged_evaluator }
     let(:evaluator_role) { another_evaluator_role }
     let!(:my_assignement) { create(:evaluation_assignment, proposal:, evaluator_role: logged_evaluator_role) }
@@ -86,7 +86,7 @@ describe "Assign evaluators" do
       visit current_path
     end
 
-    it_behaves_like "assigns a evaluator"
+    it_behaves_like "assigns an evaluator"
     it "cannot unassign other evaluators" do
       create(:evaluation_assignment, proposal:, evaluator_role: another_evaluator_role)
       within "tr", text: translated(proposal.title) do
