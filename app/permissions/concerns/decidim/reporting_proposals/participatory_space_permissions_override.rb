@@ -2,10 +2,6 @@
 
 module Decidim
   module ReportingProposals
-    # Prepended to the participatory space admin permission classes
-    # (Decidim::ParticipatoryProcesses::Permissions, Decidim::Assemblies::Permissions)
-    # to grant space admins access to the taxonomy evaluators management pages
-    # (index/edit/update share the :update action).
     module ParticipatorySpacePermissionsOverride
       def permissions
         super
@@ -24,14 +20,17 @@ module Decidim
       end
 
       def can_manage_taxonomy_evaluators?
-        space = context[:current_participatory_space]
-        return false unless user && space
+        return false unless user && current_participatory_space
 
-        return true if user.admin? && user.organization == space.organization
+        return true if user.admin? && user.organization == current_participatory_space.organization
 
         # assembly user_roles include the ancestor assemblies ones on purpose:
         # upstream grants parent assembly admins access to child assemblies
-        space.user_roles(:admin).exists?(user:)
+        current_participatory_space.user_roles(:admin).exists?(user:)
+      end
+
+      def current_participatory_space
+        @current_participatory_space ||= context.fetch(:current_participatory_space, nil)
       end
     end
   end

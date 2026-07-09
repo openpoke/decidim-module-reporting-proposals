@@ -18,19 +18,19 @@ module Decidim
         private
 
         def current_organization
-          context[:proposal].try(:organization) || context[:current_organization]
+          @current_organization ||= proposal.try(:organization) || context.fetch(:current_organization, nil)
         end
 
         def component_settings
-          context[:component_settings] || component.try(:settings)
+          @component_settings ||= context.fetch(:component_settings, nil) || component.try(:settings)
         end
 
         def component
-          context[:proposal].try(:component) || context[:current_component]
+          @component ||= proposal.try(:component) || context.fetch(:current_component, nil)
         end
 
         def user_author_note?
-          context[:proposal_note].try(:author) == user
+          context.fetch(:proposal_note, nil).try(:author) == user
         end
 
         def hide_content_action?

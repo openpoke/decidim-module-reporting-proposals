@@ -89,9 +89,13 @@ module Decidim
           end
 
           def evaluator_can_unassign_evaluator_from_proposals?
-            can_unassign_evaluator_from_proposals? if user == context.fetch(:evaluator, nil)
+            can_unassign_evaluator_from_proposals? if user == evaluator
 
             can_add_evaluators?
+          end
+
+          def evaluator
+            @evaluator ||= context.fetch(:evaluator, nil)
           end
 
           def can_add_evaluators?
