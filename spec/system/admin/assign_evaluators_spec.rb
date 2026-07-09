@@ -122,6 +122,6 @@ describe "Assign evaluators" do
     let(:login_user) { logged_evaluator }
     let(:evaluator_role) { logged_evaluator_role }
 
-    it_behaves_like "removes a evaluator"
+    it_behaves_like "removes an evaluator"
   end
 end
