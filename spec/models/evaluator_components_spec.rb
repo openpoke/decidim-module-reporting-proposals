@@ -13,13 +13,8 @@ module Decidim::ParticipatorySpaceRoleConfig
     end
 
     module TestEvaluatorOverride
-      extend ActiveSupport::Concern
-      included do
-        alias_method :test_original_accepted_components, :accepted_components
-
-        def accepted_components
-          test_original_accepted_components + [:another_component]
-        end
+      def accepted_components
+        super + [:another_component]
       end
     end
 
@@ -30,11 +25,11 @@ module Decidim::ParticipatorySpaceRoleConfig
     context "when non default accepted components are added" do
       let(:alt_evaluator) { TestEvaluator.new(nil) }
 
-      TestEvaluator.include(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
+      TestEvaluator.prepend(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
 
       it "has default accepted components" do
         expect(alt_evaluator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals)
-        TestEvaluator.include(TestEvaluatorOverride)
+        TestEvaluator.prepend(TestEvaluatorOverride)
 
         expect(alt_evaluator.accepted_components).to contain_exactly(:proposals, :test, :reporting_proposals, :another_component)
       end
