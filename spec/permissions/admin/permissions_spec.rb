@@ -179,7 +179,7 @@ module Decidim::ReportingProposals::Admin
       it_behaves_like "can hide proposals"
     end
 
-    context "when user is a evaluator" do
+    context "when user is an evaluator" do
       let!(:evaluator_role) { create(:participatory_process_user_role, user:, role: :evaluator, participatory_process: space) }
       let!(:user) { create(:user, organization:) }
       # regression: another user's admin role must not open the actions to everyone

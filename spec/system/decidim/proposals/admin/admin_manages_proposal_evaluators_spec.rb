@@ -20,7 +20,7 @@ describe "Admin manages proposals evaluators" do
 
   include_context "when managing a component as an admin"
 
-  context "when assigning to a evaluator" do
+  context "when assigning to an evaluator" do
     before do
       visit current_path
 
@@ -58,7 +58,7 @@ describe "Admin manages proposals evaluators" do
         end
       end
 
-      context "when a evaluator already exists" do
+      context "when an evaluator already exists" do
         before do
           create(:evaluation_assignment, proposal:, evaluator_role: second_evaluator_role)
 
