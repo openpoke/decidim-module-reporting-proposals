@@ -2,13 +2,22 @@
 de:
   activemodel:
     attributes:
-      category:
-        evaluator_ids: Automatisch zugewiesen an
       proposal:
         has_no_address: Adresse unbekannt
-        has_no_image: Kein Foto vorhanden
+        has_no_attachments: Has no attachments
       proposal_photo:
-        add_photos: Fotos hinzufügen
+        add_attachments: Add photos
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Evaluator name
+      taxonomy_evaluators:
+        evaluator_role_ids: Evaluators
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: must contain only images
   decidim:
     admin:
       hidden_resource_mailer:
@@ -40,7 +49,7 @@ de:
           amend: Änderungsvorschlag
           comment: Kommentieren
           create: Erstellen
-          endorse: Unterstützung
+          like: Like
           vote: Abstimmung
           vote_comment: Kommentar bewerten
           withdraw: Zurückziehen
@@ -96,7 +105,6 @@ de:
             new_proposal_help_text: Hilfetext für neue Meldungen
             no_taxonomy_filters_found: Keine Klassifizierungsfilter gefunden.
             official_proposals_enabled: Offizielle Meldungen aktivieren
-            only_photo_attachments: Nur Foto-Anhänge zulassen
             participatory_texts_enabled: Partizipative Texte aktivieren
             participatory_texts_enabled_readonly: Die Interaktion mit dieser Einstellung ist nicht möglich, wenn Meldungen bestehen. Bitte erstellen Sie eine neue „Meldungen-Komponente“, wenn Sie diese Funktion aktivieren möchten, oder verwerfen Sie alle Meldungen im Menü „Partizipative Texte“, wenn Sie diese Funktion deaktivieren möchten.
             proposal_answering_enabled: Antworten auf Vorschläge zulassen
@@ -323,6 +331,8 @@ de:
         exports:
           proposal_comments: Kommentare
           proposals: Meldungen
+        menu:
+          taxonomy_evaluators: Taxonomy evaluators
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -348,15 +358,23 @@ de:
             delete_image: Bild löschen
           photos:
             title: Bilder
-        proposals_evaluator_mailer:
-          notify_proposals_evaluator:
-            admin_panel: Admin-Konsole
-            email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
-            gratitude: Vielen Dank!
-            greeting: Hallo %{name}
-            public_side: User-Ansicht
-            subject: Dir wurden neue Meldungen zugewiesen
         resolution_time: Bearbeitungszeit
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Select evaluators
+            title: Edit evaluators for %{taxonomy}
+            update: Update
+          index:
+            actions: Actions
+            description: Evaluators will be automatically assigned to the new proposals classified under these taxonomies.
+            empty: There are no taxonomies available. Please add some taxonomy filters to the proposals components of this space first.
+            evaluators: Evaluators
+            taxonomy: Taxonomy
+            title: Automatic taxonomy evaluators
+            unassigned: Unassigned
+          update:
+            invalid: There was a problem updating the evaluators for this taxonomy.
+            success: Evaluators successfully updated for this taxonomy.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -397,10 +415,13 @@ de:
               x_years:
                 one: 1 Jahr
                 other: "%{count} Jahre"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} assigned an evaluator to the %{resource_name} taxonomy"
+          delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name} taxonomy"
       form:
-        add_image: Bild hinzufügen
-        edit_image: Bild bearbeiten
-        image_legend: "(Optional) Bild hinzufügen"
+        add_attachments: Add image or documents
+        edit_attachments: Edit image or documents
       forms:
         errors:
           device_not_supported: Diese Funktion wird von deinem Browser nicht unterstützt.
@@ -421,12 +442,10 @@ de:
             description: Dies sind Vorschläge, die in einem Radius von %{meters} zu dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende Meldung Unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
           no_similars_found: Keine ähnliche Meldungen gefunden
-        edit:
-          delete_image: Bild löschen
     statistics:
       reporting_proposals_accepted: Anzahl der akzeptierten direkten Meldungen
       reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen
       reporting_proposals_count: Anzahl der direkten Meldungen
-      reporting_proposals_endorsements_count: Anzahl der Befürwortungen für direkte Meldungen
       reporting_proposals_followers_count: Anzahl der Follower von direkten Meldungen
+      reporting_proposals_likes_count: Number of likes for direct proposals
       reporting_proposals_votes_count: Anzahl der Unterstützungen für direkte Meldungen
