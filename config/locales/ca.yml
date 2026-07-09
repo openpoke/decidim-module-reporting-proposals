@@ -2,13 +2,22 @@
 ca:
   activemodel:
     attributes:
-      category:
-        evaluator_ids: Avaluadores assignades
       proposal:
         has_no_address: No té adreça
-        has_no_image: Sense imatge
+        has_no_attachments: Has no attachments
       proposal_photo:
-        add_photos: Add photos
+        add_attachments: Add photos
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Evaluator name
+      taxonomy_evaluators:
+        evaluator_role_ids: Evaluators
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: must contain only images
   decidim:
     admin:
       hidden_resource_mailer:
@@ -40,7 +49,7 @@ ca:
           amend: Esmena
           comment: Comentar
           create: Crear
-          endorse: Adherir-se
+          like: Like
           vote: Donar suport
           vote_comment: Votar el comentari
           withdraw: Retirar
@@ -96,7 +105,6 @@ ca:
             new_proposal_help_text: Text d'ajuda per la creació d'una nova proposta
             no_taxonomy_filters_found: No taxonomy filters found.
             official_proposals_enabled: Propostes d'administradora (oficials) habilitades
-            only_photo_attachments: Utilitza només fitxers de fotos
             participatory_texts_enabled: Textos participatius habilitats
             participatory_texts_enabled_readonly: No es pot interactuar amb aquesta configuració si hi ha propostes existents. Si us plau, crea un nou 'component de propostes' si vols habilitar aquesta característica o descarta totes les propostes importades al menú "textos participatius" si vols deshabilitar-lo.
             proposal_answering_enabled: Resposta a les propostes habilitada
@@ -323,6 +331,8 @@ ca:
         exports:
           proposal_comments: Comentaris
           proposals: Propostes directes
+        menu:
+          taxonomy_evaluators: Taxonomy evaluators
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -348,15 +358,23 @@ ca:
             delete_image: Esborrar imatge
           photos:
             title: Fotografies
-        proposals_evaluator_mailer:
-          notify_proposals_evaluator:
-            admin_panel: panell d'administració
-            email_body: Has estat assignat com a avaluador de les propostes llistades a sota. Això significa que s'ha confiat en tu per donar-hi resposta en els propoers dies.
-            gratitude: Gràcies per la teva ajuda!
-            greeting: Hola %{name},
-            public_side: lloc públic
-            subject: Nova proposta asignada per la teva avaluació
         resolution_time: Temps de resolució
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Select evaluators
+            title: Edit evaluators for %{taxonomy}
+            update: Update
+          index:
+            actions: Actions
+            description: Evaluators will be automatically assigned to the new proposals classified under these taxonomies.
+            empty: There are no taxonomies available. Please add some taxonomy filters to the proposals components of this space first.
+            evaluators: Evaluators
+            taxonomy: Taxonomy
+            title: Automatic taxonomy evaluators
+            unassigned: Unassigned
+          update:
+            invalid: There was a problem updating the evaluators for this taxonomy.
+            success: Evaluators successfully updated for this taxonomy.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -397,10 +415,13 @@ ca:
               x_years:
                 one: 1 any
                 other: "%{count} anys"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} assigned an evaluator to the %{resource_name} taxonomy"
+          delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name} taxonomy"
       form:
-        add_image: Add image
-        edit_image: Edit image
-        image_legend: "(Optional) Add an image"
+        add_attachments: Add image or documents
+        edit_attachments: Edit image or documents
       forms:
         errors:
           device_not_supported: La geolocalització no és compatible amb el vostre navegador.
@@ -421,12 +442,10 @@ ca:
             description: Aquestes són propostes que es troben en un radi de %{meters} respecte a la que esteu creant. En cas que trobeu un altra proposta d'informe en la mateixa situació, podeu optar per donar-li una adhesió en comptes de crear-ne un de nou.
             title: Propostes properes
           no_similars_found: No similar proposals found
-        edit:
-          delete_image: Esborra la imatge
     statistics:
       reporting_proposals_accepted: Nombre de propostes directes acceptades
       reporting_proposals_comments_count: Nombre de comentaris a propostes directes
       reporting_proposals_count: Nombre de propostes directes
-      reporting_proposals_endorsements_count: Nombre d'adhesions a propostes directes
       reporting_proposals_followers_count: Nombre de seguidores de propostes directes
+      reporting_proposals_likes_count: Number of likes for direct proposals
       reporting_proposals_votes_count: Nombre de suports a propostes directes
