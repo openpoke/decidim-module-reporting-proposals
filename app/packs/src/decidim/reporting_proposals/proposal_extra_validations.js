@@ -1,5 +1,11 @@
 $(() => {
 
+  const rulesTag = document.querySelector("[data-proposal-rules]");
+  if (!rulesTag) {
+    return;
+  }
+  const rules = JSON.parse(rulesTag.dataset.proposalRules);
+
   const $title = $('input[name="proposal[title]"]');
   const $body = $('[name="proposal[body]"]');
   const prosemirror = document.querySelector(".ProseMirror");
@@ -33,7 +39,7 @@ $(() => {
     if (options && options[prop]) {
       $error.html(options[prop].error);
     }
-    else {$error.html(Decidim.ProposalRules.genericError);}
+    else {$error.html(rules.genericError);}
   };
   
   const validate = ($field, value, options) => {
@@ -75,12 +81,12 @@ $(() => {
       });
     }
     $form.on("submit", (ev) => {
-      if (!validate($title, $title.val(), Decidim.ProposalRules.title)) {
+      if (!validate($title, $title.val(), rules.title)) {
         ev.preventDefault();
       }
       if (!validate($body, prosemirror
         ? prosemirror.textContent
-        : $body.val(), Decidim.ProposalRules.body)) {
+        : $body.val(), rules.body)) {
         ev.preventDefault();
       }
     });
