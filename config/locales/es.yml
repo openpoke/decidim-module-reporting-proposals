@@ -501,11 +501,7 @@ es:
         add_attachments: Añadir imagen o documentos
         edit_attachments: Editar imagen o documentos
       forms:
-        errors:
-          device_not_supported: Este navegador no admite geolocalización.
-          no_device_location: Lo sentimos, no hemos podido detectar tu ubicación.
         use_my_camera: Usar mi cámara
-        use_my_location: Detectar mi ubicación
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |

@@ -506,12 +506,7 @@ ca:
         add_attachments: Afegir imatge o documents
         edit_attachments: Editar imatge o documents
       forms:
-        errors:
-          device_not_supported: La geolocalització no és compatible amb el vostre
-            navegador.
-          no_device_location: Ho sentim, no hem pogut detectar la teva localització.
         use_my_camera: Usa la meva càmera
-        use_my_location: Usa la meva localització
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |

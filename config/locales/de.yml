@@ -507,11 +507,7 @@ de:
         add_attachments: Bild oder Dokumente hinzufügen
         edit_attachments: Bild oder Dokumente bearbeiten
       forms:
-        errors:
-          device_not_supported: Diese Funktion wird von deinem Browser nicht unterstützt.
-          no_device_location: Entschuldigung, wir konnten deinen Standort nicht erkennen.
         use_my_camera: Kamera verwenden
-        use_my_location: Standort verwenden
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |

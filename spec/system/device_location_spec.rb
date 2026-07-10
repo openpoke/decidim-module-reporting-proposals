@@ -32,7 +32,7 @@ describe "User location button" do
       let(:geocoding_enabled) { true }
 
       it "has my location button" do
-        expect(page).to have_button("Use my location")
+        expect(page).to have_button("Use my current location")
       end
 
       context "when option disabled" do
@@ -40,7 +40,7 @@ describe "User location button" do
         let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
 
         it "does not has the location button" do
-          expect(page).to have_no_button("Use my location")
+          expect(page).to have_no_button("Use my current location")
         end
       end
     end
@@ -53,7 +53,7 @@ describe "User location button" do
       end
 
       it "the button should be deactivated and the errors removed" do
-        expect(page).to have_css(".user-device-location button[disabled]")
+        expect(page).to have_css(".geocoding__locate button[disabled]")
         expect(page).to have_no_css("label[for=proposal_address].is-invalid-label")
         expect(page).to have_css("input#proposal_address[disabled]")
       end

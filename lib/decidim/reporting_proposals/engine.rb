@@ -8,10 +8,6 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::ReportingProposals
 
-      routes do
-        post :locate, to: "geolocation#locate"
-      end
-
       # generic overrides
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)

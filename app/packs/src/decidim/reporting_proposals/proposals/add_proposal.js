@@ -9,7 +9,7 @@ $(() => {
   let latFieldName = "proposal[latitude]";
   let longFieldName = "proposal[longitude]";
   const $labelInput = $("label[for='proposal_address']");
-  const $buttonLocation = $(".user-device-location button");
+  const $buttonLocation = $(".geocoding__locate button");
 
   if ($map.length) {
     if (!$addressInputField.data("coordinates")) {

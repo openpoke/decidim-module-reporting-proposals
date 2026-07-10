@@ -117,7 +117,7 @@ shared_examples "creates reporting proposal" do
 
     click_on "Modify the proposal"
 
-    expect(page).to have_css(".user-device-location button[disabled]")
+    expect(page).to have_css(".geocoding__locate button[disabled]")
     expect(page).to have_css("#proposal_attachments_button[disabled]")
   end
 

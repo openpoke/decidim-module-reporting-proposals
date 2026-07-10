@@ -491,11 +491,7 @@ en:
         add_attachments: Add image or documents
         edit_attachments: Edit image or documents
       forms:
-        errors:
-          device_not_supported: Geolocation is not supported by your browser.
-          no_device_location: Sorry, we couldn't detect your location.
         use_my_camera: Use my camera
-        use_my_location: Use my location
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |
