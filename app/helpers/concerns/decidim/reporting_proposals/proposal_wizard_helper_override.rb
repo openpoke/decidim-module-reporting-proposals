@@ -34,10 +34,6 @@ module Decidim
           end
         end
 
-        def total_steps
-          proposal_wizard_steps.count
-        end
-
         def reporting_proposals_component?
           return false unless current_component&.manifest_name
 

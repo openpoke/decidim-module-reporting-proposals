@@ -12,7 +12,7 @@
               id="assign_evaluator_role_ids"
               name="evaluator_role_ids[]"
               placeholder="<%= t("decidim.proposals.admin.proposals.index.select_evaluators") %>"
-              class="w-full mt-2 js-evaluator-multiselect"
+              class="w-full mt-2"
               multiple>
               <%= available_evaluators_for_proposal(proposal, current_user).map do |option| %>
                 <option value="<%= option[1] %>"><%= option[0] %></option>
