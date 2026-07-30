@@ -4,20 +4,20 @@ de:
     attributes:
       proposal:
         has_no_address: Adresse unbekannt
-        has_no_attachments: Has no attachments
+        has_no_attachments: Hat keine Anhänge
       proposal_photo:
-        add_attachments: Add photos
+        add_attachments: Fotos hinzufügen
       taxonomy_evaluator:
         admin_log:
-          evaluator_role_id: Evaluator name
+          evaluator_role_id: Name der bewertenden Person
       taxonomy_evaluators:
-        evaluator_role_ids: Evaluators
+        evaluator_role_ids: Bewertende Personen
     errors:
       models:
         proposal_photo:
           attributes:
             add_attachments:
-              only_images: must contain only images
+              only_images: darf nur Bilder enthalten
   decidim:
     admin:
       hidden_resource_mailer:
@@ -49,7 +49,7 @@ de:
           amend: Änderungsvorschlag
           comment: Kommentieren
           create: Erstellen
-          like: Like
+          like: Gefällt mir
           vote: Abstimmung
           vote_comment: Kommentar bewerten
           withdraw: Zurückziehen
@@ -78,7 +78,7 @@ de:
               default: Standard
               most_commented: Meiste Kommentare
               most_followed: Am meisten gefolgt
-              most_liked: Most liked
+              most_liked: Beliebteste
               most_voted: Am meisten unterstützt
               random: Zufällig
               recent: Neueste
@@ -153,7 +153,7 @@ de:
               default: Standard
               most_commented: Meiste Kommentare
               most_followed: Am meisten gefolgt
-              most_liked: Most liked
+              most_liked: Beliebteste
               most_voted: Am meisten unterstützt
               random: Zufällig
               recent: Neueste
@@ -332,7 +332,7 @@ de:
           proposal_comments: Kommentare
           proposals: Meldungen
         menu:
-          taxonomy_evaluators: Taxonomy evaluators
+          taxonomy_evaluators: Bewertende Personen dieser Klassifizierung
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -361,20 +361,20 @@ de:
         resolution_time: Bearbeitungszeit
         taxonomy_evaluators:
           edit:
-            select_evaluators: Select evaluators
-            title: Edit evaluators for %{taxonomy}
-            update: Update
+            select_evaluators: Bewertende Personen auswählen
+            title: Bewertende Personen für %{taxonomy} auswählen
+            update: Aktualisieren
           index:
-            actions: Actions
-            description: Evaluators will be automatically assigned to the new proposals classified under these taxonomies.
-            empty: There are no taxonomies available. Please add some taxonomy filters to the proposals components of this space first.
-            evaluators: Evaluators
-            taxonomy: Taxonomy
-            title: Automatic taxonomy evaluators
-            unassigned: Unassigned
+            actions: Aktionen
+            description: Bewertende Personen werden automatisch den neuen Vorschlägen zugeordnet, die unter diesen Klassifizierung eingereicht werden.
+            empty: Es sind keine Klassifizierungen verfügbar. Bitte fügen Sie zuerst einige Klassifizierungsfilter zu den Vorschlagskomponenten dieses Bereichs hinzu.
+            evaluators: Bewertende Personen
+            taxonomy: Klassifizierung
+            title: Automatisch zugeteilte bewertende Personen für die Klassifizierung
+            unassigned: Nicht zugewiesen
           update:
-            invalid: There was a problem updating the evaluators for this taxonomy.
-            success: Evaluators successfully updated for this taxonomy.
+            invalid: Es gab ein Problem beim Aktualisieren der bewertenden Personen für diese Klassifizierung.
+            success: Bewertende Personen für diese Klassifizierung erfolgreich aktualisiert.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -417,11 +417,11 @@ de:
                 other: "%{count} Jahre"
       admin_log:
         taxonomy_evaluator:
-          create: "%{user_name} assigned an evaluator to the %{resource_name} taxonomy"
-          delete: "%{user_name} unassigned an evaluator from the %{taxonomy_name} taxonomy"
+          create: "%{user_name} hat der Klassifizierung %{resource_name} eine bewertende Person zugewiesen"
+          delete: "%{user_name} hat die Zuweisung einer bewertenden Person zur Klassifizierung %{taxonomy_name} zurückgezogen"
       form:
-        add_attachments: Add image or documents
-        edit_attachments: Edit image or documents
+        add_attachments: Bild oder Dokumente hinzufügen
+        edit_attachments: Bild oder Dokumente bearbeiten
       forms:
         use_my_camera: Kamera verwenden
       notification_publish_proposal_mailer:
@@ -443,5 +443,5 @@ de:
       reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen
       reporting_proposals_count: Anzahl der direkten Meldungen
       reporting_proposals_followers_count: Anzahl der Follower von direkten Meldungen
-      reporting_proposals_likes_count: Number of likes for direct proposals
+      reporting_proposals_likes_count: Anzahl der Unterstützungen für direkte Meldungen
       reporting_proposals_votes_count: Anzahl der Unterstützungen für direkte Meldungen
