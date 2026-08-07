@@ -23,6 +23,13 @@ module Decidim
           it { is_expected.not_to be_valid }
         end
 
+        # The browser always submits the blank hidden input of the multiple file field
+        context "when the attachments field is submitted empty" do
+          let(:add_attachments) { [""] }
+
+          it { is_expected.not_to be_valid }
+        end
+
         context "when a document is uploaded" do
           let(:add_attachments) { [Decidim::Dev.test_file("Exampledocument.pdf", "application/pdf")] }
 

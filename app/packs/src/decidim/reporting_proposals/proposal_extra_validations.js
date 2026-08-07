@@ -1,4 +1,4 @@
-$(() => {
+document.addEventListener("turbo:load", () => {
 
   const rulesTag = document.querySelector("[data-proposal-rules]");
   if (!rulesTag) {
@@ -21,7 +21,6 @@ $(() => {
       search = ".form-error"
     }
     let $error = $closest.find(search);
-    console.log("findError", "$closest", $closest, " $field", $field, "prop", prop, "$error", $error);
     if ($error.length === 0) {
       $error = $(`<span class="${search.replace(/\./g, " ")}"></span>`).appendTo($closest);
     }
@@ -33,7 +32,6 @@ $(() => {
   };
   
   const addError = ($field, options, prop) => {
-    // console.log("addError", $field, options, prop)
     let $error = findError($field, prop);
     $error.addClass("is-visible");
     if (options && options[prop]) {
@@ -43,8 +41,6 @@ $(() => {
   };
   
   const validate = ($field, value, options) => {
-    console.log("validate", $field, value, options);
-
     // validate caps if needed
     const minLen = $field.attr("minlength");
 

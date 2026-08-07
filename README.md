@@ -122,6 +122,10 @@ This module provides the following features:
 
 7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
 
+### Maps configuration
+
+The geolocation features (address map, proximity comparison, "Use my location" button) rely on Decidim core's dynamic maps, which are disabled unless the host application configures a maps provider — see [Maps and geocoding](https://docs.decidim.org/en/develop/services/maps.html) in the Decidim docs. When using a provider other than HERE, remember to allow its hosts in the [Content Security Policy](https://docs.decidim.org/en/develop/customize/content_security_policy.html), otherwise the map renders as an empty grey area.
+
 ### Customization
 
 Almost all the features of this module can be customized/disabled through an initializer.

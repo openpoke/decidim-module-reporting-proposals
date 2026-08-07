@@ -1,6 +1,6 @@
 import attachGeocoding from "src/decidim/geocoding/attach_input"
 
-$(() => {
+document.addEventListener("turbo:load", () => {
   const $checkbox = $("input:checkbox[name$='[has_no_address]']");
   const $hasAdressInput = $("input[name$='[has_address]']");
   const $addressInput = $("#address_input");
@@ -12,10 +12,22 @@ $(() => {
   const $buttonLocation = $(".geocoding__locate button");
 
   if ($map.length) {
+    // A map initialized while #address_map is hidden stays 0x0 and never requests
+    // tiles, so every reveal must force Leaflet to recalculate its size.
+    const showMap = () => {
+      $map.show();
+      // The Leaflet instance lives on the inner [data-decidim-map] element
+      // (see decidim-core map.js), not on the #address_map wrapper.
+      const map = $map.find("[data-decidim-map]").data("map");
+      if (map) {
+        window.requestAnimationFrame(() => map.invalidateSize());
+      }
+    };
+
     if (!$addressInputField.data("coordinates")) {
       $map.hide();
     }
-    $addressInputField.on("geocoder-suggest-coordinates.decidim", () => $map.show());
+    $addressInputField.on("geocoder-suggest-coordinates.decidim", () => showMap());
 
     // Handle no address checkbox in reverse, mandatory by default instead of default decidim
     if ($checkbox.length > 0) {
@@ -36,7 +48,7 @@ $(() => {
 
         } else {
           if ($(`input[name='${latFieldName}']`).val()) {
-            $map.show();
+            showMap();
           }
           $addressInputField.prop("disabled", false);
           $buttonLocation.prop("disabled", false);
