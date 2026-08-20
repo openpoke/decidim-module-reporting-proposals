@@ -7,7 +7,7 @@ module Decidim
         include Decidim::AttachmentAttributes
         attachments_attribute :attachments
 
-        validates :add_attachments, presence: true
+        validate :add_attachments_present
         validate :attachments_are_images
 
         def current_component
@@ -15,6 +15,10 @@ module Decidim
         end
 
         private
+
+        def add_attachments_present
+          errors.add(:add_attachments, :blank) if add_attachments.compact_blank.blank?
+        end
 
         def attachments_are_images
           return if add_attachments.compact_blank.all? { |entry| image_entry?(entry) }

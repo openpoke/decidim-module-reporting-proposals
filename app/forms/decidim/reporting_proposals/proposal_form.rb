@@ -7,7 +7,7 @@ module Decidim
       attribute :has_no_address, Boolean
       attribute :has_no_attachments, Boolean
 
-      validates :add_attachments, presence: true, if: ->(form) { form.attachments_required? && form.attachments.blank? }
+      validates :attachments, presence: true, if: ->(form) { form.attachments_required? && form.add_attachments.compact_blank.blank? }
 
       def map_model(model)
         super

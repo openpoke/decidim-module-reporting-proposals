@@ -83,6 +83,23 @@ module Decidim
 
         it { is_expected.not_to be_valid }
 
+        it "reports the error on the attribute rendered outside the upload modal" do
+          expect(subject).not_to be_valid
+          expect(subject.errors[:attachments]).to be_present
+        end
+
+        context "and attachments are not required" do
+          let(:has_no_attachments) { true }
+
+          it { is_expected.to be_valid }
+        end
+      end
+
+      context "when the attachments field is submitted empty" do
+        let(:image) { [""] }
+
+        it { is_expected.not_to be_valid }
+
         context "and attachments are not required" do
           let(:has_no_attachments) { true }
 

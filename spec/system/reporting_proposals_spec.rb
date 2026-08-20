@@ -67,6 +67,25 @@ describe "Reporting proposals overrides" do
     it_behaves_like "creates reporting proposal"
     it_behaves_like "reuses draft if exists"
     it_behaves_like "remove errors", continue: true
+
+    it "does not mark the file input of the upload modal as required" do
+      expect(page).to have_field("proposal[add_attachments][]", type: "file", visible: :all)
+      expect(page).to have_no_css("input[type=file][required]", visible: :all)
+    end
+
+    it "shows a visible error when attachments are required and none are given" do
+      within "#content" do
+        fill_in :proposal_title, with: proposal_title
+        fill_in :proposal_body, with: proposal_body
+        fill_in :proposal_address, with: address
+        uncheck "proposal_has_no_attachments"
+
+        find("*[type=submit]").click
+      end
+
+      expect(page).to have_css("form.new_proposal")
+      expect(page).to have_css(".gallery__container .form-error", text: /cannot be blank/i)
+    end
   end
 
   context "when editing a existing reporting proposal", :serves_geocoding_autocomplete do
