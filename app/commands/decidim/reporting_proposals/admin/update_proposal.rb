@@ -7,7 +7,7 @@ module Decidim
       class UpdateProposal < Decidim::Proposals::Admin::UpdateProposal
         # Public: Initializes the command.
         #
-        # form         - A form object with the params.
+        # form - A form object with the params.
         # proposal - the proposal to update.
         def initialize(form, proposal)
           @form = form
@@ -18,20 +18,22 @@ module Decidim
         # Executes the command. Broadcasts these events:
         #
         # - :ok when everything is valid, together with the proposal.
-        # - :invalid if the form wasn't valid and we couldn't proceed.
+        # - :invalid if the form was not valid and we could not proceed.
         #
         # Returns nothing.
+        #
+        # Unlike the parent command, attachments are only appended (no cleanup),
+        # so the existing ones survive; removal goes through `remove_photo`.
         def call
           return broadcast(:invalid) if form.invalid?
 
-          if process_gallery?
-            build_gallery
-            return broadcast(:invalid) if gallery_invalid?
+          if process_attachments?
+            build_attachments
+            return broadcast(:invalid) if attachments_invalid?
           end
 
           transaction do
-            create_gallery if process_gallery?
-            photo_cleanup!
+            create_attachments(first_weight: first_attachment_weight) if process_attachments?
           end
 
           broadcast(:ok, proposal)
@@ -39,7 +41,10 @@ module Decidim
 
         private
 
-        attr_reader :form, :proposal, :gallery
+        # The form submits no keep ids, so the parent's photos.count could collide with an existing weight
+        def first_attachment_weight
+          proposal.attachments.maximum(:weight).to_i + 1
+        end
       end
     end
   end

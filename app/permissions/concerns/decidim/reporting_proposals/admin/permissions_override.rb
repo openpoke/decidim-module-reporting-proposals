@@ -12,18 +12,18 @@ module Decidim
             # The public part needs to be implemented yet
             return permission_action if permission_action.scope != :admin
 
-            # Valuators can only perform these actions
-            if user_is_valuator?
-              if valuator_assigned_to_proposal?
+            # Evaluators can only perform these actions
+            if user_is_evaluator?
+              if evaluator_assigned_to_proposal?
                 can_create_proposal_note?
                 can_create_proposal_answer?
-                can_assign_valuator_to_proposal?
+                can_assign_evaluator_to_proposal?
                 allow! if action_is_show_on_proposal?
               elsif action_is_show_on_proposal?
                 disallow!
               end
 
-              valuator_can_unassign_valuator_from_proposals?
+              evaluator_can_unassign_evaluator_from_proposals?
               can_export_proposals?
 
               return permission_action
@@ -42,11 +42,8 @@ module Decidim
             # time limit.
             allow! if permission_action.subject == :proposal && permission_action.action == :edit && admin_edition_is_available?
 
-            # Every user allowed by the space can update the category of the proposal
-            allow! if permission_action.subject == :proposal_category && permission_action.action == :update
-
-            # Every user allowed by the space can update the scope of the proposal
-            allow! if permission_action.subject == :proposal_scope && permission_action.action == :update
+            # Every user allowed by the space can update the taxonomy of the proposal
+            allow! if permission_action.subject == :proposal_taxonomy && permission_action.action == :update
 
             # Every user allowed by the space can import proposals from another_component
             allow! if permission_action.subject == :proposals && permission_action.action == :import
@@ -60,12 +57,11 @@ module Decidim
             # Every user allowed by the space can split proposals to another component
             allow! if permission_action.subject == :proposals && permission_action.action == :split
 
-            # Every user allowed by the space can assign proposals to a valuator
-            can_assign_valuator_to_proposal?
+            # Every user allowed by the space can assign proposals to an evaluator
+            can_assign_evaluator_to_proposal?
 
-            # Every user allowed by the space can unassign a valuator from proposals
-            can_unassign_valuator_from_proposals?
-
+            # Every user allowed by the space can unassign an evaluator from proposals
+            can_unassign_evaluator_from_proposals?
             # Only admin users can publish many answers at once
             toggle_allow(user.admin?) if permission_action.subject == :proposals && permission_action.action == :publish_answers
 
@@ -92,16 +88,20 @@ module Decidim
             permission_action.subject == :proposal && permission_action.action == :show
           end
 
-          def valuator_can_unassign_valuator_from_proposals?
-            can_unassign_valuator_from_proposals? if user == context.fetch(:valuator, nil)
+          def evaluator_can_unassign_evaluator_from_proposals?
+            can_unassign_evaluator_from_proposals? if user == evaluator
 
-            can_add_valuators?
+            can_add_evaluators?
           end
 
-          def can_add_valuators?
-            return unless permission_action.action == :assign_to_valuator && permission_action.subject == :proposals
+          def evaluator
+            @evaluator ||= context.fetch(:evaluator, nil)
+          end
 
-            toggle_allow(Decidim::ReportingProposals.valuators_assign_other_valuators)
+          def can_add_evaluators?
+            return false unless permission_action.action == :assign_to_evaluator && permission_action.subject == :proposals
+
+            toggle_allow(Decidim::ReportingProposals.evaluators_assign_other_evaluators)
           end
         end
       end

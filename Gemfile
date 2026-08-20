@@ -21,18 +21,18 @@ gem "puma", ">= 6.3.1"
 gem "rexml", "3.4.1"
 
 group :development, :test do
-  gem "byebug", "~> 11.0", platform: :mri
-
   gem "brakeman", "~> 6.1"
+  gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", DECIDIM_VERSION
+  gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION
   gem "parallel_tests", "~> 4.2"
 end
 
 group :development do
-  gem "letter_opener_web", "~> 2.0"
+  gem "letter_opener_web"
   gem "listen", "~> 3.1"
-  gem "web-console", "~> 4.2"
+  gem "web-console"
 end
 
 group :test do

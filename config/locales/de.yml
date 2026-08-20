@@ -2,20 +2,29 @@
 de:
   activemodel:
     attributes:
-      category:
-        valuator_ids: Automatisch zugewiesen an
       proposal:
         has_no_address: Adresse unbekannt
-        has_no_image: Kein Foto vorhanden
+        has_no_attachments: Keine Anhänge vorhanden
+      proposal_photo:
+        add_attachments: Fotos hinzufügen
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Name der bewertenden Person
+      taxonomy_evaluators:
+        evaluator_role_ids: Bewertende Personen
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: darf nur Bilder enthalten
   decidim:
     admin:
-      actions:
-        manage: Verwalten
-        new: Neu
       hidden_resource_mailer:
         notify_mail:
           body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
-          body_2: Wenn Sie glauben, dass dies ein Fehler war, wenden Sie sich bitte an die Administratoren von
+          body_2: Wenn Sie glauben, dass dies ein Fehler war, wenden Sie sich bitte
+            an die Administratoren von
           hello: Guten Tag,
           reason: 'Grund: %{reason}'
           subject: Ihre Meldung wurde ausgeblendet
@@ -26,138 +35,230 @@ de:
       proposals:
         settings:
           global:
-            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
-            evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
+            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im
+              Status "in Bearbeitung" als überfällig gekennzeichnet werden
+            evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt
+              werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
-            geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den Vergleich von Meldungen nach Entfernung und nicht nach Textähnlichkeit. Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente konfiguriert und aktiviert wird (andernfalls wird standardmäßig der Vergleich von Text-Ähnlichkeiten vorgenommen).
+            geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den
+              Vergleich von Meldungen nach Entfernung und nicht nach Textähnlichkeit.
+              Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente
+              konfiguriert und aktiviert wird (andernfalls wird standardmäßig der
+              Vergleich von Text-Ähnlichkeiten vorgenommen).
             geocoding_comparison_newer_than: Nur Meldungen der letzten x Tage vergleichen
-            geocoding_comparison_newer_than_help: Diese Einstellung ist nur relevant, wenn die Meldungen nach Entfernung verglichen werden. Meldungen, die älter als die angegebene Anzahl von Tagen sind, werden ignoriert. Setze eine 0, um alle Meldungen zu vergleichen.
-            geocoding_comparison_radius: Maximaler Radius (in Metern) für den Vergleich zu bestehenden Meldungen (wird nach Nähe sortiert)
-            proposal_photo_editing_enabled: Administratoren und Experten erlauben Fotos hinzuzufügen oder zu löschen, wenn sie Meldungen bearbeiten
-            unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete Meldung als überfällig
-            unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
+            geocoding_comparison_newer_than_help: Diese Einstellung ist nur relevant,
+              wenn die Meldungen nach Entfernung verglichen werden. Meldungen, die
+              älter als die angegebene Anzahl von Tagen sind, werden ignoriert. Setze
+              eine 0, um alle Meldungen zu vergleichen.
+            geocoding_comparison_radius: Maximaler Radius (in Metern) für den Vergleich
+              zu bestehenden Meldungen (wird nach Nähe sortiert)
+            proposal_photo_editing_enabled: Administratoren und Experten erlauben
+              Fotos hinzuzufügen oder zu löschen, wenn sie Meldungen bearbeiten
+            unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete
+              Meldung als überfällig
+            unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt
+              werden sollen, wähle hier 0.
       reporting_proposals:
         actions:
           amend: Änderungsvorschlag
           comment: Kommentieren
           create: Erstellen
-          endorse: Unterstützung
+          like: Unterstützen
           vote: Abstimmung
           vote_comment: Kommentar bewerten
           withdraw: Zurückziehen
         name: Meldungen
         settings:
           global:
-            additional_button_for_show_proposal_link: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Ziel-Link)
-            additional_button_for_show_proposal_text: Zusätzlicher Button unter dem Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Button-Text)
-            additional_button_link: Zusätzlicher Button neben dem Button "neue Meldung" (Ziel-Link)
-            additional_button_text: Zusätzlicher Button neben dem Button "neue Meldung" (Button-Text)
-            additional_buttons_for_show_proposal_show: Einen zusätzlichen Button in der öffentlichen Ansicht anzeigen
-            additional_buttons_show: Einen zusätzlichen Button in der öffentlichen Ansicht anzeigen
+            additional_button_for_show_proposal_link: Zusätzlicher Button unter dem
+              Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Ziel-Link)
+            additional_button_for_show_proposal_text: Zusätzlicher Button unter dem
+              Link "Zurück zur Liste" beim Besuch einer bestimmter Meldung (Button-Text)
+            additional_button_link: Zusätzlicher Button neben dem Button "neue Meldung"
+              (Ziel-Link)
+            additional_button_text: Zusätzlicher Button neben dem Button "neue Meldung"
+              (Button-Text)
+            additional_buttons_for_show_proposal_show: Einen zusätzlichen Button in
+              der öffentlichen Ansicht anzeigen
+            additional_buttons_show: Einen zusätzlichen Button in der öffentlichen
+              Ansicht anzeigen
             additional_buttons_show_help: Füge den Text und Link unten hinzu
             amendments_enabled: Änderungsvorschläge aktivieren
-            amendments_enabled_help: Wenn aktiviert, konfiguriere die Funktionen für Änderungsvorschläge für jeden Schritt.
+            amendments_enabled_help: Wenn aktiviert, konfiguriere die Funktionen für
+              Änderungsvorschläge für jeden Schritt.
             amendments_wizard_help_text: Hilfetext für die Änderungsfunktion
             announcement: Ankündigung
             attachments_allowed: Anhänge zulassen
-            can_accumulate_supports_beyond_threshold: Kann Unterstützungen über den Schwellenwert hinaus sammeln
+            can_accumulate_votes_beyond_threshold: Kann Unterstützungen über den Schwellenwert
+              hinaus sammeln
             collaborative_drafts_enabled: Kollaborative Entwürfe aktivieren
             comments_enabled: Kommentare erlauben
             comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)
             default_sort_order: Standardsortierung für Meldungen
-            default_sort_order_help: Standardmäßig bedeutet, dass, wenn die Unterstützung aktiviert ist, die Meldungen nach Zufall sortiert werden, und wenn die Unterstützung blockiert wird, werden sie nach den am meisten unterstützten sortiert.
+            default_sort_order_help: Standardmäßig bedeutet, dass, wenn die Unterstützung
+              aktiviert ist, die Meldungen nach Zufall sortiert werden, und wenn die
+              Unterstützung blockiert wird, werden sie nach den am meisten unterstützten
+              sortiert.
             default_sort_order_options:
               default: Standard
               most_commented: Meiste Kommentare
-              most_endorsed: Am meisten befürwortet
               most_followed: Am meisten gefolgt
+              most_liked: Am häufigsten unterstützt
               most_voted: Am meisten unterstützt
               random: Zufällig
               recent: Neueste
               with_more_authors: Mit mehreren Autoren
-            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im Status "in Bearbeitung" als überfällig gekennzeichnet werden
-            evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
+            default_taxonomy: Standard Klassifizierung
+            default_taxonomy_help: Wählen Sie, welche Klassifizierung standardmäßig
+              angezeigt werden soll. Wenn keine Taxonomie ausgewählt ist, werden die
+              Ergebnisse in einem Listenformat angezeigt.
+            define_taxonomy_filters: Bitte definieren Sie einige Filter für diesen
+              partizipativen Bereich, bevor Sie diese Einstellung verwenden.
+            edit_time: Vorschläge können vor Ablauf dieser Zeit von den Autoren bearbeitet
+              werden
+            edit_time_units:
+              days: Tage
+              hours: Stunden
+              minutes: Minuten
+            evaluating_proposals_overdue: Nach wie vielen Tagen soll die Meldung im
+              Status "in Bearbeitung" als überfällig gekennzeichnet werden
+            evaluating_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt
+              werden sollen, wähle hier 0.
             geocoding_comparison_enabled: Vergleiche die Meldungen nach Entfernung
-            geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den Vergleich von Vorschlägen nach Entfernung und nicht nach Textähnlichkeit. Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente konfiguriert und aktiviert wird (andernfalls wird standardmäßig der Vergleich von Text-Ähnlichkeiten vorgenommen).
+            geocoding_comparison_enabled_help: Diese Einstellungen ermöglichen den
+              Vergleich von Vorschlägen nach Entfernung und nicht nach Textähnlichkeit.
+              Diese Funktion setzt voraus, dass ein Geocoding-Dienst in der Komponente
+              konfiguriert und aktiviert wird (andernfalls wird standardmäßig der
+              Vergleich von Text-Ähnlichkeiten vorgenommen).
             geocoding_comparison_newer_than: Nur Meldungen der letzten x Tage vergleichen
-            geocoding_comparison_newer_than_help: Diese Einstellung ist nur relevant, wenn die Meldungen nach Entfernung verglichen werden. Meldungen, die älter als die angegebene Anzahl von Tagen sind, werden ignoriert. Setze eine 0, um alle Meldungen zu vergleichen.
-            geocoding_comparison_radius: Maximaler Radius (in Metern) für den Vergleich zu bestehenden Meldungen (wird nach Nähe sortiert)
+            geocoding_comparison_newer_than_help: Diese Einstellung ist nur relevant,
+              wenn die Meldungen nach Entfernung verglichen werden. Meldungen, die
+              älter als die angegebene Anzahl von Tagen sind, werden ignoriert. Setze
+              eine 0, um alle Meldungen zu vergleichen.
+            geocoding_comparison_radius: Maximaler Radius (in Metern) für den Vergleich
+              zu bestehenden Meldungen (wird nach Nähe sortiert)
             geocoding_enabled: Geocoding aktivieren
             minimum_votes_per_user: Mindeststimmen pro Nutzer
             new_proposal_body_template: Vorausgefüllter Text in einer neuen Meldung
-            new_proposal_body_template_help: Sie können einen vorausgefüllten Text in neuen Meldungen bestimmen
+            new_proposal_body_template_help: Sie können einen vorausgefüllten Text
+              in neuen Meldungen bestimmen
             new_proposal_help_text: Hilfetext für neue Meldungen
+            no_taxonomy_filters_found: Keine Klassifizierungsfilter gefunden.
             official_proposals_enabled: Offizielle Meldungen aktivieren
-            only_photo_attachments: Nur Foto-Anhänge zulassen
             participatory_texts_enabled: Partizipative Texte aktivieren
-            participatory_texts_enabled_readonly: Die Interaktion mit dieser Einstellung ist nicht möglich, wenn Meldungen bestehen. Bitte erstellen Sie eine neue „Meldungen-Komponente“, wenn Sie diese Funktion aktivieren möchten, oder verwerfen Sie alle Meldungen im Menü „Partizipative Texte“, wenn Sie diese Funktion deaktivieren möchten.
+            participatory_texts_enabled_readonly: Die Interaktion mit dieser Einstellung
+              ist nicht möglich, wenn Meldungen bestehen. Bitte erstellen Sie eine
+              neue „Meldungen-Komponente“, wenn Sie diese Funktion aktivieren möchten,
+              oder verwerfen Sie alle Meldungen im Menü „Partizipative Texte“, wenn
+              Sie diese Funktion deaktivieren möchten.
             proposal_answering_enabled: Antworten auf Vorschläge zulassen
-            proposal_edit_before_minutes: Meldungen können von Autoren innerhalb dieser Zeit bearbeitet werden
+            proposal_edit_before_minutes: Meldungen können von Autoren innerhalb dieser
+              Zeit bearbeitet werden
             proposal_edit_time: Meldung bearbeiten
             proposal_edit_time_choices:
               infinite: Meldungen können beliebig lang bearbeitet werden
-              limited: Meldungen können nach einem spezifischen Zeitfenster nicht mehr bearbeitet werden
+              limited: Meldungen können nach einem spezifischen Zeitfenster nicht
+                mehr bearbeitet werden
             proposal_length: Maximale Länge des Haupttextes
-            proposal_limit: Limitiere, falls gewünscht die Anzahl möglicher Meldungen pro Benutzer
-            proposal_photo_editing_enabled: Administratoren und Experten erlauben Fotos hinzuzufügen oder zu löschen, wenn sie Meldungen bearbeiten
-            proposal_wizard_step_1_help_text: Hilfetext zum Schritt "Erstellen" in der Meldungserfassung
-            proposal_wizard_step_2_help_text: Hilfetext zum Schritt "Vergleichen" in der Meldungserfassung
-            proposal_wizard_step_3_help_text: Hilfetext zum Schritt "Ergänzen" in der Meldungserfassung
-            proposal_wizard_step_4_help_text: Hilfetext zum Schritt "Veröffentlichen" in der Meldungserfassung
-            resources_permissions_enabled: Berechtigungen können für jede Meldung festgelegt werden
+            proposal_limit: Limitiere, falls gewünscht die Anzahl möglicher Meldungen
+              pro Benutzer
+            proposal_photo_editing_enabled: Administratoren und Experten erlauben
+              Fotos hinzuzufügen oder zu löschen, wenn sie Meldungen bearbeiten
+            proposal_wizard_step_1_help_text: Hilfetext zum Schritt "Erstellen" in
+              der Meldungserfassung
+            proposal_wizard_step_2_help_text: Hilfetext zum Schritt "Vergleichen"
+              in der Meldungserfassung
+            proposal_wizard_step_3_help_text: Hilfetext zum Schritt "Ergänzen" in
+              der Meldungserfassung
+            proposal_wizard_step_4_help_text: Hilfetext zum Schritt "Veröffentlichen"
+              in der Meldungserfassung
+            resources_permissions_enabled: Berechtigungen können für jede Meldung
+              festgelegt werden
             scope_id: Themenfeld
             scopes_enabled: Themenbereiche aktiviert
+            taxonomy_filters: Filter für die Komponente auswählen
+            taxonomy_filters_add: Filter hinzufügen
             threshold_per_proposal: Schwellenwert pro Meldung
-            unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete Meldung als überfällig
-            unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt werden sollen, wähle hier 0.
+            unanswered_proposals_overdue: Nach wie vielen Tagen gilt eine nicht beantwortete
+              Meldung als überfällig
+            unanswered_proposals_overdue_help: Falls keine zeitlichen Hinweise angezeigt
+              werden sollen, wähle hier 0.
             vote_limit: Unterstützungslimit pro Benutzer
           step:
             amendment_creation_enabled: Änderungsvorschläge erlauben
             amendment_creation_enabled_help: User können Änderungsvorschläge anbringen.
             amendment_promotion_enabled: Hervorheben von Änderungsvorschlägen
-            amendment_promotion_enabled_help: Die Verfasser einer Änderung können die abgelehnten Vorschläge in der Meldung hervorheben.
+            amendment_promotion_enabled_help: Die Verfasser einer Änderung können
+              die abgelehnten Vorschläge in der Meldung hervorheben.
             amendment_reaction_enabled: Reaktion auf Änderungsvorschläge aktivieren
-            amendment_reaction_enabled_help: Die Autoren einer Meldung können Änderungsvorschläge anderer User/innen akzeptieren oder ablehnen.
+            amendment_reaction_enabled_help: Die Autoren einer Meldung können Änderungsvorschläge
+              anderer User/innen akzeptieren oder ablehnen.
             amendments_visibility: Sichtbarkeit der Änderungsvorschläge
             amendments_visibility_choices:
               all: Änderungsvorschläge sind für alle sichtbar
               participants: Änderungsvorschläge sind nur für ihre Autoren sichtbar
-            amendments_visibility_help: Wenn die Option "Änderungen sind nur für ihre Autoren sichtbar" ausgewählt ist, muss der Teilnehmer eingeloggt sein, um die vorgenommenen Änderungen zu sehen.
+            amendments_visibility_help: Wenn die Option "Änderungen sind nur für ihre
+              Autoren sichtbar" ausgewählt ist, muss der Teilnehmer eingeloggt sein,
+              um die vorgenommenen Änderungen zu sehen.
             announcement: Ankündigung
             answers_with_costs: Kosten für Vorschlagsantworten aktivieren
             automatic_hashtags: Zu allen Vorschlägen hinzugefügte Hashtags
             comments_blocked: Kommentare deaktivieren
             creation_enabled: Teilnehmer können Meldungen erstellen
-            creation_enabled_readonly: Diese Einstellung ist deaktiviert, wenn Sie die Funktion Partizipative Texte aktivieren. Um Vorschläge als partizipatorischen Text hochzuladen, klicken Sie auf den Button Partizipative Texte und folgen Sie den Anweisungen.
+            creation_enabled_readonly: Diese Einstellung ist deaktiviert, wenn Sie
+              die Funktion Partizipative Texte aktivieren. Um Vorschläge als partizipatorischen
+              Text hochzuladen, klicken Sie auf den Button Partizipative Texte und
+              folgen Sie den Anweisungen.
             default_sort_order: Standardsortierung für Meldungen
-            default_sort_order_help: Standardmäßig bedeutet, dass, wenn die Unterstützung aktiviert ist, die Meldungen nach Zufall sortiert werden, und wenn die Unterstützung blockiert wird, werden sie nach den am meisten unterstützten sortiert.
+            default_sort_order_help: Standardmäßig bedeutet, dass, wenn die Unterstützung
+              aktiviert ist, die Meldungen nach Zufall sortiert werden, und wenn die
+              Unterstützung blockiert wird, werden sie nach den am meisten unterstützten
+              sortiert.
             default_sort_order_options:
               default: Standard
               most_commented: Meiste Kommentare
-              most_endorsed: Am meisten befürwortet
               most_followed: Am meisten gefolgt
+              most_liked: Am häufigsten unterstützt
               most_voted: Am meisten unterstützt
               random: Zufällig
               recent: Neueste
               with_more_authors: Mit mehreren Autoren
-            endorsements_blocked: Unterstützung blockieren
-            endorsements_enabled: Unterstützung aktivieren
+            likes_blocked: Unterstützung blockieren
+            likes_enabled: Unterstützung aktivieren
             proposal_answering_enabled: Antworten auf Meldungen zulassen
             publish_answers_immediately: Antworten sofort veröffentlichten
-            publish_answers_immediately_help_html: 'Beachten Sie, dass, wenn Sie eine Meldung ohne diese Option beantworten, Sie diese manuell veröffentlichen müssen, indem Sie ihn auswählen und die Aktion für die Veröffentlichung verwenden. Weitere Informationen darüber, wie das funktioniert, finden Sie unter <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">Antworten Dokumentationsseite</a>.'
-            suggested_hashtags: Hashtags, die den Teilnehmern für neue Meldungen vorgeschlagen werden
-            votes_blocked: Gefällt mir-Angaben blockieren
-            votes_enabled: Gefällt mir-Angaben erlauben
-            votes_hidden: Gefällt-mir Anhaben nicht öffentlich anzeigen
+            publish_answers_immediately_help_html: Beachten Sie, dass, wenn Sie eine
+              Meldung ohne diese Option beantworten, Sie diese manuell veröffentlichen
+              müssen, indem Sie ihn auswählen und die Aktion für die Veröffentlichung
+              verwenden. Weitere Informationen darüber, wie das funktioniert, finden
+              Sie unter <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication"
+              target="_blank">Antworten Dokumentationsseite</a>.
+            suggested_hashtags: Hashtags, die den Teilnehmern für neue Meldungen vorgeschlagen
+              werden
+            votes_blocked: Stimmensammlung deaktiviert
+            votes_enabled: Stimmensammlung aktiviert
+            votes_hidden: Stimmenanzahl ausgeblendet (falls die Stimmensammlung aktiviert
+              ist, wird die Anzahl Stimmen nicht angezeigt)
     events:
       proposals:
+        proposal_published:
+          admin_panel: Admin Panel
         proposal_published_for_admin:
           admin_panel: Admin Panel
-          email_intro: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
-          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie Administrator/in von "%{participatory_space_title} " sind.
-          email_subject: Eine neue Meldung "%{resource_title}" wurde zu %{participatory_space_title} hinzugefügt
-          notification_title: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a> wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier gelangen Sie zur Meldung: %{admin_url}'
-          notification_title_official: 'Die offizielle Meldung <a href="%{resource_path}">%{resource_title}</a> wurde in %{participatory_space_title} hinzugefügt. Link: %{admin_url}'
+          email_intro: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a>
+            wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier
+            gelangen Sie zur Meldung: %{admin_url}'
+          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie Administrator/in
+            von "%{participatory_space_title} " sind.
+          email_subject: Eine neue Meldung "%{resource_title}" wurde zu %{participatory_space_title}
+            hinzugefügt
+          notification_title: 'Die Meldung <a href="%{resource_path}">%{resource_title}</a>
+            wurde von %{author} zu %{participatory_space_title} hinzugefügt. Hier
+            gelangen Sie zur Meldung: %{admin_url}'
+          notification_title_official: 'Die offizielle Meldung <a href="%{resource_path}">%{resource_title}</a>
+            wurde in %{participatory_space_title} hinzugefügt. Link: %{admin_url}'
+        proposal_published_for_space:
+          admin_panel: Admin Panel
     moderations:
       actions:
         hide: Verbergen
@@ -171,26 +272,21 @@ de:
         proposals:
           address:
             geolocated_at: Hier geolokalisiert
+          index:
+            id: ID
           send_email_button:
             send_mail: Den Meldungslink per E-Mail weiterleiten
-          show:
-            report: Bericht
+      proposals:
+        compare:
+          continue: Weiter
+          title: Meldungen vergleichen
+        wizard_steps:
+          step_compare: Vergleichen
     reported_mailer:
       report:
         admin_resource: Diese Ressource moderieren
     reporting_proposals:
-      actions:
-        answer_proposal: Meldung beantworten
-        edit_proposal: Meldung bearbeiten
-        import: Meldungen aus einer anderen Komponente importieren
-        new: Neue Meldung
-        participatory_texts: Partizipative Texte
-        show: Meldung anzeigen
-        title: Aktionen
       admin:
-        actions:
-          edit_valuators: Experten ändern
-          preview: Vorschau
         answer_overdue:
           datetime:
             distance_in_words:
@@ -271,11 +367,6 @@ de:
               x_years:
                 one: 1 Jahr zur Beantwortung
                 other: "%{count} Jahre zur Beantwortung"
-        categories:
-          form:
-            valuators_help: Wählen Sie Experten aus, die automatisch zugewiesen werden, wenn eine Meldung in dieser Kategorie veröffentlicht wird (diese erhalten eine Benachrichtigung).
-          index:
-            valuators_column: Automatisch zugewiesen an
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -319,6 +410,8 @@ de:
         exports:
           proposal_comments: Kommentare
           proposals: Meldungen
+        menu:
+          taxonomy_evaluators: Taxonomie-Bewertung
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
@@ -339,30 +432,31 @@ de:
         proposals:
           photo_form:
             action: Bild hinzufügen
-            add_images: Bilder hinzufügen
-            edit_images: Bilder hinzufügen
-            gallery_legend: Bilder hinzufügen
-            title: Bilder
-            upload_msg: Keine Dateien ausgewählt
           photo_gallery:
+            are_you_sure: Möchten Sie dieses Bild wirklich löschen?
             delete_image: Bild löschen
-            photos: Bilder
           photos:
             title: Bilder
-          valuators_list:
-            assigned_valuators: Zugewiesene Experten
-            remove_assignment: Zuweisung entfernen
-            remove_assignment_confirmation: Zuweisung wurde entfernt
-            valuators: Expert/innen
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: admin panel
-            email_body: Du bist für die hier aufgelisteten Meldungen als Experte / Expertin zugeteilt worden. Danke für eine zeitnahe Prüfung der Statthaftigkeit und Bearbeitung der Meldung.
-            gratitude: Vielen Dank!
-            greeting: Hallo %{name}
-            public_side: User-Ansicht
-            subject: Dir wurden neue Meldungen zugewiesen
         resolution_time: Bearbeitungszeit
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Bewertende Personen auswählen
+            title: Bewertende Personen für %{taxonomy} bearbeiten
+            update: Aktualisieren
+          index:
+            actions: Aktionen
+            description: Bewertende Personen werden neuen Vorschlägen, die mit diesen
+              Taxonomien klassifiziert sind, automatisch zugewiesen.
+            empty: Es sind keine Taxonomien verfügbar. Bitte fügen Sie zuerst Taxonomiefilter
+              zu den Vorschlagskomponenten dieses Raums hinzu.
+            evaluators: Bewertende Personen
+            taxonomy: Taxonomie
+            title: Automatische Taxonomie-Bewertung
+            unassigned: Nicht zugewiesen
+          update:
+            invalid: Beim Aktualisieren der bewertenden Personen für diese Taxonomie
+              ist ein Problem aufgetreten.
+            success: Bewertende Personen für diese Taxonomie erfolgreich aktualisiert.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -403,12 +497,17 @@ de:
               x_years:
                 one: 1 Jahr
                 other: "%{count} Jahre"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} hat der Taxonomie %{resource_name} eine bewertende
+            Person zugewiesen"
+          delete: "%{user_name} hat die Zuweisung einer bewertenden Person zur Taxonomie
+            %{taxonomy_name} entfernt"
+      form:
+        add_attachments: Bild oder Dokumente hinzufügen
+        edit_attachments: Bild oder Dokumente bearbeiten
       forms:
-        errors:
-          device_not_supported: Diese Funktion wird von deinem Browser nicht unterstützt.
-          no_device_location: Entschuldigung, wir konnten deinen Standort nicht erkennen.
         use_my_camera: Kamera verwenden
-        use_my_location: Standort verwenden
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |
@@ -420,16 +519,16 @@ de:
         compare:
           geocoding:
             away: "%{meters} entfernt"
-            description: Dies sind Vorschläge, die in einem Radius von %{meters} zu dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die die gleiche Situation gemeldet. In diesem Fall können Sie die bestehende Meldung Unterstützen, anstatt eine neue zu erstellen.
+            description: Dies sind Vorschläge, die in einem Radius von %{meters} zu
+              dem von Ihnen erstellten sind. Allenfalls hat eine andere Person die
+              gleiche Situation gemeldet. In diesem Fall können Sie die bestehende
+              Meldung unterstützen, anstatt eine neue zu erstellen.
             title: Bestehende Meldungen in der Umgebung
-        edit:
-          delete_image: Bild löschen
-        form:
-          image: Foto
+          no_similars_found: Keine ähnlichen Meldungen gefunden
     statistics:
       reporting_proposals_accepted: Anzahl der akzeptierten direkten Meldungen
       reporting_proposals_comments_count: Anzahl der Kommentare zu direkten Meldungen
       reporting_proposals_count: Anzahl der direkten Meldungen
-      reporting_proposals_endorsements_count: Anzahl der Befürwortungen für direkte Meldungen
       reporting_proposals_followers_count: Anzahl der Follower von direkten Meldungen
+      reporting_proposals_likes_count: Anzahl der Befürwortungen für direkte Meldungen
       reporting_proposals_votes_count: Anzahl der Unterstützungen für direkte Meldungen

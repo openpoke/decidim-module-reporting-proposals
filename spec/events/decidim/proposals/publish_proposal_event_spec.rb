@@ -8,7 +8,7 @@ module Decidim
       let(:resource) { create(:proposal, title: "A nice proposal") }
       let(:participatory_process) { create(:participatory_process, organization:) }
       let(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
-      let(:resource_title) { translated(resource.title) }
+      let(:resource_title) { decidim_sanitize_translated(resource.title) }
       let(:event_name) { "decidim.events.proposals.proposal_published" }
 
       include_context "when a simple event"

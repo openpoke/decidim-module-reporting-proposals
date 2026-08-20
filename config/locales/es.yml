@@ -2,162 +2,260 @@
 es:
   activemodel:
     attributes:
-      category:
-        valuator_ids: Evaluadores automáticos
       proposal:
         has_no_address: No tiene dirección
-        has_no_image: No tiene imagen
+        has_no_attachments: No tiene archivos adjuntos
+      proposal_photo:
+        add_attachments: Añadir fotos
+      taxonomy_evaluator:
+        admin_log:
+          evaluator_role_id: Nombre de la evaluadora
+      taxonomy_evaluators:
+        evaluator_role_ids: Evaluadores
+    errors:
+      models:
+        proposal_photo:
+          attributes:
+            add_attachments:
+              only_images: solo puede contener imágenes
   decidim:
     admin:
-      actions:
-        manage: Gestionar
-        new: Nuevo
       hidden_resource_mailer:
         notify_mail:
           body_1: Un administrador eliminó su propuesta porque ha sido denunciada.
-          body_2: Si crees que ha sido un error, ponte en contacto con los administradores de
+          body_2: Si crees que ha sido un error, ponte en contacto con los administradores
+            de
           hello: Hola,
           reason: 'Motivo: %{reason}'
           subject: Tu propuesta ha sido ocultada
     application:
       geocoding:
-        unconfigured: '¡La geocodificación no está configurada!'
+        unconfigured: "¡La geocodificación no está configurada!"
     components:
       proposals:
         settings:
           global:
-            evaluating_proposals_overdue: Después de cuántos días una propuesta en su estado de evaluación es considerada atrasada
-            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            evaluating_proposals_overdue: Después de cuántos días una propuesta en
+              su estado de evaluación es considerada atrasada
+            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista
+              de propuestas. Déjala a cero para desactivar esta característica.
             geocoding_comparison_enabled: Comparar propuestas por proximidad
-            geocoding_comparison_enabled_help: Esta configuración permite comparar propuestas por proximidad en lugar de similitud de texto. Esta característica requiere que un servicio de geocodificación esté configurado y habilitado en el componente (en caso contrario se usará la comparación por similitud de texto).
-            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los últimos X días
-            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando se comparan propuestas por proximidad. Las propuestas más antiguas que el número especificado de días serán ignoradas. Usar cero para comparar todas las propuestas sin importar la distancia.
-            geocoding_comparison_radius: Radio máximo (en metros) para considerar propuestas similares (se ordenará por distancia) por proximidad
-            proposal_photo_editing_enabled: Permitir a administradores y evaluadores editar fotos cuando respondan propuestas
-            unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
-            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            geocoding_comparison_enabled_help: Esta configuración permite comparar
+              propuestas por proximidad en lugar de similitud de texto. Esta característica
+              requiere que un servicio de geocodificación esté configurado y habilitado
+              en el componente (en caso contrario se usará la comparación por similitud
+              de texto).
+            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los
+              últimos X días
+            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando
+              se comparan propuestas por proximidad. Las propuestas más antiguas que
+              el número especificado de días serán ignoradas. Usar cero para comparar
+              todas las propuestas sin importar la distancia.
+            geocoding_comparison_radius: Radio máximo (en metros) para considerar
+              propuestas similares (se ordenará por distancia) por proximidad
+            proposal_photo_editing_enabled: Permitir a administradores y evaluadores
+              editar fotos cuando respondan propuestas
+            unanswered_proposals_overdue: Después de cuántos días se considera una
+              propuesta sin respuesta atrasada
+            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista
+              de propuestas. Déjala a cero para desactivar esta característica.
       reporting_proposals:
         actions:
           amend: Enmendar
           comment: Comentar
           create: Crear
-          endorse: Adherirse
+          like: '"Me gusta"'
           vote: Apoyar
           vote_comment: Votar comentario
           withdraw: Retirar
         name: Propuestas directas
         settings:
           global:
-            additional_button_for_show_proposal_link: Botón de acción adicional después del enlace "Volver a la lista" al visitar una propuesta en particular (enlace)
-            additional_button_for_show_proposal_text: Botón de acción adicional después del enlace "Volver a la lista" cuando visite una propuesta en particular (texto)
-            additional_button_link: Botón de acción adicional junto a la nueva propuesta (enlace)
-            additional_button_text: Botón de acción adicional junto a la nueva propuesta (texto)
-            additional_buttons_for_show_proposal_show: Mostrar un botón adicional en la vista pública
-            additional_buttons_show: Mostrar un botón adicional en la vista pública del listado de propuestas
+            additional_button_for_show_proposal_link: Botón de acción adicional después
+              del enlace "Volver a la lista" al visitar una propuesta en particular
+              (enlace)
+            additional_button_for_show_proposal_text: Botón de acción adicional después
+              del enlace "Volver a la lista" cuando visite una propuesta en particular
+              (texto)
+            additional_button_link: Botón de acción adicional junto a la nueva propuesta
+              (enlace)
+            additional_button_text: Botón de acción adicional junto a la nueva propuesta
+              (texto)
+            additional_buttons_for_show_proposal_show: Mostrar un botón adicional
+              en la vista pública
+            additional_buttons_show: Mostrar un botón adicional en la vista pública
+              del listado de propuestas
             additional_buttons_show_help: Añadir el texto y enlazar abajo
             amendments_enabled: Enmiendas habilitadas
-            amendments_enabled_help: Si está activo, configura las opciones de enmiendas para cada fase.
+            amendments_enabled_help: Si está activo, configura las opciones de enmiendas
+              para cada fase.
             amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
             announcement: Anuncio
             attachments_allowed: Permitir los archivos adjuntos
-            can_accumulate_supports_beyond_threshold: Puede acumular apoyos una vez superados los necesarios
+            can_accumulate_votes_beyond_threshold: Puede acumular apoyos una vez superados
+              los necesarios
             collaborative_drafts_enabled: Borradores colaborativos habilitados
             comments_enabled: Comentarios habilitados
-            comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres mantener la configuración por defecto)
+            comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres
+              mantener la configuración por defecto)
             default_sort_order: Orden predeterminado de propuestas
-            default_sort_order_help: Por defecto significa que si los apoyos están habilitados, las propuestas se mostrarán en orden aleatorio, y si los apoyos están bloqueados, se ordenarán por las más apoyadas.
+            default_sort_order_help: Por defecto significa que si los apoyos están
+              habilitados, las propuestas se mostrarán en orden aleatorio, y si los
+              apoyos están bloqueados, se ordenarán por las más apoyadas.
             default_sort_order_options:
               default: Predeterminado
               most_commented: Más comentadas
-              most_endorsed: Con más adhesiones
               most_followed: Más seguidas
+              most_liked: Con más "Me gusta"
               most_voted: Con más apoyos
               random: Aleatorio
               recent: Recientes
               with_more_authors: Con más autores
-            evaluating_proposals_overdue: Después de cuántos días una propuesta en su estado de evaluación es considerada atrasada
-            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            default_taxonomy: Taxonomía predeterminada
+            default_taxonomy_help: Selecciona qué taxonomía quieres mostrar por defecto.
+              Si no se selecciona alguna taxonomía, los resultados se mostrarán en
+              un formato de lista.
+            define_taxonomy_filters: Por favor, define algunos filtros para este espacio
+              de participación antes de utilizar esta configuración.
+            edit_time: Las autoras pueden editar las propuestas antes de que pase
+              este tiempo
+            edit_time_units:
+              days: Días
+              hours: Horas
+              minutes: Minutos
+            evaluating_proposals_overdue: Después de cuántos días una propuesta en
+              su estado de evaluación es considerada atrasada
+            evaluating_proposals_overdue_help: Esto añade una alerta visual a la lista
+              de propuestas. Déjala a cero para desactivar esta característica.
             geocoding_comparison_enabled: Comparar propuestas por proximidad
-            geocoding_comparison_enabled_help: Esta configuración permite comparar propuestas por proximidad en lugar de similitud de texto. Esta característica requiere que un servicio de geocodificación esté configurado y habilitado en el componente (en caso contrario se usará la comparación por similitud de texto).
-            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los últimos X días
-            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando se comparan propuestas por proximidad. Las propuestas más antiguas que el número especificado de días serán ignoradas. Usar cero para comparar todas las propuestas sin importar la distancia.
-            geocoding_comparison_radius: Radio máximo (en metros) para considerar propuestas similares (se ordenará por distancia) por proximidad
+            geocoding_comparison_enabled_help: Esta configuración permite comparar
+              propuestas por proximidad en lugar de similitud de texto. Esta característica
+              requiere que un servicio de geocodificación esté configurado y habilitado
+              en el componente (en caso contrario se usará la comparación por similitud
+              de texto).
+            geocoding_comparison_newer_than: Compara solo la propuesta hecha en los
+              últimos X días
+            geocoding_comparison_newer_than_help: Este ajuste sólo se aplica cuando
+              se comparan propuestas por proximidad. Las propuestas más antiguas que
+              el número especificado de días serán ignoradas. Usar cero para comparar
+              todas las propuestas sin importar la distancia.
+            geocoding_comparison_radius: Radio máximo (en metros) para considerar
+              propuestas similares (se ordenará por distancia) por proximidad
             geocoding_enabled: Geolocalización habilitada
             minimum_votes_per_user: Apoyos mínimos por participante
             new_proposal_body_template: Plantilla para el texto de nueva propuesta
-            new_proposal_body_template_help: Puede definir el texto predefinido que tendrán las nuevas propuestas
+            new_proposal_body_template_help: Puede definir el texto predefinido que
+              tendrán las nuevas propuestas
             new_proposal_help_text: Texto de ayuda al crear una propuesta
+            no_taxonomy_filters_found: No se han encontrado filtros de taxonomía.
             official_proposals_enabled: Propuestas oficiales habilitadas
-            only_photo_attachments: Permitir solo fotos en los archivos adjuntos
             participatory_texts_enabled: Textos participativos habilitados
-            participatory_texts_enabled_readonly: No se puede interactuar con esta configuración si hay propuestas existentes. Por favor, crea un nuevo componente de propuesta si quieres activar esta característica o descartar todas las propuestas importadas en el menú "Textos Participativos" si quieres desactivarla.
+            participatory_texts_enabled_readonly: No se puede interactuar con esta
+              configuración si hay propuestas existentes. Por favor, crea un nuevo
+              componente de propuesta si quieres activar esta característica o descartar
+              todas las propuestas importadas en el menú "Textos Participativos" si
+              quieres desactivarla.
             proposal_answering_enabled: Respuesta a las propuestas habilitada
-            proposal_edit_before_minutes: Los autores pueden editar las propuestas antes de que pase este número de minutos
+            proposal_edit_before_minutes: Los autores pueden editar las propuestas
+              antes de que pase este número de minutos
             proposal_edit_time: Edición de propuestas
             proposal_edit_time_choices:
               infinite: Permitir editar propuestas por una cantidad infinita de tiempo
               limited: Permitir la edición de propuestas dentro de un plazo específico
             proposal_length: Longitud máxima del cuerpo de la propuesta
             proposal_limit: Límite de propuestas por participante
-            proposal_photo_editing_enabled: Permitir a administradores y evaluadores editar fotos cuando respondan propuestas
-            proposal_wizard_step_1_help_text: Texto de ayuda para el paso "Crear" del asistente de propuesta
-            proposal_wizard_step_2_help_text: Texto de ayuda para el paso "Comparar" del asistente de propuesta
-            proposal_wizard_step_3_help_text: Texto de ayuda para el paso «Completar» del asistente para propuestas
-            proposal_wizard_step_4_help_text: Texto de ayuda para el paso "Publicar" del asistente de propuesta
-            resources_permissions_enabled: Se pueden establecer permisos de acciones para cada propuesta
+            proposal_photo_editing_enabled: Permitir a administradores y evaluadores
+              editar fotos cuando respondan propuestas
+            proposal_wizard_step_1_help_text: Texto de ayuda para el paso "Crear"
+              del asistente de propuesta
+            proposal_wizard_step_2_help_text: Texto de ayuda para el paso "Comparar"
+              del asistente de propuesta
+            proposal_wizard_step_3_help_text: Texto de ayuda para el paso «Completar»
+              del asistente para propuestas
+            proposal_wizard_step_4_help_text: Texto de ayuda para el paso "Publicar"
+              del asistente de propuesta
+            resources_permissions_enabled: Se pueden establecer permisos de acciones
+              para cada propuesta
             scope_id: Ámbito
             scopes_enabled: Ámbitos habilitados
+            taxonomy_filters: Seleccionar filtros para el componente
+            taxonomy_filters_add: Añadir un filtro
             threshold_per_proposal: Umbral por propuesta
-            unanswered_proposals_overdue: Después de cuántos días se considera una propuesta sin respuesta atrasada
-            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista de propuestas. Déjala a cero para desactivar esta característica.
+            unanswered_proposals_overdue: Después de cuántos días se considera una
+              propuesta sin respuesta atrasada
+            unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista
+              de propuestas. Déjala a cero para desactivar esta característica.
             vote_limit: Límite de apoyos por participante
           step:
             amendment_creation_enabled: Creación de enmiendas habilitada
             amendment_creation_enabled_help: El participante puede enmendar propuestas.
             amendment_promotion_enabled: Promoción de enmiendas activada
-            amendment_promotion_enabled_help: Las autoras de la enmienda podrán promover la enmienda rechazada como nueva propuesta.
+            amendment_promotion_enabled_help: Las autoras de la enmienda podrán promover
+              la enmienda rechazada como nueva propuesta.
             amendment_reaction_enabled: Reacciones a las enmiendas activada
-            amendment_reaction_enabled_help: Las autoras de la propuesta podrán aceptar o rechazar las enmiendas de otras participantes.
+            amendment_reaction_enabled_help: Las autoras de la propuesta podrán aceptar
+              o rechazar las enmiendas de otras participantes.
             amendments_visibility: Visibilidad de las enmiendas
             amendments_visibility_choices:
               all: Las enmiendas son visibles para todos
               participants: Las enmiendas son visibles sólo para sus autoras
-            amendments_visibility_help: Si se selecciona la opción "Las enmiendas son visibles sólo para sus autoras", las participantes deberán iniciar sesión para ver las enmiendas realizadas.
+            amendments_visibility_help: Si se selecciona la opción "Las enmiendas
+              son visibles sólo para sus autoras", las participantes deberán iniciar
+              sesión para ver las enmiendas realizadas.
             announcement: Anuncio
             answers_with_costs: Habilitar costes en las respuestas a las propuestas
             automatic_hashtags: Hashtags añadidos a todas las propuestas
             comments_blocked: Comentarios bloqueados
             creation_enabled: Las participantes pueden crear propuestas
-            creation_enabled_readonly: Esta opción se desactiva cuando activas la funcionalidad de Textos Participativos. Para subir propuestas como texto participativo haz clic en el botón Textos Participativos y sigue las instrucciones.
+            creation_enabled_readonly: Esta opción se desactiva cuando activas la
+              funcionalidad de Textos Participativos. Para subir propuestas como texto
+              participativo haz clic en el botón Textos Participativos y sigue las
+              instrucciones.
             default_sort_order: Orden predeterminado de propuestas
-            default_sort_order_help: Por defecto significa que si los apoyos están habilitados, las propuestas se mostrarán en orden aleatorio, y si los apoyos están bloqueados, se ordenarán por las más apoyadas.
+            default_sort_order_help: Por defecto significa que si los apoyos están
+              habilitados, las propuestas se mostrarán en orden aleatorio, y si los
+              apoyos están bloqueados, se ordenarán por las más apoyadas.
             default_sort_order_options:
               default: Predeterminado
               most_commented: Más comentadas
-              most_endorsed: Con más adhesiones
               most_followed: Más seguidas
+              most_liked: Con más "Me gusta"
               most_voted: Con más apoyos
               random: Aleatorio
               recent: Recientes
               with_more_authors: Con más autores
-            endorsements_blocked: Adhesiones bloqueadas
-            endorsements_enabled: Adhesiones habilitadas
+            likes_blocked: Adhesiones bloqueadas
+            likes_enabled: Adhesiones habilitadas
             proposal_answering_enabled: Respuesta a las propuestas habilitada
             publish_answers_immediately: Publicar respuestas a las propuestas inmediatamente
-            publish_answers_immediately_help_html: 'Ten en cuenta que si respondes a alguna propuesta sin que esto esté habilitado, tendrás que publicarlas manualmente seleccionándolas y utilizando la acción de publicar. Para más información sobre el funcionamiento, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication" target="_blank">página de documentación de respuestas a las propuestas</a>.'
-            suggested_hashtags: Hashtags sugeridos a las participantes para nuevas propuestas
+            publish_answers_immediately_help_html: Ten en cuenta que si respondes
+              a alguna propuesta sin que esto esté habilitado, tendrás que publicarlas
+              manualmente seleccionándolas y utilizando la acción de publicar. Para
+              más información sobre el funcionamiento, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication"
+              target="_blank">página de documentación de respuestas a las propuestas</a>.
+            suggested_hashtags: Hashtags sugeridos a las participantes para nuevas
+              propuestas
             votes_blocked: Apoyos bloqueados
             votes_enabled: Apoyos habilitados
-            votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando esta opción ocultarás el número de apoyos)
+            votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando
+              esta opción ocultarás el número de apoyos)
     events:
       proposals:
+        proposal_published:
+          admin_panel: Panel de administración
         proposal_published_for_admin:
           admin_panel: panel de administración
-          email_intro: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
-          email_outro: Has recibido esta notificación porque eres administrador/a del espacio participativo "%{participatory_space_title}".
+          email_intro: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a>
+            a %{participatory_space_title}. Adminístrala en %{admin_url}'
+          email_outro: Has recibido esta notificación porque eres administrador/a
+            del espacio participativo "%{participatory_space_title}".
           email_subject: Nueva propuesta «%{resource_title}» añadida a %{participatory_space_title}
-          notification_title: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}'
-          notification_title_official: La propuesta oficial <a href="%{resource_path}">%{resource_title}</a> a %{participatory_space_title}. Adminístrala en %{admin_url}
+          notification_title: '%{author} ha añadido la propuesta <a href="%{resource_path}">%{resource_title}</a>
+            a %{participatory_space_title}. Adminístrala en %{admin_url}'
+          notification_title_official: La propuesta oficial <a href="%{resource_path}">%{resource_title}</a>
+            a %{participatory_space_title}. Adminístrala en %{admin_url}
+        proposal_published_for_space:
+          admin_panel: Panel de administración
     moderations:
       actions:
         hide: Ocultar
@@ -171,26 +269,21 @@ es:
         proposals:
           address:
             geolocated_at: Geolocalizada en
+          index:
+            id: ID
           send_email_button:
             send_mail: Enviar un correo electrónico al usuario
-          show:
-            report: Denunciar
+      proposals:
+        compare:
+          continue: Continuar
+          title: Comparar propuestas
+        wizard_steps:
+          step_compare: Comparar
     reported_mailer:
       report:
         admin_resource: Administrar este recurso
     reporting_proposals:
-      actions:
-        answer_proposal: Responder a la propuesta
-        edit_proposal: Editar propuesta
-        import: Importar propuestas de otro componente
-        new: Nueva propuesta
-        participatory_texts: Textos participativos
-        show: Ver propuesta
-        title: Acciones
       admin:
-        actions:
-          edit_valuators: Editar evaluadores
-          preview: Previsualizar
         answer_overdue:
           datetime:
             distance_in_words:
@@ -271,11 +364,6 @@ es:
               x_years:
                 one: 1 año para responder
                 other: "%{count} años para responder"
-        categories:
-          form:
-            valuators_help: Seleccione los evaluadores que serán asignados automáticamente cuando una propuesta se publique en esta categoría (recibirán una notificación).
-          index:
-            valuators_column: Evaluadores automáticos
         evaluate_pending:
           datetime:
             distance_in_words:
@@ -319,13 +407,15 @@ es:
         exports:
           proposal_comments: Comentarios
           proposals: Propuestas directas
+        menu:
+          taxonomy_evaluators: Evaluadores de taxonomías
         notification_answer_proposal_mailer:
           notify_proposal_author:
             email_body: |
               Tu propuesta ha sido respondida.
               Puedes leer la respuesta aquí:<br>
               <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: '¡Hola, %{recipient}!'
+            greeting: "¡Hola, %{recipient}!"
             subject: Su propuesta ha sido respondida
         proposal_notes:
           modal:
@@ -339,30 +429,30 @@ es:
         proposals:
           photo_form:
             action: Añadir imagen
-            add_images: Añadir imágenes
-            edit_images: Añadir imágenes
-            gallery_legend: Añadir imágenes
-            title: Fotos
-            upload_msg: No hay archivos seleccionados
           photo_gallery:
+            are_you_sure: "¿Seguro que quieres eliminar esta imagen?"
             delete_image: Eliminar imagen
-            photos: Fotos
           photos:
             title: Fotos
-          valuators_list:
-            assigned_valuators: Asignar evaluadoras
-            remove_assignment: eliminar asignación
-            remove_assignment_confirmation: Seguro que quieres eliminar esta asignación?
-            valuators: Evaluadoras
-        proposals_valuator_mailer:
-          notify_proposals_valuator:
-            admin_panel: panel de administración
-            email_body: Has sido asignado como evaluador para las propuestas que se listan a continuación. Esto significa que en los próximos días deberías comentar y/o una respuesta adecuada.
-            gratitude: '¡Gracias por tu ayuda!'
-            greeting: Hola %{name},
-            public_side: parte pública
-            subject: Nuevas propuestas asignadas para su evaluación
         resolution_time: Tiempo de resolución
+        taxonomy_evaluators:
+          edit:
+            select_evaluators: Seleccionar evaluadores
+            title: Editar evaluadores de %{taxonomy}
+            update: Actualizar
+          index:
+            actions: Acciones
+            description: Los evaluadores se asignarán automáticamente a las nuevas
+              propuestas clasificadas con estas taxonomías.
+            empty: No hay taxonomías disponibles. Primero añade filtros de taxonomía
+              a los componentes de propuestas de este espacio.
+            evaluators: Evaluadores
+            taxonomy: Taxonomía
+            title: Evaluadores automáticos de taxonomías
+            unassigned: Sin asignar
+          update:
+            invalid: Hubo un problema al actualizar los evaluadores de esta taxonomía.
+            success: Evaluadores actualizados correctamente para esta taxonomía.
         time_elapsed:
           datetime:
             distance_in_words:
@@ -403,33 +493,35 @@ es:
               x_years:
                 one: 1 año
                 other: "%{count} años"
+      admin_log:
+        taxonomy_evaluator:
+          create: "%{user_name} asignó una evaluadora a la taxonomía %{resource_name}"
+          delete: "%{user_name} desasignó una evaluadora de la taxonomía %{taxonomy_name}"
+      form:
+        add_attachments: Añadir imagen o documentos
+        edit_attachments: Editar imagen o documentos
       forms:
-        errors:
-          device_not_supported: Este navegador no admite geolocalización.
-          no_device_location: Lo sentimos, no hemos podido detectar tu ubicación.
         use_my_camera: Usar mi cámara
-        use_my_location: Detectar mi ubicación
       notification_publish_proposal_mailer:
         notify_proposal_author:
           email_body: |
             Tu propuesta ha sido publicada.
             Puedes verla aquí <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-          greeting: '¡Hola, %{recipient}!'
+          greeting: "¡Hola, %{recipient}!"
           subject: Tu propuesta ha sido publicada
       proposals:
         compare:
           geocoding:
-            away: "A %{meters} de distancia"
-            description: Estas son propuestas que están en un radio de %{meters} a la que estás creando. En caso de que encuentres otra reportando la misma situación, puedes elegir apoyarla en lugar de crear una nueva.
+            away: A %{meters} de distancia
+            description: Estas son propuestas que están en un radio de %{meters} a
+              la que estás creando. En caso de que encuentres otra reportando la misma
+              situación, puedes elegir apoyarla en lugar de crear una nueva.
             title: Propuestas cercanas
-        edit:
-          delete_image: Eliminar imagen
-        form:
-          image: Imágen/foto
+          no_similars_found: No se han encontrado propuestas similares
     statistics:
       reporting_proposals_accepted: Número de propuestas directas aceptadas
       reporting_proposals_comments_count: Número de comentarios en propuestas directas
       reporting_proposals_count: Número de propuestas directas
-      reporting_proposals_endorsements_count: Número de adhesiones en propuestas directas
       reporting_proposals_followers_count: Número de seguidores en propuestas directas
+      reporting_proposals_likes_count: Número de "Me gusta" en propuestas directas
       reporting_proposals_votes_count: Número de votos en propuestas directas

@@ -9,7 +9,7 @@ module Decidim::ReportingProposals::Admin
     let!(:proposal) { create(:proposal) }
     let(:reason) { ["This is a reason", "This is another reason"] }
 
-    context "when valuator assigned" do
+    context "when evaluator assigned" do
       let(:mail) { described_class.notify_mail(proposal, proposal.authors, reason) }
 
       it "set subject email" do
@@ -24,7 +24,7 @@ module Decidim::ReportingProposals::Admin
         expect(mail.to).to eq([proposal.authors.first.email])
       end
 
-      it "body email has valuator name" do
+      it "body email has evaluator name" do
         expect(email_body(mail)).to include("This is a reason")
         expect(email_body(mail)).to include("This is another reason")
       end

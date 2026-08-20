@@ -1,8 +1,0 @@
-<!-- insert_after 'td:contains("proposal.published_at")' -->
-
-<td>
-  <% if proposal.category %>
-    <%= icon "price-tag-3-line", class: "fill-gray w-4 h-4" %>
-    <%= translated_attribute proposal.category.name %>
-  <% end %>
-</td>

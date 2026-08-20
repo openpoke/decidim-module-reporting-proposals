@@ -11,11 +11,12 @@ module Decidim
           # Helpers for overdue proposals
           include ActionView::Helpers::DateHelper
 
-          def available_valuators_for_proposal(proposal, current_user)
+          def available_evaluators_for_proposal(proposal, current_user)
             participatory_space = proposal.component.participatory_space
 
-            all_roles = participatory_space.user_roles(:valuator).order_by_name
-            assigned_ids = proposal.valuation_assignments.pluck(:valuator_role_id)
+            # assembly user roles include the ancestor assemblies ones, so a strict space check is needed
+            all_roles = participatory_space.user_roles(:evaluator).for_space(participatory_space).order_by_name
+            assigned_ids = proposal.evaluation_assignments.pluck(:evaluator_role_id)
 
             available_roles = all_roles.reject do |role|
               role.decidim_user_id == current_user.id || assigned_ids.include?(role.id)

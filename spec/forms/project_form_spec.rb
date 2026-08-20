@@ -23,14 +23,12 @@ module Decidim::Budgets
     let(:reporting_component) { create(:component, manifest_name: :reporting_proposals, participatory_space: participatory_process) }
     let(:reporting_proposals) { create_list(:proposal, 2, component: reporting_component) }
     let(:parent_scope) { create(:scope, organization:) }
-    let(:scope) { create(:subscope, parent: parent_scope) }
-    let(:category) { create(:category, participatory_space: participatory_process) }
+    let(:taxonomies) { [] }
     let(:project) do
       create(
         :project,
         budget:,
-        scope:,
-        category:
+        taxonomies:
       )
     end
 

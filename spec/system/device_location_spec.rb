@@ -5,10 +5,12 @@ require "spec_helper"
 describe "User location button" do
   include_context "with a component"
   let(:manifest_name) { "reporting_proposals" }
+  let(:geocoding_enabled) { true }
   let!(:component) do
     create(:reporting_proposals_component,
-           :with_extra_hashtags,
-           participatory_space: participatory_process)
+           :with_creation_enabled,
+           participatory_space: participatory_process,
+           settings: { geocoding_enabled: })
   end
   let!(:user) { create(:user, :admin, :confirmed, organization:) }
   let(:proposal) { Decidim::Proposals::Proposal.last }
@@ -26,15 +28,20 @@ describe "User location button" do
   end
 
   shared_examples "uses device location" do
-    it "has my location button" do
-      expect(page).to have_button("Use my location")
-    end
+    context "when geocoding_enabled" do
+      let(:geocoding_enabled) { true }
 
-    context "when option disabled" do
-      let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+      it "has my location button" do
+        expect(page).to have_button("Use my current location")
+      end
 
-      it "does not has the location button" do
-        expect(page).to have_no_button("Use my location")
+      context "when option disabled" do
+        let(:geocoding_enabled) { false }
+        let(:manifests) { all_manifests - [component.manifest_name.to_sym] }
+
+        it "does not has the location button" do
+          expect(page).to have_no_button("Use my current location")
+        end
       end
     end
   end
@@ -46,7 +53,7 @@ describe "User location button" do
       end
 
       it "the button should be deactivated and the errors removed" do
-        expect(page).to have_css(".user-device-location button[disabled]")
+        expect(page).to have_css(".geocoding__locate button[disabled]")
         expect(page).to have_no_css("label[for=proposal_address].is-invalid-label")
         expect(page).to have_css("input#proposal_address[disabled]")
       end

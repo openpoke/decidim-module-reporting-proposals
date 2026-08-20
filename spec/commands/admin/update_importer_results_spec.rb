@@ -10,8 +10,9 @@ module Decidim::Accountability
     let(:result) { create(:result, progress: 10) }
     let(:organization) { result.component.organization }
     let(:user) { create(:user, organization:) }
-    let(:scope) { create(:scope, organization:) }
-    let(:category) { create(:category, participatory_space: participatory_process) }
+    let!(:taxonomizations) do
+      2.times.map { create(:taxonomization, taxonomy: create(:taxonomy, :with_parent, organization:), taxonomizable: result) }
+    end
     let(:participatory_process) { result.component.participatory_space }
     let(:start_date) { Date.yesterday }
     let(:end_date) { Date.tomorrow }
@@ -36,8 +37,7 @@ module Decidim::Accountability
         description: { en: "description" },
         proposal_ids: [proposal.id, reporting_proposal.id],
         project_ids: [],
-        scope:,
-        category:,
+        taxonomizations:,
         start_date:,
         end_date:,
         decidim_accountability_status_id: status.id,

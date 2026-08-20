@@ -1,6 +1,6 @@
 <% if component_settings.attachments_allowed? %>
   <div class="card-section">
-    <div class="component__show_photos" data-component="accordion" id="accordion-photos">
+    <div class="component__show_photos" data-controller="accordion" id="accordion-photos">
       <button class="card-divider-button" data-controls="panel-photos" type="button">
         <%= icon "arrow-right-s-line" %>
         <h2 class="card-title">
@@ -9,10 +9,7 @@
       </button>
       <div id="panel-photos">
         <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_gallery" %>
-        <% if admin_allowed_to? :edit_photos,
-                                :proposals,
-                                (extra_context = { proposal: proposal }),
-                                (chain = [::Decidim::ReportingProposals::Admin::Permissions]) %>
+        <% if admin_allowed_to?(:edit_photos, :proposals, { proposal: }, [::Decidim::ReportingProposals::Admin::Permissions]) %>
           <%= render partial: "decidim/reporting_proposals/admin/proposals/photo_form" %>
         <% end %>
       </div>

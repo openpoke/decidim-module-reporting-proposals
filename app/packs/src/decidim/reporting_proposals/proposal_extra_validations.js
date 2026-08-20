@@ -1,4 +1,10 @@
-$(() => {
+document.addEventListener("turbo:load", () => {
+
+  const rulesTag = document.querySelector("[data-proposal-rules]");
+  if (!rulesTag) {
+    return;
+  }
+  const rules = JSON.parse(rulesTag.dataset.proposalRules);
 
   const $title = $('input[name="proposal[title]"]');
   const $body = $('[name="proposal[body]"]');
@@ -15,7 +21,6 @@ $(() => {
       search = ".form-error"
     }
     let $error = $closest.find(search);
-    console.log("findError", "$closest", $closest, " $field", $field, "prop", prop, "$error", $error);
     if ($error.length === 0) {
       $error = $(`<span class="${search.replace(/\./g, " ")}"></span>`).appendTo($closest);
     }
@@ -27,18 +32,15 @@ $(() => {
   };
   
   const addError = ($field, options, prop) => {
-    // console.log("addError", $field, options, prop)
     let $error = findError($field, prop);
     $error.addClass("is-visible");
     if (options && options[prop]) {
       $error.html(options[prop].error);
     }
-    else {$error.html(Decidim.ProposalRules.genericError);}
+    else {$error.html(rules.genericError);}
   };
   
   const validate = ($field, value, options) => {
-    console.log("validate", $field, value, options);
-
     // validate caps if needed
     const minLen = $field.attr("minlength");
 
@@ -75,12 +77,12 @@ $(() => {
       });
     }
     $form.on("submit", (ev) => {
-      if (!validate($title, $title.val(), Decidim.ProposalRules.title)) {
+      if (!validate($title, $title.val(), rules.title)) {
         ev.preventDefault();
       }
       if (!validate($body, prosemirror
         ? prosemirror.textContent
-        : $body.val(), Decidim.ProposalRules.body)) {
+        : $body.val(), rules.body)) {
         ev.preventDefault();
       }
     });

@@ -10,8 +10,8 @@ on:
 env:
   CI: 1
   SIMPLECOV: 1
-  NODE_VERSION: 18.17.1
-  RUBY_VERSION: 3.2.6
+  NODE_VERSION: 22.14.0
+  RUBY_VERSION: 3.3.10
   DISPLAY: ":99"
   RUBYOPT: '-W:no-deprecated'
   RAILS_ENV: test
@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update; sudo apt-get -f install wkhtmltopdf imagemagick
+        run: sudo apt-get update && sudo apt-get install -y wkhtmltopdf imagemagick
 
       - uses: nanasess/setup-chromedriver@v2
         with:

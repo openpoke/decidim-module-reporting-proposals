@@ -18,35 +18,35 @@ module Decidim
         private
 
         def current_organization
-          context[:proposal].try(:organization) || context[:current_organization]
+          @current_organization ||= proposal.try(:organization) || context.fetch(:current_organization, nil)
         end
 
         def component_settings
-          context[:component_settings] || component.try(:settings)
+          @component_settings ||= context.fetch(:component_settings, nil) || component.try(:settings)
         end
 
         def component
-          context[:proposal].try(:component) || context[:current_component]
+          @component ||= proposal.try(:component) || context.fetch(:current_component, nil)
         end
 
         def user_author_note?
-          context[:proposal_note].try(:author) == user
+          context.fetch(:proposal_note, nil).try(:author) == user
         end
 
         def hide_content_action?
-          return unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
+          return false unless permission_action.action == :hide_proposal && permission_action.subject == :proposals
 
-          toggle_allow((admin_hide_proposals_enabled? && user_allowed_or_assigned?) || user_administrator?)
+          toggle_allow(admin_hide_proposals_enabled? && (user_allowed_or_assigned? || user_administrator?))
         end
 
         def edit_photos_action?
-          return unless permission_action.action == :edit_photos && permission_action.subject == :proposals
+          return false unless permission_action.action == :edit_photos && permission_action.subject == :proposals
 
           toggle_allow(admin_proposal_photo_editing_enabled? && (user_allowed_or_assigned? || user_administrator?))
         end
 
         def edit_proposal_note?
-          return unless permission_action.action == :edit_note && permission_action.subject == :proposal_note
+          return false unless permission_action.action == :edit_note && permission_action.subject == :proposal_note
 
           toggle_allow(user_author_note?)
         end
@@ -61,17 +61,15 @@ module Decidim
         end
 
         def user_allowed_or_assigned?
-          user.admin? || (user_is_valuator? && valuator_assigned_to_proposal?)
+          user.admin? || (user_is_evaluator? && evaluator_assigned_to_proposal?)
         end
 
+        # space admins are not covered by user.admin? (organization admins only)
         def user_administrator?
-          process = Decidim::ParticipatoryProcess.where(organization: context[:proposal].try(:organization))
+          participatory_space = component.try(:participatory_space)
+          return false unless participatory_space.respond_to?(:user_roles)
 
-          admin = Decidim::User.where(id: Decidim::ParticipatoryProcessUserRole
-                                            .where(participatory_process: process, role: :admin)
-                                            .select(user.id))
-
-          admin.exists? ? user : nil
+          participatory_space.user_roles(:admin).exists?(user:)
         end
       end
     end

@@ -4,7 +4,6 @@ module Decidim
   module ReportingProposals
     class CreateReportingProposal < Decidim::Proposals::CreateProposal
       include ::Decidim::MultipleAttachmentsMethods
-      include ::Decidim::Proposals::GalleryMethods
 
       def call
         return broadcast(:invalid) if form.invalid?
@@ -12,11 +11,6 @@ module Decidim
         if process_attachments?
           build_attachments
           return broadcast(:invalid) if attachments_invalid?
-        end
-
-        if process_gallery?
-          build_gallery
-          return broadcast(:invalid) if gallery_invalid?
         end
 
         if proposal_limit_reached?
@@ -28,8 +22,7 @@ module Decidim
           create_reporting_proposal
 
           @attached_to = @proposal
-          create_gallery if process_gallery?
-          create_attachments if process_attachments?
+          create_attachments(first_weight: first_attachment_weight) if process_attachments?
         end
 
         broadcast(:ok, proposal)
@@ -47,19 +40,18 @@ module Decidim
           ) do
             proposal = Decidim::Proposals::Proposal.new(
               title: {
-                I18n.locale => title_with_hashtags
+                I18n.locale => Decidim::ContentProcessor.parse(form.title, current_organization: form.current_organization).rewrite
               },
               body: {
-                I18n.locale => body_with_hashtags
+                I18n.locale => Decidim::ContentProcessor.parse_with_processor(:inline_images, form.body, current_organization: form.current_organization).rewrite
               },
-              category: form.category,
-              scope: form.scope,
               address: form.address,
               latitude: form.latitude,
               longitude: form.longitude,
               component: form.component
             )
-            proposal.add_coauthor(@current_user, user_group:)
+            proposal.taxonomizations = form.taxonomizations if form.taxonomizations.present?
+            proposal.add_coauthor(@current_user)
             proposal.save!
             proposal
           end

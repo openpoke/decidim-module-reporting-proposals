@@ -70,11 +70,15 @@ describe "Admin manages proposal answer templates" do
   describe "using a reporting proposal_answer_template" do
     before do
       visit Decidim::EngineRouter.admin_proxy(component).root_path
-      find("a", class: "action-icon--show-proposal").click
+      within "tr", text: translated(proposal.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Preview"
+      end
     end
 
     it "uses the template" do
       expect(proposal.reload.internal_state).to eq("not_answered")
+      click_on "Answer proposal"
       within ".edit_proposal_answer" do
         select template.name["en"], from: :proposal_answer_template_chooser
         expect(page).to have_content(description)
@@ -93,10 +97,14 @@ describe "Admin manages proposal answer templates" do
       before do
         template.destroy!
         visit Decidim::EngineRouter.admin_proxy(component).root_path
-        find("a", class: "action-icon--show-proposal").click
+        within "tr", text: translated(proposal.title) do
+          find("button[data-controller='dropdown']").click
+          click_on "Preview"
+        end
       end
 
       it "hides the template selector in the proposal answer page" do
+        click_on "Answer proposal"
         expect(page).to have_no_select(:proposal_answer_template_chooser)
       end
     end
@@ -107,6 +115,7 @@ describe "Admin manages proposal answer templates" do
       let!(:proposal) { create(:proposal, component:) }
 
       it "displays the global template in dropdown" do
+        click_on "Answer proposal"
         expect(page).to have_select(:proposal_answer_template_chooser, with_options: [translated(template.name)])
       end
 

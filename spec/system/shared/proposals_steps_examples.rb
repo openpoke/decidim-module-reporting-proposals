@@ -41,44 +41,31 @@ shared_examples "reuses draft if exists" do
 end
 
 shared_examples "customized form" do
-  context "when only_photo_attachments is enabled" do
-    let(:only_photos) { true }
+  context "when attachments are not active" do
+    let(:attachments) { false }
 
-    it "does not show the attachments" do
-      uncheck "proposal_has_no_image"
-      expect(page).to have_no_content("Add an attachment")
-      expect(page).to have_content("Image/photo")
-    end
-
-    context "and attachment are not active" do
-      let(:attachments) { false }
-
-      it "does not show the attachments or photos" do
-        expect(page).to have_no_checked_field("proposal_has_no_image")
-        expect(page).to have_no_content("Add an attachment")
-        expect(page).to have_no_content("Image/photo")
-      end
+    it "does not show the attachments upload" do
+      expect(page).to have_no_field("proposal_has_no_attachments")
+      expect(page).to have_no_content("Add image or documents")
     end
   end
 
   it "uploads attachments", :slow do
-    uncheck "proposal_has_no_image"
+    uncheck "proposal_has_no_attachments"
     fill_proposal(attach: true, extra_fields: false, skip_address: true)
 
     expect(page).to have_content(proposal_title)
-    expect(page).to have_button("Images")
-    expect(page).to have_button("Documents")
+    expect(page).to have_content("Publish")
   end
 end
 
 shared_examples "creates reporting proposal" do
   it "redirects to the publish step" do
-    fill_proposal(skip_group: true)
+    fill_proposal
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(user.name)
     expect(page).to have_content(proposal_body)
-    expect(page).to have_content(translated(proposal_category.name))
 
     expect(page).to have_button("Publish")
 
@@ -95,16 +82,9 @@ shared_examples "creates reporting proposal" do
     expect(page).to have_content(proposal_title)
     body = translated(proposal.body)
     expect(body).to have_content(proposal_body)
-    expect(proposal.category).to eq(category)
     expect(proposal.address).to eq(address)
     expect(proposal.latitude).to eq(latitude)
     expect(proposal.longitude).to eq(longitude)
-    expect(body).to have_content("HashtagAuto1")
-    expect(body).to have_content("HashtagAuto2")
-    expect(body).to have_content("HashtagSuggested1")
-    expect(body).to have_no_content("HashtagSuggested2")
-    expect(proposal.identities.first).to eq(user_group)
-    expect(proposal.scope).to eq(scope)
   end
 
   it "modifies the proposal" do
@@ -114,7 +94,7 @@ shared_examples "creates reporting proposal" do
     expect(page).to have_no_content("Documents")
 
     click_on "Modify the proposal"
-    find_by_id("proposal_has_no_image").click
+    find_by_id("proposal_has_no_attachments").click
 
     within ".wizard-steps" do
       expect(page).to have_content("Create your proposal")
@@ -124,28 +104,25 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content("Edit proposal draft")
 
-    expect(page).to have_content("Image/photo")
-    expect(page).to have_content("Add documents")
-    check "proposal_has_no_image"
-    select translated(another_category.name), from: :proposal_category_id
+    expect(page).to have_content("Add image or documents")
+    check "proposal_has_no_attachments"
     click_on "Preview"
 
     expect(page).to have_content(proposal_title)
     expect(page).to have_content(proposal_body)
-    expect(proposal.category).to eq(another_category)
   end
 
-  it "remember has_no_address and has_no_image" do
+  it "remember has_no_address and has_no_attachments" do
     fill_proposal(skip_address: true, attach: false)
 
     click_on "Modify the proposal"
 
-    expect(page).to have_css(".user-device-location button[disabled]")
-    expect(page).to have_css("#proposal_add_photos_button[disabled]")
+    expect(page).to have_css(".geocoding__locate button[disabled]")
+    expect(page).to have_css("#proposal_attachments_button[disabled]")
   end
 
   it "stores no address if checked" do
-    fill_proposal(skip_address: true, skip_group: true, skip_scope: true)
+    fill_proposal(skip_address: true)
 
     click_on "Publish"
 
@@ -153,9 +130,7 @@ shared_examples "creates reporting proposal" do
 
     expect(page).to have_content(proposal_title)
     expect(translated(proposal.body)).to have_content(proposal_body)
-    expect(proposal.category).to eq(category)
     expect(proposal.identities.first).to eq(user)
-    expect(proposal.scope).to be_nil
     expect(proposal.address).to be_nil
     expect(proposal.latitude).to be_nil
     expect(proposal.longitude).to be_nil
@@ -190,13 +165,13 @@ end
 shared_examples "normal form" do
   it "does not have modified fields" do
     expect(page).to have_no_field("proposal_has_no_address")
-    expect(page).to have_no_field("proposal_has_no_image")
+    expect(page).to have_no_field("proposal_has_no_attachments")
   end
 end
 
 shared_examples "creates normal proposal" do
   it "redirects to the publish step" do
-    fill_proposal(extra_fields: false)
+    fill_proposal
 
     within "#content" do
       expect(page).to have_content("Publish your proposal")
@@ -205,7 +180,6 @@ shared_examples "creates normal proposal" do
 
   it "publishes the proposal" do
     fill_proposal(extra_fields: false)
-    expect(proposal.identities.first).to eq(user)
 
     click_on "Publish"
 

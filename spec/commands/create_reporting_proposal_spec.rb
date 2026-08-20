@@ -22,10 +22,6 @@ module Decidim
 
       let(:author) { create(:user, organization:) }
 
-      let(:user_group) do
-        create(:user_group, :verified, organization:, users: [author])
-      end
-
       # let(:uploaded_files) do
       #   [
       #     Decidim::Dev.test_file("Exampledocument.pdf", "application/pdf")
@@ -58,9 +54,7 @@ module Decidim
           body:,
           address:,
           has_no_address:,
-          user_group_id: user_group.try(:id),
-          add_photos: uploaded_photos,
-          add_documents: uploaded_files
+          add_attachments: uploaded_photos + uploaded_files
         }
       end
 

@@ -5,8 +5,6 @@ require "spec_helper"
 module Decidim
   module Proposals
     describe ProposalsController do
-      routes { Decidim::Proposals::Engine.routes }
-
       let(:user) { create(:user, :confirmed, organization: component.organization) }
 
       let(:proposal_params) do
@@ -20,6 +18,7 @@ module Decidim
         request.env["decidim.current_organization"] = component.organization
         request.env["decidim.current_participatory_space"] = component.participatory_space
         request.env["decidim.current_component"] = component
+        stub_const("Decidim::Paginable::OPTIONS", [100])
       end
 
       describe "GET index" do
@@ -211,7 +210,7 @@ module Decidim
                 title: "Short",
                 # When the proposal has existing photos or documents, their IDs
                 # will be sent as Strings in the form payload.
-                photos: proposal.photos.map { |a| a.id.to_s },
+                attachments: proposal.photos.map { |a| a.id.to_s },
                 documents: proposal.documents.map { |a| a.id.to_s }
               }
             end

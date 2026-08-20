@@ -1,47 +1,35 @@
-$(() => {
-  const $input = $("#proposal_add_photos_button");
-  const $button = $(".camera-container .user-device-camera");
-  const $checkbox = $("#proposal_has_no_image");
-  const $formError = $(".camera-container .form-error")
-  const $labelInput = $("label[for='proposal_add_photos']")
-
-  const removeErrors = () => {
-    $input.removeClass("is-invalid-input");
-    $formError.removeClass("is-visible");
-    $labelInput.removeClass("is-invalid-label");
-  };
-
-  const toggleInput = () => {
-    if ($checkbox[0].checked) {
-      removeErrors();
-      $input.prop("disabled", true);
-      $button.prop("disabled", true);
-    } else {
-      $input.prop("disabled", false);
-      $button.prop("disabled", false);
+document.addEventListener("turbo:load", () => {
+  $(".camera-container").each(function () {
+    const $container = $(this);
+    const $input = $container.find("input[type='file']");
+    const $button = $container.find(".user-device-camera");
+    if ($input.length === 0 || $button.length === 0) {
+      return;
     }
-  }
 
-  $input.attr("accept", "image/*");
+    // The checkbox and the upload-modal trigger both live outside the modal;
+    // reach them through the form attribute name and the dialog id.
+    const $checkbox = $("input[type='checkbox'][name$='[has_no_attachments]']");
+    const modalId = $container.closest("[data-dialog]").attr("data-dialog");
+    const $trigger = modalId
+      ? $(`[data-dialog-open='${modalId}']`)
+      : $();
 
-  $button.on("click", () => {
-    // console.log("click button")
-    $input.attr("capture", "camera");
-    $input.click();
-    $input.removeAttr("capture", "camera");
-  });
+    const toggleInput = () => {
+      const disabled = $checkbox.length > 0 && $checkbox[0].checked;
+      $button.prop("disabled", disabled);
+      $trigger.prop("disabled", disabled);
+    };
 
-  $input.on("click", () => {
-    // console.log("click", $input);
-    $input.one("blur", () => {
-      // console.log("blur", $input);
-      removeErrors();
+    $button.on("click", () => {
+      $input.attr("capture", "camera");
+      $input.click();
+      $input.removeAttr("capture");
     });
+
+    if ($checkbox.length > 0) {
+      $checkbox.on("change", toggleInput);
+      toggleInput();
+    }
   });
-
-
-  if ($checkbox.length > 0) {
-    $checkbox.on("change", toggleInput);
-    toggleInput();
-  }
-}); 
+});
