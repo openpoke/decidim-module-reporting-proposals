@@ -20,6 +20,10 @@ module Decidim::Proposals
     describe "#serialize" do
       let(:serialized) { subject.serialize }
 
+      it "keeps the upstream columns" do
+        expect(serialized).to include(:id, :author, :address, :latitude, :longitude, :votes, :withdrawn, :created_at)
+      end
+
       it "serializes the answer_time" do
         expect(serialized).to include(answer_time: "#{I18n.t("decidim.reporting_proposals.admin.resolution_time")}: #{time_elapsed_to_answer(proposal)}")
       end
