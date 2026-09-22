@@ -34,25 +34,31 @@ module Decidim
       [:proposals, :reporting_proposals]
     end
 
-    # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+    # Public setting to prevent evaluators or admins to modify the photos attached to a proposal
     # otherwise can be configured at the component level
     config_accessor :allow_proposal_photo_editing do
       true
     end
 
-    # Public setting to allow to assign other valuators
-    config_accessor :valuators_assign_other_valuators do
+    # Public setting to allow to assign other evaluators
+    config_accessor :evaluators_assign_other_evaluators do
       true
     end
 
-    # Public setting to to get an e-mail notification when there is a new answer to a proposal
+    # Public setting to get an e-mail notification when there is a new answer to a proposal
     config_accessor :notify_authors_on_answering do
       [:proposals, :reporting_proposals]
     end
 
-    # Public setting to to get an e-mail notification when the proposal is published
+    # Public setting to get an e-mail notification when the proposal is published
     config_accessor :notify_authors_on_publish do
       [:proposals, :reporting_proposals]
+    end
+
+    # Identity email of the bot user ("Automatic assignment") that authors automatic
+    # evaluator assignments in the admin log. No mail is sent to it; it only needs to be unique.
+    config_accessor :automation_user_email do
+      "reporting-proposals-automation@example.org"
     end
   end
 end

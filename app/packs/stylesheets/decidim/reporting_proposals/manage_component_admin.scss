@@ -49,11 +49,6 @@
   transform: scale(0.95);
 }
 
-#proposal_photo_add_photos {
-  display: block;
-  margin-top: 1rem;
-}
-
 .admin-address {
   display: flex;
   gap: 1rem;
@@ -62,15 +57,4 @@
   .component__show-address {
     max-height: 3rem;
   }
-}
-
-.component__show_notes-grid {
-  a {
-    text-decoration: underline;
-  }
-}
-
-//Variables
-.layout-content table svg.hide-button {
-  fill: var(--secondary);
 }

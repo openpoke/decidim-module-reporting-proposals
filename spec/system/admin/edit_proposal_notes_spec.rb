@@ -27,6 +27,7 @@ describe "Edit Proposal Notes" do
 
   before do
     within "tr", text: translated(proposal.title) do
+      find("button[data-controller='dropdown']").click
       click_on "Answer proposal"
     end
   end
@@ -41,7 +42,7 @@ describe "Edit Proposal Notes" do
 
   it "edits a proposal note" do
     click_on "Private notes"
-    within ".comment:last-child" do
+    within ".comment", match: :first do
       click_on "Edit note"
     end
 

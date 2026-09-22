@@ -20,8 +20,9 @@ module Decidim
         @snippets
       end
 
+      # rules are exposed as a data attribute, read by proposal_extra_validations.js
       def rules_tag
-        content_tag(:script, "Decidim.ProposalRules = #{rules.to_json};".html_safe)
+        content_tag(:div, nil, hidden: true, data: { proposal_rules: rules.to_json })
       end
 
       # caps rules are not explicitly used in the JS validations

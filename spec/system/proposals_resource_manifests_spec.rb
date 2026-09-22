@@ -46,6 +46,7 @@ describe "Admin find_resource_manifest" do
 
       expect(page).to have_admin_callout("successfully")
       within "tr", text: "My result" do
+        find("button[data-controller='dropdown']").click
         click_on "Edit"
       end
       within ".plugin-dropdown_input" do
@@ -56,14 +57,22 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals" do
       visit manage_component_path(component)
-      click_on "Edit"
+      within "tr", text: translated(result.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".edit_result" do
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_on "Edit"
+      within "tr", text: translated(result.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_content(translated(reporting_proposal.title))
@@ -72,14 +81,22 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose normal proposals" do
       visit manage_component_path(component)
-      click_on "Edit"
+      within "tr", text: translated(result.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".edit_result" do
         tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_on "Edit"
+      within "tr", text: translated(result.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_no_content(translated(reporting_proposal.title))
@@ -89,12 +106,19 @@ describe "Admin find_resource_manifest" do
 
   describe "budgets" do
     let(:component) { create(:budgets_component, participatory_space: participatory_process) }
-    let!(:project) { create(:project, component:) }
+    let!(:budget) { create(:budget, component:) }
+    let!(:project) { create(:project, budget:) }
 
     it "admin can choose reporting proposals when creating" do
       visit manage_component_path(component)
-      click_on "Manage projects"
-      click_on "New project"
+      within "tr", text: translated(budget.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Add projects"
+      end
+
+      within ".item_show__wrapper" do
+        click_on("New project", class: "button")
+      end
 
       within ".new_project" do
         fill_in_i18n(
@@ -115,6 +139,7 @@ describe "Admin find_resource_manifest" do
       expect(page).to have_admin_callout("successfully")
 
       within "tr", text: "My project" do
+        find("button[data-controller='dropdown']").click
         click_on "Edit"
       end
       within ".plugin-dropdown_input" do
@@ -125,15 +150,27 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose reporting proposals" do
       visit manage_component_path(component)
-      click_on "Manage projects"
-      click_on "Edit"
+      within "tr", text: translated(budget.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Add projects"
+      end
+
+      within "tr", text: translated(project.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".edit_project" do
         tom_select("#proposals_list", option_id: [proposal.id, reporting_proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_on "Edit"
+      within "tr", text: translated(project.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_content(translated(reporting_proposal.title))
@@ -142,15 +179,27 @@ describe "Admin find_resource_manifest" do
 
     it "admin can choose normal proposals" do
       visit manage_component_path(component)
-      click_on "Manage projects"
-      click_on "Edit"
+      within "tr", text: translated(budget.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Add projects"
+      end
+
+      within "tr", text: translated(project.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".edit_project" do
         tom_select("#proposals_list", option_id: [proposal.id])
         find("*[type=submit]").click
       end
 
       expect(page).to have_admin_callout("successfully")
-      click_on "Edit"
+      within "tr", text: translated(project.title) do
+        find("button[data-controller='dropdown']").click
+        click_on "Edit"
+      end
+
       within ".plugin-dropdown_input" do
         expect(page).to have_content(translated(proposal.title))
         expect(page).to have_no_content(translated(reporting_proposal.title))
@@ -162,12 +211,18 @@ describe "Admin find_resource_manifest" do
     let(:component) { create(:meeting_component, :with_creation_enabled, participatory_space: participatory_process) }
     let!(:meeting) { create(:meeting, :past, :published, component:, author: user) }
 
+    before do
+      stub_geocoding_coordinates([meeting.latitude, meeting.longitude])
+    end
+
     it "user can choose reporting_proposals" do
       visit main_component_path(component)
 
       click_on translated(meeting.title)
-      click_on "Close meeting"
-
+      within ".layout-author" do
+        find("#dropdown-trigger-resource-#{meeting.id}").click
+        click_on "Close"
+      end
       expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
         expect(page).to have_content "Proposals"
@@ -187,7 +242,10 @@ describe "Admin find_resource_manifest" do
       visit main_component_path(component)
 
       click_on translated(meeting.title)
-      click_on "Close meeting"
+      within ".layout-author" do
+        find("#dropdown-trigger-resource-#{meeting.id}").click
+        click_on "Close"
+      end
 
       expect(page).to have_content "Close meeting"
       within "form.edit_close_meeting" do
@@ -209,7 +267,10 @@ describe "Admin find_resource_manifest" do
 
       it "admin can choose reporting proposals" do
         visit manage_component_path(component)
-        page.click_on "Close"
+        within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+          find("button[data-controller='dropdown']").click
+          click_on "Close"
+        end
 
         within ".edit_close_meeting" do
           expect(page).to have_content "Proposals"
@@ -227,7 +288,11 @@ describe "Admin find_resource_manifest" do
         expect(page).to have_admin_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
-        page.click_on "Close"
+        within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+          find("button[data-controller='dropdown']").click
+          click_on "Close"
+        end
+
         within ".plugin-dropdown_input" do
           expect(page).to have_content(translated(proposal.title))
           expect(page).to have_content(translated(reporting_proposal.title))
@@ -236,7 +301,10 @@ describe "Admin find_resource_manifest" do
 
       it "admin can choose normal proposals" do
         visit manage_component_path(component)
-        page.click_on "Close"
+        within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+          find("button[data-controller='dropdown']").click
+          click_on "Close"
+        end
 
         within ".edit_close_meeting" do
           expect(page).to have_content "Proposals"
@@ -254,7 +322,11 @@ describe "Admin find_resource_manifest" do
         expect(page).to have_admin_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
-        page.click_on "Close"
+        within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
+          find("button[data-controller='dropdown']").click
+          click_on "Close"
+        end
+
         within ".plugin-dropdown_input" do
           expect(page).to have_content(translated(proposal.title))
           expect(page).to have_no_content(translated(reporting_proposal.title))

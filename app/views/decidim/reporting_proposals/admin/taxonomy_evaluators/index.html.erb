@@ -1,0 +1,67 @@
+<% add_decidim_page_title(t(".title")) %>
+
+<div class="card" aria-labelledby="taxonomy_evaluators-title">
+  <div class="item_show__header">
+    <div class="w-full">
+      <h1 class="item_show__header-title" id="taxonomy_evaluators-title">
+        <%= t(".title") %>
+      </h1>
+
+      <p class="mt-2 text-gray-2">
+        <%= t(".description") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="card-section p-4">
+    <% if collection.any? %>
+      <div class="table-stacked" role="table" aria-labelledby="taxonomy_evaluators-title">
+        <table class="table-list">
+          <thead>
+            <tr role="row">
+              <th scope="col" role="columnheader"><%= t(".taxonomy") %></th>
+              <th scope="col" role="columnheader"><%= t(".evaluators") %></th>
+              <th scope="col" role="columnheader" class="w-16"><%= t(".actions") %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% can_edit_taxonomies = allowed_to?(:update, :taxonomy) %>
+            <% tree_collection.each do |taxonomy| %>
+              <tr role="row">
+                <td data-label="<%= t(".taxonomy") %>">
+                  <div class="<%= taxonomy_indent_class(taxonomy) %>">
+                    <% if taxonomy.root? %>
+                      <% if can_edit_taxonomies %>
+                        <%= link_to translated_attribute(taxonomy.name), decidim_admin.edit_taxonomy_path(taxonomy) %>
+                      <% else %>
+                        <%= translated_attribute(taxonomy.name) %>
+                      <% end %>
+                    <% else %>
+                      <%= icon "corner-down-right-line", class: "text-gray" %>
+                      <%= translated_attribute(taxonomy.name) %>
+                    <% end %>
+                  </div>
+                </td>
+                <td data-label="<%= t(".evaluators") %>">
+                  <% evaluators = evaluators_for(taxonomy) %>
+                  <% if evaluators.any? %>
+                    <%= evaluators.map(&:name).join(", ") %>
+                  <% else %>
+                    <em class="text-warning"><%= t(".unassigned") %></em>
+                  <% end %>
+                </td>
+                <td data-label="<%= t(".actions") %>" class="table-list__actions">
+                  <%= icon_link_to "pencil-line",
+                                   taxonomy_evaluators_router.edit_taxonomy_evaluator_path(id: taxonomy.id),
+                                   t("actions.edit", scope: "decidim.admin") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p><%= t(".empty") %></p>
+    <% end %>
+  </div>
+</div>

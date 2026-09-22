@@ -1,2 +1,0 @@
-<!-- insert_after "#valuators" -->
-<%= render partial: "decidim/proposals/admin/proposals/assign_to_valuator", locals: { current_participatory_space: current_participatory_space, proposal: proposal } %>

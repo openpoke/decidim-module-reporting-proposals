@@ -1,3 +1,0 @@
-<!-- insert_bottom ".table-list__actions" -->
-
-<%= render "decidim/reporting_proposals/admin/proposals/proposal_td_hide", proposal: proposal %>

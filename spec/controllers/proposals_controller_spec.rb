@@ -4,8 +4,6 @@ require "spec_helper"
 
 module Decidim::Proposals
   describe ProposalsController do
-    routes { Decidim::Proposals::Engine.routes }
-
     let(:component) { create(:reporting_proposals_component, settings:) }
     let(:settings) { {} }
     let(:organization) { component.organization }

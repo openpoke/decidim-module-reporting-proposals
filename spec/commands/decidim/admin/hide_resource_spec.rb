@@ -24,6 +24,9 @@ module Decidim::Admin
     end
 
     context "when everything is ok" do
+      let(:arguments) { { resource: reportable } }
+      let(:fired_event) { "decidim.admin.hide_resource" }
+
       it "broadcasts ok" do
         expect { command.call }.to broadcast(:ok)
       end
@@ -47,7 +50,6 @@ module Decidim::Admin
       end
 
       it "sends a notification to the reportable's author" do
-        expect(Decidim::EventsManager).to receive(:publish).with(author_notification)
         expect(Decidim::EventsManager).to receive(:publish).with(author_notification)
         command.call
       end

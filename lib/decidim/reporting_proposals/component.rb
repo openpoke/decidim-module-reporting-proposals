@@ -23,27 +23,27 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.newsletter_participant_entities = ["Decidim::Proposals::Proposal"]
 
-  component.actions = %w(endorse vote create withdraw amend comment vote_comment)
+  component.actions = %w(like vote create withdraw amend comment vote_comment)
 
   component.query_type = "Decidim::ReportingProposals::ReportingProposalsType"
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
-  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_endorsed most_voted most_commented most_followed with_more_authors).freeze
+  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_liked most_voted most_commented most_followed with_more_authors).freeze
 
   component.settings(:global) do |settings|
-    settings.attribute :scopes_enabled, type: :boolean, default: false
-    settings.attribute :scope_id, type: :scope
+    settings.attribute :taxonomy_filters, type: :taxonomy_filters
     settings.attribute :vote_limit, type: :integer, default: 0
     settings.attribute :minimum_votes_per_user, type: :integer, default: 0
     settings.attribute :proposal_limit, type: :integer, default: 0
     settings.attribute :proposal_length, type: :integer, default: 500
-    settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: -> { %w(limited infinite) }
+    settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: %w(limited infinite)
+    settings.attribute :edit_time, type: :integer_with_units, default: [5, "minutes"], required: true, units: %w(minutes hours days)
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
     settings.attribute :threshold_per_proposal, type: :integer, default: 0
     settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
-    settings.attribute :default_sort_order, type: :select, default: "default", choices: -> { REP_POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, default: "default", choices: REP_POSSIBLE_SORT_ORDERS
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
     settings.attribute :comments_enabled, type: :boolean, default: true
     settings.attribute :comments_max_length, type: :integer, required: false
@@ -52,12 +52,9 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
     settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
     settings.attribute :attachments_allowed, type: :boolean, default: true
-    settings.attribute :only_photo_attachments, type: :boolean, default: true
     settings.attribute :resources_permissions_enabled, type: :boolean, default: true
     settings.attribute :collaborative_drafts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
-    settings.attribute :participatory_texts_enabled,
-                       type: :boolean, default: false,
-                       readonly: ->(_) { true }
+    settings.attribute :participatory_texts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
     settings.attribute :amendments_enabled, type: :boolean, default: false
     settings.attribute :amendments_wizard_help_text, type: :text, translated: true, editor: true, required: false
     settings.attribute :announcement, type: :text, translated: true, editor: true
@@ -79,23 +76,21 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.settings(:step) do |settings|
-    settings.attribute :endorsements_enabled, type: :boolean, default: true
-    settings.attribute :endorsements_blocked, type: :boolean
-    settings.attribute :votes_enabled, type: :boolean
-    settings.attribute :votes_blocked, type: :boolean
+    settings.attribute :likes_enabled, type: :boolean, default: true
+    settings.attribute :likes_blocked, type: :boolean, default: false
+    settings.attribute :votes_enabled, type: :boolean, default: false
+    settings.attribute :votes_blocked, type: :boolean, default: false
     settings.attribute :votes_hidden, type: :boolean, default: false
     settings.attribute :comments_blocked, type: :boolean, default: false
     settings.attribute :creation_enabled, type: :boolean, default: true
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :publish_answers_immediately, type: :boolean, default: true
     settings.attribute :answers_with_costs, type: :boolean, default: false
-    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: -> { REP_POSSIBLE_SORT_ORDERS }
+    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: REP_POSSIBLE_SORT_ORDERS
     settings.attribute :amendment_creation_enabled, type: :boolean, default: true
     settings.attribute :amendment_reaction_enabled, type: :boolean, default: true
     settings.attribute :amendment_promotion_enabled, type: :boolean, default: true
-    settings.attribute :amendments_visibility,
-                       type: :enum, default: "all",
-                       choices: -> { Decidim.config.amendments_visibility_options }
+    settings.attribute :amendments_visibility, type: :enum, default: "all", choices: Decidim.config.amendments_visibility_options
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :automatic_hashtags, type: :text, editor: false, required: false
     settings.attribute :suggested_hashtags, type: :text, editor: false, required: false
@@ -120,9 +115,9 @@ Decidim.register_component(:reporting_proposals) do |component|
     Decidim::Proposals::ProposalVote.where(proposal: proposals).count
   end
 
-  component.register_stat :reporting_proposals_endorsements_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
+  component.register_stat :reporting_proposals_likes_count, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).not_hidden
-    proposals.sum(:endorsements_count)
+    proposals.sum(:likes_count)
   end
 
   component.register_stat :reporting_proposals_comments_count, tag: :comments do |components, start_at, end_at|
@@ -141,11 +136,12 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       collection = Decidim::Proposals::Proposal
                    .published
+                   .not_hidden
                    .where(component: component_instance)
-                   .includes(:scope, :category, :component)
+                   .includes(:taxonomies, :component)
 
-      if space.user_roles(:valuator).where(user:).any?
-        collection.with_valuation_assigned_to(user, space)
+      if space.user_roles(:evaluator).where(user:).any?
+        collection.with_evaluation_assigned_to(user, space)
       else
         collection
       end
@@ -160,7 +156,7 @@ Decidim.register_component(:reporting_proposals) do |component|
     exports.collection do |component_instance|
       Decidim::Comments::Export.comments_for_resource(
         Decidim::Proposals::Proposal, component_instance
-      ).includes(:author, :user_group, root_commentable: { component: { participatory_space: :organization } })
+      ).includes(:author, root_commentable: { component: { participatory_space: :organization } })
     end
 
     exports.include_in_open_data = true
@@ -235,14 +231,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       Decidim::Component.create!(params)
     end
 
-    if participatory_space.scope
-      scopes = participatory_space.scope.descendants
-      global = participatory_space.scope
-    else
-      scopes = participatory_space.organization.scopes
-      global = nil
-    end
-
     Decidim::Proposals.create_default_states!(component, admin_user)
 
     5.times do |n|
@@ -251,8 +239,6 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       params = {
         component:,
-        category: participatory_space.categories.sample,
-        scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
         title: { en: Faker::Lorem.sentence(word_count: 2) },
         body: { en: Faker::Lorem.paragraphs(number: 2).join("\n") },
         proposal_state:,
@@ -276,8 +262,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       if n.positive?
         Decidim::User.where(decidim_organization_id: participatory_space.decidim_organization_id).all.sample(n).each do |author|
-          user_group = [true, false].sample ? Decidim::UserGroups::ManageableUserGroups.for(author).verified.sample : nil
-          proposal.add_coauthor(author, user_group:)
+          proposal.add_coauthor(author)
         end
       end
 
@@ -290,35 +275,14 @@ Decidim.register_component(:reporting_proposals) do |component|
           password: "decidim123456",
           password_confirmation: "decidim123456",
           name:,
-          nickname: Faker::Twitter.unique.screen_name,
+          nickname: Faker::X.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
           confirmed_at: Time.current
         )
 
-        group = Decidim::UserGroup.create!(
-          name: Faker::Name.name,
-          nickname: Faker::Twitter.unique.screen_name,
-          email: Faker::Internet.email,
-          extended_data: {
-            document_number: Faker::Code.isbn,
-            phone: Faker::PhoneNumber.phone_number,
-            verified_at: Time.current
-          },
-          decidim_organization_id: component.organization.id,
-          confirmed_at: Time.current
-        )
-
-        Decidim::UserGroupMembership.create!(
-          user: author,
-          role: "creator",
-          user_group: group
-        )
-
         params = {
           component:,
-          category: participatory_space.categories.sample,
-          scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: { en: "#{proposal.title["en"]} #{Faker::Lorem.sentence(word_count: 1)}" },
           body: { en: "#{proposal.body["en"]} #{Faker::Lorem.sentence(word_count: 3)}" },
           proposal_state: Decidim::Proposals::ProposalState.where(component: proposal.component, token: :evaluating).first,
@@ -334,7 +298,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           visibility: "public-only"
         ) do
           emendation = Decidim::Proposals::Proposal.new(params)
-          emendation.add_coauthor(author, user_group: author.user_groups.first)
+          emendation.add_coauthor(author)
           emendation.save!
           emendation
         end
@@ -356,7 +320,7 @@ Decidim.register_component(:reporting_proposals) do |component|
           password: "decidim123456",
           password_confirmation: "decidim123456",
           name:,
-          nickname: Faker::Twitter.unique.screen_name,
+          nickname: Faker::X.unique.screen_name,
           organization: component.organization,
           tos_agreement: "1",
           confirmed_at: Time.current,
@@ -370,7 +334,7 @@ Decidim.register_component(:reporting_proposals) do |component|
 
       unless proposal.published_state? && proposal.rejected?
         (n * 2).times do |index|
-          email = "endorsement-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-endr#{index}@example.org"
+          email = "like-author-#{participatory_space.underscored_name}-#{participatory_space.id}-#{n}-endr#{index}@example.org"
           name = "#{Faker::Name.name} #{participatory_space.id} #{n} endr#{index}"
 
           author = Decidim::User.find_or_initialize_by(email:)
@@ -378,32 +342,12 @@ Decidim.register_component(:reporting_proposals) do |component|
             password: "decidim123456",
             password_confirmation: "decidim123456",
             name:,
-            nickname: Faker::Twitter.unique.screen_name,
+            nickname: Faker::X.unique.screen_name,
             organization: component.organization,
             tos_agreement: "1",
             confirmed_at: Time.current
           )
-          if index.even?
-            group = Decidim::UserGroup.create!(
-              name: Faker::Name.name,
-              nickname: Faker::Twitter.unique.screen_name,
-              email: Faker::Internet.email,
-              extended_data: {
-                document_number: Faker::Code.isbn,
-                phone: Faker::PhoneNumber.phone_number,
-                verified_at: Time.current
-              },
-              decidim_organization_id: component.organization.id,
-              confirmed_at: Time.current
-            )
-
-            Decidim::UserGroupMembership.create!(
-              user: author,
-              role: "creator",
-              user_group: group
-            )
-          end
-          Decidim::Endorsement.create!(resource: proposal, author:, user_group: author.user_groups.first)
+          Decidim::Like.create!(resource: proposal, author:)
         end
       end
 
@@ -434,8 +378,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       draft = Decidim.traceability.perform_action!("create", Decidim::Proposals::CollaborativeDraft, author) do
         draft = Decidim::Proposals::CollaborativeDraft.new(
           component:,
-          category: participatory_space.categories.sample,
-          scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
           title: Faker::Lorem.sentence(word_count: 2),
           body: Faker::Lorem.paragraphs(number: 2).join("\n"),
           state:,
@@ -470,8 +412,6 @@ Decidim.register_component(:reporting_proposals) do |component|
       Decidim::Proposals::CollaborativeDraft.all.sample,
       Decidim::User.where(organization: component.organization).all.sample,
       component:,
-      category: participatory_space.categories.sample,
-      scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
       title: Faker::Lorem.sentence(word_count: 2),
       body: Faker::Lorem.paragraphs(number: 2).join("\n")
     )

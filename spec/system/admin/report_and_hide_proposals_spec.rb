@@ -25,6 +25,7 @@ describe "Report and hide proposal" do
   end
 
   it "admin can be report and hide the proposal" do
+    find("button[data-target^='actions-proposal']").click
     expect(page).to have_button("Report")
 
     expect(proposal).not_to be_hidden
@@ -41,6 +42,7 @@ describe "Report and hide proposal" do
     expect(proposal.reload).not_to be_hidden
     expect(proposal).to be_reported
     visit component_path
+    find("button[data-target^='actions-proposal']").click
     expect(page).to have_link("Hide")
 
     click_on "Hide"

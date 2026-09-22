@@ -1,6 +1,6 @@
-<% note.body.split("\n").each_with_index do |paragraph, index| %>
+<% proposal_note.body.split("\n").each_with_index do |paragraph, index| %>
   <%= Decidim::ContentRenderers::LinkRenderer.new(paragraph).render("data-external-link"=> false).html_safe %>
-  <% unless index == note.body.split("\n").size - 1 %>
+  <% unless index == proposal_note.body.split("\n").size - 1 %>
     <br>
   <% end %>
 <% end %>

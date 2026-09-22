@@ -5,7 +5,7 @@
         <div class="proposal-photo gallery__item" id="photo-<%= photo.id %>">
           <%= link_to photo.big_url, target: "_blank", rel: "noopener", "data-external-link" => "false" do %>
             <%= image_tag photo.thumbnail_url, class: "thumbnail", alt: strip_tags(translated_attribute(photo.title)) %>
-            <% if admin_allowed_to? :edit_photos, :proposals, extra_context = { proposal: proposal }, chain = [::Decidim::ReportingProposals::Admin::Permissions] %>
+            <% if admin_allowed_to?(:edit_photos, :proposals, { proposal: }, [::Decidim::ReportingProposals::Admin::Permissions]) %>
               <%= icon_link_to "close-line",
                                decidim_admin_reporting_proposals.remove_photo_path(id: proposal.id, photo_id: photo.id),
                                t(".delete_image"),

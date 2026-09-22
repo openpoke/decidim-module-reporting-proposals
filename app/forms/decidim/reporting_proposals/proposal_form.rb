@@ -5,28 +5,25 @@ module Decidim
     class ProposalForm < Decidim::Proposals::ProposalForm
       attribute :address, String
       attribute :has_no_address, Boolean
-      attribute :has_no_image, Boolean
+      attribute :has_no_attachments, Boolean
 
-      attachments_attribute :photos
+      validates :attachments, presence: true, if: ->(form) { form.attachments_required? && form.add_attachments.compact_blank.blank? }
 
-      validates :add_photos, presence: true, if: ->(form) { form.has_camera? && form.photos.blank? }
-
-      # Set the has no address
       def map_model(model)
-        super(model)
+        super
 
         self.has_no_address = true if model.address.blank?
-        self.has_no_image = true if model.photo.blank?
+        self.has_no_attachments = true if model.attachments.blank?
       end
 
       def has_address?
-        return if has_no_address
+        return false if has_no_address
 
         geocoding_enabled?
       end
 
-      def has_camera?
-        return if has_no_image
+      def attachments_required?
+        return false if has_no_attachments
 
         current_component.settings.attachments_allowed?
       end

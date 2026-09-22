@@ -33,6 +33,19 @@ bin/rails decidim:upgrade
 bin/rails db:migrate
 ```
 
+> ** MIGRATION TO v0.31:**
+> Decidim v0.31 has made a refactor to the **valuator** terminology and has concluded that **evaluator** is better.
+> You can check the arguments [here](https://github.com/decidim/decidim/releases/tag/v0.31.0). 
+>
+> You have to take into account that you might have to change a function in your initializer. The `config.valuators_assign_other_valuators` has been changed to `config.evaluators_assign_other_evaluators`
+>
+> ```ruby
+>  config.evaluators_assign_other_evaluators = true
+>  ```
+>
+> Automatic evaluator assignment is now configured per taxonomy instead of per category.
+> Existing category-valuator assignments are not migrated automatically (the category-to-taxonomy conversion happens through the `decidim:taxonomies:import_plan` task, after this module's migrations have already removed the old table), so after importing taxonomies you must reconfigure the evaluators for each taxonomy in the admin panel.
+
 > **MIGRATION FROM v0.28:**
 > Decidim version 0.29 introduced custom proposal states. 
 > In order to apply them to the existing reporting proposals,
@@ -73,10 +86,13 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
+| 0.8.x   | 0.31.x                      |
 | 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |
 | 0.5.x   | 0.27.x                      |
 | 0.4.x   | 0.26.x                      |
+
+There is not a version compatible for Decidim 0.30.x
 
 ## Usage
 
@@ -94,18 +110,21 @@ This module provides the following features:
 2. **Comparison by proximity**: By default, reporting proposals are compared by proximity before publishing (as they are geolocated by default). This can be disabled in the component's settings.
   ![Compare by proximity](features/proximity.png)
 
-3. **Automatic assignation of valuators**: When a proposal is created, admins usually have to assign valuators manually to it. This module allows admins to assign valuators to a category directly. This will automatically assign all valuators in that category to any proposal/reporting proposal created under it (and also existing proposals). This avoids the need of manually assign proposals to valuators. This behavior can be disabled in the component's settings.
-  ![Valuators in categories](features/categories.png)
+3. **Automatic assignment of evaluators per taxonomy**: When a proposal is created, admins usually have to assign evaluators manually to it. This module adds a "Taxonomy evaluators" sub-menu to the participatory process and assembly admin (right after "Components"). It lists, as a tree, the taxonomies used by the proposals and reporting proposals components of the space, and editing a taxonomy allows to assign one or more evaluators to it. Those evaluators are then automatically assigned to any proposal published under that taxonomy (or re-classified to it later). Evaluators can be assigned at any level of the tree, root taxonomies included: a taxonomy without its own evaluators inherits them from the nearest ancestor that has some, while a taxonomy with its own list overrides the inherited one. This avoids the need of manually assigning proposals to evaluators.
 
-4. **Valuators empowerment**: A number of features allow valuators to have more control over the proposals they are evaluating. They can assign other valuators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, valuators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
-  ![Valuators empowerment](features/answering1.png)
+4. **Evaluators empowerment**: A number of features allow evaluators to have more control over the proposals they are evaluating. They can assign other evaluators (instead of themselves) and they can change or add photos to a proposal. All of it is configurable. Also, evaluators can be assigned directly in the proposal's answering page instead of using the bulk assignation feature. Additionally, privates note can be edited and links in it are clickable.
+  ![Evaluators empowerment](features/answering1.png)
 
 5. **Overdue proposals**: This module allows to set a number of days after which a proposal is considered overdue. This is configurable and can be disabled. This feature affects the admin list of proposals, adding visual notes, color coded, to facilitate the identification of overdue proposals and preventing admins to leave unanswered proposals for a long time.
   ![Overdue proposals](features/overdues.png)
 
-6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, valuators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
+6. **Improved notifications**: Some notifications are added, and some existing ones are improved. For instance, evaluators and admins can receive notifications after a proposal has been added and it's content includes a direct link to the proposal and its answering page.
 
 7. **Hide proposals without reporting**: Administrators can hide proposals directly, without using the reporting process. Also, authors who's content has been hidden receive a notification.
+
+### Maps configuration
+
+The geolocation features (address map, proximity comparison, "Use my location" button) rely on Decidim core's dynamic maps, which are disabled unless the host application configures a maps provider — see [Maps and geocoding](https://docs.decidim.org/en/develop/services/maps.html) in the Decidim docs. When using a provider other than HERE, remember to allow its hosts in the [Content Security Policy](https://docs.decidim.org/en/develop/customize/content_security_policy.html), otherwise the map renders as an empty grey area.
 
 ### Customization
 
@@ -133,15 +152,20 @@ Decidim::ReportingProposals.configure do |config|
   # in a geocoded address field. Accepts an array of component manifest names
   config.show_my_location_button = [:proposals, :meetings, :reporting_proposals]
 
-  # Public Setting that adds a button next to the "add image" input[type=file] to open the camera directly
+  # Public setting that adds a button to open the camera directly next to the attachments upload
+  # of reporting proposals (and the admin photo form of both proposals components)
   config.use_camera_button = true
 
-  # Public setting to prevent valuators or admins to modify the photos attached to a proposal
+  # Public setting to prevent evaluators or admins to modify the photos attached to a proposal
   # otherwise can be configured at the component level
   config.allow_proposal_photo_editing = true
 
-  # Public setting to allow to assign other valuators
-  config.valuators_assign_other_valuators = true
+  # Public setting to allow to assign other evaluators
+  config.evaluators_assign_other_evaluators = true
+
+  # Public setting that defines the email of the bot user ("Automatic assignment")
+  # used as the author of automatic evaluator assignments in the admin log
+  config.automation_user_email = "reporting-proposals-automation@example.org"
 end
 ```
 
@@ -187,9 +211,9 @@ can add the environment variables to the root directory of the project in a file
 named `.rbenv-vars`. If these are defined for the environment, you can omit
 defining these in the commands shown above.
 
-#### Webpacker notes
+#### Shakapacker notes
 
-As latests versions of Decidim, this repository uses Webpacker for Rails. This means that compilation
+As latests versions of Decidim, this repository uses Shakapacker for Rails. This means that compilation
 of assets is required everytime a Javascript or CSS file is modified. Usually, this happens
 automatically, but in some cases (specially when actively changes that type of files) you want to 
 speed up the process. 
@@ -197,7 +221,7 @@ speed up the process.
 To do that, start in a separate terminal than the one with `bin/rails s`, and BEFORE it, the following command:
 
 ```bash
-bin/webpack-dev-server
+bin/shakapacker-dev-server
 ```
 
 #### Code Styling

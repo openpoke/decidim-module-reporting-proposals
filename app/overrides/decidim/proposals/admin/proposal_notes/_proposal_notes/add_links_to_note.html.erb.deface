@@ -1,3 +1,0 @@
-<!-- replace "erb[loud]:contains('simple_format note.body')" -->
-
-<%= render partial: "decidim/proposals/admin/proposal_notes/proposal_notes_body", locals: { note: note } %>

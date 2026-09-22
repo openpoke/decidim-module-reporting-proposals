@@ -1,0 +1,33 @@
+<% add_decidim_page_title(t(".title", taxonomy: translated_attribute(taxonomy.name))) %>
+<% append_javascript_pack_tag "decidim_reporting_proposals_evaluators_admin", defer: true %>
+
+<div class="item_show__header">
+  <h1 class="item_show__header-title">
+    <%= t(".title", taxonomy: translated_attribute(taxonomy.name)) %>
+  </h1>
+</div>
+
+<div class="item__edit item__edit-1col">
+  <div class="item__edit-form">
+    <%= decidim_form_for(@form, url: taxonomy_evaluators_router.taxonomy_evaluator_path(id: taxonomy.id), method: :patch, html: { class: "form form-defaults edit_taxonomy_evaluators" }) do |f| %>
+      <div class="form__wrapper">
+        <div class="card pt-4">
+          <div class="card-section">
+            <div class="row column">
+              <%= f.select :evaluator_role_ids,
+                           evaluators_for_select,
+                           {},
+                           { multiple: true, class: "w-full js-taxonomy-evaluators-multiselect", placeholder: t(".select_evaluators") } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item__edit-sticky">
+        <div class="item__edit-sticky-container">
+          <%= f.submit t(".update"), class: "button button__sm button__secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -16,6 +16,7 @@ describe "Send email to user with link" do
 
   before do
     within "tr", text: translated(proposal.title) do
+      find("button[data-controller='dropdown']").click
       click_on "Answer proposal"
     end
   end

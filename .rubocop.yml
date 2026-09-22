@@ -1,22 +1,17 @@
-
-inherit_from:
-  - https://raw.githubusercontent.com/decidim/decidim/release/0.29-stable/.rubocop.yml
-
-# Offense count: 8
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedMethods, AllowedPatterns.
-Style/ReturnNilInPredicateMethodDefinition:
-  Enabled: false
-
-# Offense count: 5
-# Configuration parameters: EnforcedStyle, AllowedGems, Include.
-# SupportedStyles: Gemfile, gems.rb, gemspec
-# Include: **/*.gemspec, **/Gemfile, **/gems.rb
-Gemspec/DevelopmentDependencies:
-  Enabled: false
+inherit_gem:
+  decidim-dev: rubocop-decidim.yml
 
 AllCops:
   Exclude:
+    - 'db/**/*.rb'
+    - 'vendor/**/*'
     - "spec/decidim_dummy_app*/**/*"
     - "development_app/**/*"
-    - "node_modules/**/*"
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/i18n_spec.rb
+    - "spec/system/**/*"
+
+Style/RedundantArrayConstructor:
+  Enabled: false

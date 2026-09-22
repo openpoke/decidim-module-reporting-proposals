@@ -1,0 +1,9 @@
+<!-- replace "erb[loud]:contains('proposal.evaluation_assignments_count')" -->
+
+<% assignments = proposal.evaluation_assignments.order(:created_at) %>
+<% if assignments.empty? %>
+  0
+<% else %>
+  <%= assignments.first&.evaluator_role&.user&.name %>
+  <%= "(+#{assignments.size - 1})" if assignments.size > 1 %>
+<% end %>

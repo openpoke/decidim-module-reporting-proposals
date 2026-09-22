@@ -19,19 +19,22 @@ describe "Add proposals photos" do
     )
 
     visit manage_component_path(component)
-    click_on "Answer proposal"
+    within "tr", text: translated(proposal.title) do
+      find("button[data-controller='dropdown']").click
+      click_on "Answer proposal"
+    end
   end
 
   shared_examples "can add photos" do
     it "has a photo section" do
       click_on "Photos"
-      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file("proposal_photo_add_attachments", Decidim::Dev.asset("city.jpeg"))
       click_on "Save images"
       click_on "Photos"
 
       expect(page).to have_css("img[src*=\"city.jpeg\"]", count: 1)
 
-      dynamically_attach_file("proposal_photo_add_photos", Decidim::Dev.asset("city.jpeg"))
+      dynamically_attach_file("proposal_photo_add_attachments", Decidim::Dev.asset("city.jpeg"))
       click_on "Save images"
 
       click_on "Photos"

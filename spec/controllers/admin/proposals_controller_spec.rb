@@ -133,7 +133,7 @@ module Decidim::ReportingProposals
         let(:params) do
           {
             id:,
-            add_photos: [image]
+            add_attachments: [image]
           }
         end
 
