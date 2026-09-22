@@ -4,8 +4,8 @@ require "spec_helper"
 
 module Decidim
   module ReportingProposals
-    describe CreateReportingProposal do
-      let(:form_klass) { ProposalForm }
+    describe Decidim::Proposals::CreateProposal do
+      let(:form_klass) { Decidim::ReportingProposals::ProposalForm }
       let(:component) { create(:reporting_proposals_component) }
       let(:organization) { component.organization }
       let(:user) { create(:user, :admin, :confirmed, organization:) }

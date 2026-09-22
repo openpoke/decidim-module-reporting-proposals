@@ -31,7 +31,7 @@ module Decidim
           @step = Proposals::ProposalsController::STEP1
           @form = form(new_proposal_form).from_params(proposal_creation_params)
 
-          create_proposal_command.call(@form, current_user) do
+          Decidim::Proposals::CreateProposal.call(@form, current_user) do
             on(:ok) do |proposal|
               flash[:notice] = I18n.t("proposals.create.success", scope: "decidim")
 
@@ -118,10 +118,6 @@ module Decidim
 
         def new_proposal_form
           reporting_proposal? ? Decidim::ReportingProposals::ProposalForm : Decidim::Proposals::ProposalForm
-        end
-
-        def create_proposal_command
-          reporting_proposal? ? CreateReportingProposal : Decidim::Proposals::CreateProposal
         end
 
         def reporting_proposal?
