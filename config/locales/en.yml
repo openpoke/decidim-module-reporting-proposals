@@ -28,9 +28,6 @@ en:
           hello: Hello,
           reason: 'Reason: %{reason}'
           subject: Your proposal has been hidden
-    application:
-      geocoding:
-        unconfigured: Geocoding is not configured!
     components:
       proposals:
         settings:
@@ -88,6 +85,14 @@ en:
             amendments_wizard_help_text: Amendments Wizard help text
             announcement: Announcement
             attachments_allowed: Allow attachments
+            awesome_voting_manifest: Support type
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
+              changing this setting in the middle of a votation period can result
+              in inaccurate or unexpected results.</span><br>Note also that this setting
+              can only be edited if the component has no supports yet.
+            awesome_voting_manifest_options:
+              default: Simple vote (default)
+              voting_cards: Voting using coloured cards
             can_accumulate_votes_beyond_threshold: Can accumulate supports beyond
               threshold
             collaborative_drafts_enabled: Collaborative drafts enabled
@@ -175,6 +180,16 @@ en:
             unanswered_proposals_overdue_help: This adds a visual alert to the list
               of proposals. Leave it to zero to disable this feature.
             vote_limit: Support limit per participant
+            voting_cards_box_title: Title for the voting box
+            voting_cards_box_title_help: Default is "Vote on this proposal". Use "-"
+              to hide it.
+            voting_cards_instructions: Support instructions/help (dismissible modal
+              window)
+            voting_cards_instructions_help: Default is "Please read the election rules
+              carefully to understand how your vote will be used by %{organization}"
+            voting_cards_show_abstain: Add an abstention option
+            voting_cards_show_modal_help: Show instructions/help modal when support
+              is clicked
           step:
             amendment_creation_enabled: Amendment creation enabled
             amendment_creation_enabled_help: Participant can amend proposals.

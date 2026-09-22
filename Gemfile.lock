@@ -251,6 +251,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -362,6 +364,12 @@ GEM
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
+    decidim-decidim_awesome (0.14.3)
+      active_hashcash (~> 0.4.0)
+      decidim-admin (>= 0.31.0, < 0.32)
+      decidim-core (>= 0.31.0, < 0.32)
+      deface (>= 1.5)
+      sassc (~> 2.3)
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
@@ -848,6 +856,8 @@ GEM
     sass-embedded (1.101.0)
       google-protobuf (~> 4.31)
       rake (>= 13)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     securerandom (0.4.1)
     selenium-webdriver (4.45.0)
       base64 (~> 0.2)
@@ -950,6 +960,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   codecov
   decidim!
+  decidim-decidim_awesome (~> 0.14.0)
   decidim-dev!
   decidim-initiatives!
   decidim-reporting_proposals!

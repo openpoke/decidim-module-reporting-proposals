@@ -28,9 +28,6 @@ es:
           hello: Hola,
           reason: 'Motivo: %{reason}'
           subject: Tu propuesta ha sido ocultada
-    application:
-      geocoding:
-        unconfigured: "¡La geocodificación no está configurada!"
     components:
       proposals:
         settings:
@@ -92,6 +89,11 @@ es:
             amendments_wizard_help_text: Texto de ayuda del asistente de enmiendas
             announcement: Anuncio
             attachments_allowed: Permitir los archivos adjuntos
+            awesome_voting_manifest: Tipos de soporte
+            awesome_voting_manifest_help_html: <strong class="text-alert">Sé consciente de que cambiar esta configuración en medio de un período de votación puede producir resultados inexactos o inesperados.</strong><br>Tenga en cuenta que esta configuración solo se puede editar si el componente aún no tiene ningún soporte.
+            awesome_voting_manifest_options:
+              default: Voto simple (por defecto)
+              voting_cards: Votación con tarjetas de color
             can_accumulate_votes_beyond_threshold: Puede acumular apoyos una vez superados
               los necesarios
             collaborative_drafts_enabled: Borradores colaborativos habilitados
@@ -186,6 +188,12 @@ es:
             unanswered_proposals_overdue_help: Esto añade una alerta visual a la lista
               de propuestas. Déjala a cero para desactivar esta característica.
             vote_limit: Límite de apoyos por participante
+            voting_cards_box_title: Título de la cabina de votación
+            voting_cards_box_title_help: Por defecto es "Votar en esta propuesta". Use "-" para ocultarla.
+            voting_cards_instructions: Instrucciones/ayuda de soporte (ventana modal descartable)
+            voting_cards_instructions_help: Por defecto es "Por favor lee las reglas de votación cuidadosamente para entender cómo se usará tu voto por %{organization}"
+            voting_cards_show_abstain: Añadir una opción de abstención
+            voting_cards_show_modal_help: Mostrar instrucciones/ayuda modal cuando se haga clic en el soporte
           step:
             amendment_creation_enabled: Creación de enmiendas habilitada
             amendment_creation_enabled_help: El participante puede enmendar propuestas.
