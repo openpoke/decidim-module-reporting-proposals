@@ -27,9 +27,6 @@ ca:
           hello: Hola,
           reason: 'Motiu: %{reason}'
           subject: La teva proposta ha estat amagada
-    application:
-      geocoding:
-        unconfigured: La geocodificació no està configurada!
     components:
       proposals:
         settings:
@@ -68,6 +65,11 @@ ca:
             amendments_wizard_help_text: Text d'ajuda en crear una nova esmena
             announcement: Anunci
             attachments_allowed: Permetre arxius adjunts
+            awesome_voting_manifest: Support type
+            awesome_voting_manifest_help_html: <span class="text-alert">Be aware that changing this setting in the middle of a votation period can result in inaccurate or unexpected results.</span><br>Note also that this setting can only be edited if the component has no supports yet.
+            awesome_voting_manifest_options:
+              default: Simple vote (default)
+              voting_cards: Voting using coloured cards
             can_accumulate_votes_beyond_threshold: Can accumulate supports beyond threshold
             collaborative_drafts_enabled: Esborranys col·laboratius habilitats
             comments_enabled: Comentaris habilitats
@@ -129,6 +131,12 @@ ca:
             unanswered_proposals_overdue: Quants dies després una proposta sense resposta es considera vençuda
             unanswered_proposals_overdue_help: Aquesta regla afegeix una alerta visual a la llista e propostes. Si no ho vols utilitzar, deixa aquest valor a zero.
             vote_limit: Límit de suports per participant
+            voting_cards_box_title: Title for the voting box
+            voting_cards_box_title_help: Default is "Vote on this proposal". Use "-" to hide it.
+            voting_cards_instructions: Support instructions/help (dismissible modal window)
+            voting_cards_instructions_help: Default is "Please read the election rules carefully to understand how your vote will be used by %{organization}"
+            voting_cards_show_abstain: Add an abstention option
+            voting_cards_show_modal_help: Show instructions/help modal when support is clicked
           step:
             amendment_creation_enabled: Creació d'esmena habilitada
             amendment_creation_enabled_help: La participant pot esmenar propostes.
