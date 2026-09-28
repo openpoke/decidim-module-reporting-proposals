@@ -5,17 +5,19 @@ module Decidim
     module Admin
       # A command with all the business logic when a user updates a proposal note.
       class UpdateProposalNote < Decidim::Command
+        include Decidim::Proposals::Admin::ProposalNotesMethods
+
         # Public: Initializes the command.
         #
-        # form         - A form object with the params.
+        # form - A form object with the params.
         # note - the proposal_note to update.
-        def initialize(notes_form, note)
-          @notes_form = notes_form
+        def initialize(form, note)
+          @form = form
           @note = note
         end
 
         def call
-          return broadcast(:invalid) if notes_form.invalid?
+          return broadcast(:invalid) if form.invalid?
 
           update_proposal_note
 
@@ -24,11 +26,10 @@ module Decidim
 
         private
 
-        attr_reader :notes_form, :note, :proposal
+        attr_reader :form, :note
 
         def update_proposal_note
-          note.body = notes_form.body
-          note.save!
+          Decidim.traceability.update!(note, form.current_user, { body: rewritten_body }, resource: { title: note.proposal.title })
         end
       end
     end

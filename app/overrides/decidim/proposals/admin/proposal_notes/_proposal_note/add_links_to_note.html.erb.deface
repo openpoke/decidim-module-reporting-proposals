@@ -1,3 +1,5 @@
 <!-- replace "erb[loud]:contains('simple_format proposal_note.formatted_body')" -->
 
-<%= render partial: "decidim/proposals/admin/proposal_notes/proposal_notes_body", locals: { proposal_note: proposal_note } %>
+<%= simple_format Decidim::ContentRenderers::LinkRenderer.new(proposal_note.formatted_body).render("data-external-link" => false),
+                  {},
+                  sanitize_options: { attributes: %w(href target rel class title data-external-link) } %>

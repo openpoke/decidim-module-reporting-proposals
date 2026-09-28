@@ -95,4 +95,28 @@ describe "Edit Proposal Notes" do
       expect(page).to have_css("a[href='https://github.com'][target='_blank']", text: "https://github.com", count: 5)
     end
   end
+
+  context "when the note contains HTML" do
+    let(:proposal_notes_count) { 1 }
+    let(:body) { %(<img src="x" onerror="window.noteXss = true"> https://github.com) }
+
+    it "does not render the injected markup" do
+      click_on "Private notes"
+      expect(page).to have_no_css(".comment__content img[onerror]")
+      expect(page.evaluate_script("window.noteXss")).to be_nil
+      expect(page).to have_link("https://github.com", href: "https://github.com")
+    end
+  end
+
+  context "when the note mentions a user" do
+    let(:proposal_notes_count) { 1 }
+    let(:mentioned) { create(:user, :confirmed, organization:) }
+    let(:body) { "Ping #{mentioned.to_global_id}" }
+
+    it "renders the mention as a profile link" do
+      click_on "Private notes"
+      expect(page).to have_link("@#{mentioned.nickname}")
+      expect(page).to have_no_content("gid://")
+    end
+  end
 end

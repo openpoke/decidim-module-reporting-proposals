@@ -1,3 +1,0 @@
-<!-- replace_contents "td:contains('present(proposal).title')" -->
-
-<%= render "decidim/reporting_proposals/admin/proposals/proposal_td_title", proposal: proposal %>

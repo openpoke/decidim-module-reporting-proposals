@@ -16,6 +16,8 @@ module Decidim
         end
 
         def answer_time
+          return unless Decidim::ReportingProposals.answering_follow_up?(proposal.component)
+
           if unanswered_proposals_overdue?(proposal)
             time_ago_in_words(last_day_to_answer(proposal),
                               scope: "decidim.reporting_proposals.admin.answer_overdue.datetime.distance_in_words")

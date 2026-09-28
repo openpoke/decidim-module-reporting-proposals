@@ -9,7 +9,7 @@ module Decidim
       included do
         def proposal_wizard_steps
           steps = [Proposals::ProposalsController::STEP1]
-          steps << Proposals::ProposalsController::STEP_COMPARE if reporting_proposals_component?
+          steps << Proposals::ProposalsController::STEP_COMPARE if reporting_proposals_component? || geocoding_comparison_step?
           steps << Proposals::ProposalsController::STEP2
         end
 
@@ -32,6 +32,10 @@ module Decidim
           when Decidim::Proposals::ProposalsController::STEP2
             preview_proposal_path
           end
+        end
+
+        def geocoding_comparison_step?
+          respond_to?(:geocoding_comparison?) && geocoding_comparison?
         end
 
         def reporting_proposals_component?

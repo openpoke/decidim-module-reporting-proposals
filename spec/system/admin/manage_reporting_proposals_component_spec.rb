@@ -67,6 +67,28 @@ describe "Managing reporting proposals component" do
     end
   end
 
+  context "when a standard proposals setting is readonly" do
+    let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
+
+    before do
+      create(:proposal, component:)
+      visit edit_component_path(component)
+    end
+
+    it "shows the readonly setting" do
+      expect(page).to have_css(".participatory_texts_enabled_container.readonly_container", visible: :visible)
+    end
+  end
+
+  context "when creating a reporting proposals component" do
+    before { visit Decidim::EngineRouter.admin_proxy(participatory_process).new_component_path(type: "reporting_proposals") }
+
+    it "hides readonly attributes" do
+      expect(page).to have_no_content("Collaborative drafts enabled")
+      expect(page).to have_no_content("Participatory texts enabled")
+    end
+  end
+
   context "when managing proposals permissions" do
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
 

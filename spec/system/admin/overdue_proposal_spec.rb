@@ -67,6 +67,18 @@ describe "Highlighted proposal" do
     context "when managing standard proposals" do
       it_behaves_like "proposals list has no due dates"
       it_behaves_like "proposals list has overdue dates"
+
+      context "when the follow up is disabled for standard proposals" do
+        before do
+          allow(Decidim::ReportingProposals).to receive(:proposal_answering_follow_up).and_return([:reporting_proposals])
+          visit manage_component_path(component)
+        end
+
+        it "keeps the core title cell" do
+          expect(page).to have_no_css(".table__title-block")
+          expect(page).to have_no_css(".help-text-overdue")
+        end
+      end
     end
 
     context "when managing reporting proposals" do

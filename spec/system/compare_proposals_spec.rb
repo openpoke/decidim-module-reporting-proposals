@@ -72,6 +72,19 @@ describe "Reporting proposals overrides" do
 
   it_behaves_like "compares using geocoding"
 
+  context "when it is a standard proposals component with proximity comparison" do
+    let(:manifest_name) { "proposals" }
+    let!(:component) { create(:proposal_component, participatory_space: participatory_process, settings: { geocoding_enabled: true, geocoding_comparison_enabled: true }) }
+
+    it_behaves_like "compares using geocoding"
+
+    it "marks the compare step as the current wizard step" do
+      within "#wizard-steps" do
+        expect(page).to have_css("[data-active]", text: "Compare")
+      end
+    end
+  end
+
   context "when no proposals are found" do
     let(:latitude) { 41.1 }
     let(:longitude) { 2.2 }

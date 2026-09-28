@@ -187,8 +187,12 @@ module Decidim::ReportingProposals::Admin
 
       it_behaves_like "cannot edit photos"
       it_behaves_like "cannot hide proposals"
-      it_behaves_like "can add evaluators to the proposal"
-      it_behaves_like "cannot add evaluators to the proposal"
+
+      describe "add evaluators to a proposal not assigned to them" do
+        let(:action) { { scope: :admin, action: :assign_to_evaluator, subject: :proposals } }
+
+        it { is_expected.to be false }
+      end
 
       context "and can evaluate the current proposal" do
         let!(:assignment) { create(:evaluation_assignment, proposal:, evaluator_role:) }
@@ -196,6 +200,8 @@ module Decidim::ReportingProposals::Admin
         it_behaves_like "can answer proposals"
         it_behaves_like "can edit photos"
         it_behaves_like "can hide proposals"
+        it_behaves_like "can add evaluators to the proposal"
+        it_behaves_like "cannot add evaluators to the proposal"
       end
     end
 
