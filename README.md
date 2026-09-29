@@ -160,12 +160,16 @@ Decidim::ReportingProposals.configure do |config|
   # otherwise can be configured at the component level
   config.allow_proposal_photo_editing = true
 
-  # Public setting to allow to assign other evaluators
+  # Public setting to allow evaluators to assign other evaluators to the proposals assigned to them
   config.evaluators_assign_other_evaluators = true
 
   # Public setting that defines the email of the bot user ("Automatic assignment")
   # used as the author of automatic evaluator assignments in the admin log
   config.automation_user_email = "reporting-proposals-automation@example.org"
+
+  # Public setting that shows the answering deadlines in the admin list of proposals
+  # Accepts an array of component manifest names
+  config.proposal_answering_follow_up = [:proposals, :reporting_proposals]
 end
 ```
 

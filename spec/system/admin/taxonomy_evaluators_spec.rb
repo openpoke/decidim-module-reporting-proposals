@@ -201,6 +201,18 @@ describe "Taxonomy evaluators" do
       end
     end
 
+    context "when the space has no proposals components" do
+      let(:empty_space) { create(:participatory_process, organization:) }
+
+      it "does not show the menu item" do
+        visit Decidim::EngineRouter.admin_proxy(empty_space).components_path
+
+        within "[id='admin-sidebar-menu-settings']" do
+          expect(page).to have_no_content("Taxonomy evaluators")
+        end
+      end
+    end
+
     context "when the user is a process admin" do
       let!(:user) { create(:process_admin, :confirmed, participatory_process: participatory_space) }
 

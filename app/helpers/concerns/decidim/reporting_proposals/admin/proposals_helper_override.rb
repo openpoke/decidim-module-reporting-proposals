@@ -30,6 +30,10 @@ module Decidim
             end
           end
 
+          def answering_follow_up?(component = current_component)
+            Decidim::ReportingProposals.answering_follow_up?(component)
+          end
+
           def unanswered_proposals_overdue?(proposal)
             grace_period = days_unanswered(proposal)
             !grace_period.zero? &&
@@ -48,13 +52,13 @@ module Decidim
           end
 
           def days_unanswered(proposal)
-            return proposal.component.settings.unanswered_proposals_overdue.to_i if proposal.component&.settings
+            return proposal.component.settings.try(:unanswered_proposals_overdue).to_i if proposal.component&.settings
 
             Decidim::ReportingProposals.unanswered_proposals_overdue.to_i
           end
 
           def days_evaluating(proposal)
-            return proposal.component.settings.evaluating_proposals_overdue.to_i if proposal.component&.settings
+            return proposal.component.settings.try(:evaluating_proposals_overdue).to_i if proposal.component&.settings
 
             Decidim::ReportingProposals.evaluating_proposals_overdue.to_i
           end

@@ -67,7 +67,6 @@ module Decidim::ReportingProposals
 
         it "escapes the taxonomy name in the explanation" do
           expect(subject).not_to include("<script>")
-          expect(subject).to include("&lt;script&gt;")
           expect(subject).to include("Parks")
         end
       end

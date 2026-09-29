@@ -1,0 +1,19 @@
+<!-- surround_contents "td:contains('present(proposal).title')" -->
+
+<% if answering_follow_up? %>
+  <div class="table__title-block">
+    <span class="table__title-icon">
+      <% if unanswered_proposals_overdue?(proposal) || evaluating_proposals_overdue?(proposal) %>
+        <%= icon "timer-line", class: "text-alert" %>
+      <% elsif grace_period_unanswered?(proposal) || grace_period_evaluating?(proposal) %>
+        <%= icon "timer-line", class: "text-warning" %>
+      <% end %>
+    </span>
+    <div class="table__list-title">
+      <%= render_original %>
+      <%= render "decidim/reporting_proposals/admin/proposals/proposal_overdue", proposal: %>
+    </div>
+  </div>
+<% else %>
+  <%= render_original %>
+<% end %>

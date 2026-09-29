@@ -119,24 +119,25 @@ module Decidim
         end
       end
 
-      initializer "decidim_reporting_proposals.component_overdue_options" do
-        Decidim.component_registry.find(:proposals).tap do |component|
-          component.settings(:global) do |settings|
-            settings.attribute :geocoding_comparison_enabled, type: :boolean, default: false
-            settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
-            settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
-            settings.attribute(:unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue)
-            settings.attribute(:evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue)
-            settings.attribute(:proposal_photo_editing_enabled, type: :boolean, default: false)
+      initializer "decidim_reporting_proposals.component_overdue_options", after: :load_config_initializers do
+        Decidim.component_registry.find(:proposals).settings(:global) do |settings|
+          settings.attribute :geocoding_comparison_enabled, type: :boolean, default: false
+          settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
+          settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
+          settings.attribute :proposal_photo_editing_enabled, type: :boolean, default: false
+        end
+
+        Decidim::ReportingProposals.proposal_answering_follow_up.each do |manifest_name|
+          Decidim.component_registry.find(manifest_name)&.settings(:global) do |settings|
+            settings.attribute :unanswered_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.unanswered_proposals_overdue
+            settings.attribute :evaluating_proposals_overdue, type: :integer, default: Decidim::ReportingProposals.evaluating_proposals_overdue
           end
         end
       end
 
       initializer "decidim_reporting_proposals.on_publish_proposals" do
-        config.to_prepare do
-          ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_taxonomies)/) do |_event_name, data|
-            Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(data)
-          end
+        ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_taxonomies)/) do |_event_name, data|
+          Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(data)
         end
       end
 

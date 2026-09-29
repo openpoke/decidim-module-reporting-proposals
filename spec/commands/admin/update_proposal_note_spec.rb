@@ -4,25 +4,17 @@ require "spec_helper"
 
 module Decidim::ReportingProposals::Admin
   describe UpdateProposalNote do
-    let(:form_klass) { Decidim::ReportingProposals::Admin::ProposalPhotoForm }
-
     let(:component) { create(:reporting_proposals_component) }
     let(:organization) { component.organization }
     let(:user) { create(:user, :admin, :confirmed, organization:) }
-    let(:form) do
-      Decidim::Proposals::Admin::ProposalNoteForm.from_params(
-        form_params
-      )
-    end
+    let(:form) { Decidim::Proposals::Admin::ProposalNoteForm.from_params(form_params).with_context(current_user: user, current_organization: organization) }
 
     let!(:note) { create(:proposal_note, proposal:, author: user) }
     let(:command) { described_class.new(form, note) }
     let!(:proposal) { create(:proposal, :official, component:) }
 
     describe "call" do
-      let(:form_params) do
-        { body: }
-      end
+      let(:form_params) { { body: } }
 
       context "when the form is valid" do
         let(:body) { "Test body" }
@@ -32,9 +24,23 @@ module Decidim::ReportingProposals::Admin
         end
 
         it "updates the note" do
-          expect do
-            command.call
-          end.to change(note, :body)
+          expect { command.call }.to change { note.reload.body }.to("Test body")
+        end
+
+        it "traces the action", versioning: true do
+          expect { command.call }.to change(Decidim::ActionLog, :count).by(1)
+          expect(Decidim::ActionLog.last.action).to eq("update")
+        end
+      end
+
+      context "when the body mentions a user" do
+        let(:mentioned) { create(:user, :confirmed, organization:) }
+        let(:body) { "Ping @#{mentioned.nickname}" }
+
+        it "stores the mention as a global id" do
+          command.call
+
+          expect(note.reload.body).to eq("Ping #{mentioned.to_global_id}")
         end
       end
 

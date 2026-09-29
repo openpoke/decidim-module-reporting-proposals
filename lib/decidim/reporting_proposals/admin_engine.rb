@@ -63,7 +63,7 @@ module Decidim
                         decidim_admin_participatory_processes.taxonomy_evaluators_path(current_participatory_space),
                         active: is_active_link?(decidim_admin_participatory_processes.taxonomy_evaluators_path(current_participatory_space)),
                         icon_name: "price-tag-3-line",
-                        if: allowed_to?(:update, :taxonomy_evaluator)
+                        if: allowed_to?(:update, :taxonomy_evaluator) && current_participatory_space.components.exists?(manifest_name: %w(proposals reporting_proposals))
 
           menu.move :taxonomy_evaluators, after: :components
         end
@@ -75,7 +75,7 @@ module Decidim
                           decidim_admin_assemblies.taxonomy_evaluators_path(current_participatory_space),
                           active: is_active_link?(decidim_admin_assemblies.taxonomy_evaluators_path(current_participatory_space)),
                           icon_name: "price-tag-3-line",
-                          if: allowed_to?(:update, :taxonomy_evaluator)
+                          if: allowed_to?(:update, :taxonomy_evaluator) && current_participatory_space.components.exists?(manifest_name: %w(proposals reporting_proposals))
 
             menu.move :taxonomy_evaluators, after: :components
           end

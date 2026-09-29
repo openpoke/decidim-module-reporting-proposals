@@ -14,12 +14,12 @@ module Decidim
         def snippets
           @snippets ||= Decidim::Snippets.new
 
-          unless @snippets.any?(:reporting_proposals_manage_component) && reporting_proposals_component?
+          if reporting_proposals_component? && @snippets.for(:reporting_proposals_manage_component).blank?
             @snippets.add(:reporting_proposals_manage_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_manage_component_admin"))
             @snippets.add(:head, @snippets.for(:reporting_proposals_manage_component))
           end
 
-          unless @snippets.any?(:reporting_proposals_list_component) && any_proposals_component?
+          if any_proposals_component? && @snippets.for(:reporting_proposals_list_component).blank?
             @snippets.add(:reporting_proposals_list_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_list_component_admin"))
             @snippets.add(:head, @snippets.for(:reporting_proposals_list_component))
           end
@@ -28,11 +28,16 @@ module Decidim
         end
 
         def reporting_proposals_component?
-          current_component&.manifest_name == "reporting_proposals"
+          snippets_manifest_name == "reporting_proposals"
         end
 
         def any_proposals_component?
-          current_component&.manifest_name.in? %w(proposals reporting_proposals)
+          snippets_manifest_name.in? %w(proposals reporting_proposals)
+        end
+
+        # the new component form has no record yet, only the requested type
+        def snippets_manifest_name
+          current_component&.manifest_name || params[:type]
         end
 
         def current_component

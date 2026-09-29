@@ -40,7 +40,8 @@ module Decidim
       true
     end
 
-    # Public setting to allow to assign other evaluators
+    # Public setting to allow evaluators to assign other evaluators to the proposals assigned to them
+    # (false is stricter than Decidim, which always allows it)
     config_accessor :evaluators_assign_other_evaluators do
       true
     end
@@ -59,6 +60,16 @@ module Decidim
     # evaluator assignments in the admin log. No mail is sent to it; it only needs to be unique.
     config_accessor :automation_user_email do
       "reporting-proposals-automation@example.org"
+    end
+
+    # Public setting that shows the answering deadlines in the admin list of proposals
+    # Accepts an array of component manifest names
+    config_accessor :proposal_answering_follow_up do
+      [:proposals, :reporting_proposals]
+    end
+
+    def self.answering_follow_up?(component)
+      proposal_answering_follow_up.include?(component&.manifest_name&.to_sym)
     end
   end
 end
