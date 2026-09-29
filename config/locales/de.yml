@@ -175,6 +175,10 @@ de:
             votes_blocked: Gefällt mir-Angaben blockieren
             votes_enabled: Gefällt mir-Angaben erlauben
             votes_hidden: Gefällt-mir Anhaben nicht öffentlich anzeigen
+    download_your_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     events:
       proposals:
         proposal_published:
@@ -196,6 +200,10 @@ de:
           hide:
             invalid: Beim Verbergen der Ressource ist ein Problem aufgetreten.
             success: Ressource erfolgreich verborgen.
+    open_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     proposals:
       admin:
         proposals:
