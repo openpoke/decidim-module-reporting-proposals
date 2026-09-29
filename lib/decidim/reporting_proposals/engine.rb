@@ -36,9 +36,6 @@ module Decidim
         Decidim::ParticipatorySpaceRoleConfig::Evaluator.prepend(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
         Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
-        # port of https://github.com/openpoke/decidim/pull/31,23,29,24,43
-        Decidim::ReportedMailer.include(Decidim::ReportingProposals::ReportedMailerOverride)
-
         # The :proposal resource manifest is built eagerly when decidim-proposals is required (its component.rb),
         # before this to_prepare runs, so including the override into ResourceManifest does not affect the
         # already-registered manifest. We delete it and register it again so it is rebuilt with the patched class.
@@ -138,6 +135,12 @@ module Decidim
       initializer "decidim_reporting_proposals.on_publish_proposals" do
         ActiveSupport::Notifications.subscribe(/decidim.events\.proposals\.(proposal_published|proposal_update_taxonomies)/) do |_event_name, data|
           Decidim::ReportingProposals::AssignProposalEvaluatorsJob.perform_later(data)
+        end
+      end
+
+      initializer "decidim_reporting_proposals.reported_mailer_override", after: :load_config_initializers do
+        Rails.autoloaders.main.on_load("Decidim::ReportedMailer") do |reported_mailer|
+          reported_mailer.include(Decidim::ReportingProposals::ReportedMailerOverride)
         end
       end
 
