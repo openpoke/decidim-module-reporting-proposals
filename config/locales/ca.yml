@@ -175,6 +175,10 @@ ca:
             votes_blocked: Suports bloquejats
             votes_enabled: Suports habilitats
             votes_hidden: Suports ocults (si els suports estan habilitats, marcant aquesta opció s'amagarà el nombre de suports)
+    download_your_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     events:
       proposals:
         proposal_published:
@@ -196,6 +200,10 @@ ca:
           hide:
             invalid: Hi ha hagut un problema amagant aquest recurs.
             success: Recurs amagat amb èxit.
+    open_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     proposals:
       admin:
         proposals:
