@@ -241,6 +241,10 @@ en:
             votes_enabled: Supports enabled
             votes_hidden: Supports hidden (if supports are enabled, checking this
               will hide the number of supports)
+    download_your_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     events:
       proposals:
         proposal_published:
@@ -268,6 +272,10 @@ en:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
+    open_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     proposals:
       admin:
         proposals:
