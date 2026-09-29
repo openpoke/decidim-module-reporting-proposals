@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim/application_mailer"
+
 module Decidim
   module ReportingProposals
     class NotificationPublishProposalMailer < Decidim::ApplicationMailer
