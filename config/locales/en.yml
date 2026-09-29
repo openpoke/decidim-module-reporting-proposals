@@ -272,6 +272,10 @@ en:
           hide:
             invalid: There was a problem hiding the resource.
             success: Resource successfully hidden.
+    open_data:
+      help:
+        proposals:
+          answer_time: The time it took for the proposal to be answered
     proposals:
       admin:
         proposals:
