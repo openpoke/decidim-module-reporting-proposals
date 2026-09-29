@@ -247,6 +247,10 @@ es:
             votes_enabled: Apoyos habilitados
             votes_hidden: Apoyos ocultos (si los apoyos están habilitados, marcando
               esta opción ocultarás el número de apoyos)
+    download_your_data:
+      help:
+        proposals:
+          answer_time: El tiempo que ha tardado en responderse la propuesta
     events:
       proposals:
         proposal_published:
@@ -272,6 +276,10 @@ es:
           hide:
             invalid: Se ha producido un error al ocultar el recurso.
             success: Recurso correctamente ocultado.
+    open_data:
+      help:
+        proposals:
+          answer_time: El tiempo que ha tardado en responderse la propuesta
     proposals:
       admin:
         proposals:
