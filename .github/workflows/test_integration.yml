@@ -106,7 +106,7 @@ jobs:
 
       - uses: nanasess/setup-chromedriver@v2
         with:
-          chromedriver-version: 153.0.8010.52
+          chromedriver-version: 156.0.8078.47
 
       - name: List Chrome
         run: apt list --installed | grep chrome
@@ -116,7 +116,7 @@ jobs:
 
       - uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 153.0.8010.52
+          chrome-version: 156.0.8078.47
 
       - uses: ruby/setup-ruby@v1
         with:
