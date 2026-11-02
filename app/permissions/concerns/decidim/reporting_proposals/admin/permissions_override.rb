@@ -18,12 +18,9 @@ module Decidim
                 can_create_proposal_note?
                 can_create_proposal_answer?
                 can_assign_evaluator_to_proposal?
-                allow! if action_is_show_on_proposal?
-              elsif action_is_show_on_proposal?
-                disallow!
               end
-
               evaluator_can_unassign_evaluator_from_proposals?
+              can_read_proposal?
               can_export_proposals?
 
               return permission_action
@@ -35,8 +32,8 @@ module Decidim
               can_create_proposal_answer?
             end
 
-            # Allow any admin user to view a proposal.
-            allow! if action_is_show_on_proposal?
+            # Every user allowed by the space can read proposals
+            allow! if permission_action.subject == :proposal && permission_action.action == :read
 
             # Admins can only edit official proposals if they are within the
             # time limit.
@@ -83,10 +80,6 @@ module Decidim
           # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
           private
-
-          def action_is_show_on_proposal?
-            permission_action.subject == :proposal && permission_action.action == :show
-          end
 
           def evaluator_can_unassign_evaluator_from_proposals?
             can_unassign_evaluator_from_proposals? if user == evaluator

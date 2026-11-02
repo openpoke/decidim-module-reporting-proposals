@@ -53,7 +53,7 @@ module Decidim
         private
 
         def proposal
-          @proposal ||= Decidim::Proposals::Proposal.find(params[:id])
+          @proposal ||= Decidim::Proposals::Proposal.where(component: current_component).find(params[:id])
         end
       end
     end

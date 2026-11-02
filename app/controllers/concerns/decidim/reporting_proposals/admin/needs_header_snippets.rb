@@ -37,15 +37,15 @@ module Decidim
 
         # the new component form has no record yet, only the requested type
         def snippets_manifest_name
-          current_component&.manifest_name || params[:type]
+          this_component&.manifest_name || params[:type]
         end
 
-        def current_component
-          @current_component ||= if defined?(query_scope) && query_scope.respond_to?(:find)
-                                   query_scope.find_by(id: params[:id])
-                                 elsif params.has_key?(:component_id)
-                                   Decidim::Component.find_by(id: params[:component_id])
-                                 end
+        def this_component
+          @this_component ||= if defined?(query_scope) && query_scope.respond_to?(:find)
+                                query_scope.find_by(id: params[:id])
+                              elsif params.has_key?(:component_id)
+                                Decidim::Component.find_by(id: params[:component_id]) # rubocop:disable Decidim/OrganizationScopedFinder
+                              end
         end
       end
     end

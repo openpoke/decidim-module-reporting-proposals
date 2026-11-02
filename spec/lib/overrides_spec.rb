@@ -24,14 +24,15 @@ checksums = [
     package: "decidim-templates",
     files: {
       "/app/commands/decidim/templates/admin/update_proposal_answer_template.rb" => "9ee3f25f047e17a5b7041d43ba319183",
-      "/app/controllers/decidim/templates/admin/proposal_answer_templates_controller.rb" => "de223364a9061aa42c127a6493d1a731"
+      "/app/controllers/decidim/templates/admin/proposal_answer_templates_controller.rb" => "e77378b5570d38402fa8c719918900cb"
     }
   },
   {
     package: "decidim-proposals",
     files: {
       "/app/events/decidim/proposals/publish_proposal_event.rb" => "085ba02d02310d94b462b43c973007c6",
-      "/app/controllers/decidim/proposals/proposals_controller.rb" => "92bf9b32eb4968b6ad71c1711e4750d2",
+      "/app/controllers/decidim/proposals/proposals_controller.rb" => "c37b628d7426f957d1340a4b40ab6787",
+      "/app/controllers/decidim/proposals/admin/proposals_controller.rb" => "666b056c8d3676946cd46cab6b048960",
       "/app/helpers/decidim/proposals/proposal_wizard_helper.rb" => "330889e7edb2fbd3571391a32d3d02c8",
       "/app/commands/decidim/proposals/create_proposal.rb" => "f88c0aa5b5927410707bc356eef8f544",
       "/app/commands/decidim/proposals/update_proposal.rb" => "aac67a59183b35341471013407b7da7e",
@@ -49,8 +50,8 @@ checksums = [
       "/app/views/decidim/proposals/admin/proposals/index.html.erb" => "be85d4fb783a9a66f48d13c26379e7b6",
       "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "24a279a3de60ee4d35aa960f2f9782c4",
       "/app/commands/decidim/proposals/admin/assign_proposals_to_evaluator.rb" => "1b59364e9808128809831c57e9ed93a3",
-      "/app/permissions/decidim/proposals/admin/permissions.rb" => "34e652c5be8db79d4b5f8e9a7c6b808e",
-      "/app/controllers/decidim/proposals/admin/proposal_answers_controller.rb" => "3317aaa495ce3563ae6d150229f90ca9",
+      "/app/permissions/decidim/proposals/admin/permissions.rb" => "47869294893fca27a70a3d7aee3fd2d1",
+      "/app/controllers/decidim/proposals/admin/proposal_answers_controller.rb" => "7dbff778081e1e2140f6bab0f946ace9",
       "/app/controllers/decidim/proposals/admin/evaluation_assignments_controller.rb" => "67b1583b2483bbb09ebfa13b7194a11a",
       "/app/views/decidim/proposals/proposals/show.html.erb" => "e2c0adf5c283f7396d93207e1b7ab740",
       "/app/views/decidim/proposals/proposals/_wizard_header.html.erb" => "60700214b35bbca30979a1ca4d0b0bb6",
