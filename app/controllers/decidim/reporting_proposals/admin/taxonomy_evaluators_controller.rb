@@ -49,7 +49,7 @@ module Decidim
         private
 
         def collection
-          @collection ||= Decidim::Taxonomy.where(id: available_taxonomy_ids).load
+          @collection ||= Decidim::Taxonomy.where(id: available_taxonomy_ids).load # rubocop:disable Decidim/OrganizationScopedFinder
         end
 
         # children keep the loaded collection's default_scope (weight) order:
@@ -76,7 +76,7 @@ module Decidim
         # part_of expands each taxonomy with all its ancestors
         def available_taxonomy_ids
           taxonomy_ids = proposals_components.flat_map(&:available_taxonomy_ids).uniq
-          Decidim::Taxonomy.where(id: taxonomy_ids).pluck(:part_of).flatten.uniq
+          Decidim::Taxonomy.where(id: taxonomy_ids).pluck(:part_of).flatten.uniq # rubocop:disable Decidim/OrganizationScopedFinder
         end
 
         def proposals_components

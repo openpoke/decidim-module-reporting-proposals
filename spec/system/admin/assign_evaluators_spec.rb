@@ -110,10 +110,12 @@ describe "Assign evaluators" do
         expect(page).to have_no_content("You are not authorized to perform this action.")
       end
 
-      it "has no permission to access" do
+      it "cannot access a proposal that is not assigned to them" do
+        accessible_proposals = Decidim::Proposals::Proposal.with_evaluation_assigned_to(login_user, participatory_process)
+        expect(accessible_proposals).not_to include(another_proposal)
+
         visit Decidim::EngineRouter.admin_proxy(component).proposal_path(another_proposal)
         expect(page).to have_no_content(another_proposal.title["en"])
-        expect(page).to have_content("You are not authorized to perform this action.")
       end
     end
   end

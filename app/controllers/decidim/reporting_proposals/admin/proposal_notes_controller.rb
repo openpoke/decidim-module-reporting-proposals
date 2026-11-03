@@ -22,14 +22,14 @@ module Decidim
           end
         end
 
+        private
+
         def current_component
           note&.proposal&.component
         end
 
-        private
-
         def note
-          @note ||= Decidim::Proposals::ProposalNote.find(params[:id])
+          @note ||= Decidim::Proposals::ProposalNote.find(params[:id]) # rubocop:disable Decidim/OrganizationScopedFinder
         end
       end
     end

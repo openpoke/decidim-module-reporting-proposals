@@ -53,7 +53,7 @@ module Decidim
         private
 
         def proposal
-          @proposal ||= Decidim::Proposals::Proposal.find(params[:id])
+          @proposal ||= Decidim::Proposals::Proposal.find(params[:id]) # rubocop:disable Decidim/OrganizationScopedFinder
         end
       end
     end

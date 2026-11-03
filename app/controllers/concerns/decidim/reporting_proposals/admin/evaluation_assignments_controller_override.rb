@@ -51,6 +51,8 @@ module Decidim
             end
           end
 
+          protected
+
           def after_add_evaluator_url
             return request.referer if request.referer.present? && request.referer =~ %r{manage/proposals/[0-9]+}
 

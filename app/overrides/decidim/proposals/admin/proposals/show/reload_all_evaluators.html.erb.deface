@@ -1,0 +1,3 @@
+<!-- replace "erb[silent]:contains('proposal.evaluation_assignments.each do |assignment|')" -->
+
+<% proposal.evaluation_assignments.reload.each do |assignment| %>
