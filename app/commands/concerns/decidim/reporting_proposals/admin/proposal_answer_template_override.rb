@@ -10,7 +10,7 @@ module Decidim
           private
 
           def identify_templateable_resource
-            found_component = Decidim::Component.find_by(id: @form.component_constraint, manifest_name: %(proposals reporting_proposals))
+            found_component = Decidim::Component.find_by(id: @form.component_constraint, manifest_name: %w(proposals reporting_proposals))
             if found_component.present?
               resource = found_component&.participatory_space&.decidim_organization_id == @form.current_organization.id ? found_component : nil
             end
