@@ -10,10 +10,6 @@ Decidim.register_component(:reporting_proposals) do |component|
   component.stylesheet = "decidim/proposals/proposals"
   component.icon = "media/images/decidim_proposals.svg"
 
-  component.on(:before_destroy) do |instance|
-    raise "Can't destroy this component when there are proposals" if Decidim::Proposals::Proposal.where(component: instance).any?
-  end
-
   component.on(:create) do |instance|
     admin_user = GlobalID::Locator.locate(instance.versions.first.whodunnit)
     Decidim::Proposals.create_default_states!(instance, admin_user)
@@ -53,7 +49,6 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :geocoding_comparison_newer_than, type: :integer, default: 60
     settings.attribute :attachments_allowed, type: :boolean, default: true
     settings.attribute :resources_permissions_enabled, type: :boolean, default: true
-    settings.attribute :collaborative_drafts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
     settings.attribute :participatory_texts_enabled, type: :boolean, default: false, readonly: ->(_) { true }
     settings.attribute :amendments_enabled, type: :boolean, default: false
     settings.attribute :amendments_wizard_help_text, type: :text, translated: true, editor: true, required: false
@@ -92,12 +87,6 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :automatic_hashtags, type: :text, editor: false, required: false
     settings.attribute :suggested_hashtags, type: :text, editor: false, required: false
-  end
-
-  component.register_resource(:collaborative_draft) do |resource|
-    resource.model_class_name = "Decidim::Proposals::CollaborativeDraft"
-    resource.card = "decidim/proposals/collaborative_draft"
-    resource.reported_content_cell = "decidim/proposals/collaborative_drafts/reported_content"
   end
 
   component.register_stat :reporting_proposals_count, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
@@ -214,8 +203,7 @@ Decidim.register_component(:reporting_proposals) do |component|
       published_at: Time.current,
       participatory_space:,
       settings: {
-        vote_limit: 0,
-        collaborative_drafts_enabled: true
+        vote_limit: 0
       },
       step_settings:
     }
@@ -360,59 +348,7 @@ Decidim.register_component(:reporting_proposals) do |component|
       end
 
       Decidim::Comments::Seed.comments_for(proposal)
-
-      #
-      # Collaborative drafts
-      #
-      state = if n > 3
-                "published"
-              elsif n > 2
-                "withdrawn"
-              else
-                "open"
-              end
-      author = Decidim::User.where(organization: component.organization).all.sample
-
-      draft = Decidim.traceability.perform_action!("create", Decidim::Proposals::CollaborativeDraft, author) do
-        draft = Decidim::Proposals::CollaborativeDraft.new(
-          component:,
-          title: Faker::Lorem.sentence(word_count: 2),
-          body: Faker::Lorem.paragraphs(number: 2).join("\n"),
-          state:,
-          published_at: Time.current
-        )
-        draft.coauthorships.build(author: participatory_space.organization)
-        draft.save!
-        draft
-      end
-
-      case n
-      when 2
-        author2 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author2)
-        author3 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author3)
-        author4 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author4)
-        author5 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author5)
-        author6 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author6)
-      when 3
-        author2 = Decidim::User.where(organization: component.organization).all.sample
-        Decidim::Coauthorship.create(coauthorable: draft, author: author2)
-      end
-
-      Decidim::Comments::Seed.comments_for(draft)
     end
-
-    Decidim.traceability.update!(
-      Decidim::Proposals::CollaborativeDraft.all.sample,
-      Decidim::User.where(organization: component.organization).all.sample,
-      component:,
-      title: Faker::Lorem.sentence(word_count: 2),
-      body: Faker::Lorem.paragraphs(number: 2).join("\n")
-    )
   end
 
   def random_state_answer

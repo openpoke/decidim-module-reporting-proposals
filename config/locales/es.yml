@@ -96,7 +96,6 @@ es:
               voting_cards: Votación con tarjetas de color
             can_accumulate_votes_beyond_threshold: Puede acumular apoyos una vez superados
               los necesarios
-            collaborative_drafts_enabled: Borradores colaborativos habilitados
             comments_enabled: Comentarios habilitados
             comments_max_length: Longitud máxima de los comentarios (deja 0 si quieres
               mantener la configuración por defecto)

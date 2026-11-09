@@ -22,8 +22,8 @@ gem "rexml", "3.4.1"
 
 group :development, :test do
   gem "brakeman", "~> 6.1"
-  gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-decidim_awesome", "~> 0.14.0"
+  gem "byebug", "~> 13.0", platform: :mri
+  gem "decidim-decidim_awesome", github: "decidim-ice/decidim-module-decidim_awesome", branch: "main"
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION

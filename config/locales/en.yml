@@ -95,7 +95,6 @@ en:
               voting_cards: Voting using coloured cards
             can_accumulate_votes_beyond_threshold: Can accumulate supports beyond
               threshold
-            collaborative_drafts_enabled: Collaborative drafts enabled
             comments_enabled: Comments enabled
             comments_max_length: Comments max length (Leave 0 for default value)
             default_sort_order: Default proposal sorting

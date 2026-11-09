@@ -112,7 +112,11 @@ module Decidim
 
       initializer "decidim_reporting_proposals.mount_routes" do
         Decidim::Core::Engine.routes do
-          mount Decidim::ReportingProposals::Engine, at: "/reporting_proposals", as: "decidim_reporting_proposals"
+          extend Decidim::Routes::LocaleRedirects
+
+          scope "/:locale", **locale_scope_options do
+            mount Decidim::ReportingProposals::Engine, at: "/reporting_proposals", as: "decidim_reporting_proposals"
+          end
         end
       end
 
