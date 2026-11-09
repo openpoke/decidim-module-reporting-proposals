@@ -49,8 +49,7 @@ module Decidim::ReportingProposals
         end
       end
 
-      shared_examples "hide failure" do |msg|
-        msg ||= "There was a problem hiding the resource"
+      shared_examples "hide failure" do |msg = "There was a problem hiding the resource"|
         it "hides the proposal" do
           put(:hide_proposal, params:)
           expect(response).to have_http_status(:redirect)

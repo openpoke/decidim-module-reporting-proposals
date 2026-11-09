@@ -263,7 +263,7 @@ module Decidim::ReportingProposals
     end
 
     describe "update taxonomies" do
-      subject(:update_taxonomies_command) { Decidim::Proposals::Admin::UpdateProposalTaxonomies.new([new_taxonomy.id], [proposal.id], organization) }
+      subject(:update_taxonomies_command) { Decidim::Proposals::Admin::UpdateProposalTaxonomies.new([new_taxonomy.id], [proposal.id], component) }
 
       let(:new_taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
 

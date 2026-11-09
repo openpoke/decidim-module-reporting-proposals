@@ -38,9 +38,6 @@ module Decidim
     # (false is stricter than Decidim, which always allows it)
     mattr_accessor :evaluators_assign_other_evaluators, default: true
 
-    # Public setting to get an e-mail notification when there is a new answer to a proposal
-    mattr_accessor :notify_authors_on_answering, default: [:proposals, :reporting_proposals]
-
     # Public setting to get an e-mail notification when the proposal is published
     mattr_accessor :notify_authors_on_publish, default: [:proposals, :reporting_proposals]
 

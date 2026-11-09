@@ -86,6 +86,7 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
+| 0.9.x   | 0.32.x                      |
 | 0.8.x   | 0.31.x                      |
 | 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |

@@ -16,7 +16,7 @@ module Decidim
               flash.now[:alert] = I18n.t("reportable.hide.invalid", scope: "decidim.moderations.admin")
             end
           end
-          redirect_back(fallback_location: decidim_admin.root_path)
+          redirect_back_or_to(decidim_admin.root_path)
         end
 
         def add_photos

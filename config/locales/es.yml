@@ -424,14 +424,6 @@ es:
           proposals: Propuestas directas
         menu:
           taxonomy_evaluators: Evaluadores de taxonomías
-        notification_answer_proposal_mailer:
-          notify_proposal_author:
-            email_body: |
-              Tu propuesta ha sido respondida.
-              Puedes leer la respuesta aquí:<br>
-              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: "¡Hola, %{recipient}!"
-            subject: Su propuesta ha sido respondida
         proposal_notes:
           modal:
             body: Nota

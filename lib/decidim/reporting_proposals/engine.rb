@@ -12,7 +12,6 @@ module Decidim
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
         Decidim::FormBuilder.prepend(Decidim::ReportingProposals::FormBuilderOverride)
-        Decidim::ResourceHelper.include(Decidim::ReportingProposals::ResourceHelperOverride)
         Decidim::Map::Autocomplete::Builder.prepend(Decidim::ReportingProposals::MapBuilderOverride)
         Decidim::LinkedResourcesForCell.include(Decidim::ReportingProposals::LinkedResourcesForCellOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
@@ -29,12 +28,12 @@ module Decidim
         Decidim::Budgets::Admin::ProjectForm.prepend(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
         Decidim::Budgets::Admin::CreateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Budgets::Admin::UpdateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
-        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.prepend(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatoryProcesses::Permissions.prepend(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride)
         Decidim::Assemblies::Permissions.prepend(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride) if defined?(Decidim::Assemblies::AdminEngine)
         Decidim::ParticipatorySpaceRoleConfig::Evaluator.prepend(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
-        Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::CreateProposalAnswerTemplate.prepend(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
         # The :proposal resource manifest is built eagerly when decidim-proposals is required (its component.rb),
         # before this to_prepare runs, so including the override into ResourceManifest does not affect the

@@ -11,7 +11,7 @@ env:
   CI: 1
   SIMPLECOV: 1
   NODE_VERSION: 22.14.0
-  RUBY_VERSION: 3.3.11
+  RUBY_VERSION: 3.4.7
   DISPLAY: ":99"
   RUBYOPT: '-W:no-deprecated'
   RAILS_ENV: test
@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update && sudo apt-get install -y imagemagick
+        run: sudo apt-get update && sudo apt-get install -y libvips libvips-tools
 
       - uses: ruby/setup-ruby@v1
         with:

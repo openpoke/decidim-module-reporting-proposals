@@ -419,14 +419,6 @@ de:
           proposals: Meldungen
         menu:
           taxonomy_evaluators: Taxonomie-Bewertung
-        notification_answer_proposal_mailer:
-          notify_proposal_author:
-            email_body: |
-              Dein Beitrag wurde beantwortet.
-              Du kannst die Antwort hier einsehen:<br>
-              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hallo %{recipient}!
-            subject: Dein Beitrag wurde beantwortet
         proposal_notes:
           modal:
             body: Notiz

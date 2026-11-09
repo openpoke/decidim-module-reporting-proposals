@@ -17,21 +17,6 @@ module Decidim
         resources :proposal_notes, only: :update
       end
 
-      initializer "decidim_reporting_proposals.template_routes" do
-        if defined? Decidim::Templates::AdminEngine
-          Decidim::Templates::AdminEngine.routes do
-            resources :proposal_answer_templates do
-              member do
-                post :copy
-              end
-              collection do
-                get :fetch
-              end
-            end
-          end
-        end
-      end
-
       initializer "decidim_reporting_proposals.admin_mount_routes" do
         Decidim::Core::Engine.routes do
           extend Decidim::Routes::LocaleRedirects

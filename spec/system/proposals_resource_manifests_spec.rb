@@ -44,7 +44,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Result successfully created.")
       within "tr", text: "My result" do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -67,7 +67,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Result successfully updated.")
       within "tr", text: translated(result.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -91,7 +91,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Result successfully updated.")
       within "tr", text: translated(result.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -136,7 +136,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Project successfully created.")
 
       within "tr", text: "My project" do
         find("button[data-controller='dropdown']").click
@@ -165,7 +165,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Project successfully updated.")
       within "tr", text: translated(project.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -194,7 +194,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Project successfully updated.")
       within "tr", text: translated(project.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"

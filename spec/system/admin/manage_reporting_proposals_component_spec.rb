@@ -24,7 +24,6 @@ describe "Managing reporting proposals component" do
   end
 
   it "hides readonly attributes" do
-    expect(page).to have_no_content("Collaborative drafts enabled")
     expect(page).to have_no_content("Participatory texts enabled")
   end
 
@@ -47,7 +46,6 @@ describe "Managing reporting proposals component" do
     let!(:component) { create(:proposal_component, participatory_space: participatory_process) }
 
     it "does not hide readonly attributes" do
-      expect(page).to have_content("Collaborative drafts enabled")
       expect(page).to have_content("Participatory texts enabled")
     end
 
@@ -84,7 +82,6 @@ describe "Managing reporting proposals component" do
     before { visit Decidim::EngineRouter.admin_proxy(participatory_process).new_component_path(type: "reporting_proposals") }
 
     it "hides readonly attributes" do
-      expect(page).to have_no_content("Collaborative drafts enabled")
       expect(page).to have_no_content("Participatory texts enabled")
     end
   end

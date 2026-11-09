@@ -18,7 +18,7 @@ module Decidim
             on(:invalid) do
               flash[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
             end
-            redirect_back(fallback_location: decidim_admin.root_path)
+            redirect_back_or_to(decidim_admin.root_path)
           end
         end
 

@@ -89,7 +89,7 @@ describe "Evaluator manages proposals" do
         end
       end
 
-      expect(page).to have_content("successfully")
+      expect(page).to have_content("Evaluator unassigned from proposals successfully")
     end
 
     it "can leave proposal notes" do
@@ -115,7 +115,7 @@ describe "Evaluator manages proposals" do
         )
         click_on "Answer"
       end
-      expect(page).to have_content("successfully")
+      expect(page).to have_callout("Proposal successfully answered.")
     end
   end
 end

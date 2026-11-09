@@ -55,7 +55,7 @@ module Decidim
             .to include("The <a href=\"#{resource_path}\">#{resource_title}</a> proposal was published by ")
 
           expect(subject.notification_title)
-            .to include("<a href=\"/profiles/#{author.nickname}\">#{author.name}</a>.")
+            .to include("<a href=\"/en/profiles/#{author.nickname}\">#{author.name}</a>.")
 
           expect(subject.notification_title).not_to include("Check it out of the")
         end
@@ -63,8 +63,7 @@ module Decidim
 
       describe "notification_title to admin" do
         let(:extra) { { type: "admin", participatory_space: true } }
-
-        i18n_scope = "decidim.events.proposals.proposal_published_for_admin"
+        let(:i18n_scope) { "decidim.events.proposals.proposal_published_for_admin" }
 
         it "is generated correctly" do
           expect(subject.notification_title).to include("Check it out of the")
@@ -115,7 +114,7 @@ module Decidim
         describe "notification_title" do
           it "is generated correctly" do
             expect(subject.notification_title)
-              .to eq("The proposal <a href=\"#{resource_path}\">A nice proposal</a> has been added to #{participatory_space_title} by #{author.name} <a href=\"/profiles/#{author.nickname}\">@#{author.nickname}</a>.")
+              .to eq("The proposal <a href=\"#{resource_path}\">A nice proposal</a> has been added to #{participatory_space_title} by #{author.name} <a href=\"/en/profiles/#{author.nickname}\">@#{author.nickname}</a>.")
           end
         end
       end
@@ -133,6 +132,7 @@ module Decidim
         let(:en_version) { subject.resource_text["en"] }
         let(:machine_translated) { subject.resource_text["machine_translations"]["ca"] }
         let(:translatable) { true }
+        let(:untranslated_content) { subject.resource_text["en"] }
 
         it_behaves_like "a translated event"
       end

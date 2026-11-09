@@ -32,14 +32,14 @@ describe "Taxonomy evaluators permissions" do
     it "redirects away from the taxonomy evaluators index" do
       visit index_path
 
-      expect(page).to have_current_path("/admin/")
+      expect(page).to have_current_path(decidim_admin.root_path)
       expect(page).to have_no_content("Taxonomy evaluators")
     end
 
     it "redirects away from the taxonomy evaluators edit page" do
       visit edit_path
 
-      expect(page).to have_current_path("/admin/")
+      expect(page).to have_current_path(decidim_admin.root_path)
       expect(page).to have_no_content("Roads and pavements")
     end
   end

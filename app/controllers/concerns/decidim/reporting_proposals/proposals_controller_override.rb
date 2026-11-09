@@ -48,14 +48,14 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("proposals.create.error", scope: "decidim")
-              render :new, status: :unprocessable_entity
+              render :new, status: :unprocessable_content
             end
           end
         end
 
         def compare
           @step = Proposals::ProposalsController::STEP_COMPARE
-          @proposal = Decidim::Proposals::Proposal.find(params[:id])
+          @proposal = Decidim::Proposals::Proposal.not_hidden.where(component: current_component).find(params[:id])
 
           enforce_permission_to :edit, :proposal, proposal: @proposal
 
@@ -80,7 +80,7 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("proposals.update_draft.error", scope: "decidim")
-              render :edit_draft, status: :unprocessable_entity
+              render :edit_draft, status: :unprocessable_content
             end
           end
         end
@@ -97,7 +97,7 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("proposals.update.error", scope: "decidim")
-              render :edit, status: :unprocessable_entity
+              render :edit, status: :unprocessable_content
             end
           end
         end

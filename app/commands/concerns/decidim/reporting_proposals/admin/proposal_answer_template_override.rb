@@ -4,18 +4,13 @@ module Decidim
   module ReportingProposals
     module Admin
       module ProposalAnswerTemplateOverride
-        extend ActiveSupport::Concern
+        private
 
-        included do
-          private
+        def identify_templateable_resource
+          return super if @form.component_constraint.blank?
 
-          def identify_templateable_resource
-            found_component = Decidim::Component.find_by(id: @form.component_constraint, manifest_name: %w(proposals reporting_proposals))
-            if found_component.present?
-              resource = found_component&.participatory_space&.decidim_organization_id == @form.current_organization.id ? found_component : nil
-            end
-            resource
-          end
+          Decidim::Component.for_organization(organization: current_organization)
+                            .find_by(id: @form.component_constraint, manifest_name: %w(proposals reporting_proposals)) || super
         end
       end
     end

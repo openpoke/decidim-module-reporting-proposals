@@ -428,14 +428,6 @@ ca:
           proposals: Propostes directes
         menu:
           taxonomy_evaluators: Avaluadores de taxonomies
-        notification_answer_proposal_mailer:
-          notify_proposal_author:
-            email_body: |
-              La teva proposta ha estat contestada.
-              Pots llegir la resposta aquí:<br>
-              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hola, %{recipient}!
-            subject: La teva proposta ha estat contestada
         proposal_notes:
           modal:
             body: Nota
