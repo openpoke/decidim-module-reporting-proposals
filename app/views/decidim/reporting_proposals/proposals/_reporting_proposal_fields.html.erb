@@ -25,7 +25,7 @@
   </div>
 <% end %>
 
-<%= form.text_field :title, class: "js-hashtags", value: form_presenter.title, data: { controller: "character-counter" } %>
+<%= form.text_field :title, value: form_presenter.title, data: { controller: "character-counter" } %>
 
 <%= text_editor_for_proposal_body(form) %>
 

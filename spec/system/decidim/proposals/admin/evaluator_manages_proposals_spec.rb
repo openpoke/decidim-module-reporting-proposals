@@ -35,6 +35,24 @@ describe "Evaluator manages proposals" do
     end
   end
 
+  context "when visiting an unassigned proposal directly" do
+    before do
+      allow(Rails.application).to \
+        receive(:env_config).with(no_args).and_wrap_original do |m, *|
+          m.call.merge(
+            "action_dispatch.show_exceptions" => true,
+            "action_dispatch.show_detailed_exceptions" => false
+          )
+        end
+
+      visit Decidim::EngineRouter.admin_proxy(current_component).proposal_path(unassigned_proposal)
+    end
+
+    it "does not allow access" do
+      expect(page).to have_text("The page you are looking for cannot be found")
+    end
+  end
+
   context "when bulk unassigning evaluators" do
     before do
       within "tr", text: translated(assigned_proposal.title) do
@@ -93,29 +111,59 @@ describe "Evaluator manages proposals" do
     end
 
     it "can leave proposal notes" do
-      click_on("Private notes")
+      expect(page).to have_content("Private notes")
+      click_on "Private notes"
+
       within ".new_proposal_note" do
         fill_in "Note", with: " This is my note"
         click_on "Submit"
       end
 
-      click_on("Private notes")
-      within ".comment" do
+      click_on "Private notes"
+      within "#panel-notes .comment:last-of-type" do
         expect(page).to have_content("This is my note")
       end
     end
 
-    it "can answer proposals" do
-      within "form.edit_proposal_answer" do
-        choose "Accepted"
-        fill_in_i18n_editor(
-          :proposal_answer_answer,
-          "#proposal_answer-answer-tabs",
-          en: "This is my answer"
-        )
-        click_on "Answer"
+    context "when answering a proposal" do
+      shared_examples "can change state" do |state|
+        it "can answer proposals" do
+          within "form.edit_proposal_answer" do
+            choose state
+            fill_in_i18n_editor(
+              :proposal_answer_answer,
+              "#proposal_answer-answer-tabs",
+              en: "This is my answer"
+            )
+            click_on "Answer"
+          end
+          expect(page).to have_callout("Proposal successfully answered.")
+        end
       end
-      expect(page).to have_callout("Proposal successfully answered.")
+
+      include_examples "can change state", "Accepted"
+
+      context "when there are custom states involved" do
+        let(:state_params) do
+          {
+            title: { en: "Custom state" },
+            token: "custom_state",
+            bg_color: "#ffeebd",
+            text_color: "#ad4910"
+          }
+        end
+        let!(:custom_state) { create(:proposal_state, **state_params, component: current_component) }
+
+        before do
+          visit current_path
+        end
+
+        it "successfully displays the new state" do
+          expect(page).to have_content("Custom state")
+        end
+
+        include_examples "can change state", "Custom state"
+      end
     end
   end
 end

@@ -19,16 +19,6 @@ ca:
             add_attachments:
               only_images: només pot contenir imatges
   decidim:
-    admin:
-      hidden_resource_mailer:
-        notify_mail:
-          body_1: Un administrador ha esborrat la vostra proposta perquè ha estat
-            denunciada.
-          body_2: Si penseu que ha estat un error, si us plau, contacteu els administradors
-            de
-          hello: Hola,
-          reason: 'Motiu: %{reason}'
-          subject: La teva proposta ha estat amagada
     components:
       proposals:
         settings:
@@ -92,6 +82,9 @@ ca:
             amendments_wizard_help_text: Text d'ajuda en crear una nova esmena
             announcement: Anunci
             attachments_allowed: Permetre arxius adjunts
+            attachments_allowed_help: En activar aquesta opció, les propostes es mostraran
+              en mode de quadrícula per defecte i la primera imatge apareixerà a la
+              targeta.
             awesome_voting_manifest: Tipus de suport
             awesome_voting_manifest_help_html: <strong class="text-alert">Sigues conscient que canviar aquesta configuració enmig d'un període de votació pot donar lloc a resultats inexactes o inesperats.</strong><br>També tingueu en compte que aquesta configuració només es pot editar si el component encara no té cap suport.
             awesome_voting_manifest_options:
@@ -107,7 +100,7 @@ ca:
               habilitats, les propostes es mostraran aleatòriament, i si els suports
               estan bloquejats, aleshores es mostraran de més a menys suports."
             default_sort_order_options:
-              default: Per defecte
+              automatic: Per defecte
               most_commented: Més comentada
               most_followed: Més seguida
               most_liked: Amb més "M'agrada"
@@ -215,7 +208,6 @@ ca:
               identificats per a veure les esmenes realitzades.
             announcement: Anunci
             answers_with_costs: Habilita el cost en la resposta de les propostes
-            automatic_hashtags: Hashtags afegits a totes les propostes
             comments_blocked: Comentaris bloquejats
             creation_enabled: Les participants poden crear propostes directes
             creation_enabled_readonly: Aquesta opció es desactiva quan actives la
@@ -227,7 +219,7 @@ ca:
               habilitats, les propostes es mostraran aleatòriament, i si els suports
               estan bloquejats, aleshores es mostraran de més a menys suports."
             default_sort_order_options:
-              default: Per defecte
+              automatic: Per defecte
               most_commented: Més comentada
               most_followed: Més seguida
               most_liked: Amb més "M'agrada"
@@ -244,8 +236,6 @@ ca:
               manualment seleccionant i fent servir l'acció de publicar. Per a més
               informació sobre el funcionament, consulta la <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication"
               target="_blank">pàgina de documentació de les respostes a les propostes</a>.
-            suggested_hashtags: Hashtags suggerits a les participants per a noves
-              propostes
             votes_blocked: Suports bloquejats
             votes_enabled: Suports habilitats
             votes_hidden: Suports ocults (si els suports estan habilitats, marcant

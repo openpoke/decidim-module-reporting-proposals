@@ -13,7 +13,7 @@ module Decidim
             end
 
             on(:invalid) do
-              flash.now[:alert] = I18n.t("reportable.hide.invalid", scope: "decidim.moderations.admin")
+              flash[:alert] = I18n.t("reportable.hide.invalid", scope: "decidim.moderations.admin")
             end
           end
           redirect_back_or_to(decidim_admin.root_path)

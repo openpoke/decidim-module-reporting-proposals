@@ -17,8 +17,6 @@ gem "decidim-reporting_proposals", path: "."
 
 gem "bootsnap", "~> 1.7"
 gem "puma", ">= 6.3.1"
-# seems that rexml 3.4.1 have issues generating some XMLs and codecov compatibility
-gem "rexml", "3.4.1"
 
 group :development, :test do
   gem "brakeman", "~> 6.1"

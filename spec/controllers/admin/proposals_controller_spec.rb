@@ -106,6 +106,11 @@ module Decidim::ReportingProposals
           let(:reportable) { create(:proposal) }
 
           it_behaves_like "hide failure"
+
+          it "keeps the error message after the redirect" do
+            put(:hide_proposal, params:)
+            expect(session.dig("flash", "flashes", "alert")).to include("There was a problem hiding the resource")
+          end
         end
 
         context "when the user is not admin" do

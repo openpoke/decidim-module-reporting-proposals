@@ -29,18 +29,16 @@ describe "Taxonomy evaluators permissions" do
   context "when the user has no admin roles" do
     let!(:user) { create(:user, :confirmed, organization:) }
 
-    it "redirects away from the taxonomy evaluators index" do
-      visit index_path
+    context "and visits the taxonomy evaluators index" do
+      let(:target_path) { index_path }
 
-      expect(page).to have_current_path(decidim_admin.root_path)
-      expect(page).to have_no_content("Taxonomy evaluators")
+      it_behaves_like "a 404 page"
     end
 
-    it "redirects away from the taxonomy evaluators edit page" do
-      visit edit_path
+    context "and visits the taxonomy evaluators edit page" do
+      let(:target_path) { edit_path }
 
-      expect(page).to have_current_path(decidim_admin.root_path)
-      expect(page).to have_no_content("Roads and pavements")
+      it_behaves_like "a 404 page"
     end
   end
 

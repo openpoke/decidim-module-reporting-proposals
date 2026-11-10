@@ -40,21 +40,31 @@ describe "Edit Proposal Notes" do
     end
   end
 
-  it "edits a proposal note" do
-    click_on "Private notes"
-    within ".comment", match: :first do
-      click_on "Edit note"
-    end
+  shared_examples "editing a proposal note" do
+    it "edits a proposal note" do
+      click_on "Private notes"
+      within ".comment", match: :first do
+        click_on "Edit note"
+      end
 
-    within ".edit_proposal_note" do
-      expect(page).to have_content("Test body")
-      fill_in :proposal_note_body, with: "New awesome body"
-      find("*[type=submit]").click
-    end
+      within ".edit_proposal_note" do
+        expect(page).to have_content("Test body")
+        fill_in :proposal_note_body, with: "New awesome body"
+        find("*[type=submit]").click
+      end
 
-    expect(page).to have_admin_callout("successfully updated")
-    click_on "Private notes"
-    expect(page).to have_content("New awesome body")
+      expect(page).to have_admin_callout("successfully updated")
+      click_on "Private notes"
+      expect(page).to have_content("New awesome body")
+    end
+  end
+
+  it_behaves_like "editing a proposal note"
+
+  context "when the author is a process admin" do
+    let(:user) { create(:process_admin, :confirmed, organization:, participatory_process: participatory_space) }
+
+    it_behaves_like "editing a proposal note"
   end
 
   it "does not display the edited status" do

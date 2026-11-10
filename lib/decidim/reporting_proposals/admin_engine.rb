@@ -10,11 +10,12 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        # Add admin engine routes here
-        put :hide_proposal, to: "proposals#hide_proposal"
-        post :add_photos, to: "proposals#add_photos"
-        delete :remove_photo, to: "proposals#remove_photo"
-        resources :proposal_notes, only: :update
+        constraints(->(request) { Decidim::Admin::OrganizationDashboardConstraint.new(request).matches? }) do
+          put :hide_proposal, to: "proposals#hide_proposal"
+          post :add_photos, to: "proposals#add_photos"
+          delete :remove_photo, to: "proposals#remove_photo"
+          resources :proposal_notes, only: :update
+        end
       end
 
       initializer "decidim_reporting_proposals.admin_mount_routes" do
@@ -29,17 +30,21 @@ module Decidim
 
       initializer "decidim_reporting_proposals.taxonomy_evaluators_routes" do
         Decidim::ParticipatoryProcesses::AdminEngine.routes.append do
-          scope "/participatory_processes/:participatory_process_slug" do
-            resources :taxonomy_evaluators, only: [:index, :edit, :update],
-                                            controller: "/decidim/reporting_proposals/admin/participatory_process_taxonomy_evaluators"
+          constraints(->(request) { Decidim::Admin::OrganizationDashboardConstraint.new(request).matches? }) do
+            scope "/participatory_processes/:participatory_process_slug" do
+              resources :taxonomy_evaluators, only: [:index, :edit, :update],
+                                              controller: "/decidim/reporting_proposals/admin/participatory_process_taxonomy_evaluators"
+            end
           end
         end
 
         if defined?(Decidim::Assemblies::AdminEngine)
           Decidim::Assemblies::AdminEngine.routes.append do
-            scope "/assemblies/:assembly_slug" do
-              resources :taxonomy_evaluators, only: [:index, :edit, :update],
-                                              controller: "/decidim/reporting_proposals/admin/assembly_taxonomy_evaluators"
+            constraints(->(request) { Decidim::Admin::OrganizationDashboardConstraint.new(request).matches? }) do
+              scope "/assemblies/:assembly_slug" do
+                resources :taxonomy_evaluators, only: [:index, :edit, :update],
+                                                controller: "/decidim/reporting_proposals/admin/assembly_taxonomy_evaluators"
+              end
             end
           end
         end

@@ -7,7 +7,7 @@ module Decidim
         helper_method :note
 
         def update
-          enforce_permission_to :edit_note, :proposal_note, proposal_note: note
+          enforce_permission_to :edit_note, :proposal_note, proposal_note: note, proposal: note.proposal
           @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(params)
 
           Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, note) do

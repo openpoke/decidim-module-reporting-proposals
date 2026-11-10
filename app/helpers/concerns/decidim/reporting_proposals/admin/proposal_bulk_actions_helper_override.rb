@@ -8,8 +8,11 @@ module Decidim
 
         included do
           def find_evaluators_for_select(participatory_space, _current_user)
+            evaluator_roles = participatory_space.user_roles(:evaluator)
+            return [] if evaluator_roles.empty?
+
             # assembly user roles include the ancestor assemblies ones, so a strict space check is needed
-            evaluator_roles = participatory_space.user_roles(:evaluator).for_space(participatory_space).order_by_name
+            evaluator_roles = evaluator_roles.for_space(participatory_space).order_by_name
             evaluators = Decidim::User.where(id: evaluator_roles.pluck(:decidim_user_id)).to_a
 
             evaluator_roles.map do |role|

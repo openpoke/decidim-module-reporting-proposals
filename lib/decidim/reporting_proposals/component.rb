@@ -9,6 +9,7 @@ Decidim.register_component(:reporting_proposals) do |component|
   component.admin_engine = Decidim::Proposals::AdminEngine
   component.stylesheet = "decidim/proposals/proposals"
   component.icon = "media/images/decidim_proposals.svg"
+  component.icon_key = "chat-new-line"
 
   component.on(:create) do |instance|
     admin_user = GlobalID::Locator.locate(instance.versions.first.whodunnit)
@@ -37,24 +38,33 @@ Decidim.register_component(:reporting_proposals) do |component|
 
   component.permissions_class_name = "Decidim::Proposals::Permissions"
 
-  REP_POSSIBLE_SORT_ORDERS = %w(default random recent most_liked most_voted most_commented most_followed with_more_authors).freeze
+  sort_order_choices = lambda do |context|
+    component = context[:component]
+    orders = POSSIBLE_SORT_ORDERS.dup
+
+    orders = orders.excluding(WITH_MORE_AUTHORS_ORDER) unless component && Decidim::Proposals::Proposal.with_more_authors_available?(component)
+    orders = orders.excluding(MOST_COMMENTED_ORDER) unless component && Decidim::Proposals::Proposal.most_commented_available?(component)
+    orders = orders.excluding(MOST_LIKED_ORDER) unless component && Decidim::Proposals::Proposal.most_liked_available?(component)
+
+    orders
+  end
 
   component.settings(:global) do |settings|
     settings.attribute :taxonomy_filters, type: :taxonomy_filters
-    settings.attribute :vote_limit, type: :integer, default: 0
-    settings.attribute :minimum_votes_per_user, type: :integer, default: 0
-    settings.attribute :proposal_limit, type: :integer, default: 0
+    settings.attribute :vote_limit, type: :integer, default: 0, required: true
+    settings.attribute :minimum_votes_per_user, type: :integer, default: 0, required: true
+    settings.attribute :proposal_limit, type: :integer, default: 0, required: true
     settings.attribute :proposal_length, type: :integer, default: 500
     settings.attribute :proposal_edit_time, type: :enum, default: "limited", choices: %w(limited infinite)
     settings.attribute :edit_time, type: :integer_with_units, default: [5, "minutes"], required: true, units: %w(minutes hours days)
     settings.attribute :proposal_edit_before_minutes, type: :integer, default: 5
-    settings.attribute :threshold_per_proposal, type: :integer, default: 0
+    settings.attribute :threshold_per_proposal, type: :integer, default: 0, required: true
     settings.attribute :can_accumulate_votes_beyond_threshold, type: :boolean, default: false
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
-    settings.attribute :default_sort_order, type: :select, default: "default", choices: REP_POSSIBLE_SORT_ORDERS
+    settings.attribute :default_sort_order, type: :select, default: "automatic", choices: ->(context) { sort_order_choices.call(context) }
     settings.attribute :official_proposals_enabled, type: :boolean, default: true
     settings.attribute :comments_enabled, type: :boolean, default: true
-    settings.attribute :comments_max_length, type: :integer, required: false
+    settings.attribute :comments_max_length, type: :integer, required: true
     settings.attribute :geocoding_enabled, type: :boolean, default: true
     settings.attribute :geocoding_comparison_enabled, type: :boolean, default: true
     settings.attribute :geocoding_comparison_radius, type: :integer, default: 30
@@ -91,17 +101,19 @@ Decidim.register_component(:reporting_proposals) do |component|
     settings.attribute :proposal_answering_enabled, type: :boolean, default: true
     settings.attribute :publish_answers_immediately, type: :boolean, default: true
     settings.attribute :answers_with_costs, type: :boolean, default: false
-    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: REP_POSSIBLE_SORT_ORDERS
+    settings.attribute :default_sort_order, type: :select, include_blank: true, choices: ->(context) { sort_order_choices.call(context) }
     settings.attribute :amendment_creation_enabled, type: :boolean, default: true
     settings.attribute :amendment_reaction_enabled, type: :boolean, default: true
     settings.attribute :amendment_promotion_enabled, type: :boolean, default: true
-    settings.attribute :amendments_visibility, type: :enum, default: "all", choices: Decidim.config.amendments_visibility_options
+    settings.attribute :amendments_visibility, type: :enum, default: "all", choices: ->(_context) { Decidim.config.amendments_visibility_options }
     settings.attribute :announcement, type: :text, translated: true, editor: true
-    settings.attribute :automatic_hashtags, type: :text, editor: false, required: false
-    settings.attribute :suggested_hashtags, type: :text, editor: false, required: false
   end
 
-  component.register_stat :reporting_proposals_count, primary: true, priority: Decidim::StatsRegistry::HIGH_PRIORITY do |components, start_at, end_at|
+  component.register_stat :reporting_proposals_count,
+                          primary: true,
+                          priority: Decidim::StatsRegistry::HIGH_PRIORITY,
+                          icon_name: "chat-new-line",
+                          tooltip_key: "proposals_count_tooltip" do |components, start_at, end_at|
     Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_withdrawn.not_hidden.count
   end
 
@@ -119,12 +131,19 @@ Decidim.register_component(:reporting_proposals) do |component|
     proposals.sum(:likes_count)
   end
 
-  component.register_stat :reporting_proposals_comments_count, tag: :comments do |components, start_at, end_at|
+  component.register_stat :reporting_proposals_comments_count,
+                          icon_name: "chat-1-line",
+                          tooltip_key: "comments_count",
+                          tag: :comments do |components, start_at, end_at|
     proposals = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_hidden
     proposals.sum(:comments_count)
   end
 
-  component.register_stat :reporting_proposals_followers_count, tag: :followers, priority: Decidim::StatsRegistry::LOW_PRIORITY do |components, start_at, end_at|
+  component.register_stat :reporting_proposals_followers_count,
+                          tag: :followers,
+                          icon_name: "user-follow-line",
+                          tooltip_key: "followers_count_tooltip",
+                          priority: Decidim::StatsRegistry::LOW_PRIORITY do |components, start_at, end_at|
     proposals_ids = Decidim::Proposals::FilteredProposals.for(components, start_at, end_at, :reporting_proposals).published.not_hidden.pluck(:id)
     Decidim::Follow.where(decidim_followable_type: "Decidim::Proposals::Proposal", decidim_followable_id: proposals_ids).count
   end
@@ -164,9 +183,6 @@ Decidim.register_component(:reporting_proposals) do |component|
   end
 
   component.imports :proposals do |imports|
-    imports.form_view = "decidim/proposals/admin/imports/proposals_fields"
-    imports.form_class_name = "Decidim::Proposals::Admin::ProposalsFileImportForm"
-
     imports.messages do |msg|
       msg.set(:resource_name) { |count: 1| I18n.t("decidim.proposals.admin.imports.resources.proposals", count:) }
       msg.set(:title) { I18n.t("decidim.proposals.admin.imports.title.proposals") }

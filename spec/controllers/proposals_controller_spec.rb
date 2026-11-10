@@ -93,6 +93,42 @@ module Decidim::Proposals
 
     it_behaves_like "geocoding comparison", true
 
+    describe "GET compare" do
+      let(:proposal) { create(:proposal, :draft, component:, users: [current_user]) }
+
+      it "redirects to the preview when there are no similar proposals" do
+        get :compare, params: { id: proposal.id }
+
+        expect(response).to redirect_to("#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview")
+      end
+
+      context "when the proposal belongs to another component" do
+        let(:proposal) { create(:proposal, :draft, component: create(:reporting_proposals_component, organization:), users: [current_user]) }
+
+        it "does not find the proposal" do
+          expect { get :compare, params: { id: proposal.id } }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      context "when the proposal is hidden" do
+        let(:proposal) { create(:proposal, :hidden, component:, users: [current_user]) }
+
+        it "does not find the proposal" do
+          expect { get :compare, params: { id: proposal.id } }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      context "when the proposal is already published" do
+        let(:proposal) { create(:proposal, component:, users: [current_user]) }
+
+        it "redirects to the proposal" do
+          get :compare, params: { id: proposal.id }
+
+          expect(response).to redirect_to(Decidim::ResourceLocatorPresenter.new(proposal).path)
+        end
+      end
+    end
+
     context "when component is a normal proposal component" do
       let(:component) { create(:proposal_component, settings:) }
 

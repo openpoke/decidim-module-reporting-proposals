@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "decidim/assemblies/test/factories"
+require "decidim/initiatives/test/factories"
 
 module Decidim::ReportingProposals
   # rubocop:disable RSpec/AnyInstance
@@ -254,6 +255,16 @@ module Decidim::ReportingProposals
 
     context "when the taxonomy has no mapped evaluators" do
       let!(:evaluator_role) { create(:participatory_process_user_role, role: "evaluator", user: evaluator_user, participatory_process:) }
+
+      it "does not assign any evaluator" do
+        expect do
+          perform_enqueued_jobs { subject.call }
+        end.not_to change(Decidim::Proposals::EvaluationAssignment, :count)
+      end
+    end
+
+    context "when the space has no user roles" do
+      let!(:component) { create(:proposal_component, participatory_space: create(:initiative, organization:)) }
 
       it "does not assign any evaluator" do
         expect do
