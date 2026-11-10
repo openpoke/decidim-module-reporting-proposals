@@ -116,7 +116,7 @@ module Decidim::ReportingProposals
         context "when the user is not admin" do
           let(:user) { create(:user, :confirmed, organization:) }
 
-          it_behaves_like "hide failure", ""
+          it_behaves_like "hide failure", "You are not authorized to perform this action."
         end
 
         context "when the user is not in the organization" do

@@ -44,7 +44,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Result successfully created.")
+      expect(page).to have_callout("Result successfully created.")
       within "tr", text: "My result" do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -67,7 +67,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Result successfully updated.")
+      expect(page).to have_callout("Result successfully updated.")
       within "tr", text: translated(result.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -91,7 +91,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Result successfully updated.")
+      expect(page).to have_callout("Result successfully updated.")
       within "tr", text: translated(result.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -136,7 +136,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Project successfully created.")
+      expect(page).to have_callout("Project successfully created.")
 
       within "tr", text: "My project" do
         find("button[data-controller='dropdown']").click
@@ -165,7 +165,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Project successfully updated.")
+      expect(page).to have_callout("Project successfully updated.")
       within "tr", text: translated(project.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -194,7 +194,7 @@ describe "Admin find_resource_manifest" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("Project successfully updated.")
+      expect(page).to have_callout("Project successfully updated.")
       within "tr", text: translated(project.title) do
         find("button[data-controller='dropdown']").click
         click_on "Edit"
@@ -285,7 +285,7 @@ describe "Admin find_resource_manifest" do
           click_on "Close"
         end
 
-        expect(page).to have_admin_callout("Meeting successfully closed")
+        expect(page).to have_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
         within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do
@@ -319,7 +319,7 @@ describe "Admin find_resource_manifest" do
           click_on "Close"
         end
 
-        expect(page).to have_admin_callout("Meeting successfully closed")
+        expect(page).to have_callout("Meeting successfully closed")
         expect(page).to have_content("Yes")
 
         within "tr", text: Decidim::Meetings::MeetingPresenter.new(meeting).title do

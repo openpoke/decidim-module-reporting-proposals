@@ -21,7 +21,7 @@ gem "puma", ">= 6.3.1"
 group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "byebug", "~> 13.0", platform: :mri
-  gem "decidim-decidim_awesome", github: "decidim-ice/decidim-module-decidim_awesome", branch: "main"
+  gem "decidim-decidim_awesome", github: "decidim-ice/decidim-module-decidim_awesome"
   gem "decidim-dev", DECIDIM_VERSION
   gem "decidim-initiatives", DECIDIM_VERSION
   gem "decidim-templates", DECIDIM_VERSION

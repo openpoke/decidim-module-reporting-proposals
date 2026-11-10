@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Proposals
     describe PublishProposalEvent do
-      let(:resource) { create(:proposal, title: "A nice proposal") }
+      let(:resource) { create(:proposal) }
       let(:participatory_process) { create(:participatory_process, organization:) }
       let(:proposal_component) { create(:proposal_component, participatory_space: participatory_process) }
       let(:resource_title) { decidim_sanitize_translated(resource.title) }
@@ -74,7 +74,7 @@ module Decidim
       end
 
       context "when the proposal is official" do
-        let(:resource) { create(:proposal, :official, title: "A nice proposal") }
+        let(:resource) { create(:proposal, :official) }
         let(:extra) { { participatory_space: resource.participatory_space } }
 
         describe "notification_title" do

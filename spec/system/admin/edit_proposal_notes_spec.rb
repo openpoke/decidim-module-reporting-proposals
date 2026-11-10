@@ -53,7 +53,7 @@ describe "Edit Proposal Notes" do
         find("*[type=submit]").click
       end
 
-      expect(page).to have_admin_callout("successfully updated")
+      expect(page).to have_callout("Proposal note successfully updated.")
       click_on "Private notes"
       expect(page).to have_content("New awesome body")
     end

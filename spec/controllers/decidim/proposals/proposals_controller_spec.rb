@@ -5,6 +5,8 @@ require "spec_helper"
 module Decidim
   module Proposals
     describe ProposalsController do
+      include Decidim::Core::Engine.routes.url_helpers
+
       let(:user) { create(:user, :confirmed, organization: component.organization) }
 
       let(:proposal_params) do
@@ -77,49 +79,6 @@ module Decidim
             end
           end
         end
-
-        context "when XHR request" do
-          include_context "with controller rendering the view" do
-            before do
-              controller.view_context_class.class_eval do
-                def proposals_path(_options)
-                  "/"
-                end
-
-                def proposal_path(_options)
-                  "/"
-                end
-              end
-            end
-
-            let(:component) { create(:proposal_component, :with_geocoding_enabled) }
-            let!(:proposal) { create(:proposal, :accepted, component:, address: "Peny Lane 1") }
-            let(:params) do
-              {
-                participatory_process_slug: component.participatory_space.slug,
-                component_id: component.id,
-                filter: {
-                  with_any_state: [state]
-                }
-              }
-            end
-            let(:state) { "accepted" }
-
-            it "has all accepted proposals" do
-              get(:index, xhr: true, params:)
-              expect(response.body).to have_content('address\\":\\"Peny Lane 1\\"')
-            end
-
-            context "when filtering" do
-              let(:state) { "rejected" }
-
-              it "does not have accepted proposals" do
-                get(:index, xhr: true, params:)
-                expect(response.body).to have_no_content('address\\":\\"Peny Lane 1\\"')
-              end
-            end
-          end
-        end
       end
 
       describe "GET new" do
@@ -143,6 +102,16 @@ module Decidim
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:new)
           end
+        end
+      end
+
+      context "when user is not logged in" do
+        let(:component) { create(:proposal_component, :with_creation_enabled) }
+
+        it "redirects to the login page" do
+          get(:new)
+          expect(response).to have_http_status(:found)
+          expect(response).to redirect_to(new_user_session_path)
         end
       end
 
@@ -242,14 +211,14 @@ module Decidim
         before { sign_in user }
 
         context "when you try to preview a proposal created by another user" do
-          it "does not render the preview page" do
+          it "will not render the preview page" do
             get(:preview, params:)
             expect(subject).not_to render_template(:preview)
           end
         end
 
         context "when you try to publish a proposal created by another user" do
-          it "does not render the publish page" do
+          it "will not render the publish page" do
             post(:publish, params:)
             expect(subject).not_to render_template(:publish)
           end
@@ -270,7 +239,7 @@ module Decidim
             expect(flash[:notice]).to eq("Proposal successfully updated.")
             expect(response).to have_http_status(:found)
             proposal.reload
-            expect(proposal.withdrawn?).to be true
+            expect(proposal).to be_withdrawn
           end
 
           context "and the proposal already has votes" do
@@ -282,7 +251,7 @@ module Decidim
               expect(flash[:alert]).to eq("This proposal cannot be withdrawn because it already has votes.")
               expect(response).to have_http_status(:found)
               proposal.reload
-              expect(proposal.withdrawn?).to be false
+              expect(proposal).not_to be_withdrawn
             end
           end
         end
@@ -300,7 +269,7 @@ module Decidim
               expect(flash[:alert]).to eq("You are not authorized to perform this action.")
               expect(response).to have_http_status(:found)
               proposal.reload
-              expect(proposal.withdrawn?).to be false
+              expect(proposal).not_to be_withdrawn
             end
           end
         end

@@ -54,7 +54,7 @@ describe "Admin manages proposal answer templates" do
           page.find("*[type=submit]").click
         end
 
-        expect(page).to have_admin_callout("Template created successfully.")
+        expect(page).to have_callout("Template created successfully.")
         expect(page).to have_current_path decidim_admin_templates.proposal_answer_templates_path
         within ".table-list" do
           expect(page).to have_i18n_content(scope_name)
@@ -85,7 +85,7 @@ describe "Admin manages proposal answer templates" do
         click_on "Answer"
       end
 
-      expect(page).to have_admin_callout("Proposal successfully answered")
+      expect(page).to have_callout("Proposal successfully answered")
 
       within "tr", text: proposal.title["en"] do
         expect(page).to have_content("Rejected")
