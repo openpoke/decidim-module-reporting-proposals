@@ -19,7 +19,7 @@ env:
 jobs:
   build:
     name: Build & Precompile
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     services:
       postgres:
@@ -71,7 +71,7 @@ jobs:
 
   test:
     name: Integration Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     strategy:
       matrix:
