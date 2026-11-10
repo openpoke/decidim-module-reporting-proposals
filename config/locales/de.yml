@@ -81,7 +81,11 @@ de:
               standardmäßig im Rastermodus angezeigt und das erste Bild wird auf der
               Karte angezeigt.
             awesome_voting_manifest: Art der Unterstützung
-            awesome_voting_manifest_help_html: <strong class="text-alert">Seien Sie sich bewusst, dass eine Änderung dieser Einstellung während einer Abstimmungsperiode zu ungenauen oder unerwarteten Ergebnissen führen kann.</strong><br>Beachten Sie auch, dass diese Einstellung nur bearbeitet werden kann, wenn die Komponente noch keine Unterstützung hat.
+            awesome_voting_manifest_help_html: <strong class="text-alert">Seien Sie
+              sich bewusst, dass eine Änderung dieser Einstellung während einer Abstimmungsperiode
+              zu ungenauen oder unerwarteten Ergebnissen führen kann.</strong><br>Beachten
+              Sie auch, dass diese Einstellung nur bearbeitet werden kann, wenn die
+              Komponente noch keine Unterstützung hat.
             awesome_voting_manifest_options:
               default: Einfache Abstimmung (Standard)
               voting_cards: Abstimmung mit farbigen Karten
@@ -180,11 +184,16 @@ de:
               werden sollen, wähle hier 0.
             vote_limit: Unterstützungslimit pro Benutzer
             voting_cards_box_title: Titel für das Abstimmungsfeld
-            voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen". Verwenden Sie "-", um den Text auszublenden.
-            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares Pop-Up-Fenster)
-            voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization} verwendet wird"
+            voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen".
+              Verwenden Sie "-", um den Text auszublenden.
+            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares
+              Pop-Up-Fenster)
+            voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln
+              sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}
+              verwendet wird"
             voting_cards_show_abstain: Enthaltungsmöglichkeit hinzufügen
-            voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen an, wenn "Hilfe" angewählt wird
+            voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen
+              an, wenn "Hilfe" angewählt wird
           step:
             amendment_creation_enabled: Änderungsvorschläge erlauben
             amendment_creation_enabled_help: User können Änderungsvorschläge anbringen.
