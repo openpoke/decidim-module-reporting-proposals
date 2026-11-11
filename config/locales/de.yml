@@ -178,7 +178,7 @@ de:
     download_your_data:
       help:
         proposals:
-          answer_time: The time it took for the proposal to be answered
+          answer_time: Vergangene Zeit bis zur Vorschlagsbeantwortung
     events:
       proposals:
         proposal_published:
@@ -203,7 +203,7 @@ de:
     open_data:
       help:
         proposals:
-          answer_time: The time it took for the proposal to be answered
+          answer_time: Vergangene Zeit bis zur Vorschlagsbeantwortung
     proposals:
       admin:
         proposals:
