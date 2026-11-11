@@ -80,7 +80,7 @@ module Decidim
         # Assembly user roles include the ancestor assemblies ones, so the
         # scope is restricted to the roles defined in the space itself.
         def current_evaluators
-          @current_evaluators ||= TaxonomyEvaluator.where(
+          @current_evaluators ||= TaxonomyEvaluator.where( # rubocop:disable Decidim/OrganizationScopedFinder
             taxonomy: form.taxonomy,
             evaluator_role: form.current_participatory_space.user_roles(:evaluator).for_space(form.current_participatory_space)
           )

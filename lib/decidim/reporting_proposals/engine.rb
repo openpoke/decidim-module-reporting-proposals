@@ -12,7 +12,6 @@ module Decidim
       config.to_prepare do
         ComponentValidator.include(Decidim::ReportingProposals::ComponentValidatorOverride)
         Decidim::FormBuilder.prepend(Decidim::ReportingProposals::FormBuilderOverride)
-        Decidim::ResourceHelper.include(Decidim::ReportingProposals::ResourceHelperOverride)
         Decidim::Map::Autocomplete::Builder.prepend(Decidim::ReportingProposals::MapBuilderOverride)
         Decidim::LinkedResourcesForCell.include(Decidim::ReportingProposals::LinkedResourcesForCellOverride)
         Decidim::Proposals::ProposalSerializer.include(Decidim::ReportingProposals::ProposalSerializerOverride)
@@ -29,12 +28,12 @@ module Decidim
         Decidim::Budgets::Admin::ProjectForm.prepend(Decidim::ReportingProposals::MapIncludedProposalsForFormOverride)
         Decidim::Budgets::Admin::CreateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
         Decidim::Budgets::Admin::UpdateProject.include(Decidim::ReportingProposals::CreateProjectOverride)
-        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::UpdateProposalAnswerTemplate.prepend(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
         Decidim::Proposals::Admin::Permissions.include(Decidim::ReportingProposals::Admin::PermissionsOverride)
         Decidim::ParticipatoryProcesses::Permissions.prepend(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride)
         Decidim::Assemblies::Permissions.prepend(Decidim::ReportingProposals::ParticipatorySpacePermissionsOverride) if defined?(Decidim::Assemblies::AdminEngine)
         Decidim::ParticipatorySpaceRoleConfig::Evaluator.prepend(Decidim::ReportingProposals::ParticipatorySpaceRoleConfig::EvaluatorOverride)
-        Decidim::Templates::Admin::CreateProposalAnswerTemplate.include(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
+        Decidim::Templates::Admin::CreateProposalAnswerTemplate.prepend(Decidim::ReportingProposals::Admin::ProposalAnswerTemplateOverride) if defined?(Decidim::Templates)
 
         # The :proposal resource manifest is built eagerly when decidim-proposals is required (its component.rb),
         # before this to_prepare runs, so including the override into ResourceManifest does not affect the
@@ -70,14 +69,16 @@ module Decidim
         # We'll make sure this does not break rails in situations where database is not installed (ie, creating the test or development apps)
         begin
           Decidim.participatory_space_manifests.each do |manifest|
-            manifest.model_class_name.constantize.new.user_roles.model.include(Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride)
+            role_class = manifest.model_class_name.constantize.new.user_roles.model
+            # spaces without user roles (initiatives) return a relation of the space model itself
+            role_class.include(Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride) if role_class.include?(Decidim::ParticipatorySpaceUser)
           end
         rescue StandardError => e
           Rails.logger.error("Error while trying to include Decidim::ReportingProposals::ParticipatorySpaceUserRoleOverride: #{e.message}")
         end
       end
 
-      initializer "decidim_reporting_proposals.append_compare_route", after: :append_routes do
+      initializer "decidim_reporting_proposals.append_compare_route" do
         Decidim::Proposals::Engine.routes.append do
           resources :proposals, only: [] do
             member do
@@ -88,7 +89,7 @@ module Decidim
       end
 
       # controllers and helpers overrides
-      initializer "decidim_reporting_proposals.overrides", after: "decidim.action_controller" do
+      initializer "decidim_reporting_proposals.overrides", after: "decidim_core.action_controller" do
         config.to_prepare do
           Decidim::Admin::ComponentsController.include(Decidim::ReportingProposals::Admin::NeedsHeaderSnippets)
           Decidim::Proposals::ProposalsController.include(Decidim::ReportingProposals::ProposalsControllerOverride)
@@ -112,7 +113,11 @@ module Decidim
 
       initializer "decidim_reporting_proposals.mount_routes" do
         Decidim::Core::Engine.routes do
-          mount Decidim::ReportingProposals::Engine, at: "/reporting_proposals", as: "decidim_reporting_proposals"
+          extend Decidim::Routes::LocaleRedirects
+
+          scope "/:locale", **locale_scope_options do
+            mount Decidim::ReportingProposals::Engine, at: "/reporting_proposals", as: "decidim_reporting_proposals"
+          end
         end
       end
 
@@ -141,14 +146,6 @@ module Decidim
       initializer "decidim_reporting_proposals.reported_mailer_override", after: :load_config_initializers do
         Rails.autoloaders.main.on_load("Decidim::ReportedMailer") do |reported_mailer|
           reported_mailer.include(Decidim::ReportingProposals::ReportedMailerOverride)
-        end
-      end
-
-      initializer "decidim_reporting_proposals.on_hiding_resource" do
-        ActiveSupport::Notifications.subscribe("decidim.events.reports.resource_hidden") do |_event_name, data|
-          Decidim::ReportingProposals::Admin::HiddenResourceMailer.notify_mail(
-            data[:resource], data[:affected_users], data[:extra][:report_reasons]
-          ).deliver_later
         end
       end
 

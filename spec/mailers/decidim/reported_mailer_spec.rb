@@ -4,15 +4,22 @@ require "spec_helper"
 
 module Decidim
   describe ReportedMailer do
-    let(:organization) { create(:organization, name: { en: "Test Organization" }) }
+    let(:organization) { create(:organization) }
     let(:user) { create(:user, :admin, organization:) }
-    let(:participatory_space) { create(:participatory_process, title: Decidim::Faker::Localized.sentence, organization:) }
-    let(:component) { create(:component, participatory_space:) }
+    let(:component) { create(:component, organization:) }
     let(:reportable) { create(:proposal, title: Decidim::Faker::Localized.sentence, body: Decidim::Faker::Localized.paragraph(sentence_count: 3)) }
     let(:moderation) { create(:moderation, reportable:, participatory_space: component.participatory_space, report_count: 1) }
     let(:author) { reportable.creator_identity }
     let!(:report) { create(:report, moderation:, details: "bacon eggs spam") }
     let(:decidim) { Decidim::Core::Engine.routes.url_helpers }
+
+    before do
+      if reportable.coauthorships.first.author.is_a?(Decidim::Organization)
+        reportable.coauthorships.first.author.update!(name: { en: "O'Higgins" })
+      else
+        reportable.coauthorships.first.author.update!(name: "O'Higgins")
+      end
+    end
 
     describe "#report" do
       let(:mail) { described_class.report(user, report) }
@@ -29,7 +36,7 @@ module Decidim
 
       describe "email body" do
         it "includes the participatory space name" do
-          expect(email_body(mail)).to match(moderation.participatory_space.title["en"])
+          expect(email_body(mail)).to include(decidim_escape_translated(moderation.participatory_space.title))
         end
 
         it "includes link to admin this resource" do
@@ -54,7 +61,7 @@ module Decidim
           expect(email_body(mail)).to match(report.details)
         end
 
-        it "doesn't include the report details if they are not present" do
+        it "does not include the report details if they are not present" do
           report.details = nil
 
           expect(email_body(mail)).not_to match("<b>Details</b>")
@@ -66,8 +73,8 @@ module Decidim
 
         it "includes the reported content" do
           expect(email_body(mail)).to match("(ID: #{reportable.id})")
-          expect(email_body(mail)).to match(reportable.title["en"])
-          expect(email_body(mail)).to match(reportable.body["en"])
+          expect(email_body(mail)).to match(translated(reportable.title))
+          expect(email_body(mail)).to match(translated(reportable.body))
         end
 
         it "renders the organization default language when the content language cannot be deduced by the reported content itself" do
@@ -94,7 +101,7 @@ module Decidim
 
         context "when the author is a user" do
           it "includes the name of the author and a link to their profile" do
-            expect(mail).to have_link(author.name, href: decidim.profile_url(author.nickname, host: organization.host))
+            expect(mail).to have_link(author.name, href: decidim.profile_url(author.nickname, locale: I18n.locale, host: organization.host))
           end
         end
 
@@ -105,7 +112,7 @@ module Decidim
             author.save!
           end
 
-          it "includes the name of the author but no link to his profile" do
+          it "includes the name of the author but no link to their profile" do
             expect(mail).to have_no_link(author.name)
           end
         end
@@ -120,19 +127,19 @@ module Decidim
 
         context "when the author is a meeting" do
           let(:meetings_component) { create(:component, manifest_name: :meetings, organization: reportable.organization) }
-          let!(:meeting) { create(:meeting, title: { en: "A simple title" }, component: meetings_component) }
+          let!(:meeting) { create(:meeting, component: meetings_component) }
 
           it "includes the title of the meeting" do
             reportable.coauthorships.destroy_all
             create(:coauthorship, coauthorable: reportable, author: meeting)
 
-            expect(email_body(mail)).to match(meeting.title["en"])
+            expect(email_body(mail)).to have_content(translated(meeting.title))
           end
         end
       end
     end
 
-    describe "#hide" do
+    describe "#hidden_automatically" do
       let(:mail) { described_class.hidden_automatically(user, report) }
 
       let(:mail_subject) { "Un contingut s'ha ocultat automàticament" }
@@ -140,6 +147,7 @@ module Decidim
 
       let(:body) { "ocultat automàticament" }
       let(:default_body) { "has been hidden" }
+      let(:locale) { nil }
 
       include_examples "localised email"
     end

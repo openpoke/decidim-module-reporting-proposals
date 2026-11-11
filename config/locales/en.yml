@@ -19,15 +19,6 @@ en:
             add_attachments:
               only_images: must contain only images
   decidim:
-    admin:
-      hidden_resource_mailer:
-        notify_mail:
-          body_1: An administrator removed your proposal because it has been reported.
-          body_2: If you feel that has been a mistake please contact the administrators
-            of
-          hello: Hello,
-          reason: 'Reason: %{reason}'
-          subject: Your proposal has been hidden
     components:
       proposals:
         settings:
@@ -85,6 +76,8 @@ en:
             amendments_wizard_help_text: Amendments Wizard help text
             announcement: Announcement
             attachments_allowed: Allow attachments
+            attachments_allowed_help: By enabling this option, proposals will default
+              to grid mode, and the first image will appear on the card.
             awesome_voting_manifest: Support type
             awesome_voting_manifest_help_html: <span class="text-alert">Be aware that
               changing this setting in the middle of a votation period can result
@@ -95,15 +88,14 @@ en:
               voting_cards: Voting using coloured cards
             can_accumulate_votes_beyond_threshold: Can accumulate supports beyond
               threshold
-            collaborative_drafts_enabled: Collaborative drafts enabled
             comments_enabled: Comments enabled
             comments_max_length: Comments max length (Leave 0 for default value)
             default_sort_order: Default proposal sorting
-            default_sort_order_help: Default means that if the supports are enabled,
+            default_sort_order_help: Automatic means that if the supports are enabled,
               the proposals will be shown sorted by random, and if the supports are
               blocked, then they will be sorted by the most supported.
             default_sort_order_options:
-              default: Default
+              automatic: Automatic
               most_commented: Most commented
               most_followed: Most followed
               most_liked: Most liked
@@ -208,18 +200,17 @@ en:
               the amendments made.
             announcement: Announcement
             answers_with_costs: Enable costs on proposal answers
-            automatic_hashtags: Hashtags added to all proposals
             comments_blocked: Comments blocked
             creation_enabled: Participants can create proposals
             creation_enabled_readonly: This setting is disabled when you activate
               the Participatory Texts functionality. To upload proposals as participatory
               text click on the Participatory Texts button and follow the instructions.
             default_sort_order: Default proposal sorting
-            default_sort_order_help: Default it means that if the supports are enabled,
+            default_sort_order_help: Automatic means that if the supports are enabled,
               the proposals will be shown sorted by random, and if the supports are
               blocked, then they will be sorted by the most supported.
             default_sort_order_options:
-              default: Default
+              automatic: Automatic
               most_commented: Most commented
               most_followed: Most followed
               most_liked: Most liked
@@ -236,7 +227,6 @@ en:
               them and using the action for publication. For more info on how this
               works, see <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication"
               target="_blank">proposals' answers documentation page</a>.
-            suggested_hashtags: Hashtags suggested to participants for new proposals
             votes_blocked: Supports blocked
             votes_enabled: Supports enabled
             votes_hidden: Supports hidden (if supports are enabled, checking this
@@ -421,14 +411,6 @@ en:
           proposals: Reporting proposals
         menu:
           taxonomy_evaluators: Taxonomy evaluators
-        notification_answer_proposal_mailer:
-          notify_proposal_author:
-            email_body: |
-              Your proposal has been answered.
-              You can read the answer here:<br>
-              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hi, %{recipient}!
-            subject: Your proposal has been answered
         proposal_notes:
           modal:
             body: Note

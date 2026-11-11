@@ -7,7 +7,7 @@ module Decidim
         helper_method :note
 
         def update
-          enforce_permission_to :edit_note, :proposal_note, proposal_note: note
+          enforce_permission_to :edit_note, :proposal_note, proposal_note: note, proposal: note.proposal
           @notes_form = form(Decidim::Proposals::Admin::ProposalNoteForm).from_params(params)
 
           Decidim::ReportingProposals::Admin::UpdateProposalNote.call(@notes_form, note) do
@@ -18,7 +18,7 @@ module Decidim
             on(:invalid) do
               flash[:alert] = I18n.t("proposal_notes.update.invalid", scope: "decidim.reporting_proposals.admin")
             end
-            redirect_back(fallback_location: decidim_admin.root_path)
+            redirect_back_or_to(decidim_admin.root_path)
           end
         end
 

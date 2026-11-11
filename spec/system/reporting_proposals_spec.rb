@@ -15,8 +15,6 @@ describe "Reporting proposals overrides" do
            participatory_space: participatory_process,
            settings: { taxonomy_filters: [taxonomy_filter.id], attachments_allowed: attachments })
   end
-  let(:automatic_hashtags) { "HashtagAuto1 HashtagAuto2" }
-  let(:suggested_hashtags) { "HashtagSuggested1 HashtagSuggested2" }
   let!(:user) { create(:user, :confirmed, organization:) }
   let(:proposal_title) { "More sidewalks and less roads" }
   let(:proposal_body) { "Cities need more people, not more cars" }

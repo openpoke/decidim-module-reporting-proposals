@@ -37,7 +37,7 @@ describe "Admin manages proposals evaluators" do
     end
 
     it "shows an update button" do
-      expect(page).to have_button("Assign", count: 1)
+      expect(page).to have_button(id: "js-submit-assign-proposals-to-evaluator", count: 1)
     end
 
     context "when submitting the form" do
@@ -45,7 +45,7 @@ describe "Admin manages proposals evaluators" do
         perform_enqueued_jobs do
           within "#js-form-assign-proposals-to-evaluator" do
             tom_select("#assign_evaluator_role_ids", option_id: evaluator_role.id)
-            click_on("Assign")
+            click_on(id: "js-submit-assign-proposals-to-evaluator")
           end
         end
       end
@@ -123,18 +123,18 @@ describe "Admin manages proposals evaluators" do
     end
 
     it "shows an update button" do
-      expect(page).to have_button("Unassign", count: 1)
+      expect(page).to have_button(id: "js-submit-unassign-proposals-from-evaluator", count: 1)
     end
 
     context "when submitting the form" do
       before do
         within "#js-form-unassign-proposals-from-evaluator" do
           tom_select("#unassign_evaluator_role_ids", option_id: evaluator_role.id)
-          click_on("Unassign")
+          click_on(id: "js-submit-unassign-proposals-from-evaluator")
         end
       end
 
-      it "unassigns the proposals to the evaluator" do
+      it "unassigns the proposals from the evaluator" do
         expect(page).to have_content("Evaluator unassigned from proposals successfully")
 
         within "tr", text: translated(proposal.title) do

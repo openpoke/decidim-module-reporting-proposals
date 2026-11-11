@@ -1,10 +1,10 @@
-ARG DECIDIM_VERSION=0.31
-FROM decidim/decidim:${DECIDIM_VERSION}
+ARG DECIDIM_VERSION=0.32.1
+FROM decidim/decidim-generator:${DECIDIM_VERSION}
+
+RUN apt-get update && apt-get install -y libvips-tools && apt-get clean
 
 WORKDIR /app
 COPY . .
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["bundle", "exec", "bin/rails", "server", "-b", "0.0.0.0"]
-
-

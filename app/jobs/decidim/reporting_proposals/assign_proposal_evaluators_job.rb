@@ -9,6 +9,7 @@ module Decidim
       def perform(data)
         @resource = data[:resource]
         return unless relevant_event?(data)
+        return if participatory_space.user_roles(:evaluator).empty?
         return if evaluator_roles.blank?
 
         evaluator_names = evaluator_roles.map { |role| role.user.name }.join(", ")

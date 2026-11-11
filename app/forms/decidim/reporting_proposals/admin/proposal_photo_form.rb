@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class ProposalPhotoForm < Decidim::Form
         include Decidim::AttachmentAttributes
+
         attachments_attribute :attachments
 
         validate :add_attachments_present

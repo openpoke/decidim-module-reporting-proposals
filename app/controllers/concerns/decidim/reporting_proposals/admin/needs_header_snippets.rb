@@ -15,12 +15,12 @@ module Decidim
           @snippets ||= Decidim::Snippets.new
 
           if reporting_proposals_component? && @snippets.for(:reporting_proposals_manage_component).blank?
-            @snippets.add(:reporting_proposals_manage_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_manage_component_admin"))
+            @snippets.add(:reporting_proposals_manage_component, helpers.stylesheet_pack_tag("decidim_reporting_proposals_manage_component_admin"))
             @snippets.add(:head, @snippets.for(:reporting_proposals_manage_component))
           end
 
           if any_proposals_component? && @snippets.for(:reporting_proposals_list_component).blank?
-            @snippets.add(:reporting_proposals_list_component, ActionController::Base.helpers.stylesheet_pack_tag("decidim_reporting_proposals_list_component_admin"))
+            @snippets.add(:reporting_proposals_list_component, helpers.stylesheet_pack_tag("decidim_reporting_proposals_list_component_admin"))
             @snippets.add(:head, @snippets.for(:reporting_proposals_list_component))
           end
 

@@ -19,15 +19,6 @@ de:
             add_attachments:
               only_images: darf nur Bilder enthalten
   decidim:
-    admin:
-      hidden_resource_mailer:
-        notify_mail:
-          body_1: Ein Administrator hat Ihre Meldung entfernt, weil sie gemeldet wurde.
-          body_2: Wenn Sie glauben, dass dies ein Fehler war, wenden Sie sich bitte
-            an die Administratoren von
-          hello: Guten Tag,
-          reason: 'Grund: %{reason}'
-          subject: Ihre Meldung wurde ausgeblendet
     components:
       proposals:
         settings:
@@ -86,14 +77,20 @@ de:
             amendments_wizard_help_text: Hilfetext für die Änderungsfunktion
             announcement: Ankündigung
             attachments_allowed: Anhänge zulassen
+            attachments_allowed_help: Durch Aktivieren dieser Option werden Vorschläge
+              standardmäßig im Rastermodus angezeigt und das erste Bild wird auf der
+              Karte angezeigt.
             awesome_voting_manifest: Art der Unterstützung
-            awesome_voting_manifest_help_html: <strong class="text-alert">Seien Sie sich bewusst, dass eine Änderung dieser Einstellung während einer Abstimmungsperiode zu ungenauen oder unerwarteten Ergebnissen führen kann.</strong><br>Beachten Sie auch, dass diese Einstellung nur bearbeitet werden kann, wenn die Komponente noch keine Unterstützung hat.
+            awesome_voting_manifest_help_html: <strong class="text-alert">Seien Sie
+              sich bewusst, dass eine Änderung dieser Einstellung während einer Abstimmungsperiode
+              zu ungenauen oder unerwarteten Ergebnissen führen kann.</strong><br>Beachten
+              Sie auch, dass diese Einstellung nur bearbeitet werden kann, wenn die
+              Komponente noch keine Unterstützung hat.
             awesome_voting_manifest_options:
               default: Einfache Abstimmung (Standard)
               voting_cards: Abstimmung mit farbigen Karten
             can_accumulate_votes_beyond_threshold: Kann Unterstützungen über den Schwellenwert
               hinaus sammeln
-            collaborative_drafts_enabled: Kollaborative Entwürfe aktivieren
             comments_enabled: Kommentare erlauben
             comments_max_length: Maximale Länge der Kommentare (0 für Standardwert)
             default_sort_order: Standardsortierung für Meldungen
@@ -102,7 +99,7 @@ de:
               Unterstützung blockiert wird, werden sie nach den am meisten unterstützten
               sortiert.
             default_sort_order_options:
-              default: Standard
+              automatic: Automatisch
               most_commented: Meiste Kommentare
               most_followed: Am meisten gefolgt
               most_liked: Am häufigsten unterstützt
@@ -187,11 +184,16 @@ de:
               werden sollen, wähle hier 0.
             vote_limit: Unterstützungslimit pro Benutzer
             voting_cards_box_title: Titel für das Abstimmungsfeld
-            voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen". Verwenden Sie "-", um den Text auszublenden.
-            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares Pop-Up-Fenster)
-            voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization} verwendet wird"
+            voting_cards_box_title_help: Standardmässig "Für diesen Vorschlag abstimmen".
+              Verwenden Sie "-", um den Text auszublenden.
+            voting_cards_instructions: Hilfe/Anleitung zum Unterstützen (schliessbares
+              Pop-Up-Fenster)
+            voting_cards_instructions_help: Standardmässig "Bitte lesen Sie die Wahlregeln
+              sorgfältig durch, um zu verstehen, wie Ihre Stimme von %{organization}
+              verwendet wird"
             voting_cards_show_abstain: Enthaltungsmöglichkeit hinzufügen
-            voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen an, wenn "Hilfe" angewählt wird
+            voting_cards_show_modal_help: Zeige die Hilfe/Anleitung zum Unterstützen
+              an, wenn "Hilfe" angewählt wird
           step:
             amendment_creation_enabled: Änderungsvorschläge erlauben
             amendment_creation_enabled_help: User können Änderungsvorschläge anbringen.
@@ -210,7 +212,6 @@ de:
               um die vorgenommenen Änderungen zu sehen.
             announcement: Ankündigung
             answers_with_costs: Kosten für Vorschlagsantworten aktivieren
-            automatic_hashtags: Zu allen Vorschlägen hinzugefügte Hashtags
             comments_blocked: Kommentare deaktivieren
             creation_enabled: Teilnehmer können Meldungen erstellen
             creation_enabled_readonly: Diese Einstellung ist deaktiviert, wenn Sie
@@ -223,7 +224,7 @@ de:
               Unterstützung blockiert wird, werden sie nach den am meisten unterstützten
               sortiert.
             default_sort_order_options:
-              default: Standard
+              automatic: Automatisch
               most_commented: Meiste Kommentare
               most_followed: Am meisten gefolgt
               most_liked: Am häufigsten unterstützt
@@ -241,8 +242,6 @@ de:
               verwenden. Weitere Informationen darüber, wie das funktioniert, finden
               Sie unter <a href="https://docs.decidim.org/en/admin/components/proposals/answers#_publication"
               target="_blank">Antworten Dokumentationsseite</a>.
-            suggested_hashtags: Hashtags, die den Teilnehmern für neue Meldungen vorgeschlagen
-              werden
             votes_blocked: Stimmensammlung deaktiviert
             votes_enabled: Stimmensammlung aktiviert
             votes_hidden: Stimmenanzahl ausgeblendet (falls die Stimmensammlung aktiviert
@@ -420,14 +419,6 @@ de:
           proposals: Meldungen
         menu:
           taxonomy_evaluators: Taxonomie-Bewertung
-        notification_answer_proposal_mailer:
-          notify_proposal_author:
-            email_body: |
-              Dein Beitrag wurde beantwortet.
-              Du kannst die Antwort hier einsehen:<br>
-              <a href=%{answer_url} target="_blank">%{proposal_title}</a>
-            greeting: Hallo %{recipient}!
-            subject: Dein Beitrag wurde beantwortet
         proposal_notes:
           modal:
             body: Notiz

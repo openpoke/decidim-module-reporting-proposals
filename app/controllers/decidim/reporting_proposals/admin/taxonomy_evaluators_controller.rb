@@ -41,7 +41,7 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("taxonomy_evaluators.update.invalid", scope: "decidim.reporting_proposals.admin")
-              render :edit, status: :unprocessable_entity
+              render :edit, status: :unprocessable_content
             end
           end
         end

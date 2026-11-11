@@ -49,8 +49,7 @@ module Decidim::ReportingProposals
         end
       end
 
-      shared_examples "hide failure" do |msg|
-        msg ||= "There was a problem hiding the resource"
+      shared_examples "hide failure" do |msg = "There was a problem hiding the resource"|
         it "hides the proposal" do
           put(:hide_proposal, params:)
           expect(response).to have_http_status(:redirect)
@@ -107,12 +106,17 @@ module Decidim::ReportingProposals
           let(:reportable) { create(:proposal) }
 
           it_behaves_like "hide failure"
+
+          it "keeps the error message after the redirect" do
+            put(:hide_proposal, params:)
+            expect(session.dig("flash", "flashes", "alert")).to include("There was a problem hiding the resource")
+          end
         end
 
         context "when the user is not admin" do
           let(:user) { create(:user, :confirmed, organization:) }
 
-          it_behaves_like "hide failure", ""
+          it_behaves_like "hide failure", "You are not authorized to perform this action."
         end
 
         context "when the user is not in the organization" do

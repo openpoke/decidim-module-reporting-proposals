@@ -10,6 +10,8 @@ module Decidim
       included do
         helper_method :reporting_proposal?, :geocoding_comparison?
 
+        before_action(only: :compare) { ensure_is_draft }
+
         # rubocop:disable Naming/VariableNumber
         STEP1 = :step_1
         STEP2 = :step_2
@@ -48,14 +50,13 @@ module Decidim
 
             on(:invalid) do
               flash.now[:alert] = I18n.t("proposals.create.error", scope: "decidim")
-              render :new, status: :unprocessable_entity
+              render :new, status: :unprocessable_content
             end
           end
         end
 
         def compare
           @step = Proposals::ProposalsController::STEP_COMPARE
-          @proposal = Decidim::Proposals::Proposal.find(params[:id])
 
           enforce_permission_to :edit, :proposal, proposal: @proposal
 
@@ -64,41 +65,6 @@ module Decidim
           if @similar_proposals.blank?
             flash[:notice] = I18n.t("reporting_proposals.proposals.compare.no_similars_found", scope: "decidim")
             redirect_to "#{Decidim::ResourceLocatorPresenter.new(@proposal).path}/preview"
-          end
-        end
-
-        def update_draft
-          @step = Proposals::ProposalsController::STEP1
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-
-          @form = form_proposal_params
-          Decidim::Proposals::UpdateProposal.call(@form, current_user, @proposal) do
-            on(:ok) do |proposal|
-              flash[:notice] = I18n.t("proposals.update_draft.success", scope: "decidim")
-              redirect_to "#{Decidim::ResourceLocatorPresenter.new(proposal).path}/preview"
-            end
-
-            on(:invalid) do
-              flash.now[:alert] = I18n.t("proposals.update_draft.error", scope: "decidim")
-              render :edit_draft, status: :unprocessable_entity
-            end
-          end
-        end
-
-        def update
-          enforce_permission_to :edit, :proposal, proposal: @proposal
-
-          @form = form_proposal_params
-          Decidim::Proposals::UpdateProposal.call(@form, current_user, @proposal) do
-            on(:ok) do |proposal|
-              flash[:notice] = I18n.t("proposals.update.success", scope: "decidim")
-              redirect_to Decidim::ResourceLocatorPresenter.new(proposal).path
-            end
-
-            on(:invalid) do
-              flash.now[:alert] = I18n.t("proposals.update.error", scope: "decidim")
-              render :edit, status: :unprocessable_entity
-            end
           end
         end
 

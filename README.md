@@ -31,9 +31,16 @@ And then execute (do also this on upgrades):
 bundle
 bin/rails decidim:upgrade
 bin/rails db:migrate
+bin/rails data:migrate
 ```
 
-> ** MIGRATION TO v0.31:**
+> **MIGRATION TO v0.32:**
+> Version 0.9 of this module requires Decidim v0.32 (Ruby 3.4, Rails 8.1), follow the upgrade notes [here](https://github.com/decidim/decidim/releases/tag/v0.32.0).
+>
+> The `config.notify_authors_on_answering` setting has been removed, as Decidim already sends an email to the authors when a proposal is answered. Remove it from your initializer if you have it:
+> settings that do not exist now raise an error when the application starts.
+
+> **MIGRATION TO v0.31:**
 > Decidim v0.31 has made a refactor to the **valuator** terminology and has concluded that **evaluator** is better.
 > You can check the arguments [here](https://github.com/decidim/decidim/releases/tag/v0.31.0). 
 >
@@ -86,6 +93,7 @@ Depending on your Decidim version, you can choose the corresponding version to e
 
 | Version | Compatible Decidim versions |
 |---------|-----------------------------|
+| 0.9.x   | 0.32.x                      |
 | 0.8.x   | 0.31.x                      |
 | 0.7.x   | 0.29.x                      |
 | 0.6.x   | 0.28.x                      |
@@ -146,7 +154,7 @@ Decidim::ReportingProposals.configure do |config|
 
   # Public Setting that defines whether the administrator is allowed to hide the proposals.
   # Set to false if you do not want to use this feature
-  config.allow_admins_to_hide_proposals =true
+  config.allow_admins_to_hide_proposals = true
 
   # Public Setting that allows to configure which component will have "Use my location" button
   # in a geocoded address field. Accepts an array of component manifest names
@@ -162,6 +170,10 @@ Decidim::ReportingProposals.configure do |config|
 
   # Public setting to allow evaluators to assign other evaluators to the proposals assigned to them
   config.evaluators_assign_other_evaluators = true
+
+  # Public setting to get an e-mail notification when the proposal is published
+  # Accepts an array of component manifest names
+  config.notify_authors_on_publish = [:proposals, :reporting_proposals]
 
   # Public setting that defines the email of the bot user ("Automatic assignment")
   # used as the author of automatic evaluator assignments in the admin log

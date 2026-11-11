@@ -9,14 +9,14 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.3.11
+  RUBY_VERSION: 3.4.7
   NODE_VERSION: 22.14.0
   SHAKAPACKER_RUNTIME_COMPILE: "false"
 
 jobs:
   lint-report:
     name: Linting
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -44,5 +44,5 @@ jobs:
       - run: bundle exec rubocop -P
         name: Lint Ruby files
 
-      - run: bundle exec erblint app/**/*.erb
+      - run: bundle exec erb_lint app/**/*.erb
         name: Lint ERB files

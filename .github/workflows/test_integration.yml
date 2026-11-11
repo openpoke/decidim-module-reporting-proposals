@@ -9,7 +9,7 @@ on:
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.3.11
+  RUBY_VERSION: 3.4.7
   NODE_VERSION: 22.14.0
   RAILS_ENV: test
   DATABASE_USERNAME: postgres
@@ -19,7 +19,7 @@ env:
 jobs:
   build:
     name: Build & Precompile
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     services:
       postgres:
@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update && sudo apt-get install -y imagemagick
+        run: sudo apt-get update && sudo apt-get install -y libvips libvips-tools
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -71,7 +71,7 @@ jobs:
 
   test:
     name: Integration Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     strategy:
       matrix:
@@ -102,7 +102,7 @@ jobs:
           fetch-depth: 1
 
       - name: Install additional tools
-        run: sudo apt-get update && sudo apt-get install -y imagemagick
+        run: sudo apt-get update && sudo apt-get install -y libvips libvips-tools
 
       - uses: browser-actions/setup-chrome@v2
         with:
@@ -113,9 +113,6 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      
-      - name: Install imagemagick
-        run: sudo apt install -y imagemagick
 
       - uses: actions/download-artifact@v4
         with:
